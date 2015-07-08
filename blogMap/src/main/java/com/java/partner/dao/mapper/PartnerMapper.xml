@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.PartnerMapper">
+	
+	<insert id="partnerRegister" parameterType="com.java.partner.dto.PartnerDto">
+	  	insert into partner(partner_no,member_id,category_code,partner_name,partner_phone,partner_addr,partner_rgdate,partner_yn,partner_ydate,partner_pic_name,partner_pic_path,partner_pic_size) values(partner_partner_no_seq.nextval,#{member_id},#{category_code},#{partner_name},#{partner_phone},#{partner_addr},sysdate,'n',null,#{partner_pic_name},#{partner_pic_path},#{partner_pic_size})
+	</insert>
+	
+	<select id="partnerList" resultType="com.java.partner.dto.PartnerDto">
+		select count(*) from partner
+	</select>
+	
+</mapper>

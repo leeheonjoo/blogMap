@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.BoardReadMapper">
+	<select id="getData" resultType="com.java.boardRead.dto.BoardReadDto">
+		select *
+		  from category
+		 where category_code='200300'
+	</select>
+	
+	<select id="getSidoCondition" resultType="String">
+		select distinct loc_sido
+		  from location_info
+		 order by 1
+	</select>
+	
+	<select id="getHeaderCondition" resultType="String">
+		select distinct category_mname
+		  from category
+		 order by 1
+	</select>
+	
+	<select id="getGunLocationCondition" parameterType="String" resultType="String">
+		select distinct nvl(loc_sigugun, 'blank')
+		  from location_info
+		 where loc_sido = #{siData}
+		 order by 1
+	</select>
+	
+	<select id="getDongLocationCondition" parameterType="java.util.HashMap" resultType="String">
+		select distinct loc_dongri
+		  from location_info
+		 where loc_sido = #{siData}
+		   and nvl(loc_sigugun,'%') like '%'||#{gunData}||'%'
+		 order by 1
+	</select>
+	
+	<select id="getDetailCategoryCondition" parameterType="String" resultType="String">
+		select distinct category_sname
+		  from category
+		 where category_MName=#{headData}
+		   and category_sub != '000'
+		 order by 1
+	</select>
+</mapper>

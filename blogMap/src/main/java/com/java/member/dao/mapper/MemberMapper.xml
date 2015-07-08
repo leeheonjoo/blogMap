@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.MemberMapper">
+	<select id="login" parameterType="java.util.HashMap" resultType="String">
+		select member_id from member where member_id=#{id} and member_pwd=#{password}
+	</select>
+	
+	<insert id="register" parameterType="com.java.member.dto.MemberDto">
+		insert into member(member_id,member_pwd,member_name,member_joindate,member_jointype) values(#{member_id},#{member_pwd},#{member_name},sysdate,#{member_jointype})
+	</insert>
+	
+	<select id="registerCheck" parameterType="String" resultType="String">
+		select member_id from member where member_id=#{member_id}
+	</select>
+	
+	<select id="fbRegisterCheck" parameterType="String" resultType="String">
+		select member_id from member where member_id=#{member_id}
+	</select>
+	
+	<insert id="fbRegister" parameterType="com.java.member.dto.MemberDto">
+		insert into member(member_id,member_name,member_joindate,member_jointype) values(#{member_id},#{member_name},sysdate,#{member_jointype})
+	</insert>
+	
+	<select id="fbRegisterSelect" parameterType="String" resultType="com.java.member.dto.MemberDto">
+		select * from member where member_id=#{member_id}
+	</select>
+
+	<update id="updatePassword" parameterType="String">
+		update member set member_pwd=#{password} where member_id=#{email}
+	</update>
+		
+	<select id="myPageUpdate_pwdCheck" parameterType="java.util.HashMap" resultType="String">
+		select member_id from member where member_pwd=#{member_pwd} and member_id=#{member_id}
+	</select>
+	
+	<update id="myPageUpdate" parameterType="com.java.member.dto.MemberDto">
+		update member set member_name=#{member_name}, member_pwd=#{member_pwd} where member_id=#{member_id}
+	</update>
+	
+	<delete id="myPageDelete" parameterType="com.java.member.dto.MemberDto">
+		delete from member where member_id=#{member_id} and member_pwd=#{member_pwd}
+	</delete>
+	
+	<select id="totalPoint" parameterType="String" resultType="Integer">
+		select sum(point_value) from point_info where member_id=#{member_id}
+	</select>
+	
+	<select id="point_info" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		<![CDATA[select * from (select rownum as rnum, x.* from (select p.*,b.board_title from point_info p, board b where p.board_no=b.board_no and p.member_id=#{member_id})x)y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]>
+	</select>
+	
+	<select id="totalBoard" parameterType="String" resultType="Integer">
+		select count(*) from board where member_id=#{member_id}
+	</select>
+	
+	<select id="board_info" parameterType="String" resultType="java.util.HashMap">
+		select b.*,category_mname from category c,board b where b.category_code=c.category_code and member_id=#{member_id}
+	</select>
+	
+	<select id="totalFavorite" parameterType="String" resultType="Integer">
+		select count(*) from favorite where member_id=#{member_id}
+	</select>
+	
+	<select id="favorite_info" parameterType="String" resultType="java.util.HashMap">
+		select f.*,b.board_title from board b, favorite f where b.board_no=f.board_no and f.member_id=#{member_id}
+	</select>
+	
+	<select id="point_info_count" parameterType="String" resultType="Integer">
+		select count(*) from point_info where member_id=#{member_id}
+	</select>
+</mapper>

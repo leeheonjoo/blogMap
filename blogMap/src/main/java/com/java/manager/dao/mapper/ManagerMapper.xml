@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.ManagerMapper">
+	<select id="getmemberList" resultType="com.java.member.dto.MemberDto">
+		select * from member order by member_id asc
+	</select>
+	
+	<delete id="memberDelete" parameterType="String">
+		delete from member where member_id=#{id}
+	</delete>
+	
+	<delete id="delLog" parameterType="String">
+		insert into MANAGER_LOG values(manager_log_seq.nextval,'lucyman@nate.com',SYSDATE,'03',#{id})
+	</delete>
+	
+	<select id="getManagerList" resultType="com.java.manager.dto.ManagerDto">
+		select * from manager
+	</select>
+	
+	<select id="getManagerLog" parameterType="String" resultType="com.java.manager.dto.ManagerLogDto" >
+		select * from manager_log where manager_id=#{id} order by log_no desc
+	</select>
+	
+	<select id="getPartnerList" resultType="com.java.partner.dto.PartnerDto">
+		select * from partner
+	</select>
+	
+	<update id="partnerSubmit" parameterType="String">
+		update PARTNER SET partner_yn='y', partner_ydate=sysdate where member_id=#{id}
+	</update>
+	
+	<insert id="submitLog" parameterType="String">
+		insert into manager_log values(manager_log_seq.nextval,'lucyman@nate.com',SYSDATE,'02',#{id})
+	</insert>
+	
+	<delete id="partnerDelete" parameterType="String">
+		delete from partner where member_id=#{id}
+	</delete>
+	
+	<insert id="partnerDeleteLog" parameterType="String">
+		insert into manager_log values(manager_log_seq.nextval,'lucyman@nate.com',sysdate,'03',#{id})
+	</insert>
+	
+	<select id="getCouponData" resultType="com.java.coupon.dto.CouponDto">
+		select * from coupon
+	</select>
+	
+	<update id="couponSubmit" parameterType="Integer">
+		update coupon set coupon_yn='y' where coupon_no=#{couponNo}
+	</update>
+	
+	<insert id="couponSubmitLog" parameterType="Integer">
+		insert into manager_log values(manager_log_seq.nextval, 'lucyman@nate.com', sysdate, '04', #{couponNo})
+	</insert>
+	
+</mapper> 

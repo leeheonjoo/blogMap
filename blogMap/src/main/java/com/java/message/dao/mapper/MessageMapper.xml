@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dao.MessageMapper">
+
+	<resultMap type="com.java.message.dto.MessageDto" id="messageDto">
+	<result property="message_no" column="message_no"/>
+	<result property="member_id" column="member_id"/>
+	<result property="message_content" column="message_content"/>
+	<result property="message_receiver" column="message_receiver"/>
+	<result property="message_sDate" column="message_sdate"/>
+	<result property="message_rDate" column="message_rdate"/>
+	<result property="message_yn" column="message_yn"/>
+	</resultMap>
+	
+	<insert id="messageSendInsert" parameterType="com.java.message.dto.MessageDto">
+		<![CDATA[
+		insert into message(message_no, member_id, message_content, message_receiver, message_sDate, message_yn)
+		values(message_message_no_seq.nextval
+		,#{member_id}
+		,#{message_content}
+		,#{message_receiver}
+		,sysdate
+		,'N')
+		]]>
+	</insert>
+	
+	<select id="messageCount" resultType="int">
+		select count(*) from message
+	</select>
+	
+	<select id="sendmessageList" parameterType="java.util.Map" resultMap="messageDto">
+		<![CDATA[
+			select * from 
+				(select rownum rnum,a.* from
+					(select * from message order by member_id asc,message_no asc)a)
+				where rnum>=#{startRow} and rnum<=#{endRow} and member_id=#{member_id}
+		]]>
+	</select>
+	
+	<select id="receivemessageList" parameterType="java.util.Map" resultMap="messageDto">
+		<![CDATA[
+			select * from 
+				(select rownum rnum,a.* from
+					(select * from message order by member_id asc,message_no desc)a)
+				where rnum>=#{startRow} and rnum<=#{endRow} and message_receiver=#{member_id}
+		]]>
+	</select>
+	
+	<update id="read_yn" parameterType="com.java.message.dto.MessageDto">
+	 	update message set message_yn='Y', message_rDate=sysdate
+	 	where message_no=#{message_no} and message_yn='N'
+	</update>
+	
+	<!-- <update id="rDate" parameterType="com.java.message.dto.MessageDto">
+		update message set message_rDate=sysdate where message_no=#{message_no}
+	</update> -->
+	
+	<select id="read" resultMap="messageDto" parameterType="int">
+		select * from message where message_no=#{message_no}
+	</select>
+	
+	<delete id="delete" parameterType="java.util.Map" >
+		delete from message where message_no=#{message_no} and message_receiver=#{member_id}
+	</delete>
+</mapper>
