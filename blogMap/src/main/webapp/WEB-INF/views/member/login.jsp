@@ -32,7 +32,7 @@
 	 		            }
 	 					 
 	 					 alert("로그인 성공");
-	 					 location.href="${root}/1";
+	 					 location.href="${root}/";
 	
 	 				}
 	 				

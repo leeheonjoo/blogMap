@@ -76,7 +76,7 @@ $(document).ready(function(){
 					
 					if(responseData=="1"){
 						alert("회원가입완료");
-						location.href="${root}/1";
+						location.href="${root}/";
 					}
 					
 					if(responseData!="1"){
