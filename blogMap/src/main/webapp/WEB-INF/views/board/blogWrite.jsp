@@ -189,7 +189,7 @@ $(document).ready(function(){
 												type : 'get',
 												url : '${root}/board/search.do',
 												data : {
-													key : "1b79d7553c7736aca4e7243cdecfecbc",
+													key : "da3d853c119e911822c1141b3a2153af",
 													query : address,
 													encoding : "utf-8",
 													output : "json",
