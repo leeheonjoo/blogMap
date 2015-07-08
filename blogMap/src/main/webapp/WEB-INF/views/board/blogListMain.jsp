@@ -154,6 +154,7 @@
 <script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=fc567d7628e894d55e68c6dbeb7784a2"></script>
 </head>
 <body>
+	<input name="member_id" value="test"/>
 	<!-- 검색조건 navbar : 20150706 이헌주 -->
 	<nav id="blogListMain" class="navbar navbar-inverse ">
 		<div class="container-fluid">
@@ -238,7 +239,7 @@ $(function(){
 	if (!navigator.geolocation) {
 		var latitude = 37.5675451; //위도
 		var longitude = 126.9773356; //경도
-		mapCreate(latitude, longitude);
+		blogListMapCreate(latitude, longitude);
 	}
 
 	function success(position) {
@@ -247,7 +248,7 @@ $(function(){
 		
 		latitude = latitude.toFixed(7);
 		longitude = longitude.toFixed(7);
-		mapCreate(latitude, longitude);
+		blogListMapCreate(latitude, longitude);
 	}
 
 	function error() {
