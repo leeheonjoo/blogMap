@@ -91,11 +91,7 @@
 				<li>
 					 <div class="row">
 							<div class="col-md-12">
-								Login via
-								<div class="social-buttons" style="text-align:center;">
-									<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-								</div>
-                                or
+							<br/>
 								 <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
 										<div class="form-group">
 											 <label class="sr-only" for="exampleInputEmail2">Email address</label>
@@ -113,6 +109,9 @@
 											 <label>
 											 <input type="checkbox"> keep me logged-in
 											 </label>
+										</div>
+										<div class="social-buttons" style="text-align:center;">
+											<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
 										</div>
 								 </form>
 							</div>
