@@ -17,7 +17,7 @@ $(document).ready(function(){
 				type:'POST',
 				url:'${root}/member/registerCheck.do',
 				data:{
-					member_id:$("input[name='member_id']").val(),
+					member_id:$("#member_register_id").val(),
 				},
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseCheckData){
