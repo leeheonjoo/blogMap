@@ -191,7 +191,7 @@ function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
 <body>
 	
 	<div>
-		아이디 <input type="text" id="member_register_id" name="member_id"/>
+		아이디 <input type="text" id="member_register_id"/>
 		<input type="button" id="member_id_check" value="아이디 중복체크"/>
 		<input type="button" id="member_id_confirm" value="아이디(email) 인증"/>
 		<input type="hidden" id="member_register_id_hidden"/>
