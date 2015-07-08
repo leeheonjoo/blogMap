@@ -130,7 +130,7 @@
             	 		                sessionStorage.setItem('email', data.member_id);
             	 		                var email = sessionStorage.getItem('email');
             	 		                alert(email);
-            	 		                $("input[name='member_id']").attr("value",sessionStorage.getItem('email'));
+            	 		                //$("input[name='member_id']").attr("value",sessionStorage.getItem('email'));
             	 		                $("#loginCheck").text(email);
             	 		                
             	 		            }
