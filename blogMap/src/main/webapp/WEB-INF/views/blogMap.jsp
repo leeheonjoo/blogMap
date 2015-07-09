@@ -707,7 +707,7 @@
 					</div>
 					<div class="modal-footer">
 						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a data-toggle="modal" href="#messageDelete" class="btn btn-primary btn-delete">메시지 삭제</a>
+						<a data-toggle="modal" href="#messageDelete" data-dismiss="modal" class="btn btn-primary btn-delete">메시지 삭제</a>
 					</div>
 			   </div>
 			</div>
@@ -730,7 +730,7 @@
 					</div>
 					<div class="modal-footer">
 						<a href="#" data-dismiss="modal" class="btn">취소</a>
-						<a class="btn btn-primary delete_btn" onclick="msgDelete()">메시지 삭제</a>
+						<a class="btn btn-primary delete_btn" data-dismiss="modal" onclick="msgDelete()">메시지 삭제</a>
 					</div>
 			   </div>
 			</div>
