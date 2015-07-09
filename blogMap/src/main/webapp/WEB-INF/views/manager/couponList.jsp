@@ -41,10 +41,6 @@
 						$("#couponList:last-child #coupon").attr({"name":data[i].coupon_no, "value":"취소"});				// 승인된 쿠폰에 쿠폰 취소버튼 추가
 					}					
 					
-/* 
-*/
-					
-					
 				});
 				
 				$("#partner[value='취소']").click(function(){

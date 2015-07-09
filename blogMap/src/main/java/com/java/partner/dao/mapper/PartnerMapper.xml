@@ -7,9 +7,19 @@
 	<insert id="partnerRegister" parameterType="com.java.partner.dto.PartnerDto">
 	  	insert into partner(partner_no,member_id,category_code,partner_name,partner_phone,partner_addr,partner_rgdate,partner_yn,partner_ydate,partner_pic_name,partner_pic_path,partner_pic_size) values(partner_partner_no_seq.nextval,#{member_id},#{category_code},#{partner_name},#{partner_phone},#{partner_addr},sysdate,'n',null,#{partner_pic_name},#{partner_pic_path},#{partner_pic_size})
 	</insert>
-	
-	<select id="partnerList" resultType="com.java.partner.dto.PartnerDto">
-		select count(*) from partner
+	<select id="partnerCount" resultType="int">
+	select count(*) from partner
 	</select>
-	
+	<select id="partnerList" resultType="com.java.partner.dto.PartnerDto">
+		select * from partner where category_code=100000 order by partner_no desc
+	</select>
+	<select id="getPartnerListDate" parameterType="Integer" resultType="com.java.partner.dto.PartnerDto">
+		select * from partner where partner_no=#{partnerNo}
+	</select>
+	<select id="restaurantPartnerList" resultType="com.java.partner.dto.PartnerDto">
+		select * from partner where category_code=200000 order by partner_no desc
+	</select>
+	<select id="getRestaurantPartnerListDate" parameterType="Integer" resultType="com.java.partner.dto.PartnerDto">
+		select * from partner where partner_no=#{partnerNo}
+	</select>
 </mapper>

@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.java.partner.dao.PartnerDao;
 import com.java.partner.dto.PartnerDto;
 /**
@@ -44,6 +45,7 @@ public class PartnerServiceImpl implements PartnerService {
 		MultipartHttpServletRequest request=(MultipartHttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		PartnerDto partnerDto=(PartnerDto)map.get("partnerDto");
+		
 		logger.info(partnerDto.getMember_id());
 		logger.info(partnerDto.getCategory_code());
 		logger.info(partnerDto.getPartner_name());
@@ -102,12 +104,102 @@ public class PartnerServiceImpl implements PartnerService {
 	@Override
 	public void list(ModelAndView mav) {
 		logger.info("PartnerServiceImp list----------------");
+	
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpServletResponse response=(HttpServletResponse)map.get("response");
+
+		int count=partnerDao.getPartnerCount();
+		logger.info("count:" + count);
+		
+		List<PartnerDto> partnerList=null;
+		if(count>0){
+			partnerList=partnerDao.getPartnerList();
+			logger.info("partnerListSize:"+partnerList.size());
+		}
+//		메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
+		Gson gson=new Gson();
+		String json=gson.toJson(partnerList);
+		logger.info("partnerList:"+partnerList);
+		logger.info("json:"+json);
+		
+//		JSON 에 저장된 정보를 조회
+		//System.out.println("json: " + json);
+		
+		/*mav.addObject("count",count);*/
+//		mav.addObject("tourPageNumber",tourPageNumber);	
+		mav.addObject("partnerList",partnerList);
+		mav.addObject("json", json);
+	}
+	
+	@Override
+	public void getPartnerListDate(ModelAndView mav) {
+		logger.info("Partner getPartnerListDate start----------------");
 		
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
-		List<PartnerDto> partnerList=partnerDao.getPartnerList();
+		int partnerNo=Integer.parseInt(request.getParameter("partnerNo"));
+		logger.info("partnerNo : " + partnerNo);
+	
+		PartnerDto getPartnerListDate=partnerDao.getPartnerListDate(partnerNo);
+		logger.info("맵퍼 갔다와서:"+getPartnerListDate);
+		
+		Gson gson=new Gson();
+		String json=gson.toJson(getPartnerListDate);
+		logger.info("json으로 담은후에" + json);
 			
+		//mav.addObject("getPartnerListDate",getPartnerListDate);
+		mav.addObject("json",json);
+	}
+	@Override
+	public void restaurantList(ModelAndView mav) {
+		logger.info("PartnerServiceImp restaurantList------------- ");
+		
+		Map<String,Object> map=  mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		
+		int count=partnerDao.getPartnerCount();
+		logger.info("count:"+count);
+		
+		List<PartnerDto> restaurantPartnerList=null;
+		if(count>0){
+			restaurantPartnerList=partnerDao.getRestaurantPartnerList();
+			logger.info("restaurantPartnerList:"+restaurantPartnerList.size());
+		}
+		
+		Gson gson=new Gson();
+		String json=gson.toJson(restaurantPartnerList);
+		logger.info("restaurantPartnerList:"+restaurantPartnerList);
+		logger.info("json:"+json);
+		
+		System.out.println("json"+json);
+		
+		mav.addObject("restaurantPartnerList",restaurantPartnerList);
+		mav.addObject("json",json);
+	}
+	@Override
+	public void getRestaurantPartnerListDate(ModelAndView mav) {
+		logger.info("Partner getRestaurantPartnerListDate start----------------");
+		
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		
+		int partnerNo=Integer.parseInt(request.getParameter("partnerNo"));
+		logger.info("partnerNo : " + partnerNo);
+	
+		PartnerDto getRestaurantPartnerListDate=partnerDao.getRestaurantPartnerListDate(partnerNo);
+		logger.info("맵퍼 갔다와서:"+getRestaurantPartnerListDate);
+		
+		Gson gson=new Gson();
+		String json=gson.toJson(getRestaurantPartnerListDate);
+		logger.info("json으로 담은후에" + json);
+			
+		//mav.addObject("getPartnerListDate",getPartnerListDate);
+		mav.addObject("json",json);
+		
 	}
 }

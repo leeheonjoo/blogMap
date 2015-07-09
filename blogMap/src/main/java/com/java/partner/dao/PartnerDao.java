@@ -15,4 +15,11 @@ public interface PartnerDao {
 
 	public List<PartnerDto> getPartnerList();
 	
+	public int getPartnerCount();
+	
+	public PartnerDto getPartnerListDate(int partnerNo);
+
+	public List<PartnerDto> getRestaurantPartnerList();
+
+	public PartnerDto getRestaurantPartnerListDate(int partnerNo);
 }
