@@ -226,7 +226,7 @@
 	<!-- **********************************
 	                        제휴업체 : 변태훈
 	     ***********************************-->
-		<a data-toggle="modal" href="#partnerMain" class="btn btn-primary">제휴업체등록</a>
+		<a data-toggle="modal" href="#partnerMain" class="btn btn-primary" id ="partner_Registration">제휴업체등록</a>
 		<br/><br/>
 		
 		<!-- 제휴업체 - 제휴업체등록 main -->

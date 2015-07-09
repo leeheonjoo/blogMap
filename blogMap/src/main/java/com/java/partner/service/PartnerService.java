@@ -13,4 +13,6 @@ public interface PartnerService {
 	
 	public void list(ModelAndView mav);
 	
+	public void getPartnerListDate(ModelAndView mav);
+	
 }
