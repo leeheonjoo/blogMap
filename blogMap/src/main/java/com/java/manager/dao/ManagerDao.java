@@ -36,5 +36,7 @@ public interface ManagerDao {
 		
 		public void couponSubmitLog(int couponNo);
 		
+		public PartnerDto partnerDetail(int partnerNo);
+		
 
 }

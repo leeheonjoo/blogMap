@@ -271,4 +271,31 @@ public class ManagerController {
 		}
 	}
 	
+	/**
+	 * @name:partnerDetail
+	 * @date:2015. 7. 9.
+	 * @author:이동희
+	 * @description: 제휴업체의 상세 정보를 가지고 오는 메소드
+	 */
+	@RequestMapping("/manager/partnerDetail.do")
+	public void partnerDetail(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager PartnerDetail Start");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.partnerDetail(mav);
+		
+		Map<String, Object> map=mav.getModel();
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
 }

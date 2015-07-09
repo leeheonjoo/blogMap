@@ -8,6 +8,8 @@
 <title>BLOG MAP</title>
 <script type="text/javascript">
 	$(document).ready(function(){
+		var email=sessionStorage.getItem('email');
+		alert(email);
 		// memberList
  		$("input#getMemberList").click(function(){	// 회원정보버튼 클릭시 실행
 			getMemberList();	// 회원리스트 불러오는 함수 호출
@@ -15,7 +17,8 @@
 		
 		// partnerList
 		$("input#getPartnerList").click(function(){		// 제휴업체 정보버튼 클릭시 실행
-			getPartnerList()		// 제휴업체 정보를 불러오는 함수 호출
+			getPartnerList();		// 제휴업체 정보를 불러오는 함수 호출
+			
 		});
 		
 		 // couponList
@@ -26,15 +29,11 @@
 		// managerList
 		$("input#managerInfo2").click(function(){		//관리자정보 버튼을 클릭시 실행
 			getManagerList();		// 관리자 정보를 불러오는 함수 호출			
+			
 		});
 		
-		$('a[aria-controls="tab_member"]').on('shown.bs.tab', function (e) {
-			alert();  
-			e.target // newly activated tab
-			  e.relatedTarget // previous active tab
-		})
-		
 	});
+	
 	
 </script>
 </head>

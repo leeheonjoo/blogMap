@@ -11,7 +11,10 @@
 <title>Manager</title>
 <script type="text/javascript" src="${root }/css/manager/script.js"></script>
 <script type="text/javascript">
+
 	function getManagerList(){
+		var email=sessionStorage.getItem('email');
+		alert(email);
 		$("#managerListResult").empty();	// 관리자 정보를 가져오기전 리셋 시킴 (중복을 삽입을 방지하기 위해)
 		$("#managerLogList").hide();
 		$.ajax({
