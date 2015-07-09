@@ -11,24 +11,27 @@
 <title>Home</title>
 <script type="text/javascript">
 	$(document).ready(function() {
+		var email=sessionStorage.getItem('email');
+		alert("현재 로그인 중인 아이디 : " + email);
+		
 		$("#write_btn").click(function() {
 				$.ajax({
 					type : 'post',
 					url : '${root}/message/messageWrite.do',
 				 	data : {
-				 		member_id : $("input[name='member_id']").val(),
-						message_receiver : $("input[name='message_receiver']").val(),
-						message_content : $("textarea#message_content").val(),
+				 		member_id : email,
+						message_receiver : $("input[name='messageWrite_receiver']").val(),
+						message_content : $("textarea#messageWrite_content").val(),
 				 	}, 
 					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 					success : function(responseData) {
 					//	alert(responseData);
 						if(responseData == 1){
-							$("input[name='message_receiver']").val("");
-							$("textarea#message_content").val("");
+							$("input[name='messageWrite_receiver']").val("");
+							$("textarea#messageWrite_content").val("");
 							$('#myTab a:first').tab('show');
-							$("#result").empty();
-							$("#result1").empty();
+							$("#receiveMsgResult").empty();
+							$("#sendMsgResult").empty();
 							
 							
 							$.ajax({
@@ -44,17 +47,14 @@
 				 					//alert(data.category_code);
 				
 									$.each(data,function(i) {
-										$("#result").append($("#listRow").clone().css("display","block"));
-										$("#result #listRow:last-child #no").append(data[i].message_no);
-										$("#result #listRow:last-child #content").append(data[i].message_content);
-										$("#result #listRow:last-child #id").append(data[i].member_id);
-										$("#result #listRow:last-child #sDate").append(data[i].message_sDate);
-										$("#result #listRow:last-child #yn").append(data[i].message_yn);
-										$("#result #listRow:last-child a").attr("id", data[i].message_no);
+										$("#receiveMsgResult").append($("#receiveListRow").clone());
+										$("#receiveMsgResult #receiveListRow:last-child #msg_R_no").append(data[i].message_no);
+										$("#receiveMsgResult #receiveListRow:last-child #msg_R_content").append(data[i].message_content);
+										$("#receiveMsgResult #receiveListRow:last-child #msg_R_id").append(data[i].member_id);
+										$("#receiveMsgResult #receiveListRow:last-child #msg_R_sDate").append(data[i].message_sDate);
+										$("#receiveMsgResult #receiveListRow:last-child #msg_R_yn").append(data[i].message_yn);
+										$("#receiveMsgResult #receiveListRow:last-child a").attr("id", data[i].message_no);
 										
-										$("#" + data[i].message_no).click(function(){
-											importData(data[i].message_no);	
-										});
 									});
 								},
 								error : function(data) {
@@ -65,6 +65,9 @@
 							$.ajax({
 								type : 'get',
 								url : '${root}/message/mainMessage.do',
+								data : {
+									member_id : email
+								},
 								contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 								success : function(responseData) {
 									var data = JSON.parse(responseData);
@@ -75,17 +78,14 @@
 				 					//alert(data.category_code);
 				
 									$.each(data,function(i) {
-										$("#result1").append($("#listRow1").clone().css("display","block"));
-										$("#result1 #listRow1:last-child #no1").append(data[i].message_no);
-										$("#result1 #listRow1:last-child #content1").append(data[i].message_content);
-										$("#result1 #listRow1:last-child #id1").append(data[i].message_receiver);
-										$("#result1 #listRow1:last-child #sDate1").append(data[i].message_sDate);
-										$("#result1 #listRow1:last-child #yn1").append(data[i].message_yn);
-										$("#result1 #listRow1:last-child a").attr("id", data[i].message_no);
+										$("#sendMsgResult").append($("#sendListRow").clone());
+										$("#sendMsgResult #sendListRow:last-child #msg_S_no").append(data[i].message_no);
+										$("#sendMsgResult #sendListRow:last-child #msg_S_content").append(data[i].message_content);
+										$("#sendMsgResult #sendListRow:last-child #msg_S_id").append(data[i].message_receiver);
+										$("#sendMsgResult #sendListRow:last-child #msg_S_sDate").append(data[i].message_sDate);
+										$("#sendMsgResult #sendListRow:last-child #msg_S_yn").append(data[i].message_yn);
+										$("#sendMsgResult #sendListRow:last-child a").attr("id", data[i].message_no);
 										
-										$("#" + data[i].message_no).click(function(){
-											importData(data[i].message_no);	
-										});
 									});
 								},
 								error : function(data) {
@@ -108,12 +108,12 @@
 			<div class="form-group form-group-lg">		<!-- 크기 조절을 하기 위한 기본 틀 -->
 				<div class="col-md-2 col-sm-2 col-xs-2 "><label class="control-label" for="formGroupInputLarge">받는사람</label></div> 
 																	<!-- 크기 조절을 할 대상		크기 설정 (크게 / 보통 / 작게 ) -->
-				<div class="col-md-10 col-sm-10 col-xs-10"><input type="text" class="form-control" id="message_receiver" name="message_receiver" placeholder="받는 사람의 아이디를 입력하세요."/></div>
+				<div class="col-md-10 col-sm-10 col-xs-10"><input type="text" class="form-control" id="message_receiver" name="messageWrite_receiver" placeholder="받는 사람의 아이디를 입력하세요."/></div>
 			</div>																	<!-- 크기조절을 할 대상 -->
 	
 			<div class="form-group form-group-lg">
 				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputLarge">내용</label></div>
-				<div class="col-md-10 col-sm-10 col-xs-10"><textarea rows="5" name="message_content" class="form-control" id="message_content" placeholder="내용을 입력하세요"></textarea>
+				<div class="col-md-10 col-sm-10 col-xs-10"><textarea rows="5" name="messageWrite_content" class="form-control" id="messageWrite_content" placeholder="내용을 입력하세요"></textarea>
 				</div>
 			</div>
 	

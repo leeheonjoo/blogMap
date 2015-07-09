@@ -69,7 +69,6 @@ public class MessageServiceImp implements MessageService {
 	 */
 	@Override
 	public void sendMessageListOk(ModelAndView mav) {
-		logger.info("sendMessageListOk--------------");
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
@@ -78,7 +77,8 @@ public class MessageServiceImp implements MessageService {
 		if(pageNumber==null) pageNumber="1";
 		
 //		사용자 아이디 임의로 등록
-		String member_id="test@test.com";
+		String member_id=request.getParameter("member_id");
+		logger.info("SendMessage member_id" + member_id);
 		
 //		한페이지에 뿌려줄 게시물 수
 		int boardSize=30;

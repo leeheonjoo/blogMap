@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/css/bootstrap-select.css"/>	<!-- bootstrap-select stylesheet 로드 -->
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" type="text/css" href="${root}/css/layer.css"/>
+<link rel="stylesheet" type="text/css" href="${root}/css/blogMap/blogMap.css"/>											<!-- Metro style dynamic Tiles stylesheet 로드 -->
 <style>
 	.modal-lg{
 		width: auto;
@@ -34,6 +35,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>						<!-- bootstrap javascript를 로드 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.js"></script>	<!-- bootstrap-select javascript를 로드 -->
 <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-dropdown.js"></script>		<!-- bootstrap-dropdown javascript를 로드 -->
+<script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>									<!-- Metro style dynamic Tiles javascript를 로드 -->
 <!-- modal -->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -69,65 +71,271 @@
 </head>
 <body>
 	<div class="container-fluid">
-<nav class="navbar navbar-default navbar-inverse" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">BlogMap</a>
-    </div>
+		<nav class="navbar navbar-default navbar-inverse" role="navigation">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">BlogMap</a>
+				</div>
+			
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+							<ul id="login-dp" class="dropdown-menu">
+								<li>
+									<div class="row">
+										<div class="col-md-12">
+										<br/>
+											<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+												<div class="form-group">
+													 <label class="sr-only" for="exampleInputEmail2">Email address</label>
+													 <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+												</div>
+												<div class="form-group">
+													<label class="sr-only" for="exampleInputPassword2">Password</label>
+													<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+													<div class="help-block text-right"><a href="">Forget the password ?</a></div>
+												</div>
+												<div class="form-group">
+													<button type="submit" class="btn btn-primary btn-block">Sign in</button>
+												</div>
+												<div class="checkbox">
+													<label>
+														<input type="checkbox"> keep me logged-in
+													</label>
+												</div>
+												<div class="social-buttons" style="text-align:center;">
+													<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+												</div>
+											</form>
+										</div>
+										<div class="bottom text-center">
+											New here ? <a href="#"><b>Join Us</b></a>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				 </div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
+	</div>
+	<br/><br/>
+		
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
-			<ul id="login-dp" class="dropdown-menu">
-				<li>
-					 <div class="row">
-							<div class="col-md-12">
-							<br/>
-								 <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-										<div class="form-group">
-											 <label class="sr-only" for="exampleInputEmail2">Email address</label>
-											 <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
-										</div>
-										<div class="form-group">
-											 <label class="sr-only" for="exampleInputPassword2">Password</label>
-											 <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
-                                             <div class="help-block text-right"><a href="">Forget the password ?</a></div>
-										</div>
-										<div class="form-group">
-											 <button type="submit" class="btn btn-primary btn-block">Sign in</button>
-										</div>
-										<div class="checkbox">
-											 <label>
-											 <input type="checkbox"> keep me logged-in
-											 </label>
-										</div>
-										<div class="social-buttons" style="text-align:center;">
-											<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-										</div>
-								 </form>
+
+	<!-- Metro style dynamic Tiles -->
+	<div class="container dynamicTile">
+		<div class="row ">
+	    	<div class="col-sm-2 col-xs-4">
+	    		<div id="tile1" class="tile">
+		        
+					<div class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="http://handsontek.net/demoimages/tiles/twitter1.png" class="img-responsive"/>
 							</div>
-							<div class="bottom text-center">
-								New here ? <a href="#"><b>Join Us</b></a>
+							<div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/twitter2.png" class="img-responsive"/>
 							</div>
-					 </div>
-				</li>
-			</ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-	
-		<br/><br/>
+						</div>
+					</div>
+		        
+		   		</div>
+			</div>
+			
+			<div class="col-sm-2 col-xs-4">
+				<div id="tile2" class="tile">
+			   	 
+					<div class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="http://handsontek.net/demoimages/tiles/hot.png" class="img-responsive"/>
+							</div>
+							<div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/hot2.png" class="img-responsive"/>
+							</div>
+							<div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/hot3.png" class="img-responsive"/>
+							</div>
+						</div>
+					</div>
+			        
+				</div>
+			</div>
+			
+			<div class="col-sm-2 col-xs-4">
+				<div id="tile3" class="tile">
+			   	 
+					<div class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+   								<img src="http://handsontek.net/demoimages/tiles/weather2.png" class="img-responsive"/>
+							</div>
+							<div class="item">
+						   		<img src="http://handsontek.net/demoimages/tiles/weather.png" class="img-responsive"/>
+							</div>
+						</div>
+					</div>
+			        
+				</div>
+			</div>
+			
+			<div class="col-sm-2 col-xs-4">
+				<div id="tile4" class="tile">
+			   	 
+					<div class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="http://handsontek.net/demoimages/tiles/facebook3.png" class="img-responsive"/>
+							</div>
+							<div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/facebook2.png" class="img-responsive"/>
+							</div>
+						</div>
+					</div>
+			        
+				</div>
+			</div>
+			
+			<div class="col-sm-2 col-xs-4">
+				<div id="tile5" class="tile">
+			  	 
+					<div class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="http://handsontek.net/demoimages/tiles/neews.png" class="img-responsive"/>
+							</div>
+							<div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/neews2.png" class="img-responsive"/>
+							</div>
+						</div>
+					</div>
+ 
+				</div>
+			</div>
+			
+			<div class="col-sm-2 col-xs-4">
+				<div id="tile6" class="tile">
+			   	 
+					<div class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="http://handsontek.net/demoimages/tiles/skype.png" class="img-responsive"/>
+							</div>
+							<div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/skype2.png" class="img-responsive"/>
+							</div>
+						</div>
+					</div>
+			        
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-4 col-xs-8">
+				<div id="tile7" class="tile">
+			   	 
+					<div class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+					    	<div class="item active">
+								<img src="http://handsontek.net/demoimages/tiles/gallery.png" class="img-responsive"/>
+						    </div>
+						    <div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/gallery2.png" class="img-responsive"/>
+						    </div>
+						    <div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/gallery3.png" class="img-responsive"/>
+						    </div>
+						</div>
+					</div>
+			        
+				</div>
+			</div>
+			
+			<div class="col-sm-2 col-xs-4">
+				<div id="tile8" class="tile">
+			   	 
+					<div class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="http://handsontek.net/demoimages/tiles/music.png" class="img-responsive"/>
+							</div>
+							<div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/music2.png" class="img-responsive"/>
+							</div>
+						</div>
+					</div>
+			        
+				</div>
+			</div>
+			
+			<div class="col-sm-2 col-xs-4">
+				<div id="tile9" class="tile">
+				  	 
+					<div class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="http://handsontek.net/demoimages/tiles/calendar.png" class="img-responsive"/>
+							</div>
+							<div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/calendar2.png" class="img-responsive"/>
+							</div>
+						</div>
+					</div>
+				       
+				</div>
+			</div>
+			
+			<div class="col-sm-4 col-xs-8">
+				<div id="tile10" class="tile">
+				  	 
+					<div class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<h3 class="tilecaption"><i class="fa fa-child fa-4x"></i></h3>
+							</div>
+							<div class="item">
+								<h3 class="tilecaption">Customize your tiles</h3>
+							</div>
+							<div class="item">
+								<h3 class="tilecaption">Text, Icons, Images</h3>
+							</div>
+							<div class="item">
+								<h3 class="tilecaption">Combine them and create your metro style</h3>
+							</div>
+						</div>
+					</div>
+				    
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+
+<div class="container-fluid">
+
 	<!-- **********************************
 	                        블로그 리스트 : 이헌주
 	     ***********************************-->
@@ -226,7 +434,7 @@
 	<!-- **********************************
 	                        제휴업체 : 변태훈
 	     ***********************************-->
-		<a data-toggle="modal" href="#partnerMain" class="btn btn-primary">제휴업체등록</a>
+		<a data-toggle="modal" href="#partnerMain" class="btn btn-primary" id ="partner_Registration">제휴업체등록</a>
 		<br/><br/>
 		
 		<!-- 제휴업체 - 제휴업체등록 main -->
@@ -707,7 +915,7 @@
 					</div>
 					<div class="modal-footer">
 						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a data-toggle="modal" href="#messageDelete" class="btn btn-primary btn-delete">메시지 삭제</a>
+						<a data-toggle="modal" href="#messageDelete" data-dismiss="modal" class="btn btn-primary btn-delete">메시지 삭제</a>
 					</div>
 			   </div>
 			</div>
@@ -730,13 +938,17 @@
 					</div>
 					<div class="modal-footer">
 						<a href="#" data-dismiss="modal" class="btn">취소</a>
-						<a class="btn btn-primary delete_btn" onclick="msgDelete()">메시지 삭제</a>
+						<a class="btn btn-primary delete_btn" data-dismiss="modal" onclick="msgDelete()">메시지 삭제</a>
 					</div>
 			   </div>
 			</div>
 		</div>
-		
 	</div>
+	
+	
+	
+	
+
 	
 <!-- 	$("div[id='blogListSub'].modal").modal(); -->
 </body>
