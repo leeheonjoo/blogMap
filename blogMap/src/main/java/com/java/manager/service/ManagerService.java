@@ -21,4 +21,6 @@ public interface ManagerService {
 	public void getCouponData(ModelAndView mav);
 	
 	public void couponSubmit(ModelAndView mav);
+	
+	public void partnerDetail(ModelAndView mav);
 }

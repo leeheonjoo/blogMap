@@ -273,4 +273,25 @@ public class ManagerServiceImpl implements ManagerService {
 		mav.addObject("json", json);
 		
 	}
+	
+	@Override
+	public void partnerDetail(ModelAndView mav) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int partnerNo=Integer.parseInt(request.getParameter("partner_no"));
+		logger.info("partnerNo : " + partnerNo);
+		
+		PartnerDto partnerDto=managerDao.partnerDetail(partnerNo);
+		logger.info("partnerDto : " + partnerDto);
+		
+		Gson gson=new Gson();					//Gson의 객체를 생성
+		String json=gson.toJson(partnerDto);			//Log를 json으로 변환
+		logger.info("json: " + json);
+		
+		mav.addObject("json", json);
+			
+	}
 }
