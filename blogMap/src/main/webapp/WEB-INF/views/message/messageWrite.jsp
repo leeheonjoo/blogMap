@@ -47,11 +47,17 @@
 				 					//alert(data.category_code);
 				
 									$.each(data,function(i) {
+										var date=new Date(data[i].message_sDate);
+										var sy=date.getFullYear();
+										var sm=date.getMonth()+1;
+										var sd=date.getDate();
+										
+										var sdate=sy + "/" + sm + "/" + sd;
 										$("#receiveMsgResult").append($("#receiveListRow").clone());
 										$("#receiveMsgResult #receiveListRow:last-child #msg_R_no").append(data[i].message_no);
 										$("#receiveMsgResult #receiveListRow:last-child #msg_R_content").append(data[i].message_content);
 										$("#receiveMsgResult #receiveListRow:last-child #msg_R_id").append(data[i].member_id);
-										$("#receiveMsgResult #receiveListRow:last-child #msg_R_sDate").append(data[i].message_sDate);
+										$("#receiveMsgResult #receiveListRow:last-child #msg_R_sDate").append(sdate);
 										$("#receiveMsgResult #receiveListRow:last-child #msg_R_yn").append(data[i].message_yn);
 										$("#receiveMsgResult #receiveListRow:last-child a").attr("id", data[i].message_no);
 										
@@ -78,11 +84,17 @@
 				 					//alert(data.category_code);
 				
 									$.each(data,function(i) {
+										var date=new Date(data[i].message_sDate);
+										var sy=date.getFullYear();
+										var sm=date.getMonth()+1;
+										var sd=date.getDate();
+										
+										var sdate=sy + "/" + sm + "/" + sd;
 										$("#sendMsgResult").append($("#sendListRow").clone());
 										$("#sendMsgResult #sendListRow:last-child #msg_S_no").append(data[i].message_no);
 										$("#sendMsgResult #sendListRow:last-child #msg_S_content").append(data[i].message_content);
 										$("#sendMsgResult #sendListRow:last-child #msg_S_id").append(data[i].message_receiver);
-										$("#sendMsgResult #sendListRow:last-child #msg_S_sDate").append(data[i].message_sDate);
+										$("#sendMsgResult #sendListRow:last-child #msg_S_sDate").append(sdate);
 										$("#sendMsgResult #sendListRow:last-child #msg_S_yn").append(data[i].message_yn);
 										$("#sendMsgResult #sendListRow:last-child a").attr("id", data[i].message_no);
 										
@@ -101,7 +113,7 @@
 </head>
 <body>
 	<form class="form-horizontal">		<!-- 전체적인 폼 내에서 Label / Text 창의 크기를 조절하기 위해 필요한 폼 -->
-		<input type="hidden" name="member_id"/>
+		<!-- <input type="hidden" name="member_id"/> -->
 			
 		<div class="col-md-12 col-sm-12 col-xs-12">		<!-- Div 를 3화면에서 12 칸 모두 사용 -->
 			
