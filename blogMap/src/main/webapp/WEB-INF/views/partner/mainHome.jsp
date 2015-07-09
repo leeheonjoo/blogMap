@@ -247,11 +247,12 @@ $(function() {
 				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 				success : function(responseData) {
 				var data = JSON.parse(responseData);
-					alert("업체이름" + data.partner_name);
+// 					alert("업체이름" + data.partner_name);
+			
 				
 				$("p[name='p_name']").html(data.partner_name);
-		 		$("input[name='p_phone']").html(data.partner_phone);
-		 		$("input[name='p_addr']").html(data.partner_addr); 
+				$("p[name='p_phone']").html(data.partner_phone);
+				$("p[name='p_addr']").html(data.partner_addr);
 
 			/* 	$("#modal_info .img").attr('src', data.data_img); */
 				}
