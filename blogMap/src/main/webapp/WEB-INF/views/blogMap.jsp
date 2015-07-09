@@ -484,21 +484,21 @@
 								<div class="form-group">
 									<label class="col-xs-3 control-label">업체명</label>
 									<div class="col-xs-9">
-										<p class="form-control-static name"></p>
+ 										<p class="form-control-static name" name="p_name"></p> 
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<label class="col-xs-3 control-label">전화번호</label>
 									<div class="col-xs-9">
-										<p class="form-control-static phone"></p>
+ 										<p class="form-control-static phone" name="p_phone"></p>  
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<label class="col-xs-3 control-label">주소</label>
 									<div class="col-xs-9">
-										<p class="form-control-static address"></p>
+										<p class="form-control-static address" name="p_addr"></p> 
 									</div>
 								</div>
 							</div>
@@ -527,7 +527,7 @@
 	
 						<div class="modal-body" id="data-body">							
 							<input type="hidden"  id="category_code" name="category_code"/>
-							<input type="hidden"  id="member_id" name="member_id" value="test@test.com"/>
+							<input type="hidden"  id="member_id" name="member_id" value="${member_id }"/>
 							<div class="form-group">
 								<label class="col-xs-4 control-label">업체명</label>
 								<div class="col-xs-8">

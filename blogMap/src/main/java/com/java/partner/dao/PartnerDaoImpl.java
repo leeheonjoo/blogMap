@@ -55,4 +55,20 @@ public class PartnerDaoImpl implements PartnerDao {
 		
 		return session.selectOne("dao.PartnerMapper.getPartnerListDate", partnerNo);
 	}
+@Override
+	public List<PartnerDto> getRestaurantPartnerList() {
+		logger.info("PartnerMapper.restaurantPartnerList------------------------");
+		List<PartnerDto>restaurantList=session.selectList("dao.PartnerMapper.restaurantPartnerList");
+		logger.info(String.valueOf("restaurantPartnerList_Size:"+restaurantList.size()));
+		
+		return restaurantList;
+	}
+@Override
+public PartnerDto getRestaurantPartnerListDate(int partnerNo) {
+	logger.info("PartnerMapper.getRestaurantPartnerListDate----------------------");
+	logger.info("partnerNo 맴퍼가기전 : "+ partnerNo);
+	//PartnerDto getPartnerListDate=session.selectOne("dao.PartnerMapper.getPartnerListDate", partnerNo);
+	
+	return session.selectOne("dao.PartnerMapper.getRestaurantPartnerListDate", partnerNo);
+}
 }

@@ -14,5 +14,9 @@ public interface PartnerService {
 	public void list(ModelAndView mav);
 	
 	public void getPartnerListDate(ModelAndView mav);
+
+	public void restaurantList(ModelAndView mav);
+
+	public void getRestaurantPartnerListDate(ModelAndView mav);
 	
 }
