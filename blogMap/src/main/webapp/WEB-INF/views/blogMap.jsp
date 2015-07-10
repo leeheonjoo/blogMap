@@ -139,9 +139,8 @@ $(document).ready(function() {
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 				    		<a data-toggle="modal" href="#blogListMain">
-				    		<div id="tile1" class="tile" style="background-image: url('${root}/css/blogMap/images/search.png'); background-size: cover;">
-				    		
-					   		</div></a>
+				    			<div id="tile1" class="tile" style="background-image: url('${root}/css/blogMap/images/search.png'); background-size: cover;"></div>
+				    		</a>
 						</div>
 					</div>
 		        
@@ -175,12 +174,9 @@ $(document).ready(function() {
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-							<div class="item active">
-   								<img src="http://handsontek.net/demoimages/tiles/weather2.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-						   		<img src="http://handsontek.net/demoimages/tiles/weather.png" class="img-responsive"/>
-							</div>
+				    		<a data-toggle="modal" href="#blogMapWrite">
+				    			<div id="tile1" class="tile" style="background-image: url('${root}/css/blogMap/images/write_go.png'); background-size: cover;"></div>
+				    		</a>
 						</div>
 					</div>
 			        
