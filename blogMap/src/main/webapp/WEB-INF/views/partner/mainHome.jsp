@@ -4,12 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <c:set var="root" value="${pageContext.request.contextPath }"/>
-<c:set var="member_id" value="xognsl99@naver.com"/>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>BLOG MAP</title>
 <script type="text/javascript">
 $(function() {
+	$("input[name='member_id']").val(sessionStorage.getItem('email'));
 	$("#partner_tour_button").click(function() {
 		$("#category_code").val("100000");
 	})
@@ -53,7 +53,7 @@ $(function() {
 			<div class="tab-content col-md-9">
 				<section role="tabpanel" class="tab-pane active" id="tab_tour">
 					<div class="row" id="tour_item_list">	
-						<div class="col-md-2 col-sm-3 col-xs-4" id="item1" role="button" style="display:none;">
+						<div class="col-md-2 col-sm-3 col-xs-4" id="tour_item" role="button" style="display:none;">
 							<div id="tour_info" class="thumbnail">	
 								<a data-toggle="modal" href="#modal_info" class="list_partner_no">
 									<img class="img-responsive" src="http://placehold.it/300x300" alt="업체이미지"/>
@@ -202,7 +202,7 @@ $(function() {
 					/* alert("ok"); */	
 				$.ajax({
 					type:'post',
-					url:'${root}/partner/partnerList.do',
+					url:'${root}/partner/tour_partner_List.do',
 					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 					success : function(responseData) {
 						var data = JSON.parse(responseData);
@@ -211,9 +211,10 @@ $(function() {
 						/* 데이타를 채우기 위해 복사 */
 						$.each(data, function(i){
 							
-							$("#tour_item_list").append($("#item1").clone().css("display", "block"));
-							$("#item1:last-child #list_partner_name").append(data[i].partner_name);
-							$("#item1:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
+							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
+							$("#tour_item:last-child #list_partner_name").append(data[i].partner_name);
+							$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
+					
 							/* $("#item1:last_child .phone").append(data[i].partner_phone);
 							$("#item1:last_child .addr").append(data[i].partner_addr); */
 							//$("#item1:last_child .img").attr('src', data.data_img);
@@ -243,6 +244,25 @@ $(function() {
 				});
 			});
 		});
+			 
+		 function partnerData(no){
+				$.ajax({
+					type:'get',
+					url:'${root}/partner/getTourPartnerListDate.do?partnerNo=' + no,
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+					success : function(responseData) {
+					var data = JSON.parse(responseData);
+//		 			alert("업체이름" + data.partner_name);
+					
+						
+					$("p[name='p_name']").html(data.partner_name);
+					$("p[name='p_phone']").html(data.partner_phone);
+					$("p[name='p_addr']").html(data.partner_addr);
+
+				/* 	$("#modal_info .img").attr('src', data.data_img); */
+					}
+				});
+			}
 			 
 			 $(document).ready(function(){	
 					/* 데이타를 채우기 위해 복사 */
@@ -292,26 +312,6 @@ $(function() {
 					});
 				});
 			});
-		
-			 
-		function partnerData(no){
-			$.ajax({
-				type:'get',
-				url:'${root}/partner/getPartnerListDate.do?partnerNo=' + no,
-				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-				success : function(responseData) {
-				var data = JSON.parse(responseData);
-// 					alert("업체이름" + data.partner_name);
-			
-				
-				$("p[name='p_name']").html(data.partner_name);
-				$("p[name='p_phone']").html(data.partner_phone);
-				$("p[name='p_addr']").html(data.partner_addr);
-
-			/* 	$("#modal_info .img").attr('src', data.data_img); */
-				}
-			});
-		}
 		
 		function restaurantPartnerData(no){
 			$.ajax({

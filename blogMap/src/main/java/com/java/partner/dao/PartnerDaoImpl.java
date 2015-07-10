@@ -24,6 +24,7 @@ public class PartnerDaoImpl implements PartnerDao {
 @Override
 	public int partnerRegister(PartnerDto partnerDto) {
 		logger.info("PartnerMapper.partnerRegister-------------------------------------");
+		
 		int check=session.insert("dao.PartnerMapper.partnerRegister", partnerDto);
 		
 		return check;
@@ -35,10 +36,10 @@ public class PartnerDaoImpl implements PartnerDao {
  * @description: 제휴업체 리스트 (getPartnerList)
  */
 @Override
-	public List<PartnerDto> getPartnerList() {
-		logger.info("PartnerMapper.partnerList----------------------------------");
-		List<PartnerDto> list=session.selectList("dao.PartnerMapper.partnerList");
-		logger.info(String.valueOf("partnerList_Size:"+list.size()) );
+	public List<PartnerDto> getTourPartnerList() {
+		logger.info("PartnerMapper.getTourPartnerList----------------------------------");
+		List<PartnerDto> list=session.selectList("dao.PartnerMapper.getTourPartnerList");
+		logger.info(String.valueOf("getTourPartnerList_Size:"+list.size()) );
 		
 		return list;
 	}
@@ -48,18 +49,18 @@ public class PartnerDaoImpl implements PartnerDao {
 		return session.selectOne("dao.PartnerMapper.partnerCount");
 	}
 @Override
-	public PartnerDto getPartnerListDate(int partnerNo) {
-		logger.info("PartnerMapper.getPartnerListDate----------------------");
+	public PartnerDto getTourPartnerListDate(int partnerNo) {
+		logger.info("PartnerMapper.getTourPartnerListDate----------------------");
 		logger.info("partnerNo 맴퍼가기전 : "+ partnerNo);
 		//PartnerDto getPartnerListDate=session.selectOne("dao.PartnerMapper.getPartnerListDate", partnerNo);
 		
-		return session.selectOne("dao.PartnerMapper.getPartnerListDate", partnerNo);
+		return session.selectOne("dao.PartnerMapper.getTourPartnerListDate", partnerNo);
 	}
 @Override
 	public List<PartnerDto> getRestaurantPartnerList() {
-		logger.info("PartnerMapper.restaurantPartnerList------------------------");
-		List<PartnerDto>restaurantList=session.selectList("dao.PartnerMapper.restaurantPartnerList");
-		logger.info(String.valueOf("restaurantPartnerList_Size:"+restaurantList.size()));
+		logger.info("PartnerMapper.getRestaurantPartnerList------------------------");
+		List<PartnerDto>restaurantList=session.selectList("dao.PartnerMapper.getRestaurantPartnerList");
+		logger.info(String.valueOf("getRestaurantPartnerList_Size:"+restaurantList.size()));
 		
 		return restaurantList;
 	}
