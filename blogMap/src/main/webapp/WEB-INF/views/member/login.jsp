@@ -146,19 +146,22 @@
             	 					 
             	 					alert("로그인 성공");
             	 					
-            	 					$("#blogmap_login_bar").fadeOut();
-            	 					$("#blogmap_after_login").css("display","block");
+            	 					$("#blogmap_before_login span").remove();
+            	 					$("#blogmap_before_login").attr("data-toggle","");
+            	 					$("#login_text").text("Logout");
             	 					
-            	 					$("#blogmap_after_login").click(function(){
-            	 						if(sessionStorage.getItem('jointype')=="0002"){
-            	 							FB.logout();
-            	 						}
-            	 						sessionStorage.clear();
-            	 						//$("#blogmap_after_login").css("display","none");
-            	 						//$("#blogmap_login_bar").fadeIn();
-            	 						location.href="${root}/";
+            	 					if($("#login_text").text()=="Logout"){
+            	 						$("#blogmap_before_login").click(function(){
+                	 						if(sessionStorage.getItem('jointype')=="0002"){
+                	 							FB.logout();
+                	 						}
+                	 						sessionStorage.clear();
+                	 						//$("#blogmap_after_login").css("display","none");
+                	 						//$("#blogmap_login_bar").fadeIn();
+                	 						location.href="${root}/";
+            	 						});
+            	 					}
             	 					
-            	 					});
                         		}
                         	}
                         	
