@@ -62,7 +62,7 @@
 </head>
 <body>
 	<div class="container-fluid" style="max-width:1190px;">
-		<nav class="navbar navbar-inverse" role="navigation">
+		<nav class="navbar navbar-default navbar-inverse" role="navigation">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -130,10 +130,21 @@
 	<div class="container dynamicTile">
 		<div class="row ">
 	    	<div class="col-sm-2 col-xs-4">
-	    		<a data-toggle="modal" href="#blogListMain">
-	    		<div id="tile1" class="tile" style="background-image: url('${root}/css/blogMap/images/search.png'); background-size: cover;">
-	    		
-		   		</div></a>
+	    		<div id="tile1" class="tile">
+		        
+					<div class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="http://handsontek.net/demoimages/tiles/twitter1.png" class="img-responsive"/>
+							</div>
+							<div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/twitter2.png" class="img-responsive"/>
+							</div>
+						</div>
+					</div>
+		        
+		   		</div>
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
