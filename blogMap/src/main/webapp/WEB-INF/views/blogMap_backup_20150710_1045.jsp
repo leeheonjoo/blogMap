@@ -61,7 +61,7 @@
 </script>
 </head>
 <body>
-	<div class="container-fluid" style="max-width:1190px;">
+	<div class="container-fluid">
 		<nav class="navbar navbar-default navbar-inverse" role="navigation">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
