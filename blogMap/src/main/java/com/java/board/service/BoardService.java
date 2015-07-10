@@ -14,4 +14,5 @@ public interface BoardService {
 	public void getCategory(ModelAndView mav);
 
 	public void blogWrite(ModelAndView mav);
+	
 }

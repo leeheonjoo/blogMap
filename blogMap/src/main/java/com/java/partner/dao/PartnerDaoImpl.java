@@ -18,10 +18,10 @@ import com.java.partner.dto.PartnerDto;
 public class PartnerDaoImpl implements PartnerDao {
 	private final Logger logger=Logger.getLogger(this.getClass().getName());
 	
-	@Autowired
+@Autowired
 	public SqlSessionTemplate session;
 	
-	@Override
+@Override
 	public int partnerRegister(PartnerDto partnerDto) {
 		logger.info("PartnerMapper.partnerRegister-------------------------------------");
 		int check=session.insert("dao.PartnerMapper.partnerRegister", partnerDto);
@@ -34,7 +34,7 @@ public class PartnerDaoImpl implements PartnerDao {
  * @author: 변태훈
  * @description: 제휴업체 리스트 (getPartnerList)
  */
-	@Override
+@Override
 	public List<PartnerDto> getPartnerList() {
 		logger.info("PartnerMapper.partnerList----------------------------------");
 		List<PartnerDto> list=session.selectList("dao.PartnerMapper.partnerList");
@@ -42,4 +42,33 @@ public class PartnerDaoImpl implements PartnerDao {
 		
 		return list;
 	}
+	
+@Override
+	public int getPartnerCount() {
+		return session.selectOne("dao.PartnerMapper.partnerCount");
+	}
+@Override
+	public PartnerDto getPartnerListDate(int partnerNo) {
+		logger.info("PartnerMapper.getPartnerListDate----------------------");
+		logger.info("partnerNo 맴퍼가기전 : "+ partnerNo);
+		//PartnerDto getPartnerListDate=session.selectOne("dao.PartnerMapper.getPartnerListDate", partnerNo);
+		
+		return session.selectOne("dao.PartnerMapper.getPartnerListDate", partnerNo);
+	}
+@Override
+	public List<PartnerDto> getRestaurantPartnerList() {
+		logger.info("PartnerMapper.restaurantPartnerList------------------------");
+		List<PartnerDto>restaurantList=session.selectList("dao.PartnerMapper.restaurantPartnerList");
+		logger.info(String.valueOf("restaurantPartnerList_Size:"+restaurantList.size()));
+		
+		return restaurantList;
+	}
+@Override
+public PartnerDto getRestaurantPartnerListDate(int partnerNo) {
+	logger.info("PartnerMapper.getRestaurantPartnerListDate----------------------");
+	logger.info("partnerNo 맴퍼가기전 : "+ partnerNo);
+	//PartnerDto getPartnerListDate=session.selectOne("dao.PartnerMapper.getPartnerListDate", partnerNo);
+	
+	return session.selectOne("dao.PartnerMapper.getRestaurantPartnerListDate", partnerNo);
+}
 }

@@ -90,9 +90,15 @@ public class ManagerDaoImpl implements ManagerDao {
 		return session.update("dao.ManagerMapper.couponSubmit", couponNo);
 	}
 	
-@Override
+	@Override
 	public void couponSubmitLog(int couponNo) {
 		// TODO Auto-generated method stub
 		session.insert("dao.ManagerMapper.couponSubmitLog", couponNo);
+	}
+	
+	@Override
+	public PartnerDto partnerDetail(int partnerNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("dao.ManagerMapper.partnerDetail", partnerNo);
 	}
 }

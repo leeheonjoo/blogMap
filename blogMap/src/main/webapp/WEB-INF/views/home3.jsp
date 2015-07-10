@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-<c:set var="member_id" value="test@test.com"/>
+<c:set var="member_id" value="xognsl99@naver.com"/>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -92,21 +92,24 @@
 							<div class="form-group">
 								<label class="col-xs-3 control-label">업체명</label>
 								<div class="col-xs-9">
-									<p class="form-control-static name"></p>
+									<p class="form-control-static name" name="p_name"></p> 
+									<!-- <input type="text" class="form-control-static" name="p_name"/> -->
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label class="col-xs-3 control-label">전화번호</label>
 								<div class="col-xs-9">
-									<p class="form-control-static phone"></p>
+									<p class="form-control-static phone" name="p_phone"></p> 
+<!-- 									<input type="text" class="form-control-static phone" id="p_phone"></input> -->
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label class="col-xs-3 control-label">주소</label>
 								<div class="col-xs-9">
-									<p class="form-control-static address"></p>
+								<p class="form-control-static address" name="p_addr"></p> 
+<!-- 									<input type="text" class="form-control-static address" id="p_addr"></input> -->
 								</div>
 							</div>
 						</div>
@@ -166,7 +169,7 @@
 					</div>
 
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary" onclick="return form_validation();">신청하기</button>
+						<button type="submit" class="btn btn-primary" id="form_validation">신청하기</button>
 					</div>
 				</div>
 			</form>

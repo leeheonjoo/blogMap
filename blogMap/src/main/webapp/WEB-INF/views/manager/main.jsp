@@ -28,80 +28,13 @@
 		
 		 // couponList
 		$("input#couponInfo2").click(function(){		// 쿠폰 정보버튼 클릭시 실행
-			getCouponlist()		// 제휴업체 정보를 불러오는 함수 호출
-			var el='couponInfo2';
-			var temp = $('div#' + el);
-			var temp_bg = $('#' + el + '_bg');   //dimmed 레이어를 감지하기 위한 boolean 변수
-			var temp_div = $('#' + el + '_div');
-			var temp_btn = $('#' + el + '_btn');
-			
-			if (temp_bg) {
-				temp_div.fadeIn(); //'bg' 클래스가 존재하면 레이어가 나타나고 배경은 dimmed 된다. 
-			} else {
-				temp.fadeIn();
-			}
-
-			// 화면의 중앙에 레이어를 띄운다.
-			if (temp.outerHeight() < $(document).height())
-				temp.css('margin-top', '-' + temp.outerHeight() / 2 + 'px');
-			else temp.css('top', '0px');
-			if (temp.outerWidth() < $(document).width()) 
-				temp.css('margin-left', '-' + temp.outerWidth() / 2 + 'px');
-			else temp.css('left', '0px');
-
-			temp_btn.click(function(e) {
-				if (temp_bg) {
-					temp_div.fadeOut(); //'bg' 클래스가 존재하면 레이어를 사라지게 한다. 
-				} else {
-					temp.fadeOut();
-				}
-				e.preventDefault();
-			});
-
-			temp_bg.click(function(e) { //배경을 클릭하면 레이어를 사라지게 하는 이벤트 핸들러
-				temp_div.fadeOut();
-				e.preventDefault();
-			});
+			getCouponlist()
 						
 		}); 
 		
 		// managerList
 		$("input#managerInfo2").click(function(){		//관리자정보 버튼을 클릭시 실행
-			getManagerList();		// 관리자 정보를 불러오는 함수 호출
-			var el='managerInfo2';
-			var temp = $('div#' + el);
-			var temp_bg = $('#' + el + '_bg');   //dimmed 레이어를 감지하기 위한 boolean 변수
-			var temp_div = $('#' + el + '_div');
-			var temp_btn = $('#' + el + '_btn');
-			
-			if (temp_bg) {
-				temp_div.fadeIn(); //'bg' 클래스가 존재하면 레이어가 나타나고 배경은 dimmed 된다. 
-			} else {
-				temp.fadeIn();
-			}
-
-			// 화면의 중앙에 레이어를 띄운다.
-			if (temp.outerHeight() < $(document).height())
-				temp.css('margin-top', '-' + temp.outerHeight() / 2 + 'px');
-			else temp.css('top', '0px');
-			if (temp.outerWidth() < $(document).width()) 
-				temp.css('margin-left', '-' + temp.outerWidth() / 2 + 'px');
-			else temp.css('left', '0px');
-
-			temp_btn.click(function(e) {
-				if (temp_bg) {
-					temp_div.fadeOut(); //'bg' 클래스가 존재하면 레이어를 사라지게 한다. 
-				} else {
-					temp.fadeOut();
-				}
-				e.preventDefault();
-			});
-
-			temp_bg.click(function(e) { //배경을 클릭하면 레이어를 사라지게 하는 이벤트 핸들러
-				temp_div.fadeOut();
-				e.preventDefault();
-			});
-						
+			getManagerList();						
 		});
 		
 	});

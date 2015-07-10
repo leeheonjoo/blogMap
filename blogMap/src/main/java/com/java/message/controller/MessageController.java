@@ -56,8 +56,8 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 	@RequestMapping(value="/message/mainMessage.do",method=RequestMethod.GET)
 	public void sendMessageListOk(HttpServletRequest request, HttpServletResponse response){
 		
-		logger.info("------------------- Send Message List1 ------------------");
-		System.out.println("ddddddd");
+		logger.info("------------------- Send Message List ------------------");
+	
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);

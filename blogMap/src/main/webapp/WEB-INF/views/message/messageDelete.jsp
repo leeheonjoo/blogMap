@@ -11,27 +11,31 @@
 <title>Delete</title>
 <script type="text/javascript">
 	function msgDelete() {
+		var email=sessionStorage.getItem('email');
+		
 		//alert($("input[name='message_no']").val());
 			$.ajax({
 				type : 'post',
 				url : '${root}/message/messageDelete.do',
 			 	data : {
-			 		member_id : $("input[name='member_id11']").val(),
+			 		member_id : $("input[name='member_Delid']").val(),
 					message_no : $("input[name='message_no']").val()
 			 	}, 
 				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 				success : function(responseData) {
 				//	alert(responseData);
 					if(responseData == 1){
-						$("#messageDelete").fadeOut();
-						$("#messageRead").fadeOut();
 						$('#myTab a:first').tab('show');
-						$("#result").empty();
-						$("#result1").empty();
+						$("#receiveMsgResult").empty();
+						$("#sendMsgResult").empty();
+						$("input[name='member_Delid']").val("");
 						
 						$.ajax({
 							type : 'get',
 							url : '${root}/message/mainMessage.do',
+							data : {
+								member_id : email
+							},
 							contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 							success : function(responseData) {
 								var data = JSON.parse(responseData);
@@ -43,17 +47,23 @@
 			
 								/*result Div 안에 listRow Div 를 복사하여 붙이면서 불러온 정보를 차례대로 담는다. */
 								$.each(data,function(i) {
+									var date=new Date(data[i].message_sDate);
+									var sy=date.getFullYear();
+									var sm=date.getMonth()+1;
+									var sd=date.getDate();
+									
+									var sdate=sy + "/" + sm + "/" + sd;
 								//	alert(i + " " + data[i].message_no + " " + data[i].message_content);
-									$("#result").append($("#listRow").clone().css("display","block"));
-									$("#result #listRow:last-child .no").append(data[i].message_no);
-									$("#result #listRow:last-child .content").append(data[i].message_content);
-									$("#result #listRow:last-child .id").append(data[i].member_id);
-									$("#result #listRow:last-child .sDate").append(data[i].message_sDate);
-									$("#result #listRow:last-child .yn").append(data[i].message_yn);
-									$("#result #listRow:last-child a").attr("id", data[i].message_no);
+									$("#sendMsgResult").append($("#sendListRow").clone());
+									$("#sendMsgResult #sendListRow:last-child #msg_S_no").append(data[i].message_no);
+									$("#sendMsgResult #sendListRow:last-child #msg_S_content").append(data[i].message_content);
+									$("#sendMsgResult #sendListRow:last-child #msg_S_id").append(data[i].member_id);
+									$("#sendMsgResult #sendListRow:last-child #msg_S_sDate").append(sdate);
+									$("#sendMsgResult #sendListRow:last-child #msg_S_yn").append(data[i].message_yn);
+									$("#sendMsgResult #sendListRow:last-child a").attr("id", data[i].message_no);
 									
 									$("#" + data[i].message_no).click(function(){
-										importData(data[i].message_no);	
+										msgDelimportData(data[i].message_no);	
 									});
 								});
 							},
@@ -62,7 +72,7 @@
 							}
 						});
 
-		 function importData(no){
+		 function msgDelimportData(no){
 			$.ajax({
 				type:'get',
 				url:'${root}/message/messageRead.do?message_no=' + no,
@@ -70,11 +80,18 @@
 				success:function(responseData){
 				//	alert(responseData);
 					var data=JSON.parse(responseData);
+					
+					var date=new Date(data.message_sDate);
+					var sy=date.getFullYear();
+					var sm=date.getMonth()+1;
+					var sd=date.getDate();
+					
+					var sdate=sy + "/" + sm + "/" + sd;
 				//	alert(data.message_no);
 					$("input[name='message_no']").val(data.message_no);
 			 		$("input[name='message_receiver']").val(data.message_receiver);
 			 		$("input[name='member_id']").val(data.member_id); 
-			 		$("input[name='message_sDate']").val(data.message_sDate); 
+			 		$("input[name='message_sDate']").val(sdate); 
 			 		$("textarea[name='message_content']").val(data.message_content); 
 				},
 				error:function(data){
@@ -98,7 +115,7 @@
 					</div>
 					
 					<div class="col-md-8 col-sm-8 col-xs-8">
-						<input type="text" class="form-control" name="member_id11"/>
+						<input type="text" class="form-control" name="member_Delid"/>
 					</div>
 				</div>
 			</div>
