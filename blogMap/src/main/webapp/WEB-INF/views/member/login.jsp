@@ -10,13 +10,13 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#login").click(function(){
+		$("#login_btn").click(function(){
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/login.do',
 				data:{
-					id:$("input[name='id']").val(),
-					password:$("input[name='password']").val()					
+					id:$("#member_login_id").val(),
+					password:$("#member_login_password").val()					
 				},
 				
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
@@ -30,9 +30,14 @@
 	 		                alert(email);
 	 		                $("#loginCheck").text(email);
 	 		            }
+	 	
 	 					 
+	 					 
+	 					 //$("#blogmap_login_bar").fadeOut();
+	 				   	 //$("#blogmap_after_login").css("display","block");
 	 					 alert("로그인 성공");
 	 					 location.href="${root}/";
+	 					
 	
 	 				}
 	 				
@@ -79,7 +84,7 @@
 </head>
 <body>
 	
-	<span>
+	<!-- <span>
 	<input type="text" name="id"/><br/>
 	<input type="password" name="password"/>
 	</span>
@@ -88,7 +93,7 @@
 	<input type="button" id="login" value="로그인"/>
 	</span>
 	
-	<div id="loginCheck"></div>
+	<div id="loginCheck"></div> -->
 	
 	
     <script>
@@ -129,19 +134,36 @@
             	 					 if (window.sessionStorage) {
             	 		                sessionStorage.setItem('email', data.member_id);
             	 		                var email = sessionStorage.getItem('email');
+            	 		                
+            	 		                sessionStorage.setItem('jointype', data.member_jointype);
+           	 		                	var jointype = sessionStorage.getItem('jointype');
             	 		                alert(email);
+            	 		                alert(jointype);
             	 		                //$("input[name='member_id']").attr("value",sessionStorage.getItem('email'));
             	 		                $("#loginCheck").text(email);
             	 		                
             	 		            }
             	 					 
-            	 					 alert("로그인 성공");
-            	 					//location.href="${root}/1";
-            	
-            	 				}
+            	 					alert("로그인 성공");
+            	 					
+            	 					$("#blogmap_login_bar").fadeOut();
+            	 					$("#blogmap_after_login").css("display","block");
+            	 					
+            	 					$("#blogmap_after_login").click(function(){
+            	 						if(sessionStorage.getItem('jointype')=="0002"){
+            	 							FB.logout();
+            	 						}
+            	 						sessionStorage.clear();
+            	 						//$("#blogmap_after_login").css("display","none");
+            	 						//$("#blogmap_login_bar").fadeIn();
+            	 						location.href="${root}/";
+            	 					
+            	 					});
+                        		}
                         	}
                         	
                         });
+                        
                     }
                 });    
                  
@@ -150,11 +172,17 @@
             } else {
                 
             }
+            
+            
         });
-
          FB.Event.subscribe('auth.login', function(response) {
-            document.location.reload();
+        	 //$("#blogmap_login_bar").fadeOut();
+			 //$("#blogmap_after_login").css("display","block");
+			 
+        	 document.location.reload();
+        	 
         }); 
+         
       };
     
       // Load the SDK Asynchronously
@@ -165,11 +193,13 @@
          js.src = "//connect.facebook.net/ko_KR/all.js";
          ref.parentNode.insertBefore(js, ref);
        }(document)); 
-    </script>
+      
+      
+    </script> 
         
-<!-- 페이스북 로그아웃 -->     
-    <fb:login-button show-faces="false" width="200" max-rows="1"></fb:login-button>
-
+ 
+   <!--  <fb:login-button show-faces="false" width="200" max-rows="1"></fb:login-button> -->
+	<!-- <a href="#" onclick="FB.login();">[login]</a> -->
 <!-- 페북 로그인시 사용자 정보 출력 -->    
     <p>사용자정보 출력</p>
     <div align="left">

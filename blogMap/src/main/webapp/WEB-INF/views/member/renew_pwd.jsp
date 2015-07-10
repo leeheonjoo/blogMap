@@ -36,12 +36,44 @@
 </script>
 </head>
 <body>
-	<div>
+	<!-- <div>
 		아이디(이메일)<input type="text" name="member_id_renew"/>   
 	</div>
 	
 	<div>
 		<input type="button" name="submit" value="발송"/>
-	</div>
+	</div> -->
+	
+	<div class="container">
+        <div class="row centered-form">
+	        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+	        	<div class="panel panel-default">
+	        		<div class="panel-heading">
+				    	<h1 class="panel-title">비밀번호 찾기</h1>
+				 	</div>
+				 	
+		 			<div class="panel-body"> 
+		    		<!-- <form role="form"> -->
+		  	
+						<div class="row">
+		    				<div class="col-xs-6 col-sm-6 col-md-6">
+		    					<div class="form-group">
+		               				<input type="text" name="member_id_renew" class="form-control input-sm" placeholder="Email Address"/>
+		    					</div>
+		    				</div>
+		    				
+		    				<div class="col-xs-2 col-sm-2 col-md-2">
+			    					<div class="form-group">
+			    						<input type="button" name="submit" value="발송" class="btn btn-info btn-block"/>
+			    					</div>
+			    			</div>
+		    			</div>
+		    			
+		    		</div>
+		    		
+				</div>
+			</div>
+		</div>
+	</div> 
 </body>
 </html>
