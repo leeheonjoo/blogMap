@@ -31,14 +31,23 @@
 					return false;
 				}
 					//alert(data.category_code);
-	
-				/*result Div 안에 listRow Div 를 복사하여 붙이면서 불러온 정보를 차례대로 담는다. */
+					
+					/*result Div 안에 listRow Div 를 복사하여 붙이면서 불러온 정보를 차례대로 담는다. */
 				$.each(data,function(i) {
+					var date=new Date(data[i].message_sDate);
+					var sy=date.getFullYear();
+					var sm=date.getMonth()+1;
+					var sd=date.getDate();
+					
+					var sdate=sy + "/" + sm + "/" + sd;
+					/* alert(sdate); */
+					/* alert(date.getFullYear() + "/" + date.getMonth()+1 + "/" + date.getDate() + "/" + date.getHours()); */
+					
 					$("#sendMsgResult").append($("#sendListRow").clone());
 						$("#sendMsgResult #sendListRow:last-child #msg_S_no").append(data[i].message_no);
 						$("#sendMsgResult #sendListRow:last-child #msg_S_content").append(data[i].message_content);
 						$("#sendMsgResult #sendListRow:last-child #msg_S_id").append(data[i].message_receiver);
-						$("#sendMsgResult #sendListRow:last-child #msg_S_sDate").append(data[i].message_sDate);
+						$("#sendMsgResult #sendListRow:last-child #msg_S_sDate").append(sdate);
 						$("#sendMsgResult #sendListRow:last-child #msg_S_yn").append(data[i].message_yn);
 						$("#sendMsgResult #sendListRow:last-child a").attr("id", data[i].message_no);
 						
@@ -60,11 +69,18 @@
 				success:function(responseData){
 				//	alert(responseData);
 					var data=JSON.parse(responseData);
+					
+					var date=new Date(data.message_sDate);
+					var sy=date.getFullYear();
+					var sm=date.getMonth()+1;
+					var sd=date.getDate();
+					
+					var sdate=sy + "/" + sm + "/" + sd;
 				//	alert(data.message_no);
 					$("input[name='message_no']").val(data.message_no);
 			 		$("input[name='message_receiver']").val(data.message_receiver);
 			 		$("input[name='member_id']").val(data.member_id); 
-			 		$("input[name='message_sDate']").val(data.message_sDate); 
+			 		$("input[name='message_sDate']").val(sdate); 
 			 		$("textarea[name='message_content']").val(data.message_content); 
 				},
 				error:function(data){
@@ -95,11 +111,17 @@
 
 				/*result Div 안에 listRow Div 를 복사하여 붙이면서 불러온 정보를 차례대로 담는다. */
 				$.each(data,function(i) {
+					var date=new Date(data[i].message_sDate);
+					var sy=date.getFullYear();
+					var sm=date.getMonth()+1;
+					var sd=date.getDate();
+					
+					var sdate=sy + "/" + sm + "/" + sd;
 					$("#receiveMsgResult").append($("#receiveListRow").clone());
 						$("#receiveMsgResult #receiveListRow:last-child #msg_R_no").append(data[i].message_no);
 						$("#receiveMsgResult #receiveListRow:last-child #msg_R_content").append(data[i].message_content);
 						$("#receiveMsgResult #receiveListRow:last-child #msg_R_id").append(data[i].member_id);
-						$("#receiveMsgResult #receiveListRow:last-child #msg_R_sDate").append(data[i].message_sDate);
+						$("#receiveMsgResult #receiveListRow:last-child #msg_R_sDate").append(sdate);
 						$("#receiveMsgResult #receiveListRow:last-child #msg_R_yn").append(data[i].message_yn);
 						$("#receiveMsgResult #receiveListRow:last-child a").attr("id", data[i].message_no);
 						
@@ -122,11 +144,18 @@
 				success:function(responseData){
 				//	alert(responseData);
 					var data=JSON.parse(responseData);
+					
+					var date=new Date(data.message_sDate);
+					var sy=date.getFullYear();
+					var sm=date.getMonth()+1;
+					var sd=date.getDate();
+					
+					var sdate=sy + "/" + sm + "/" + sd;
 				//	alert(data.message_no);
 					$("input[name='message_no']").val(data.message_no);
 			 		$("input[name='message_receiver']").val(data.message_receiver);
 			 		$("input[name='member_id']").val(data.member_id); 
-			 		$("input[name='message_sDate']").val(data.message_sDate); 
+			 		$("input[name='message_sDate']").val(sdate); 
 			 		$("textarea[name='message_content']").val(data.message_content); 
 				},
 				error:function(data){
@@ -164,11 +193,17 @@
 	
 				/*result Div 안에 listRow Div 를 복사하여 붙이면서 불러온 정보를 차례대로 담는다. */
 				$.each(data,function(i) {
+					var date=new Date(data[i].message_sDate);
+					var sy=date.getFullYear();
+					var sm=date.getMonth()+1;
+					var sd=date.getDate();
+					
+					var sdate=sy + "/" + sm + "/" + sd;
 					$("#receiveMsgResult").append($("#receiveListRow").clone());
 						$("#receiveMsgResult #receiveListRow:last-child #msg_R_no").append(data[i].message_no);
 						$("#receiveMsgResult #receiveListRow:last-child #msg_R_content").append(data[i].message_content);
 						$("#receiveMsgResult #receiveListRow:last-child #msg_R_id").append(data[i].member_id);
-						$("#receiveMsgResult #receiveListRow:last-child #msg_R_sDate").append(data[i].message_sDate);
+						$("#receiveMsgResult #receiveListRow:last-child #msg_R_sDate").append(sdate);
 						$("#receiveMsgResult #receiveListRow:last-child #msg_R_yn").append(data[i].message_yn);
 						$("#receiveMsgResult #receiveListRow:last-child a").attr("id", data[i].message_no);
 						
@@ -191,11 +226,18 @@
 			success:function(responseData){
 			//	alert(responseData);
 				var data=JSON.parse(responseData);
+				
+				var date=new Date(data.message_sDate);
+				var sy=date.getFullYear();
+				var sm=date.getMonth()+1;
+				var sd=date.getDate();
+				
+				var sdate=sy + "/" + sm + "/" + sd;
 			//	alert(data.message_no);
 				$("input[name='message_no']").val(data.message_no);
 		 		$("input[name='message_receiver']").val(data.message_receiver);
 		 		$("input[name='member_id']").val(data.member_id); 
-		 		$("input[name='message_sDate']").val(data.message_sDate); 
+		 		$("input[name='message_sDate']").val(sdate); 
 		 		$("textarea[name='message_content']").val(data.message_content); 
 			},
 			error:function(data){
