@@ -34,8 +34,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>						<!-- bootstrap javascript를 로드 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.js"></script>	<!-- bootstrap-select javascript를 로드 -->
 <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-dropdown.js"></script>		<!-- bootstrap-dropdown javascript를 로드 -->
-<!-- modal -->
+
 <script type="text/javascript">
+//	<modal>
 	$(document).ready(function() {
 		$('.modal').on('hidden.bs.modal', function( event ) {
 			$(this).removeClass( 'fv-modal-stack' );
@@ -66,7 +67,7 @@
 		});
 
 	
-		
+// 		<session check -> button change>
 		if(sessionStorage.getItem('email')!=null){
 			
 			$("#blogmap_login_bar").fadeOut();
@@ -89,9 +90,6 @@
 			$("#blogmap_login_bar").fadeIn();
 		} */
 	});
-	
-	
-	
 </script>
 </head>
 <body>
