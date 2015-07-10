@@ -135,6 +135,8 @@ public class ManagerServiceImpl implements ManagerService {
 		
 	}
 	
+	
+	
 	/**
 	 * @name:getPartnerDate
 	 * @date:2015. 7. 1.
@@ -147,6 +149,7 @@ public class ManagerServiceImpl implements ManagerService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
+				
 		List<PartnerDto> partnerList=managerDao.getPartnerData();
 		logger.info("partnerListSize : " + partnerList.size());
 		
@@ -156,6 +159,62 @@ public class ManagerServiceImpl implements ManagerService {
 		logger.info("json: " + json);
 		
 		mav.addObject("json", json);
+		
+	}
+	
+	/**
+	 * @name:getSearchPartnerDate
+	 * @date:2015. 7. 8.
+	 * @author:이동희
+	 * @description: Partner정보를 조회시 DB에서 데이타를 가지고온다.
+	 */
+	@Override
+	public void getSearchPartnerDate(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		
+		String partner_name=request.getParameter("name");
+		logger.info("partner_name:" + partner_name);
+		
+		
+		List<PartnerDto> searchPartnerList=managerDao.getSearchPartnerData(partner_name);
+		logger.info("searchPartnerList : " + searchPartnerList);
+		
+		Gson gson=new Gson();					//Gson의 객체를 생성
+		String searchjson=gson.toJson(searchPartnerList);	//Log를 json으로 변환
+		
+		logger.info("searchjson: " + searchjson);
+		
+		mav.addObject("searchjson", searchjson);
+		
+	}
+	
+	/**
+	 * @name:getSearchPartnerYN
+	 * @date:2015. 7. 10.
+	 * @author:이동희
+	 * @description: Partner정보를 조회시 DB에서 데이타를 가지고온다.
+	 */
+	@Override
+	public void getSearchPartnerYN(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		
+		String partner_yn=request.getParameter("partner_yn");
+		logger.info("partner_yn:" + partner_yn);
+		
+		
+		List<PartnerDto> searchPartnerList=managerDao.getSearchPartnerYN(partner_yn);
+		logger.info("searchPartnerList : " + searchPartnerList);
+		
+		Gson gson=new Gson();					//Gson의 객체를 생성
+		String searchjson=gson.toJson(searchPartnerList);	//Log를 json으로 변환
+		
+		logger.info("searchjson: " + searchjson);
+		
+		mav.addObject("searchjson", searchjson);
 		
 	}
 	

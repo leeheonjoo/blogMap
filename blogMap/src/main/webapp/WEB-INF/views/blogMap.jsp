@@ -517,7 +517,7 @@ $(document).ready(function() {
 	
 						<div class="modal-body" id="data-body">							
 							<input type="hidden"  id="category_code" name="category_code"/>
-							<input type="hidden"  id="member_id" name="member_id" value="${member_id }"/>
+							<input type="hidden"  id="member_id" name="member_id"/>
 							<div class="form-group">
 								<label class="col-xs-4 control-label">업체명</label>
 								<div class="col-xs-8">
