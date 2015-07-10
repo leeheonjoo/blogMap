@@ -39,17 +39,14 @@
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
 <!-- modal, session check -->
 <script type="text/javascript">
-$(document).ready(function() {		
-//		<session check -> button change>
-	if(sessionStorage.getItem('email')!=null){
-		//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
-		//$("#blogmap_login_bar").fadeOut();
-		$("#blogmap_before_login span").remove();
-		$("#blogmap_before_login").attr("data-toggle","");
-		$("#login_text").text("Logout");
-		
-		if($("#login_text").text()=="Logout"){
-			$("#blogmap_before_login").click(function(){
+	$(document).ready(function() {		
+// 		<session check -> button change>
+		if(sessionStorage.getItem('email')!=null){
+			
+			$("#blogmap_login_bar").fadeOut();
+			$("#blogmap_after_login").css("display","block");
+			
+			$("#blogmap_after_login").click(function(){
 				if(sessionStorage.getItem('jointype')=="0002"){
 					FB.logout();
 				}
@@ -57,10 +54,10 @@ $(document).ready(function() {
 				//$("#blogmap_after_login").css("display","none");
 				//$("#blogmap_login_bar").fadeIn();
 				location.href="${root}/";
+				
 			});
-		}
-	}
-});
+		};
+	});
 </script>
 </head>
 <body>
@@ -79,10 +76,10 @@ $(document).ready(function() {
 				</div>
 			
 				<!-- Collect the nav links, forms, and other content for toggling -->
-			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav navbar-right">
 			        <li id="blogmap_login_bar" class="dropdown">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a>
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b>Login</b> <span class="caret"></span></a>
 						<ul id="login-dp" class="dropdown-menu">
 							<li>
 								 <div class="row">
@@ -119,7 +116,7 @@ $(document).ready(function() {
 							</li>
 						</ul>
 			        </li>
-			       
+			        <li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
 			      </ul>
 				 </div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
@@ -138,10 +135,12 @@ $(document).ready(function() {
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-				    		<a data-toggle="modal" href="#blogListMain">
-				    		<div id="tile1" class="tile" style="background-image: url('${root}/css/blogMap/images/search.png'); background-size: cover;">
-				    		
-					   		</div></a>
+							<div class="item active">
+								<img src="http://handsontek.net/demoimages/tiles/twitter1.png" class="img-responsive"/>
+							</div>
+							<div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/twitter2.png" class="img-responsive"/>
+							</div>
 						</div>
 					</div>
 		        
@@ -521,7 +520,7 @@ $(document).ready(function() {
 	
 						<div class="modal-body" id="data-body">							
 							<input type="hidden"  id="category_code" name="category_code"/>
-							<input type="hidden"  id="member_id" name="member_id"/>
+							<input type="hidden"  id="member_id" name="member_id" value="${member_id }"/>
 							<div class="form-group">
 								<label class="col-xs-4 control-label">업체명</label>
 								<div class="col-xs-8">

@@ -44,7 +44,7 @@
 	</delete>
 	
 	<select id="totalPoint" parameterType="String" resultType="Integer">
-		select sum(point_value) from point_info where member_id=#{member_id}
+		select nvl(sum(point_value),0) from point_info where member_id=#{member_id}
 	</select>
 	
 	<select id="point_info" parameterType="java.util.HashMap" resultType="java.util.HashMap">
@@ -52,7 +52,7 @@
 	</select>
 	
 	<select id="totalBoard" parameterType="String" resultType="Integer">
-		select count(*) from board where member_id=#{member_id}
+		select nvl(count(*),0) from board where member_id=#{member_id}
 	</select>
 	
 	<select id="board_info" parameterType="String" resultType="java.util.HashMap">
@@ -60,7 +60,7 @@
 	</select>
 	
 	<select id="totalFavorite" parameterType="String" resultType="Integer">
-		select count(*) from favorite where member_id=#{member_id}
+		select nvl(count(*),0) from favorite where member_id=#{member_id}
 	</select>
 	
 	<select id="favorite_info" parameterType="String" resultType="java.util.HashMap">
@@ -68,6 +68,6 @@
 	</select>
 	
 	<select id="point_info_count" parameterType="String" resultType="Integer">
-		select count(*) from point_info where member_id=#{member_id}
+		select nvl(count(*),0) from point_info where member_id=#{member_id}
 	</select>
 </mapper>

@@ -35,36 +35,42 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>						<!-- bootstrap javascript를 로드 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.js"></script>	<!-- bootstrap-select javascript를 로드 -->
 <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-dropdown.js"></script>		<!-- bootstrap-dropdown javascript를 로드 -->
-<!-- Modal, Metro style javascript를 로드 -->
-<script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
-<!-- modal, session check -->
+<script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>									<!-- Metro style dynamic Tiles javascript를 로드 -->
+<!-- modal -->
 <script type="text/javascript">
-$(document).ready(function() {		
-//		<session check -> button change>
-	if(sessionStorage.getItem('email')!=null){
-		//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
-		//$("#blogmap_login_bar").fadeOut();
-		$("#blogmap_before_login span").remove();
-		$("#blogmap_before_login").attr("data-toggle","");
-		$("#login_text").text("Logout");
-		
-		if($("#login_text").text()=="Logout"){
-			$("#blogmap_before_login").click(function(){
-				if(sessionStorage.getItem('jointype')=="0002"){
-					FB.logout();
-				}
-				sessionStorage.clear();
-				//$("#blogmap_after_login").css("display","none");
-				//$("#blogmap_login_bar").fadeIn();
-				location.href="${root}/";
-			});
-		}
-	}
-});
+	$(document).ready(function() {
+		$('.modal').on('hidden.bs.modal', function( event ) {
+			$(this).removeClass( 'fv-modal-stack' );
+			$('body').data( 'fv_open_modals', $('body').data( 'fv_open_modals' ) - 1 );
+		});
+
+		$( '.modal' ).on( 'shown.bs.modal', function ( event ) {
+			 // keep track of the number of open modals
+			 if ( typeof( $('body').data( 'fv_open_modals' ) ) == 'undefined' ){
+			   $('body').data( 'fv_open_modals', 0 );
+			 }
+	                   
+			 // if the z-index of this modal has been set, ignore.
+	                        
+			if ( $(this).hasClass( 'fv-modal-stack' ) ){
+				return;
+			}
+	                   
+			$(this).addClass( 'fv-modal-stack' );
+			
+			$('body').data( 'fv_open_modals', $('body').data( 'fv_open_modals' ) + 1 );
+			
+			$(this).css('z-index', 1040 + (10 * $('body').data( 'fv_open_modals' )));
+			
+			$( '.modal-backdrop' ).not( '.fv-modal-stack' ).css( 'z-index', 1039 + (10 * $('body').data( 'fv_open_modals' )));
+			
+			$( '.modal-backdrop' ).not( 'fv-modal-stack' ).addClass( 'fv-modal-stack' );
+		});
+	});
 </script>
 </head>
 <body>
-	<div class="container-fluid" style="max-width:1190px;">
+	<div class="container-fluid">
 		<nav class="navbar navbar-default navbar-inverse" role="navigation">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -79,53 +85,51 @@ $(document).ready(function() {
 				</div>
 			
 				<!-- Collect the nav links, forms, and other content for toggling -->
-			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			      <ul class="nav navbar-nav navbar-right">
-			        <li id="blogmap_login_bar" class="dropdown">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a>
-						<ul id="login-dp" class="dropdown-menu">
-							<li>
-								 <div class="row">
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+							<ul id="login-dp" class="dropdown-menu">
+								<li>
+									<div class="row">
 										<div class="col-md-12">
 										<br/>
-											 <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-													<div class="form-group">
-														 <label class="sr-only" for="member_login_id">Email address</label>
-														 <input type="email" class="form-control" id="member_login_id" placeholder="Email address" required>
-													</div>
-													
-													<div class="form-group">
-														 <label class="sr-only" for="member_login_password">Password</label>
-														 <input type="password" class="form-control" id="member_login_password" placeholder="Password" required>
-													</div>
-													
-													<div class="form-group">
-														 <button type="button" id="login_btn" class="btn btn-primary btn-block">Sign in</button>
-													</div>
-													
-											  </form> 
-											  <div class="help-block text-right"><a data-toggle="modal" href="#blogmap_renew_pwd">Forget the password ?</a></div>
-											  	
-
-												<div class="social-buttons" style="text-align:center;">
-													<a href="#" class="btn btn-fb"  onclick="FB.login();"><i class="fa fa-facebook"></i> Facebook</a>
+											<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+												<div class="form-group">
+													 <label class="sr-only" for="exampleInputEmail2">Email address</label>
+													 <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
 												</div>
+												<div class="form-group">
+													<label class="sr-only" for="exampleInputPassword2">Password</label>
+													<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+													<div class="help-block text-right"><a href="">Forget the password ?</a></div>
+												</div>
+												<div class="form-group">
+													<button type="submit" class="btn btn-primary btn-block">Sign in</button>
+												</div>
+												<div class="checkbox">
+													<label>
+														<input type="checkbox"> keep me logged-in
+													</label>
+												</div>
+												<div class="social-buttons" style="text-align:center;">
+													<a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+												</div>
+											</form>
 										</div>
-										
 										<div class="bottom text-center">
-											New here ? <a data-toggle="modal" href="#blogmapRegister"><b>Join Us</b></a>
+											New here ? <a href="#"><b>Join Us</b></a>
 										</div>
-								 </div>
-							</li>
-						</ul>
-			        </li>
-			       
-			      </ul>
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
 				 </div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 		</nav>
 	</div>
-	<br/>
+	<br/><br/>
 		
 
 
@@ -138,10 +142,12 @@ $(document).ready(function() {
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-				    		<a data-toggle="modal" href="#blogListMain">
-				    		<div id="tile1" class="tile" style="background-image: url('${root}/css/blogMap/images/search.png'); background-size: cover;">
-				    		
-					   		</div></a>
+							<div class="item active">
+								<img src="http://handsontek.net/demoimages/tiles/twitter1.png" class="img-responsive"/>
+							</div>
+							<div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/twitter2.png" class="img-responsive"/>
+							</div>
 						</div>
 					</div>
 		        
@@ -521,7 +527,7 @@ $(document).ready(function() {
 	
 						<div class="modal-body" id="data-body">							
 							<input type="hidden"  id="category_code" name="category_code"/>
-							<input type="hidden"  id="member_id" name="member_id"/>
+							<input type="hidden"  id="member_id" name="member_id" value="${member_id }"/>
 							<div class="form-group">
 								<label class="col-xs-4 control-label">업체명</label>
 								<div class="col-xs-8">

@@ -9,11 +9,12 @@
 <title>BLOG MAP</title>
 <script type="text/javascript">
 $(function() {
+	$("input[name='member_id']").val(sessionStorage.getItem('email'));
 	$("#partner_tour_button").click(function() {
 		$("#category_code").val("100000");
 	})
 	$("#partner_restaurant_button").click(function() {
-		$("category_code").val("200000");
+		$("#category_code").val("200000");
 	})
 })
 </script>
@@ -52,11 +53,11 @@ $(function() {
 			<div class="tab-content col-md-9">
 				<section role="tabpanel" class="tab-pane active" id="tab_tour">
 					<div class="row" id="tour_item_list">	
-						<div class="col-md-2 col-sm-3 col-xs-4" id="item1" role="button" style="display:none;">
+						<div class="col-md-2 col-sm-3 col-xs-4" id="tour_item" role="button" style="display:none;">
 							<div id="tour_info" class="thumbnail">	
 								<a data-toggle="modal" href="#modal_info" class="list_partner_no">
-									<div class="caption">
 									<img class="img-responsive" src="http://placehold.it/300x300" alt="업체이미지"/>
+										<div class="caption">
 										<p id="list_partner_name"></p>
 									</div>								
 								</a>
@@ -75,22 +76,25 @@ $(function() {
 				<!-- restaurant 탭 내용 -->
 				<section role="tabpanel" class="tab-pane active" id="tab_restaurant">
 					<div class="row" id="restaurant_item_list">	
-						<div class="col-md-2 col-sm-3 col-xs-4 item" data-name="영심이 떡볶이 &김밥" data-phone="031-708-3090" data-address="판교 2호점 " role="button">
-							<div class="thumbnail">
+						<div class="col-md-2 col-sm-3 col-xs-4" id="restaurant_item"  role="button">
+							<div id="restaurant_info" class="thumbnail">
+							<a data-toggle="modal" href="#modal_info" class="list_partner_no">
 								<img class="img-responsive" src="http://placehold.it/300x300" alt="업체이미지"/>
 								<div class="caption">
-									<p>업체이름</p>
+									<p id="list_partner_name"></p>
 								</div>
+								</a>
 							</div>
 						</div>
-					</div>
+					</div> 
 					<div class="row">	
 						<hr/>
 						<div class="col-xs-12 text-right">
-							<button type="button" id="partner_restaurant_button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">restaurant 업체등록</button>									
+							<button type="button" id="partner_restaurant_button" name="partner_restaurant_button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">restaurant 업체등록</button>									
 						</div>
 					</div>
-				</section>	
+				</section>
+				<div role="tabpanel" class="tab-pane" id="tab_tour"/>	
 				</div>
 			</div>
 		</div>
@@ -198,7 +202,7 @@ $(function() {
 					/* alert("ok"); */	
 				$.ajax({
 					type:'post',
-					url:'${root}/partner/partnerList.do',
+					url:'${root}/partner/tour_partner_List.do',
 					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 					success : function(responseData) {
 						var data = JSON.parse(responseData);
@@ -207,9 +211,10 @@ $(function() {
 						/* 데이타를 채우기 위해 복사 */
 						$.each(data, function(i){
 							
-							$("#tour_item_list").append($("#item1").clone().css("display", "block"));
-							$("#item1:last-child #list_partner_name").append(data[i].partner_name);
-							$("#item1:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
+							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
+							$("#tour_item:last-child #list_partner_name").append(data[i].partner_name);
+							$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
+					
 							/* $("#item1:last_child .phone").append(data[i].partner_phone);
 							$("#item1:last_child .addr").append(data[i].partner_addr); */
 							//$("#item1:last_child .img").attr('src', data.data_img);
@@ -240,10 +245,78 @@ $(function() {
 			});
 		});
 			 
-		function partnerData(no){
+		 function partnerData(no){
+				$.ajax({
+					type:'get',
+					url:'${root}/partner/getTourPartnerListDate.do?partnerNo=' + no,
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+					success : function(responseData) {
+					var data = JSON.parse(responseData);
+//		 			alert("업체이름" + data.partner_name);
+					
+						
+					$("p[name='p_name']").html(data.partner_name);
+					$("p[name='p_phone']").html(data.partner_phone);
+					$("p[name='p_addr']").html(data.partner_addr);
+
+				/* 	$("#modal_info .img").attr('src', data.data_img); */
+					}
+				});
+			}
+			 
+			 $(document).ready(function(){	
+					/* 데이타를 채우기 위해 복사 */
+					
+					$("#partner_Registration").click(function(){
+// 						alert("ok"); 
+					$.ajax({
+						type:'post',
+						url:'${root}/partner/restaurant_partner_List.do',
+						contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+						success : function(responseData) {
+							var data = JSON.parse(responseData);
+							alert(data);
+						
+							/* 데이타를 채우기 위해 복사 */
+							$.each(data, function(i){
+								
+								$("#restaurant_item_list").append($("#restaurant_item").clone().css("display", "block"));
+								$("#restaurant_item:last-child #list_partner_name").append(data[i].partner_name);
+								$("#restaurant_item:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
+								/* $("#item1:last_child .phone").append(data[i].partner_phone);
+								$("#item1:last_child .addr").append(data[i].partner_addr); */
+								//$("#item1:last_child .img").attr('src', data.data_img);
+								
+								// 각 업체를 클릭했을때 이벤트
+								$("#partner_" + data[i].partner_no).click(function(){
+									alert("업체클릭" + data[i].partner_no)
+									partnerData(data[i].partner_no);	
+								});
+							});
+						
+						$("#modal_info").modal({
+							'show' : false,
+							'backdrop' : 'static'
+						}).on('hidden.bs.modal', function(){
+							// 가져왓던 정보를 초기화
+							$("#modal_info .name").text('');
+							$("#modal_info .phone").text('');
+							$("#modal_info .addr").text('');
+							$("#modal_info .img").attr('src','');
+						});
+							if (!data) {
+								alert("등록된 정보가 없습니다.");
+								return false;
+							}
+						}
+					});
+				});
+			});
+		
+		function restaurantPartnerData(no){
 			$.ajax({
 				type:'get',
-				url:'${root}/partner/getPartnerListDate.do?partnerNo=' + no,
+				url:'${root}/partner/getRestaurantPartnerListDate.do?partnerNo=' + no,
 				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 				success : function(responseData) {
 				var data = JSON.parse(responseData);
