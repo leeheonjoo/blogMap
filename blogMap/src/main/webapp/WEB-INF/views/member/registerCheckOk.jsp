@@ -26,8 +26,42 @@
 </script>
 </head>
 <body>
-	<h3>사용가능한 아이디 입니다.</h3>
+	<!-- <h3>사용가능한 아이디 입니다.</h3>
 	<input type="button" name="okay" value="사용하기"/>
-	<input type="button" name="cancel" value="취소"/>
+	<input type="button" name="cancel" value="취소"/> -->
+	
+	<div class="container">
+        <div class="row centered-form">
+	        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+	        	<div class="panel panel-default">
+	        		<div class="panel-heading">
+				    	<h1 class="panel-title">사용가능한 아이디입니다.</h1>
+				 	</div>
+				 	
+		 			<div class="panel-body"> 
+		    		<!-- <form role="form"> -->
+		  	
+						<div class="row">
+		    				<div class="col-xs-2 col-sm-2 col-md-2">
+			    					<div class="form-group">
+			    						<input type="button" name="okay" value="사용하기" class="btn btn-info btn-block"/>
+			    						
+			    					</div>
+			    			</div>
+			    			
+			    			<div class="col-xs-2 col-sm-2 col-md-2">
+			    					<div class="form-group">
+			    						<input type="button" name="cancel" value="취소" class="btn btn-info btn-block"/>
+			    						
+			    					</div>
+			    			</div>
+		    			</div>
+		    			
+		    		</div>
+		    		
+				</div>
+			</div>
+		</div>
+	</div> 
 </body>
 </html>

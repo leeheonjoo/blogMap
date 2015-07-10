@@ -75,6 +75,7 @@ public class ManagerController {
 		}
 		
 	}
+	
 	/**
 	 * @name:partnerList
 	 * @date:2015. 7. 3.
@@ -101,6 +102,57 @@ public class ManagerController {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * @name:partnerList
+	 * @date:2015. 7. 3.
+	 * @author:이동희
+	 * @description: 검색시 제휴업체 정보를 불러오는 메소드
+	 */
+	@RequestMapping("/manager/searchPartnerInfo.do")
+	public void searchPartnerList(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager PartnerList start");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.getSearchPartnerDate(mav);
+		Map<String, Object> map=mav.getModel();
+		
+		String searchjson=(String) map.get("searchjson");
+		logger.info("searchjson:0" + searchjson);
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(searchjson);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/manager/searchPartnerYN.do")
+	public void searchPartnerYN(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager PartnerList start");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.getSearchPartnerYN(mav);
+		Map<String, Object> map=mav.getModel();
+		
+		String searchjson=(String) map.get("searchjson");
+		logger.info("searchjson:0" + searchjson);
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(searchjson);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	
 	/**
 	 * @name:partnerSubmit

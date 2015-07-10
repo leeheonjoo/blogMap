@@ -18,6 +18,10 @@ public interface ManagerDao {
 		
 		public List<PartnerDto> getPartnerData();
 		
+		public List<PartnerDto> getSearchPartnerData(String partner_name);
+		
+		public List<PartnerDto> getSearchPartnerYN(String partner_yn);
+		
 		public List<ManagerDto> getManagerDate();
 		
 		public List<ManagerLogDto> getManagerLog(String id);

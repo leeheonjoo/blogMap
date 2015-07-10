@@ -10,13 +10,13 @@
 	<select id="partnerCount" resultType="int">
 	select count(*) from partner
 	</select>
-	<select id="partnerList" resultType="com.java.partner.dto.PartnerDto">
+	<select id="getTourPartnerList" resultType="com.java.partner.dto.PartnerDto">
 		select * from partner where category_code=100000 order by partner_no desc
 	</select>
-	<select id="getPartnerListDate" parameterType="Integer" resultType="com.java.partner.dto.PartnerDto">
+	<select id="getTourPartnerListDate" parameterType="Integer" resultType="com.java.partner.dto.PartnerDto">
 		select * from partner where partner_no=#{partnerNo}
 	</select>
-	<select id="restaurantPartnerList" resultType="com.java.partner.dto.PartnerDto">
+	<select id="getRestaurantPartnerList" resultType="com.java.partner.dto.PartnerDto">
 		select * from partner where category_code=200000 order by partner_no desc
 	</select>
 	<select id="getRestaurantPartnerListDate" parameterType="Integer" resultType="com.java.partner.dto.PartnerDto">

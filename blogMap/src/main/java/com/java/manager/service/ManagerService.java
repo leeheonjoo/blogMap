@@ -10,6 +10,10 @@ public interface ManagerService {
 	
 	public void getPartnerDate(ModelAndView mav);
 	
+	public void getSearchPartnerDate(ModelAndView mav);
+	
+	public void getSearchPartnerYN(ModelAndView mav);
+	
 	public void getManagerDate(ModelAndView mav);
 	
 	public void getManagerLog(ModelAndView mav);

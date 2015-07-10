@@ -136,8 +136,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void fbLogin(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
-		HttpServletResponse response = (HttpServletResponse) map
-				.get("response");
+		HttpServletResponse response = (HttpServletResponse) map.get("response");
 		MemberDto memberDto = (MemberDto) map.get("memberDto");
 
 		logger.info("member_id:" + memberDto.getMember_id());
