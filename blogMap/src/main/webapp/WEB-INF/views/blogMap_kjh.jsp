@@ -119,7 +119,6 @@
 							</li>
 						</ul>
 			        </li>
-			        <!-- <li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li> -->
 			      </ul>
 				 </div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
