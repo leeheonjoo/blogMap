@@ -64,66 +64,66 @@ body{
 
 
 /*마에페이지*/
+.blogShort{ border-bottom:1px solid #ddd;}
+.add{background: #333; padding: 10%; height: 300px;}
 
-//Reusing bootstrap 3 panel CSS
-.panel {
-    background-color: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 4px 4px 4px 4px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
-}   
-
-.panel-primary {
-    border-color: #428BCA;
-}   
-
-.panel-primary > .panel-heading {
-    background-color: #428BCA;
-    border-color: #428BCA;
-    color: #FFFFFF;
-}   
-
-.panel-heading {
-    border-bottom: 1px solid rgba(0, 0, 0, 0);
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    padding: 10px 15px;
-}   
-
-.panel-title {
-    font-size: 16px;
-    margin-bottom: 0;
-    margin-top: 0;
-}   
-
-.panel-body:before, .panel-body:after {
-    content: " ";
-    display: table;
-}   
-
-.panel-body:before, .panel-body:after {
-    content: " ";
-    display: table;
-}   
-
-.panel-body:after {
-    clear: both;
-}   
-
-.panel-body {
-    padding: 15px;
-}   
-
-.panel-footer {
-    background-color: #F5F5F5;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    border-top: 1px solid #DDDDDD;
-    padding: 10px 15px;
+.nav-sidebar { 
+    width: 100%;
+    padding: 30px 0; 
+    border-right: 1px solid #ddd;
+}
+.nav-sidebar a {
+    color: #333;
+    -webkit-transition: all 0.08s linear;
+    -moz-transition: all 0.08s linear;
+    -o-transition: all 0.08s linear;
+    transition: all 0.08s linear;
+}
+.nav-sidebar .active a { 
+    cursor: default;
+    background-color: #0b56a8; 
+    color: #fff; 
+}
+.nav-sidebar .active a:hover {
+    background-color: #E50000;   
+}
+.nav-sidebar .text-overflow a,
+.nav-sidebar .text-overflow .media-body {
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis; 
 }
 
-//CSS from v3 snipp
+.btn-blog {
+    color: #ffffff;
+    background-color: #E50000;
+    border-color: #E50000;
+    border-radius:0;
+    margin-bottom:10px
+}
+.btn-blog:hover,
+.btn-blog:focus,
+.btn-blog:active,
+.btn-blog.active,
+.open .dropdown-toggle.btn-blog {
+    color: white;
+    background-color:#0b56a8;
+    border-color: #0b56a8;
+}
+article h2{color:#333333;}
+h2{color:#0b56a8;}
+ .margin10{margin-bottom:10px; margin-right:10px;}
+ 
+ .container .text-style
+{
+  text-align: justify;
+  line-height: 23px;
+  margin: 0 13px 0 0;
+  font-size: 19px;
+}
+
+/*마이페이지-테이블*/
 .user-row {
     margin-bottom: 14px;
 }
@@ -144,6 +144,7 @@ body{
 
 .table-user-information > tbody > tr {
     border-top: 1px solid rgb(221, 221, 221);
+    font-size:18px;
 }
 
 .table-user-information > tbody > tr:first-child {
@@ -154,3 +155,8 @@ body{
 .table-user-information > tbody > tr > td {
     border-top: 0;
 }
+.toppad
+{margin-top:20px;
+}
+
+

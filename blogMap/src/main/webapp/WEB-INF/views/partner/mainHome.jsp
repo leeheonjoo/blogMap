@@ -56,7 +56,11 @@ $(function() {
 						<div class="col-md-2 col-sm-3 col-xs-4" id="tour_item" role="button" style="display:none;">
 							<div id="tour_info" class="thumbnail">	
 								<a data-toggle="modal" href="#modal_info" class="list_partner_no">
-									<img class="img-responsive" src="http://placehold.it/300x300" alt="업체이미지"/>
+									<!-- var filename=data.partner_pic_name;
+										var filepath=data.partner_pic_path;
+									$("#partner_imagers").attr("src", )
+									 -->
+									<img class="img-responsive" id="partner_imagers"/> 
 										<div class="caption">
 										<p id="list_partner_name"></p>
 									</div>								
@@ -214,7 +218,8 @@ $(function() {
 							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
 							$("#tour_item:last-child #list_partner_name").append(data[i].partner_name);
 							$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
-					
+							$("#tour_item:last-child #partner_imagers").append(data[i].img_src);
+							
 							/* $("#item1:last_child .phone").append(data[i].partner_phone);
 							$("#item1:last_child .addr").append(data[i].partner_addr); */
 							//$("#item1:last_child .img").attr('src', data.data_img);
@@ -254,12 +259,10 @@ $(function() {
 					var data = JSON.parse(responseData);
 //		 			alert("업체이름" + data.partner_name);
 					
-						
 					$("p[name='p_name']").html(data.partner_name);
 					$("p[name='p_phone']").html(data.partner_phone);
 					$("p[name='p_addr']").html(data.partner_addr);
-
-				/* 	$("#modal_info .img").attr('src', data.data_img); */
+					$("p[name='tour_image']").attr(data.img_src);
 					}
 				});
 			}
@@ -283,9 +286,7 @@ $(function() {
 								$("#restaurant_item_list").append($("#restaurant_item").clone().css("display", "block"));
 								$("#restaurant_item:last-child #list_partner_name").append(data[i].partner_name);
 								$("#restaurant_item:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
-								/* $("#item1:last_child .phone").append(data[i].partner_phone);
-								$("#item1:last_child .addr").append(data[i].partner_addr); */
-								//$("#item1:last_child .img").attr('src', data.data_img);
+								$("#restaurant_item:last-child #partner_imagers").append(data[i].img_src);
 								
 								// 각 업체를 클릭했을때 이벤트
 								$("#partner_" + data[i].partner_no).click(function(){
@@ -326,47 +327,21 @@ $(function() {
 				$("p[name='p_name']").html(data.partner_name);
 				$("p[name='p_phone']").html(data.partner_phone);
 				$("p[name='p_addr']").html(data.partner_addr);
-
-			/* 	$("#modal_info .img").attr('src', data.data_img); */
+				$("img[name='tour_image']").attr('src', data.data_img); 
 				}
 			});
 		}
-// 		 	$(document).ready(function(){	
-// 				/* 데이타를 채우기 위해 복사 */
-// 				for(i=0; i<3; i++)
-// 				{
-// 					var clone = $("#restaurant_item_list > .item").eq(0).clone();
-// 					$("#restaurant_item_list").append(clone);
-// 				}
-				
-// 				// 각 업체를 클릭했을때 이벤트
-// 				$("#restaurant_item_list > .item").click(function(){
-					
-// 					// 정보를 가져와서 세팅한다.
-// 					var data_name = $(this).attr('data-name');
-// 					var data_phone = $(this).attr('data-phone');
-// 					var data_address = $(this).attr('data-address');
-// 					var data_img = $(this).find('img').attr('src');
-					
-// 					$("#modal_info .name").text(data_name);
-// 					$("#modal_info .phone").text(data_phone);
-// 					$("#modal_info .address").text(data_address);
-// 					$("#modal_info .img").attr('src', data_img);
-					
-// 					// 모달레이어를 연다.
-// 					$("#modal_info").modal('show');
-// 				});
-// 				$("#modal_info").modal({
-// 					'show' : false,
-// 					'backdrop' : 'static'
-// 				}).on('hidden.bs.modal', function(){
-// 					// 가져왓던 정보를 초기화
-// 					$("#modal_info .name").text('');
-// 					$("#modal_info .phone").text('');
-// 					$("#modal_info .address").text('');
-// 					$("#modal_info .img").attr('src','');
-// 				});
-// 			}); 
+		
+		function tourSerch(){
+			$.ajax({
+				type:'get',
+				url:'${root}/partner/tourSerch.do',
+				data:{
+					query:nameValue,
+					target:"local",
+				}
+			});			
+		}
 		</script>
 	</body>
 </html>

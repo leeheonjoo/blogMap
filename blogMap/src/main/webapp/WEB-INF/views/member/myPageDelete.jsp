@@ -32,6 +32,7 @@ $(function(){
 				
 				if(responseData=="1"){
 					alert("삭제 되었습니다.");
+					sessionStorage.clear();
 					location.href="${root}/1";
 				}else{
 					alert("삭제 실패");
@@ -50,7 +51,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<h3>비밀번호를 입력해주세요.</h3>
+	<!-- <h3>비밀번호를 입력해주세요.</h3>
 	<div>
 		<input id="myPageDelete_pwd" type="password"/>
 	</div>
@@ -58,6 +59,20 @@ $(function(){
 	<div>
 		<input id="myPageDelete_OkayBtn" type="button" value="탈퇴"/>
 		<input id="myPageDelete_CancelBtn" type="button" value="취소"/>
+	</div> -->
+	
+	
+	<label>비밀번호를 입력해주세요.</label>
+   	<div class="row">
+		<div class="col-xs-8 col-sm-8 col-md-8">
+			<div class="form-group">
+          			<input type="password" id="myPageDelete_pwd" class="form-control input-sm" placeholder="Password"/>
+			</div>
+		</div>
 	</div>
+   	<div>
+   	    <button id="myPageDelete_OkayBtn" class="btn btn-primary">삭제</button>&nbsp;&nbsp;
+   	    <button id="myPageDelete_CancelBtn" class="btn btn-primary">취소</button>
+   	</div>
 </body>
 </html>

@@ -19,4 +19,6 @@ public interface PartnerService {
 
 	public void getRestaurantPartnerListDate(ModelAndView mav);
 	
+	public void tourSerch(ModelAndView mav);
+	
 }

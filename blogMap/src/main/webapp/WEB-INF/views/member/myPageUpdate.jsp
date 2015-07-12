@@ -69,7 +69,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<div>
+	<!-- <div>
 		계정정보<input id="myPageUpdate_member_id" type="text"/> 
 	</div>
 	
@@ -91,6 +91,84 @@ $(function(){
 	
 	<div>
 		<input id="myPageUpdate_btn" type="button" value="수정"/> 
+	</div> -->
+	
+	<label>계좌정보</label><br/>
+	<div class="row">
+		<div class="col-xs-8 col-sm-8 col-md-8">
+			<div class="form-group">
+          			<input type="text" id="myPageUpdate_member_id" class="form-control input-sm"/>
+			</div>
+		</div>
 	</div>
+	
+	<label>이름</label><br/>
+	<div class="row">
+		<div class="col-xs-8 col-sm-8 col-md-8">
+			<div class="form-group">
+          			<input type="text" id="myPageUpdate_member_name" class="form-control input-sm" placeholder="Name"/>
+			</div>
+		</div>
+	</div>
+	
+	<label>현재비밀번호</label><br/>
+	<div class="row">
+		<div class="col-xs-8 col-sm-8 col-md-8">
+			<div class="form-group">
+          			<input type="password" id="myPage_member_pwd" class="form-control input-sm" placeholder="Password"/>
+			</div>
+		</div>
+	</div>
+	
+	<label>수정할 비밀번호</label><br/>
+	<div class="row">
+		<div class="col-xs-8 col-sm-8 col-md-8">
+			<div class="form-group">
+          			<input type="password" id="myPageUpdate_member_pwd" class="form-control input-sm" placeholder="Password"/>
+			</div>
+		</div>
+	</div>
+	
+	<label>비밀번호 확인</label><br/>
+	<div class="row">
+		<div class="col-xs-8 col-sm-8 col-md-8">
+			<div class="form-group">
+          			<input type="password" id="myPageUpdate_member_pwd_check" class="form-control input-sm" placeholder="Confirm password"/>
+			</div>
+		</div>
+	</div><br/>
+	
+	<div>
+       	<button id="myPageUpdate_btn" class="btn btn-primary">Update</button>
+  	</div>
+	 
+  <!-- <div class="well">
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane active in" id="home">
+       
+            
+            <input type="text" value="jsmith" class="input-xlarge"><br/>
+            
+            <input type="text" value="John" class="input-xlarge"><br/>
+            
+            <input type="text" value="Smith" class="input-xlarge"><br/>
+            
+            <input type="text" value="jsmith@yourcompany.com" class="input-xlarge"><br/>
+            
+            <input type="text" value="jsmith@yourcompany.com" class="input-xlarge"><br/><br/>
+          	
+        
+      </div>
+      <div class="tab-pane fade" id="profile">
+    	<form id="tab2">
+        	<label>New Password</label>
+        	<input type="password" class="input-xlarge">
+        	<div>
+        	    <button class="btn btn-primary">Update</button>
+        	</div>
+    	</form>
+      </div>
+  </div>
+  </div> -->
 </body>
 </html>

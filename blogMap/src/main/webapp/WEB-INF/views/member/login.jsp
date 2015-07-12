@@ -99,7 +99,7 @@
     <script>
       window.fbAsyncInit = function() {
         FB.init({
-          appId      : '371551513047868', // 앱 ID
+          appId      : '689268857840454', // 앱 ID
           status     : true,          // 로그인 상태를 확인
           cookie     : true,          // 쿠키허용
           xfbml      : true           // parse XFBML

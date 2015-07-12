@@ -27,14 +27,14 @@ $(function(){
 			
 		 	memberData=JSON.parse(data[0])
 			
-			$("#myPage_member_id").val(memberData.member_id);
-			$("#myPage_member_id").attr("disabled","disabled");
+			$("#myPage_member_id").text(memberData.member_id);
+			//$("#myPage_member_id").attr("disabled","disabled");
 			
-			$("#myPage_member_name").val(memberData.member_name);
-			$("#myPage_member_name").attr("disabled","disabled");
+			$("#myPage_member_name").text(memberData.member_name);
+			//$("#myPage_member_name").attr("disabled","disabled");
 			
-			$("#myPage_member_joindate").val(memberData.member_joindate);
-			$("#myPage_member_joindate").attr("disabled","disabled");
+			$("#myPage_member_joindate").text(memberData.member_joindate);
+			//$("#myPage_member_joindate").attr("disabled","disabled");
 			
 			$("#myPage_member_point").val(data[1]);
 			$("#myPage_member_point").attr("disabled","disabled");
@@ -47,7 +47,7 @@ $(function(){
 		}
 	});
 	
-	$("#myPage_update_btn").click(function(){
+	/* $("#myPage_update_btn").click(function(){
 		//layer_open('myPageUpdate_layer')
 		$("div[id='blogmap_myPageUpdate'].modal").modal();
 		
@@ -56,9 +56,9 @@ $(function(){
 	$("#myPage_delete_btn").click(function(){
 		//layer_open('myPageDelete_layer')
 		$("div[id='blogmap_myPageDelete'].modal").modal();
-	});
+	}); */
 	
-	$("#point_info_btn").click(function(){
+	//$("#point_info_btn").click(function(){
 		$.ajax({
 			type:'POST',
 			url:'${root}/member/point_info.do',
@@ -82,19 +82,21 @@ $(function(){
 				var currentPage=data[3];
 				
 				var pageCount=count/boardSize+(count%boardSize==0 ? 0:1);
-				alert(pageCount);
+				//alert(pageCount);
 				startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 				endPage=startPage+pageBlock-1;
 				
 				
 				//$("#myPage_member_point_list").empty();
-				$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+				//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+				$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
 				var point_data=JSON.parse(data[0]);
 				
 				
 				$.each(point_data,function(i){
 					//alert(data[i].BOARD_TITLE);
-					$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+					//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+					$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 					
 				});
 				
@@ -109,8 +111,8 @@ $(function(){
 				$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
 				
 				//이전
-				alert("startPage"+startPage);
-				alert("pageCount"+pageCount);
+				//alert("startPage"+startPage);
+				//alert("pageCount"+pageCount);
 				if(startPage>pageBlock){
 					$("#myPage_member_point_list_before").css("display","inline-block");
 				}
@@ -123,7 +125,7 @@ $(function(){
 				for(var i=startPage;i<=endPage;i++){
 					$("#myPage_member_point_list_pageNum").append("<a href='#' id='point_paging_num"+i+"'>"+i+"</a>");
 					$("#point_paging_num"+i).click(function(){
-						alert($(this).text());
+						//alert($(this).text());
 						$.ajax({
 							type:'POST',
 							url:'${root}/member/point_info.do',
@@ -148,13 +150,14 @@ $(function(){
 								
 								$("#myPage_member_point_list_title").empty();
 								$("#myPage_member_point_list_content").empty();
-								$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+								//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+								$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
 								var point_data=JSON.parse(data[0]);
 								
 								$.each(point_data,function(i){
 									//alert(data[i].BOARD_TITLE);
-									$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-									
+									//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+									$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 								});
 							}
 						});
@@ -162,8 +165,8 @@ $(function(){
 				}
 				
 				
-				alert("endPage:"+endPage);
-				alert("pageCount:"+pageCount);
+				//alert("endPage:"+endPage);
+				//alert("pageCount:"+pageCount);
 				//다음
 				if(endPage<pageCount){
 					$("#myPage_member_point_list_after").css("display","inline-block");
@@ -176,17 +179,17 @@ $(function(){
 				}
 				
 				
-				alert($("#myPage_member_point_list").css("display"));
+				/* alert($("#myPage_member_point_list").css("display"));
 				if($("#myPage_member_point_list").css("display")=="none"){
 					alert("aa");
 					$("#myPage_member_point_list").css("display","block");
 				}else if($("#myPage_member_point_list").css("display")=="block"){
 					alert("bb");
 					$("#myPage_member_point_list").css("display","none");
-				} 			
+				} 			 */
 			}			
 		});
-	});
+	//});
 	
 	//다음클릭시
 	$("#point_paging_after").click(function(){
@@ -221,13 +224,14 @@ $(function(){
 				//$("#myPage_member_point_list").empty();
 				$("#myPage_member_point_list_title").empty();
 				$("#myPage_member_point_list_content").empty();
-				$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+				//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+				$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
 				var point_data=JSON.parse(data[0]);
 				
 				$.each(point_data,function(i){
 					//alert(data[i].BOARD_TITLE);
-					$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-					
+					//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+					$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 				});
 				
 			/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -279,12 +283,13 @@ $(function(){
 								
 								$("#myPage_member_point_list_title").empty();
 								$("#myPage_member_point_list_content").empty();
-								$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+								//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+								$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
 								var point_data=JSON.parse(data[0]);
 								$.each(point_data,function(i){
 									//alert(data[i].BOARD_TITLE);
-									$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-									
+									//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+									$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 								});
 							}
 						});
@@ -344,13 +349,14 @@ $(function(){
 				//$("#myPage_member_point_list").empty();
 				$("#myPage_member_point_list_title").empty();
 				$("#myPage_member_point_list_content").empty();
-				$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+				//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+				$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
 				var point_data=JSON.parse(data[0]);
 				
 				$.each(point_data,function(i){
 					//alert(data[i].BOARD_TITLE);
-					$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-					
+					//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+					$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 				});
 				
 			/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -399,13 +405,14 @@ $(function(){
 								
 								$("#myPage_member_point_list_title").empty();
 								$("#myPage_member_point_list_content").empty();
-								$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+								//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+								$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
 								var point_data=JSON.parse(data[0]);
 								
 								$.each(point_data,function(i){
 									//alert(data[i].BOARD_TITLE);
-									$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-									
+									//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+									$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 								});
 							}
 						});
@@ -438,6 +445,7 @@ $(function(){
 			success:function(responseData){
 				$("#myPage_member_board_list").empty();
 				$("#myPage_member_board_list").append("<div><span>게시글번호</span><span>작성일</span><span>카테고리</span><span>제목</span></div>")
+				
 				var data=JSON.parse(responseData);
 				$.each(data,function(i){
 					//alert(data[i].BOARD_TITLE);
@@ -528,10 +536,11 @@ $(function(){
 
 
 </script>
+<link rel="stylesheet" href="${root }/css/layer.css" type="text/css"/>
 </head>
 <body>
-	<div>
-		<span>계정정보<input id="myPage_member_id" type="text"/></span>&nbsp;&nbsp;&nbsp;
+	<!--<div>
+		 <span>계정정보<input id="myPage_member_id" type="text"/></span>&nbsp;&nbsp;&nbsp; 
 		<span><input id="myPage_update_btn" type="button" value="수정"/></span>&nbsp;&nbsp;
 		<span><input id="myPage_delete_btn" type="button" value="탈퇴"/></span>
 	</div>
@@ -546,9 +555,9 @@ $(function(){
 	
 	<div>
 		가입일<input id="myPage_member_joindate" type="text"/>
-	</div>
+	</div> -->
 	
-	<div>
+	<!-- <div>
 		<span>포인트<input id="myPage_member_point" type="text"/></span>
 		<span><input id="point_info_btn" type="button" value="point_info"/></span>
 		<div id="myPage_member_point_list" style="display:none;">
@@ -564,8 +573,8 @@ $(function(){
 				<span id='myPage_member_point_list_after' style="display:'none';"><a href="#" id="point_paging_after">다음</a></span>
 			</div>
 		</div>
-	</div>
-	
+	</div> -->
+	<input id="point_info_btn" type="button" value="point_info"/>
 	<div>
 		<span>게시글<input id="myPage_member_boardCount" type="text"/></span>
 		<span><input id="board_info_btn" type="button" value="write_info"/></span>
@@ -585,82 +594,98 @@ $(function(){
 	
 	
 	
-	
-	<div class="row-fluid user-infos cyruxx">
-            <div class="span10 offset1">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">User information</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="row-fluid">
-                            <div class="span3">
-                                <img class="img-circle"
-                                     src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"
-                                     alt="User Pic">
-                            </div>
-                            <div class="span6">
-                                <strong>Cyruxx</strong><br>
-                                <!-- <div class="table table-condensed table-responsive table-user-information">
-                                    <div>
-                                    <div>
-                                        <span>User level:</span>>
-                                        <span>Administrator</span>
-                                    </div>
-                                    <div>
-                                        <span>Registered since:</span>
-                                        <span>11/12/2013</span>
-                                    </div>
-                                    <div>
-                                        <span>Topics</span>
-                                        <span>15</span>
-                                    </div>
-                                    <div>
-                                        <span>Warnings</span>
-                                        <span>0</span>
-                                    </div>
-                                    </div>
-                                </div> -->
-                                <table class="table table-condensed table-responsive table-user-information">
-                                    <tbody>
-                                    <tr>
-                                        <td>User level:</td>
-                                        <td>Administrator</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Registered since:</td>
-                                        <td>11/12/2013</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Topics</td>
-                                        <td>15</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Warnings</td>
-                                        <td>0</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-footer">
-                        <button class="btn  btn-primary" type="button"
-                                data-toggle="tooltip"
-                                data-original-title="Send message to user"><i class="icon-envelope icon-white"></i></button>
-                        <span class="pull-right">
-                            <button class="btn btn-warning" type="button"
-                                    data-toggle="tooltip"
-                                    data-original-title="Edit this user"><i class="icon-edit icon-white"></i></button>
-                            <button class="btn btn-danger" type="button"
-                                    data-toggle="tooltip"
-                                    data-original-title="Remove this user"><i class="icon-remove icon-white"></i></button>
-                        </span>
-                    </div>
+<div class="container">
+	<div class="col-sm-2">
+    <nav class="nav-sidebar">
+		<ul class="nav tabs">
+		  <li class="active"><a href="#tab1" data-toggle="tab">회원정보</a></li>
+          <li class=""><a href="#tab2" data-toggle="tab">포인트</a></li>
+          <li class=""><a href="#tab3" data-toggle="tab">게시글</a></li>
+          <li class=""><a href="#tab4" data-toggle="tab">즐겨찾기</a></li>  
+          <li class=""><a href="#tab5" data-toggle="tab">쿠폰</a></li>                              
+		</ul>
+	</nav>
+		<div><h2 class="add">Place for your add!</h2></div>
+	</div>
+<!-- tab content -->
+	<div class="tab-content">
+		<div class="tab-pane active text-style" id="tab1">
+ 			 <div class=" col-md-9 col-lg-9 "> 
+                  <table class="table table-user-information">
+                    <tbody>
+                      <tr>
+                        <td>계정정보:</td>
+                        <td id="myPage_member_id"></td>
+                      </tr>
+                      <tr>
+                        <td>이름:</td>
+                        <td id="myPage_member_name"></td>
+                      </tr>
+                      <tr>
+                        <td>회원등급:</td>
+                        <td id="myPage_member_rate"></td>
+                      </tr>
+                 
+                      <tr>
+                        <td>가입일:</td>
+                        <td id="myPage_member_joindate"></td>
+                      </tr>
+                     
+                    </tbody>
+                  </table>
+                  
+                  <a data-toggle="modal" href="#blogmap_myPageUpdate" id="myPage_update_btn" class="btn btn-primary">정보수정</a>
+                  <a data-toggle="modal" href="#blogmap_myPageDelete" id="myPage_delete_btn" class="btn btn-primary">회원탈퇴</a>
                 </div>
+ 			
+ 			 <!-- <h3>회원정보</h3><br/><br/>
+      		 
+      		 <h5>계정정보</h5><span></span>
+      		 <h5>이름</h5><span></span>
+      		 <h5>회원등급</h5><span></span>
+      		 <h5>가입일</h5><span></span> 
+      	 <hr>   -->
+		</div>
+		<div class="tab-pane text-style" id="tab2">
+			<div class="col-md-9 col-lg-9" id="myPage_member_point_list">
+				<h2>Stet clita</h2>
+				
+		  		<table class="table table-user-information">
+                    <tbody id="myPage_member_point_list_title">
+	                    
+                    </tbody>
+                </table>
+                
+                
+		  		<table class="table table-user-information">
+                    <tbody id="myPage_member_point_list_content">
+	                    
+                    </tbody>
+                </table>
+                
+                <div id="myPage_member_point_paging">
+					<span id='myPage_member_point_list_before' style="display:'none';"><a href="#" id="point_paging_before">이전</a></span>
+					<span id='myPage_member_point_list_pageNum'></span>
+					<span id='myPage_member_point_list_after' style="display:'none';"><a href="#" id="point_paging_after">다음</a></span>
+				</div>
             </div>
-        </div>
-        
+		</div>
+		
+		<div class="tab-pane text-style" id="tab3">
+  			<h2>Stet clita</h2>
+			<p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum 
+			    iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla 
+			    facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit 
+			    augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
+			</p>
+    		<hr>
+    		
+	    <div class="col-xs-6 col-md-3">
+	      <img src="http://placehold.it/150x150" class="img-rounded pull-right">
+	  	</div>
+		</div>
+	</div>
+</div>
 	
 	<%-- <!-- 수정 -->
 	<div class="container-fluid">

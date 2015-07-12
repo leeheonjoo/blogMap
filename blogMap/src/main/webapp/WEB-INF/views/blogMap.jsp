@@ -14,16 +14,16 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>					<!-- bootstrap stylesheet 로드 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>				<!-- bootstrap 확장 테마 stylesheet 로드 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/css/bootstrap-select.css"/>	<!-- bootstrap-select stylesheet 로드 -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" type="text/css" href="${root}/css/layer.css"/>
 <link rel="stylesheet" type="text/css" href="${root}/css/blogMap/blogMap.css"/>											<!-- Metro style dynamic Tiles stylesheet 로드 -->
 <style>
 	.modal-lg{
 		width: auto;
 		margin: 1% 1% 0px 1%;
-/* 		height: 500px; */
-   		max-height: 600px;
-   		overflow-y:scroll;
+ 		height: 600px;
+/*    		max-height: 600px; */
+    		overflow-y:scroll;
 	}
 
 /*이미지 슬라이더*/	
@@ -44,15 +44,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.js"></script>	<!-- bootstrap-select javascript를 로드 -->
 <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-dropdown.js"></script>		<!-- bootstrap-dropdown javascript를 로드 -->
 
-<script type="text/javasciprt" src="${root }/css/bootstrap-confirmation.js"></script>		
-<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=da3d853c119e911822c1141b3a2153af"></script>
-<!-- modal -->
-
+<script type="text/javasciprt" src="${root}/css/bootstrap-confirmation.js"></script>
 <!-- Modal, Metro style javascript를 로드 -->
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
+<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=da3d853c119e911822c1141b3a2153af"></script>
 <!-- modal, session check -->
 <script type="text/javascript">
-
 	$(document).ready(function() {
 		 $('#myCarousel').carousel({
 		        interval: 10000
@@ -61,8 +58,7 @@
 		        var next = $(this).next();
 		        if (!next.length) {
 		            next = $(this).siblings(':first');
-		        }
-		        next.children(':first-child').clone().appendTo($(this));
+		        } t.children(':first-child').clone().appendTo($(this));
 
 		        if (next.next().length > 0) {
 		            next.next().children(':first-child').clone().appendTo($(this));
@@ -73,7 +69,7 @@
 		    });
 	});
 
-$(document).ready(function() {		
+	
 //		<session check -> button change>
 	if(sessionStorage.getItem('email')!=null){
 		//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
@@ -94,7 +90,7 @@ $(document).ready(function() {
 			});
 		}
 	}
-});
+
 
 </script>
 </head>
@@ -116,7 +112,11 @@ $(document).ready(function() {
 				<!-- Collect the nav links, forms, and other content for toggling -->
 			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav navbar-right">
+			      	<li> <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
 			        <li id="blogmap_login_bar" class="dropdown">
+<!-- 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="mainMessage"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a> -->
+<%-- 			          <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn btn-primary"><img src="${root}/css/blogMap/images/message_16.png"></img></a> --%>
+<%-- 					  <a id="mainMessageLink" data-toggle="modal" href="#mainMessage"><img src="${root}/css/blogMap/images/message_24_2.png"></img></a> --%>
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a>
 						<ul id="login-dp" class="dropdown-menu">
 							<li>
@@ -525,7 +525,7 @@ $(document).ready(function() {
 					<div class="modal-body" id="data-body">
 						<div class="row form-horizontal">
 							<div class="col-md-3">
-								<img class="img-responsive img" src="" alt="">
+								<img class="img-responsive img" name="tour_image" src="http://placehold.it/300x300"/>
 							</div>
 							<div class="col-md-9">
 								<div class="form-group">
@@ -921,8 +921,6 @@ $(document).ready(function() {
 	<!-- **********************************
 				메시지박스 : 정기창
 	     ***********************************-->
-		<a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn btn-primary">정기창 메시지</a>
-
 		<!-- 메시지박스 - 메시지 메인 -->
 		<div class="modal fade" id="mainMessage" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -990,6 +988,10 @@ $(document).ready(function() {
 			   </div>
 			</div>
 		</div>
+		
+	</div>
+	
+	<div class="container" style="max-width:1190px;">
 	</div>
 </body>
 </html>
