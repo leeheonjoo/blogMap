@@ -21,9 +21,9 @@
 	.modal-lg{
 		width: auto;
 		margin: 1% 1% 0px 1%;
-/* 		height: 500px; */
-   		max-height: 600px;
-   		overflow-y:scroll;
+ 		height: 600px;
+/*    		max-height: 600px; */
+    		overflow-y:scroll;
 	}
 
 /*이미지 슬라이더*/	
@@ -46,61 +46,10 @@
 
 <script type="text/javasciprt" src="${root }/css/bootstrap-confirmation.js"></script>		
 <script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=da3d853c119e911822c1141b3a2153af"></script>
-<!-- modal -->
-
 <!-- Modal, Metro style javascript를 로드 -->
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
 <!-- modal, session check -->
 <script type="text/javascript">
-
-	$(document).ready(function() {
-		$('.modal').on('hidden.bs.modal', function( event ) {
-			$(this).removeClass( 'fv-modal-stack' );
-			$('body').data( 'fv_open_modals', $('body').data( 'fv_open_modals' ) - 1 );
-		});
-
-		$( '.modal' ).on( 'shown.bs.modal', function ( event ) {
-			 // keep track of the number of open modals
-			 if ( typeof( $('body').data( 'fv_open_modals' ) ) == 'undefined' ){
-			   $('body').data( 'fv_open_modals', 0 );
-			 }
-	                   
-			 // if the z-index of this modal has been set, ignore.
-	                        
-			if ( $(this).hasClass( 'fv-modal-stack' ) ){
-				return;
-			}
-	                   
-			$(this).addClass( 'fv-modal-stack' );
-			
-			$('body').data( 'fv_open_modals', $('body').data( 'fv_open_modals' ) + 1 );
-			
-			$(this).css('z-index', 1040 + (10 * $('body').data( 'fv_open_modals' )));
-			
-			$( '.modal-backdrop' ).not( '.fv-modal-stack' ).css( 'z-index', 1039 + (10 * $('body').data( 'fv_open_modals' )));
-			
-			$( '.modal-backdrop' ).not( 'fv-modal-stack' ).addClass( 'fv-modal-stack' );
-		});
-		
-		 $('#myCarousel').carousel({
-		        interval: 10000
-		    })
-		    $('.fdi-Carousel .item').each(function () {
-		        var next = $(this).next();
-		        if (!next.length) {
-		            next = $(this).siblings(':first');
-		        }
-		        next.children(':first-child').clone().appendTo($(this));
-
-		        if (next.next().length > 0) {
-		            next.next().children(':first-child').clone().appendTo($(this));
-		        }
-		        else {
-		            $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
-		        }
-		    });
-	});
-
 $(document).ready(function() {		
 //		<session check -> button change>
 	if(sessionStorage.getItem('email')!=null){
@@ -144,6 +93,7 @@ $(document).ready(function() {
 				<!-- Collect the nav links, forms, and other content for toggling -->
 			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav navbar-right">
+			      	<li> <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
 			        <li id="blogmap_login_bar" class="dropdown">
 <!-- 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="mainMessage"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a> -->
 <%-- 			          <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn btn-primary"><img src="${root}/css/blogMap/images/message_16.png"></img></a> --%>
