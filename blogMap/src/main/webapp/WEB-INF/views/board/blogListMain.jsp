@@ -69,7 +69,7 @@
 					search_headCategory:headCategory,
 					search_detailCategory:detailCategory,
 					search_search_value:search_value,
-					key : "da3d853c119e911822c1141b3a2153af",
+					key : "60e9ac7ab8734daca3d2053c1e713dbd",
 					encoding : "utf-8",
 					output : "json",
 					coord : "latlng",

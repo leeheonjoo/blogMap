@@ -172,7 +172,7 @@ $(document).ready(function(){
 					type : 'get',
 					url : '${root}/board/search.do',
 					data : {
-						key : "42d878b5a85d88f01a65c4d21570452b",
+						key : "6f94d45ce20648228b18911a4764bbd9",
 						query : addrValue,
 						target : "local",
 						display : "100",
@@ -195,7 +195,7 @@ $(document).ready(function(){
 												type : 'get',
 												url : '${root}/board/search.do',
 												data : {
-													key : "da3d853c119e911822c1141b3a2153af",
+													key : "60e9ac7ab8734daca3d2053c1e713dbd",
 													query : address,
 													encoding : "utf-8",
 													output : "json",
