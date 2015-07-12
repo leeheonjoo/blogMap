@@ -82,7 +82,7 @@ $(function(){
 				var currentPage=data[3];
 				
 				var pageCount=count/boardSize+(count%boardSize==0 ? 0:1);
-				alert(pageCount);
+				//alert(pageCount);
 				startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 				endPage=startPage+pageBlock-1;
 				
@@ -111,8 +111,8 @@ $(function(){
 				$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
 				
 				//이전
-				alert("startPage"+startPage);
-				alert("pageCount"+pageCount);
+				//alert("startPage"+startPage);
+				//alert("pageCount"+pageCount);
 				if(startPage>pageBlock){
 					$("#myPage_member_point_list_before").css("display","inline-block");
 				}
@@ -125,7 +125,7 @@ $(function(){
 				for(var i=startPage;i<=endPage;i++){
 					$("#myPage_member_point_list_pageNum").append("<a href='#' id='point_paging_num"+i+"'>"+i+"</a>");
 					$("#point_paging_num"+i).click(function(){
-						alert($(this).text());
+						//alert($(this).text());
 						$.ajax({
 							type:'POST',
 							url:'${root}/member/point_info.do',
@@ -165,8 +165,8 @@ $(function(){
 				}
 				
 				
-				alert("endPage:"+endPage);
-				alert("pageCount:"+pageCount);
+				//alert("endPage:"+endPage);
+				//alert("pageCount:"+pageCount);
 				//다음
 				if(endPage<pageCount){
 					$("#myPage_member_point_list_after").css("display","inline-block");
