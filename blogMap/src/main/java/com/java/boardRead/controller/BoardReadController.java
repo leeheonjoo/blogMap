@@ -155,5 +155,18 @@ public class BoardReadController {
 		
 		
 	}
+	@RequestMapping(value="/board/blogReadDetailImg",method=RequestMethod.POST)
+	public void blogReadDetailImg(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogReadDetailImg-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogReadDetailImg(mav);
+		
+		
+	}
 	
 }

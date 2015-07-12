@@ -50,7 +50,26 @@
 <script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=da3d853c119e911822c1141b3a2153af"></script>
 <!-- modal, session check -->
 <script type="text/javascript">
-$(document).ready(function() {		
+	$(document).ready(function() {
+		 $('#myCarousel').carousel({
+		        interval: 10000
+		    })
+		    $('.fdi-Carousel .item').each(function () {
+		        var next = $(this).next();
+		        if (!next.length) {
+		            next = $(this).siblings(':first');
+		        } t.children(':first-child').clone().appendTo($(this));
+
+		        if (next.next().length > 0) {
+		            next.next().children(':first-child').clone().appendTo($(this));
+		        }
+		        else {
+		            $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+		        }
+		    });
+	});
+
+	
 //		<session check -> button change>
 	if(sessionStorage.getItem('email')!=null){
 		//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
@@ -71,7 +90,7 @@ $(document).ready(function() {
 			});
 		}
 	}
-});
+
 
 </script>
 </head>
