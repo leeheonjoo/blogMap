@@ -115,6 +115,7 @@ public class BoardController {
 			
 			boardService.blogWrite(mav);
 			mav.setViewName("blogMap");
+			
 			return mav;
 			
 		}

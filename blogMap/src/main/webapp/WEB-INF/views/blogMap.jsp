@@ -47,7 +47,9 @@
 <script type="text/javasciprt" src="${root}/css/bootstrap-confirmation.js"></script>
 <!-- Modal, Metro style javascript를 로드 -->
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
-<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=da3d853c119e911822c1141b3a2153af"></script>
+<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=60e9ac7ab8734daca3d2053c1e713dbd"></script>
+<!-- 네이버 스마트에디터 -->
+<script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>	
 <!-- modal, session check -->
 <script type="text/javascript">
 	$(document).ready(function() {
