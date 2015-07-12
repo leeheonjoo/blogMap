@@ -472,7 +472,7 @@ $(document).ready(function() {
 					<div class="modal-body" id="data-body">
 						<div class="row form-horizontal">
 							<div class="col-md-3">
-								<img class="img-responsive img" src="" alt="">
+								<img class="img-responsive img" name="tour_image" src="http://placehold.it/300x300"/>
 							</div>
 							<div class="col-md-9">
 								<div class="form-group">
