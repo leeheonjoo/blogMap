@@ -46,25 +46,38 @@ $(function() {
 </script>
 </head>
 <body>
+	<div id="blogRead_rgdate">
+		<label>작성일:</label>
+		<label></label>
+	</div>
 	<div id="blogRead_category">
 		<label>카테고리:</label> 
-		<label></label>
+		<label></label> |
 		<label></label>
 	</div>
 	<div id="blogRead_writer">
 		<label>작성자:</label> 
-		<label> </label>
+		<label></label>
 	</div>
 	<div id="blogRead_addr">
 		<label>주소:</label>
 		<label></label>
 	</div>
 	<div id="blogRead_title">
+		<label>제목:</label>
 		<label></label>
 	</div>
 	<div id="blogRead_content">
 		<label>내용:</label>
 		<div></div>
+	</div>
+	<div style="display: none;">
+	 <div id="imgHidden" class="item active">
+        <div class="col-md-4">
+            <a href="#"><img id="imgsrc" src="" class="img-responsive center-block"></a>
+            <div class="text-center">1</div>
+        </div>
+    </div>
 	</div>
 	    <div class="container">
         <div class="row">
@@ -73,43 +86,8 @@ $(function() {
                     <div id="myCarousel" class="carousel fdi-Carousel slide">
                      <!-- Carousel items -->
                         <div class="carousel fdi-Carousel slide" id="eventCarousel" data-interval="0">
-                            <div class="carousel-inner onebyone-carosel">
-                                <div class="item active">
-                                    <div class="col-md-4">
-                                        <a href="#"><img src="http://placehold.it/250x250" class="img-responsive center-block"></a>
-                                        <div class="text-center">1</div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-4">
-                                        <a href="#"><img src="http://placehold.it/250x250" class="img-responsive center-block"></a>
-                                        <div class="text-center">2</div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-4">
-                                        <a href="#"><img src="http://placehold.it/250x250" class="img-responsive center-block"></a>
-                                        <div class="text-center">3</div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-4">
-                                        <a href="#"><img src="http://placehold.it/250x250" class="img-responsive center-block"></a>
-                                        <div class="text-center">4</div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-4">
-                                        <a href="#"><img src="http://placehold.it/250x250" class="img-responsive center-block"></a>
-                                        <div class="text-center">5</div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="col-md-4">
-                                        <a href="#"><img src="http://placehold.it/250x250" class="img-responsive center-block"></a>
-                                        <div class="text-center">6</div>
-                                    </div>
-                                </div>
+                            <div id="imgDisplay" class="carousel-inner onebyone-carosel">
+                               
                             </div>
                             <a class="left carousel-control" href="#eventCarousel" data-slide="prev"></a>
                             <a class="right carousel-control" href="#eventCarousel" data-slide="next"></a>
@@ -120,24 +98,27 @@ $(function() {
             </div>
         </div>
 	</div>	
-	<div>
+	<div id="blogRead_grade">
 		<label>평점:</label>
-		<img src="${root }/css/images/star0.jpg" width="150" height="30"/><br /> 
+		<img src="" width="150" height="30"/><br /> 
 	</div>
-	
 	<div>
 	<input type="button" class="btn btn-primary" value="추천" />
 	<input type="button" class="btn btn-primary" value="비추천" />
 	<input type="button" class="btn btn-primary" value="즐겨찾기" />
 	<input type="button" class="btn btn-primary" value="쿠폰발급" />
 	<br/>
+	<div id="blogRead_reply">
 		<label>답글:</label>
 	   <div class="row form-group">
         <div class="input-group">
             <input type="text" class="form-control">
             <span class="input-group-addon success"><span class="glyphicon glyphicon-ok"></span></span>
         </div>
-        </div>	
+        </div>
+        <div id="blogRead_reply_content">
+        </div>
+    </div>
 	</div>
 	
 	 <!-- 하단 버튼 -->

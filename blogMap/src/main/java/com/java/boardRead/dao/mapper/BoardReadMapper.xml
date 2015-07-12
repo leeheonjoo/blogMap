@@ -81,20 +81,24 @@
 		and board_title like '%'||#{searchValue}||'%'
 		and board_content like '%'||#{searchValue}||'%'
 	</select>
+	
 	<select id="getreply" parameterType="int" resultType="int">
-		select count(*) from reply where board_no=#{board_no}
-		
+		select count(reply_no) from reply where board_no=#{boardNo}
 	</select>
+	
 	<select id="getReadList1" parameterType="int" resultType="java.util.HashMap">
-		select b.*,r.reply_content,r.reply_date,A.ADDR_SIDO,A.ADDR_SIGUGUN,A.addr_dongri,a.addr_bunji,F.FILE_NO,f.file_type,F.FILE_NAME,F.FILE_SIZE,f.file_comment,f.file_path 
-		from board b,board_addr_info a,reply r,attach_file f
-		where b.board_no=r.board_no and r.board_no=a.board_no and a.board_no=f.board_no
-		and b.board_no=#{board_no}
+		select b.*,a.addr_sido,a.addr_sigugun,a.addr_dongri,a.addr_bunji,c.category_mname,c.category_sname
+		from board b,board_addr_info a,category c
+		where b.board_no=a.board_no
+		and b.category_code=c.category_code
+		and b.board_no=#{boardNo}
 	</select>
-	<select id="getReadList2" parameterType="int" resultType="java.util.HashMap">
-		select  b.*,A.ADDR_SIDO,A.ADDR_SIGUGUN,A.addr_dongri,a.addr_bunji,F.FILE_NO,f.file_type,F.FILE_NAME,F.FILE_SIZE,f.file_comment,f.file_path 
-		from board b,board_addr_info a,attach_file f 
-		where b.board_no=a.board_no and a.board_no=f.board_no
-		and b.board_no=#{board_no}
+	
+	<select id="getreplyList" parameterType="int" resultType="com.java.reply.dto.ReplyDto">
+		select * from reply where board_no=#{boardNo} 
+	</select>
+	
+	<select id="getblogImg" parameterType="int" resultType="com.java.board.dto.Attach_fileDto">
+		select * from attach_file where board_no=#{boardNo}
 	</select>
 </mapper>
