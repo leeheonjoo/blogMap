@@ -53,7 +53,11 @@
 			
 			$( '.modal-backdrop' ).not( 'fv-modal-stack' ).addClass( 'fv-modal-stack' );
 		});
+		
+		
 	});
+	
+	
 </script>
 
 <%-- <link rel="stylesheet" type="text/css" href="${root}/css/manager/layer.css" /> --%>
@@ -62,8 +66,7 @@
 	<div class="container-fluid">
 		<br/><br/>		
 		<a data-toggle="modal" href="#ManagerMain" class="btn btn-primary">Manager</a>
-		
-	<!-- ManagerMain -->
+	<!-- ManagerMain (관리자페이지 메인)-->
 		<div class="modal fade" id="ManagerMain" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -88,17 +91,17 @@
 		    </div>
 		</div>
 
-	<!-- memberList -->
-		<div class="modal fade" id="memberInfo" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+	<!-- 제휴업체 상세조회 (관리자페이지 - 제휴업체 페이지 제휴업체 상세 페이지)-->
+		<div class="modal fade" id="partnerDetail" data-backdrop="static">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">MemberInfo</h5>
+						<h5 class="modal-title">제휴업체</h5>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
-							<jsp:include page="manager/memberlist.jsp"/>
+							<jsp:include page="manager/partnerDetail.jsp"/>
 						</div>
 						<br/>
 						<br/>
@@ -111,8 +114,8 @@
 			</div>
 		</div>
 		
-	<!-- memberList -->
-		<div class="modal fade" id="partnerInfo" data-backdrop="static">
+	 <!-- partnerList (관리자페이지 - 제휴업체 페이지)  -->
+		<%-- <div class="modal fade" id="partnerInfo" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -132,8 +135,7 @@
 					</div>
 			   </div>
 			</div>
-		</div>
-		
+		</div> --%>
 		
 		
 		

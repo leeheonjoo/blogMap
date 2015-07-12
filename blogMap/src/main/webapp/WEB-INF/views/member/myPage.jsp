@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-
+if(sessionStorage.getItem('email')!=null){
 $(function(){
 	var startPage=0; 
 	var endPage=0;
@@ -17,8 +17,8 @@ $(function(){
 		type:'POST',
 		url:"${root}/member/myPage.do",
 		data:{
-			//member_id:sessionStorage.getItem("email")
-			member_id:"kimjh112339@naver.com"
+			member_id:sessionStorage.getItem("email")
+			//member_id:"kimjh112339@naver.com"
 		},
 		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 		success:function(responseData){
@@ -63,8 +63,8 @@ $(function(){
 			type:'POST',
 			url:'${root}/member/point_info.do',
 			data:{
-				//member_id:sessionStorage.getItem("email")
-				member_id:"kimjh112339@naver.com"
+				member_id:sessionStorage.getItem("email")
+				//member_id:"kimjh112339@naver.com"
 				
 			},
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
@@ -128,8 +128,8 @@ $(function(){
 							type:'POST',
 							url:'${root}/member/point_info.do',
 							data:{
-								//member_id:sessionStorage.getItem("email")
-								member_id:"kimjh112339@naver.com",
+								member_id:sessionStorage.getItem("email"),
+								//member_id:"kimjh112339@naver.com",
 								pageNumber:$(this).text()
 							},
 							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
@@ -195,8 +195,8 @@ $(function(){
 			type:'POST',
 			url:'${root}/member/point_info.do',
 			data:{
-				//member_id:sessionStorage.getItem("email")
-				member_id:"kimjh112339@naver.com",
+				member_id:sessionStorage.getItem("email"),
+				//member_id:"kimjh112339@naver.com",
 				pageNumber:startPage+pageBlock
 			},
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
@@ -259,8 +259,8 @@ $(function(){
 							type:'POST',
 							url:'${root}/member/point_info.do',
 							data:{
-								//member_id:sessionStorage.getItem("email")
-								member_id:"kimjh112339@naver.com",
+								member_id:sessionStorage.getItem("email"),
+								//member_id:"kimjh112339@naver.com",
 								pageNumber:$(this).text()
 							},
 							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
@@ -318,8 +318,8 @@ $(function(){
 			type:'POST',
 			url:'${root}/member/point_info.do',
 			data:{
-				//member_id:sessionStorage.getItem("email")
-				member_id:"kimjh112339@naver.com",
+				member_id:sessionStorage.getItem("email"),
+				//member_id:"kimjh112339@naver.com",
 				pageNumber:startPage-pageBlock
 			},
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
@@ -378,8 +378,8 @@ $(function(){
 							type:'POST',
 							url:'${root}/member/point_info.do',
 							data:{
-								//member_id:sessionStorage.getItem("email")
-								member_id:"kimjh112339@naver.com",
+								member_id:sessionStorage.getItem("email"),
+								//member_id:"kimjh112339@naver.com",
 								pageNumber:$(this).text()
 							},
 							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
@@ -431,8 +431,8 @@ $(function(){
 			type:'POST',
 			url:'${root}/member/board_info.do',
 			data:{
-				//member_id:sessionStorage.getItem("email")
-				member_id:"kimjh112339@naver.com"
+				member_id:sessionStorage.getItem("email")
+				//member_id:"kimjh112339@naver.com"
 			},
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 			success:function(responseData){
@@ -463,8 +463,8 @@ $(function(){
 			type:'POST',
 			url:'${root}/member/favorite_info.do',
 			data:{
-				//member_id:sessionStorage.getItem("email")
-				member_id:"kimjh112339@naver.com"
+				member_id:sessionStorage.getItem("email")
+				//member_id:"kimjh112339@naver.com"
 			},
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 			success:function(responseData){
@@ -490,7 +490,7 @@ $(function(){
 		});
 	});
 });
-
+}
 
 /* function layer_open(el){
 	var temp = $('#' + el);
@@ -583,7 +583,84 @@ $(function(){
 		<span><input type="button" value="coupon_info"/></span>
 	</div>
 	
-
+	
+	
+	
+	<div class="row-fluid user-infos cyruxx">
+            <div class="span10 offset1">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">User information</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row-fluid">
+                            <div class="span3">
+                                <img class="img-circle"
+                                     src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=100"
+                                     alt="User Pic">
+                            </div>
+                            <div class="span6">
+                                <strong>Cyruxx</strong><br>
+                                <!-- <div class="table table-condensed table-responsive table-user-information">
+                                    <div>
+                                    <div>
+                                        <span>User level:</span>>
+                                        <span>Administrator</span>
+                                    </div>
+                                    <div>
+                                        <span>Registered since:</span>
+                                        <span>11/12/2013</span>
+                                    </div>
+                                    <div>
+                                        <span>Topics</span>
+                                        <span>15</span>
+                                    </div>
+                                    <div>
+                                        <span>Warnings</span>
+                                        <span>0</span>
+                                    </div>
+                                    </div>
+                                </div> -->
+                                <table class="table table-condensed table-responsive table-user-information">
+                                    <tbody>
+                                    <tr>
+                                        <td>User level:</td>
+                                        <td>Administrator</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Registered since:</td>
+                                        <td>11/12/2013</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Topics</td>
+                                        <td>15</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Warnings</td>
+                                        <td>0</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button class="btn  btn-primary" type="button"
+                                data-toggle="tooltip"
+                                data-original-title="Send message to user"><i class="icon-envelope icon-white"></i></button>
+                        <span class="pull-right">
+                            <button class="btn btn-warning" type="button"
+                                    data-toggle="tooltip"
+                                    data-original-title="Edit this user"><i class="icon-edit icon-white"></i></button>
+                            <button class="btn btn-danger" type="button"
+                                    data-toggle="tooltip"
+                                    data-original-title="Remove this user"><i class="icon-remove icon-white"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
 	
 	<%-- <!-- 수정 -->
 	<div class="container-fluid">

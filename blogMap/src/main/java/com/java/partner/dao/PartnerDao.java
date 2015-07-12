@@ -12,7 +12,14 @@ import com.java.partner.dto.PartnerDto;
 public interface PartnerDao {
 
 	public int partnerRegister(PartnerDto partnerDto);
-
-	public List<PartnerDto> getPartnerList();
 	
+	public int getPartnerCount();
+	
+	public List<PartnerDto> getTourPartnerList();
+	
+	public PartnerDto getTourPartnerListDate(int partnerNo);
+
+	public List<PartnerDto> getRestaurantPartnerList();
+
+	public PartnerDto getRestaurantPartnerListDate(int partnerNo);
 }

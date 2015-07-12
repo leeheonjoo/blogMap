@@ -24,8 +24,16 @@
 	</select>
 	
 	<select id="getPartnerList" resultType="com.java.partner.dto.PartnerDto">
-		select * from partner
+		select * from partner order by partner_name desc
 	</select>
+
+	<select id="getSearchPartnerList" parameterType="String" resultType="com.java.partner.dto.PartnerDto">
+		select * from partner where partner_name=#{partner_name} order by partner_name desc
+	</select>
+	
+	<select id="getSearchPartnerYN" parameterType="String" resultType="com.java.partner.dto.PartnerDto">
+		select * from partner where partner_yn=#{partner_yn} order by partner_name desc
+	</select>	
 	
 	<update id="partnerSubmit" parameterType="String">
 		update PARTNER SET partner_yn='y', partner_ydate=sysdate where member_id=#{id}
@@ -55,4 +63,7 @@
 		insert into manager_log values(manager_log_seq.nextval, 'lucyman@nate.com', sysdate, '04', #{couponNo})
 	</insert>
 	
+	<select id="partnerDetail" parameterType="Integer" resultType="com.java.partner.dto.PartnerDto">
+		select * from partner where partner_no=#{partnerNo}
+	</select>
 </mapper> 

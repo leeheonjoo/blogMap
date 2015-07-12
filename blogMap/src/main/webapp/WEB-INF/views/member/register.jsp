@@ -190,12 +190,12 @@ function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
 </head>
 <body>
 	
-	<div>
+<!-- 	<div>
 		아이디 <input type="text" id="member_register_id"/>
 		<input type="button" id="member_id_check" value="아이디 중복체크"/>
 		<input type="button" id="member_id_confirm" value="아이디(email) 인증"/>
 		<input type="hidden" id="member_register_id_hidden"/>
-	</div>
+	</div> 
 	
 	<div>
 		비밀번호	<input type="password" name="member_pwd"/>
@@ -208,9 +208,76 @@ function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
 		성명 <input type="text" name="member_name"/>
 	</div>
 	
-	<input id="register" type="button" value="가입"/>
+	<input id="register" type="button" value="가입"/>-->
 	
-	
+	<div class="container">
+        <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Please sign up for Bootsnipp <small>It's free!</small></h3>
+			 			</div>
+			 			<div class="panel-body">
+			    		<!-- <form role="form"> -->
+			  	
+							<div class="row">
+			    				<div class="col-xs-8 col-sm-8 col-md-8">
+			    					<div class="form-group">
+			               				<input type="email" id="member_register_id" class="form-control input-sm" placeholder="Email Address"/>
+			    					</div>
+			    				</div>
+			    				
+			    				<div class="col-xs-2 col-sm-2 col-md-2">
+			    					<div class="form-group">
+			    						<input type="button" id="member_id_check" value="중복확인" class="btn btn-info btn-block"/>
+			    						<!-- <button id="member_id_check" class="btn btn-default">중복확인</button> -->
+			    					</div>
+			    				</div>
+			    				
+			    				<div class="col-xs-2 col-sm-2 col-md-2">
+			    					<div class="form-group">
+			    						<input type="button" id="member_id_confirm" value="이메일인증" class="btn btn-info btn-block"/>
+			    						<!-- <button id="member_id_confirm" class="btn btn-default">이메일인증</button> -->
+			    					</div>
+			    				</div>
+			    				
+			    				<input type="hidden" id="member_register_id_hidden"/>
+			    			</div>
+			    			
+			    			
+			    			<!-- <div class="form-group">
+			    				<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+			    			</div> -->
+
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="member_pwd" class="form-control input-sm" placeholder="Password"/>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="member_pwd_check" class="form-control input-sm" placeholder="Confirm Password"/>
+			    					</div>
+			    				</div>
+			    			</div>
+			    			
+			    			<div class="row">
+			    				<div class="col-xs-8 col-sm-8 col-md-8">
+			    					<div class="form-group">
+			                			<input type="text" name="member_name" class="form-control input-sm" placeholder="Name"/>
+			    					</div>
+			    				</div>
+			    			</div>
+			    			
+			    			<input type="button" id="register" value="Register" class="btn btn-info btn-block"/>
+			    		
+			    		<!-- </form> -->
+			    	</div>
+	    		</div>
+    		</div>
+    	</div>
+    </div>
 	
 	<%-- <!-- 중복확인 레이어(사용가능) -->
 	<div class="container-fluid">

@@ -9,11 +9,12 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
+if(sessionStorage.getItem('email')!=null){
 $(function(){
-	//var email=sessionStorage.getItem('email');
+	var email=sessionStorage.getItem('email');
 	//$("#myPageUpdate_member_id").val(email);
 	
-	var email="kimjh112339@naver.com";
+	//var email="kimjh112339@naver.com";
 	
 	$("#myPageDelete_OkayBtn").click(function(){
 		//유효성검사
@@ -45,6 +46,7 @@ $(function(){
 	});
 	
 });
+}
 </script>
 </head>
 <body>

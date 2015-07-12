@@ -62,6 +62,6 @@
 	</select>
 	
 	<delete id="delete" parameterType="java.util.Map" >
-		delete from message where message_no=#{message_no} and message_receiver=#{member_id}
+		delete from message where message_no=#{message_no} and member_id=#{member_id}
 	</delete>
 </mapper>

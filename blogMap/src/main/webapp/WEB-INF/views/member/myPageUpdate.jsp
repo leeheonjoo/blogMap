@@ -8,11 +8,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+if(sessionStorage.getItem('email')!=null){
 $(function(){
-	//var email=sessionStorage.getItem('email');
+	var email=sessionStorage.getItem('email');
 	//$("#myPageUpdate_member_id").val(email);
 	
-	var email="kimjh112339@naver.com";
+	//var email="kimjh112339@naver.com";
 	$("#myPageUpdate_member_id").val(email);
 	$("#myPageUpdate_member_id").attr("disabled","disabled");
 	
@@ -64,6 +65,7 @@ $(function(){
 		});
 	});
 });	
+}
 </script>
 </head>
 <body>

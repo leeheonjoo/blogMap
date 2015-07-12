@@ -50,8 +50,20 @@ public class ManagerDaoImpl implements ManagerDao {
 	
 	@Override
 	public List<PartnerDto> getPartnerData() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub		
 		return session.selectList("dao.ManagerMapper.getPartnerList");
+	}
+	
+	@Override
+	public List<PartnerDto> getSearchPartnerData(String partner_name) {
+		// TODO Auto-generated method stub				
+		return  session.selectList("dao.ManagerMapper.getSearchPartnerList", partner_name);
+	}
+	
+	@Override
+	public List<PartnerDto> getSearchPartnerYN(String partner_yn) {
+		// TODO Auto-generated method stub				
+		return  session.selectList("dao.ManagerMapper.getSearchPartnerYN", partner_yn);
 	}
 	
 	@Override
@@ -90,9 +102,15 @@ public class ManagerDaoImpl implements ManagerDao {
 		return session.update("dao.ManagerMapper.couponSubmit", couponNo);
 	}
 	
-@Override
+	@Override
 	public void couponSubmitLog(int couponNo) {
 		// TODO Auto-generated method stub
 		session.insert("dao.ManagerMapper.couponSubmitLog", couponNo);
+	}
+	
+	@Override
+	public PartnerDto partnerDetail(int partnerNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("dao.ManagerMapper.partnerDetail", partnerNo);
 	}
 }
