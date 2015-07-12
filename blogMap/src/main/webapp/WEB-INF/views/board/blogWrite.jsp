@@ -15,7 +15,6 @@
 }
 </style>
 <!-- 네이버 스마트에디터 -->
-<script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>	
 <script type="text/javascript">
 
 //검색조건 시작
@@ -40,17 +39,6 @@ $(function(){
 	var email=sessionStorage.getItem('email');
 	$("input[name='member_id']").attr("value",email);
 	
-	$("#savebutton").click(function() {
-		alert("들어오라고");
-		var content=$("#board_content").val();
-		var realAddr=$("input type[name='addr_sido']").val();
-	
-		//id가 smarteditor인 textarea에 에디터에서 대입
-		obj.getById["board_content"].exec("UPDATE_CONTENTS_FIELD",[]);
-		//폼 submit();
-		$("#frm").submit();
-		
-	})
 });
 
 function blogWrite_optionInsert(el, data){
@@ -257,8 +245,9 @@ $(document).ready(function(){
 		
 		
 	}
-	/* 네이버 스마트 에디터(크기,색상,글꼴 등) */
 	$(function() {
+		/* 네이버 스마트 에디터(크기,색상,글꼴 등) */
+		
 		//전역변수
 		var obj=[];
 		//스마트에디터 프레임생성
@@ -276,8 +265,18 @@ $(document).ready(function(){
 			}
 			
 		});
+		$("#save_button").click(function() {
+			var content=$("#board_content").val();
+			var realAddr=$("input type[name='addr_sido']").val();
 		
-	});
+			//id가 smarteditor인 textarea에 에디터에서 대입
+			obj.getById["board_content"].exec("UPDATE_CONTENTS_FIELD",[]);
+			//폼 submit();
+			$("#frm").submit();
+		});
+	})
+		
+	
 	
 	//첨부이미지 갯수에 따른 Display=none
 	function imageNone(start) {
@@ -390,7 +389,7 @@ $(document).ready(function(){
 	 <!-- 하단 버튼 -->
 	<div align="right">
 		<input type="reset" value="취소" /> 
-		<button id="savebutton">작성</button> 
+		<input type="button" id="save_button" value="작성"/>
 		<input type="button" value="목록" />
 	</div>
 	
