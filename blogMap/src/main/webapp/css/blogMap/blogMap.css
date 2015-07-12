@@ -13,7 +13,7 @@
 }
 
 #tile1{
-    background: rgb(0,172,238);
+    background: rgb(75, 119, 190);
 }
 
 #tile2{
@@ -21,20 +21,19 @@
 }
 
 #tile3{
-    background: rgb(75, 119, 190);
+    background: rgb(0,142,0);
 }
 
 #tile4{
-    background-image: url('http://handsontek.net/demoimages/tiles/facebook.png');
-    background-size: cover;
+    background: rgb(62,157,215);
 }
 
 #tile5{
-    background: rgb(175,26,63);
+    background: rgb(0,172,238);
 }
 
 #tile6{
-    background: rgb(62,157,215);
+    background: rgb(75, 119, 190);
 }
 
 #tile7{

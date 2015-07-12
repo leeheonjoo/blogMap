@@ -21,9 +21,11 @@
 	.modal-lg{
 		width: auto;
 		margin: 1% 1% 0px 1%;
-/*  		max-height: 600px; */
-/*  		overflow-y:scroll; */
+/* 		height: 500px; */
+   		max-height: 600px;
+   		overflow-y:scroll;
 	}
+	
 </style>
 
 <!--[if lt IE 9]>
@@ -64,7 +66,7 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-	<div class="container-fluid" style="max-width:1190px;">
+	<div class="container" style="max-width:1190px;">
 		<nav class="navbar navbar-default navbar-inverse" role="navigation">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -138,9 +140,11 @@ $(document).ready(function() {
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-				    		<a data-toggle="modal" href="#blogListMain">
-				    			<div id="tile1" class="tile" style="background-image: url('${root}/css/blogMap/images/search.png'); background-size: cover;"></div>
-				    		</a>
+							<div class="item active">
+								<a data-toggle="modal" href="#blogListMain">
+									<img src="${root}/css/blogMap/images/search.png" class="img-responsive"/>
+								</a>
+							</div>
 						</div>
 					</div>
 		        
@@ -174,9 +178,11 @@ $(document).ready(function() {
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-				    		<a data-toggle="modal" href="#blogMapWrite">
-				    			<div id="tile3" class="tile" style="background-image: url('${root}/css/blogMap/images/write_go.png'); background-size: cover;"></div>
-				    		</a>
+							<div class="item active">
+								<a data-toggle="modal" href="#blogMapWrite">
+									<img src="${root}/css/blogMap/images/write_go.png" class="img-responsive"/>
+								</a>
+							</div>
 						</div>
 					</div>
 			        
@@ -189,9 +195,11 @@ $(document).ready(function() {
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-				    		<a data-toggle="modal" href="#blogMapWrite">
-				    			<div id="tile3" class="tile" style="background-image: url('${root}/css/blogMap/images/coupon_2.png'); background-size: cover;"></div>
-				    		</a>
+							<div class="item active">
+								<a data-toggle="modal" href="#blogMapWrite">
+									<img src="${root}/css/blogMap/images/coupon_2.png" class="img-responsive"/>
+								</a>
+							</div>
 						</div>
 					</div>
 			        
