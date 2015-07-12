@@ -47,7 +47,7 @@
 <script type="text/javasciprt" src="${root}/css/bootstrap-confirmation.js"></script>
 <!-- Modal, Metro style javascript를 로드 -->
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
-<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=da3d853c119e911822c1141b3a2153af"></script>
+<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=60e9ac7ab8734daca3d2053c1e713dbd"></script>
 <!-- modal, session check -->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -994,6 +994,10 @@
 	</div>
 	
 	<div class="container" style="max-width:1190px;">
+		<div class="navbar navbar-inverse row" style="text-align:center; height:50px">
+			<div class="col-sm-10 col-xs-10">주소 : 경기도 분당시 삼평동 752-18 유스페이스 B동</div>
+			<div class="col-sm-2 col-xs-2">제휴문의</div>
+		</div>
 	</div>
 </body>
 </html>
