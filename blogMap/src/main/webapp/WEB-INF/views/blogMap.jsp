@@ -67,29 +67,31 @@
 		            $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
 		        }
 		    });
+
+//			<session check -> button change>
+			if(sessionStorage.getItem('email')!=null){
+				//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
+				//$("#blogmap_login_bar").fadeOut();
+				$("#blogmap_before_login span").remove();
+				$("#blogmap_before_login").attr("data-toggle","");
+				$("#login_text").text("Logout");
+				
+				if($("#login_text").text()=="Logout"){
+					$("#blogmap_before_login").click(function(){
+						if(sessionStorage.getItem('jointype')=="0002"){
+							FB.logout();
+						}
+						sessionStorage.clear();
+						//$("#blogmap_after_login").css("display","none");
+						//$("#blogmap_login_bar").fadeIn();
+						location.href="${root}/";
+					});
+				}
+			}
 	});
 
 	
-//		<session check -> button change>
-	if(sessionStorage.getItem('email')!=null){
-		//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
-		//$("#blogmap_login_bar").fadeOut();
-		$("#blogmap_before_login span").remove();
-		$("#blogmap_before_login").attr("data-toggle","");
-		$("#login_text").text("Logout");
-		
-		if($("#login_text").text()=="Logout"){
-			$("#blogmap_before_login").click(function(){
-				if(sessionStorage.getItem('jointype')=="0002"){
-					FB.logout();
-				}
-				sessionStorage.clear();
-				//$("#blogmap_after_login").css("display","none");
-				//$("#blogmap_login_bar").fadeIn();
-				location.href="${root}/";
-			});
-		}
-	}
+
 
 
 </script>
