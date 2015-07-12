@@ -14,24 +14,16 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>					<!-- bootstrap stylesheet 로드 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>				<!-- bootstrap 확장 테마 stylesheet 로드 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/css/bootstrap-select.css"/>	<!-- bootstrap-select stylesheet 로드 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" type="text/css" href="${root}/css/layer.css"/>
 <link rel="stylesheet" type="text/css" href="${root}/css/blogMap/blogMap.css"/>											<!-- Metro style dynamic Tiles stylesheet 로드 -->
 <style>
 	.modal-lg{
 		width: auto;
 		margin: 1% 1% 0px 1%;
- 		height: 600px;
-/*    		max-height: 600px; */
-    		overflow-y:scroll;
+/*  		max-height: 600px; */
+/*  		overflow-y:scroll; */
 	}
-
-/*이미지 슬라이더*/	
-.carousel-inner.onebyone-carosel { margin: auto; width: 90%; }
-.onebyone-carosel .active.left { left: -33.33%; }
-.onebyone-carosel .active.right { left: 33.33%; }
-.onebyone-carosel .next { left: 33.33%; }
-.onebyone-carosel .prev { left: -33.33%; }
 </style>
 
 <!--[if lt IE 9]>
@@ -43,11 +35,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>						<!-- bootstrap javascript를 로드 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.js"></script>	<!-- bootstrap-select javascript를 로드 -->
 <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-dropdown.js"></script>		<!-- bootstrap-dropdown javascript를 로드 -->
-
-<script type="text/javasciprt" src="${root}/css/bootstrap-confirmation.js"></script>
 <!-- Modal, Metro style javascript를 로드 -->
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
-<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=da3d853c119e911822c1141b3a2153af"></script>
 <!-- modal, session check -->
 <script type="text/javascript">
 $(document).ready(function() {		
@@ -72,11 +61,10 @@ $(document).ready(function() {
 		}
 	}
 });
-
 </script>
 </head>
 <body>
-	<div class="container" style="max-width:1190px;">
+	<div class="container-fluid" style="max-width:1190px;">
 		<nav class="navbar navbar-default navbar-inverse" role="navigation">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -93,11 +81,7 @@ $(document).ready(function() {
 				<!-- Collect the nav links, forms, and other content for toggling -->
 			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav navbar-right">
-			      	<li> <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
 			        <li id="blogmap_login_bar" class="dropdown">
-<!-- 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="mainMessage"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a> -->
-<%-- 			          <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn btn-primary"><img src="${root}/css/blogMap/images/message_16.png"></img></a> --%>
-<%-- 					  <a id="mainMessageLink" data-toggle="modal" href="#mainMessage"><img src="${root}/css/blogMap/images/message_24_2.png"></img></a> --%>
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a>
 						<ul id="login-dp" class="dropdown-menu">
 							<li>
@@ -154,11 +138,9 @@ $(document).ready(function() {
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-							<div class="item active">
-								<a data-toggle="modal" href="#blogListMain">
-									<img src="${root}/css/blogMap/images/search.png" class="img-responsive"/>
-								</a>
-							</div>
+				    		<a data-toggle="modal" href="#blogListMain">
+				    			<div id="tile1" class="tile" style="background-image: url('${root}/css/blogMap/images/search.png'); background-size: cover;"></div>
+				    		</a>
 						</div>
 					</div>
 		        
@@ -192,11 +174,9 @@ $(document).ready(function() {
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-							<div class="item active">
-								<a data-toggle="modal" href="#blogMapWrite">
-									<img src="${root}/css/blogMap/images/write_go.png" class="img-responsive"/>
-								</a>
-							</div>
+				    		<a data-toggle="modal" href="#blogMapWrite">
+				    			<div id="tile1" class="tile" style="background-image: url('${root}/css/blogMap/images/write_go.png'); background-size: cover;"></div>
+				    		</a>
 						</div>
 					</div>
 			        
@@ -210,9 +190,10 @@ $(document).ready(function() {
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<a data-toggle="modal" href="#blogMapWrite">
-									<img src="${root}/css/blogMap/images/coupon_2.png" class="img-responsive"/>
-								</a>
+								<img src="http://handsontek.net/demoimages/tiles/facebook3.png" class="img-responsive"/>
+							</div>
+							<div class="item">
+								<img src="http://handsontek.net/demoimages/tiles/facebook2.png" class="img-responsive"/>
 							</div>
 						</div>
 					</div>
@@ -370,36 +351,17 @@ $(document).ready(function() {
 		    </div>
 		</div>
 		
-		<!-- 블로그 리스트 : 황준-->
+		<!-- 블로그 리스트 - 블로그 리스트 테스트 -->
 		<div class="modal fade" id="blogListSub" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">조회 결과</h5>
+						<h5 class="modal-title">Modal Sub</h5>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
  							<jsp:include page="board/list_backup.jsp"/>
-						</div>
-						<br/>
-						<br/>
-					</div>
-			   </div>
-			</div>
-		</div>
-		
-		<!-- 블로그 리스트 자세히 보기 : 황준 -->
-		<div class="modal fade" id="blogListDetail" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">블로그 읽기</h5>
-					</div><div class="container"></div>
-					<div class="modal-body">
-						<div id="mainResult">
- 							<jsp:include page="board/blogRead.jsp"/>
 						</div>
 						<br/>
 						<br/>
@@ -506,7 +468,7 @@ $(document).ready(function() {
 					<div class="modal-body" id="data-body">
 						<div class="row form-horizontal">
 							<div class="col-md-3">
-								<img class="img-responsive img" name="tour_image" src="http://placehold.it/300x300"/>
+								<img class="img-responsive img" src="" alt="">
 							</div>
 							<div class="col-md-9">
 								<div class="form-group">
@@ -902,6 +864,8 @@ $(document).ready(function() {
 	<!-- **********************************
 				메시지박스 : 정기창
 	     ***********************************-->
+		<a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn btn-primary">정기창 메시지</a>
+
 		<!-- 메시지박스 - 메시지 메인 -->
 		<div class="modal fade" id="mainMessage" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -970,5 +934,12 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</div>
+	
+	
+	
+	
+
+	
+<!-- 	$("div[id='blogListSub'].modal").modal(); -->
 </body>
 </html>

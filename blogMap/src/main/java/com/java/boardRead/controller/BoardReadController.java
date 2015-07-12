@@ -115,12 +115,45 @@ public class BoardReadController {
 		mav.setViewName("board/blogListMain");
 		
 		return mav;
-		
-//		try {
-//			response.setCharacterEncoding("utf-8");
-//			response.getWriter().print("test");
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}
+	@RequestMapping(value="/board/blogListSearch.do",method=RequestMethod.POST)
+	public void blogListSearch(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogListSearch-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogListSearch(mav);
+		
+		
+	}
+	@RequestMapping(value="/board/blogListResult.do",method=RequestMethod.POST)
+	public void blogListResult(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogListResult-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogListResult(mav);
+		
+		
+	}
+	@RequestMapping(value="/board/blogReadDetail.do",method=RequestMethod.POST)
+	public void blogReadDetail(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogReadDetail-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogReadDetail(mav);
+		
+		
+	}
+	
 }

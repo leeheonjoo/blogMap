@@ -27,7 +27,7 @@ public class PartnerController {
  * @name: write
  * @date:2015. 7. 5.
  * @author: 변태훈
- * @description: 제휴업체 등록 컨트롤러
+ * @description: 제휴업체 업체등록 컨트롤러
  */
 	@RequestMapping(value="/partner/write.do", method=RequestMethod.POST)
 	public void write(MultipartHttpServletRequest request, HttpServletResponse response,PartnerDto partnerDto){
@@ -46,17 +46,17 @@ public class PartnerController {
 	 * @name: list
 	 * @date:2015. 7. 7.
 	 * @author: 변태훈
-	 * @description: 제휴업체 리스트 컨트롤러
+	 * @description: 제휴업체 Tour리스트 컨트롤러
 	 */
-	@RequestMapping(value="/partner/partnerList.do", method=RequestMethod.POST)
+	@RequestMapping(value="/partner/tour_partner_List.do", method=RequestMethod.POST)
 	public void list(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Partner partnerList 시작!!!--------------------------------------------");
+		logger.info("Partner tour_partner_List 시작!!!--------------------------------------------");
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 	
-		partnerService.list(mav);
+		partnerService.tourList(mav);
 		
 		Map<String, Object> map=mav.getModel();
 		
@@ -71,20 +71,20 @@ public class PartnerController {
 
 	}
 	/**
-	 * @name: getPartner
+	 * @name: getTourPartnerListDate
 	 * @date:2015. 7. 9.
 	 * @author: 변태훈
-	 * @description: 제휴업체 업체정보 팝업
+	 * @description: 제휴업체 Tour업체정보 팝업
 	 */
-	@RequestMapping(value="/partner/getPartnerListDate.do", method=RequestMethod.GET)
-	public void getPartnerListDate(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Partner getPartnerListDate 시작!!!--------------------------------------------");
+	@RequestMapping(value="/partner/getTourPartnerListDate.do", method=RequestMethod.GET)
+	public void getTourPartnerListDate(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Partner getTourPartnerListDate 시작!!!--------------------------------------------");
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		
-		partnerService.getPartnerListDate(mav);
+		partnerService.getTourPartnerListDate(mav);
 		
 		Map<String, Object> map=mav.getModel();
 		
@@ -153,9 +153,22 @@ public class PartnerController {
 			response.getWriter().print(json);
 		}catch(IOException e){
 			e.printStackTrace();
-		}
-		
+		}	
 	}
+	
+	/**
+	 * @name: getPartner
+	 * @date:2015. 7. 9.
+	 * @author: 변태훈
+	 * @description: 제휴업체 Tour검색 
+	 */
+	@RequestMapping(value="partner/tourSerch.do", method=RequestMethod.GET)
+	public void tourSerch(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Partner tourSerch 시작!!-----------------");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request",request);
+		mav.addObject("response",response);
 		
-		
+		partnerService.tourSerch(mav);
+	}
 }

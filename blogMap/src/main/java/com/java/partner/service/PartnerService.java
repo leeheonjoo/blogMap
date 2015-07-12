@@ -11,12 +11,14 @@ public interface PartnerService {
 	
 	public boolean write(ModelAndView mav);	
 	
-	public void list(ModelAndView mav);
+	public void tourList(ModelAndView mav);
 	
-	public void getPartnerListDate(ModelAndView mav);
+	public void getTourPartnerListDate(ModelAndView mav);
 
 	public void restaurantList(ModelAndView mav);
 
 	public void getRestaurantPartnerListDate(ModelAndView mav);
+	
+	public void tourSerch(ModelAndView mav);
 	
 }

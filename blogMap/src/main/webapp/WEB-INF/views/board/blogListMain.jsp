@@ -30,6 +30,80 @@
 				alert("error : blogListMain getBeginCondition");
 			}
 		});
+		
+		$("#blogList_Search").click(function() {
+			var sido=$("#si_select:first-child").text();
+			var sigugun=$("#gun_select:first-child").text();
+			var dongmyunri=$("#dong_select").attr("value");
+			var headCategory=$("#headCategory_select").attr("value");
+			var detailCategory=$("#detailCategory_select").attr("value");
+			var search_value=$("#blogList_text").val();
+			
+			/* alert(sido);
+			alert(sigugun);
+			alert(dongmyunri);
+			alert(headCategory);
+			alert(detailCategory);
+			alert(search_value); */
+			var m = new Array();
+			//주소 배열
+			var addrArray = new Array();
+			//시도 배열
+			var sidoArray = new Array();
+			//시구군 배열
+			var sigugunArray = new Array();
+			//동면 배열
+			var dongmyunArray = new Array();
+			//번지 배열
+			var restArray=new Array();
+			//타이틀 배열
+			var titleArray=new Array();
+			var mapDiv='map';
+			$.ajax({
+				type:'post',
+				url:'${root}/board/blogListSearch.do',
+				data:{
+					search_sido:sido,
+					search_sigugun:sigugun,
+					search_dongmyunri:dongmyunri,
+					search_headCategory:headCategory,
+					search_detailCategory:detailCategory,
+					search_search_value:search_value,
+					key : "da3d853c119e911822c1141b3a2153af",
+					encoding : "utf-8",
+					output : "json",
+					coord : "latlng",
+					urls : "http://openapi.map.naver.com/api/geocode"
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(data){
+					var address= data.items[0].address;
+					var sido= data.items[0].addrdetail.sido;
+					var sigugun= data.items[0].addrdetail.sigugun;
+					var dongmyun= data.items[0].addrdetail.dongmyun;
+					var rest=data.items[0].addrdetail.rest;
+					var x=data.items[0].point.x;
+					var y=data.items[0].point.y;
+					 
+					m.push(new nhn.api.map.LatLng(y, x));
+					addrArray.push(address);
+					sidoArray.push(sido);
+					sigugunArray.push(sigugun);
+					dongmyunArray.push(dongmyun);
+					restArray.push(rest);
+					$("#map").empty();
+					mapLoad(m,addrArray,sidoArray,sigugunArray,dongmyunArray,restArray,titleArray,mapDiv,search_value);
+			},
+			error:function(data){
+				alert("error : blogListMain blogListSearch");
+			}
+			})
+			//+headCategory+"/"+detailCategory+"/"+search_value
+			
+			
+			
+		})
+		
 	})
 
 	// 	20150629 이헌주 - select 메뉴에 option을 추가하기 위한 function 
@@ -39,6 +113,8 @@
 			if(!va[i]){
 					return false;	
 			}else{
+				var vaTrim=va[i];
+				
 				$("#blogListMain #" + el).append("<li><a><option id='item' value=" + va[i] + ">" + va[i] + "</option></a></li>");
 			}
 		});
@@ -151,16 +227,14 @@
 </script>
 
 <!-- [지도 관련 스크립트] -->
-<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=fc567d7628e894d55e68c6dbeb7784a2"></script>
 </head>
 <body>
-	<input name="member_id" value="test"/>
 	<!-- 검색조건 navbar : 20150706 이헌주 -->
 	<nav id="blogListMain" class="navbar navbar-inverse ">
 		<div class="container-fluid">
 		  	<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
-			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
 			    <span class="sr-only">Toggle navigation</span>
 			    <span class="icon-bar"></span>
 			    <span class="icon-bar"></span>
@@ -169,12 +243,12 @@
 			  <a class="navbar-brand">검색조건</a>
 			</div>
 		
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 				<ul class="nav navbar-nav">
 					<!-- 검색조건(시도) -->
 					<li id="dropdown" class="dropdown">
 						<a id="si_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">시도[전체]<span class="caret"></span></a>
-						<ul id="si" class="dropdown-menu" role="menu">
+						<ul id="si" class="dropdown-menu" role="menu" style="overflow: scroll; height: 400px;" >
 							<li><a><option id="item" value="%">시도[전체]</option></a></li>
 						</ul>
 					</li>
@@ -182,7 +256,7 @@
 					<!-- 검색조건(시구군) -->
 					<li class="dropdown">
 						<a id="gun_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">시구군[전체]<span class="caret"></span></a>
-						<ul id="gun" class="dropdown-menu" role="menu">
+						<ul id="gun" class="dropdown-menu" role="menu" style="overflow: scroll; height: 400px;">
 							<li><a><option id="item" value="%">시구군[전체]</option></a></li>
 						</ul>
 					</li>
@@ -190,7 +264,7 @@
 					<!-- 검색조건(동면) -->
 					<li class="dropdown">
 						<a id="dong_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">동면[전체]<span class="caret"></span></a>
-						<ul id="dong" class="dropdown-menu" role="menu">
+						<ul id="dong" class="dropdown-menu" role="menu" style="overflow: scroll; height: 400px;">
 							<li><a><option id="item" value="%">동면[전체]</option></a></li>
 						</ul>
 					</li>
@@ -198,7 +272,7 @@
 					<!-- 검색조건(대분류) -->
 					<li class="dropdown">
 						<a id="headCategory_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">대분류[전체]<span class="caret"></span></a>
-						<ul id="headCategory" class="dropdown-menu" role="menu">
+						<ul id="headCategory" class="dropdown-menu" role="menu" style="overflow: scroll; height: 400px;">
 							<li><a value="%">대분류[전체]</a></li>
 						</ul>
 					</li>
@@ -206,7 +280,7 @@
 					<!-- 검색조건(소분류) -->
 					<li class="dropdown">
 						<a id="detailCategory_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">소분류[전체]<span class="caret"></span></a>
-						<ul id="detailCategory" class="dropdown-menu" role="menu">
+						<ul id="detailCategory" class="dropdown-menu" role="menu" style="overflow: scroll; height: 400px;">
 							<li><a value="%">소분류[전체]</a></li>
 						</ul>
 					</li>
@@ -214,8 +288,8 @@
 				<form class="navbar-form navbar-left" role="search">
 					<!-- 검색조건(문장) -->
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search"/>
-						<button type="submit" class="btn btn-default">검색</button>
+						<input type="text"  id="blogList_text" class="form-control" placeholder="Search"/>
+						<button type="button" id="blogList_Search" class="btn btn-default">검색</button>
 					</div>
 				</form>
 			</div><!-- /.navbar-collapse -->
@@ -233,7 +307,7 @@
 		</div>
 
 		<br/><br/>
-		<a data-toggle="modal" href="#blogListSub" class="btn btn-primary">Launch modal</a>
+		<!-- <a data-toggle="modal" href="#blogListSub" class="btn btn-primary">Launch modal</a> -->
 <script type="text/javascript">
 $(function(){
 	if (!navigator.geolocation) {
@@ -262,6 +336,8 @@ $(function(){
 	
 	//좌표 전달받아 지도 생성
 	function blogListMapCreate(latitude, longitude){
+		
+	//	$("map").emty();
 	// 	alert(latitude + " " + longitude);
 	// 	var oDefaultPoint = new nhn.api.map.LatLng(37.5675451, 126.9773356);	// 기본위치
 		var oPoint = new nhn.api.map.LatLng(latitude, longitude);
@@ -345,20 +421,37 @@ $(function(){
 				                // - 외부 css에 선언된 class를 이용하면 해당 class의 스타일을 바로 적용할 수 있습니다.
 				                // - 단, DIV 의 position style 은 absolute 가 되면 안되며, 
 				                // - absolute 의 경우 autoPosition 이 동작하지 않습니다. 
-				                oInfoWnd.setContent('<DIV style="border-top:1px solid; border-bottom:2px groove black; border-left:1px solid; border-right:2px groove black;margin-bottom:1px;color:black;background-color:white; width:auto; height:auto;">'+
+				                /* oInfoWnd.setContent('<DIV style="border-top:1px solid; border-bottom:2px groove black; border-left:1px solid; border-right:2px groove black;margin-bottom:1px;color:black;background-color:white; width:auto; height:auto;">'+
 				                        '<span style="color: #000000 !important;display: inline-block;font-size: 12px !important;font-weight: bold !important;letter-spacing: -1px !important;white-space: nowrap !important; padding: 2px 5px 2px 2px !important">' + 
 				                        'Hello World <br /> ' + oTarget.getPoint()
 				                        +'<span></div>');
 				                oInfoWnd.setPoint(oTarget.getPoint());
 				                oInfoWnd.setPosition({right : 15, top : 30});
 				                oInfoWnd.setVisible(true);
-				                oInfoWnd.autoPosition();
+				                oInfoWnd.autoPosition(); */
 				                return;
 				        }
 				        var oMarker = new nhn.api.map.Marker(oIcon, { title : '마커 : ' + oPoint.toString() });
 				        oMarker.setPoint(oPoint);
 				        oMap.addOverlay(oMarker);
 				});
+				//마커 띄우기(현재 접속된 위치)
+				
+
+			/*	 for(var i=0;i<m.length;i++){ //마커생성 
+		                 var oPoint = m[i]; 
+		                 var oMarker = new nhn.api.map.Marker(oIcon, { title :"["+titleArray[i]+"]"+" "+sidoArray[i]+"/"+sigugunArray[i]+"/"+dongmyunArray[i]+"/"+restArray[i]});
+		                 oMarker.setPoint(oPoint); 
+		                 oMap.addOverlay(oMarker); 
+		                  mapInfoTestWindow
+							.setContent('<DIV style="border-top:1px solid; border-bottom:2px groove black; border-left:1px solid; border-right:2px groove black;margin-bottom:1px;color:black;background-color:white; width:auto; height:auto;">'
+									+ '<button data-dismiss="modal" style="color: #000000 !important;display: inline-block;font-size: 12px !important;font-weight: bold !important;letter-spacing: -1px !important;white-space: nowrap !important; padding: 2px 2px 2px 2px !important">'
+									+ title :titleArray[i]
+									+ '</buton></div>'); 
+
+		 				oLabel.setVisible(true, oMarker);
+		 				oLabel.setPosition(true);
+		             } */
 	};
 });
 </script>

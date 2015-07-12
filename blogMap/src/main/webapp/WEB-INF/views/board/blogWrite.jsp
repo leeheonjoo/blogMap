@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <c:set var="root" value="${pageContext.request.contextPath}" />
 <!-- test를 위해 ID 입력 -->
-<c:set var="member_id" value="test@test.com"/>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -12,7 +11,7 @@
 .spanStyle{
     display:inline-block;
 	margin-left: 10px;
-	text-align: left;
+	text-align: left; 	
 }
 </style>
 <!-- 네이버 스마트에디터 -->
@@ -38,6 +37,8 @@ $(function(){
 			alert("error : blogWrite getBeginCondition");
 		}
 	});
+	var email=sessionStorage.getItem('email');
+	$("input[name='member_id']").attr("value",email);
 });
 
 function blogWrite_optionInsert(el, data){
@@ -111,6 +112,8 @@ $(document).ready(function(){
     	        alert(this.value); //선택한 이미지 경로 표시
     	        if(this.value==""||this.value==null){
     	        	  $('#UploadedImg'+index).attr('src', e.target.result);
+    	        }else{
+    	        	$('#UploadedImg'+index).attr('src',"");
     	        }
     	        readURL(this,index);
     	    });
@@ -156,10 +159,13 @@ $(document).ready(function(){
 		var restArray=new Array();
 		//타이틀 배열
 		var titleArray=new Array();
-		
+		var mapDiv='testMap';
 		
 		//맛집,주소 입력값
 		var addrValue=$("#addr").val();
+		
+		
+		
 		//입력값을 상세주소로 반환하는 검색(지역) api 이용(xml 파싱)
 		
 		$.ajax({
@@ -218,7 +224,7 @@ $(document).ready(function(){
 													 restArray.push(rest);
 													 if(total==m.length||m.length==100){
 														 alert(sidoArray.length);
-										            	  mapLoad(m,addrArray,sidoArray,sigugunArray,restArray,titleArray);
+										            	  mapLoad(m,addrArray,sidoArray,sigugunArray,dongmyunArray,restArray,titleArray,mapDiv,addrValue);
 										              }
 												},
 												error : function(xml) {
@@ -313,8 +319,8 @@ $(document).ready(function(){
 	<div>
 		<label>작성자:</label> 
 		<%-- <input type="text" name="writer" value="${member.id }"/> --%>
-		<input type="text" name="member_id" value="${member_id }" disabled="disabled"/>
-		<input type="hidden" name="member_id" value="${member_id }"/>
+		<input type="text" name="member_id"  disabled="disabled"/>
+		<input type="hidden" name="member_id" />
 	</div>
 	<div>
 		<label>위치검색:</label> 
@@ -327,6 +333,10 @@ $(document).ready(function(){
 		<br/>
 		<label>주소:</label>
 		<input type="text" name="realAddr" size="40" disabled="disabled"/>
+	</div>
+	<div>
+		<label>제목:</label>
+		<input type="text" name="board_title" size="70"/>
 	</div>
 	<div>
 		<label>내용:</label>

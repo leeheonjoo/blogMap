@@ -73,6 +73,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int blogWrite_attach(HashMap<String, Object> hashMap) {
 		logger.info("BoardDao blogWrite_attach  DAO-------------------------");
+		
 		int check=sqlSession.insert("dao.BoardMapper.blogWrite_attach",hashMap);
 		return check;
 	}

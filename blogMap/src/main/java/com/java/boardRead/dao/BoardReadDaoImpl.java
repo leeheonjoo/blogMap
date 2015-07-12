@@ -8,7 +8,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.java.board.dto.BoardDto;
+import com.java.board.dto.Board_addr_infoDto;
 import com.java.boardRead.dto.BoardReadDto;
+import com.java.boardRead.dto.CategoryDto;
 
 /**
  * @name : BoardReadDaoImpl
@@ -95,5 +98,66 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		List<String> detailList=sqlSession.selectList("dao.BoardReadMapper.getDetailCategoryCondition", headData);
 		
 		return detailList;
+	}
+
+	/**
+	 * @name : getboardList
+	 * @date : 2015. 7. 09.
+	 * @author : 황준
+	 * @description : 블로그 리스트 카테고리 검색 조건에 따른 검색결과 반환
+	 */
+	@Override
+	public List<BoardDto> getboardList(HashMap<String, Object> hashMap) {
+		logger.info("BoardReadDao getboardList-------------------------");
+		
+		/*Board_addr_infoDto board_addr_info=(Board_addr_infoDto) hashMap.get("board_addr_info");
+		CategoryDto category=(CategoryDto) hashMap.get("category"); 
+		String search_value=(String) hashMap.get("search_value"); 
+		System.out.println(board_addr_info.getAddr_sido());
+		System.out.println(board_addr_info.getAddr_sigugun());
+		System.out.println(board_addr_info.getAddr_dongri());
+		System.out.println(category.getCategory_mname());
+		System.out.println(category.getCategory_sname());
+		System.out.println(search_value);*/
+		
+		
+		List<BoardDto> boardList=sqlSession.selectList("dao.BoardReadMapper.getboardList",hashMap);
+		return boardList;
+	}
+
+	@Override
+	public List<Board_addr_infoDto> blogSearchAddr(HashMap<String, Object> hashMap) {
+		logger.info("BoardReadDao blogSearchAddr-------------------------");
+		/*List<BoardDto> boardList= (List<BoardDto>) hashMap.get("boardList");
+		System.out.println(boardList.get(0).getBoard_no());*/
+		List<Board_addr_infoDto> board_addr_infoList=null;
+		board_addr_infoList=sqlSession.selectList("dao.BoardReadMapper.blogSearchAddr",hashMap);
+		return board_addr_infoList;
+	}
+
+	@Override
+	public List<BoardDto> blogListResult(HashMap<String, Object> hashMap) {
+		logger.info("BoardReadDao blogSearchAddr-------------------------");
+		List<BoardDto> boardList=sqlSession.selectList("dao.BoardReadMapper.blogListResult",hashMap);
+		return boardList;
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getReadList1(int board_no) {
+		logger.info("BoardReadDao getReadList1-------------------------");
+		return sqlSession.selectList("dao.BoardReadMapper.getReadList1",board_no);
+	}
+
+	@Override
+	public int getreply(int board_no) {
+		logger.info("BoardReadDao getreply-------------------------");
+		
+		return sqlSession.selectOne("dao.BoardReadMapper.getreply");
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getReadList2(int board_no) {
+		logger.info("BoardReadDao getReadList2-------------------------");
+		return sqlSession.selectList("dao.BoardReadMapper.getReadList2",board_no);
 	}
 }
