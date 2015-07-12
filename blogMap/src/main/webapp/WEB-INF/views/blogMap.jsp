@@ -971,8 +971,5 @@ $(document).ready(function() {
 		</div>
 		
 	</div>
-	
-	<div class="container" style="max-width:1190px;">
-	</div>
 </body>
 </html>
