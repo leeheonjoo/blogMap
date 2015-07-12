@@ -52,5 +52,6 @@ $( document ).ready(function() {
         $(".carousel").height($("#tile1").width());
         $(".item").height($("#tile1").width());
     });
-
+    
 });
+

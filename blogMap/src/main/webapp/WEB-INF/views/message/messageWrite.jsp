@@ -12,7 +12,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		var email=sessionStorage.getItem('email');
-		alert("현재 로그인 중인 아이디 : " + email);
+		/* alert("현재 로그인 중인 아이디 : " + email); */
 		
 		$("#write_btn").click(function() {
 				$.ajax({
@@ -33,7 +33,6 @@
 							$("#receiveMsgResult").empty();
 							$("#sendMsgResult").empty();
 							
-							
 							$.ajax({
 								type : 'post',
 								url : '${root}/message/mainMessage.do',
@@ -44,66 +43,121 @@
 										alert("메시지가 비어있습니다.");
 										return false;
 									}
-				 					//alert(data.category_code);
-				
-									$.each(data,function(i) {
-										var date=new Date(data[i].message_sDate);
-										var sy=date.getFullYear();
-										var sm=date.getMonth()+1;
-										var sd=date.getDate();
-										
-										var sdate=sy + "/" + sm + "/" + sd;
-										$("#receiveMsgResult").append($("#receiveListRow").clone());
-										$("#receiveMsgResult #receiveListRow:last-child #msg_R_no").append(data[i].message_no);
-										$("#receiveMsgResult #receiveListRow:last-child #msg_R_content").append(data[i].message_content);
-										$("#receiveMsgResult #receiveListRow:last-child #msg_R_id").append(data[i].member_id);
-										$("#receiveMsgResult #receiveListRow:last-child #msg_R_sDate").append(sdate);
-										$("#receiveMsgResult #receiveListRow:last-child #msg_R_yn").append(data[i].message_yn);
-										$("#receiveMsgResult #receiveListRow:last-child a").attr("id", data[i].message_no);
-										
+									//alert(data.category_code);
+						
+									/*result Div 안에 listRow Div 를 복사하여 붙이면서 불러온 정보를 차례대로 담는다. */
+									$.each(data, function(i) {
+										var date = new Date(data[i].message_sDate);
+										var sy = date.getFullYear();
+										var sm = date.getMonth() + 1;
+										var sd = date.getDate();
+
+										var sdate = sy + "/" + sm + "/" + sd;
+
+										$("#receiveMsgResult").append("<tr style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+
+										$("#" + data[i].message_no).click(function() {
+											msgRecieveimportData(data[i].message_no);
+										});
 									});
+							},
+								error : function(data) {
+									alert("에러가 발생하였습니다.");
+								}
+							});
+
+						function msgRecieveimportData(no) {
+							$.ajax({
+								type : 'get',
+								url : '${root}/message/messageRead.do?message_no=' + no,
+								contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+								success : function(responseData) {
+									//	alert(responseData);
+									var data = JSON.parse(responseData);
+						
+									var date = new Date(data.message_sDate);
+									var sy = date.getFullYear();
+									var sm = date.getMonth() + 1;
+									var sd = date.getDate();
+						
+									var sdate = sy + "/" + sm + "/" + sd;
+									//	alert(data.message_no);
+									$("input[name='message_no']").val(data.message_no);
+									$("input[name='message_receiver']").val(data.message_receiver);
+									$("input[name='member_id']").val(data.member_id);
+									$("input[name='message_sDate']").val(sdate);
+									$("textarea[name='message_content']").val(data.message_content);
 								},
 								error : function(data) {
 									alert("에러가 발생하였습니다.");
 								}
 							});
-								
+						}
+						
+						$.ajax({
+							type : 'get',
+							url : '${root}/message/mainMessage.do',
+							data : {
+								member_id : email
+							},
+							contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+							success : function(responseData) {
+								var data = JSON.parse(responseData);
+								if (!data) {
+									alert("메시지가 비어있습니다.");
+									return false;
+								}
+								//alert(data.category_code);
+	
+								/*result Div 안에 listRow Div 를 복사하여 붙이면서 불러온 정보를 차례대로 담는다. */
+								$.each(data,function(i) {
+									var date = new Date(data[i].message_sDate);
+									var sy = date.getFullYear();
+									var sm = date.getMonth() + 1;
+									var sd = date.getDate();
+						
+									var sdate = sy + "/" + sm + "/"	+ sd;
+									/* alert(sdate); */
+									/* alert(date.getFullYear() + "/" + date.getMonth()+1 + "/" + date.getDate() + "/" + date.getHours()); */
+						
+									$("#sendMsgResult").append("<tr style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+									$("#" + data[i].message_no).click(function() {
+										msgSendimportData(data[i].message_no);
+									});
+								});
+							},
+							error : function(data) {
+								alert("에러가 발생하였습니다.");
+							}
+						});
+						
+						function msgSendimportData(no) {
 							$.ajax({
 								type : 'get',
-								url : '${root}/message/mainMessage.do',
-								data : {
-									member_id : email
-								},
+								url : '${root}/message/messageRead.do?message_no=' + no,
 								contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 								success : function(responseData) {
+									//	alert(responseData);
 									var data = JSON.parse(responseData);
-									if (!data) {
-										alert("메시지가 비어있습니다.");
-										return false;
-									}
-				 					//alert(data.category_code);
-				
-									$.each(data,function(i) {
-										var date=new Date(data[i].message_sDate);
-										var sy=date.getFullYear();
-										var sm=date.getMonth()+1;
-										var sd=date.getDate();
-										
-										var sdate=sy + "/" + sm + "/" + sd;
-										$("#sendMsgResult").append($("#sendListRow").clone());
-										$("#sendMsgResult #sendListRow:last-child #msg_S_no").append(data[i].message_no);
-										$("#sendMsgResult #sendListRow:last-child #msg_S_content").append(data[i].message_content);
-										$("#sendMsgResult #sendListRow:last-child #msg_S_id").append(data[i].message_receiver);
-										$("#sendMsgResult #sendListRow:last-child #msg_S_sDate").append(sdate);
-										$("#sendMsgResult #sendListRow:last-child #msg_S_yn").append(data[i].message_yn);
-										$("#sendMsgResult #sendListRow:last-child a").attr("id", data[i].message_no);
-										
-									});
+	
+									var date = new Date(data.message_sDate);
+									var sy = date.getFullYear();
+									var sm = date.getMonth() + 1;
+									var sd = date.getDate();
+	
+									var sdate = sy + "/" + sm + "/" + sd;
+									//	alert(data.message_no);
+									$("input[name='message_no']").val(data.message_no);
+									$("input[name='message_receiver']").val(data.message_receiver);
+									$("input[name='member_id']").val(data.member_id);
+									$("input[name='message_sDate']").val(sdate);
+									$("textarea[name='message_content']").val(data.message_content);
 								},
 								error : function(data) {
 									alert("에러가 발생하였습니다.");
 								}
-						});				
+							});	
+						}			
 					}
 				}
 			});
@@ -118,7 +172,7 @@
 		<div class="col-md-12 col-sm-12 col-xs-12">		<!-- Div 를 3화면에서 12 칸 모두 사용 -->
 			
 			<div class="form-group form-group-lg">		<!-- 크기 조절을 하기 위한 기본 틀 -->
-				<div class="col-md-2 col-sm-2 col-xs-2 "><label class="control-label" for="formGroupInputLarge">받는사람</label></div> 
+				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputLarge">받는사람</label></div> 
 																	<!-- 크기 조절을 할 대상		크기 설정 (크게 / 보통 / 작게 ) -->
 				<div class="col-md-10 col-sm-10 col-xs-10"><input type="text" class="form-control" id="message_receiver" name="messageWrite_receiver" placeholder="받는 사람의 아이디를 입력하세요."/></div>
 			</div>																	<!-- 크기조절을 할 대상 -->

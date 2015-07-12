@@ -8,6 +8,7 @@ public class BoardDto {
 	private String member_id;//회원아이디(이메일)
 	private int category_code;//카테고리 코드
 	private Date board_rgdate;//작성일
+	private String board_title; //제목
 	private String board_content;//내용
 	private int board_grade;	//평점
 	private int board_count;	//조회수
@@ -35,6 +36,12 @@ public class BoardDto {
 	}
 	public void setBoard_rgdate(Date board_rgdate) {
 		this.board_rgdate = board_rgdate;
+	}
+	public String getBoard_title() {
+		return board_title;
+	}
+	public void setBoard_title(String board_title) {
+		this.board_title = board_title;
 	}
 	public String getBoard_content() {
 		return board_content;

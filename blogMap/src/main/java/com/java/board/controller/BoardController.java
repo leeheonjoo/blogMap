@@ -100,7 +100,7 @@ public class BoardController {
 		 * @description : 블로그 작성 처리
 		 */
 		@RequestMapping(value="/board/blogWrite", method=RequestMethod.POST)
-		public void blogWrite(MultipartHttpServletRequest request,HttpServletResponse response,
+		public ModelAndView blogWrite(MultipartHttpServletRequest request,HttpServletResponse response,
 				Attach_fileDto attach_fileDto,BoardDto boardDto,Board_addr_infoDto board_addr_infoDto,BoardReadDto boardreadDto){
 			logger.info("blogTest ok");
 			
@@ -114,6 +114,9 @@ public class BoardController {
 			mav.addObject("BoardReadDto",boardreadDto);
 			
 			boardService.blogWrite(mav);
+			mav.setViewName("blogMap");
+			return mav;
+			
 		}
 		
 		

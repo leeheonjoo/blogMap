@@ -13,7 +13,7 @@
 </head>
 <body>
 <div id="partnerDetailMain" style="display: none;">
-	<!-- <img src="D:/NaverCapture/partner.png" width="300px" height="300px"/> -->
+	<%--  <img src="${root }/css/manager/images/star0.jpg" width="300px" height="300px"/> --%>
 	
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">

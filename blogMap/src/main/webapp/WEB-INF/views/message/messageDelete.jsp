@@ -14,90 +14,85 @@
 		var email=sessionStorage.getItem('email');
 		
 		//alert($("input[name='message_no']").val());
-			$.ajax({
-				type : 'post',
-				url : '${root}/message/messageDelete.do',
-			 	data : {
-			 		member_id : $("input[name='member_Delid']").val(),
-					message_no : $("input[name='message_no']").val()
-			 	}, 
-				contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-				success : function(responseData) {
-				//	alert(responseData);
-					if(responseData == 1){
-						$('#myTab a:first').tab('show');
-						$("#receiveMsgResult").empty();
-						$("#sendMsgResult").empty();
-						$("input[name='member_Delid']").val("");
-						
-						$.ajax({
-							type : 'get',
-							url : '${root}/message/mainMessage.do',
-							data : {
-								member_id : email
-							},
-							contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-							success : function(responseData) {
-								var data = JSON.parse(responseData);
-								if (!data) {
-									alert("메시지가 비어있습니다.");
-									return false;
-								}
-			 					//alert(data.category_code);
-			
-								/*result Div 안에 listRow Div 를 복사하여 붙이면서 불러온 정보를 차례대로 담는다. */
-								$.each(data,function(i) {
-									var date=new Date(data[i].message_sDate);
-									var sy=date.getFullYear();
-									var sm=date.getMonth()+1;
-									var sd=date.getDate();
-									
-									var sdate=sy + "/" + sm + "/" + sd;
-								//	alert(i + " " + data[i].message_no + " " + data[i].message_content);
-									$("#sendMsgResult").append($("#sendListRow").clone());
-									$("#sendMsgResult #sendListRow:last-child #msg_S_no").append(data[i].message_no);
-									$("#sendMsgResult #sendListRow:last-child #msg_S_content").append(data[i].message_content);
-									$("#sendMsgResult #sendListRow:last-child #msg_S_id").append(data[i].member_id);
-									$("#sendMsgResult #sendListRow:last-child #msg_S_sDate").append(sdate);
-									$("#sendMsgResult #sendListRow:last-child #msg_S_yn").append(data[i].message_yn);
-									$("#sendMsgResult #sendListRow:last-child a").attr("id", data[i].message_no);
-									
-									$("#" + data[i].message_no).click(function(){
-										msgDelimportData(data[i].message_no);	
-									});
-								});
-							},
-							error : function(data) {
-								alert("에러가 발생하였습니다.");
+		$.ajax({
+			type : 'post',
+			url : '${root}/message/messageDelete.do',
+		 	data : {
+		 		member_id : $("input[name='member_Delid']").val(),
+				message_no : $("input[name='message_no']").val()
+		 	}, 
+			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+			success : function(responseData) {
+			//	alert(responseData);
+				if(responseData == 1){
+					$('#myTab a:first').tab('show');
+					$("#receiveMsgResult").empty();
+					$("#sendMsgResult").empty();
+					$("input[name='member_Delid']").val("");
+					
+					$.ajax({
+						type : 'get',
+						url : '${root}/message/mainMessage.do',
+						data : {
+							member_id : email
+						},
+						contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+						success : function(responseData) {
+							var data = JSON.parse(responseData);
+							if (!data) {
+								alert("메시지가 비어있습니다.");
+								return false;
 							}
-						});
+							//alert(data.category_code);
 
-		 function msgDelimportData(no){
-			$.ajax({
-				type:'get',
-				url:'${root}/message/messageRead.do?message_no=' + no,
-				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-				success:function(responseData){
-				//	alert(responseData);
-					var data=JSON.parse(responseData);
+							/*result Div 안에 listRow Div 를 복사하여 붙이면서 불러온 정보를 차례대로 담는다. */
+							$.each(data,function(i) {
+								var date = new Date(data[i].message_sDate);
+								var sy = date.getFullYear();
+								var sm = date.getMonth() + 1;
+								var sd = date.getDate();
 					
-					var date=new Date(data.message_sDate);
-					var sy=date.getFullYear();
-					var sm=date.getMonth()+1;
-					var sd=date.getDate();
+								var sdate = sy + "/" + sm + "/"	+ sd;
+								/* alert(sdate); */
+								/* alert(date.getFullYear() + "/" + date.getMonth()+1 + "/" + date.getDate() + "/" + date.getHours()); */
 					
-					var sdate=sy + "/" + sm + "/" + sd;
-				//	alert(data.message_no);
-					$("input[name='message_no']").val(data.message_no);
-			 		$("input[name='message_receiver']").val(data.message_receiver);
-			 		$("input[name='member_id']").val(data.member_id); 
-			 		$("input[name='message_sDate']").val(sdate); 
-			 		$("textarea[name='message_content']").val(data.message_content); 
-				},
-				error:function(data){
-					alert("에러가 발생하였습니다.");
-				} 
-				}); 
+								$("#sendMsgResult").append("<tr style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+								$("#" + data[i].message_no).click(function() {
+									msgDelimportData(data[i].message_no);
+								});
+							});
+						},
+						error : function(data) {
+							alert("에러가 발생하였습니다.");
+						}
+					});
+				
+				function msgDelimportData(no) {
+					$.ajax({
+						type : 'get',
+						url : '${root}/message/messageRead.do?message_no=' + no,
+						contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+						success : function(responseData) {
+							//	alert(responseData);
+							var data = JSON.parse(responseData);
+
+							var date = new Date(data.message_sDate);
+							var sy = date.getFullYear();
+							var sm = date.getMonth() + 1;
+							var sd = date.getDate();
+
+							var sdate = sy + "/" + sm + "/" + sd;
+							//	alert(data.message_no);
+							$("input[name='message_no']").val(data.message_no);
+							$("input[name='message_receiver']").val(data.message_receiver);
+							$("input[name='member_id']").val(data.member_id);
+							$("input[name='message_sDate']").val(sdate);
+							$("textarea[name='message_content']").val(data.message_content);
+						},
+						error : function(data) {
+							alert("에러가 발생하였습니다.");
+						}
+					});
 				}				
 			}
 		}
@@ -115,7 +110,7 @@
 					</div>
 					
 					<div class="col-md-8 col-sm-8 col-xs-8">
-						<input type="text" class="form-control" name="member_Delid"/>
+						<input type="text" class="form-control" name="member_Delid" placeholder="아이디를 작성하세요"/>
 					</div>
 				</div>
 			</div>
