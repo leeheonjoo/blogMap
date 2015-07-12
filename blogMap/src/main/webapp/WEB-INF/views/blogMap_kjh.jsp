@@ -39,32 +39,32 @@
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
 <!-- modal, session check -->
 <script type="text/javascript">
-	$(document).ready(function() {		
-// 		<session check -> button change>
-		if(sessionStorage.getItem('email')!=null){
-			//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
-			//$("#blogmap_login_bar").fadeOut();
-			$("#blogmap_before_login span").remove();
-			$("#blogmap_before_login").attr("data-toggle","");
-			$("#login_text").text("Logout");
-			
-			if($("#login_text").text()=="Logout"){
-				$("#blogmap_before_login").click(function(){
-					if(sessionStorage.getItem('jointype')=="0002"){
-						FB.logout();
-					}
-					sessionStorage.clear();
-					//$("#blogmap_after_login").css("display","none");
-					//$("#blogmap_login_bar").fadeIn();
-					location.href="${root}/";
-				});
-			}
+$(document).ready(function() {		
+//		<session check -> button change>
+	if(sessionStorage.getItem('email')!=null){
+		//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
+		//$("#blogmap_login_bar").fadeOut();
+		$("#blogmap_before_login span").remove();
+		$("#blogmap_before_login").attr("data-toggle","");
+		$("#login_text").text("Logout");
+		
+		if($("#login_text").text()=="Logout"){
+			$("#blogmap_before_login").click(function(){
+				if(sessionStorage.getItem('jointype')=="0002"){
+					FB.logout();
+				}
+				sessionStorage.clear();
+				//$("#blogmap_after_login").css("display","none");
+				//$("#blogmap_login_bar").fadeIn();
+				location.href="${root}/";
+			});
 		}
-	});
+	}
+});
 </script>
 </head>
 <body>
-	<div class="container-fluid">
+	<div class="container-fluid" style="max-width:1190px;">
 		<nav class="navbar navbar-default navbar-inverse" role="navigation">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -79,7 +79,7 @@
 				</div>
 			
 				<!-- Collect the nav links, forms, and other content for toggling -->
-			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav navbar-right">
 			        <li id="blogmap_login_bar" class="dropdown">
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a>
@@ -119,6 +119,7 @@
 							</li>
 						</ul>
 			        </li>
+			       
 			      </ul>
 				 </div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
@@ -137,12 +138,10 @@
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-							<div class="item active">
-								<img src="http://handsontek.net/demoimages/tiles/twitter1.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/twitter2.png" class="img-responsive"/>
-							</div>
+				    		<a data-toggle="modal" href="#blogListMain">
+				    		<div id="tile1" class="tile" style="background-image: url('${root}/css/blogMap/images/search.png'); background-size: cover;">
+				    		
+					   		</div></a>
 						</div>
 					</div>
 		        
