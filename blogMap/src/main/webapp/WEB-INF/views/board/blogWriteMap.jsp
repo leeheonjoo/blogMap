@@ -14,8 +14,8 @@ v\:* {
 }
 </style>
 <!-- 네이버 지도 -->
-<script type="text/javascript"
-	src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=1b79d7553c7736aca4e7243cdecfecbc"></script>
+
+
 <script type="text/javascript">
 	try {
 		document.execCommand('BackgroundImageCache', false, true);
@@ -24,7 +24,7 @@ v\:* {
 </script>
 <script type="text/javascript">
 	//현재 위치를 좌표값으로 받아오기 위한 스크립트
-	function mapLoad(m,addrArray,sidoArray,sigugunArray,restArray,titleArray) {
+	function mapLoad(m,addrArray,sidoArray,sigugunArray,dongmyunArray,restArray,titleArray,mapDiv,search_value) {
 			var output = document.getElementById("out");
 			if (!navigator.geolocation) {
 				output.innerHTML = "<p>사용자의 브라우저는 지오로케이션을 지원하지 않습니다.</p>";
@@ -54,7 +54,7 @@ v\:* {
 			//좌표 전달받아 지도 생성
 			var oPoint = new nhn.api.map.LatLng(latitude, longitude);
 			nhn.api.map.setDefaultPoint('LatLng');
-			var oMap = new nhn.api.map.Map('testMap', {
+			var oMap = new nhn.api.map.Map(mapDiv, {
 				point : oPoint,
 				zoom : 12,
 				boundary:m,
@@ -116,26 +116,27 @@ v\:* {
 			});
 
 			oMap.attach('click',function(oCustomEvent) {
-			
-				
-					
-					
-				
+					if(mapDiv=='testMap'){
 								var oPoint = oCustomEvent.point;
 								var oTarget = oCustomEvent.target;
 								mapInfoTestWindow.setVisible(false);
 								// 마커 클릭하면
 								if (oTarget instanceof nhn.api.map.Marker) {
 									var pullAddr=oCustomEvent.target.getTitle();
-									var pAddr=pullAddr.split(" ");
-									var pAddr4=pAddr[4];
+									var pAddrs=pullAddr.split("]");
+									//alert(pAddrs);
+									
+									var pAddr=pAddrs[1].split("/");
+									var pAddr0=pAddr[0];
 									
 									
-									$("input[name=realAddr]").val(pAddr[1]+" "+pAddr[2]+" "+pAddr[3]+" "+pAddr4.trim());
-									$("input[name=addr_sido]").val(pAddr[1]);
-									$("input[name=addr_sigugun]").val(pAddr[2]);
-									$("input[name=addr_dongri]").val(pAddr[3]);
-									$("input[name=addr_bunji]").val(pAddr4.trim());
+									//var pAddr4=pAddr[4];
+									
+									$("input[name=realAddr]").val(pAddr[0]+" "+pAddr[1]+" "+pAddr[2]+" "+pAddr[3]);
+									$("input[name=addr_sido]").val(pAddr0.trim());
+									$("input[name=addr_sigugun]").val(pAddr[1]);
+									$("input[name=addr_dongri]").val(pAddr[2]);
+									$("input[name=addr_bunji]").val(pAddr[3]);
 									$("div[id=blogWriteSub].modal").modal("hide");
 									
 									// 겹침 마커 클릭한거면
@@ -146,11 +147,6 @@ v\:* {
 									// - 외부 css에 선언된 class를 이용하면 해당 class의 스타일을 바로 적용할 수 있습니다.
 									// - 단, DIV 의 position style 은 absolute 가 되면 안되며, 
 									// - absolute 의 경우 autoPosition 이 동작하지 않습니다. 
-									
-										
-										
-									
-									
 									mapInfoTestWindow.setPoint(oTarget.getPoint());
 									mapInfoTestWindow.setVisible(true);
 									mapInfoTestWindow.setPosition({
@@ -160,6 +156,156 @@ v\:* {
 									mapInfoTestWindow.autoPosition(); 
 									return;
 								}
+					}else if(mapDiv=='map'){
+						var oPoint = oCustomEvent.point;
+						var oTarget = oCustomEvent.target;
+						mapInfoTestWindow.setVisible(false);
+						// 마커 클릭하면
+						if (oTarget instanceof nhn.api.map.Marker) {
+							var pullAddr=oCustomEvent.target.getTitle();
+							var pAddrs=pullAddr.split("]");
+							//alert(pAddrs);
+							
+							var pAddr=pAddrs[1].split("/");
+							var pAddr0=pAddr[0];
+							pAddr0=pAddr0.trim();
+							var pAddr1=pAddr[1];
+							var pAddr2=pAddr[2];
+							var pAddr3=pAddr[3];
+							
+							$.ajax({
+									type : 'post',
+									url : '${root}/board/blogListResult.do',
+									data : {
+										sido : pAddr0,
+										sigugun : pAddr1,
+										dongri : pAddr2,
+										bunji : pAddr3,
+										searchValue:search_value
+									},
+									contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+									success : function(data) {
+										//alert(data); 전체값 갖고오는지 확인
+										var data=JSON.parse(data);
+										
+										$("div[id='blogListSub'].modal").modal();
+										$("#list_items").empty();
+										$.each(data,function(i){
+											var board_no=data[i].board_no;
+											var board_title=data[i].board_title;
+											var rgdate=new Date(data[i].board_rgdate);
+											var fullDate=rgdate.getFullYear()+"/"+(rgdate.getMonth()+1)+"/"+rgdate.getDate();
+											var board_grade=data[i].board_grade;
+											var board_count=data[i].board_count;
+											var board_content=data[i].board_content;
+										
+											//검색 리스트개수에 따른 복사
+											$("#list_items").append($("#listItem").clone());
+										    $("#list_items > a:eq("+i+")").find('#result_title').attr("id","result_title"+i); 
+										    $("#list_items > a:eq("+i+")").find('#result_content').attr("id","result_content"+i); 
+										    $("#list_items > a:eq("+i+")").find('#result_count').attr("id","result_count"+i); 
+										    $("#list_items > a:eq("+i+")").find('#result_grade').attr("id","result_grade"+i); 
+										    $("#list_items > a:eq("+i+")").find('#result_rgdate').attr("id","result_rgdate"+i); 
+										    $("#list_items > a:eq("+i+")").find('#result_star').attr("id","result_star"+i); 
+										    $("#list_items > a:eq("+i+")").find('#result_no').attr("id","result_no"+i); 
+										    $("#list_items > a:eq("+i+")").find('#result_button').attr("id","result_button"+i); 
+											
+										    //데이터 입력
+											$("#result_no"+i).text("글번호: "+board_no);
+											$("#result_rgdate"+i+" > small").text("작성일: "+fullDate);
+											$("#result_count"+i+" > small").text("조회수: "+board_count);
+											$("#result_grade"+i+" > small").text("평점: "+board_grade+" / 5");
+											$("#result_title"+i).text(board_title);
+											$("#result_content"+i).html(board_content);
+											
+											//평점 조건에 따른 별 색칠
+											if(board_grade=="1"){
+												$("#result_star"+i+"> span:eq(0)").attr("class","glyphicon glyphicon-star");
+											}else if(board_grade=="2"){
+												$("#result_star"+i+"> span:eq(0)").attr("class","glyphicon glyphicon-star");
+												$("#result_star"+i+"> span:eq(1)").attr("class","glyphicon glyphicon-star");
+											}else if(board_grade=="3"){
+												$("#result_star"+i+"> span:eq(0)").attr("class","glyphicon glyphicon-star");
+												$("#result_star"+i+"> span:eq(1)").attr("class","glyphicon glyphicon-star");
+												$("#result_star"+i+"> span:eq(2)").attr("class","glyphicon glyphicon-star");
+											}else if(board_grade=="4"){
+												$("#result_star"+i+" > span").attr("class","glyphicon glyphicon-star");
+												$("#result_star"+i+"> span:eq(4)").attr("class","glyphicon glyphicon-star-empty");
+											}else if(board_grade=="5"){
+												$("#result_star"+i+" > span").attr("class","glyphicon glyphicon-star");
+											}
+											
+											/*$("#blogList_result_content").append("<span>"+board_no+"</span>");
+											$("#blogList_result_content").append("<span>카테고리 넣어야함 </span>");
+											$("#blogList_result_content").append("<span>주소 넣어야함</span>");
+											$("#blogList_result_content").append("<a><span>"+board_title+"</span></a>");
+											$("#blogList_result_content").append("<span>"+fullDate+"</span>");
+											$("#blogList_result_content").append("<span>"+board_grade+"</span>");
+											$("#blogList_result_content").append("<span>"+board_count+"</span>");
+											$("#blogList_result_content").append("<br/>");
+											$("#blogList_result_content").append("<p>");
+											$("#blogList_result_content").append("<br/>");		 */
+											
+											$("#result_button"+i).click(function() {
+												$("div[id='blogListDetail'].modal").modal(); 
+													var Readno=$("#result_no"+i).text();
+													var blogRead_no=Readno.split(":");
+													blogRead_no=blogRead_no[1].trim();
+													 $.ajax({
+														type : 'post',
+														url : '${root}/board/blogReadDetail.do',
+														data : {
+															board_no : blogRead_no
+														},
+														contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+														success : function(data) {
+															
+														},
+														error:function(data){
+															
+														}
+													}); 
+											});
+										});
+										
+									},
+									error:function(data){
+										
+									}
+							});
+							
+							//var pAddr4=pAddr[4];
+							
+							/* $("input[name=realAddr]").val(pAddr[0]+" "+pAddr[1]+" "+pAddr[2]+" "+pAddr[3]);
+							$("input[name=addr_sido]").val(pAddr0.trim());
+							$("input[name=addr_sigugun]").val(pAddr[1]);
+							$("input[name=addr_dongri]").val(pAddr[2]);
+							$("input[name=addr_bunji]").val(pAddr[3]);
+							$("div[id=blogWriteSub].modal").modal("hide"); */
+							
+							// 겹침 마커 클릭한거면
+							if (oCustomEvent.clickCoveredMarker) {
+								return;
+							}
+							// - InfoWindow 에 들어갈 내용은 setContent 로 자유롭게 넣을 수 있습니다. 외부 css를 이용할 수 있으며, 
+							// - 외부 css에 선언된 class를 이용하면 해당 class의 스타일을 바로 적용할 수 있습니다.
+							// - 단, DIV 의 position style 은 absolute 가 되면 안되며, 
+							// - absolute 의 경우 autoPosition 이 동작하지 않습니다. 
+							
+								
+								
+							
+							
+							mapInfoTestWindow.setPoint(oTarget.getPoint());
+							mapInfoTestWindow.setVisible(true);
+							mapInfoTestWindow.setPosition({
+								right : 15,
+								top : 30
+							});
+							mapInfoTestWindow.autoPosition(); 
+							return;
+						}
+					}
 							/* 	var oMarker = new nhn.api.map.Marker(oIcon, {
 									title : '마커 : ' + oPoint.toString()
 								});
@@ -187,7 +333,7 @@ v\:* {
 
 			 for(var i=0;i<m.length;i++){ //마커생성 
 	                 var oPoint = m[i]; 
-	                 var oMarker = new nhn.api.map.Marker(oIcon, { title :"["+titleArray[i]+"]"+" "+addrArray[i]});
+	                 var oMarker = new nhn.api.map.Marker(oIcon, { title :"["+titleArray[i]+"]"+" "+sidoArray[i]+"/"+sigugunArray[i]+"/"+dongmyunArray[i]+"/"+restArray[i]});
 	                 oMarker.setPoint(oPoint); 
 	                 oMap.addOverlay(oMarker); 
 	                /*  mapInfoTestWindow
