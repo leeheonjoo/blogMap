@@ -13,4 +13,10 @@ public interface BoardReadService {
 	public String getLocationCondition(HttpServletRequest request, HttpServletResponse response);
 	
 	public String getCategoryCondition(HttpServletRequest request, HttpServletResponse response);
+
+	public void blogListSearch(ModelAndView mav);
+
+	public void blogListResult(ModelAndView mav);
+
+	public void blogReadDetail(ModelAndView mav);
 }

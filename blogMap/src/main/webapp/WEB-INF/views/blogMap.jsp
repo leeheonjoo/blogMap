@@ -23,6 +23,12 @@
 /*  		max-height: 600px; */
 /*  		overflow-y:scroll; */
 	}
+/*이미지 슬라이더*/	
+.carousel-inner.onebyone-carosel { margin: auto; width: 90%; }
+.onebyone-carosel .active.left { left: -33.33%; }
+.onebyone-carosel .active.right { left: 33.33%; }
+.onebyone-carosel .next { left: 33.33%; }
+.onebyone-carosel .prev { left: -33.33%; }
 </style>
 
 <!--[if lt IE 9]>
@@ -34,6 +40,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>						<!-- bootstrap javascript를 로드 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.js"></script>	<!-- bootstrap-select javascript를 로드 -->
 <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-dropdown.js"></script>		<!-- bootstrap-dropdown javascript를 로드 -->
+<script type="text/javasciprt" src="${root }/css/bootstrap-confirmation.js"></script>		
+<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=da3d853c119e911822c1141b3a2153af"></script>
 <!-- modal -->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -64,6 +72,24 @@
 			
 			$( '.modal-backdrop' ).not( 'fv-modal-stack' ).addClass( 'fv-modal-stack' );
 		});
+		
+		 $('#myCarousel').carousel({
+		        interval: 10000
+		    })
+		    $('.fdi-Carousel .item').each(function () {
+		        var next = $(this).next();
+		        if (!next.length) {
+		            next = $(this).siblings(':first');
+		        }
+		        next.children(':first-child').clone().appendTo($(this));
+
+		        if (next.next().length > 0) {
+		            next.next().children(':first-child').clone().appendTo($(this));
+		        }
+		        else {
+		            $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+		        }
+		    });
 	});
 </script>
 </head>
@@ -154,17 +180,36 @@
 		    </div>
 		</div>
 		
-		<!-- 블로그 리스트 - 블로그 리스트 테스트 -->
+		<!-- 블로그 리스트 : 황준-->
 		<div class="modal fade" id="blogListSub" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">Modal Sub</h5>
+						<h5 class="modal-title">조회 결과</h5>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
  							<jsp:include page="board/list_backup.jsp"/>
+						</div>
+						<br/>
+						<br/>
+					</div>
+			   </div>
+			</div>
+		</div>
+		
+		<!-- 블로그 리스트 자세히 보기 : 황준 -->
+		<div class="modal fade" id="blogListDetail" data-backdrop="static">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h5 class="modal-title">블로그 읽기</h5>
+					</div><div class="container"></div>
+					<div class="modal-body">
+						<div id="mainResult">
+ 							<jsp:include page="board/blogRead.jsp"/>
 						</div>
 						<br/>
 						<br/>
@@ -740,5 +785,6 @@
 	</div>
 	
 <!-- 	$("div[id='blogListSub'].modal").modal(); -->
+
 </body>
 </html>
