@@ -621,6 +621,66 @@
 				</form>
 			</div>
 		</section>
+	
+	<!-- 제휴업체 - 쿠폰정보등록 팝업 레이어 -->	
+	<!-- 쿠폰 등록 작성 - 쿠폰정보등록 -->
+      <section class="modal fade" id="couponMain">
+      <div class="modal-dialog modal-lg">
+         <form id="couponWrite_form" class="col-xs-12 form-horizontal" method="post" action="${root}/partner/couponWrite.do" autocomplete="off" enctype="multipart/form-data">
+            <div class="modal-content">
+               <input type="hidden" name="partner_no"/>
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title">쿠폰 등록</h4>
+               </div>
+
+               <div class="modal-body" id="data-body">                     
+
+                  <div class="form-group">
+                     <label class="col-xs-4 control-label">할인상품</label>
+                     <div class="col-xs-8">
+                        <input type="text" class="form-control" name="coupon_item" id="coupon_item" required="required" placeholder="할인상품명을 입력하세요"/>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label class="col-xs-4 control-label">할인율</label>
+                     <div class="col-xs-8">
+                        <input type="text" class="form-control" name="coupon_discount" id="coupon_discount" required="required" placeholder="할인율 적어주세요"/>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label class="col-xs-4 control-label">쿠폰적용시작일</label>
+                     <div class="col-xs-8">
+                        <input type="text" class="form-control" name="coupon_bymd" id="coupon_bymd" required="required" placeholder="쿠폰 시작일"/>
+                     </div>                                 
+                  </div>
+                  
+                  <div class="form-group">
+                     <label class="col-xs-4 control-label">쿠폰적용종료일</label>
+                     <div class="col-xs-8">
+                        <input type="text" class="form-control" name="coupon_eymd" id="coupon_eymd" required="required" placeholder="쿠폰 종료일"/>
+                     </div>                                 
+                  </div>
+
+                  <div class="form-group">
+                     <label class="col-xs-4 control-label">쿠폰사진</label>
+                     <div class="col-xs-8">
+                        <input type="file" class="form-control" name="img_src" id="img_src"/>
+                     </div>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" onclick="return form_coupon();">신청하기</button>
+               </div>
+            </div>
+         </form>
+      </div>
+   </section>
+   
 		
 	<!-- **********************************
 	                           회원관리 : 김정훈
