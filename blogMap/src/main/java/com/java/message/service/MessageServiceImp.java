@@ -137,7 +137,9 @@ public class MessageServiceImp implements MessageService {
 		if(pageNumber==null) pageNumber="1";
 		
 //		사용자 아이디를 임의로 등록
-		String member_id="22";
+		/*String member_id="22";*/
+		String member_id=request.getParameter("member_id");
+		logger.info("receive member_id : " + member_id);
 		
 //		게시물 수
 		int boardSize=30;
@@ -196,6 +198,40 @@ public class MessageServiceImp implements MessageService {
 		logger.info("message_no = " + message_no);	
 		
 		MessageDto messageDto=messageDao.messageRead(message_no);
+		logger.info("messageDto : " + messageDto);
+		
+		Gson gson=new Gson();
+		String json=gson.toJson(messageDto);
+		
+		System.out.println("json: " + json);
+		
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * @name:messageRead
+	 * @date:2015. 6. 26.
+	 * @author:정기창
+	 * @description:메시지 상세조회
+	 */
+	@Override
+	public void messageRead_S(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		
+		int message_no=Integer.parseInt(request.getParameter("message_no"));
+//		DB 에 사용할 메시지 번호를 불러온다.
+		
+		logger.info("message_no = " + message_no);	
+		
+		MessageDto messageDto=messageDao.messageRead_S(message_no);
 		logger.info("messageDto : " + messageDto);
 		
 		Gson gson=new Gson();

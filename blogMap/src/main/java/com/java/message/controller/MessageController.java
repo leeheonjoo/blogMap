@@ -105,6 +105,26 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 	}
 	
 	/**
+	 * @name:messageReadOk
+	 * @date:2015. 6. 26.
+	 * @author:정기창
+	 * @description:수신한 메시지 목록 중에서 한가지를 상세조회시 필요한 Controller
+	 */
+	@RequestMapping("/message/messageRead_S.do")
+	public void messageRead_S_Ok(HttpServletRequest request, HttpServletResponse response){
+		
+		logger.info("------------------- Message Read ------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		messageService.messageRead_S(mav);	
+	
+	}
+	
+	/**
 	 * @name:withDrawOk
 	 * @date:2015. 7. 03.
 	 * @author:정기창
