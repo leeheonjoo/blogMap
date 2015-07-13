@@ -4,4 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.CouponMapper">
 
+	<select id="couponCount" resultType="int">
+		select count(*) from partner
+	</select>
+	
+	<select id="couponList" resultType="com.java.coupon.dto.CouponDto">
+		select * from partner order by coupon_discount desc
+	</select>
 </mapper>

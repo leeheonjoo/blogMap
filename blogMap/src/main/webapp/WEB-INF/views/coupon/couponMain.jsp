@@ -8,61 +8,61 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>BLOG MAP</title>
 <script type="text/javascript">
-$(function() {
-	$("input[name='member_id']").val(sessionStorage.getItem('email'));
-	$("#partner_tour_button").click(function() {
-		$("#category_code").val("100000");
-	})
-	$("#partner_restaurant_button").click(function() {
-		$("#category_code").val("200000");
-	})
-})
+// $(function() {
+// 	$("input[name='member_id']").val(sessionStorage.getItem('email'));
+// 	$("#partner_tour_button").click(function() {
+// 		$("#category_code").val("100000");
+// 	})
+// 	$("#partner_restaurant_button").click(function() {
+// 		$("#category_code").val("200000");
+// 	})
+// })
 </script>
 </head>
 <body>
 	<article class="container">
 	<div class="row">
 		<section class="page-header">
-			<h2 class="page-title">제휴업체 정보</h2>
+			<h2 class="page-title">Coupon List</h2>
 		</section>
 	</div>
 
 	<div class="row">
 		<div>
 			<!-- 큰 사이즈 화면에서 탭 목록-->					
-			<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
-				<li role="presentation" class="active">
-					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour</a>
-				</li>
-				<li role="presentation">
-					<a href="#tab_restaurant" aria-controls="tab_restaurant" role="tab" data-toggle="tab">Restaurant</a>
-				</li>
-			</ul>
+<!-- 			<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist"> -->
+<!-- 				<li role="presentation" class="active"> -->
+<!-- 					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour</a> -->
+<!-- 				</li> -->
+<!-- 				<li role="presentation"> -->
+<!-- 					<a href="#tab_restaurant" aria-controls="tab_restaurant" role="tab" data-toggle="tab">Restaurant</a> -->
+<!-- 				</li> -->
+<!-- 			</ul> -->
 			
-			<!-- 작은 사이즈 화면에서 탭 목록-->
-			<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist">
-				<li role="presentation" class="active">
-					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour</a>
-				</li>
-				<li role="presentation">
-					<a href="#tab_restaurant" aria-controls="tab_restaurant" role="tab" data-toggle="tab">Restaurant</a>
-				</li>
-			</ul>
+<!-- 			<!-- 작은 사이즈 화면에서 탭 목록--> -->
+<!-- 			<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist"> -->
+<!-- 				<li role="presentation" class="active"> -->
+<!-- 					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour</a> -->
+<!-- 				</li> -->
+<!-- 				<li role="presentation"> -->
+<!-- 					<a href="#tab_restaurant" aria-controls="tab_restaurant" role="tab" data-toggle="tab">Restaurant</a> -->
+<!-- 				</li> -->
+<!-- 			</ul> -->
 
 			<!-- tour 탭 내용 --> 
 			<div class="tab-content col-md-9">
-				<section role="tabpanel" class="tab-pane active" id="tab_tour">
-					<div class="row" id="tour_item_list">	
-						<div class="col-md-2 col-sm-3 col-xs-4" id="tour_item" role="button" style="display:none;">
+				<section role="tabpanel" class="tab-pane active" id="coupon_Total">
+					<div class="row" id="coupon_item_list">	
+						<div class="col-md-2 col-sm-3 col-xs-4" id="coupon_item" role="button" style="display:none;">
 							<div id="tour_info" class="thumbnail">	
-								<a data-toggle="modal" href="#modal_info" class="list_partner_no">
+								<a data-toggle="modal" href="#modal_info" class="list_coupon_no">
 									<!-- var filename=data.partner_pic_name;
 										var filepath=data.partner_pic_path;
 									$("#partner_imagers").attr("src", )
 									 -->
-									<img class="img-responsive" id="partner_imagers"/> 
+									<img class="img-responsive" id="coupon_images"/> 
 										<div class="caption">
-										<p id="list_partner_name"></p>
+										<p id="list_coupon_name"></p>
 									</div>								
 								</a>
 							</div>
@@ -75,31 +75,31 @@ $(function() {
 						</div>
 					</div>
 				</section>
-				<div role="tabpanel" class="tab-pane" id="tab_restaurant">	
+<!-- 				<div role="tabpanel" class="tab-pane" id="tab_restaurant">	 -->
 				
-				<!-- restaurant 탭 내용 -->
-				<section role="tabpanel" class="tab-pane active" id="tab_restaurant">
-					<div class="row" id="restaurant_item_list">	
-						<div class="col-md-2 col-sm-3 col-xs-4" id="restaurant_item"  role="button">
-							<div id="restaurant_info" class="thumbnail">
-							<a data-toggle="modal" href="#modal_info" class="list_partner_no">
-								<img class="img-responsive" src="http://placehold.it/300x300" alt="업체이미지"/>
-								<div class="caption">
-									<p id="list_partner_name"></p>
-								</div>
-								</a>
-							</div>
-						</div>
-					</div> 
-					<div class="row">	
-						<hr/>
-						<div class="col-xs-12 text-right">
-							<button type="button" id="partner_restaurant_button" name="partner_restaurant_button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">restaurant 업체등록</button>									
-						</div>
-					</div>
-				</section>
-				<div role="tabpanel" class="tab-pane" id="tab_tour"/>	
-				</div>
+<!-- 				restaurant 탭 내용 -->
+<!-- 				<section role="tabpanel" class="tab-pane active" id="tab_restaurant"> -->
+<!-- 					<div class="row" id="restaurant_item_list">	 -->
+<!-- 						<div class="col-md-2 col-sm-3 col-xs-4" id="restaurant_item"  role="button"> -->
+<!-- 							<div id="restaurant_info" class="thumbnail"> -->
+<!-- 							<a data-toggle="modal" href="#modal_info" class="list_partner_no"> -->
+<!-- 								<img class="img-responsive" src="http://placehold.it/300x300" alt="업체이미지"/> -->
+<!-- 								<div class="caption"> -->
+<!-- 									<p id="list_partner_name"></p> -->
+<!-- 								</div> -->
+<!-- 								</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div>  -->
+<!-- 					<div class="row">	 -->
+<!-- 						<hr/> -->
+<!-- 						<div class="col-xs-12 text-right"> -->
+<!-- 							<button type="button" id="partner_restaurant_button" name="partner_restaurant_button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">restaurant 업체등록</button>									 -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</section> -->
+<!-- 				<div role="tabpanel" class="tab-pane" id="tab_tour"/>	 -->
+<!--  				</div> -->
 			</div>
 		</div>
 	</div>
@@ -202,11 +202,11 @@ $(function() {
 			 $(document).ready(function(){	
 				/* 데이타를 채우기 위해 복사 */
 				
-				$("#partner_Registration").click(function(){
+// 				$("#partner_Registration").click(function(){
 					/* alert("ok"); */	
 				$.ajax({
 					type:'post',
-					url:'${root}/partner/tour_partner_List.do',
+					url:'${root}/coupon/couponMain.do',
 					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 					success : function(responseData) {
 						var data = JSON.parse(responseData);
@@ -215,32 +215,32 @@ $(function() {
 						/* 데이타를 채우기 위해 복사 */
 						$.each(data, function(i){
 							
-							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
-							$("#tour_item:last-child #list_partner_name").append(data[i].partner_name);
-							$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
-							$("#tour_item:last-child #partner_imagers").append(data[i].img_src);
+							$("#coupon_item_list").append($("#coupon_item").clone().css("display", "block"));
+							$("#coupon_item:last-child #list_coupon_name").append(data[i].partner_name);
+							$("#coupon_item:last-child a[class='list_coupon_no']").attr("id", "partner_"+data[i].partner_no);
+							$("#coupon_item:last-child #coupon_images").append(data[i].img_src);
 							
 							/* $("#item1:last_child .phone").append(data[i].partner_phone);
 							$("#item1:last_child .addr").append(data[i].partner_addr); */
 							//$("#item1:last_child .img").attr('src', data.data_img);
 							
 							// 각 업체를 클릭했을때 이벤트
-							$("#partner_" + data[i].partner_no).click(function(){
-								alert("업체클릭" + data[i].partner_no)
-								partnerData(data[i].partner_no);	
+							$("#coupon_" + data[i].partner_no).click(function(){
+								alert("쿠폰" + data[i].partner_no + "클릭");
+								couponData(data[i].partner_no);	
 							});
 						});
 					
-					$("#modal_info").modal({
-						'show' : false,
-						'backdrop' : 'static'
-					}).on('hidden.bs.modal', function(){
-						// 가져왓던 정보를 초기화
-						$("#modal_info .name").text('');
-						$("#modal_info .phone").text('');
-						$("#modal_info .addr").text('');
-						$("#modal_info .img").attr('src','');
-					});
+// 					$("#modal_info").modal({
+// 						'show' : false,
+// 						'backdrop' : 'static'
+// 					}).on('hidden.bs.modal', function(){
+// 						// 가져왓던 정보를 초기화
+// 						$("#modal_info .name").text('');
+// 						$("#modal_info .phone").text('');
+// 						$("#modal_info .addr").text('');
+// 						$("#modal_info .img").attr('src','');
+// 					});
 						if (!data) {
 							alert("등록된 정보가 없습니다.");
 							return false;
@@ -248,9 +248,9 @@ $(function() {
 					}
 				});
 			});
-		});
+// 		});
 			 
-		 function partnerData(no){
+		 function couponData(no){
 				$.ajax({
 					type:'get',
 					url:'${root}/partner/getTourPartnerListDate.do?partnerNo=' + no,
