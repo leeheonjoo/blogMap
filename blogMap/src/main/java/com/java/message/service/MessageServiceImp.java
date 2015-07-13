@@ -81,7 +81,7 @@ public class MessageServiceImp implements MessageService {
 		logger.info("SendMessage member_id" + member_id);
 		
 //		한페이지에 뿌려줄 게시물 수
-		int boardSize=30;
+		int boardSize=10;
 		
 		// 페이지
 		int currentPage=Integer.parseInt(pageNumber);
@@ -101,7 +101,6 @@ public class MessageServiceImp implements MessageService {
 		if(count>0){
 			messageList=messageDao.getSendMessageList(startRow,endRow,member_id);
 		}
-		logger.info("messageListSize:"+messageList.size());
 		
 //		메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
 		Gson gson=new Gson();
@@ -136,13 +135,11 @@ public class MessageServiceImp implements MessageService {
 		String pageNumber=request.getParameter("pageNumber");
 		if(pageNumber==null) pageNumber="1";
 		
-//		사용자 아이디를 임의로 등록
-		/*String member_id="22";*/
 		String member_id=request.getParameter("member_id");
 		logger.info("receive member_id : " + member_id);
 		
 //		게시물 수
-		int boardSize=30;
+		int boardSize=10;
 		
 		// 페이지
 		int currentPage=Integer.parseInt(pageNumber);
@@ -162,7 +159,6 @@ public class MessageServiceImp implements MessageService {
 		if(count>0){
 			messageList=messageDao.getReceiveMessageList(startRow,endRow, member_id);
 		}
-		logger.info("messageListSize:"+messageList.size());
 		
 		Gson gson=new Gson();
 		String json=gson.toJson(messageList);

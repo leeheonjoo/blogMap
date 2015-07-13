@@ -24,7 +24,7 @@ public interface BoardReadDao {
 
 	public List<BoardDto> getboardList(HashMap<String, Object> hashMap);
 
-	public List<Board_addr_infoDto> blogSearchAddr(HashMap<String, Object> hashMap);
+	public List<Board_addr_infoDto> blogSearchAddr(int board_no);
 
 	public List<BoardDto> blogListResult(HashMap<String, Object> hashMap);
 
@@ -32,8 +32,7 @@ public interface BoardReadDao {
 
 	public int getreply(int boardNo);
 
-	public List<ReplyDto> getreplyList(int boardNo);
-
 	public List<Attach_fileDto> getblogImg(int boardNo);
+
 	
 }

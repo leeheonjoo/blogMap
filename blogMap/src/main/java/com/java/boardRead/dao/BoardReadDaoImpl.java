@@ -128,12 +128,12 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	}
 
 	@Override
-	public List<Board_addr_infoDto> blogSearchAddr(HashMap<String, Object> hashMap) {
+	public List<Board_addr_infoDto> blogSearchAddr(int board_no) {
 		logger.info("BoardReadDao blogSearchAddr-------------------------");
 		/*List<BoardDto> boardList= (List<BoardDto>) hashMap.get("boardList");
 		System.out.println(boardList.get(0).getBoard_no());*/
 		List<Board_addr_infoDto> board_addr_infoList=null;
-		board_addr_infoList=sqlSession.selectList("dao.BoardReadMapper.blogSearchAddr",hashMap);
+		board_addr_infoList=sqlSession.selectList("dao.BoardReadMapper.blogSearchAddr",board_no);
 		return board_addr_infoList;
 	}
 
@@ -147,7 +147,13 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	@Override
 	public List<HashMap<String, Object>> getReadList1(int boardNo) {
 		logger.info("BoardReadDao getReadList1-------------------------");
-		return sqlSession.selectList("dao.BoardReadMapper.getReadList1",boardNo);
+		int check=0;
+		List<HashMap<String, Object>> list=null;
+		check=sqlSession.update("dao.BoardReadMapper.readCount",boardNo);
+		if(check>0){
+			list=sqlSession.selectList("dao.BoardReadMapper.getReadList1",boardNo);
+		}
+		return list;
 	}
 
 	@Override
@@ -157,15 +163,13 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		return sqlSession.selectOne("dao.BoardReadMapper.getreply",boardNo);
 	}
 
-	@Override
-	public List<ReplyDto> getreplyList(int boardNo) {
-		logger.info("BoardReadDao getreplyList-------------------------");
-		return sqlSession.selectList("dao.BoardReadMapper.getreplyList",boardNo);
-	}
+	
 
 	@Override
 	public List<Attach_fileDto> getblogImg(int boardNo) {
 		logger.info("BoardReadDao getblogImg-------------------------");
 		return sqlSession.selectList("dao.BoardReadMapper.getblogImg",boardNo);
 	}
+
+	
 }

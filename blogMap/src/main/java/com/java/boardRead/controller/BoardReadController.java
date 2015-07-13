@@ -168,5 +168,34 @@ public class BoardReadController {
 		
 		
 	}
+	@RequestMapping(value="/board/blogListSearchSub1",method=RequestMethod.POST)
+	public void blogListSearchSub1(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogListSearchSub1-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogListSearchSub1(mav);
+		
+		
+	}
+	
+	@RequestMapping(value="/board/blogListSearchSub2",method=RequestMethod.POST)
+	public void blogListSearchSub2(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogListSearchSub2-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogListSearchSub2(mav);
+		
+		
+	}
+	
+	
 	
 }

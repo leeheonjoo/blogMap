@@ -109,11 +109,8 @@ $(document).ready(function(){
     	var fileId=$(this).attr('id');
     	var index=fileId.substring(6,7);
     		$("#"+fileId).change(function(){
-    	        alert(this.value); //선택한 이미지 경로 표시
     	        if(this.value==""||this.value==null){
     	        	  $('#UploadedImg'+index).attr('src', e.target.result);
-    	        }else{
-    	        	$('#UploadedImg'+index).attr('src',"");
     	        }
     	        readURL(this,index);
     	    });

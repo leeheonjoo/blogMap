@@ -57,19 +57,19 @@
 		from category 
 		where category_mname like '%'||#{category.category_mname}||'%'
 		and category_sname like '%'||#{category.category_sname}||'%')
-		and board_title like '%'||#{search_value}||'%'
-        and board_content like '%'||#{search_value}||'%'
+		and (board_title like '%'||#{search_value}||'%' or board_content like '%'||#{search_value}||'%')
 		]]>
 	</select>
 	
-	<select id="blogSearchAddr" parameterType="java.util.HashMap" resultType="com.java.board.dto.Board_addr_infoDto">
+	<select id="blogSearchAddr" parameterType="int" resultType="com.java.board.dto.Board_addr_infoDto">
 	
-	 	select distinct addr_sido,addr_sigugun,addr_dongri,addr_bunji 
+		select * from board_addr_info where board_no=#{board_no}
+	 	<!-- select distinct addr_sido,addr_sigugun,addr_dongri,addr_bunji 
 	 	from board_addr_info 
 	 	where board_no in
 	  <foreach collection="boardList" item="item" index="index" open="(" separator="," close=")">
 	  	  #{item.board_no}
-	 </foreach>
+	 </foreach> -->
 	</select>
 	
 	<select id="blogListResult" parameterType="java.util.HashMap" resultType="com.java.board.dto.BoardDto">
@@ -86,6 +86,10 @@
 		select count(reply_no) from reply where board_no=#{boardNo}
 	</select>
 	
+	<update id="readCount" parameterType="int">
+		update board set board_count=board_count+1 where board_no=#{boardNo}
+	</update>
+	
 	<select id="getReadList1" parameterType="int" resultType="java.util.HashMap">
 		select b.*,a.addr_sido,a.addr_sigugun,a.addr_dongri,a.addr_bunji,c.category_mname,c.category_sname
 		from board b,board_addr_info a,category c
@@ -94,11 +98,8 @@
 		and b.board_no=#{boardNo}
 	</select>
 	
-	<select id="getreplyList" parameterType="int" resultType="com.java.reply.dto.ReplyDto">
-		select * from reply where board_no=#{boardNo} 
-	</select>
-	
 	<select id="getblogImg" parameterType="int" resultType="com.java.board.dto.Attach_fileDto">
 		select * from attach_file where board_no=#{boardNo}
 	</select>
+	
 </mapper>

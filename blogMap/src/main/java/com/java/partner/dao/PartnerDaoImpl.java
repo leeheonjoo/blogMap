@@ -1,5 +1,6 @@
 package com.java.partner.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -7,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.java.coupon.dto.CouponDto;
 import com.java.partner.dto.PartnerDto;
 /**
  * @name:partnerRegister
@@ -72,4 +74,16 @@ public PartnerDto getRestaurantPartnerListDate(int partnerNo) {
 	
 	return session.selectOne("dao.PartnerMapper.getRestaurantPartnerListDate", partnerNo);
 }
+@Override
+	public int couponRegister(CouponDto couponDto,int partner_no) {
+		logger.info("CouponMapper.couponRegister-------------------------------------");
+		
+		HashMap<Object, Object> hMap=new HashMap<Object, Object>();
+		hMap.put("couponDto", couponDto);
+		hMap.put("partner_no", partner_no);
+		
+		int check=session.insert("dao.CouponMapper.couponRegister", hMap);
+		
+		return check;
+	}
 }

@@ -74,6 +74,12 @@ public class BoardDaoImpl implements BoardDao {
 	public int blogWrite_attach(HashMap<String, Object> hashMap) {
 		logger.info("BoardDao blogWrite_attach  DAO-------------------------");
 		
+		ArrayList<Attach_fileDto> attachList=(ArrayList<Attach_fileDto>) hashMap.get("attachList");
+		logger.info("attachList:"+attachList.size());
+		for (int i = 0; i < attachList.size(); i++) {
+			logger.info(attachList.get(i).getFile_path()); 
+		}
+		
 		int check=sqlSession.insert("dao.BoardMapper.blogWrite_attach",hashMap);
 		return check;
 	}

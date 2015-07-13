@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.java.coupon.dto.CouponDto;
 import com.java.partner.dao.PartnerDao;
 import com.java.partner.dto.PartnerDto;
 /**
@@ -200,14 +201,83 @@ public class PartnerServiceImpl implements PartnerService {
 		mav.addObject("json",json);
 		
 	}
-	@Override
-	public void tourSerch(ModelAndView mav) {
-		logger.info("PartnerServiceImp tourSerch start--------------------");
-		Map<String,Object>map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		HttpServletResponse response = (HttpServletResponse)map.get("response");
-		
 	
+/**
+ * @name: write
+ * @date:2015. 7. 5.
+ * @author: 변태훈
+ * @description:  제휴업체 등록
+ */
+	@Override
+	public boolean couponWrite(ModelAndView mav) {
+		logger.info("PartnerServiceImp couponWrite----------------");
+		
+		Map<String, Object> map=mav.getModelMap();
+		MultipartHttpServletRequest request=(MultipartHttpServletRequest)map.get("request");
+		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		
+		logger.info("이건 뜨지?");
+		
+		
+		CouponDto couponDto=(CouponDto)map.get("couponDto");
+		logger.info("시발?");
+		
+		String partner=(String) request.getSession().getAttribute("partner_no");
+		int partner_no=Integer.parseInt(partner);
+		
+		logger.info("야이놈아?");
+		logger.info("partner_no : " + partner_no);
+		logger.info("" +couponDto.getPartner_no());
+		logger.info(couponDto.getCoupon_item());
+		logger.info("" +couponDto.getCoupon_discount());
+		logger.info("" +couponDto.getCoupon_eymd());
+	
+		boolean isSuccess = false;			//성공했는지 실패했는지 여부 확인한다
+		String uploadPath = "c:/file/";
+		File dir = new File(uploadPath);
+		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
+			dir.mkdirs();
+		}
+		Iterator<String> iter=request.getFileNames();
+		while(iter.hasNext()){
+			String uploadFileName=iter.next();
+			MultipartFile mFile = request.getFile(uploadFileName);
+			String originalFileName = mFile.getOriginalFilename();
+			String saveFileName = originalFileName;
+			if(saveFileName != null && !saveFileName.equals("")) {
+				if(new File(uploadPath + saveFileName).exists()) {
+					saveFileName = saveFileName + "_" + System.currentTimeMillis();
+				}
+				try {
+					mFile.transferTo(new File(uploadPath + saveFileName));
+					couponDto.setCoupon_pic_path(uploadPath);
+					couponDto.setCoupon_pic_name(saveFileName);
+					long fileImgSize=mFile.getSize();
+					couponDto.setCoupon_pic_size(fileImgSize);
+					
+					logger.info(couponDto.getCoupon_pic_path());
+					logger.info(couponDto.getCoupon_pic_name());
+					long lo=couponDto.getCoupon_pic_size();
+					logger.info(String.valueOf(lo));
+					int check=partnerDao.couponRegister(couponDto, partner_no);
+					logger.info("coupon_check:"+check);
+					
+					isSuccess = true;
+					
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+					isSuccess = false;
+				} catch (IOException e) {
+					e.printStackTrace();
+					isSuccess = false;
+				}
+			} // if end
+		} // while end
+		return isSuccess;
+	}
+	@Override
+	public void couponList(ModelAndView mav) {
+		// TODO Auto-generated method stub
 		
 	}
 }
