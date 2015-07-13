@@ -364,20 +364,24 @@
 	<div class="container" style="max-width:1170px; height:50px; padding:0 0 0 0;">
 		<div class="navbar navbar-inverse" style="height:50px; color:gray; width:inherit;">
 				<div class="col-sm-10 col-xs-9">
-					<div class="col-sm-12 col-xs-12" style="height:50px; text-align:center;">
-						<p style="width:inherit; line-height:46px;">
-							<b style="width:inherit;">주소 : 경기도 분당시 삼평동 752-18 유스페이스 B동</b>
+					<div style="width:100%; height:50px; text-align:center;">
+						<p style="width:100%; line-height:46px;">
+							<b style="width:100%;">경기도 분당시 삼평동 752-18 유스페이스 B동</b>
 						</p>
 					</div>
 				</div>
 				<div class="col-sm-2 col-xs-3" >
-					<div class="col-sm-12 col-xs-12" style="height:50px; text-align:center;">
-						<p style="width:inherit; line-height:46px;">
-							<b style="width:inherit;"><a data-toggle="modal" href="#partnerMain" id ="partner_Registration" style="color:gray;">제휴업체</a></b>
+					<div style="width:100%; height:50px; text-align:center;">
+						<p style="width:100%; line-height:46px;">
+							<b style="width:100%;"><a data-toggle="modal" href="#partnerMain" id ="partner_Registration" style="color:gray;">제휴업체</a></b>
 						</p>
 					</div>
 				</div>
-		</div><img src="${root}/css/blogMap/images/gear_24.png"></img>
+		</div>
+		<div style="text-align:right;">
+			<a data-toggle="modal" href="#ManagerMain"><img src="${root}/css/blogMap/images/gear_24.png"></img></a>
+			
+		</div>
 
 	</div>
 	<br/><br/>
@@ -850,8 +854,6 @@
 	<!-- **********************************
 				관리자페이지 : 이동희
 	     ***********************************-->
-		<a data-toggle="modal" href="#ManagerMain" class="btn btn-primary">Manager</a>
-		<br/><br/>
 		
 		<!-- 관리자페이지 - ManagerMain -->
 		<div class="modal fade" id="ManagerMain" data-backdrop="static">
@@ -863,7 +865,6 @@
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
-							<%--<jsp:include page="manager/main.jsp"/>--%>
 							<jsp:include page="manager/managerMain_test.jsp"/>
 						</div>
 						<br/>
