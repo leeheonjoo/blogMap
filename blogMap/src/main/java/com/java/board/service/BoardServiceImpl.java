@@ -404,7 +404,8 @@ public class BoardServiceImpl implements BoardService {
 		hashMap.put("member_id", member_id);
 		hashMap.put("point_infoDto", point_infoDto);
 		
-		
+		String content=request.getParameter("board_content");
+		logger.info("DB저장값 내용:"+content);
 		//게시판 글작성
 		hashMap=boardDao.blogWrite(hashMap);
 		//결과값
@@ -471,6 +472,9 @@ public class BoardServiceImpl implements BoardService {
 		}
 		hashMap.put("attachList", attachList);
 		check=boardDao.blogWrite_attach(hashMap);
+		
+		
+		
 		/*//카테고리
 		String category_mname=request.getParameter("category_mname");
 		String category_sname=request.getParameter("category_sname");
@@ -485,8 +489,7 @@ public class BoardServiceImpl implements BoardService {
 		String rest=request.getParameter("addr_bunji");
 		
 		
-		//글내용
-		String content=request.getParameter("board_content");
+		
 			
 		//평점
 		String grade=request.getParameter("board_grade");		
