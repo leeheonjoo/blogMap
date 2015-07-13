@@ -99,9 +99,8 @@
 </script>
 </head>
 <body>
-	<div class="container" style="max-width:1190px;">
-		<nav class="navbar navbar-default navbar-inverse" role="navigation">
-			<div class="container-fluid">
+	<div class="container" style="max-width:1170px; padding:0 0 0 0;">
+		<nav class="navbar navbar-inverse" role="navigation" style="width:inherit;">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -118,9 +117,6 @@
 			      <ul class="nav navbar-nav navbar-right">
 			      	<li> <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
 			        <li id="blogmap_login_bar" class="dropdown">
-<!-- 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="mainMessage"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a> -->
-<%-- 			          <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn btn-primary"><img src="${root}/css/blogMap/images/message_16.png"></img></a> --%>
-<%-- 					  <a id="mainMessageLink" data-toggle="modal" href="#mainMessage"><img src="${root}/css/blogMap/images/message_24_2.png"></img></a> --%>
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a>
 						<ul id="login-dp" class="dropdown-menu">
 							<li>
@@ -158,10 +154,9 @@
 							</li>
 						</ul>
 			        </li>
-			       
+			   
 			      </ul>
 				 </div><!-- /.navbar-collapse -->
-			</div><!-- /.container-fluid -->
 		</nav>
 	</div>
 	<br/>
@@ -364,6 +359,23 @@
 			
 		</div>
 	</div>
+	<br/><br/>
+
+	<div class="container" style="max-width:1170px; height:70px; padding:0 0 0 0; vertical-align: middle;">
+		<div class="navbar navbar-inverse" style="text-align:center; color:gray; vertical-align: middle; width:inherit;">
+			<div style="height:50px;">
+				<div class="col-sm-10 col-xs-10" style="height:50px; vertical-align: middle;">
+					<b style="display:inline-block; margin:5 0 0 0">주소 : 경기도 분당시 삼평동 752-18 유스페이스 B동</b>
+				</div>
+				<div class="col-sm-2 col-xs-2" style="height:50px; padding:5 0 0 0 ;">
+					<b>제휴문의</b>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
 
 
 <div class="container-fluid">
@@ -994,13 +1006,6 @@
 			</div>
 		</div>
 		
-	</div>
-	
-	<div class="container" style="max-width:1190px;">
-		<div class="navbar navbar-inverse row" style="text-align:center; height:50px">
-			<div class="col-sm-10 col-xs-10">주소 : 경기도 분당시 삼평동 752-18 유스페이스 B동</div>
-			<div class="col-sm-2 col-xs-2">제휴문의</div>
-		</div>
 	</div>
 </body>
 </html>
