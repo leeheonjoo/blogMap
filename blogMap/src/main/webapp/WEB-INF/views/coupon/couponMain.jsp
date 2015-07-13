@@ -50,28 +50,18 @@
 <!-- 			</ul> -->
 
 			<!-- tour 탭 내용 --> 
-			<div class="tab-content col-md-9">
+			<div class="tab-content col-md-12">
 				<section role="tabpanel" class="tab-pane active" id="coupon_Total">
 					<div class="row" id="coupon_item_list">	
 						<div class="col-md-2 col-sm-3 col-xs-4" id="coupon_item" role="button" style="display:none;">
 							<div id="tour_info" class="thumbnail">	
 								<a data-toggle="modal" href="#modal_info" class="list_coupon_no">
-									<!-- var filename=data.partner_pic_name;
-										var filepath=data.partner_pic_path;
-									$("#partner_imagers").attr("src", )
-									 -->
 									<img class="img-responsive" id="coupon_images"/> 
-										<div class="caption">
+									<div class="caption">
 										<p id="list_coupon_name"></p>
 									</div>								
 								</a>
 							</div>
-						</div>
-					</div>
-					<div class="row">	
-						<hr/>
-						<div class="col-xs-12 text-right">
-							<button type="button" id="partner_tour_button" name="partner_tour_button"  class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">tour 업체등록</button>								
 						</div>
 					</div>
 				</section>

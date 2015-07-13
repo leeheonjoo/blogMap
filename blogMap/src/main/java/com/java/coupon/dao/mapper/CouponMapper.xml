@@ -5,10 +5,10 @@
 <mapper namespace="dao.CouponMapper">
 
 	<select id="couponCount" resultType="int">
-		select count(*) from partner
+		select count(*) from coupon
 	</select>
 	
 	<select id="couponList" resultType="com.java.coupon.dto.CouponDto">
-		select * from partner order by coupon_discount desc
+		select * from coupon order by coupon_discount desc
 	</select>
 </mapper>
