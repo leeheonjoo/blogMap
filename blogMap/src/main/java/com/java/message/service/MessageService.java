@@ -17,6 +17,8 @@ public interface MessageService {
 	public void receiveMessageListOk(ModelAndView mav);
 
 	public void messageRead(ModelAndView mav);
+	
+	public void messageRead_S(ModelAndView mav);
 
 	public void messageDelete(ModelAndView mav);
 /*

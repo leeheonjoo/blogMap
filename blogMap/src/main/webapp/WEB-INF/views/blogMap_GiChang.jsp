@@ -99,8 +99,9 @@
 </script>
 </head>
 <body>
-	<div class="container" style="max-width:1170px; padding:0 0 0 0;">
-		<nav class="navbar navbar-inverse" role="navigation" style="width:inherit;">
+	<div class="container" style="max-width:1190px;">
+		<nav class="navbar navbar-default navbar-inverse" role="navigation">
+			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -117,6 +118,9 @@
 			      <ul class="nav navbar-nav navbar-right">
 			      	<li> <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
 			        <li id="blogmap_login_bar" class="dropdown">
+<!-- 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="mainMessage"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a> -->
+<%-- 			          <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn btn-primary"><img src="${root}/css/blogMap/images/message_16.png"></img></a> --%>
+<%-- 					  <a id="mainMessageLink" data-toggle="modal" href="#mainMessage"><img src="${root}/css/blogMap/images/message_24_2.png"></img></a> --%>
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a>
 						<ul id="login-dp" class="dropdown-menu">
 							<li>
@@ -154,9 +158,10 @@
 							</li>
 						</ul>
 			        </li>
-			   
+			       
 			      </ul>
 				 </div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
 		</nav>
 	</div>
 	<br/>
@@ -228,7 +233,7 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<a data-toggle="modal" href="#blogMapCoupon">
+								<a data-toggle="modal" href="#blogMapWrite">
 									<img src="${root}/css/blogMap/images/coupon_2.png" class="img-responsive"/>
 								</a>
 							</div>
@@ -359,23 +364,6 @@
 			
 		</div>
 	</div>
-	<br/><br/>
-
-	<div class="container" style="max-width:1170px; height:70px; padding:0 0 0 0; vertical-align: middle;">
-		<div class="navbar navbar-inverse" style="height:50px; text-align:center; color:gray; vertical-align: middle; width:inherit;">
-			<div class="row" style="height:50px; vertical-align: middle;">
-				<div class="col-sm-10 col-xs-9" style="vertical-align: middle;">
-					<b style="display:inline; vertical-align: middle;">주소 : 경기도 분당시 삼평동 752-18 유스페이스 B동</b>
-				</div>
-				<div class="col-sm-2 col-xs-3" style="vertical-align: middle;">
-					<b style="display:inline; vertical-align: middle;">제휴문의</b>
-				</div>
-			</div>
-		</div>
-
-	</div>
-
-
 
 
 <div class="container-fluid">
@@ -1005,28 +993,13 @@
 			   </div>
 			</div>
 		</div>
-
-		<!-- 메시지박스 - 메시지 삭제 -->
-		<div class="modal fade" id="blogMapCoupon" data-backdrop="static">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">Coupon</h5>
-					</div><div class="container"></div>
-					<div class="modal-body">
-						<div id="mainResult">
-							<jsp:include page="coupon/couponMain.jsp"/>
-						</div>
-						<br/>
-						<br/>
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
-					</div>
-			   </div>
-			</div>
+		
+	</div>
+	
+	<div class="container" style="max-width:1190px;">
+		<div class="navbar navbar-inverse row" style="text-align:center; height:50px">
+			<div class="col-sm-10 col-xs-10">주소 : 경기도 분당시 삼평동 752-18 유스페이스 B동</div>
+			<div class="col-sm-2 col-xs-2">제휴문의</div>
 		</div>
 	</div>
 </body>
