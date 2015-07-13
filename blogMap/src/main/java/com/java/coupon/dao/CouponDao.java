@@ -8,6 +8,8 @@ public interface CouponDao {
 
 	public int getCouponCount();
 
-	public List<PartnerDto> getCouponList();
+	public List<PartnerDto> getCouponList_L();
+
+	public List<PartnerDto> getCouponList_S();
 
 }
