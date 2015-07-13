@@ -21,6 +21,8 @@ public interface MessageDao {
 	public List<MessageDto> getReceiveMessageList(int startRow, int endRow, String member_id);
 
 	public MessageDto messageRead(int message_no);
+	
+	public MessageDto messageRead_S(int message_no);
 
 	public int messageDelete(int message_no, String member_id);
 

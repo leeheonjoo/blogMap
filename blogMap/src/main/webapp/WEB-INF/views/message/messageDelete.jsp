@@ -56,7 +56,9 @@
 								/* alert(sdate); */
 								/* alert(date.getFullYear() + "/" + date.getMonth()+1 + "/" + date.getDate() + "/" + date.getHours()); */
 					
-								$("#sendMsgResult").append("<tr style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+								$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+								$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].member_id + "</td><td>" + data[i].message_content + "</td></tr>");
+								
 								$("#" + data[i].message_no).click(function() {
 									msgDelimportData(data[i].message_no);
 								});
@@ -70,7 +72,7 @@
 				function msgDelimportData(no) {
 					$.ajax({
 						type : 'get',
-						url : '${root}/message/messageRead.do?message_no=' + no,
+						url : '${root}/message/messageRead_S.do?message_no=' + no,
 						contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 						success : function(responseData) {
 							//	alert(responseData);
