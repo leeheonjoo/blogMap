@@ -390,8 +390,7 @@ thead {
 
 			<!-- 수신함 클릭시 -->
 			<div class="tab-content col-md-10">
-				<section role="tabpanel" class="tab-pane active"
-					id="tab_receiveMessageList">
+				<section role="tabpanel" class="tab-pane active" id="tab_receiveMessageList">
 				<div class="row" id="receiveMessage_item_list">
 					<div class="thumbnail">
 						<div class="caption">
@@ -440,30 +439,30 @@ thead {
 									<div class="widget stacked widget-table action-table">
 										<div class="widget-content">
 											<table class="table table-striped table-bordered">
-												<thead>
-													<tr class="hidden-xs" id="send_message">
-														<th class="col-md-1 col-sm-1 col-xs-1"
-															style="text-align: center;">No</th>
-														<th class="col-md-5 col-sm-5 col-xs-5"
-															style="text-align: center;">Message_Content</th>
-														<th class="col-md-3 col-sm-3 col-xs-3"
-															style="text-align: center;">Writer</th>
-														<th class="col-md-2 col-sm-2 col-xs-2"
-															style="text-align: center;">WriteDate</th>
-														<th class="col-md-1 col-sm-1 col-xs-1"
-															style="text-align: center;">Reception</th>
-													</tr>
-													
-													<tr class="visible-xs" id="send_message">
-															<th class="col-xs-5"
-																style="text-align: center;">Writer</th>
-															<th class="col-xs-7"
-																style="text-align: center;">Message_Content</th>
-													</tr>
-												</thead>
-												<tbody id="sendMsgResult">		<!-- 자료를 담기 위한 그릇 -->
-												</tbody>
-											</table>
+											<thead>
+												<tr class="hidden-xs" id="send_message">
+													<th class="col-md-1 col-sm-1 col-xs-1"
+														style="text-align: center;">No</th>
+													<th class="col-md-5 col-sm-5 col-xs-5"
+														style="text-align: center;">Message_Content</th>
+													<th class="col-md-3 col-sm-3 col-xs-3"
+														style="text-align: center;">Writer</th>
+													<th class="col-md-2 col-sm-2 col-xs-2"
+														style="text-align: center;">WriteDate</th>
+													<th class="col-md-1 col-sm-1 col-xs-1"
+														style="text-align: center;">Reception</th>
+												</tr>
+												
+												<tr class="visible-xs" id="send_message">
+													<th class="col-xs-5"
+														style="text-align: center;">Writer</th>
+													<th class="col-xs-7"
+														style="text-align: center;">Message_Content</th>
+												</tr>
+											</thead>
+											<tbody id="sendMsgResult">		<!-- 자료를 담기 위한 그릇 -->
+											</tbody>
+										</table>
 										</div>		<!-- /widget-content -->
 									</div>			<!-- /widget -->
 								</div>

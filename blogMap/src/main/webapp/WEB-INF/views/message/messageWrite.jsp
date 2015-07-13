@@ -176,6 +176,7 @@
 		<!-- <input type="hidden" name="member_id"/> -->
 			
 		<div class="col-md-12 col-sm-12 col-xs-12">		<!-- Div 를 3화면에서 12 칸 모두 사용 -->
+			<br/>
 			
 			<div class="form-group form-group-lg">		<!-- 크기 조절을 하기 위한 기본 틀 -->
 				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputLarge">받는사람</label></div> 
