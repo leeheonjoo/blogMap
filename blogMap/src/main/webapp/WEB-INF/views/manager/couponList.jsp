@@ -35,9 +35,9 @@
 					$("#couponList:last-child #couponBymd").append(data[i].coupon_bymd);
 					$("#couponList:last-child #couponEymd").append(data[i].coupon_eymd);
 					//$("#couponList:last-child #coupon").attr({"name":data[i].coupon_no, "value":"승인"});	
-					if(data[i].coupon_yn == "n"){
+					if(data[i].coupon_yn == "N"){
 						$("#couponList:last-child #coupon").attr({"name":data[i].coupon_no, "value":"승인"});				// 미승인된 쿠폰에 승인 버튼 추가
-					}else if(data[i].coupon_yn == "y"){
+					}else if(data[i].coupon_yn == "Y"){
 						$("#couponList:last-child #coupon").attr({"name":data[i].coupon_no, "value":"취소"});				// 승인된 쿠폰에 쿠폰 취소버튼 추가
 					}					
 					

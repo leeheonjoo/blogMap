@@ -15,6 +15,14 @@
 		insert into MANAGER_LOG values(manager_log_seq.nextval,'lucyman@nate.com',SYSDATE,'03',#{id})
 	</delete>
 	
+	<select id="getSearchMemberList" parameterType="String" resultType="com.java.member.dto.MemberDto">
+		select * from member where member_name like '%'||#{member_name}||'%' order by member_name asc						
+	</select> 
+	
+	<select id="getSearchMemberType" parameterType="String" resultType="com.java.member.dto.MemberDto">
+		select * from member where member_jointype=#{member_jointype} order by member_name asc
+	</select>
+	
 	<select id="getManagerList" resultType="com.java.manager.dto.ManagerDto">
 		select * from manager
 	</select>
@@ -28,7 +36,8 @@
 	</select>
 
 	<select id="getSearchPartnerList" parameterType="String" resultType="com.java.partner.dto.PartnerDto">
-		select * from partner where partner_name=#{partner_name} order by partner_name desc
+		select * from partner where partner_name like '%'||#{partner_name}||'%' order by partner_name asc
+						
 	</select>
 	
 	<select id="getSearchPartnerYN" parameterType="String" resultType="com.java.partner.dto.PartnerDto">

@@ -14,6 +14,10 @@ public interface ManagerDao {
 		
 		public int memberDel(String id);
 		
+		public List<MemberDto> getSearchMemberData(String member_name);
+		
+		public List<MemberDto> getSearchMemberType(String member_jointype);
+		
 		public void delLog(String id);
 		
 		public List<PartnerDto> getPartnerData();

@@ -27,10 +27,18 @@
 			<div class="modal-body" id="partner_data-body">
 				<div class="row form-horizontal">
 					<div class="col-md-3">
-						<img class="img-responsive img" id="partner_img" width="30%" height="30%" src="" alt=""/>
+						<img class="img-responsive img" id="partner_img"/>
 						
 					</div>
 					<div class="col-md-9">
+					
+						<div class="form-group">
+							<label class="col-xs-3 control-label">아이디</label>
+							<div class="col-xs-9">
+								<p class="form-control-static address" id="member_id"></p>
+							</div>
+						</div>
+						
 						<div class="form-group">
 							<label class="col-xs-3 control-label">업체명</label>
 							<div class="col-xs-9">
@@ -51,6 +59,23 @@
 								<p class="form-control-static address" id="partner_address"></p>
 							</div>
 						</div>
+						
+						
+						
+						<div class="form-group">
+							<label class="col-xs-3 control-label">등록일</label>
+							<div class="col-xs-9">
+								<p class="form-control-static address" id="partner_rgdate"></p>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-xs-3 control-label">승인일</label>
+							<div class="col-xs-9">
+								<p class="form-control-static address" id="partner_ydate"></p>
+							</div>
+						</div>
+						
 					</div>
 				</div>						
 			</div>
