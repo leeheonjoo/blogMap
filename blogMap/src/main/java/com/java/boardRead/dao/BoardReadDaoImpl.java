@@ -128,12 +128,12 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	}
 
 	@Override
-	public List<Board_addr_infoDto> blogSearchAddr(HashMap<String, Object> hashMap) {
+	public List<Board_addr_infoDto> blogSearchAddr(int board_no) {
 		logger.info("BoardReadDao blogSearchAddr-------------------------");
 		/*List<BoardDto> boardList= (List<BoardDto>) hashMap.get("boardList");
 		System.out.println(boardList.get(0).getBoard_no());*/
 		List<Board_addr_infoDto> board_addr_infoList=null;
-		board_addr_infoList=sqlSession.selectList("dao.BoardReadMapper.blogSearchAddr",hashMap);
+		board_addr_infoList=sqlSession.selectList("dao.BoardReadMapper.blogSearchAddr",board_no);
 		return board_addr_infoList;
 	}
 

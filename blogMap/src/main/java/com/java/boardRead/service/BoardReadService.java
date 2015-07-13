@@ -22,5 +22,9 @@ public interface BoardReadService {
 
 	public void blogReadDetailImg(ModelAndView mav);
 
+	public void blogListSearchSub1(ModelAndView mav);
+
+	public void blogListSearchSub2(ModelAndView mav);
+
 	
 }
