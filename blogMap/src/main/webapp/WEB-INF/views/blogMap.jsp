@@ -361,21 +361,26 @@
 	</div>
 	<br/><br/>
 
-	<div class="container" style="max-width:1170px; height:70px; padding:0 0 0 0; vertical-align: middle;">
-		<div class="navbar navbar-inverse" style="height:50px; text-align:center; color:gray; vertical-align: middle; width:inherit;">
-			<div class="row" style="height:50px; vertical-align: middle;">
-				<div class="col-sm-10 col-xs-9" style="vertical-align: middle;">
-					<b style="display:inline; vertical-align: middle;">주소 : 경기도 분당시 삼평동 752-18 유스페이스 B동</b>
+	<div class="container" style="max-width:1170px; height:50px; padding:0 0 0 0;">
+		<div class="navbar navbar-inverse" style="height:50px; color:gray; width:inherit;">
+				<div class="col-sm-10 col-xs-9">
+					<div class="col-sm-12 col-xs-12" style="height:50px; text-align:center;">
+						<p style="width:inherit; line-height:46px;">
+							<b style="width:inherit;">주소 : 경기도 분당시 삼평동 752-18 유스페이스 B동</b>
+						</p>
+					</div>
 				</div>
-				<div class="col-sm-2 col-xs-3" style="vertical-align: middle;">
-					<b style="display:inline; vertical-align: middle;">제휴문의</b>
+				<div class="col-sm-2 col-xs-3" >
+					<div class="col-sm-12 col-xs-12" style="height:50px; text-align:center;">
+						<p style="width:inherit; line-height:46px;">
+							<b style="width:inherit;"><a data-toggle="modal" href="#partnerMain" id ="partner_Registration" style="color:gray;">제휴업체</a></b>
+						</p>
+					</div>
 				</div>
-			</div>
 		</div>
 
 	</div>
-
-
+	<br/><br/>
 
 
 <div class="container-fluid">
@@ -497,9 +502,6 @@
 	<!-- **********************************
 	                        제휴업체 : 변태훈
 	     ***********************************-->
-		<a data-toggle="modal" href="#partnerMain" class="btn btn-primary" id ="partner_Registration">제휴업체등록</a>
-		<br/><br/>
-		
 		<!-- 제휴업체 - 제휴업체등록 main -->
 		<div class="modal fade" id="partnerMain" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
