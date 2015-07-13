@@ -23,14 +23,37 @@ public class CouponController {
 	private CouponService couponService;
 	
 	@RequestMapping(value="/coupon/couponMain.do", method=RequestMethod.POST)
-	public void list(HttpServletRequest request, HttpServletResponse response){
+	public void coupon_List_L(HttpServletRequest request, HttpServletResponse response){
 		logger.info("Partner tour_partner_List 시작!!!--------------------------------------------");
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 	
-		couponService.couponList(mav);
+		couponService.couponList_L(mav);
+		
+		Map<String, Object> map=mav.getModel();
+		
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+
+	}
+	
+	@RequestMapping(value="/coupon/couponMain.do", method=RequestMethod.GET)
+	public void coupon_List_S(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Partner tour_partner_List 시작!!!--------------------------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+	
+		couponService.couponList_S(mav);
 		
 		Map<String, Object> map=mav.getModel();
 		
