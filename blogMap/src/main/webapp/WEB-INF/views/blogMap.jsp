@@ -582,21 +582,22 @@
 							<div class="form-group">
 								<label class="col-xs-4 control-label">업체명</label>
 								<div class="col-xs-8">
-									<input type="text" class="form-control" name="partner_name" id="name" value="${partner_name}" required="required" placeholder="업체명"/>
+									<input type="text" class="form-control" name="partner_name" id="name" value="" required="required" placeholder="업체명"/>
 								</div>
 							</div>
 	
 							<div class="form-group">
 								<label class="col-xs-4 control-label">전화번호</label>
 								<div class="col-xs-8">
-									<input type="text" class="form-control" name="partner_phone" id="phone" value="${partner_phone}" required="required" placeholder="전화번호"/>
+									<input type="text" class="form-control" name="partner_phone" id="phone" value="" required="required" placeholder="전화번호"/>
 								</div>
 							</div>
 	
 							<div class="form-group">
 								<label class="col-xs-4 control-label">주소</label>
 								<div class="col-xs-8">
-									<input type="text" class="form-control" name="Partner_addr" id="address" value="${partner_address}" required="required" placeholder="주소"/>
+									<input type="text" class="form-control" name="partner_addr" id="address" value="" required="required" placeholder="주소를 입력하세요"/>
+									<a data-toggle="modal" href="#blogWriteSub" class="btn btn-primary" onclick="mapSearch();">위치검색</a>
 								</div>											
 							</div>
 	
