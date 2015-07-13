@@ -228,7 +228,7 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<a data-toggle="modal" href="#blogMapWrite">
+								<a data-toggle="modal" href="#blogMapCoupon">
 									<img src="${root}/css/blogMap/images/coupon_2.png" class="img-responsive"/>
 								</a>
 							</div>
@@ -1005,7 +1005,29 @@
 			   </div>
 			</div>
 		</div>
-		
+
+		<!-- 메시지박스 - 메시지 삭제 -->
+		<div class="modal fade" id="blogMapCoupon" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h5 class="modal-title">Coupon</h5>
+					</div><div class="container"></div>
+					<div class="modal-body">
+						<div id="mainResult">
+							<jsp:include page="coupon/couponMain.jsp"/>
+						</div>
+						<br/>
+						<br/>
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">Close</a>
+						<a href="#" class="btn btn-primary">Save changes</a>
+					</div>
+			   </div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
