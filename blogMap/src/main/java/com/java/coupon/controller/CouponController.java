@@ -22,7 +22,7 @@ public class CouponController {
 	@Autowired
 	private CouponService couponService;
 	
-	@RequestMapping(value="/partner/tour_partner_List.do", method=RequestMethod.POST)
+	@RequestMapping(value="/coupon/couponMain.do", method=RequestMethod.POST)
 	public void list(HttpServletRequest request, HttpServletResponse response){
 		logger.info("Partner tour_partner_List 시작!!!--------------------------------------------");
 		
