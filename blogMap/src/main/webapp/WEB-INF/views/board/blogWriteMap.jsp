@@ -259,6 +259,70 @@ v\:* {
 														},
 														contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 														success : function(data) {
+															var data=JSON.parse(data);
+															
+															//데이터 추출
+															var pullAddr=data[0].ADDR_SIDO+" "+data[0].ADDR_SIGUGUN+" "
+															+data[0].ADDR_DONGRI+" "+data[0].ADDR_BUNJI;
+															var content=data[0].BOARD_CONTENT;
+															var writer=data[0].MEMBER_ID;
+															var title=data[0].BOARD_TITLE;
+															var mcategory=data[0].CATEGORY_MNAME;               
+															var scategory=data[0].CATEGORY_SNAME;
+															var rgdate=new Date(data[0].BOARD_RGDATE);
+															var fullDate=rgdate.getFullYear()+"/"+(rgdate.getMonth()+1)+"/"+rgdate.getDate();
+															var grade=data[0].BOARD_GRADE;
+															var boardno=data[0].BOARD_NO;
+															//데이터 입력
+															$("#blogRead_rgdate > label:eq(1)").text(fullDate); 
+															$("#blogRead_addr > label:eq(1)").text(pullAddr); 
+															$("#blogRead_content > div").html(content);
+															$("#blogRead_writer > label:eq(1)").text(writer);
+															$("#blogRead_title > label:eq(1)").text(title);
+															$("#blogRead_category > label:eq(1)").text(mcategory);
+															$("#blogRead_category > label:eq(2)").text(scategory);
+															
+															//평점
+															if(grade=="0"){
+																$("#blogRead_grade > img").attr("src","${root}/css/images/star0.jpg");
+															}else if(grade=="1"){
+																$("#blogRead_grade > img").attr("src","${root}/css/images/star1.jpg");
+															}else if(grade=="2"){
+																$("#blogRead_grade > img").attr("src","${root}/css/images/star2.jpg");
+															}else if(grade=="3"){
+																$("#blogRead_grade > img").attr("src","${root}/css/images/star3.jpg");
+															}else if(grade=="4"){
+																$("#blogRead_grade > img").attr("src","${root}/css/images/star4.jpg");
+															}else{
+																$("#blogRead_grade > img").attr("src","${root}/css/images/star5.jpg");
+															}
+															//첨부파일(이미지)
+															$.ajax({
+																type : 'post',
+																url : '${root}/board/blogReadDetailImg.do',
+																data : {
+																	board_no : boardno
+																},
+																contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+																success : function(data) {
+																	var data=JSON.parse(data);
+																	$.each(data,function(i){
+																		var fileNo=data[i].file_no;
+																		var filePath=data[i].file_path;
+																		alert(filePath);
+																		var fileComment=data[i].file_comment;
+																		
+																		$("#imgDisplay").append($("#imgHidden").clone());
+																	    $("#imgDisplay > #imgHidden").attr("id","imgHidden"+i);
+																	    $("#imgHidden"+i).find("#imgsrc").attr("src",filePath);
+																		
+																	});
+																},
+																error:function(data){
+																	
+																}
+															});
+															
 															
 														},
 														error:function(data){

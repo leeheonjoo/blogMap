@@ -47,31 +47,54 @@
 <script type="text/javasciprt" src="${root}/css/bootstrap-confirmation.js"></script>
 <!-- Modal, Metro style javascript를 로드 -->
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
-<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=da3d853c119e911822c1141b3a2153af"></script>
+<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=60e9ac7ab8734daca3d2053c1e713dbd"></script>
+<!-- 네이버 스마트에디터 -->
+<script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>	
 <!-- modal, session check -->
 <script type="text/javascript">
-$(document).ready(function() {		
-//		<session check -> button change>
-	if(sessionStorage.getItem('email')!=null){
-		//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
-		//$("#blogmap_login_bar").fadeOut();
-		$("#blogmap_before_login span").remove();
-		$("#blogmap_before_login").attr("data-toggle","");
-		$("#login_text").text("Logout");
-		
-		if($("#login_text").text()=="Logout"){
-			$("#blogmap_before_login").click(function(){
-				if(sessionStorage.getItem('jointype')=="0002"){
-					FB.logout();
+	$(document).ready(function() {
+		 $('#myCarousel').carousel({
+		        interval: 10000
+		    })
+		    $('.fdi-Carousel .item').each(function () {
+		        var next = $(this).next();
+		        if (!next.length) {
+		            next = $(this).siblings(':first');
+		        } t.children(':first-child').clone().appendTo($(this));
+
+		        if (next.next().length > 0) {
+		            next.next().children(':first-child').clone().appendTo($(this));
+		        }
+		        else {
+		            $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+		        }
+		    });
+
+//			<session check -> button change>
+			if(sessionStorage.getItem('email')!=null){
+				//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
+				//$("#blogmap_login_bar").fadeOut();
+				$("#blogmap_before_login span").remove();
+				$("#blogmap_before_login").attr("data-toggle","");
+				$("#login_text").text("Logout");
+				
+				if($("#login_text").text()=="Logout"){
+					$("#blogmap_before_login").click(function(){
+						if(sessionStorage.getItem('jointype')=="0002"){
+							FB.logout();
+						}
+						sessionStorage.clear();
+						//$("#blogmap_after_login").css("display","none");
+						//$("#blogmap_login_bar").fadeIn();
+						location.href="${root}/";
+					});
 				}
-				sessionStorage.clear();
-				//$("#blogmap_after_login").css("display","none");
-				//$("#blogmap_login_bar").fadeIn();
-				location.href="${root}/";
-			});
-		}
-	}
-});
+			}
+	});
+
+	
+
+
 
 </script>
 </head>
@@ -969,6 +992,14 @@ $(document).ready(function() {
 					</div>
 			   </div>
 			</div>
+		</div>
+		
+	</div>
+	
+	<div class="container" style="max-width:1190px;">
+		<div class="navbar navbar-inverse row" style="text-align:center; height:50px">
+			<div class="col-sm-10 col-xs-10">주소 : 경기도 분당시 삼평동 752-18 유스페이스 B동</div>
+			<div class="col-sm-2 col-xs-2">제휴문의</div>
 		</div>
 	</div>
 </body>

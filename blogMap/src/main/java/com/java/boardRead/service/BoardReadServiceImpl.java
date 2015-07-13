@@ -311,8 +311,8 @@ public class BoardReadServiceImpl implements BoardReadService {
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		HttpServletResponse response=(HttpServletResponse) map.get("response");
 		
-		int board_no=Integer.parseInt(request.getParameter("board_no"));
-		System.out.println("board_no:"+board_no);
+		int boardNo=Integer.parseInt(request.getParameter("board_no"));
+		System.out.println("board_no:"+boardNo);
 		
 		
 		List<BoardDto> boardDtoList=null;
@@ -323,29 +323,15 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		HashMap<String,Object> hMap=new HashMap<String,Object>();
 		hMap.put("boardDtoList", boardDtoList);
-		hMap.put("replyDtoList", replyDtoList);
 		hMap.put("board_addr_infoDtoList", board_addr_infoDtoList);
-		hMap.put("attach_fileDtoList", attach_fileDtoList);
-		
+		hMap.put("category", category);
 		
 		List<HashMap<String,Object>> boardReadList=new ArrayList<HashMap<String,Object>>();
 		boardReadList.add(hMap);
-		int reply_check=boardReadDao.getreply(board_no);
-		System.out.println(reply_check);
-		if(reply_check>0){
-			hMap.put("boardDtoList", boardDtoList);
-			hMap.put("replyDtoList", replyDtoList);
-			hMap.put("board_addr_infoDtoList", board_addr_infoDtoList);
-			hMap.put("attach_fileDtoList", attach_fileDtoList);
-			boardReadList=boardReadDao.getReadList1(board_no);
-		}else{
-			hMap.put("boardDtoList", boardDtoList);
-			hMap.put("board_addr_infoDtoList", board_addr_infoDtoList);
-			hMap.put("attach_fileDtoList", attach_fileDtoList);
-			boardReadList=boardReadDao.getReadList2(board_no);
-		}
-		
-		
+	
+		hMap.put("boardDtoList", boardDtoList);
+		hMap.put("board_addr_infoDtoList", board_addr_infoDtoList);
+		boardReadList=boardReadDao.getReadList1(boardNo);
 		
 		logger.info("boardReadList"+boardReadList);
 		/*hMap.put("category", category);*/
@@ -358,9 +344,36 @@ public class BoardReadServiceImpl implements BoardReadService {
 		try {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(boardReadList_json);
+			System.out.println(boardReadList_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void blogReadDetailImg(ModelAndView mav) {
+		logger.info("BoardReadService blogReadDetail------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int boardNo=Integer.parseInt(request.getParameter("board_no"));
+		List<Attach_fileDto> imgList=null;
+		imgList=boardReadDao.getblogImg(boardNo);
+		logger.info("imgList:"+imgList);
+		Gson gson=new Gson();
+		String imgList_json=gson.toJson(imgList);
+		
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(imgList_json);
+			System.out.println(imgList_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 }

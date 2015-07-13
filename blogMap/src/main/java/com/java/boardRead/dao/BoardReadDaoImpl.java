@@ -8,10 +8,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.java.board.dto.Attach_fileDto;
 import com.java.board.dto.BoardDto;
 import com.java.board.dto.Board_addr_infoDto;
 import com.java.boardRead.dto.BoardReadDto;
 import com.java.boardRead.dto.CategoryDto;
+import com.java.reply.dto.ReplyDto;
 
 /**
  * @name : BoardReadDaoImpl
@@ -143,21 +145,27 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> getReadList1(int board_no) {
+	public List<HashMap<String, Object>> getReadList1(int boardNo) {
 		logger.info("BoardReadDao getReadList1-------------------------");
-		return sqlSession.selectList("dao.BoardReadMapper.getReadList1",board_no);
+		return sqlSession.selectList("dao.BoardReadMapper.getReadList1",boardNo);
 	}
 
 	@Override
-	public int getreply(int board_no) {
+	public int getreply(int boardNo) {
 		logger.info("BoardReadDao getreply-------------------------");
 		
-		return sqlSession.selectOne("dao.BoardReadMapper.getreply");
+		return sqlSession.selectOne("dao.BoardReadMapper.getreply",boardNo);
 	}
 
 	@Override
-	public List<HashMap<String, Object>> getReadList2(int board_no) {
-		logger.info("BoardReadDao getReadList2-------------------------");
-		return sqlSession.selectList("dao.BoardReadMapper.getReadList2",board_no);
+	public List<ReplyDto> getreplyList(int boardNo) {
+		logger.info("BoardReadDao getreplyList-------------------------");
+		return sqlSession.selectList("dao.BoardReadMapper.getreplyList",boardNo);
+	}
+
+	@Override
+	public List<Attach_fileDto> getblogImg(int boardNo) {
+		logger.info("BoardReadDao getblogImg-------------------------");
+		return sqlSession.selectList("dao.BoardReadMapper.getblogImg",boardNo);
 	}
 }

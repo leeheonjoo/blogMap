@@ -89,6 +89,21 @@ public class MessageDaoImpl implements MessageDao {
 		
 		return message;
 	}
+	
+	/**
+	 * @name:messageRead
+	 * @date:2015. 6. 26.
+	 * @author:정기창
+	 * @description: List 에 저장된 메시지 정보 중에서 한가지를 검색하여 상세 조회
+	 */
+	@Override
+	public MessageDto messageRead_S(int message_no) {
+		MessageDto message=null;
+	
+		message=sqlSession.selectOne("dao.MessageMapper.read",message_no);
+		
+		return message;
+	}
 
 	/**
 	 * @name:messageDelete

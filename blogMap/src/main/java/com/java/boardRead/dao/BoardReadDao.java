@@ -3,9 +3,11 @@ package com.java.boardRead.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import com.java.board.dto.Attach_fileDto;
 import com.java.board.dto.BoardDto;
 import com.java.board.dto.Board_addr_infoDto;
 import com.java.boardRead.dto.BoardReadDto;
+import com.java.reply.dto.ReplyDto;
 
 public interface BoardReadDao {
 	public BoardReadDto getData();
@@ -26,10 +28,12 @@ public interface BoardReadDao {
 
 	public List<BoardDto> blogListResult(HashMap<String, Object> hashMap);
 
-	public List<HashMap<String, Object>> getReadList1(int board_no);
+	public List<HashMap<String, Object>> getReadList1(int boardNo);
 
-	public int getreply(int board_no);
+	public int getreply(int boardNo);
 
-	public List<HashMap<String, Object>> getReadList2(int board_no);
+	public List<ReplyDto> getreplyList(int boardNo);
+
+	public List<Attach_fileDto> getblogImg(int boardNo);
 	
 }
