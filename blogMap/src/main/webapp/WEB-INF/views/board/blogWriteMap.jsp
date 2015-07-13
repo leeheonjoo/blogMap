@@ -281,6 +281,7 @@ v\:* {
 															$("#blogRead_title > label:eq(1)").text(title);
 															$("#blogRead_category > label:eq(1)").text(mcategory);
 															$("#blogRead_category > label:eq(2)").text(scategory);
+															$("#blogRead_boardno > label:eq(0)").text(boardno);
 															
 															//평점
 															if(grade=="0"){
@@ -309,7 +310,6 @@ v\:* {
 																	$.each(data,function(i){
 																		var fileNo=data[i].file_no;
 																		var filePath=data[i].file_path;
-																		alert(filePath);
 																		var fileComment=data[i].file_comment;
 																		
 																		$("#imgDisplay").append($("#imgHidden").clone());
@@ -323,6 +323,43 @@ v\:* {
 																}
 															});
 															
+															alert(boardno);
+															$.ajax({
+																type : 'post',
+																url : '${root}/board/blogReadReply.do',
+																data : {
+																	board_no : boardno
+																},
+																contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+																success : function(data) {
+																	if(data=="[]"){
+																		alert("null값");
+																	}else{
+																	var data=JSON.parse(data);
+																	$("#listAllDiv").empty();
+																	$.each(data,function(i){
+																			var replyNo=data[i].reply_no;
+																			var boardNo=data[i].board_no;
+																			var memberId=data[i].member_id;
+																			var replyContent=data[i].reply_content;
+																			var replyDate=new Date(data[i].reply_date);
+																			var replyfullDate=replyDate.getFullYear()+"/"+(replyDate.getMonth()+1)+"/"+replyDate.getDate();
+																			
+																			$("#listAllDiv").append($("#reply_content_insert").clone());
+																			$("#listAllDiv > #reply_content_insert").css("display","block");
+																			$("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
+																			$("#reply_content_insert"+i+" > span:eq(0)").text(replyNo);
+																			$("#reply_content_insert"+i+" > span:eq(1)").text(memberId);
+																			$("#reply_content_insert"+i+" > span:eq(2)").text(replyContent);
+																			$("#reply_content_insert"+i+" > span:eq(3)").text(replyfullDate);
+																			
+																		});
+																	}
+																},
+																error:function(data){
+																	
+																}
+															});
 															
 														},
 														error:function(data){
