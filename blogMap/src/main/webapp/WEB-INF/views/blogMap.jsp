@@ -362,13 +362,13 @@
 	<br/><br/>
 
 	<div class="container" style="max-width:1170px; height:70px; padding:0 0 0 0; vertical-align: middle;">
-		<div class="navbar navbar-inverse" style="text-align:center; color:gray; vertical-align: middle; width:inherit;">
-			<div style="height:50px;">
-				<div class="col-sm-10 col-xs-10" style="height:50px; vertical-align: middle;">
-					<b style="display:inline-block; margin:5 0 0 0">주소 : 경기도 분당시 삼평동 752-18 유스페이스 B동</b>
+		<div class="navbar navbar-inverse" style="height:50px; text-align:center; color:gray; vertical-align: middle; width:inherit;">
+			<div class="row" style="height:50px; vertical-align: middle;">
+				<div class="col-sm-10 col-xs-9" style="vertical-align: middle;">
+					<b style="display:inline; vertical-align: middle;">주소 : 경기도 분당시 삼평동 752-18 유스페이스 B동</b>
 				</div>
-				<div class="col-sm-2 col-xs-2" style="height:50px; padding:5 0 0 0 ;">
-					<b>제휴문의</b>
+				<div class="col-sm-2 col-xs-3" style="vertical-align: middle;">
+					<b style="display:inline; vertical-align: middle;">제휴문의</b>
 				</div>
 			</div>
 		</div>
