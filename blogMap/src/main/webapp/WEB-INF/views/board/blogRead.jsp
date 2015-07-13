@@ -33,19 +33,116 @@
     background-color: rgb(217, 83, 79);
     border-color: rgb(212, 63, 58);
 }
+.replyDiv{	
+	width:800px;height:30px; 
+	border:solid 0px red;
+	margin:4px 0px 0px 4px;
+}
+
+.cssBunho {
+	border:solid 0px blue;
+	display:block;
+	float:left;
+}
+
+
+.cssReply {
+	border:solid 0px blue;
+	display:block;
+	float:left;
+}
+
+.cssUpDel {
+	border:solid 0px blue;
+	display:block;
+	float:left;
+}
 </style>
+
+<script type="text/javascript" src="${root }/css/replyWrite.js"></script>
+<script type="text/javascript" src="${root }/css/replyDelete.js"></script>
+<script type="text/javascript" src="${root }/css/replyUpdate.js"></script>
 <script type="text/javascript">
 $(function() {
+	var email=sessionStorage.getItem('email');
+	
 	$("#ggd").click(function() {
 		alert("하하");
 		$('[data-toggle="confirmation"]').confirmation(title);
 	})
 	
+	
+	$("span[class='glyphicon glyphicon-ok']").click(function() {
+		var replyConent = $("#replyInsert").val();
+		$("#replyInsert").val("");
+		if(replyConent!=""){
+		alert(replyConent);
+		alert(email);
+		var boardno=$("#blogRead_boardno > label:eq(0)").text();
+		$.ajax({
+			type : 'post',
+			url : '${root}/board/blogWriteReply.do',
+			data : {
+				board_no : boardno,
+				reply_content: replyConent,
+				reply_member_id: email
+				
+			},
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			success : function(data) {
+				if(data!="0"){
+					$("#listAllDiv").empty();
+					$.ajax({
+						type : 'post',
+						url : '${root}/board/blogReadReply.do',
+						data : {
+							board_no : boardno
+						},
+						contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+						success : function(data) {
+							var data=JSON.parse(data);
+							$.each(data,function(i){
+								var replyNo=data[i].reply_no;
+								var boardNo=data[i].board_no;
+								var memberId=data[i].member_id;
+								var replyContent=data[i].reply_content;
+								var replyDate=new Date(data[i].reply_date);
+								var replyfullDate=replyDate.getFullYear()+"/"+(replyDate.getMonth()+1)+"/"+replyDate.getDate();
+								
+								$("#listAllDiv").append($("#reply_content_insert").clone());
+								$("#listAllDiv > #reply_content_insert").css("display","block");
+								$("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
+								$("#reply_content_insert"+i+" > span:eq(0)").text(replyNo);
+								$("#reply_content_insert"+i+" > span:eq(1)").text(memberId);
+								$("#reply_content_insert"+i+" > span:eq(2)").text(replyContent);
+								$("#reply_content_insert"+i+" > span:eq(3)").text(replyfullDate);
+								
+							});
+						},error: function(data) {
+							
+						}
+							
+					})
+				}
+			},
+			error:function(data){
+				
+			}
+		})
+		}else{
+			alert("NULL값으로 입력해주세요.");			
+		}
+})
+	
 });
+
 
 </script>
 </head>
 <body>
+	<div id="blogRead_boardno" style="display: none;">
+		<label></label>
+	</div>		
 	<div id="blogRead_rgdate">
 		<label>작성일:</label>
 		<label></label>
@@ -102,29 +199,44 @@ $(function() {
 		<label>평점:</label>
 		<img src="" width="150" height="30"/><br /> 
 	</div>
+	<br/>
 	<div>
 	<input type="button" class="btn btn-primary" value="추천" />
 	<input type="button" class="btn btn-primary" value="비추천" />
 	<input type="button" class="btn btn-primary" value="즐겨찾기" />
 	<input type="button" class="btn btn-primary" value="쿠폰발급" />
+	</div>
 	<br/>
 	<div id="blogRead_reply">
 		<label>답글:</label>
 	   <div class="row form-group">
         <div class="input-group">
-            <input type="text" class="form-control">
+            <input id="replyInsert" type="text" class="form-control">
             <span class="input-group-addon success"><span class="glyphicon glyphicon-ok"></span></span>
         </div>
         </div>
-        <div id="blogRead_reply_content">
+        <div id="blogRead_reply_content" style="border: 1px; border-color: black;">
+		<div id="reply_content_insert" class="replyDiv" style="display:none;">   <!-- div를 통해 한번에 삭제하기위함,, 자식들도 삭제되므로! -->
+			<span style="display: none;"></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			<span>
+				<a href="javascript:upSelectToServer()">수정</a>
+				<a href="javascript:deleteToServer()">삭제</a>
+			</span>
+		</div>
+	<div id="listAllDiv">
+			
+	</div>
         </div>
     </div>
-	</div>
+	
 	
 	 <!-- 하단 버튼 -->
 	<div align="right">
-		<input type="button" class="btn btn-primary" id="savebutton" value="수정" /> 
-		<a id="ggd" class="btn" data-toggle="confirmation" data-placement="bottom" data-original-title>삭제</a> 
+		<input type="button" class="btn btn-primary" id="Upbutton" value="수정" /> 
+		<input type="button" class="btn btn-primary" id="Debutton" value="삭제" /> 
 		<input type="button" class="btn btn-primary" value="목록" />
 	</div>
 	

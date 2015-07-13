@@ -4,4 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.ReplyMapper">
 
+	<select id="getreplyList" parameterType="int" resultType="com.java.reply.dto.ReplyDto">
+		select * from reply where board_no=#{boardNo} 
+	</select>
+	
+	<insert id="blogWriteReply" parameterType="java.util.HashMap">
+		insert into 
+		reply(reply_no,board_no,member_id,reply_content,reply_date) 
+		values(REPLY_REPLY_NO_SEQ.nextval,#{boardNo},#{member_id},#{reply_content},sysdate)
+	</insert>
 </mapper>
