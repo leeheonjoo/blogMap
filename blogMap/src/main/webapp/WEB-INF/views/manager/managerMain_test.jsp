@@ -102,24 +102,37 @@
 										
 						
 						<div role="tabpanel" class="tab-pane" id="tab_partner">
-							<jsp:include page="partnerList.jsp"/>
+							<div class="row" id="memberInfo_list">
+								<div class="thumbnail">
+									<div class="caption">	
+										<jsp:include page="partnerList.jsp"/>
+									</div>
+								</div>
+							</div>
 						</div>
 						
 						<div role="tabpanel" class="tab-pane" id="tab_coupon">
-							<jsp:include page="couponList.jsp"/>
+							<div class="row" id="memberInfo_list">
+								<div class="thumbnail">
+									<div class="caption">	
+										<jsp:include page="couponList.jsp"/>
+									</div>
+								</div>
+							</div>
 						</div>
 						
 						<div role="tabpanel" class="tab-pane" id="tab_manager">
-							<jsp:include page="managerList.jsp"/>
+							<div class="row" id="memberInfo_list">
+								<div class="thumbnail">
+									<div class="caption">	
+										<jsp:include page="managerList.jsp"/>
+									</div>
+								</div>
+							</div>						
 						</div>
-						
 					</div>
-				</div>
-
+	
 			</div>
-
-			
-
 		</article>
 		
 </body>
