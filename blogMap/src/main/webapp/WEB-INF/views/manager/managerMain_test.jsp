@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		var email=sessionStorage.getItem('email');
-		alert(email);
+// 		alert(email);
 		// memberList
  		$("input#getMemberList").click(function(){	// 회원정보버튼 클릭시 실행
 			getMemberList();	// 회원리스트 불러오는 함수 호출
