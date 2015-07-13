@@ -11,7 +11,7 @@ public class CouponDto {
 	private Date coupon_eymd;
 	private String coupon_pic_name;
 	private String coupon_pic_path;
-	private String coupon_pic_size;
+	private long coupon_pic_size;
 	private String coupon_yn;
 	
 	public int getCoupon_no() {
@@ -78,11 +78,11 @@ public class CouponDto {
 		this.coupon_pic_path = coupon_pic_path;
 	}
 	
-	public String getCoupon_pic_size() {
+	public long getCoupon_pic_size() {
 		return coupon_pic_size;
 	}
 	
-	public void setCoupon_pic_size(String coupon_pic_size) {
+	public void setCoupon_pic_size(long coupon_pic_size) {
 		this.coupon_pic_size = coupon_pic_size;
 	}
 
