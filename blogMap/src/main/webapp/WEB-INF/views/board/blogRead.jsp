@@ -176,25 +176,6 @@ $(function() {
         </div>
     </div>
 	</div>
-	    <div class="container">
-        <div class="row">
-            <div class="span12">
-                <div class="well">
-                    <div id="myCarousel" class="carousel fdi-Carousel slide">
-                     <!-- Carousel items -->
-                        <div class="carousel fdi-Carousel slide" id="eventCarousel" data-interval="0">
-                            <div id="imgDisplay" class="carousel-inner onebyone-carosel">
-                               
-                            </div>
-                            <a class="left carousel-control" href="#eventCarousel" data-slide="prev"></a>
-                            <a class="right carousel-control" href="#eventCarousel" data-slide="next"></a>
-                        </div>
-                        <!--/carousel-inner-->
-                    </div><!--/myCarousel-->
-                </div><!--/well-->
-            </div>
-        </div>
-	</div>	
 	<div id="blogRead_grade">
 		<label>평점:</label>
 		<img src="" width="150" height="30"/><br /> 

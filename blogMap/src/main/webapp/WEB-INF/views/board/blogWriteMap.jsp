@@ -345,13 +345,13 @@ v\:* {
 																			var replyDate=new Date(data[i].reply_date);
 																			var replyfullDate=replyDate.getFullYear()+"/"+(replyDate.getMonth()+1)+"/"+replyDate.getDate();
 																			
-																			$("#listAllDiv").append($("#reply_content_insert").clone());
+																			/* $("#listAllDiv").append($("#reply_content_insert").clone());
 																			$("#listAllDiv > #reply_content_insert").css("display","block");
 																			$("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
 																			$("#reply_content_insert"+i+" > span:eq(0)").text(replyNo);
 																			$("#reply_content_insert"+i+" > span:eq(1)").text(memberId);
 																			$("#reply_content_insert"+i+" > span:eq(2)").text(replyContent);
-																			$("#reply_content_insert"+i+" > span:eq(3)").text(replyfullDate);
+																			$("#reply_content_insert"+i+" > span:eq(3)").text(replyfullDate); */
 																			
 																		});
 																	}
