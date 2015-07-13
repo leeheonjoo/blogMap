@@ -118,9 +118,9 @@ $(function() {
 				if(! check_empty("#address", '주소') ) return false;
 				
 				// 글자수 체크
-				if( $("#name").val().length < 4 || $("#name").val().length > 50 )
+				if( $("#name").val().length < 1 || $("#name").val().length > 50 )
 				{
-					alert("업체 이름은 최소 5글자 이상 50글자 미만이어야 합니다.");
+					alert("업체 이름은 최소 1글자 이상 50글자 미만이어야 합니다.");
 					$("#name").focus();
 					return false;
 				} 
@@ -136,7 +136,7 @@ $(function() {
 				}
 				
 				// 사용자 확인창
-				if(! confirm("신청하시겠습니까?")) return false;		
+				if(! confirm("신청하시겠습니까?")) return null;		
 				
 				var data = new FormData();
 				$.each($('#attachFile')[0].files,function(i,file){
