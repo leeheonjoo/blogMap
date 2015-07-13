@@ -9,8 +9,16 @@
 		select count(*) from coupon
 	</select>
 	
-	<select id="couponList" resultType="com.java.coupon.dto.CouponDto">
-		select * from coupon order by coupon_discount desc
+	<select id="couponList_L" resultType="com.java.coupon.dto.CouponDto">
+		<![CDATA[
+			select * from coupon where coupon_discount='50' order by coupon_discount desc
+		]]>
+	</select>
+	
+	<select id="couponList_S" resultType="com.java.coupon.dto.CouponDto">
+		<![CDATA[
+			select * from coupon where coupon_discount < '50' order by coupon_discount desc
+		]]>
 	</select>
 	
 	

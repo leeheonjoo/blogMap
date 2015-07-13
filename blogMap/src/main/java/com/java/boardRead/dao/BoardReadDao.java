@@ -32,8 +32,7 @@ public interface BoardReadDao {
 
 	public int getreply(int boardNo);
 
-	public List<ReplyDto> getreplyList(int boardNo);
-
 	public List<Attach_fileDto> getblogImg(int boardNo);
+
 	
 }

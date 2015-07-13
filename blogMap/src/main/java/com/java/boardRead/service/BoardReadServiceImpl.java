@@ -331,6 +331,8 @@ public class BoardReadServiceImpl implements BoardReadService {
 	
 		hMap.put("boardDtoList", boardDtoList);
 		hMap.put("board_addr_infoDtoList", board_addr_infoDtoList);
+		
+		
 		boardReadList=boardReadDao.getReadList1(boardNo);
 		
 		logger.info("boardReadList"+boardReadList);
@@ -376,4 +378,8 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		
 	}
+
+
+
+	
 }

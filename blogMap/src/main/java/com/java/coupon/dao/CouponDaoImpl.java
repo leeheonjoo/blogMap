@@ -22,11 +22,14 @@ public int getCouponCount() {
 }
 
 @Override
-public List<PartnerDto> getCouponList() {
-	logger.info("PartnerMapper.getTourPartnerList----------------------------------");
-	List<PartnerDto> list=session.selectList("dao.CouponMapper.couponList");
-	logger.info(String.valueOf("getCouponList:"+list.size()));
-	
+public List<PartnerDto> getCouponList_L() {
+	List<PartnerDto> list=session.selectList("dao.CouponMapper.couponList_L");
+	return list;
+}
+
+@Override
+public List<PartnerDto> getCouponList_S() {
+	List<PartnerDto> list=session.selectList("dao.CouponMapper.couponList_S");
 	return list;
 }
 
