@@ -377,7 +377,7 @@
 						</p>
 					</div>
 				</div>
-		</div>
+		</div><img src="${root}/css/blogMap/images/gear_24.png"></img>
 
 	</div>
 	<br/><br/>
@@ -388,9 +388,6 @@
 	<!-- **********************************
 	                        블로그 리스트 : 이헌주
 	     ***********************************-->
-		<a data-toggle="modal" href="#blogListMain" class="btn btn-primary">blogMapList</a>
-		<br/><br/>
-		
 		<!-- 블로그 리스트 - 블로그 리스트 검색 -->
 		<div class="modal fade" id="blogListMain" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -451,9 +448,6 @@
 	<!-- **********************************
 	                             블로그 작성 : 황준
 	     ***********************************-->
-		<a data-toggle="modal" href="#blogMapWrite" class="btn btn-primary">blogMapWrite</a>
-		<br/><br/>
-		
 		<!-- 블로그 작성 - blogMapWrite -->	
 		<div class="modal fade" id="blogMapWrite" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -634,9 +628,6 @@
 	<!-- **********************************
 	                           회원관리 : 김정훈
 	     ***********************************-->
-		<a data-toggle="modal" href="#blogmapLogin" class="btn btn-primary">blogMapLogin</a>
-		<br/><br/>
-		
 		<!-- 회원관리 - 로그인 -->
 		<div class="modal fade" id="blogmapLogin" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
