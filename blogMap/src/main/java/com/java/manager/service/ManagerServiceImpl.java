@@ -4,6 +4,7 @@ package com.java.manager.service;
 //import java.io.PrintWriter;
 //import java.util.ArrayList;
 //import java.util.HashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 //import net.sf.json.JSONObject;
+
 
 
 
@@ -340,7 +342,14 @@ public class ManagerServiceImpl implements ManagerService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
-		List<CouponDto> couponList=managerDao.getCouponData();
+		CouponDto couponDto=null;
+		PartnerDto partnerDto=null;
+		
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("couponDto", couponDto);
+		hMap.put("partnerDto", partnerDto);		
+		
+		List<HashMap<String, Object>> couponList=managerDao.getCouponData();
 		logger.info("couponListSize : " + couponList.size());
 		
 		Gson gson=new Gson();					//Gson의 객체를 생성
@@ -416,11 +425,19 @@ public class ManagerServiceImpl implements ManagerService {
 		int coupon_no=Integer.parseInt(request.getParameter("coupon_no"));
 		logger.info("coupon_no : " + coupon_no);
 		
-		CouponDto couponDto=managerDao.couponDetail(coupon_no);
-		logger.info("couponDto:" + couponDto);
+		CouponDto couponDto=null;
+		PartnerDto partnerDto=null;
+		
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("couponDto", couponDto);
+		hMap.put("partnerDto", partnerDto);
+		
+		
+		List<HashMap<String, Object>> couponInfo = managerDao.couponDetail(coupon_no);
+		logger.info("couponInfo:" + couponInfo);
 		
 		Gson gson=new Gson();					//Gson의 객체를 생성
-		String json=gson.toJson(couponDto);			//Log를 json으로 변환
+		String json=gson.toJson(couponInfo);			//Log를 json으로 변환
 		logger.info("json: " + json);
 		
 		mav.addObject("json", json);			
