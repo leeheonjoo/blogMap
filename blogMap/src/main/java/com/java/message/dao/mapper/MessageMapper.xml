@@ -21,7 +21,7 @@
 		,#{member_id}
 		,#{message_content}
 		,#{message_receiver}
-		,sysdate
+		,current_date
 		,'N')
 		]]>
 	</insert>
@@ -44,18 +44,14 @@
 			select * from 
 				(select rownum rnum,a.* from
 					(select * from message order by member_id asc,message_no desc)a)
-				where rnum>=#{startRow} and rnum<=#{endRow} and message_receiver=#{member_id}
+						where rnum>=#{startRow} and rnum<=#{endRow} and message_receiver=#{member_id}
 		]]>
 	</select>
 	
 	<update id="read_yn" parameterType="com.java.message.dto.MessageDto">
-	 	update message set message_yn='Y', message_rDate=sysdate
+	 	update message set message_yn='Y', message_rDate=current_date
 	 	where message_no=#{message_no} and message_yn='N'
 	</update>
-	
-	<!-- <update id="rDate" parameterType="com.java.message.dto.MessageDto">
-		update message set message_rDate=sysdate where message_no=#{message_no}
-	</update> -->
 	
 	<select id="read" resultMap="messageDto" parameterType="int">
 		select * from message where message_no=#{message_no}

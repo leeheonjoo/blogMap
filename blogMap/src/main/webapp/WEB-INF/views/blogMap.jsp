@@ -1093,7 +1093,7 @@
 
 		<!-- 메시지박스 - 메시지 삭제 -->
 		<div class="modal fade" id="blogMapCoupon" data-backdrop="static">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
