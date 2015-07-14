@@ -14,16 +14,19 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>					<!-- bootstrap stylesheet 로드 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>				<!-- bootstrap 확장 테마 stylesheet 로드 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/css/bootstrap-select.css"/>	<!-- bootstrap-select stylesheet 로드 -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"/>
 <link rel="stylesheet" type="text/css" href="${root}/css/layer.css"/>
 <link rel="stylesheet" type="text/css" href="${root}/css/blogMap/blogMap.css"/>											<!-- Metro style dynamic Tiles stylesheet 로드 -->
 <style>
 	.modal-lg{
 		width: auto;
 		margin: 1% 1% 0px 1%;
-/*  		max-height: 600px; */
-/*  		overflow-y:scroll; */
+ 		height: 600px;
+/*    		max-height: 600px; */
+    		overflow-y:scroll;
 	}
+
+
 </style>
 
 <!--[if lt IE 9]>
@@ -37,36 +40,60 @@
 <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-dropdown.js"></script>		<!-- bootstrap-dropdown javascript를 로드 -->
 <!-- Modal, Metro style javascript를 로드 -->
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
+<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=60e9ac7ab8734daca3d2053c1e713dbd"></script>
+<!-- 네이버 스마트에디터 -->
+<script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>	
 <!-- modal, session check -->
 <script type="text/javascript">
-$(document).ready(function() {		
-//		<session check -> button change>
-	if(sessionStorage.getItem('email')!=null){
-		//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
-		//$("#blogmap_login_bar").fadeOut();
-		$("#blogmap_before_login span").remove();
-		$("#blogmap_before_login").attr("data-toggle","");
-		$("#login_text").text("Logout");
-		
-		if($("#login_text").text()=="Logout"){
-			$("#blogmap_before_login").click(function(){
-				if(sessionStorage.getItem('jointype')=="0002"){
-					FB.logout();
+	$(document).ready(function() {
+		 $('#myCarousel').carousel({
+		        interval: 10000
+		    })
+		    $('.fdi-Carousel .item').each(function () {
+		        var next = $(this).next();
+		        if (!next.length) {
+		            next = $(this).siblings(':first');
+		        } t.children(':first-child').clone().appendTo($(this));
+
+		        if (next.next().length > 0) {
+		            next.next().children(':first-child').clone().appendTo($(this));
+		        }
+		        else {
+		            $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+		        }
+		    });
+
+//			<session check -> button change>
+			if(sessionStorage.getItem('email')!=null){
+				//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
+				//$("#blogmap_login_bar").fadeOut();
+				$("#blogmap_before_login span").remove();
+				$("#blogmap_before_login").attr("data-toggle","");
+				$("#login_text").text("Logout");
+				
+				if($("#login_text").text()=="Logout"){
+					$("#blogmap_before_login").click(function(){
+						if(sessionStorage.getItem('jointype')=="0002"){
+							FB.logout();
+						}
+						sessionStorage.clear();
+						//$("#blogmap_after_login").css("display","none");
+						//$("#blogmap_login_bar").fadeIn();
+						location.href="${root}/";
+					});
 				}
-				sessionStorage.clear();
-				//$("#blogmap_after_login").css("display","none");
-				//$("#blogmap_login_bar").fadeIn();
-				location.href="${root}/";
-			});
-		}
-	}
-});
+			}
+	});
+
+	
+
+
+
 </script>
 </head>
 <body>
-	<div class="container-fluid" style="max-width:1190px;">
-		<nav class="navbar navbar-default navbar-inverse" role="navigation">
-			<div class="container-fluid">
+	<div class="container" style="max-width:1170px; padding:0 0 0 0;">
+		<nav class="navbar navbar-inverse" role="navigation" style="width:inherit;">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -81,6 +108,7 @@ $(document).ready(function() {
 				<!-- Collect the nav links, forms, and other content for toggling -->
 			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav navbar-right">
+			      	<li> <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
 			        <li id="blogmap_login_bar" class="dropdown">
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a>
 						<ul id="login-dp" class="dropdown-menu">
@@ -108,7 +136,12 @@ $(document).ready(function() {
 											  	
 
 												<div class="social-buttons" style="text-align:center;">
-													<a href="#" class="btn btn-fb"  onclick="FB.login();"><i class="fa fa-facebook"></i> Facebook</a>
+													<!-- <a href="#" class="btn btn-fb" onclick="FB.login();"><i class="fa fa-facebook"></i> Facebook</a> -->
+													<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size="large">Facebook 
+													</fb:login-button>
+													<!-- <br/><br/>
+													<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false" style="width:200px;">Facebook</div> -->
+													
 												</div>
 										</div>
 										
@@ -119,10 +152,9 @@ $(document).ready(function() {
 							</li>
 						</ul>
 			        </li>
-			       
+			   
 			      </ul>
 				 </div><!-- /.navbar-collapse -->
-			</div><!-- /.container-fluid -->
 		</nav>
 	</div>
 	<br/>
@@ -138,10 +170,11 @@ $(document).ready(function() {
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-				    		<a data-toggle="modal" href="#blogListMain">
-				    		<div id="tile1" class="tile" style="background-image: url('${root}/css/blogMap/images/search.png'); background-size: cover;">
-				    		
-					   		</div></a>
+							<div class="item active">
+								<a data-toggle="modal" href="#blogListMain">
+									<img src="${root}/css/blogMap/images/search.png" class="img-responsive"/>
+								</a>
+							</div>
 						</div>
 					</div>
 		        
@@ -176,10 +209,9 @@ $(document).ready(function() {
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-   								<img src="http://handsontek.net/demoimages/tiles/weather2.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-						   		<img src="http://handsontek.net/demoimages/tiles/weather.png" class="img-responsive"/>
+								<a data-toggle="modal" href="#blogMapWrite">
+									<img src="${root}/css/blogMap/images/write_go.png" class="img-responsive"/>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -194,10 +226,9 @@ $(document).ready(function() {
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<img src="http://handsontek.net/demoimages/tiles/facebook3.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/facebook2.png" class="img-responsive"/>
+								<a data-toggle="modal" href="#blogMapCoupon">
+									<img src="${root}/css/blogMap/images/coupon_2.png" class="img-responsive"/>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -326,6 +357,32 @@ $(document).ready(function() {
 			
 		</div>
 	</div>
+	<br/><br/>
+
+	<div class="container" style="max-width:1170px; height:50px; padding:0 0 0 0;">
+		<div class="navbar navbar-inverse" style="height:50px; color:gray; width:inherit;">
+				<div class="col-sm-10 col-xs-9">
+					<div style="width:100%; height:50px; text-align:center;">
+						<p style="width:100%; line-height:46px;">
+							<b style="width:100%;">경기도 분당시 삼평동 752-18 유스페이스 B동</b>
+						</p>
+					</div>
+				</div>
+				<div class="col-sm-2 col-xs-3" >
+					<div style="width:100%; height:50px; text-align:center;">
+						<p style="width:100%; line-height:46px;">
+							<b style="width:100%;"><a data-toggle="modal" href="#partnerMain" id ="partner_Registration" style="color:gray;">제휴업체</a></b>
+						</p>
+					</div>
+				</div>
+		</div>
+		<div style="text-align:right;">
+			<a data-toggle="modal" href="#ManagerMain"><img src="${root}/css/blogMap/images/gear_24.png"></img></a>
+			
+		</div>
+
+	</div>
+	<br/><br/>
 
 
 <div class="container-fluid">
@@ -333,9 +390,6 @@ $(document).ready(function() {
 	<!-- **********************************
 	                        블로그 리스트 : 이헌주
 	     ***********************************-->
-		<a data-toggle="modal" href="#blogListMain" class="btn btn-primary">blogMapList</a>
-		<br/><br/>
-		
 		<!-- 블로그 리스트 - 블로그 리스트 검색 -->
 		<div class="modal fade" id="blogListMain" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -355,13 +409,13 @@ $(document).ready(function() {
 		    </div>
 		</div>
 		
-		<!-- 블로그 리스트 - 블로그 리스트 테스트 -->
+		<!-- 블로그 리스트 : 황준-->
 		<div class="modal fade" id="blogListSub" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">Modal Sub</h5>
+						<h5 class="modal-title">조회 결과</h5>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -374,12 +428,28 @@ $(document).ready(function() {
 			</div>
 		</div>
 		
+		<!-- 블로그 리스트 자세히 보기 : 황준 -->
+		<div class="modal fade" id="blogListDetail" data-backdrop="static">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h5 class="modal-title">블로그 읽기</h5>
+					</div><div class="container"></div>
+					<div class="modal-body">
+						<div id="mainResult">
+ 							<jsp:include page="board/blogRead.jsp"/>
+						</div>
+						<br/>
+						<br/>
+					</div>
+			   </div>
+			</div>
+		</div>
+		
 	<!-- **********************************
 	                             블로그 작성 : 황준
 	     ***********************************-->
-		<a data-toggle="modal" href="#blogMapWrite" class="btn btn-primary">blogMapWrite</a>
-		<br/><br/>
-		
 		<!-- 블로그 작성 - blogMapWrite -->	
 		<div class="modal fade" id="blogMapWrite" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -428,9 +498,6 @@ $(document).ready(function() {
 	<!-- **********************************
 	                        제휴업체 : 변태훈
 	     ***********************************-->
-		<a data-toggle="modal" href="#partnerMain" class="btn btn-primary" id ="partner_Registration">제휴업체등록</a>
-		<br/><br/>
-		
 		<!-- 제휴업체 - 제휴업체등록 main -->
 		<div class="modal fade" id="partnerMain" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -472,7 +539,7 @@ $(document).ready(function() {
 					<div class="modal-body" id="data-body">
 						<div class="row form-horizontal">
 							<div class="col-md-3">
-								<img class="img-responsive img" src="" alt="">
+								<img class="img-responsive img" name="tour_image" src="http://placehold.it/300x300"/>
 							</div>
 							<div class="col-md-9">
 								<div class="form-group">
@@ -521,25 +588,26 @@ $(document).ready(function() {
 	
 						<div class="modal-body" id="data-body">							
 							<input type="hidden"  id="category_code" name="category_code"/>
-							<input type="hidden"  id="member_id" name="member_id" value="${member_id }"/>
+							<input type="hidden"  id="member_id" name="member_id"/>
 							<div class="form-group">
 								<label class="col-xs-4 control-label">업체명</label>
 								<div class="col-xs-8">
-									<input type="text" class="form-control" name="partner_name" id="name" value="${partner_name}" required="required" placeholder="업체명"/>
+									<input type="text" class="form-control" name="partner_name" id="name" value="" required="required" placeholder="업체명"/>
 								</div>
 							</div>
 	
 							<div class="form-group">
 								<label class="col-xs-4 control-label">전화번호</label>
 								<div class="col-xs-8">
-									<input type="text" class="form-control" name="partner_phone" id="phone" value="${partner_phone}" required="required" placeholder="전화번호"/>
+									<input type="text" class="form-control" name="partner_phone" id="phone" value="" required="required" placeholder="전화번호"/>
 								</div>
 							</div>
 	
 							<div class="form-group">
 								<label class="col-xs-4 control-label">주소</label>
 								<div class="col-xs-8">
-									<input type="text" class="form-control" name="Partner_addr" id="address" value="${partner_address}" required="required" placeholder="주소"/>
+									<input type="text" class="form-control" name="partner_addr" id="address" value="" required="required" placeholder="주소를 입력하세요"/>
+									<a data-toggle="modal" href="#blogWriteSub" class="btn btn-primary" onclick="mapSearch();">위치검색</a>
 								</div>											
 							</div>
 	
@@ -558,13 +626,70 @@ $(document).ready(function() {
 				</form>
 			</div>
 		</section>
+	
+	<!-- 제휴업체 - 쿠폰정보등록 팝업 레이어 -->	
+	<!-- 쿠폰 등록 작성 - 쿠폰정보등록 -->
+      <section class="modal fade" id="couponMain">
+      <div class="modal-dialog modal-lg">
+         <form id="couponWrite_form" class="col-xs-12 form-horizontal" method="post" action="${root}/partner/couponWrite.do" autocomplete="off" enctype="multipart/form-data">
+            <div class="modal-content">
+               <input type="hidden" name="partner_no"/>
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+                  <h4 class="modal-title">쿠폰 등록</h4>
+               </div>
+
+               <div class="modal-body" id="data-body">                     
+
+                  <div class="form-group">
+                     <label class="col-xs-4 control-label">할인상품</label>
+                     <div class="col-xs-8">
+                        <input type="text" class="form-control" name="coupon_item" id="coupon_item" required="required" placeholder="할인상품명을 입력하세요"/>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label class="col-xs-4 control-label">할인율</label>
+                     <div class="col-xs-8">
+                        <input type="text" class="form-control" name="coupon_discount" id="coupon_discount" required="required" placeholder="할인율 적어주세요"/>
+                     </div>
+                  </div>
+
+                  <div class="form-group">
+                     <label class="col-xs-4 control-label">쿠폰적용시작일</label>
+                     <div class="col-xs-8">
+                        <input type="text" class="form-control" name="coupon_bymd" id="coupon_bymd" required="required" placeholder="쿠폰 시작일"/>
+                     </div>                                 
+                  </div>
+                  
+                  <div class="form-group">
+                     <label class="col-xs-4 control-label">쿠폰적용종료일</label>
+                     <div class="col-xs-8">
+                        <input type="text" class="form-control" name="coupon_eymd" id="coupon_eymd" required="required" placeholder="쿠폰 종료일"/>
+                     </div>                                 
+                  </div>
+
+                  <div class="form-group">
+                     <label class="col-xs-4 control-label">쿠폰사진</label>
+                     <div class="col-xs-8">
+                        <input type="file" class="form-control" name="img_src" id="img_src"/>
+                     </div>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary" onclick="return form_coupon();">신청하기</button>
+               </div>
+            </div>
+         </form>
+      </div>
+   </section>
+   
 		
 	<!-- **********************************
 	                           회원관리 : 김정훈
 	     ***********************************-->
-		<a data-toggle="modal" href="#blogmapLogin" class="btn btn-primary">blogMapLogin</a>
-		<br/><br/>
-		
 		<!-- 회원관리 - 로그인 -->
 		<div class="modal fade" id="blogmapLogin" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -787,8 +912,6 @@ $(document).ready(function() {
 	<!-- **********************************
 				관리자페이지 : 이동희
 	     ***********************************-->
-		<a data-toggle="modal" href="#ManagerMain" class="btn btn-primary">Manager</a>
-		<br/><br/>
 		
 		<!-- 관리자페이지 - ManagerMain -->
 		<div class="modal fade" id="ManagerMain" data-backdrop="static">
@@ -800,7 +923,6 @@ $(document).ready(function() {
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
-							<%--<jsp:include page="manager/main.jsp"/>--%>
 							<jsp:include page="manager/managerMain_test.jsp"/>
 						</div>
 						<br/>
@@ -838,7 +960,7 @@ $(document).ready(function() {
 			</div>
 		</div>
 		
-	<!-- 관리자페이지 - partnerInfo -->
+		<!-- 관리자페이지 - partnerInfo -->
 		<div class="modal fade" id="partnerInfo" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
@@ -861,15 +983,34 @@ $(document).ready(function() {
 			</div>
 		</div>
 
-
+		<!-- 관리자페이지 - 제휴업체 상세조회 (관리자페이지 - 제휴업체 페이지 제휴업체 상세 페이지)-->
+		<div class="modal fade" id="partnerDetail" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h5 class="modal-title">제휴업체</h5>
+					</div><div class="container"></div>
+					<div class="modal-body">
+						<div id="mainResult">
+							<jsp:include page="manager/partnerDetail.jsp"/>
+						</div>
+						<br/>
+						<br/>
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">Close</a>
+						<!-- <a href="#" class="btn btn-primary">Save changes</a> -->
+					</div>
+			   </div>
+			</div>
+		</div>
 
 
 
 	<!-- **********************************
 				메시지박스 : 정기창
 	     ***********************************-->
-		<a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn btn-primary">정기창 메시지</a>
-
 		<!-- 메시지박스 - 메시지 메인 -->
 		<div class="modal fade" id="mainMessage" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -937,13 +1078,29 @@ $(document).ready(function() {
 			   </div>
 			</div>
 		</div>
-	</div>
-	
-	
-	
-	
 
-	
-<!-- 	$("div[id='blogListSub'].modal").modal(); -->
+		<!-- 메시지박스 - 메시지 삭제 -->
+		<div class="modal fade" id="blogMapCoupon" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h5 class="modal-title">Coupon</h5>
+					</div><div class="container"></div>
+					<div class="modal-body">
+						<div id="mainResult">
+							<jsp:include page="coupon/couponMain.jsp"/>
+						</div>
+						<br/>
+						<br/>
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">Close</a>
+						<a href="#" class="btn btn-primary">Save changes</a>
+					</div>
+			   </div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

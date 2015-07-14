@@ -136,7 +136,12 @@
 											  	
 
 												<div class="social-buttons" style="text-align:center;">
-													<a href="#" class="btn btn-fb"  onclick="FB.login();"><i class="fa fa-facebook"></i> Facebook</a>
+													<!-- <a href="#" class="btn btn-fb" onclick="FB.login();"><i class="fa fa-facebook"></i> Facebook</a> -->
+													<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size="large">Facebook 
+													</fb:login-button>
+													<!-- <br/><br/>
+													<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false" style="width:200px;">Facebook</div> -->
+													
 												</div>
 										</div>
 										
