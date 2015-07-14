@@ -562,6 +562,7 @@
 					</div>
 					
 					<div class="modal-footer">
+						<a data-toggle="modal" href="#couponMain" class="btn btn-primary" id ="coupon_Registration">쿠폰등록</a>
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 					</div>
 				</div>
