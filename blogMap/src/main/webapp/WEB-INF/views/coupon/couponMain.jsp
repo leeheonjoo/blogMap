@@ -23,7 +23,7 @@
 			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(responseData) {
 				var data = JSON.parse(responseData);
-				/* alert(data); */
+				alert(data); 
 			
 				/* 데이타를 채우기 위해 복사 */
 				$.each(data, function(i){
@@ -68,7 +68,7 @@
 				/* 데이타를 채우기 위해 복사 */
 				$.each(data, function(i){
 					var pic=data[i].coupon_pic_name;
-					alert(pic);
+					alert("L"+pic);
 					
 					$("#coupon_item_list").append($("#coupon_item").clone().css("display", "block"));
 					$("#coupon_item:last-child #list_coupon_L_item").append(data[i].coupon_item);
