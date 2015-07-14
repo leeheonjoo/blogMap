@@ -201,6 +201,7 @@
             	 					alert("로그인 성공");
             	 					
             	 					$("#blogmap_before_login span").remove();
+            	 					$("#blogmap_main_myPage").css("display","inline-block");
             	 					$("#blogmap_before_login").attr("data-toggle","");
             	 					$("#login_text").text("Logout");
             	 					
