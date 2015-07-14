@@ -10,13 +10,21 @@
 	
 	<select id="couponList_L" resultType="com.java.coupon.dto.CouponDto">
 		<![CDATA[
-			select * from coupon where coupon_discount='50' order by coupon_discount desc
+			select * from coupon c,
+			   (select partner_no, member_id, partner_name from partner where member_id=#{member_id}) p
+			        where c.partner_no = p.partner_no
+			            and coupon_discount = '50' and coupon_yn='Y'      
+			                order by coupon_discount desc
 		]]>
 	</select>
 	
 	<select id="couponList_S" resultType="com.java.coupon.dto.CouponDto">
-		<![CDATA[
-			select * from coupon where coupon_discount < '50' order by coupon_discount desc
+		<![CDATA[	
+			select * from coupon c,
+			   (select partner_no, member_id, partner_name from partner where member_id=#{member_id}) p
+			        where c.partner_no = p.partner_no
+			            and coupon_discount < '50' and coupon_yn='Y'      
+			                order by coupon_discount desc
 		]]>
 	</select>
 	

@@ -22,14 +22,14 @@ public int getCouponCount() {
 }
 
 @Override
-public List<PartnerDto> getCouponList_L() {
-	List<PartnerDto> list=session.selectList("dao.CouponMapper.couponList_L");
+public List<PartnerDto> getCouponList_L(String member_id) {
+	List<PartnerDto> list=session.selectList("dao.CouponMapper.couponList_L", member_id);
 	return list;
 }
 
 @Override
-public List<PartnerDto> getCouponList_S() {
-	List<PartnerDto> list=session.selectList("dao.CouponMapper.couponList_S");
+public List<PartnerDto> getCouponList_S(String member_id) {
+	List<PartnerDto> list=session.selectList("dao.CouponMapper.couponList_S", member_id);
 	return list;
 }
 

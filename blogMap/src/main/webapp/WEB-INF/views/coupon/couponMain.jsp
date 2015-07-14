@@ -11,10 +11,15 @@
 
  $(document).ready(function(){	
 	$("#tile4").click(function(){
+		$("#coupon_item_list").empty();
+		$("#coupon_item_list1").empty();		
 		
 		$.ajax({
 			type:'get',
 			url:'${root}/coupon/couponMain.do',
+			data : {
+				member_id : email
+			},
 			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(responseData) {
 				var data = JSON.parse(responseData);
@@ -22,11 +27,14 @@
 			
 				/* 데이타를 채우기 위해 복사 */
 				$.each(data, function(i){
+					var pic=data[i].coupon_pic_name;
+					var partner_name=data[i].partner_name;
+					alert(pic + "/" + partner_name);
 					
 					$("#coupon_item_list1").append($("#coupon_item1").clone().css("display", "block"));
-					$("#coupon_item1:last-child #list_coupon_S_item").append(data[i].coupon_item);
+					$("#coupon_item1:last-child #list_coupon_S_item").append(partner_name);
 					$("#coupon_item1:last-child a[class='list_coupon_no']").attr("id", data[i].coupon_no);
-					$("#coupon_item1:last-child #coupon_images").append(data[i].img_src);
+					$("#coupon_item1:last-child #coupon_images1").attr("src", "${root}/css/coupon_images/" + pic);
 					
 					/* $("#item1:last_child .phone").append(data[i].partner_phone);
 					$("#item1:last_child .addr").append(data[i].partner_addr); */
@@ -49,6 +57,9 @@
 		$.ajax({
 			type:'post',
 			url:'${root}/coupon/couponMain.do',
+			data : {
+				member_id : email
+			},
 			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(responseData) {
 				var data = JSON.parse(responseData);
@@ -56,11 +67,13 @@
 			
 				/* 데이타를 채우기 위해 복사 */
 				$.each(data, function(i){
+					var pic=data[i].coupon_pic_name;
+					alert(pic);
 					
 					$("#coupon_item_list").append($("#coupon_item").clone().css("display", "block"));
 					$("#coupon_item:last-child #list_coupon_L_item").append(data[i].coupon_item);
 					$("#coupon_item:last-child a[class='list_coupon_no']").attr("id", data[i].coupon_no);
-					$("#coupon_item:last-child #coupon_images").append(data[i].img_src);
+					$("#coupon_item:last-child #coupon_images").attr("src", "${root}/css/coupon_images/" + pic);
 					
 					/* $("#item1:last_child .phone").append(data[i].partner_phone);
 					$("#item1:last_child .addr").append(data[i].partner_addr); */
@@ -114,7 +127,7 @@
 						
 						<div id="tour_info" class="thumbnail">
 								<a data-toggle="modal" href="#modal_info" class="list_coupon_no"> 
-									<img class="img-responsive" id="coupon_images"/>	
+									<img class="img-responsive" id="coupon_images1"/>	
 									<div class="caption">
 										<p id="list_coupon_S_item"></p>
 									</div>
