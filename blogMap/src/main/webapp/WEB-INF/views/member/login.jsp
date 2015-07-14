@@ -225,9 +225,9 @@
                 });    
                  
             } else if (response.status === 'not_authorized') {
-				alert("aa");
+				//alert("aa");
             } else {
-                alert("bb");
+                //alert("bb");
             }
             
             
