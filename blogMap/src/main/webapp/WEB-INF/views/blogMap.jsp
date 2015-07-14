@@ -1018,6 +1018,29 @@
 			   </div>
 			</div>
 		</div>
+		
+		<!-- 관리자페이지 - 쿠폰 상세조회 (관리자페이지 - 제휴업체 페이지 제휴업체 상세 페이지)-->
+		<div class="modal fade" id="couponDetail" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+						<h5 class="modal-title">쿠폰</h5>
+					</div><div class="container"></div>
+					<div class="modal-body">
+						<div id="mainResult">
+							<jsp:include page="manager/couponDetail.jsp"/>
+						</div>
+						<br/>
+						<br/>
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">Close</a>
+						<!-- <a href="#" class="btn btn-primary">Save changes</a> -->
+					</div>
+			   </div>
+			</div>
+		</div>
 
 
 
