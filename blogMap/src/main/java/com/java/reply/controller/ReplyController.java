@@ -20,6 +20,7 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 	@Autowired
 	private ReplyService replyService;
 	
+	
 	@RequestMapping(value="/board/blogReadReply.do",method=RequestMethod.POST)
 	public void blogReadReply(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogReadReply-------------------------");
@@ -42,5 +43,28 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 		mav.addObject("response",response);
 		
 		replyService.blogWriteReply(mav);
+	}
+	
+	@RequestMapping(value="/board/blogReadReplyUpdate.do",method=RequestMethod.POST)
+	public void blogReadReplyUpdate(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogReadReplyUpdate-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		replyService.blogReadReplyUpdate(mav);
+	}
+	@RequestMapping(value="/board/blogReadReplyDelete.do",method=RequestMethod.POST)
+	public void blogReadReplyDelete(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogReadReplyDelete-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		replyService.blogReadReplyDelete(mav);
 	}
 }

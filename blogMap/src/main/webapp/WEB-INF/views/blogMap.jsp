@@ -42,7 +42,9 @@
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
 <script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=60e9ac7ab8734daca3d2053c1e713dbd"></script>
 <!-- 네이버 스마트에디터 -->
-<script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>	
+<script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<!-- 컨폼 확인창 -->	
+<script type="text/javascript" src="${root }/css/board/jquery.popconfirm.js"></script>
 <!-- modal, session check -->
 <script type="text/javascript">
 	$(document).ready(function() {
