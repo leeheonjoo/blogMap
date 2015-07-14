@@ -21,7 +21,7 @@
 				 	data : {
 				 		member_id : email,
 						message_receiver : $("input[name='messageWrite_receiver']").val(),
-						message_content : $("textarea#messageWrite_content").val(),
+						message_content : $("textarea#messageWrite_content").val()
 				 	}, 
 					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 					success : function(responseData) {
@@ -36,6 +36,9 @@
 							$.ajax({
 								type : 'post',
 								url : '${root}/message/mainMessage.do',
+								data : {
+									member_id : email
+								},
 								contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 								success : function(responseData) {
 									var data = JSON.parse(responseData);
@@ -54,8 +57,9 @@
 
 										var sdate = sy + "/" + sm + "/" + sd;
 
-										$("#receiveMsgResult").append("<tr style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
-
+										$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+										$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].member_id + "</td><td>" + data[i].message_content + "</td></tr>");
+										
 										$("#" + data[i].message_no).click(function() {
 											msgRecieveimportData(data[i].message_no);
 										});
@@ -120,7 +124,9 @@
 									/* alert(sdate); */
 									/* alert(date.getFullYear() + "/" + date.getMonth()+1 + "/" + date.getDate() + "/" + date.getHours()); */
 						
-									$("#sendMsgResult").append("<tr style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+									$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+									$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].member_id + "</td><td>" + data[i].message_content + "</td></tr>");
+									
 									$("#" + data[i].message_no).click(function() {
 										msgSendimportData(data[i].message_no);
 									});
@@ -134,7 +140,7 @@
 						function msgSendimportData(no) {
 							$.ajax({
 								type : 'get',
-								url : '${root}/message/messageRead.do?message_no=' + no,
+								url : '${root}/message/messageRead_S.do?message_no=' + no,
 								contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 								success : function(responseData) {
 									//	alert(responseData);
@@ -170,6 +176,7 @@
 		<!-- <input type="hidden" name="member_id"/> -->
 			
 		<div class="col-md-12 col-sm-12 col-xs-12">		<!-- Div 를 3화면에서 12 칸 모두 사용 -->
+			<br/>
 			
 			<div class="form-group form-group-lg">		<!-- 크기 조절을 하기 위한 기본 틀 -->
 				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputLarge">받는사람</label></div> 

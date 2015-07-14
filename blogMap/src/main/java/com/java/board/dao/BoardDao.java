@@ -1,12 +1,7 @@
 package com.java.board.dao;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import com.java.board.dto.Attach_fileDto;
-import com.java.board.dto.BoardDto;
-import com.java.board.dto.Board_addr_infoDto;
 
 public interface BoardDao {
 	/**

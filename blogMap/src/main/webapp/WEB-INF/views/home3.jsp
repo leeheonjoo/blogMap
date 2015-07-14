@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <c:set var="root" value="${pageContext.request.contextPath}"/>
-<c:set var="member_id" value="xognsl99@naver.com"/>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -44,23 +43,25 @@
 </head>
 <body>
 <!-- 블로그 검색 레이어 오픈 --> 
-<a data-toggle="modal" href="#blogListMain" class="btn btn-primary" id ="partner_Registration">제휴업체등록</a>
-<!-- blogList -->
-	<div class="modal fade" id="blogListMain" data-backdrop="static">
+<a data-toggle="modal" href="#partnerMain" class="btn btn-primary" id ="partner_Registration">제휴업체등록</a>
+		<br/><br/>
+		
+	<!-- 제휴업체 - 제휴업체등록 main -->
+	<div class="modal fade" id="partnerMain" data-backdrop="static">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title">제휴업체등록</h4>
 					<div class="row">
-					  <div class="col-lg-4">
-					    <div class="input-group">
-					      <input type="text" class="form-control" placeholder="Search for..."/>
-					      <span class="input-group-btn">
-					        <button class="btn btn-default" type="button">검색</button>
-					      </span>
-					    </div>	<!-- /input-group -->
-					  </div>	<!-- /.col-lg-6 -->
+				  		<div class="col-lg-4">
+						    <div class="input-group">
+				      			<input type="text" class="form-control" placeholder="Search for..."/>
+					      		<span class="input-group-btn">
+					        		<button class="btn btn-default" type="button">검색</button>
+					      		</span>
+						    </div>	<!-- /input-group -->
+				  		</div>	<!-- /.col-lg-6 -->
 					</div>		<!-- /.row -->	
 				</div>
 				<div class="modal-body">
@@ -72,7 +73,7 @@
 	    </div>
 	</div>
 	
-	<!-- 제휴업체 정보 팝업 레이어 --> 
+	<!-- 제휴업체 - 제휴업체 정보 팝업 레이어 -->
 	<section class="modal fade" id="modal_info">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -86,30 +87,27 @@
 				<div class="modal-body" id="data-body">
 					<div class="row form-horizontal">
 						<div class="col-md-3">
-							<img class="img-responsive img" src="" alt="">
+							<img class="img-responsive img" name="tour_image" src="http://placehold.it/300x300"/>
 						</div>
 						<div class="col-md-9">
 							<div class="form-group">
 								<label class="col-xs-3 control-label">업체명</label>
 								<div class="col-xs-9">
-									<p class="form-control-static name" name="p_name"></p> 
-									<!-- <input type="text" class="form-control-static" name="p_name"/> -->
+										<p class="form-control-static name" name="p_name"></p> 
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label class="col-xs-3 control-label">전화번호</label>
 								<div class="col-xs-9">
-									<p class="form-control-static phone" name="p_phone"></p> 
-<!-- 									<input type="text" class="form-control-static phone" id="p_phone"></input> -->
+										<p class="form-control-static phone" name="p_phone"></p>  
 								</div>
 							</div>
 							
 							<div class="form-group">
 								<label class="col-xs-3 control-label">주소</label>
 								<div class="col-xs-9">
-								<p class="form-control-static address" name="p_addr"></p> 
-<!-- 									<input type="text" class="form-control-static address" id="p_addr"></input> -->
+									<p class="form-control-static address" name="p_addr"></p> 
 								</div>
 							</div>
 						</div>
@@ -117,13 +115,72 @@
 				</div>
 				
 				<div class="modal-footer">
+					<a data-toggle="modal" href="#couponMain" class="btn btn-primary" id ="coupon_Registration">쿠폰등록</a>
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 				</div>
 			</div>
 		</div>
 	</section>
 	
-	<!-- 제휴업체 정보 팝업 레이어 끝 -->
+	<!-- 쿠폰 등록 작성 - 쿠폰정보등록 -->
+		<section class="modal fade" id="couponMain">
+		<div class="modal-dialog modal-lg">
+			<form id="couponWrite_form" class="col-xs-12 form-horizontal" method="post" action="${root}/partner/couponWrite.do" autocomplete="off" enctype="multipart/form-data">
+				<div class="modal-content">
+					
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">쿠폰 등록</h4>
+					</div>
+
+					<div class="modal-body" id="data-body">							
+
+						<div class="form-group">
+							<label class="col-xs-4 control-label">할인상품</label>
+							<div class="col-xs-8">
+								<input type="text" class="form-control" name="coupon_item" id="coupon_item" required="required" placeholder="할인상품명을 입력하세요"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-4 control-label">할인율</label>
+							<div class="col-xs-8">
+								<input type="text" class="form-control" name="coupon_discount" id="coupon_discount" required="required" placeholder="할인율 적어주세요"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-4 control-label">쿠폰적용시작일</label>
+							<div class="col-xs-8">
+								<input type="text" class="form-control" name="coupon_bymd" id="coupon_bymd" required="required" placeholder="쿠폰 시작일"/>
+							</div>											
+						</div>
+						
+						<div class="form-group">
+							<label class="col-xs-4 control-label">쿠폰적용종료일</label>
+							<div class="col-xs-8">
+								<input type="text" class="form-control" name="coupon_eymd" id="coupon_eymd" required="required" placeholder="쿠폰 종료일"/>
+							</div>											
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-4 control-label">쿠폰사진</label>
+							<div class="col-xs-8">
+								<input type="file" class="form-control" name="img_src" id="img_src"/>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary" onclick="return form_coupon();">신청하기</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+	
+	<!-- 제휴업체 - 제휴업체 등록 팝업 레이어 -->
 	<section class="modal fade" id="write_pop">
 		<div class="modal-dialog modal-lg">
 			<form id="write_form" class="col-xs-12 form-horizontal" method="post" action="${root}/partner/write.do" autocomplete="off" enctype="multipart/form-data">
@@ -138,25 +195,26 @@
 
 					<div class="modal-body" id="data-body">							
 						<input type="hidden"  id="category_code" name="category_code"/>
-						<input type="hidden"  id="member_id" name="member_id" value="${member_id }"/>
+						<input type="hidden"  id="member_id" name="member_id"/>
 						<div class="form-group">
 							<label class="col-xs-4 control-label">업체명</label>
 							<div class="col-xs-8">
-								<input type="text" class="form-control" name="partner_name" id="name" value="${partner_name}" required="required" placeholder="업체명"/>
+								<input type="text" class="form-control" name="partner_name" id="name" value="" required="required" placeholder="업체명"/>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-xs-4 control-label">전화번호</label>
 							<div class="col-xs-8">
-								<input type="text" class="form-control" name="partner_phone" id="phone" value="${partner_phone}" required="required" placeholder="전화번호"/>
+								<input type="text" class="form-control" name="partner_phone" id="phone" value="" required="required" placeholder="전화번호"/>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<label class="col-xs-4 control-label">주소</label>
 							<div class="col-xs-8">
-								<input type="text" class="form-control" name="Partner_addr" id="address" value="${partner_address}" required="required" placeholder="주소"/>
+								<input type="text" class="form-control" name="partner_addr" id="address" value="" required="required" placeholder="주소를 입력하세요"/>
+								<a data-toggle="modal" href="#blogWriteSub" class="btn btn-primary" onclick="mapSearch();">위치검색</a>
 							</div>											
 						</div>
 
@@ -169,7 +227,7 @@
 					</div>
 
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary" id="form_validation">신청하기</button>
+						<button type="submit" class="btn btn-primary" onclick="return form_validation();">신청하기</button>
 					</div>
 				</div>
 			</form>

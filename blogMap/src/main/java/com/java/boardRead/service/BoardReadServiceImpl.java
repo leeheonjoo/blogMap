@@ -183,12 +183,14 @@ public class BoardReadServiceImpl implements BoardReadService {
 		String headCategor=request.getParameter("search_headCategory");
 		String detailCategory=request.getParameter("search_detailCategory");
 		String search_value=request.getParameter("search_search_value");
-		String key = request.getParameter("key");
-		String encoding = request.getParameter("encoding");
-		String output = request.getParameter("output");
-		String coord = request.getParameter("coord");
-		String urls = request.getParameter("urls");
-		String query="";
+		
+		System.out.println("sido:"+sido);
+		System.out.println("sigugun:"+sigugun);
+		System.out.println("dongmyunri:"+dongmyunri);
+		System.out.println("headCategor:"+headCategor);
+		System.out.println("detailCategory:"+detailCategory);
+		System.out.println("search_value:"+search_value);
+	
 		Board_addr_infoDto board_addr_infoDto=new Board_addr_infoDto();
 		board_addr_infoDto.setAddr_sido(sido);
 		board_addr_infoDto.setAddr_sigugun(sigugun);
@@ -208,55 +210,29 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		if(boardList!=null){
 			System.out.println("블로그조회 갯수:"+boardList.size());;
-			hashMap.put("boardList", boardList);
+			/*hashMap.put("boardList", boardList);
 			List<Board_addr_infoDto> board_Addr_infoDto=null;
 			board_Addr_infoDto=boardReadDao.blogSearchAddr(hashMap);
 			System.out.println("블로그조회에 검색값에 따른 주소 갯수:"+board_Addr_infoDto.size());
-			
-		/*	Gson gson=new Gson();
-			String board_Addrinfo=gson.toJson(board_Addr_infoDto);
+			*/
+			Gson gson=new Gson();
+			String boardList_json=gson.toJson(boardList);
 			try {
-				response.getWriter().println(board_Addrinfo);
+				response.getWriter().println(boardList_json);
+				System.out.println(boardList_json);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			*/
-			for (int i = 0; i < board_Addr_infoDto.size(); i++) {
+			
+			/*for (int i = 0; i < board_Addr_infoDto.size(); i++) {
 				query=board_Addr_infoDto.get(i).getAddr_sido()+" "
 			+board_Addr_infoDto.get(i).getAddr_sigugun()+" "
 			+board_Addr_infoDto.get(i).getAddr_dongri()+" "
 			+board_Addr_infoDto.get(i).getAddr_bunji();
 				
-				System.out.println("ajax에 보낼 query:"+query);
-			try {
-					urls += "?key=" + key;
-					urls += "&encoding=" + encoding;
-					urls += "&coord=" + coord;
-					urls += "&output=" + output;
-					urls += "&query=" + URLEncoder.encode(query, "UTF-8");
-					System.out.println("blogList_url:" + urls);
-					
-					try {
-						URL urlss=new URL(urls);
-						// 한글 처리를 위해 InputStreamReader를 UTF-8 인코딩으로 감싼다.
-						InputStreamReader isr = new InputStreamReader(urlss.openConnection().getInputStream(), "UTF-8");
-						 JSONObject object = (JSONObject)JSONValue.parseWithException(isr);
-						 JSONObject result = (JSONObject)(object.get("result"));
-						 response.setContentType("application/json;charset=utf-8");	
-						 response.getWriter().print(result);
-						 System.out.println(result);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} 
-						
-						
-						
-				} catch (UnsupportedEncodingException e1) {
-					e1.printStackTrace();
-				}
-			}
+			
+			}*/
 		}
 	  }
 
@@ -311,8 +287,8 @@ public class BoardReadServiceImpl implements BoardReadService {
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		HttpServletResponse response=(HttpServletResponse) map.get("response");
 		
-		int board_no=Integer.parseInt(request.getParameter("board_no"));
-		System.out.println("board_no:"+board_no);
+		int boardNo=Integer.parseInt(request.getParameter("board_no"));
+		System.out.println("board_no:"+boardNo);
 		
 		
 		List<BoardDto> boardDtoList=null;
@@ -323,29 +299,17 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		HashMap<String,Object> hMap=new HashMap<String,Object>();
 		hMap.put("boardDtoList", boardDtoList);
-		hMap.put("replyDtoList", replyDtoList);
 		hMap.put("board_addr_infoDtoList", board_addr_infoDtoList);
-		hMap.put("attach_fileDtoList", attach_fileDtoList);
-		
+		hMap.put("category", category);
 		
 		List<HashMap<String,Object>> boardReadList=new ArrayList<HashMap<String,Object>>();
 		boardReadList.add(hMap);
-		int reply_check=boardReadDao.getreply(board_no);
-		System.out.println(reply_check);
-		if(reply_check>0){
-			hMap.put("boardDtoList", boardDtoList);
-			hMap.put("replyDtoList", replyDtoList);
-			hMap.put("board_addr_infoDtoList", board_addr_infoDtoList);
-			hMap.put("attach_fileDtoList", attach_fileDtoList);
-			boardReadList=boardReadDao.getReadList1(board_no);
-		}else{
-			hMap.put("boardDtoList", boardDtoList);
-			hMap.put("board_addr_infoDtoList", board_addr_infoDtoList);
-			hMap.put("attach_fileDtoList", attach_fileDtoList);
-			boardReadList=boardReadDao.getReadList2(board_no);
-		}
+	
+		hMap.put("boardDtoList", boardDtoList);
+		hMap.put("board_addr_infoDtoList", board_addr_infoDtoList);
 		
 		
+		boardReadList=boardReadDao.getReadList1(boardNo);
 		
 		logger.info("boardReadList"+boardReadList);
 		/*hMap.put("category", category);*/
@@ -358,9 +322,111 @@ public class BoardReadServiceImpl implements BoardReadService {
 		try {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(boardReadList_json);
+			System.out.println(boardReadList_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
+	@Override
+	public void blogReadDetailImg(ModelAndView mav) {
+		logger.info("BoardReadService blogReadDetailImg------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int boardNo=Integer.parseInt(request.getParameter("board_no"));
+		List<Attach_fileDto> imgList=null;
+		imgList=boardReadDao.getblogImg(boardNo);
+		logger.info("imgList:"+imgList);
+		Gson gson=new Gson();
+		String imgList_json=gson.toJson(imgList);
+		
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(imgList_json);
+			System.out.println(imgList_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	@Override
+	public void blogListSearchSub1(ModelAndView mav) {
+		logger.info("BoardReadService blogListSearchSub1------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int board_no=Integer.parseInt(request.getParameter("board_no"));
+		
+		List<Board_addr_infoDto> board_Addr_infoDto=null;
+		board_Addr_infoDto=boardReadDao.blogSearchAddr(board_no);
+		if(board_Addr_infoDto!=null){
+		System.out.println("블로그조회에 검색값에 따른 주소 갯수:"+board_Addr_infoDto.size());
+		Gson gson=new Gson();
+		String board_Addr_infoDto_json=gson.toJson(board_Addr_infoDto);
+		
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(board_Addr_infoDto_json);
+			System.out.println(board_Addr_infoDto_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+			
+	}
+
+	@Override
+	public void blogListSearchSub2(ModelAndView mav) {
+		logger.info("BoardReadService blogListSearchSub2------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		String category_code=request.getParameter("category_code");
+		String key = request.getParameter("key");
+		String encoding = request.getParameter("encoding");
+		String output = request.getParameter("output");
+		String coord = request.getParameter("coord");
+		String urls = request.getParameter("urls");
+		String query=request.getParameter("query");
+		
+		System.out.println("ajax에 보낼 query:"+query);
+		try {
+				urls += "?key=" + key;
+				urls += "&encoding=" + encoding;
+				urls += "&coord=" + coord;
+				urls += "&output=" + output;
+				urls += "&query=" + URLEncoder.encode(query, "UTF-8");
+				System.out.println("blogList_url:" + urls);
+				
+				try {
+					URL urlss=new URL(urls);
+					// 한글 처리를 위해 InputStreamReader를 UTF-8 인코딩으로 감싼다.
+					InputStreamReader isr = new InputStreamReader(urlss.openConnection().getInputStream(), "UTF-8");
+					 JSONObject object = (JSONObject)JSONValue.parseWithException(isr);
+					 JSONObject result = (JSONObject)(object.get("result"));
+					 response.setContentType("application/json;charset=utf-8");	
+					 response.getWriter().print(result);
+					 System.out.println(result);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+					
+					
+					
+			} catch (UnsupportedEncodingException e1) {
+				e1.printStackTrace();
+			}
+	}
+	
 }

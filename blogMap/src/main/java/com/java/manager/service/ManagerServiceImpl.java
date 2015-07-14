@@ -86,6 +86,55 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 
 	/**
+	 * @name:getSearchMemberDate
+	 * @date:2015. 7. 14.
+	 * @author:이동희
+	 * @description: MemberList 조회시 조회한 이름으로 DB에서 데이타를 가지고 온다.
+	 */
+	@Override
+	public void getSearchMemberDate(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		
+		String member_name=request.getParameter("name");
+		logger.info("member_name:" + member_name);
+		
+		
+		List<MemberDto> searchMemberList=managerDao.getSearchMemberData(member_name);
+		logger.info("searchMemberList : " + searchMemberList);
+		
+		Gson gson=new Gson();								//Gson의 객체를 생성
+		String searchjson=gson.toJson(searchMemberList);	//Log를 json으로 변환
+		
+		logger.info("searchjson: " + searchjson);
+		
+		mav.addObject("searchjson", searchjson);
+	}
+	
+	@Override
+	public void getSearchMemberType(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		
+		String member_jointype=request.getParameter("member_jointype");
+		logger.info("member_jointype:" + member_jointype);
+		
+		
+		List<MemberDto> searchMemberList=managerDao.getSearchMemberType(member_jointype);
+		logger.info("searchPartnerList : " + searchMemberList);
+		
+		Gson gson=new Gson();					//Gson의 객체를 생성
+		String json=gson.toJson(searchMemberList);	//Log를 json으로 변환
+		
+		logger.info("json: " + json);
+		
+		mav.addObject("json", json);
+		
+	}
+
+	/**
 	 * @name:getManagerDate
 	 * @date:2015. 6. 30.
 	 * @author:이동희
@@ -166,7 +215,7 @@ public class ManagerServiceImpl implements ManagerService {
 	 * @name:getSearchPartnerDate
 	 * @date:2015. 7. 8.
 	 * @author:이동희
-	 * @description: Partner정보를 조회시 DB에서 데이타를 가지고온다.
+	 * @description: Partner정보를 조회시 이름으로 DB에서 데이타를 가지고온다.
 	 */
 	@Override
 	public void getSearchPartnerDate(ModelAndView mav) {
@@ -350,7 +399,10 @@ public class ManagerServiceImpl implements ManagerService {
 		String json=gson.toJson(partnerDto);			//Log를 json으로 변환
 		logger.info("json: " + json);
 		
-		mav.addObject("json", json);
-			
+		mav.addObject("json", json);			
 	}
+
+	
+	
+	
 }

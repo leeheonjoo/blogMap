@@ -9,7 +9,7 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		var email=sessionStorage.getItem('email');
-		alert(email);
+// 		alert(email);
 		// memberList
  		$("input#getMemberList").click(function(){	// 회원정보버튼 클릭시 실행
 			getMemberList();	// 회원리스트 불러오는 함수 호출
@@ -102,24 +102,37 @@
 										
 						
 						<div role="tabpanel" class="tab-pane" id="tab_partner">
-							<jsp:include page="partnerList.jsp"/>
+							<div class="row" id="memberInfo_list">
+								<div class="thumbnail">
+									<div class="caption">	
+										<jsp:include page="partnerList.jsp"/>
+									</div>
+								</div>
+							</div>
 						</div>
 						
 						<div role="tabpanel" class="tab-pane" id="tab_coupon">
-							<jsp:include page="couponList.jsp"/>
+							<div class="row" id="memberInfo_list">
+								<div class="thumbnail">
+									<div class="caption">	
+										<jsp:include page="couponList.jsp"/>
+									</div>
+								</div>
+							</div>
 						</div>
 						
 						<div role="tabpanel" class="tab-pane" id="tab_manager">
-							<jsp:include page="managerList.jsp"/>
+							<div class="row" id="memberInfo_list">
+								<div class="thumbnail">
+									<div class="caption">	
+										<jsp:include page="managerList.jsp"/>
+									</div>
+								</div>
+							</div>						
 						</div>
-						
 					</div>
-				</div>
-
+	
 			</div>
-
-			
-
 		</article>
 		
 </body>

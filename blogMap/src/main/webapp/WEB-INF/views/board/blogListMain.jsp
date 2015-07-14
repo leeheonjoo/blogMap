@@ -33,7 +33,13 @@
 		
 		$("#blogList_Search").click(function() {
 			var sido=$("#si_select:first-child").text();
+			if(sido=="시도[전체]"){
+				sido="%";
+			}
 			var sigugun=$("#gun_select:first-child").text();
+			if(sigugun=="시구군[전체]"){
+				sigugun="%";
+			}
 			var dongmyunri=$("#dong_select").attr("value");
 			var headCategory=$("#headCategory_select").attr("value");
 			var detailCategory=$("#detailCategory_select").attr("value");
@@ -58,7 +64,9 @@
 			var restArray=new Array();
 			//타이틀 배열
 			var titleArray=new Array();
+			var pullAddr="";
 			var mapDiv='map';
+			
 			$.ajax({
 				type:'post',
 				url:'${root}/board/blogListSearch.do',
@@ -68,31 +76,96 @@
 					search_dongmyunri:dongmyunri,
 					search_headCategory:headCategory,
 					search_detailCategory:detailCategory,
-					search_search_value:search_value,
-					key : "da3d853c119e911822c1141b3a2153af",
-					encoding : "utf-8",
-					output : "json",
-					coord : "latlng",
-					urls : "http://openapi.map.naver.com/api/geocode"
+					search_search_value:search_value
 				},
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(data){
-					var address= data.items[0].address;
-					var sido= data.items[0].addrdetail.sido;
-					var sigugun= data.items[0].addrdetail.sigugun;
-					var dongmyun= data.items[0].addrdetail.dongmyun;
-					var rest=data.items[0].addrdetail.rest;
-					var x=data.items[0].point.x;
-					var y=data.items[0].point.y;
-					 
-					m.push(new nhn.api.map.LatLng(y, x));
-					addrArray.push(address);
-					sidoArray.push(sido);
-					sigugunArray.push(sigugun);
-					dongmyunArray.push(dongmyun);
-					restArray.push(rest);
-					$("#map").empty();
-					mapLoad(m,addrArray,sidoArray,sigugunArray,dongmyunArray,restArray,titleArray,mapDiv,search_value);
+					var data=JSON.parse(data);
+					$.each(data,function(i){
+						var board_no=data[i].board_no;
+						var member_id=data[i].member_id;
+						var category_code=data[i].category_code;
+						var board_rgdate=data[i].board_rgdate;
+						var board_title=data[i].board_title;
+						var board_content=data[i].board_content;
+						var board_grade=data[i].board_grade;
+						var board_count=data[i].board_count;
+						
+						$.ajax({
+							type:'post',
+							url:'${root}/board/blogListSearchSub1.do',
+							data:{
+								board_no: board_no
+								/* category_code: category_code,
+								key : "60e9ac7ab8734daca3d2053c1e713dbd",
+								encoding : "utf-8",
+								output : "json",
+								coord : "latlng",
+								urls : "http://openapi.map.naver.com/api/geocode" */
+							},
+							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+							success:function(data){
+								var data=JSON.parse(data);
+								var board_no=data[0].board_no;
+								var addr_sido=data[0].addr_sido;
+								var addr_sigugun=data[0].addr_sigugun;
+								var addr_dongri=data[0].addr_dongri
+								var addr_bunji=data[0].addr_bunji;
+								
+								if(addr_sigugun!=null){
+								pullAddr=addr_sido+" "+addr_sigugun+" "+addr_dongri+" "+addr_bunji;
+								}else{
+									pullAddr=addr_sido+" "+addr_dongri+" "+addr_bunji;	
+								}
+								
+								$.ajax({
+									type:'post',
+									url:'${root}/board/blogListSearchSub2.do',
+									data:{
+										query: pullAddr, 
+										key : "60e9ac7ab8734daca3d2053c1e713dbd",
+										encoding : "utf-8",
+										output : "json",
+										coord : "latlng",
+										urls : "http://openapi.map.naver.com/api/geocode"
+									},
+									contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+									success:function(data){
+										var address= data.items[0].address;
+										var sido= data.items[0].addrdetail.sido;
+										var sigugun= data.items[0].addrdetail.sigugun;
+										var dongmyun= data.items[0].addrdetail.dongmyun;
+										var rest=data.items[0].addrdetail.rest;
+										var x=data.items[0].point.x;
+										var y=data.items[0].point.y;
+										 
+										m.push(new nhn.api.map.LatLng(y, x));
+										addrArray.push(address);
+										sidoArray.push(sido);
+										sigugunArray.push(sigugun);
+										dongmyunArray.push(dongmyun);
+										restArray.push(rest);
+										
+										
+											$("#map").empty();
+											mapLoad(m,addrArray,sidoArray,sigugunArray,dongmyunArray,restArray,titleArray,mapDiv,search_value);
+									
+									},
+									error:function(data){
+										
+									}
+								})
+								
+								
+								
+							},
+							error:function(data){
+								
+							}
+						})
+					})
+					
+					
 			},
 			error:function(data){
 				alert("error : blogListMain blogListSearch");

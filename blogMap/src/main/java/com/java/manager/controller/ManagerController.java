@@ -69,11 +69,59 @@ public class ManagerController {
 		String json=(String)map.get("json");
 		
 		try{
+			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(json);
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * @name:searchMemberList
+	 * @date:2015. 7. 14.
+	 * @author:이동희
+	 * @description: 회원이름으로 리스트 검색하는 메소드
+	 */
+	@RequestMapping("/manager/searchMemberinfo.do")
+	public void searchMemberList(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager searchMemberList Start");
 		
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.getSearchMemberDate(mav);
+		Map<String, Object> map=mav.getModel();
+		
+		String json=(String)map.get("searchjson");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/manager/searchMemberType.do")
+	public void searchMemberType(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager searchMemberType Start");
+		
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.getSearchMemberType(mav);
+		Map<String, Object> map=mav.getModel();
+		
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 	
 	/**

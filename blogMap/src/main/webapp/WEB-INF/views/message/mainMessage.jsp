@@ -150,7 +150,9 @@ thead {
 					/* alert(sdate); */
 					/* alert(date.getFullYear() + "/" + date.getMonth()+1 + "/" + date.getDate() + "/" + date.getHours()); */
 		
-					$("#sendMsgResult").append("<tr style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+					$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+					$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].member_id + "</td><td>" + data[i].message_content + "</td></tr>");
+					
 					$("#" + data[i].message_no).click(function() {
 						msgSendimportData(data[i].message_no);
 					});
@@ -165,7 +167,7 @@ thead {
 	function msgSendimportData(no) {
 		$.ajax({
 			type : 'get',
-			url : '${root}/message/messageRead.do?message_no=' + no,
+			url : '${root}/message/messageRead_S.do?message_no=' + no,
 			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(responseData) {
 				//	alert(responseData);
@@ -201,6 +203,9 @@ thead {
 		$.ajax({
 			type : 'post',
 			url : '${root}/message/mainMessage.do',
+			data : {
+				member_id : email
+			},
 			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(responseData) {
 				var data = JSON.parse(responseData);
@@ -219,7 +224,8 @@ thead {
 
 					var sdate = sy + "/" + sm + "/" + sd;
 
-					$("#receiveMsgResult").append("<tr style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+					$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+					$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].member_id + "</td><td>" + data[i].message_content + "</td></tr>");
 
 					$("#" + data[i].message_no).click(function() {
 						msgRecieveimportData(data[i].message_no);
@@ -278,6 +284,9 @@ thead {
 		$.ajax({
 			type : 'post',
 			url : '${root}/message/mainMessage.do',
+			data : {
+				member_id : email
+			},
 			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(responseData) {
 				var data = JSON.parse(responseData);
@@ -296,7 +305,9 @@ thead {
 
 					var sdate = sy + "/" + sm + "/" + sd;
 
-					$("#receiveMsgResult").append("<tr style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id+ "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+					$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
+					$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].member_id + "</td><td>" + data[i].message_content + "</td></tr>");
+					
 					$("#" + data[i].message_no).click(function() {
 						msgimportData(data[i].message_no);
 					});
@@ -325,12 +336,10 @@ thead {
 				var sdate = sy + "/" + sm + "/" + sd;
 				//	alert(data.message_no);
 				$("input[name='message_no']").val(data.message_no);
-				$("input[name='message_receiver']").val(
-						data.message_receiver);
+				$("input[name='message_receiver']").val(data.message_receiver);
 				$("input[name='member_id']").val(data.member_id);
 				$("input[name='message_sDate']").val(sdate);
-				$("textarea[name='message_content']").val(
-						data.message_content);
+				$("textarea[name='message_content']").val(data.message_content);
 			},
 			error : function(data) {
 				alert("에러가 발생하였습니다.");
@@ -381,8 +390,7 @@ thead {
 
 			<!-- 수신함 클릭시 -->
 			<div class="tab-content col-md-10">
-				<section role="tabpanel" class="tab-pane active"
-					id="tab_receiveMessageList">
+				<section role="tabpanel" class="tab-pane active" id="tab_receiveMessageList">
 				<div class="row" id="receiveMessage_item_list">
 					<div class="thumbnail">
 						<div class="caption">
@@ -391,7 +399,7 @@ thead {
 									<div class="widget-content">
 										<table class="table table-striped table-bordered">
 											<thead>
-												<tr id="receive_message">
+												<tr class="hidden-xs" id="receive_message">
 													<th class="col-md-1 col-sm-1 col-xs-1"
 														style="text-align: center;">No</th>
 													<th class="col-md-5 col-sm-5 col-xs-5"
@@ -402,6 +410,13 @@ thead {
 														style="text-align: center;">WriteDate</th>
 													<th class="col-md-1 col-sm-1 col-xs-1"
 														style="text-align: center;">Reception</th>
+												</tr>
+												
+												<tr class="visible-xs" id="receive_message">
+													<th class="col-xs-5"
+														style="text-align: center;">Writer</th>
+													<th class="col-xs-7"
+														style="text-align: center;">Message_Content</th>
 												</tr>
 											</thead>
 											<tbody id="receiveMsgResult">		<!-- 자료를 담기 위한 그릇 -->
@@ -424,23 +439,30 @@ thead {
 									<div class="widget stacked widget-table action-table">
 										<div class="widget-content">
 											<table class="table table-striped table-bordered">
-												<thead>
-													<tr id="send_message">
-														<th class="col-md-1 col-sm-1 col-xs-1"
-															style="text-align: center;">No</th>
-														<th class="col-md-5 col-sm-5 col-xs-5"
-															style="text-align: center;">Message_Content</th>
-														<th class="col-md-3 col-sm-3 col-xs-3"
-															style="text-align: center;">Writer</th>
-														<th class="col-md-2 col-sm-2 col-xs-2"
-															style="text-align: center;">WriteDate</th>
-														<th class="col-md-1 col-sm-1 col-xs-1"
-															style="text-align: center;">Reception</th>
-													</tr>
-												</thead>
-												<tbody id="sendMsgResult">		<!-- 자료를 담기 위한 그릇 -->
-												</tbody>
-											</table>
+											<thead>
+												<tr class="hidden-xs" id="send_message">
+													<th class="col-md-1 col-sm-1 col-xs-1"
+														style="text-align: center;">No</th>
+													<th class="col-md-5 col-sm-5 col-xs-5"
+														style="text-align: center;">Message_Content</th>
+													<th class="col-md-3 col-sm-3 col-xs-3"
+														style="text-align: center;">Writer</th>
+													<th class="col-md-2 col-sm-2 col-xs-2"
+														style="text-align: center;">WriteDate</th>
+													<th class="col-md-1 col-sm-1 col-xs-1"
+														style="text-align: center;">Reception</th>
+												</tr>
+												
+												<tr class="visible-xs" id="send_message">
+													<th class="col-xs-5"
+														style="text-align: center;">Writer</th>
+													<th class="col-xs-7"
+														style="text-align: center;">Message_Content</th>
+												</tr>
+											</thead>
+											<tbody id="sendMsgResult">		<!-- 자료를 담기 위한 그릇 -->
+											</tbody>
+										</table>
 										</div>		<!-- /widget-content -->
 									</div>			<!-- /widget -->
 								</div>

@@ -8,10 +8,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.java.board.dto.Attach_fileDto;
 import com.java.board.dto.BoardDto;
 import com.java.board.dto.Board_addr_infoDto;
 import com.java.boardRead.dto.BoardReadDto;
 import com.java.boardRead.dto.CategoryDto;
+import com.java.reply.dto.ReplyDto;
 
 /**
  * @name : BoardReadDaoImpl
@@ -126,12 +128,12 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	}
 
 	@Override
-	public List<Board_addr_infoDto> blogSearchAddr(HashMap<String, Object> hashMap) {
+	public List<Board_addr_infoDto> blogSearchAddr(int board_no) {
 		logger.info("BoardReadDao blogSearchAddr-------------------------");
 		/*List<BoardDto> boardList= (List<BoardDto>) hashMap.get("boardList");
 		System.out.println(boardList.get(0).getBoard_no());*/
 		List<Board_addr_infoDto> board_addr_infoList=null;
-		board_addr_infoList=sqlSession.selectList("dao.BoardReadMapper.blogSearchAddr",hashMap);
+		board_addr_infoList=sqlSession.selectList("dao.BoardReadMapper.blogSearchAddr",board_no);
 		return board_addr_infoList;
 	}
 
@@ -143,21 +145,31 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> getReadList1(int board_no) {
+	public List<HashMap<String, Object>> getReadList1(int boardNo) {
 		logger.info("BoardReadDao getReadList1-------------------------");
-		return sqlSession.selectList("dao.BoardReadMapper.getReadList1",board_no);
+		int check=0;
+		List<HashMap<String, Object>> list=null;
+		check=sqlSession.update("dao.BoardReadMapper.readCount",boardNo);
+		if(check>0){
+			list=sqlSession.selectList("dao.BoardReadMapper.getReadList1",boardNo);
+		}
+		return list;
 	}
 
 	@Override
-	public int getreply(int board_no) {
+	public int getreply(int boardNo) {
 		logger.info("BoardReadDao getreply-------------------------");
 		
-		return sqlSession.selectOne("dao.BoardReadMapper.getreply");
+		return sqlSession.selectOne("dao.BoardReadMapper.getreply",boardNo);
 	}
 
+	
+
 	@Override
-	public List<HashMap<String, Object>> getReadList2(int board_no) {
-		logger.info("BoardReadDao getReadList2-------------------------");
-		return sqlSession.selectList("dao.BoardReadMapper.getReadList2",board_no);
+	public List<Attach_fileDto> getblogImg(int boardNo) {
+		logger.info("BoardReadDao getblogImg-------------------------");
+		return sqlSession.selectList("dao.BoardReadMapper.getblogImg",boardNo);
 	}
+
+	
 }

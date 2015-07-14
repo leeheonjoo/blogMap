@@ -404,7 +404,8 @@ public class BoardServiceImpl implements BoardService {
 		hashMap.put("member_id", member_id);
 		hashMap.put("point_infoDto", point_infoDto);
 		
-		
+		String content=request.getParameter("board_content");
+		logger.info("DB저장값 내용:"+content);
 		//게시판 글작성
 		hashMap=boardDao.blogWrite(hashMap);
 		//결과값
@@ -422,7 +423,7 @@ public class BoardServiceImpl implements BoardService {
 		long[] fileSize = new long[5];
 		
 		ArrayList<Attach_fileDto> attachList=new ArrayList<Attach_fileDto>();
-		
+		File file=null;
 		for (int j = 0; j < upFile.size(); j++) {
 			String originalName=upFile.get(j).getOriginalFilename();
 			if(originalName!=null||originalName!=""){
@@ -432,12 +433,13 @@ public class BoardServiceImpl implements BoardService {
 			fileSize[j]=upFile.get(j).getSize();
 			
 			if(fileSize[j]!=0){
+				attach_fileDto=new Attach_fileDto();
 				try{
 					
 					String dir = "c:/file/blogWriteImages";
 					
 					
-					File file=new File(dir,originalNames[j]);
+					file=new File(dir,originalNames[j]);
 					if (!file.isDirectory()) {			//파일이 존재하지 않을 때 
 						file.mkdirs();
 					}
@@ -455,11 +457,11 @@ public class BoardServiceImpl implements BoardService {
 					
 					if(check>0){
 						//첨푸파일 DB적용
-						attachList.add(attach_fileDto);
+						attachList.add(j,attach_fileDto);
 						
 						
-						System.out.println(attachList.size());
-						
+						System.out.println("!"+attachList.size());
+						System.out.println(j+"!"+attachList.get(j).getFile_name());
 					}
 				}catch(Exception e){
 					logger.info("파일 입출력 에러" + e);
@@ -470,7 +472,15 @@ public class BoardServiceImpl implements BoardService {
 
 		}
 		hashMap.put("attachList", attachList);
+		attachList=(ArrayList<Attach_fileDto>) hashMap.get("attachList");
+		for (int i = 0; i < attachList.size(); i++) {
+			System.out.println("j"+attachList.get(i).getFile_name());
+		}
+		
 		check=boardDao.blogWrite_attach(hashMap);
+		
+		
+		
 		/*//카테고리
 		String category_mname=request.getParameter("category_mname");
 		String category_sname=request.getParameter("category_sname");
@@ -485,8 +495,7 @@ public class BoardServiceImpl implements BoardService {
 		String rest=request.getParameter("addr_bunji");
 		
 		
-		//글내용
-		String content=request.getParameter("board_content");
+		
 			
 		//평점
 		String grade=request.getParameter("board_grade");		

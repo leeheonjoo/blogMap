@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.java.coupon.dto.CouponDto;
 import com.java.partner.dto.PartnerDto;
 import com.java.partner.service.PartnerService;
 
@@ -157,18 +158,48 @@ public class PartnerController {
 	}
 	
 	/**
-	 * @name: getPartner
-	 * @date:2015. 7. 9.
+	 * @name: couponWrite
+	 * @date:2015. 7. 5.
 	 * @author: 변태훈
-	 * @description: 제휴업체 Tour검색 
+	 * @description: 제휴업체 쿠폰등록 컨트롤러
 	 */
-	@RequestMapping(value="partner/tourSerch.do", method=RequestMethod.GET)
-	public void tourSerch(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Partner tourSerch 시작!!-----------------");
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request",request);
-		mav.addObject("response",response);
+		@RequestMapping(value="/partner/couponWrite.do", method=RequestMethod.POST)
+		public void couponWrite(MultipartHttpServletRequest request, HttpServletResponse response,CouponDto couponDto){
+			logger.info("Partner couponWrite 시작!!!--------------------------------------------");
+			
+			ModelAndView mav=new ModelAndView();
+			mav.addObject("request", request);
+			mav.addObject("response", response);
+			mav.addObject("couponDto",couponDto);
+
+			partnerService.couponWrite(mav);
+		}
+	/**
+	 * @name: list
+	 * @date:2015. 7. 13.
+	 * @author: 변태훈
+	 * @description: 쿠폰 리스트 컨트롤러
+	 */
+	@RequestMapping(value="/partner/coupon_List.do", method=RequestMethod.POST)
+	public void couponList(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Partner couponList 시작!!!--------------------------------------------");
 		
-		partnerService.tourSerch(mav);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+	
+		partnerService.restaurantList(mav);
+		
+		Map<String, Object> map=mav.getModel();
+		
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+
 	}
 }

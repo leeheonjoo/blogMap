@@ -2,6 +2,7 @@ package com.java.partner.dao;
 
 import java.util.List;
 
+import com.java.coupon.dto.CouponDto;
 import com.java.partner.dto.PartnerDto;
 /**
  * @name:PartnerDao
@@ -22,4 +23,6 @@ public interface PartnerDao {
 	public List<PartnerDto> getRestaurantPartnerList();
 
 	public PartnerDto getRestaurantPartnerListDate(int partnerNo);
+	
+	public int couponRegister(CouponDto couponDto,int partner_no);
 }
