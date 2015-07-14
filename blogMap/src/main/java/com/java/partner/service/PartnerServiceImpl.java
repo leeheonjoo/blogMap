@@ -54,8 +54,7 @@ public class PartnerServiceImpl implements PartnerService {
 		logger.info(partnerDto.getPartner_addr());
 	
 		boolean isSuccess = false;			//성공했는지 실패했는지 여부 확인한다
-		String uploadPath = request.getSession().getServletContext().getRealPath("/images");
-		logger.info(uploadPath);
+		String uploadPath = "C:\\Users\\Taylor\\git\\blogMap\\blogMap\\src\\main\\webapp\\css\\images\\partner";
 		File dir = new File(uploadPath);
 		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
 			dir.mkdirs();
@@ -233,7 +232,7 @@ public class PartnerServiceImpl implements PartnerService {
 		logger.info("" +couponDto.getCoupon_eymd());
 	
 		boolean isSuccess = false;			//성공했는지 실패했는지 여부 확인한다
-		String uploadPath = request.getSession().getServletContext().getRealPath("/coupon_images");
+		String uploadPath = "C:\\Users\\Taylor\\git\\blogMap\\blogMap\\src\\main\\webapp\\css\\coupon_images";
 		File dir = new File(uploadPath);
 		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
 			dir.mkdirs();

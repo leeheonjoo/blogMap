@@ -187,7 +187,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<a data-toggle="modal" href="#blogListMain">
-									<img src="${root}/css/blogMap/images/search.png" class="img-responsive"/>
+									<img src="${root}/images/blogMap/search.png" class="img-responsive"/>
 								</a>
 							</div>
 						</div>
@@ -225,7 +225,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<a data-toggle="modal" href="#blogMapWrite">
-									<img src="${root}/css/blogMap/images/write_go.png" class="img-responsive"/>
+									<img src="${root}/images/blogMap/write_go.png" class="img-responsive"/>
 								</a>
 							</div>
 						</div>
@@ -242,7 +242,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<a data-toggle="modal" href="#blogMapCoupon">
-									<img src="${root}/css/blogMap/images/coupon_2.png" class="img-responsive"/>
+									<img src="${root}/images/blogMap/coupon_2.png" class="img-responsive"/>
 								</a>
 							</div>
 						</div>
@@ -392,7 +392,7 @@
 				</div>
 		</div>
 		<div style="text-align:right;">
-			<a data-toggle="modal" href="#ManagerMain"><img src="${root}/css/blogMap/images/gear_24.png"></img></a>
+			<a data-toggle="modal" href="#ManagerMain"><img src="${root}/images/blogMap/gear_24.png"></img></a>
 			
 		</div>
 
@@ -554,7 +554,7 @@
 					<div class="modal-body" id="data-body">
 						<div class="row form-horizontal">
 							<div class="col-md-3">
-								<img class="img-responsive img" name="tour_image" src="http://placehold.it/300x300"/>
+								<img class="img-responsive img" id="partnerDetail_imagers"/>
 							</div>
 							<div class="col-md-9">
 								<div class="form-group">
@@ -581,9 +581,11 @@
 						</div>						
 					</div>
 					
-					<div class="modal-footer">
-						<a data-toggle="modal" href="#couponMain" class="btn btn-primary" id ="coupon_Registration">쿠폰등록</a>
-						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+					<div class="row">
+						<div class="col-xs-12 text-right">
+							<input type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#mainCoupon_Registration" value="쿠폰등록"/>								
+							<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -623,14 +625,13 @@
 								<label class="col-xs-4 control-label">주소</label>
 								<div class="col-xs-8">
 									<input type="text" class="form-control" name="partner_addr" id="address" value="" required="required" placeholder="주소를 입력하세요"/>
-									<a data-toggle="modal" href="#blogWriteSub" class="btn btn-primary" onclick="mapSearch();">위치검색</a>
 								</div>											
 							</div>
 	
 							<div class="form-group">
 								<label class="col-xs-4 control-label">업체사진</label>
 								<div class="col-xs-8">
-									<input type="file" class="form-control" name="img_src" id="img_src"/>
+									<input type="file" class="form-control" name="img_src" id="partner_imagers"/>
 								</div>
 							</div>
 						</div>
@@ -645,11 +646,10 @@
 	
 	<!-- 제휴업체 - 쿠폰정보등록 팝업 레이어 -->	
 	<!-- 쿠폰 등록 작성 - 쿠폰정보등록 -->
-      <section class="modal fade" id="couponMain">
+      <section class="modal fade" id="mainCoupon_Registration">
       <div class="modal-dialog modal-lg">
          <form id="couponWrite_form" class="col-xs-12 form-horizontal" method="post" action="${root}/partner/couponWrite.do" autocomplete="off" enctype="multipart/form-data">
             <div class="modal-content">
-               <input type="hidden" name="partner_no"/>
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
@@ -658,7 +658,8 @@
                </div>
 
                <div class="modal-body" id="data-body">                     
-
+				<input type="hidden" id="coupon_no" name="coupon_no"/>
+				<input type="hidden" id="partner_no" name="partner_no"/>
                   <div class="form-group">
                      <label class="col-xs-4 control-label">할인상품</label>
                      <div class="col-xs-8">
@@ -690,12 +691,12 @@
                   <div class="form-group">
                      <label class="col-xs-4 control-label">쿠폰사진</label>
                      <div class="col-xs-8">
-                        <input type="file" class="form-control" name="img_src" id="img_src"/>
+                        <input type="file" class="form-control" name="img_src" id="coupon_imagers"/>
                      </div>
                   </div>
                </div>
                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary" onclick="return form_coupon();">신청하기</button>
+                  <button type="button"  id="coupon_Register" class="btn btn-primary">신청하기</button>
                </div>
             </div>
          </form>
@@ -1008,6 +1009,29 @@
 					<div class="modal-body">
 						<div id="mainResult">
 							<jsp:include page="manager/partnerDetail.jsp"/>
+						</div>
+						<br/>
+						<br/>
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">Close</a>
+						<!-- <a href="#" class="btn btn-primary">Save changes</a> -->
+					</div>
+			   </div>
+			</div>
+		</div>
+		
+		<!-- 관리자페이지 - 쿠폰 상세조회 (관리자페이지 - 제휴업체 페이지 제휴업체 상세 페이지)-->
+		<div class="modal fade" id="couponDetail" data-backdrop="static">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+						<h5 class="modal-title">쿠폰</h5>
+					</div><div class="container"></div>
+					<div class="modal-body">
+						<div id="mainResult">
+							<jsp:include page="manager/couponDetail.jsp"/>
 						</div>
 						<br/>
 						<br/>

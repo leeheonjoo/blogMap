@@ -358,13 +358,15 @@ vertical-align: middle;
 </head>
 <body>
 
-	<div>
+<div class="caption">
+
+	<div >
 		<input type="button" id="getMemberList" value="Reset"/>
 		<input type="radio" name="joinType" id="blogmap"/><span>BlogMap</span>&nbsp;&nbsp;
 		<input type="radio" name="joinType" id="faceBook"/><span>FaceBook</span> &nbsp;&nbsp;
 		<input type="text" placeholder="Name Search" id="memberSearchTag"/> 
 		<input type="submit" id="searchMember" value="Search"/>
-	</div>
+	</div><br/>
 	
 	<div>
 		<div class="span7">   
@@ -391,33 +393,10 @@ vertical-align: middle;
 				
 			</div> <!-- /widget -->
 	    </div>
-
-<!--  테이블로 변경 -->	
-<!-- <!-- 회원정보 타이틀 -->	 
-<!-- 	<div class="row" id="memberTitle" align="center"> -->
-<!--         <div class="col-md-3 col-sm-3 col-xs-3">아이디</div> -->
-<!--         <div class="col-md-2 col-sm-2 col-xs-2">이름</div> -->
-<!--         <div class="col-md-3 col-sm-3 col-xs-3">가입일</div> -->
-<!--         <div class="col-md-1 col-sm-1 col-xs-1">가입유형</div> -->
-<!--         <div class="col-md-2 col-sm-2 col-xs-2">포인트</div> -->
-<!--     	<div class="col-md-1 col-sm-1 col-xs-1">삭제</div> -->
-<!--     </div> -->
-
-<!-- <!-- 회원정보를 불러올 기본틀  -->		 
-<!-- 	<div class="row" id="memberList" style="display:none;" align="center" > -->
-<!-- 		<div class="col-md-3 col-sm-3 col-xs-3" id="memberId"></div> -->
-<!--         <div class="col-md-2 col-sm-2 col-xs-2" id="memberName"></div> -->
-<!--         <div class="col-md-3 col-sm-3 col-xs-3" id="memberJoindate"></div> -->
-<!--         <div class="col-md-1 col-sm-1 col-xs-1" id="memberJoinType"></div> -->
-<!--         <div class="col-md-2 col-sm-2 col-xs-2" id="memberPoint"></div> -->
-<!--     	<div class="col-md-1 col-sm-1 col-xs-1"> -->
-<!--     		<input id="delete" type="button" value="삭제"/> -->
-<!--     	</div> -->
-<!-- 	</div> -->
-
-<!-- <!-- 회원정보를 삽입시킬 div테그 -->	 
-<!-- 	<div class="row" id="memberListResult"></div> -->
 	</div>
+
+</div>
+
 </body>
 </html>
 
