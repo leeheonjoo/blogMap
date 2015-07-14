@@ -65,7 +65,7 @@
 							});
 						},
 						error : function(data) {
-							alert("에러가 발생하였습니다.");
+							alert("로그인을 해 주세요.");
 						}
 					});
 				
@@ -92,7 +92,7 @@
 							$("textarea[name='message_content']").val(data.message_content);
 						},
 						error : function(data) {
-							alert("에러가 발생하였습니다.");
+							alert("로그인을 해 주세요.");
 						}
 					});
 				}				

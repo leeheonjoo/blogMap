@@ -68,7 +68,19 @@
 				//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
 				//$("#blogmap_login_bar").fadeOut();
 				$("#blogmap_before_login span").remove();
+				
+				/* if($("#blogmap_main_myPage b").text()=="MyPage"){
+					$("#blogmap_main_myPage").parent().remove();
+				} */
+				/* if(sessionStorage.getItem('jointype')=="0002"){
+					$("#blogmap_main_myPage").empty();
+				}
+				
+				$("#blogmap_main_myPage").append('<a id="blogmap_main_myPage" data-toggle="modal" href="#blogmap_myPage" class="btn" style="text-align:left;"><b>MyPage</b></a>'); */
+				
+				$("#blogmap_main_myPage").css("display","inline-block");
 				$("#blogmap_before_login").attr("data-toggle","");
+				
 				$("#login_text").text("Logout");
 				
 				if($("#login_text").text()=="Logout"){
@@ -108,7 +120,8 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav navbar-right">
-			      	<li> <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
+			      	<li><a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
+			      	<li><a id="blogmap_main_myPage" data-toggle="modal" href="#blogmap_myPage" class="btn" style="text-align:left; display:none"><b>MyPage</b></a></li>
 			        <li id="blogmap_login_bar" class="dropdown">
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a>
 						<ul id="login-dp" class="dropdown-menu">
@@ -136,7 +149,12 @@
 											  	
 
 												<div class="social-buttons" style="text-align:center;">
-													<a href="#" class="btn btn-fb"  onclick="FB.login();"><i class="fa fa-facebook"></i> Facebook</a>
+													<!-- <a href="#" class="btn btn-fb" onclick="FB.login();"><i class="fa fa-facebook"></i> Facebook</a> -->
+													<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size="large">Facebook 
+													</fb:login-button>
+													<!-- <br/><br/>
+													<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false" style="width:200px;">Facebook</div> -->
+													
 												</div>
 										</div>
 										
@@ -562,6 +580,7 @@
 					</div>
 					
 					<div class="modal-footer">
+						<a data-toggle="modal" href="#couponMain" class="btn btn-primary" id ="coupon_Registration">쿠폰등록</a>
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 					</div>
 				</div>
@@ -830,8 +849,6 @@
 		</div>
 	
 		<!-- 회원관리 - 마이페이지 -->
-		<a data-toggle="modal" href="#blogmap_myPage" class="btn btn-primary">blogMapMypage</a>
-		<br/><br/>
 		<!-- 마이페이지 -->
 		<div class="modal fade" id="blogmap_myPage" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -1076,7 +1093,7 @@
 
 		<!-- 메시지박스 - 메시지 삭제 -->
 		<div class="modal fade" id="blogMapCoupon" data-backdrop="static">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

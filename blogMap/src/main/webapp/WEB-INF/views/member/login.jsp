@@ -97,14 +97,68 @@
 	
 	
     <script>
+    /* function checkLoginState() {
+        FB.getLoginStatus(function(response) {
+          statusChangeCallback(response);
+        });
+      } */
+
       window.fbAsyncInit = function() {
         FB.init({
-          appId      : '689268857840454', // 앱 ID
+          appId      : '371551513047868', // 앱 ID
           status     : true,          // 로그인 상태를 확인
           cookie     : true,          // 쿠키허용
-          xfbml      : true           // parse XFBML
+          xfbml      : true,        // parse XFBML
+          oauth  : true // enable OAuth 2.0
         });
        
+        //---
+       /*   (function(d){
+
+            var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+
+            js = d.createElement('script'); js.id = id; js.async = true;
+
+            js.src = "//connect.facebook.net/en_US/all.js";
+
+            d.getElementsByTagName('head')[0].appendChild(js);
+
+          }(document));   //기본적으로 페이스북과 연동하는 세팅 입니다. 같이 써주면 됩니다.
+		
+        
+
+        	 
+
+        	 
+
+        	FB.login(function(response) {
+
+        	if (response.authResponse) {
+        		alert("a");
+        		checkLoginState();
+        	     // callback 영역입니다. 자신의 브라우저가 페북에 연동되면 여기로직을 처리 하게 되죠
+
+        	} else {
+        		alert("b");
+        	     //오류가 났거나 연동이 실패 했을때 처리 하는부분..... 
+
+        	       }
+
+        	     }
+				
+        	 , {scope: "public_profile,email"} 
+
+        	);
+ */
+        	
+    
+          
+       //---
+		
+		
+          
+          
+          
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
                 
@@ -147,6 +201,7 @@
             	 					alert("로그인 성공");
             	 					
             	 					$("#blogmap_before_login span").remove();
+            	 					$("#blogmap_main_myPage").css("display","inline-block");
             	 					$("#blogmap_before_login").attr("data-toggle","");
             	 					$("#login_text").text("Logout");
             	 					
@@ -171,13 +226,13 @@
                 });    
                  
             } else if (response.status === 'not_authorized') {
-
+				//alert("aa");
             } else {
-                
+                //alert("bb");
             }
             
             
-        });
+        },{scope: 'public_profile,email'});
          FB.Event.subscribe('auth.login', function(response) {
         	 //$("#blogmap_login_bar").fadeOut();
 			 //$("#blogmap_after_login").css("display","block");
@@ -203,7 +258,9 @@
  
    <!--  <fb:login-button show-faces="false" width="200" max-rows="1"></fb:login-button> -->
 	<!-- <a href="#" onclick="FB.login();">[login]</a> -->
-<!-- 페북 로그인시 사용자 정보 출력 -->    
+<!-- 페북 로그인시 사용자 정보 출력 -->  
+ 
+
     <p>사용자정보 출력</p>
     <div align="left">
      <!--   <img id="image"/>-->

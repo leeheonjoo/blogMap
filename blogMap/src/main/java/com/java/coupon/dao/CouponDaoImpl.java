@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.java.coupon.dto.CouponDto;
 import com.java.partner.dto.PartnerDto;
 
 @Component
@@ -22,14 +23,14 @@ public int getCouponCount() {
 }
 
 @Override
-public List<PartnerDto> getCouponList_L() {
-	List<PartnerDto> list=session.selectList("dao.CouponMapper.couponList_L");
+public List<CouponDto> getCouponList_L(String member_id) {
+	List<CouponDto> list=session.selectList("dao.CouponMapper.couponList_L", member_id);
 	return list;
 }
 
 @Override
-public List<PartnerDto> getCouponList_S() {
-	List<PartnerDto> list=session.selectList("dao.CouponMapper.couponList_S");
+public List<CouponDto> getCouponList_S(String member_id) {
+	List<CouponDto> list=session.selectList("dao.CouponMapper.couponList_S", member_id);
 	return list;
 }
 
