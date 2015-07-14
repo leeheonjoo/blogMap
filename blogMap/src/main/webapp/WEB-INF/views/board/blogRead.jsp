@@ -136,7 +136,10 @@ $(function() {
 })
 	
 });
-
+function replyUpdate() {
+	var a=$(this).text();
+	alert(a);
+}
 
 </script>
 </head>
@@ -252,8 +255,8 @@ $(function() {
 			<span></span>
 			<span></span>
 			<span>
-				<a href="javascript:upSelectToServer()">수정</a>
-				<a href="javascript:deleteToServer()">삭제</a>
+				<button>수정</button>
+				<button>삭제</button>
 			</span>
 		</div>
 	<div id="listAllDiv">
