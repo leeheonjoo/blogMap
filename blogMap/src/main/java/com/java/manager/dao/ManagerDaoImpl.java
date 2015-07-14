@@ -121,11 +121,31 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
+	public int couponCancle(int couponNo) {
+		// TODO Auto-generated method stub
+		return session.update("dao.ManagerMapper.couponCancle", couponNo);
+	}
+	
+	@Override
+	public void couponCancleLog(int couponNo) {
+		// TODO Auto-generated method stub
+		session.insert("dao.ManagerMapper.couponCancleLog", couponNo);
+	}
+	
+	@Override
+	public CouponDto couponDetail(int couponNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("dao.ManagerMapper.couponDetail", couponNo);
+	}
+	
+	@Override
 	public PartnerDto partnerDetail(int partnerNo) {
 		// TODO Auto-generated method stub
 		return session.selectOne("dao.ManagerMapper.partnerDetail", partnerNo);
 	}
+	
+	
+	
 
-	
-	
+
 }

@@ -383,6 +383,50 @@ public class ManagerServiceImpl implements ManagerService {
 	}
 	
 	@Override
+	public void couponCancle(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int couponNo=Integer.parseInt(request.getParameter("couponNo"));
+		logger.info("couponNo:" + couponNo);
+		
+		int check=managerDao.couponCancle(couponNo);
+		logger.info("couponCancle check :" + check);
+		
+		if(check == 1){
+			managerDao.couponCancleLog(couponNo);	// 관리자 로그 저장
+		}
+		
+		Gson gson=new Gson();					//Gson의 객체를 생성
+		String json=gson.toJson(check);			//Log를 json으로 변환
+		
+		logger.info("json: " + json);
+		
+		mav.addObject("json", json);
+		
+		
+	}
+	
+	public void couponDetail(ModelAndView mav){
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int coupon_no=Integer.parseInt(request.getParameter("coupon_no"));
+		logger.info("coupon_no : " + coupon_no);
+		
+		CouponDto couponDto=managerDao.couponDetail(coupon_no);
+		logger.info("couponDto:" + couponDto);
+		
+		Gson gson=new Gson();					//Gson의 객체를 생성
+		String json=gson.toJson(couponDto);			//Log를 json으로 변환
+		logger.info("json: " + json);
+		
+		mav.addObject("json", json);			
+	}
+	
+	@Override
 	public void partnerDetail(ModelAndView mav) {
 		// TODO Auto-generated method stub
 		Map<String, Object> map=mav.getModelMap();
@@ -402,6 +446,7 @@ public class ManagerServiceImpl implements ManagerService {
 		mav.addObject("json", json);			
 	}
 
+	
 	
 	
 	
