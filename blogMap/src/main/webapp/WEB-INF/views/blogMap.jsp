@@ -185,7 +185,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<a data-toggle="modal" href="#blogListMain">
-									<img src="${root}/css/blogMap/images/search.png" class="img-responsive"/>
+									<img src="${root}/images/blogMap/search.png" class="img-responsive"/>
 								</a>
 							</div>
 						</div>
@@ -223,7 +223,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<a data-toggle="modal" href="#blogMapWrite">
-									<img src="${root}/css/blogMap/images/write_go.png" class="img-responsive"/>
+									<img src="${root}/images/blogMap/write_go.png" class="img-responsive"/>
 								</a>
 							</div>
 						</div>
@@ -240,7 +240,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<a data-toggle="modal" href="#blogMapCoupon">
-									<img src="${root}/css/blogMap/images/coupon_2.png" class="img-responsive"/>
+									<img src="${root}/images/blogMap/coupon_2.png" class="img-responsive"/>
 								</a>
 							</div>
 						</div>
@@ -390,7 +390,7 @@
 				</div>
 		</div>
 		<div style="text-align:right;">
-			<a data-toggle="modal" href="#ManagerMain"><img src="${root}/css/blogMap/images/gear_24.png"></img></a>
+			<a data-toggle="modal" href="#ManagerMain"><img src="${root}/images/blogMap/gear_24.png"></img></a>
 			
 		</div>
 
