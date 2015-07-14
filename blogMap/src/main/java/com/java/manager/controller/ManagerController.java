@@ -103,6 +103,12 @@ public class ManagerController {
 		}
 	}
 	
+	/**
+	 * @name:searchMemberType
+	 * @date:2015. 7. 14.
+	 * @author:이동희
+	 * @description: 회원가입 유형으로 검색하는 메소드
+	 */
 	@RequestMapping("/manager/searchMemberType.do")
 	public void searchMemberType(HttpServletRequest request, HttpServletResponse response){
 		logger.info("Manager searchMemberType Start");
@@ -359,6 +365,55 @@ public class ManagerController {
 		mav.addObject("response", response);
 		
 		managerService.couponSubmit(mav);
+		
+		Map<String, Object> map=mav.getModel();
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * @name:couponCancle
+	 * @date:2015. 7. 14.
+	 * @author:이동희
+	 * @description: 쿠폰발행 취소하는 메소드
+	 */
+	@RequestMapping("/manager/couponCancle.do")
+	public void couponCancle(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager CouponCancle Start");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.couponCancle(mav);
+		
+		Map<String, Object> map=mav.getModel();
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@RequestMapping("/manager/couponDetail.do")
+	public void couponDetail(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager CouponDetail Start");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.couponDetail(mav);
 		
 		Map<String, Object> map=mav.getModel();
 		String json=(String)map.get("json");

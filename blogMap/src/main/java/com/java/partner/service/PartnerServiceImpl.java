@@ -54,7 +54,8 @@ public class PartnerServiceImpl implements PartnerService {
 		logger.info(partnerDto.getPartner_addr());
 	
 		boolean isSuccess = false;			//성공했는지 실패했는지 여부 확인한다
-		String uploadPath = "c:/file/";
+		String uploadPath = request.getSession().getServletContext().getRealPath("/images");
+		logger.info(uploadPath);
 		File dir = new File(uploadPath);
 		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
 			dir.mkdirs();
@@ -216,16 +217,15 @@ public class PartnerServiceImpl implements PartnerService {
 		MultipartHttpServletRequest request=(MultipartHttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
-		logger.info("이건 뜨지?");
-		
-		
+		logger.info("111111111111111111111111111111");
+
 		CouponDto couponDto=(CouponDto)map.get("couponDto");
-		logger.info("시발?");
+		logger.info("222222222222222222222222222222222");
 		
 		String partner=(String) request.getSession().getAttribute("partner_no");
 		int partner_no=Integer.parseInt(partner);
 		
-		logger.info("야이놈아?");
+		logger.info("33333333333333333333333333333333333");
 		logger.info("partner_no : " + partner_no);
 		logger.info("" +couponDto.getPartner_no());
 		logger.info(couponDto.getCoupon_item());
@@ -233,7 +233,7 @@ public class PartnerServiceImpl implements PartnerService {
 		logger.info("" +couponDto.getCoupon_eymd());
 	
 		boolean isSuccess = false;			//성공했는지 실패했는지 여부 확인한다
-		String uploadPath = "c:/file/";
+		String uploadPath = request.getSession().getServletContext().getRealPath("/coupon_images");
 		File dir = new File(uploadPath);
 		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
 			dir.mkdirs();

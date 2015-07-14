@@ -44,6 +44,12 @@ public interface ManagerDao {
 		
 		public void couponSubmitLog(int couponNo);
 		
+		public int couponCancle(int couponNo);
+		
+		public void couponCancleLog(int couponNo);
+		
+		public CouponDto couponDetail(int coupon_no);
+		
 		public PartnerDto partnerDetail(int partnerNo);
 		
 
