@@ -539,7 +539,7 @@
 					<div class="modal-body" id="data-body">
 						<div class="row form-horizontal">
 							<div class="col-md-3">
-								<img class="img-responsive img" name="tour_image" src="http://placehold.it/300x300"/>
+								<img class="img-responsive img" id="partnerDetail_imagers"/>
 							</div>
 							<div class="col-md-9">
 								<div class="form-group">
@@ -676,7 +676,7 @@
                   <div class="form-group">
                      <label class="col-xs-4 control-label">쿠폰사진</label>
                      <div class="col-xs-8">
-                        <input type="file" class="form-control" name="img_src" id="img_src"/>
+                        <input type="file" class="form-control" name="img_src" id="coupon_imagers"/>
                      </div>
                   </div>
                </div>
