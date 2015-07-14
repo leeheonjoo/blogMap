@@ -32,14 +32,14 @@ $(function() {
 		<!-- 큰 사이즈 화면에서 탭 목록-->					
 		<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
 			<li role="presentation" class="active">
-				<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour&Restaurant</a>
+				<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
 			</li>
 		</ul>
 		
 		<!-- 작은 사이즈 화면에서 탭 목록-->
 		<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist">
 			<li role="presentation" class="active">
-				<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour&Restaurant</a>
+				<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
 			</li>
 		</ul>
 
@@ -50,10 +50,6 @@ $(function() {
 					<div class="col-md-2 col-sm-3 col-xs-4" id="tour_item" role="button" style="display:none;">
 						<div id="tour_info" class="thumbnail">	
 							<a data-toggle="modal" href="#modal_info" class="list_partner_no">
-								<!-- var filename=data.partner_pic_name;
-									var filepath=data.partner_pic_path;
-								$("#partner_imagers").attr("src", )
-								 -->
 								<img class="img-responsive" id="partner_imagers"/> 
 									<div class="caption">
 									<p id="list_partner_name"></p>
@@ -166,7 +162,7 @@ $(function() {
 							$("#tour_item:last-child #list_partner_name").append(data[i].partner_name);
 							$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
 							$("input[name='partner_no']").append(data[i].partner_no);
-							$("#tour_item:last-child #partner_imagers").attr("src","${root}/css/partner/images/"+data[i].partner_pic_name);
+							$("#tour_item:last-child #partner_imagers").attr("src","${root}/css/images/partner/"+data[i].partner_pic_name);
 							
 							// 각 업체를 클릭했을때 이벤트
 							$("#partner_" + data[i].partner_no).click(function(){
@@ -174,7 +170,7 @@ $(function() {
 								partnerData(data[i].partner_no);	
 							});
 						});
-					}
+					}	
 				});
 			/* }); */
 		
@@ -217,7 +213,8 @@ $(function() {
 						$("p[name='p_name']").html(data.partner_name);
 						$("p[name='p_phone']").html(data.partner_phone);
 						$("p[name='p_addr']").html(data.partner_addr);
-						$("p[name='tour_image']").attr(data.img_src);
+// 						$("img[id='partnerDetail_imagers']").attr("src","${root}/css/images/partner/"+data.partner_pic_name);
+						$("#data-body:#partnerDetail_imagers").attr("src","${root}/css/images/partner/"+data.partner_pic_name);
 					}
 				});
 			};
