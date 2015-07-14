@@ -64,8 +64,8 @@
 		select * from partner where partner_no=#{partnerNo}
 	</select>
 	
-	<select id="getCouponData" resultType="com.java.coupon.dto.CouponDto">
-		select * from coupon
+	<select id="getCouponData" resultType="java.util.HashMap">
+		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no
 	</select>
 	
 	<update id="couponSubmit" parameterType="Integer">
@@ -84,8 +84,8 @@
 		insert into manager_log values(manager_log_seq.nextval, 'lucyman@nate.com', sysdate, '0005', #{couponNo})
 	</insert>
 	
-	<select id="couponDetail" parameterType="Integer" resultType="com.java.coupon.dto.CouponDto">
-		select * from coupon where coupon_no=#{couponNo}
+	<select id="couponDetail" parameterType="Integer" resultType="java.util.HashMap">
+		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no and c.coupon_no=#{couponNo}
 	</select>
 	
 	

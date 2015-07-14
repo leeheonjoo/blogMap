@@ -21,54 +21,54 @@
 			success:function(responseData){
 				$("#couponListResult").empty();		// 데이타를 가지고 오기전에 리셋 (중복삽입을 방지하기 위해)
 				var data=JSON.parse(responseData);	// 가지고 온 데이타를 data변수에 저장 
-				
+				alert(data.length)
 				if(!data){
 					alert("데이타가 없습니다.");
 					return false;
 				}
 				
 				$.each(data, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
-					var getbymd = new Date(data[i].coupon_bymd);	// 등록일 날짜 변환
+					var getbymd = new Date(data[i].COUPON_BYMD);	// 등록일 날짜 변환
 					var byear = getbymd.getFullYear();
 					var bmonth = getbymd.getMonth() + 1;
 					var bday = getbymd.getDate();
 					var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
 					//alert(bymd);
 					
-					var geteymd = new Date(data[i].coupon_eymd);	// 승인일 날짜 변환
+					var geteymd = new Date(data[i].COUPON_EYMD);	// 승인일 날짜 변환
 					var eyear = geteymd.getFullYear();
 					var emonth = geteymd.getMonth() + 1;
 					var eday = geteymd.getDate();
 					var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
 					//alert(eymd);
 					
-					if(data[i].coupon_yn == "N"){
+					if(data[i].COUPON_YN == "N"){
 						$("#couponListResult").append("<tr style='text-align:center;'>"
-								+ "<td>" + data[i].coupon_no + "</td>"			// 아이디
-								+ "<td>" + data[i].partner_no + "</td>"			// 이름	
-								+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].coupon_no+"'>" + data[i].coupon_item + "</a></td>"		//
-								+ "<td>" + data[i].coupon_discount + "</td>"		//							
+								+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
+								+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
+								+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
+								+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
 								+ "<td>" + bymd + "</td>"						// 등록일
 								+ "<td>" + eymd + "</td>"		//
 								+ "<td>"
-								+"<input type='button' id='coupon' value = '승인' name='"+data[i].coupon_no+"'/></td>"
+								+"<input type='button' id='coupon' value = '승인' name='"+data[i].COUPON_NO+"'/></td>"
 								+ "</tr>");
-					}else if(data[i].coupon_yn =="Y"){
+					}else if(data[i].COUPON_YN =="Y"){
 						$("#couponListResult").append("<tr style='text-align:center;'>"
-								+ "<td>" + data[i].coupon_no + "</td>"			// 아이디
-								+ "<td>" + data[i].partner_no + "</td>"			// 이름	
-								+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].coupon_no+"'>" + data[i].coupon_item + "</a></td>"		//
-								+ "<td>" + data[i].coupon_discount + "</td>"		//							
+								+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
+								+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
+								+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
+								+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
 								+ "<td>" + bymd + "</td>"						// 등록일
 								+ "<td>" + eymd + "</td>"		//
 								+ "<td>"
-								+"<input type='button' id='coupon' value = '취소' name='"+data[i].coupon_no+"'/></td>"
+								+"<input type='button' id='coupon' value = '취소' name='"+data[i].COUPON_NO+"'/></td>"
 								+ "</tr>");
 					}
 					
-					$("#coupon"+data[i].coupon_no).click(function(){
+					$("#coupon"+data[i].COUPON_NO).click(function(){
 						/* $("#partner_data-body").empty(); */
-						couponDetail(data[i].coupon_no);
+						couponDetail(data[i].COUPON_NO);
 					});
 					
 				});
@@ -163,20 +163,20 @@
 				 success:function(responseData){
 					var data=JSON.parse(responseData);
 					//var filename=data.partner_pic_name
-					alert(data.coupon_pic_name);
+					alert(data[0].PARTNER_NAME);
 					$("#couponDetailResult").append($("#couponDetailMain").clone().css("display","block"));
-					$("#couponDetailMain:last-child #coupon_img").attr("src", "${root}/css/coupon/images/"+data.coupon_pic_name);
-					$("#couponDetailMain:last-child #partner_no").html(data.partner_no);
-					$("#couponDetailMain:last-child #coupon_item").html(data.coupon_item);
-					$("#couponDetailMain:last-child #coupon_discount").html(data.coupon_discount);
-					$("#couponDetailMain:last-child #coupon_bymd").html(data.coupon_bymd);
-					$("#couponDetailMain:last-child #coupon_eymd").html(data.coupon_eymd);					
-					if(data.coupon_yn == "Y"){
+					$("#couponDetailMain:last-child #coupon_img").attr("src", "${root}/css/coupon/images/"+data[0].COUPON_PIC_NAME);
+					$("#couponDetailMain:last-child #partner_no").html(data[0].PARTNER_NAME);
+					$("#couponDetailMain:last-child #coupon_item").html(data[0].COUPON_ITEM);
+					$("#couponDetailMain:last-child #coupon_discount").html(data[0].COUPON_DISCOUNT);
+					$("#couponDetailMain:last-child #coupon_bymd").html(data[0].COUPON_BYMD);
+					$("#couponDetailMain:last-child #coupon_eymd").html(data[0].COUPON_EYMD);					
+					if(data[0].COUPON_YN == "Y"){
 						//$("#partner_submit").css("display", "none");
-						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data.coupon_no, "value":"삭제"});
-					}else if(data.coupon_yn == "N"){
+						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"삭제"});
+					}else if(data[0].COUPON_YN == "N"){
 						//$("#partner_delete").css("display", "none");
-						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data.coupon_no, "value":"승인"});
+						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"승인"});
 					} 
 					
 					$("#coupon[value='취소']").click(function(){
@@ -215,13 +215,13 @@
 
 <div class="caption">
 
-	<div class="row" id="searchTag">
-			<input type="button" id="getPartnerList" value="리셋"/>
-			<input type="radio" name="partner_yn" id="y"/><span>승인업체</span> &nbsp;&nbsp;
-			<input type="radio" name="partner_yn" id="n"/><span>미승인업체</span>&nbsp;&nbsp;
-			<input type="text" placeholder="Search" id="searchTag"/> 
+	<div>
+			<input type="button" id="getPartnerList" value="Reset"/>&nbsp;&nbsp;
+			<input type="radio" name="coupon_yn" id="y"/><span>Approval</span> &nbsp;&nbsp;
+			<input type="radio" name="coupon_yn" id="n"/><span>Disapproved</span>&nbsp;&nbsp;
+			<input type="text" placeholder="Name Search" id="searchTag"/> 
 			<input type="submit" id="searchPartner" value="Search"/>	
-	</div>
+	</div><br/>
 	
 	<div>
 		<div class="span7">   
