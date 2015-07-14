@@ -174,34 +174,34 @@ function replyUpdate() {
     <!-- Indicators -->
     <ol class="carousel-indicators">
       <li data-target=".carousel" data-slide-to="0" class="active"></li>
-      <li data-target=".carousel" data-slide-to="1"></li>
-      <li data-target=".carousel" data-slide-to="2"></li>
-      <li data-target=".carousel" data-slide-to="3"></li>
-      <li data-target=".carousel" data-slide-to="4"></li>
+<!--       <li data-target=".carousel" data-slide-to="1"></li> -->
+<!--       <li data-target=".carousel" data-slide-to="2"></li> -->
+<!--       <li data-target=".carousel" data-slide-to="3"></li> -->
+<!--       <li data-target=".carousel" data-slide-to="4"></li> -->
     </ol>
 
     <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
+    <div id="imageSlideBox" class="carousel-inner" role="listbox">
       <div class="item active">
         <img src="${root }/css/board/images/no_detail_img.gif">
-        <div class="carousel-caption">Görsel #1</div>
+        <div class="carousel-caption">이미지가 없습니다.</div>
       </div>
-      <div class="item">
-        <img src="">
-        <div class="carousel-caption">Görsel #2</div>
-      </div>
-      <div class="item">
-        <img src="">
-        <div class="carousel-caption">Görsel #3</div>
-      </div>
-      <div class="item">
-        <img src="">
-        <div class="carousel-caption">Görsel #4</div>
-      </div>
-      <div class="item">
-        <img src="">
-        <div class="carousel-caption">Görsel #5</div>
-      </div>
+<!--       <div class="item"> -->
+<!--         <img src=""> -->
+<!--         <div class="carousel-caption">Görsel #2</div> -->
+<!--       </div> -->
+<!--       <div class="item"> -->
+<!--         <img src=""> -->
+<!--         <div class="carousel-caption">Görsel #3</div> -->
+<!--       </div> -->
+<!--       <div class="item"> -->
+<!--         <img src=""> -->
+<!--         <div class="carousel-caption">Görsel #4</div> -->
+<!--       </div> -->
+<!--       <div class="item"> -->
+<!--         <img src=""> -->
+<!--         <div class="carousel-caption">Görsel #5</div> -->
+<!--       </div> -->
     </div>
 
     <!-- Controls -->

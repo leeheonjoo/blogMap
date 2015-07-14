@@ -164,7 +164,7 @@ public class BoardReadController {
 		mav.addObject("request",request);
 		mav.addObject("response",response);
 		
-		boardReadService.blogReadDetailImg(mav);
+		boardReadService.blogReadDetailImg(mav); 
 		
 		
 	}

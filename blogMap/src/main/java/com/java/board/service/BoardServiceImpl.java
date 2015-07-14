@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
@@ -437,7 +438,6 @@ public class BoardServiceImpl implements BoardService {
 				try{
 					
 					String dir = "c:/file/blogWriteImages";
-					
 					
 					file=new File(dir,originalNames[j]);
 					if (!file.isDirectory()) {			//파일이 존재하지 않을 때 
