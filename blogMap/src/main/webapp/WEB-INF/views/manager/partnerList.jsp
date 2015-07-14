@@ -164,12 +164,11 @@
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					var data=JSON.parse(responseData);
-					
-					var filename=data.partner_pic_name
+					//var filename=data.partner_pic_name
 					
 					$("#partnerDetailResult").append($("#partnerDetailMain").clone().css("display","block"));
 					$("#partnerDetailMain:last-child #member_id").html(data.member_id);
-					$("#partnerDetailMain:last-child #partner_img").attr("src", "${root}/css/partner/images/"+filename);
+					$("#partnerDetailMain:last-child #partner_img").attr("src", "${root}/css/partner/images/"+data.partner_pic_name);
 					$("#partnerDetailMain:last-child #partner_name").html(data.partner_name);
 					$("#partnerDetailMain:last-child #partner_phone").html(data.partner_phone);
 					$("#partnerDetailMain:last-child #partner_address").html(data.partner_addr);

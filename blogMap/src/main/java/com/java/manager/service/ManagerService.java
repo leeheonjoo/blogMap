@@ -30,6 +30,10 @@ public interface ManagerService {
 	
 	public void couponSubmit(ModelAndView mav);
 	
+	public void couponCancle(ModelAndView mav);
+	
+	public void couponDetail(ModelAndView mav);
+	
 	public void partnerDetail(ModelAndView mav);
 	
 	
