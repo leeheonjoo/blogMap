@@ -36,7 +36,6 @@ public class BoardDaoImpl implements BoardDao {
 	 * @author : 황준
 	 * @description : 블로그 작성시 불러올 카테고리 목록
 	 */
-	
 	@Override
 	public List<String> getHeaderCondition() {
 		logger.info("BoardDao getHeaderCondition DAO-------------------------");
