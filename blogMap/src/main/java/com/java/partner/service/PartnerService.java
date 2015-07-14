@@ -19,6 +19,8 @@ public interface PartnerService {
 
 	public void getRestaurantPartnerListDate(ModelAndView mav);
 	
-	public void tourSerch(ModelAndView mav);
+	public boolean couponWrite(ModelAndView mav);
+	
+	public void couponList(ModelAndView mav);
 	
 }

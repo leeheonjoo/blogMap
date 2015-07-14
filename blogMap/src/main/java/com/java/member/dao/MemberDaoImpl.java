@@ -73,8 +73,12 @@ public class MemberDaoImpl implements MemberDao {
 		int check = 0;
 		String id = sqlSession.selectOne("dao.MemberMapper.fbRegisterCheck",member_id);
 
-		if (id != null)
+		if (id != null){
 			check = 1;
+		}else{
+			check=0;
+		}
+			
 		return check;
 	}
 

@@ -4,9 +4,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface ManagerService {
 	
-	public void getData(ModelAndView mav);
+	public void getData(ModelAndView mav);					// 모든 회원정보 가져오기
 	
-	public void memberDel(ModelAndView mav);
+	public void memberDel(ModelAndView mav);				// 회원 삭제
+	
+	public void getSearchMemberDate(ModelAndView mav);		// 회원 검색  
+	
+	public void getSearchMemberType(ModelAndView mav);
 	
 	public void getPartnerDate(ModelAndView mav);
 	
@@ -27,4 +31,6 @@ public interface ManagerService {
 	public void couponSubmit(ModelAndView mav);
 	
 	public void partnerDetail(ModelAndView mav);
+	
+	
 }

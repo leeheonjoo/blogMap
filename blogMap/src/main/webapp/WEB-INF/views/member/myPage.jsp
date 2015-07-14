@@ -12,7 +12,7 @@ if(sessionStorage.getItem('email')!=null){
 $(function(){
 	var startPage=0; 
 	var endPage=0;
-	var pageBlock=1;
+	var pageBlock=10;
 	$.ajax({
 		type:'POST',
 		url:"${root}/member/myPage.do",
@@ -36,8 +36,9 @@ $(function(){
 			$("#myPage_member_joindate").text(memberData.member_joindate);
 			//$("#myPage_member_joindate").attr("disabled","disabled");
 			
-			$("#myPage_member_point").val(data[1]);
-			$("#myPage_member_point").attr("disabled","disabled");
+			$("#myPage_member_point_total").text(data[1]+"points");
+			/* $("#myPage_member_point").val(data[1]);
+			$("#myPage_member_point").attr("disabled","disabled"); */
 			
 			$("#myPage_member_boardCount").val(data[2]);
 			$("#myPage_member_boardCount").attr("disabled","disabled");
@@ -89,15 +90,19 @@ $(function(){
 				
 				//$("#myPage_member_point_list").empty();
 				//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
-				$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+				//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+				$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 				var point_data=JSON.parse(data[0]);
 				
 				
 				$.each(point_data,function(i){
 					//alert(data[i].BOARD_TITLE);
 					//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-					$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-					
+					//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+					$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+					+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
+					+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+					+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 				});
 				
 				if(endPage>pageCount){
@@ -151,13 +156,18 @@ $(function(){
 								$("#myPage_member_point_list_title").empty();
 								$("#myPage_member_point_list_content").empty();
 								//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
-								$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+								//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+								$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 								var point_data=JSON.parse(data[0]);
 								
 								$.each(point_data,function(i){
 									//alert(data[i].BOARD_TITLE);
 									//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-									$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+									//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+									$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+											+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
+											+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+											+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 								});
 							}
 						});
@@ -215,7 +225,7 @@ $(function(){
 				var boardSize=data[1];
 				var count=data[2];
 				var currentPage=data[3];
-				var pageBlock=1;
+				var pageBlock=10;
 				var pageCount=count/boardSize+(count%boardSize==0 ? 0:1);
 				alert(pageCount);
 				startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
@@ -225,13 +235,18 @@ $(function(){
 				$("#myPage_member_point_list_title").empty();
 				$("#myPage_member_point_list_content").empty();
 				//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
-				$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+				//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+				$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 				var point_data=JSON.parse(data[0]);
 				
 				$.each(point_data,function(i){
 					//alert(data[i].BOARD_TITLE);
 					//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-					$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+					//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+					$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+							+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
+							+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+							+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 				});
 				
 			/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -284,12 +299,17 @@ $(function(){
 								$("#myPage_member_point_list_title").empty();
 								$("#myPage_member_point_list_content").empty();
 								//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
-								$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+								//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+								$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 								var point_data=JSON.parse(data[0]);
 								$.each(point_data,function(i){
 									//alert(data[i].BOARD_TITLE);
 									//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-									$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+									//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+									$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+											+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
+											+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+											+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 								});
 							}
 						});
@@ -340,7 +360,7 @@ $(function(){
 				var boardSize=data[1];
 				var count=data[2];
 				var currentPage=data[3];
-				var pageBlock=1;
+				var pageBlock=10;
 				var pageCount=count/boardSize+(count%boardSize==0 ? 0:1);
 				alert(pageCount);
 				startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
@@ -350,13 +370,18 @@ $(function(){
 				$("#myPage_member_point_list_title").empty();
 				$("#myPage_member_point_list_content").empty();
 				//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
-				$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+				//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+				$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 				var point_data=JSON.parse(data[0]);
 				
 				$.each(point_data,function(i){
 					//alert(data[i].BOARD_TITLE);
 					//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-					$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+					//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+					$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+							+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
+							+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+							+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 				});
 				
 			/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -406,13 +431,18 @@ $(function(){
 								$("#myPage_member_point_list_title").empty();
 								$("#myPage_member_point_list_content").empty();
 								//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
-								$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+								//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+								$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 								var point_data=JSON.parse(data[0]);
 								
 								$.each(point_data,function(i){
 									//alert(data[i].BOARD_TITLE);
 									//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-									$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+									//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+									$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+											+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
+											+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+											+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 								});
 							}
 						});
@@ -648,9 +678,9 @@ $(function(){
 		</div>
 		<div class="tab-pane text-style" id="tab2">
 			<div class="col-md-9 col-lg-9" id="myPage_member_point_list">
-				<h2>Stet clita</h2>
+				<h2 id="myPage_member_point_total"></h2>
 				
-		  		<table class="table table-user-information">
+		  		<!-- <table class="table table-user-information">
                     <tbody id="myPage_member_point_list_title">
 	                    
                     </tbody>
@@ -661,13 +691,31 @@ $(function(){
                     <tbody id="myPage_member_point_list_content">
 	                    
                     </tbody>
-                </table>
-                
-                <div id="myPage_member_point_paging">
+                </table> -->
+                			
+	
+				<div class="method">
+			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_point_list_title">
+			        </div>
+			
+					<div id="myPage_member_point_list_content">
+			        </div>
+			    </div>
+    
+    	<!-- 		<div id="myPage_member_point_paging">
 					<span id='myPage_member_point_list_before' style="display:'none';"><a href="#" id="point_paging_before">이전</a></span>
 					<span id='myPage_member_point_list_pageNum'></span>
 					<span id='myPage_member_point_list_after' style="display:'none';"><a href="#" id="point_paging_after">다음</a></span>
-				</div>
+				</div> -->
+					
+					<div id="myPage_member_point_paging" class="container">
+						<ul class="pagination">
+			              <li id="myPage_member_point_list_before" class="disabled" style="display:'none';"><a href="#" id="point_paging_before">«</a></li>
+			              <li id="myPage_member_point_list_pageNum"></li>
+			              <li id="myPage_member_point_list_after" style="display:'none';"><a href="#" id="point_paging_after">»</a></li>
+	           			</ul>
+					</div>
+				
             </div>
 		</div>
 		

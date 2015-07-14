@@ -31,6 +31,18 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
+	public List<MemberDto> getSearchMemberData(String member_name) {	// 수정해야함
+		// TODO Auto-generated method stub
+		return session.selectList("dao.ManagerMapper.getSearchMemberList", member_name);
+	}
+	
+	@Override
+	public List<MemberDto> getSearchMemberType(String member_jointype) {
+		// TODO Auto-generated method stub
+		return session.selectList("dao.ManagerMapper.getSearchMemberType", member_jointype);
+	}
+	
+	@Override
 	public void delLog(String id) {
 		// TODO Auto-generated method stub
 		session.insert("dao.ManagerMapper.delLog", id);
@@ -55,7 +67,7 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public List<PartnerDto> getSearchPartnerData(String partner_name) {
+	public List<PartnerDto> getSearchPartnerData(String partner_name) {		
 		// TODO Auto-generated method stub				
 		return  session.selectList("dao.ManagerMapper.getSearchPartnerList", partner_name);
 	}
@@ -113,4 +125,7 @@ public class ManagerDaoImpl implements ManagerDao {
 		// TODO Auto-generated method stub
 		return session.selectOne("dao.ManagerMapper.partnerDetail", partnerNo);
 	}
+
+	
+	
 }
