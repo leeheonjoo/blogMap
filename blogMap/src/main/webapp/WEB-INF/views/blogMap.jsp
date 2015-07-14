@@ -849,8 +849,6 @@
 		</div>
 	
 		<!-- 회원관리 - 마이페이지 -->
-		<a data-toggle="modal" href="#blogmap_myPage" class="btn btn-primary">blogMapMypage</a>
-		<br/><br/>
 		<!-- 마이페이지 -->
 		<div class="modal fade" id="blogmap_myPage" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -1095,7 +1093,7 @@
 
 		<!-- 메시지박스 - 메시지 삭제 -->
 		<div class="modal fade" id="blogMapCoupon" data-backdrop="static">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

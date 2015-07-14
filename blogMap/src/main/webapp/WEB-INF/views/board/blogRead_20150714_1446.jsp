@@ -174,30 +174,25 @@ $(function() {
       <li data-target=".carousel" data-slide-to="1"></li>
       <li data-target=".carousel" data-slide-to="2"></li>
       <li data-target=".carousel" data-slide-to="3"></li>
-      <li data-target=".carousel" data-slide-to="4"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="${root }/css/board/images/no_detail_img.gif">
+        <img src="http://www.adobewordpress.com/wp-content/uploads/2014/02/wallpaper-thumb-941.jpg">
         <div class="carousel-caption">Görsel #1</div>
       </div>
       <div class="item">
-        <img src="">
+        <img src="http://www.adobewordpress.com/wp-content/uploads/2014/02/wallpaper-thumb-101.jpg">
         <div class="carousel-caption">Görsel #2</div>
       </div>
       <div class="item">
-        <img src="">
+        <img src="http://www.adobewordpress.com/wp-content/uploads/2014/02/wallpaper-thumb-1051.jpg">
         <div class="carousel-caption">Görsel #3</div>
       </div>
       <div class="item">
-        <img src="">
+        <img src="http://www.adobewordpress.com/wp-content/uploads/2013/07/wallpaper-thumb-74.jpg">
         <div class="carousel-caption">Görsel #4</div>
-      </div>
-      <div class="item">
-        <img src="">
-        <div class="carousel-caption">Görsel #5</div>
       </div>
     </div>
 
