@@ -358,11 +358,11 @@
 	<br/><br/>
 
 	<div class="container" style="max-width:1170px; height:50px; padding:0 0 0 0;">
-		<div class="navbar navbar-inverse" style="height:50px; color:gray; width:inherit;">
+		<div class="navbar" style="height:50px; color:gray; width:inherit;">
 				<div class="col-sm-10 col-xs-9">
 					<div style="width:100%; height:50px; text-align:center;">
 						<p style="width:100%; line-height:46px;">
-							<b style="width:100%;">경기도 분당시 삼평동 752-18 유스페이스 B동</b>
+							<b style="width:100%;"></b>
 						</p>
 					</div>
 				</div>
@@ -1055,7 +1055,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">BlogMap</h4>
+						<h4 class="modal-title">Message</h4>
 					</div>
 					<div class="modal-body">
 						<jsp:include page="message/mainMessage.jsp"/>
@@ -1077,7 +1077,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">BlogMap</h5>
+						<h5 class="modal-title">MessageRead</h5>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
