@@ -163,14 +163,28 @@
 				 success:function(responseData){
 					var data=JSON.parse(responseData);
 					//var filename=data.partner_pic_name
-					alert(data[0].PARTNER_NAME);
+					//alert(data[0].PARTNER_NAME);
+					var getbymd = new Date(data[0].COUPON_BYMD);	// 등록일 날짜 변환
+					var byear = getbymd.getFullYear();
+					var bmonth = getbymd.getMonth() + 1;
+					var bday = getbymd.getDate();
+					var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+					//alert(bymd);
+					
+					var geteymd = new Date(data[0].COUPON_EYMD);	// 승인일 날짜 변환
+					var eyear = geteymd.getFullYear();
+					var emonth = geteymd.getMonth() + 1;
+					var eday = geteymd.getDate();
+					var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+					//alert(eymd);
+					
 					$("#couponDetailResult").append($("#couponDetailMain").clone().css("display","block"));
-					$("#couponDetailMain:last-child #coupon_img").attr("src", "${root}/css/coupon/images/"+data[0].COUPON_PIC_NAME);
+					$("#couponDetailMain:last-child #coupon_img").attr("src", "${root}/pds/coupon/"+data[0].COUPON_PIC_NAME);
 					$("#couponDetailMain:last-child #partner_no").html(data[0].PARTNER_NAME);
 					$("#couponDetailMain:last-child #coupon_item").html(data[0].COUPON_ITEM);
 					$("#couponDetailMain:last-child #coupon_discount").html(data[0].COUPON_DISCOUNT);
-					$("#couponDetailMain:last-child #coupon_bymd").html(data[0].COUPON_BYMD);
-					$("#couponDetailMain:last-child #coupon_eymd").html(data[0].COUPON_EYMD);					
+					$("#couponDetailMain:last-child #coupon_bymd").html(bymd);
+					$("#couponDetailMain:last-child #coupon_eymd").html(eymd);					
 					if(data[0].COUPON_YN == "Y"){
 						//$("#partner_submit").css("display", "none");
 						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"삭제"});
@@ -217,10 +231,10 @@
 
 	<div>
 			<input type="button" id="getPartnerList" value="Reset"/>&nbsp;&nbsp;
-			<input type="radio" name="coupon_yn" id="y"/><span>Approval</span> &nbsp;&nbsp;
-			<input type="radio" name="coupon_yn" id="n"/><span>Disapproved</span>&nbsp;&nbsp;
+			<input type="radio" name="coupon_yn" id="y"/><span>승인쿠폰</span> &nbsp;&nbsp;
+			<input type="radio" name="coupon_yn" id="n"/><span>미승인쿠폰</span>&nbsp;&nbsp;
 			<input type="text" placeholder="Name Search" id="searchTag"/> 
-			<input type="submit" id="searchPartner" value="Search"/>	
+			<input type="submit" id="searchCoupon" value="Search"/>	
 	</div><br/>
 	
 	<div>
@@ -250,38 +264,7 @@
 			</div> <!-- /widget -->
 	    </div>
 	</div>
-	</div>
-	
-	<!-- 
-	<div>
-회원정보 타이틀	
-		<div class="row" id="couponTitle" align="center">
-	       	<div class="col-md-1 col-sm-1 col-xs-1">순번</div>
-	        <div class="col-md-2 col-sm-2 col-xs-2">업체명</div>
-	        <div class="col-md-2 col-sm-2 col-xs-2">상품</div>
-	        <div class="col-md-2 col-sm-2 col-xs-2">할인율</div>
-	        <div class="col-md-2 col-sm-2 col-xs-2">시작일</div>
-	    	<div class="col-md-2 col-sm-2 col-xs-2">종료일</div>
-	    	<div class="col-md-1 col-sm-1 col-xs-1">구분</div>
-	    	
-  	  </div>
-
-쿠폰정보를 불러올 기본틀 		
-		<div class="row" id="couponList" style="display:none;" align="center">
-			<div class="col-md-1 col-sm-1 col-xs-1" id="couponNo"></div>
-	        <div class="col-md-2 col-sm-2 col-xs-2" id="partner"></div>
-	        <div class="col-md-2 col-sm-2 col-xs-2" id="item"></div>
-	        <div class="col-md-2 col-sm-2 col-xs-2" id="discount"></div>
-	        <div class="col-md-2 col-sm-2 col-xs-2" id="couponBymd"></div>
-	    	<div class="col-md-2 col-sm-2 col-xs-2" id="couponEymd"></div>
-	    	<div class="col-md-1 col-sm-1 col-xs-1">
-	    		<input id="coupon" type="button"/>
-	    	</div>
-		</div>
-
-회원정보를 삽입시킬 div테그	
-		<div class="row" id="couponListResult"></div>
-	</div> -->
+</div>
 </body>
 </html>
 
