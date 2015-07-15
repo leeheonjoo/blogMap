@@ -13,4 +13,12 @@
 		reply(reply_no,board_no,member_id,reply_content,reply_date) 
 		values(REPLY_REPLY_NO_SEQ.nextval,#{boardNo},#{member_id},#{reply_content},sysdate)
 	</insert>
+	
+	<update id="blogReadReplyUpdate" parameterType="java.util.HashMap">
+		update reply set reply_content=#{reply_content}, reply_date=current_date where reply_no=#{reply_no} and member_id=#{member_id}
+	</update>
+	
+	<delete id="blogReadReplyDelete" parameterType="java.util.HashMap">
+		delete from reply where reply_no=#{reply_no} and member_id=#{member_id} 
+	</delete>
 </mapper>

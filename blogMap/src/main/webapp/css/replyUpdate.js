@@ -3,9 +3,18 @@
  */
 var root=null;
 var updateDiv=null;
-function upSelectToServer(bunho,requestRoot){
+function upSelectToServer(bb){
+	
+	alert("들어온다.");
+	
+	alert(bb);
+	var bbb=$(bb).parents();
+	alert(bbb);
+	
+
+	//bunho,requestRoot
 	//alert(bunho + "," + root);
-	root=requestRoot;
+/*	root=requestRoot;
 	var params="bunho="+bunho;
 	var url=root + "/12_reply/replySelect.do?" + params;
 	
@@ -16,7 +25,7 @@ function upSelectToServer(bunho,requestRoot){
 		success:function(data){
 			upSelectProcess(data);
 		}
-	});
+	});*/
 }
 
 function upSelectProcess(data){

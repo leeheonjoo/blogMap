@@ -365,7 +365,14 @@ v\:* {
                                                          $("#reply_content_insert"+i+" > span:eq(1)").text(memberId);
                                                          $("#reply_content_insert"+i+" > span:eq(2)").text(replyContent);
                                                          $("#reply_content_insert"+i+" > span:eq(3)").text(replyfullDate);
+                                                         $("#reply_content_insert"+i+" > span:eq(4)").attr("id","reply_buttons"+i);
+                        								 $("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
+                        								 $("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
                                                          
+                        								 if(email!=memberId){
+                        										$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
+                        										$("#reply_buttons"+i+" > button:eq(1)").css("display","none");
+                        									}
                                                       });
                                                    }
                                                 },

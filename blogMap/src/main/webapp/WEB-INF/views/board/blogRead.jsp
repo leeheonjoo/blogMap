@@ -67,12 +67,7 @@
 $(function() {
 	var email=sessionStorage.getItem('email');
 	
-	$("#ggd").click(function() {
-		alert("하하");
-		$('[data-toggle="confirmation"]').confirmation(title);
-	})
-	
-	
+	//댓글입력 버튼 클릭시 
 	$("span[class='glyphicon glyphicon-ok']").click(function() {
 		var replyConent = $("#replyInsert").val();
 		$("#replyInsert").val("");
@@ -117,7 +112,16 @@ $(function() {
 								$("#reply_content_insert"+i+" > span:eq(1)").text(memberId);
 								$("#reply_content_insert"+i+" > span:eq(2)").text(replyContent);
 								$("#reply_content_insert"+i+" > span:eq(3)").text(replyfullDate);
+								$("#reply_content_insert"+i+" > span:eq(4)").attr("id","reply_buttons"+i);
+								$("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
+								$("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
 								
+								if(email!=memberId){
+									$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
+									$("#reply_buttons"+i+" > button:eq(1)").css("display","none");
+								}
+								
+												
 							});
 						},error: function(data) {
 							
@@ -136,7 +140,88 @@ $(function() {
 })
 	
 });
+function reply_update(UThis) {
+	var updateId=$(UThis).attr("id");
+	var index=updateId.substring(20,21);
+	var replyNo=$("#reply_content_insert"+index+" > span:eq(0)").text();
+	var memberId=$("#reply_content_insert"+index+" > span:eq(1)").text();
+	var reply=$("#reply_content_insert"+index+" > span:eq(2)").text();
+	$("#reply_content_insert"+index).append("<span id='upBunho"+index+"'></span>");
+	$("#upBunho"+index).append("<input id='newText' type='text' value='" + reply + "'/>");
+	$("#upBunho"+index).append("<input type='button' value='수정' id='up"+index+"'/>");
+	$("#upBunho"+index).append("<input type='button' value='취소' id='cancel"+index+"'/>");
+	
+	$("#up"+index).click(function(){
+		var replyContent=$("#newText").val();
+		
+		
+		 $.ajax({
+				type : 'post',
+				url : '${root}/board/blogReadReplyUpdate.do',
+				data : {
+					reply_no : replyNo,
+					reply_content: replyContent,
+					member_id: memberId
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success : function(data) {
+					
+					if(data!="0"){
+						alert("댓글 수정완료");
+						$("#reply_content_insert"+index+" > span:eq(2)").text(replyContent);
+						$("#upBunho"+index).remove();
+						
+					}
+				},
+				error: function(data) {
+					
+				}
+			})  
+	});
+	$("#cancel"+index).click(function(){
+		$("#upBunho"+index).remove();
+	});
+	
 
+	
+	
+}
+function reply_delete(DThis) {
+	var deleteId=$(DThis).attr('id');
+	var index=deleteId.substring(20,21);
+	var replyNo=$("#reply_content_insert"+index+" > span:eq(0)").text();
+	var memberId=$("#reply_content_insert"+index+" > span:eq(1)").text(); 
+	
+	if (confirm("정말 삭제하시겠습니까??") == true){ //확인
+		$.ajax({
+			type : 'post',
+			url : '${root}/board/blogReadReplyDelete.do',
+			data : {
+				reply_no : replyNo,
+				member_id: memberId
+			},
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			success : function(data) {
+				if(data!="0"){
+					alert("댓글삭제완료");
+					$("#reply_content_insert"+index).remove();
+				}
+			},
+			error: function(data) {
+				
+			}
+		}) 
+	}else{ //취소
+		return;
+	}
+	/* $("#reply_content_delete"+i).popConfirm({
+		title: "Delete",
+		content: "정말로 삭제 하시겠습니까?",
+		placement: "bottom"
+	});	 */
+	
+	
+}
 
 </script>
 </head>
@@ -242,8 +327,8 @@ $(function() {
 			<span></span>
 			<span></span>
 			<span>
-				<a href="javascript:upSelectToServer()">수정</a>
-				<a href="javascript:deleteToServer()">삭제</a>
+				<button onclick="reply_update(this)">수정</button>
+				<button onclick="reply_delete(this)">삭제</button>
 			</span>
 		</div>
 	<div id="listAllDiv">
