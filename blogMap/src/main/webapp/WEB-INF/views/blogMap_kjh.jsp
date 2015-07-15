@@ -68,7 +68,19 @@
 				//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
 				//$("#blogmap_login_bar").fadeOut();
 				$("#blogmap_before_login span").remove();
+				
+				/* if($("#blogmap_main_myPage b").text()=="MyPage"){
+					$("#blogmap_main_myPage").parent().remove();
+				} */
+				/* if(sessionStorage.getItem('jointype')=="0002"){
+					$("#blogmap_main_myPage").empty();
+				}
+				
+				$("#blogmap_main_myPage").append('<a id="blogmap_main_myPage" data-toggle="modal" href="#blogmap_myPage" class="btn" style="text-align:left;"><b>MyPage</b></a>'); */
+				
+				$("#blogmap_main_myPage").css("display","inline-block");
 				$("#blogmap_before_login").attr("data-toggle","");
+				
 				$("#login_text").text("Logout");
 				
 				if($("#login_text").text()=="Logout"){
@@ -108,7 +120,8 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav navbar-right">
-			      	<li> <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
+			      	<li><a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
+			      	<li><a id="blogmap_main_myPage" data-toggle="modal" href="#blogmap_myPage" class="btn" style="text-align:left; display:none"><b>MyPage</b></a></li>
 			        <li id="blogmap_login_bar" class="dropdown">
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a>
 						<ul id="login-dp" class="dropdown-menu">
@@ -567,6 +580,7 @@
 					</div>
 					
 					<div class="modal-footer">
+						<a data-toggle="modal" href="#couponMain" class="btn btn-primary" id ="coupon_Registration">쿠폰등록</a>
 						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 					</div>
 				</div>

@@ -28,8 +28,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.java.board.dto.BoardDto;
 import com.java.boardRead.dto.BoardReadDto;
+import com.java.coupon.dto.CouponDto;
 import com.java.member.dao.MemberDao;
 import com.java.member.dto.MemberDto;
+import com.java.partner.dto.PartnerDto;
 import com.java.point.dto.PointDto;
 
 /**
@@ -373,14 +375,17 @@ public class MemberServiceImpl implements MemberService {
 		String totalPoint=String.valueOf(memberDao.totalPoint(member_id));
 		String totalBoard=String.valueOf(memberDao.totalBoard(member_id));
 		String totalFavorite=String.valueOf(memberDao.totalFavorite(member_id));
+		String totalCoupon=String.valueOf(memberDao.totalCoupon(member_id));
+		
 		logger.info("totalPoint:"+totalPoint);
 		logger.info("totalBoard:"+totalBoard);
 		logger.info("totalFavorite:"+totalFavorite);
+		logger.info("totalCoupon:"+totalCoupon);
 		
 		Gson gson=new Gson();
 		String json=gson.toJson(memberDto);
 		
-		String info=json+"|"+totalPoint+"|"+totalBoard +"|"+totalFavorite;
+		String info=json+"|"+totalPoint+"|"+totalBoard +"|"+totalFavorite+"|"+totalCoupon;
 		try {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(info);
@@ -473,7 +478,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		int currentPage=Integer.parseInt(pageNumber);
 		
-		int boardSize=1;
+		int boardSize=3;
 		int startRow=(currentPage-1)*boardSize+1;
 		int endRow=currentPage*boardSize;
 		int count=memberDao.point_info_count(member_id);
@@ -576,6 +581,59 @@ public class MemberServiceImpl implements MemberService {
 			e.printStackTrace();
 		}
 		
+	}
+
+	/**
+	 * @name:coupon_info
+	 * @date:2015. 7. 14.
+	 * @author:김정훈
+	 * @description:
+	 */
+	@Override
+	public void coupon_info(ModelAndView mav) {
+		Map<String,Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpServletResponse response = (HttpServletResponse) map.get("response");
+		
+		String member_id=request.getParameter("member_id");
+		logger.info("member_id:"+member_id);
+		
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
+		
+		int currentPage=Integer.parseInt(pageNumber);
+		
+		int boardSize=3;
+		int startRow=(currentPage-1)*boardSize+1;
+		int endRow=currentPage*boardSize;
+		int count=memberDao.totalCoupon(member_id);
+		
+		logger.info("count:"+count);
+		List<PartnerDto> partnerList=null;
+		List<CouponDto> couponList=null;
+		HashMap<String,Object> hMap=new HashMap<String,Object>();
+		hMap.put("partnerList", partnerList);
+		hMap.put("couponList", couponList);
+		
+		List<HashMap<String,Object>> coupon_info_list=new ArrayList<HashMap<String,Object>>();
+		coupon_info_list=memberDao.coupon_info(member_id,startRow,endRow);
+		
+		
+		//logger.info("coupon_info_list:"+coupon_info_list.size());
+		
+		Gson gson=new Gson();
+		String couponInfo_json=gson.toJson(coupon_info_list);
+		System.out.println(couponInfo_json);
+		
+		String coupon_info_pack=couponInfo_json+"|"+boardSize+"|"+count+"|"+currentPage;
+		
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(coupon_info_pack);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

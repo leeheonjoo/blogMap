@@ -30,5 +30,7 @@ public interface MemberService {
 
 	public void favorite_info(ModelAndView mav);
 
+	public void coupon_info(ModelAndView mav);
+
 	
 }

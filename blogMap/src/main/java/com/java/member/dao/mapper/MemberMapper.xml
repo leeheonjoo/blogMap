@@ -70,4 +70,12 @@
 	<select id="point_info_count" parameterType="String" resultType="Integer">
 		select nvl(count(*),0) from point_info where member_id=#{member_id}
 	</select>
+	
+	<select id="totalCoupon" parameterType="String" resultType="Integer">
+		select count(*) from coupon_issue where member_id=#{member_id}
+	</select>
+	
+	<select id="coupon_info" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		<![CDATA[select * from (select rownum rnum,x.* from (select a.coupon_no, a.coupon_item, a.coupon_bymd, a.coupon_eymd, a.coupon_pic_name, a.coupon_pic_path, p.partner_name,p.partner_phone,p.partner_addr from coupon a, partner p where p.partner_no=a.partner_no and a.coupon_no IN(select coupon_no from coupon_issue c,member m where c.member_id=m.member_id and m.member_id=#{member_id})) x) y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]> 
+	</select>
 </mapper>

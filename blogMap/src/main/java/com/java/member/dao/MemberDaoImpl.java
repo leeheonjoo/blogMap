@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.java.board.dto.BoardDto;
+import com.java.coupon.dto.CouponDto;
 import com.java.member.dto.MemberDto;
 import com.java.point.dto.PointDto;
 
@@ -196,6 +197,22 @@ public class MemberDaoImpl implements MemberDao {
 	public int point_info_count(String member_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("dao.MemberMapper.point_info_count",member_id);
+	}
+
+	@Override
+	public int totalCoupon(String member_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("dao.MemberMapper.totalCoupon",member_id);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> coupon_info(String member_id, int startRow,
+			int endRow) {
+		HashMap<String,Object> hMap=new HashMap<String,Object>();
+		hMap.put("member_id", member_id);
+		hMap.put("startRow", startRow);
+		hMap.put("endRow", endRow);
+		return sqlSession.selectList("dao.MemberMapper.coupon_info",hMap);
 	}
 
 	

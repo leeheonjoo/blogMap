@@ -233,4 +233,23 @@ public class MemberController {
 		
 		memberService.favorite_info(mav);
 	}
+	
+	
+	/**
+	 * @name:coupon_info
+	 * @date:2015. 7. 14.
+	 * @author:김정훈
+	 * @description:
+	 */
+	@RequestMapping(value="/member/coupon_info.do",method=RequestMethod.POST)
+	public void coupon_info(HttpServletRequest request,HttpServletResponse response){
+		logger.info("coupon_info------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		memberService.coupon_info(mav);
+		
+	}
 }

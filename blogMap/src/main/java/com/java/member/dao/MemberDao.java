@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.java.coupon.dto.CouponDto;
 import com.java.member.dto.MemberDto;
 
 public interface MemberDao {
@@ -41,6 +42,11 @@ public interface MemberDao {
 	public int totalFavorite(String member_id);
 
 	public int point_info_count(String member_id);
+
+	public int totalCoupon(String member_id);
+
+	public List<HashMap<String, Object>> coupon_info(String member_id, int startRow,
+			int endRow);
 
 	
 }
