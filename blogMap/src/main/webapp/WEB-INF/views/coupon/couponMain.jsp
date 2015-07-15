@@ -164,17 +164,14 @@ li { list-style-type:none;}
 					var partner_name=data[i].PARTNER_NAME;
 					alert("coupon L : "+pic + " / " + partner_name);
 					
-					var count=0;
-					count++;
-					$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
-					$("#coupon_slide_List_L:last-child #coupon_images1").attr("src", "${root}/css/coupon_images/" + pic);
+// 					for(var pageCount=0; pageCount < couponCount/8; pageCountCount++){
+// 						for(var couponCount=0; couponCount < 8; couponCount++){
+							$("#coupon_slide_List_L").append($("#coupon_slide_List_1").clone().css("display", "block"));
+							$("#coupon_slide_List_1:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+							$("#coupon_slide_List_1:last-child #coupon_images1").attr("src", "${root}/pds/coupon/" + pic);	
+// 						}	
+// 					}
 					
-					if(count == 8){
-						$("#coupon_slide_List_1").append($("#coupon_slide_List_L").clone());
-						$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
-						$("#coupon_slide_List_L:last-child #coupon_images1").attr("src", "${root}/css/coupon_images/" + pic);
-						return false;
-					}
 					/* $("#item1:last_child .phone").append(data[i].partner_phone);
 					$("#item1:last_child .addr").append(data[i].partner_addr); */
 					//$("#item1:last_child .img").attr('src', data.data_img);
@@ -208,32 +205,12 @@ li { list-style-type:none;}
 			<div class="carousel slide" id="myCarousel">
 		        <div class="carousel-inner col-md-12 col-sm-12 col-xs-12" id="coupon_List">
 		            <div class="item active">
-		            <div class="caption" id="coupon_slide_List_L">
-<!-- 		                    <ul class="thumbnails"> -->
-<!-- 		                        <li class="col-md-4 col-sm-4 col-xs-4"> -->
-<!-- 		    						<div class="fff"> -->
-<!-- 										<div class="thumbnail"> -->
-<!-- 											<a href="#"><img class="img-responsive" id="coupon_images"></a> -->
-<!-- 										</div> -->
-<!-- 		                            </div> -->
-<!-- 		                        </li> -->
-<!-- 		                        <li class="col-md-4 col-sm-4 col-xs-4"> -->
-<!-- 									<div class="fff"> -->
-<!-- 										<div class="thumbnail"> -->
-<!-- 											<a href="#"><img class="img-responsive" id="coupon_images"></a> -->
-<!-- 										</div> -->
-<!-- 		                            </div> -->
-<!-- 		                        </li> -->
-<!-- 		                        <li class="col-md-4 col-sm-4 col-xs-4"> -->
-<!-- 									<div class="fff"> -->
-<!-- 										<div class="thumbnail"> -->
-<!-- 											<a href="#"><img class="img-responsive" id="coupon_images"></a> -->
-<!-- 										</div> -->
-<!-- 		                            </div> -->
-<!-- 		                        </li> -->
-
-<!-- 		                    </ul> -->
-		                     <ul class="thumbnails">
+		       	    	<div class="caption" id="coupon_slide_List_L" style="display: none;">
+                   		</div>
+              		</div><!-- /Slide1 --> 
+		            
+		            <div class="item" id="coupon_slide_List_1">
+		            	<ul class="thumbnails">
 		                         <li class="col-md-3 col-sm-3 col-xs-3">
 		    						<div class="fff">
 										<div class="thumbnail">
@@ -241,61 +218,7 @@ li { list-style-type:none;}
 										</div>
 		                            </div>
 		                        </li>
-<!-- 		                         <li class="col-md-3 col-sm-3 col-xs-3"> -->
-<!-- 		    						<div class="fff"> -->
-<!-- 										<div class="thumbnail"> -->
-<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
-<!-- 										</div> -->
-<!-- 		                            </div> -->
-<!-- 		                        </li> -->
-<!-- 		                        <li class="col-md-3 col-sm-3 col-xs-3"> -->
-<!-- 		    						<div class="fff"> -->
-<!-- 										<div class="thumbnail"> -->
-<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
-<!-- 										</div> -->
-<!-- 		                            </div> -->
-<!-- 		                        </li> -->
-<!-- 		                        <li class="col-md-3 col-sm-3 col-xs-3"> -->
-<!-- 		    						<div class="fff"> -->
-<!-- 										<div class="thumbnail"> -->
-<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
-<!-- 										</div> -->
-<!-- 		                            </div> -->
-<!-- 		                        </li> -->
-<!-- 		                    </ul> -->
-<!-- 		                    <ul class="thumbnails"> -->
-<!-- 		                         <li class="col-md-3 col-sm-3 col-xs-3"> -->
-<!-- 		    						<div class="fff"> -->
-<!-- 										<div class="thumbnail"> -->
-<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
-<!-- 										</div> -->
-<!-- 		                            </div> -->
-<!-- 		                        </li> -->
-<!-- 		                         <li class="col-md-3 col-sm-3 col-xs-3"> -->
-<!-- 		    						<div class="fff"> -->
-<!-- 										<div class="thumbnail"> -->
-<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
-<!-- 										</div> -->
-<!-- 		                            </div> -->
-<!-- 		                        </li> -->
-<!-- 		                        <li class="col-md-3 col-sm-3 col-xs-3"> -->
-<!-- 		    						<div class="fff"> -->
-<!-- 										<div class="thumbnail"> -->
-<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
-<!-- 										</div> -->
-<!-- 		                            </div> -->
-<!-- 		                        </li> -->
-<!-- 		                        <li class="col-md-3 col-sm-3 col-xs-3"> -->
-<!-- 		    						<div class="fff"> -->
-<!-- 										<div class="thumbnail"> -->
-<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
-<!-- 										</div> -->
-<!-- 		                            </div> -->
-<!-- 		                        </li> -->
-		                    </ul>
-		                    </div>
-		              </div><!-- /Slide1 --> 
-		            <div class="item" id="coupon_slide_List_1">
+		                  	</ul>
 		              </div><!-- /Slide2 --> 
 		              
 		              
