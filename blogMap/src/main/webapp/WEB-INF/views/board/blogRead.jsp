@@ -7,7 +7,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="${root}/css/board/boardCarousel.css"/>
 <style type="text/css">
 .input-group-addon.primary {
     color: rgb(255, 255, 255);
@@ -59,10 +58,16 @@
 	float:left;
 }
 </style>
+<link rel="stylesheet" type="text/css" href="${root }/css/board/boardCarousel.css"/>
+<%-- <link rel="stylesheet" type="text/css" href="${root }/css/board/slick.css"/> --%>
+<!--  Add the new slick-theme.css if you want the default styling -->
+<%-- <link rel="stylesheet" type="text/css" href="${root }/css/board/slick-theme.css"/> --%>
 
 <script type="text/javascript" src="${root }/css/replyWrite.js"></script>
 <script type="text/javascript" src="${root }/css/replyDelete.js"></script>
 <script type="text/javascript" src="${root }/css/replyUpdate.js"></script>
+<%-- <script type="text/javascript" src="${root }/css/board/slick.js"></script> --%>
+<%-- <script type="text/javascript" src="${root }/css/board/boardCarousel.js"></script> --%>
 <script type="text/javascript">
 $(function() {
 	var email=sessionStorage.getItem('email');
@@ -220,9 +225,7 @@ function reply_delete(DThis) {
 		placement: "bottom"
 	});	 */
 	
-	
 }
-
 </script>
 </head>
 <body>
@@ -250,48 +253,59 @@ function reply_delete(DThis) {
 		<label>제목:</label>
 		<label></label>
 	</div>
-	
-<section class="awSlider">
-  <div  class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target=".carousel" data-slide-to="0" class="active"></li>
-      <li data-target=".carousel" data-slide-to="1"></li>
-    </ol>
 
-<!-- 	<div id="imgHidden" class="item" style="display:none;"> -->
-<!-- 	  <img src=""> -->
-<!-- 	  <div class="carousel-caption"></div> -->
-<!-- 	</div> -->
-
-    <!-- Wrapper for slides -->
-    <div id="imageSlideBox" class="carousel-inner" role="listbox">
-      <div class="item active">
-        <img src="${root }/css/board/images/no_detail_img.gif">
-        <div class="carousel-caption">이미지가 없습니다.</div>
-      </div>
-      <div class="item">
-        <img src="/images/board/1436888556546_a030_anwansoon.png">
-        <div class="carousel-caption">Görsel #2</div>
-      </div>
-    </div>
-
-    <!-- Controls -->
-    <a class="left carousel-control" href=".carousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Geri</span>
-    </a>
-    <a class="right carousel-control" href=".carousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">İleri</span>
-    </a>
-  </div>
-</section>
-	
 	<div id="blogRead_content">
 		<label>내용:</label>
 		<div></div>
 	</div>
+	
+	<!-- 이미지 슬라이드 -->
+<section class="section-white">
+  <div class="container">
+
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="http://placehold.it/800x400" alt="...">
+          <div class="carousel-caption">
+            <h2>Heading</h2>
+          </div>
+        </div>
+        <div class="item">
+          <img src="http://placehold.it/800x400" alt="...">
+          <div class="carousel-caption">
+            <h2>Heading</h2>
+          </div>
+        </div>
+        <div class="item">
+          <img src="http://placehold.it/800x400" alt="...">
+          <div class="carousel-caption">
+            <h2>Heading</h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+
+  </div>
+</section>
+<br/>
+
 <!-- 	<div style="display: none;"> -->
 <!-- 	 <div id="imgHidden" class="item active"> -->
 <!--         <div class="col-md-4"> -->

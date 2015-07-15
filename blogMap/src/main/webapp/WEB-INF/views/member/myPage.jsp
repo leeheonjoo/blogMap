@@ -8,12 +8,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-var startPage=0; 
-var endPage=0;
-var pageBlock=1;
 if(sessionStorage.getItem('email')!=null){
 	$(function(){
+		var p_startPage=0; 
+		var p_endPage=0;
+		var pageBlock=1;
 		
+		var b_startPage=0;
+		var b_endPage=0;
+		
+		
+		var c_startPage=0;
+		var c_endPage=0;
 		$.ajax({
 			type:'POST',
 			url:"${root}/member/myPage.do",
@@ -86,10 +92,10 @@ if(sessionStorage.getItem('email')!=null){
 					var count=data[2];
 					var currentPage=data[3];
 					
-					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+					var pageCount=count/boardSize+(count%boardSize==0 ? 0:1);
 					//alert(pageCount);
-					startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
-					endPage=startPage+pageBlock-1;
+					p_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					p_endPage=p_startPage+pageBlock-1;
 					
 					
 					//$("#myPage_member_point_list").empty();
@@ -109,10 +115,10 @@ if(sessionStorage.getItem('email')!=null){
 						+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 					});
 					
-					if(endPage>pageCount){
-						endPage=pageCount;
+					if(p_endPage>pageCount){
+						p_endPage=pageCount;
 					}
-					
+					//
 					//페이징
 					//$("#myPage_member_point_list_pageNum").empty();
 					/* $("#myPage_member_point_list").after("<span id='myPage_member_point_list_before'></span>");
@@ -122,16 +128,16 @@ if(sessionStorage.getItem('email')!=null){
 					//이전
 					//alert("startPage"+startPage);
 					//alert("pageCount"+pageCount);
-					if(startPage>pageBlock){
+					if(p_startPage>pageBlock){
 						$("#myPage_member_point_list_before").css("display","inline-block");
 					}
 					
-					if(startPage<=pageBlock){
+					if(p_startPage<=pageBlock){
 						$("#myPage_member_point_list_before").css("display","none");
 					}
 					
 					
-					for(var i=startPage;i<=endPage;i++){
+					for(var i=p_startPage;i<=p_endPage;i++){
 						$("#myPage_member_point_list_pageNum").append("<a href='#' id='point_paging_num"+i+"'>"+i+"</a>");
 						$("#point_paging_num"+i).click(function(){
 							//alert($(this).text());
@@ -182,13 +188,13 @@ if(sessionStorage.getItem('email')!=null){
 					//alert("endPage:"+endPage);
 					//alert("pageCount:"+pageCount);
 					//다음
-					if(endPage<pageCount){
+					if(p_endPage<pageCount){
 						$("#myPage_member_point_list_after").css("display","inline-block");
 						
 						
 					}
 					
-					if(endPage>=pageCount){
+					if(p_endPage>=pageCount){
 						$("#myPage_member_point_list_after").css("display","none");
 					}
 					
@@ -206,19 +212,268 @@ if(sessionStorage.getItem('email')!=null){
 		//});
 		
 		//다음클릭시
+		$("#point_paging_after").click(function(){
+			alert("Aa");
+			$.ajax({
+				type:'POST',
+				url:'${root}/member/point_info.do',
+				data:{
+					member_id:sessionStorage.getItem("email"),
+					//member_id:"kimjh112339@naver.com",
+					pageNumber:p_startPage+pageBlock
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					
+					var data=responseData.split("|");
+					/* alert(data[0]);
+					alert(data[1]);
+					alert(data[2]);
+					alert(data[3]); */
+					
+					var boardSize=data[1];
+					var count=data[2];
+					var currentPage=data[3];
+					//var pageBlock=1;
+					var pageCount=count/boardSize+(count%boardSize==0 ? 0:1);
+					alert(pageCount);
+					p_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					p_endPage=p_startPage+pageBlock-1;
+					
+					//$("#myPage_member_point_list").empty();
+					$("#myPage_member_point_list_title").empty();
+					$("#myPage_member_point_list_content").empty();
+					//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+					//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+					$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
+					var point_data=JSON.parse(data[0]);
+					
+					$.each(point_data,function(i){
+						//alert(data[i].BOARD_TITLE);
+						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+								+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
+								+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+								+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+					});
+					
+				/* 	$("#myPage_member_point_list_pageNum").remove();
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_before'></span>");
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
+					
+					
+					alert("다음startPage:"+p_startPage);
+					alert("다음endPage:"+p_endPage);
+					alert("다음pageBlock"+pageBlock)
+					//이전
+					if(p_startPage>pageBlock){
+						alert("block");
+						$("#myPage_member_point_list_before").css("display","inline-block");
+					}
+					
+					if(p_startPage<=pageBlock){
+						//alert("hidden");
+						$("#myPage_member_point_list_before").css("display","none");
+					}
+					
+					$("#myPage_member_point_list_pageNum").empty();
+					for(var i=p_startPage;i<=p_endPage;i++){
+						$("#myPage_member_point_list_pageNum").append("<a href='#' id='point_paging_num"+i+"'>"+i+"</a>");
+						$("#point_paging_num"+i).click(function(){
+							alert($(this).text());
+							$.ajax({
+								type:'POST',
+								url:'${root}/member/point_info.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									//member_id:"kimjh112339@naver.com",
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									/* alert(data[0]);
+									alert(data[1]);
+									alert(data[2]);
+									alert(data[3]); */
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									$("#myPage_member_point_list_title").empty();
+									$("#myPage_member_point_list_content").empty();
+									//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+									//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+									$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
+									var point_data=JSON.parse(data[0]);
+									$.each(point_data,function(i){
+										//alert(data[i].BOARD_TITLE);
+										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+												+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
+												+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+												+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+									});
+								}
+							});
+						});
+					}
+					alert("다음endPage:"+p_endPage);
+					alert("다음pageCount"+pageCount);
+					alert("다음마지막startPage:"+p_startPage);
+					//다음
+					if(p_endPage<pageCount){
+						alert("다음block");
+						$("#myPage_member_point_list_after").css("display","inline-block");
+					}
+					
+					if(p_endPage>=pageCount){
+						alert("다음hidden");
+						$("#myPage_member_point_list_after").css("display","none");
+						alert("bbbbbb");
+					}
+					
+				}
+			});
+		});
 		
-		
-		
-		/////////////////////////////////////
-		
-		 
 		
 		//이전클릭시
+		$("#point_paging_before").click(function(){
+			alert("이전startPage:"+p_startPage);
+			alert("이전pageBlock:"+pageBlock);
+			$.ajax({
+				type:'POST',
+				url:'${root}/member/point_info.do',
+				data:{
+					member_id:sessionStorage.getItem("email"),
+					//member_id:"kimjh112339@naver.com",
+					pageNumber:p_startPage-pageBlock
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					
+					var data=responseData.split("|");
+					/* alert(data[0]);
+					alert(data[1]);
+					alert(data[2]);
+					alert(data[3]); */
+					
+					var boardSize=data[1];
+					var count=data[2];
+					var currentPage=data[3];
+					//var pageBlock=1;
+					var pageCount=count/boardSize+(count%boardSize==0 ? 0:1);
+					alert(pageCount);
+					p_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					p_endPage=p_startPage+pageBlock-1;
+					
+					//$("#myPage_member_point_list").empty();
+					$("#myPage_member_point_list_title").empty();
+					$("#myPage_member_point_list_content").empty();
+					//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+					//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+					$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
+					var point_data=JSON.parse(data[0]);
+					
+					$.each(point_data,function(i){
+						//alert(data[i].BOARD_TITLE);
+						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+								+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
+								+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+								+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+					});
+					
+				/* 	$("#myPage_member_point_list_pageNum").remove();
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_before'></span>");
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
+					
+					alert("startPage:"+p_startPage);
+					alert("pageBlock:"+pageBlock);
+					//이전
+					if(p_startPage>pageBlock){
+						$("#myPage_member_point_list_before").css("display","inline-block");
+					}
+					
+					if(p_startPage<=pageBlock){
+						$("#myPage_member_point_list_before").css("display","none");
+					}
+					
+					$("#myPage_member_point_list_pageNum").empty();
+					for(var i=p_startPage;i<=p_endPage;i++){
+						$("#myPage_member_point_list_pageNum").append("<a href='#' id='point_paging_num"+i+"'>"+i+"</a>");
+						$("#point_paging_num"+i).click(function(){
+							alert($(this).text());
+							$.ajax({
+								type:'POST',
+								url:'${root}/member/point_info.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									//member_id:"kimjh112339@naver.com",
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									/* alert(data[0]);
+									alert(data[1]);
+									alert(data[2]);
+									alert(data[3]); */
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									
+									$("#myPage_member_point_list_title").empty();
+									$("#myPage_member_point_list_content").empty();
+									//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+									//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+									$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
+									var point_data=JSON.parse(data[0]);
+									
+									$.each(point_data,function(i){
+										//alert(data[i].BOARD_TITLE);
+										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+												+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
+												+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+												+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+									});
+								}
+							});
+						});
+					}
+					
+					//다음
+					if(p_endPage<pageCount){
+						$("#myPage_member_point_list_after").css("display","inline-block");
+					}
+					
+					if(p_endPage>=pageCount){
+						$("#myPage_member_point_list_after").css("display","none");
+					}
+				}
+			});
+		});
 		
 		
 		
-		
-		$("#board_info_btn").click(function(){
+		/* $("#board_info_btn").click(function(){
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/board_info.do',
@@ -249,7 +504,8 @@ if(sessionStorage.getItem('email')!=null){
 					} 			
 				}			
 			});
-		});
+		}); */
+		
 		
 		$("#favorite_info_btn").click(function(){
 			$.ajax({
@@ -303,28 +559,28 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
 				});
 				
-				var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+				var pageCount=count/boardSize+(count%boardSize==0 ? 0:1);
 				//alert(pageCount);
-				startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
-				endPage=startPage+pageBlock-1;
+				c_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+				c_endPage=c_startPage+pageBlock-1;
 
-				if(endPage>pageCount){
-					endPage=pageCount;
+				if(c_endPage>pageCount){
+					c_endPage=pageCount;
 				}
 				
 				//이전
 				//alert("startPage"+startPage);
 				//alert("pageCount"+pageCount);
-				if(startPage>pageBlock){
+				if(c_startPage>pageBlock){
 					$("#myPage_member_coupon_list_before").css("display","inline-block");
 				}
 				
-				if(startPage<=pageBlock){
+				if(c_startPage<=pageBlock){
 					$("#myPage_member_coupon_list_before").css("display","none");
 				}
 				
 				
-				for(var i=startPage;i<=endPage;i++){
+				for(var i=c_startPage;i<=c_endPage;i++){
 					$("#myPage_member_coupon_list_pageNum").append("<a href='#' id='point_paging_num"+i+"'>"+i+"</a>");
 					$("#point_paging_num"+i).click(function(){
 						//alert($(this).text());
@@ -372,18 +628,404 @@ if(sessionStorage.getItem('email')!=null){
 				//alert("endPage:"+endPage);
 				//alert("pageCount:"+pageCount);
 				//다음
-				if(endPage<pageCount){
+				if(c_endPage<pageCount){
 					$("#myPage_member_point_list_after").css("display","inline-block");
 					
 					
 				}
 				
-				if(endPage>=pageCount){
+				if(c_endPage>=pageCount){
 					$("#myPage_member_point_list_after").css("display","none");
 				}
 				
 				
 			}
+		});
+		
+		$.ajax({
+			type:'POST',
+			url:'${root}/member/board_info.do',
+			data:{
+				member_id:sessionStorage.getItem("email")
+				//member_id:"kimjh112339@naver.com"
+				
+			},
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			success:function(responseData){
+				//alert(responseData);
+				
+				var data=responseData.split("|");
+				/* alert(data[0]);
+				alert(data[1]);
+				alert(data[2]);
+				alert(data[3]); */
+				
+				var boardSize=data[1];
+				var count=data[2];
+				var currentPage=data[3];
+				
+				var pageCount=count/boardSize+(count%boardSize==0 ? 0:1);
+				//alert(pageCount);
+				b_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+				b_endPage=b_startPage+pageBlock-1;
+				
+				
+				//$("#myPage_member_point_list").empty();
+				//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+				//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+				$("#myPage_member_board_list_title").append("<div class='col-md-1'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-6'><div class='header'>카테고리</div></div><div class='col-md-2'><div class='header'>제목</div></div>");
+				var board_data=JSON.parse(data[0]);
+				
+				
+				$.each(board_data,function(i){
+					//alert(data[i].BOARD_TITLE);
+					//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+					//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+					$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+					+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+					+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+					+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+				});
+				
+				if(b_endPage>pageCount){
+					b_endPage=pageCount;
+				}
+				//
+				//페이징
+				//$("#myPage_member_point_list_pageNum").empty();
+				/* $("#myPage_member_point_list").after("<span id='myPage_member_point_list_before'></span>");
+				$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
+				$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
+				
+				//이전
+				//alert("startPage"+startPage);
+				//alert("pageCount"+pageCount);
+				if(b_startPage>pageBlock){
+					$("#myPage_member_board_list_before").css("display","inline-block");
+				}
+				
+				if(b_startPage<=pageBlock){
+					$("#myPage_member_board_list_before").css("display","none");
+				}
+				
+				
+				for(var i=b_startPage;i<=b_endPage;i++){
+					$("#myPage_member_board_list_pageNum").append("<a href='#' id='board_paging_num"+i+"'>"+i+"</a>");
+					$("#board_paging_num"+i).click(function(){
+						//alert($(this).text());
+						$.ajax({
+							type:'POST',
+							url:'${root}/member/board_info.do',
+							data:{
+								member_id:sessionStorage.getItem("email"),
+								pageNumber:$(this).text()
+							},
+							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+							success:function(responseData){
+								//alert(responseData);
+								
+								var data=responseData.split("|");
+								
+								var boardSize=data[1];
+								var count=data[2];
+								var currentPage=data[3];
+								
+								$("#myPage_member_board_list_title").empty();
+								$("#myPage_member_board_list_content").empty();
+								$("#myPage_member_board_list_title").append("<div class='col-md-1'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-6'><div class='header'>카테고리</div></div><div class='col-md-2'><div class='header'>제목</div></div>");
+								var board_data=JSON.parse(data[0]);
+								
+								
+								$.each(board_data,function(i){
+									//alert(data[i].BOARD_TITLE);
+									//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+									//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+									$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+									+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+									+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+									+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+								});
+							}
+						});
+					});
+				}
+				
+				
+				//alert("endPage:"+endPage);
+				//alert("pageCount:"+pageCount);
+				//다음
+				if(b_endPage<pageCount){
+					$("#myPage_member_board_list_after").css("display","inline-block");
+					
+					
+				}
+				
+				if(b_endPage>=pageCount){
+					$("#myPage_member_board_list_after").css("display","none");
+				}
+				
+				
+				/* alert($("#myPage_member_point_list").css("display"));
+				if($("#myPage_member_point_list").css("display")=="none"){
+					alert("aa");
+					$("#myPage_member_point_list").css("display","block");
+				}else if($("#myPage_member_point_list").css("display")=="block"){
+					alert("bb");
+					$("#myPage_member_point_list").css("display","none");
+				} 			 */
+			}			
+		});
+		//});
+		
+		//다음클릭시
+		$("#board_paging_after").click(function(){
+			alert("Aa");
+			$.ajax({
+				type:'POST',
+				url:'${root}/member/board_info.do',
+				data:{
+					member_id:sessionStorage.getItem("email"),
+					//member_id:"kimjh112339@naver.com",
+					pageNumber:b_startPage+pageBlock
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					
+					var data=responseData.split("|");
+					/* alert(data[0]);
+					alert(data[1]);
+					alert(data[2]);
+					alert(data[3]); */
+					
+					var boardSize=data[1];
+					var count=data[2];
+					var currentPage=data[3];
+					//var pageBlock=1;
+					var pageCount=count/boardSize+(count%boardSize==0 ? 0:1);
+					alert(pageCount);
+					b_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					b_endPage=b_startPage+pageBlock-1;
+					
+					$("#myPage_member_board_list_title").empty();
+					$("#myPage_member_board_list_content").empty();
+					$("#myPage_member_board_list_title").append("<div class='col-md-1'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-6'><div class='header'>카테고리</div></div><div class='col-md-2'><div class='header'>제목</div></div>");
+					var board_data=JSON.parse(data[0]);
+					
+					$.each(board_data,function(i){
+						//alert(data[i].BOARD_TITLE);
+						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+						+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+					});
+					
+				/* 	$("#myPage_member_point_list_pageNum").remove();
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_before'></span>");
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
+					
+					
+					alert("다음startPage:"+b_startPage);
+					alert("다음endPage:"+b_endPage);
+					alert("다음pageBlock"+pageBlock)
+					//이전
+					if(b_startPage>pageBlock){
+						alert("block");
+						$("#myPage_member_board_list_before").css("display","inline-block");
+					}
+					
+					if(b_startPage<=pageBlock){
+						//alert("hidden");
+						$("#myPage_member_board_list_before").css("display","none");
+					}
+					
+					$("#myPage_member_board_list_pageNum").empty();
+					for(var i=b_startPage;i<=b_endPage;i++){
+						$("#myPage_member_board_list_pageNum").append("<a href='#' id='board_paging_num"+i+"'>"+i+"</a>");
+						$("#board_paging_num"+i).click(function(){
+							alert($(this).text());
+							$.ajax({
+								type:'POST',
+								url:'${root}/member/board_info.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									//member_id:"kimjh112339@naver.com",
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									/* alert(data[0]);
+									alert(data[1]);
+									alert(data[2]);
+									alert(data[3]); */
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									$("#myPage_member_board_list_title").empty();
+									$("#myPage_member_board_list_content").empty();
+									$("#myPage_member_board_list_title").append("<div class='col-md-1'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-6'><div class='header'>카테고리</div></div><div class='col-md-2'><div class='header'>제목</div></div>");
+									var board_data=JSON.parse(data[0]);
+									
+									$.each(board_data,function(i){
+										//alert(data[i].BOARD_TITLE);
+										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+										+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+									});
+								}
+							});
+						});
+					}
+					alert("다음endPage:"+b_endPage);
+					alert("다음pageCount"+pageCount);
+					alert("다음마지막startPage:"+b_startPage);
+					//다음
+					if(b_endPage<pageCount){
+						alert("다음block");
+						$("#myPage_member_board_list_after").css("display","inline-block");
+					}
+					
+					if(b_endPage>=pageCount){
+						alert("다음hidden");
+						$("#myPage_member_board_list_after").css("display","none");
+						alert("bbbbbb");
+					}
+					
+				}
+			});
+		});
+		
+		
+		//이전클릭시
+		$("#board_paging_before").click(function(){
+			alert("이전startPage:"+b_startPage);
+			alert("이전pageBlock:"+pageBlock);
+			$.ajax({
+				type:'POST',
+				url:'${root}/member/board_info.do',
+				data:{
+					member_id:sessionStorage.getItem("email"),
+					//member_id:"kimjh112339@naver.com",
+					pageNumber:b_startPage-pageBlock
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					
+					var data=responseData.split("|");
+					/* alert(data[0]);
+					alert(data[1]);
+					alert(data[2]);
+					alert(data[3]); */
+					
+					var boardSize=data[1];
+					var count=data[2];
+					var currentPage=data[3];
+					//var pageBlock=1;
+					var pageCount=count/boardSize+(count%boardSize==0 ? 0:1);
+					alert(pageCount);
+					b_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					b_endPage=b_startPage+pageBlock-1;
+					
+					$("#myPage_member_board_list_title").empty();
+					$("#myPage_member_board_list_content").empty();
+					$("#myPage_member_board_list_title").append("<div class='col-md-1'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-6'><div class='header'>카테고리</div></div><div class='col-md-2'><div class='header'>제목</div></div>");
+					var board_data=JSON.parse(data[0]);
+					
+					$.each(board_data,function(i){
+						//alert(data[i].BOARD_TITLE);
+						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+						+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+					});
+					
+				/* 	$("#myPage_member_point_list_pageNum").remove();
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_before'></span>");
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
+					
+					alert("startPage:"+b_startPage);
+					alert("pageBlock:"+pageBlock);
+					//이전
+					if(b_startPage>pageBlock){
+						$("#myPage_member_board_list_before").css("display","inline-block");
+					}
+					
+					if(b_startPage<=pageBlock){
+						$("#myPage_member_board_list_before").css("display","none");
+					}
+					
+					$("#myPage_member_board_list_pageNum").empty();
+					for(var i=b_startPage;i<=b_endPage;i++){
+						$("#myPage_member_board_list_pageNum").append("<a href='#' id='board_paging_num"+i+"'>"+i+"</a>");
+						$("#board_paging_num"+i).click(function(){
+							alert($(this).text());
+							$.ajax({
+								type:'POST',
+								url:'${root}/member/board_info.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									//member_id:"kimjh112339@naver.com",
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									/* alert(data[0]);
+									alert(data[1]);
+									alert(data[2]);
+									alert(data[3]); */
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									
+									$("#myPage_member_board_list_title").empty();
+									$("#myPage_member_board_list_content").empty();
+									$("#myPage_member_board_list_title").append("<div class='col-md-1'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-6'><div class='header'>카테고리</div></div><div class='col-md-2'><div class='header'>제목</div></div>");
+									var board_data=JSON.parse(data[0]);
+									
+									$.each(board_data,function(i){
+										//alert(data[i].BOARD_TITLE);
+										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+										+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+									});
+								}
+							});
+						});
+					}
+					
+					//다음
+					if(b_endPage<pageCount){
+						$("#myPage_member_board_list_after").css("display","inline-block");
+					}
+					
+					if(b_endPage>=pageCount){
+						$("#myPage_member_board_list_after").css("display","none");
+					}
+				}
+			});
 		});
 	});
 }
@@ -421,254 +1063,11 @@ if(sessionStorage.getItem('email')!=null){
 		e.preventDefault();
 	});
 } */
-function nextBtn(type){
-	alert(type);
-	$.ajax({
-		type:'POST',
-		url:'${root}/member/'+type+'_info.do',
-		data:{
-			member_id:sessionStorage.getItem("email"),
-			//member_id:"kimjh112339@naver.com",
-			pageNumber:startPage+pageBlock
-		},
-		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-		success:function(responseData){
-			//alert(responseData);
-			
-			var data=responseData.split("|");
-			
-			var boardSize=data[1];
-			var count=data[2];
-			var currentPage=data[3];
-			var pageBlock=1;
-			var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-			alert(pageCount);
-			startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
-			endPage=startPage+pageBlock-1;
-			
-			if(type=="coupon"){
-				$("#myPage_member_coupon_list_content").empty();
-				var couponInfo=JSON.parse(data[0]);
-				
-				$.each(couponInfo,function(i){
-					$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-				});
-			}else{
-				//$("#myPage_member_point_list").empty();
-				$("#myPage_member_"+type+"_list_title").empty();
-				$("#myPage_member_"+type+"_list_content").empty();
-				//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
-				//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
-				$("#myPage_member_"+type+"_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
-				var point_data=JSON.parse(data[0]);
-				
-				$.each(point_data,function(i){
-					//alert(data[i].BOARD_TITLE);
-					//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-					//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-					$("#myPage_member_"+type+"_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-							+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
-							+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
-							+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
-				});
-			}
-			
-			alert("다음startPage:"+startPage);
-			alert("다음endPage:"+endPage);
-			alert("다음pageBlock"+pageBlock)
-			//이전
-			if(startPage>pageBlock){
-				alert("block");
-				$("#myPage_member_"+type+"_list_before").css("display","inline-block");
-			}
-			
-			if(startPage<=pageBlock){
-				//alert("hidden");
-				$("#myPage_member_"+type+"_list_before").css("display","none");
-			}
-			
-			$("#myPage_member_"+type+"_list_pageNum").empty();
-			for(var i=startPage;i<=endPage;i++){
-				$("#myPage_member_"+type+"_list_pageNum").append("<a href='#' id='"+type+"_paging_num"+i+"'>"+i+"</a>");
-				$("#"+type+"_paging_num"+i).click(function(){
-					alert($(this).text());
-					$.ajax({
-						type:'POST',
-						url:'${root}/member/'+type+'_info.do',
-						data:{
-							member_id:sessionStorage.getItem("email"),
-							//member_id:"kimjh112339@naver.com",
-							pageNumber:$(this).text()
-						},
-						contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-						success:function(responseData){
-							//alert(responseData);
-							
-							var data=responseData.split("|");
-							/* alert(data[0]);
-							alert(data[1]);
-							alert(data[2]);
-							alert(data[3]); */
-							
-							var boardSize=data[1];
-							var count=data[2];
-							var currentPage=data[3];
-							
-							if(type=="coupon"){
-								$("#myPage_member_coupon_list_content").empty();
-								var couponInfo=JSON.parse(data[0]);
-								
-								$.each(couponInfo,function(i){
-									$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-								});
-							}
-							
-						}
-					});
-				});
-			}
-			alert("다음endPage:"+endPage);
-			alert("다음pageCount"+pageCount);
-			alert("다음마지막startPage:"+startPage);
-			//다음
-			if(endPage<pageCount){
-				alert("다음block");
-				$("#myPage_member_"+type+"_list_after").css("display","inline-block");
-			}
-			
-			if(endPage>=pageCount){
-				alert("다음hidden");
-				$("#myPage_member_"+type+"_list_after").css("display","none");
-				//alert("bbbbbb");
-			}
-			
-		}
-	});
-}
 
 
-function beforeBtn(type){
-		alert("이전startPage:"+startPage);
-		alert("이전pageBlock:"+pageBlock);
-		$.ajax({
-			type:'POST',
-			url:'${root}/member/'+type+'_info.do',
-			data:{
-				member_id:sessionStorage.getItem("email"),
-				//member_id:"kimjh112339@naver.com",
-				pageNumber:startPage-pageBlock
-			},
-			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-			success:function(responseData){
-				//alert(responseData);
-				
-				var data=responseData.split("|");
-				/* alert(data[0]);
-				alert(data[1]);
-				alert(data[2]);
-				alert(data[3]); */
-				
-				var boardSize=data[1];
-				var count=data[2];
-				var currentPage=data[3];
-				var pageBlock=1;
-				var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-				alert(pageCount);
-				startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
-				endPage=startPage+pageBlock-1;
-				
-				if(type=="coupon"){
-					$("#myPage_member_coupon_list_content").empty();
-					var couponInfo=JSON.parse(data[0]);
-					
-					$.each(couponInfo,function(i){
-						$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-					});
-				}else{
-					//$("#myPage_member_point_list").empty();
-					$("#myPage_member_"+type+"_list_title").empty();
-					$("#myPage_member_"+type+"_list_content").empty();
-					//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
-					//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
-					$("#myPage_member_"+type+"_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
-					var point_data=JSON.parse(data[0]);
-					
-					$.each(point_data,function(i){
-						//alert(data[i].BOARD_TITLE);
-						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-						$("#myPage_member_"+type+"_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-								+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
-								+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
-								+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
-					});
-				}
-				
-				alert("startPage:"+startPage);
-				alert("pageBlock:"+pageBlock);
-				//이전
-				if(startPage>pageBlock){
-					$("#myPage_member_"+type+"_list_before").css("display","inline-block");
-				}
-				
-				if(startPage<=pageBlock){
-					$("#myPage_member_"+type+"_list_before").css("display","none");
-				}
-				
-				$("#myPage_member_"+type+"_list_pageNum").empty();
-				for(var i=startPage;i<=endPage;i++){
-					$("#myPage_member_"+type+"_list_pageNum").append("<a href='#' id='"+type+"_paging_num"+i+"'>"+i+"</a>");
-					$("#"+type+"_paging_num"+i).click(function(){
-						alert($(this).text());
-						$.ajax({
-							type:'POST',
-							url:'${root}/member/'+type+'_info.do',
-							data:{
-								member_id:sessionStorage.getItem("email"),
-								//member_id:"kimjh112339@naver.com",
-								pageNumber:$(this).text()
-							},
-							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-							success:function(responseData){
-								//alert(responseData);
-								
-								var data=responseData.split("|");
-								/* alert(data[0]);
-								alert(data[1]);
-								alert(data[2]);
-								alert(data[3]); */
-								
-								var boardSize=data[1];
-								var count=data[2];
-								var currentPage=data[3];
-								
-								
-								if(type=="coupon"){
-									$("#myPage_member_coupon_list_content").empty();
-									var couponInfo=JSON.parse(data[0]);
-									
-									$.each(couponInfo,function(i){
-										$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-									});
-								}
-							}
-						});
-					});
-				}
-				
-				//다음
-				if(endPage<pageCount){
-					$("#myPage_member_"+type+"_list_after").css("display","inline-block");
-				}
-				
-				if(endPage>=pageCount){
-					$("#myPage_member_"+type+"_list_after").css("display","none");
-				}
-			}
-		});
-	
-}
 </script>
+<!-- myPage_boardInfo -->
+
 <link rel="stylesheet" href="${root }/css/layer.css" type="text/css"/>
 </head>
 <body>
@@ -712,7 +1111,7 @@ function beforeBtn(type){
 		<span>게시글<input id="myPage_member_boardCount" type="text"/></span>
 		<span><input id="board_info_btn" type="button" value="write_info"/></span>
 		<div id="myPage_member_board_list" style="display:none;"></div>
-	</div>
+	</div> 
 	
 	<div>
 		<span>즐겨찾기<input id="myPage_member_favoriteCount" type="text"/></span>
@@ -782,21 +1181,7 @@ function beforeBtn(type){
 		<div class="tab-pane text-style" id="tab2">
 			<div class="col-md-9 col-lg-9" id="myPage_member_point_list">
 				<h2 id="myPage_member_point_total"></h2>
-				
-		  		<!-- <table class="table table-user-information">
-                    <tbody id="myPage_member_point_list_title">
-	                    
-                    </tbody>
-                </table>
-                
-                
-		  		<table class="table table-user-information">
-                    <tbody id="myPage_member_point_list_content">
-	                    
-                    </tbody>
-                </table> -->
-                			
-	
+			
 				<div class="method">
 			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_point_list_title">
 			        </div>
@@ -805,7 +1190,7 @@ function beforeBtn(type){
 			        </div>
 			    </div>
     
-    	<!-- 		<div id="myPage_member_point_paging">
+    		<!-- 	<div id="myPage_member_point_paging">
 					<span id='myPage_member_point_list_before' style="display:'none';"><a href="#" id="point_paging_before">이전</a></span>
 					<span id='myPage_member_point_list_pageNum'></span>
 					<span id='myPage_member_point_list_after' style="display:'none';"><a href="#" id="point_paging_after">다음</a></span>
@@ -813,27 +1198,42 @@ function beforeBtn(type){
 					
 					<div id="myPage_member_point_paging" class="container">
 						<ul class="pagination">
-			              <li id="myPage_member_point_list_before" style="display:'none';"><a href="#" id="point_paging_before" onclick="javascript:beforeBtn('point')">«</a></li>
+			              <li id="myPage_member_point_list_before" style="display:'none';"><a href="#" id="point_paging_before">«</a></li>
 			              <li id="myPage_member_point_list_pageNum"></li>
-			              <li id="myPage_member_point_list_after" style="display:'none';"><a href="#" id="point_paging_after" onclick="javascript:nextBtn('point')">»</a></li>
+			              <li id="myPage_member_point_list_after" style="display:'none';"><a href="#" id="point_paging_after">»</a></li>
 	           			</ul>
-					</div>
+					</div> 
 				
             </div>
 		</div>
 		
 		<div class="tab-pane text-style" id="tab3">
-  			<h2>Stet clita</h2>
-			<p>Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Duis autem vel eum 
-			    iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla 
-			    facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit 
-			    augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet,
-			</p>
-    		<hr>
-    		
-		    <div class="col-xs-6 col-md-3">
-		      <img src="http://placehold.it/150x150" class="img-rounded pull-right">
-		  	</div>
+  			<div class="col-md-9 col-lg-9" id="myPage_member_board_list">
+				<h2 id="myPage_member_board_total"></h2>
+			
+				<div class="method">
+			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_board_list_title">
+			        </div>
+			
+					<div id="myPage_member_board_list_content">
+			        </div>
+			    </div>
+    
+    		<!-- 	<div id="myPage_member_point_paging">
+					<span id='myPage_member_point_list_before' style="display:'none';"><a href="#" id="point_paging_before">이전</a></span>
+					<span id='myPage_member_point_list_pageNum'></span>
+					<span id='myPage_member_point_list_after' style="display:'none';"><a href="#" id="point_paging_after">다음</a></span>
+				</div> -->
+					
+					<div id="myPage_member_board_paging" class="container">
+						<ul class="pagination">
+			              <li id="myPage_member_board_list_before" style="display:'none';"><a href="#" id="board_paging_before">«</a></li>
+			              <li id="myPage_member_board_list_pageNum"></li>
+			              <li id="myPage_member_board_list_after" style="display:'none';"><a href="#" id="board_paging_after">»</a></li>
+	           			</ul>
+					</div> 
+				
+            </div>
 		</div>
 		
 		<div class="tab-pane text-style" id="tab3">
@@ -870,13 +1270,13 @@ function beforeBtn(type){
 	                   </ul>
 	             </div><!-- /Slide1 --> 
 	             
-	             <div id="myPage_member_coupon_paging" class="container">
+	             <!-- <div id="myPage_member_coupon_paging" class="container">
 					<ul class="pagination">
-		              <li id="myPage_member_coupon_list_before" style="display:'none';"><a href="#" id="coupon_paging_before" onclick="javascript:beforeBtn('coupon')">«</a></li>
+		              <li id="myPage_member_coupon_list_before" style="display:'none';"><a href="#" id="coupon_paging_before">«</a></li>
 		              <li id="myPage_member_coupon_list_pageNum"></li>
-		              <li id="myPage_member_coupon_list_after" style="display:'none';"><a href="#" id="coupon_paging_after" onclick="javascript:nextBtn('coupon')">»</a></li>
+		              <li id="myPage_member_coupon_list_after" style="display:'none';"><a href="#" id="coupon_paging_after">»</a></li>
 		         	</ul>
-				</div>
+				</div> -->
              </div>
         </div>
         
