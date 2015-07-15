@@ -103,7 +103,7 @@ $(function() {
 				$.each($('#attachFile')[0].files,function(i,file){
 					data.append('file',file);
 				})
-				$.ajax({
+				/* $.ajax({
 					type: 'POST',
 					url : '${root}/partner/write.do',
 					data :{
@@ -122,7 +122,7 @@ $(function() {
 						alert("서버와의 데이터 연결에 실패하였습니다.");
 						return false;
 					}
-				});
+				}); */
 				// 실제 폼이 전송되어 페이지가 변경되는것을 막기위해 false 리턴
 				return false;
 			}
@@ -172,33 +172,8 @@ $(function() {
 						});
 					}	
 				});
-			/* }); */
 		
-				 $("#coupon_Register").click(function(){			 
-					alert("쿠폰등록하기123123");
-					/* var data = new FormData();
-					$.each($('#attachFile')[0].files,function(i,file){
-						data.append('file',file);
-					})
-					$.ajax({
-					type: 'post',
-					url : '${root}/partner/couponWrite.do',
-					data : {
-						coupon_no:$("#coupon_no").val()
-					},
-					processData:false,
-					contentType:false, */
-					/* success:function(data)
-					{
-						alert(data);
-					},
-					error:function()
-					{
-						alert("서버와의 데이터 연결에 실패하였습니다.");
-						return false;
-					} 
-				});*/
-			});
+		
 		});
 			 
 		 function partnerData(no){
@@ -208,7 +183,7 @@ $(function() {
 					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 					success : function(responseData) {
 						var data = JSON.parse(responseData);
-	//		 			alert("업체이름" + data.partner_name);
+//		 				alert("업체이름" + data.partner_name);
 						
 //  					$("p[name='p_category_code']").html(data.category_code);
 						$("p[name='p_name']").html(data.partner_name);
@@ -219,9 +194,6 @@ $(function() {
 					}
 				});
 			};
-		 
-		 
-	
 		/*888888888888888888888888888888888888888888888  */
 		/* 여기에 복사하기 */
 		/*888888888888888888888888888888888888888888888  */

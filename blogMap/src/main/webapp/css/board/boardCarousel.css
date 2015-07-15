@@ -10,9 +10,17 @@
   height: auto;
 }
 
+.carousel-inner1 > .item > img,
+.carousel-inner1 > .item > a > img {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+
 /* ------------------- Carousel Styling ------------------- */
 
-.carousel-inner {
+.carousel-inner1 {
   border-radius: 15px;
 }
 
@@ -67,8 +75,8 @@
 
 @media screen and (min-width: 992px) {
 
-  .container {
-    max-width: 930px;
+  .container1 {
+    max-width: 600px;
   }
 
 }

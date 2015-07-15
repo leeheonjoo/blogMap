@@ -193,11 +193,13 @@ public class PartnerServiceImpl implements PartnerService {
 		logger.info("" +couponDto.getCoupon_eymd());
 	
 		boolean isSuccess = false;			//성공했는지 실패했는지 여부 확인한다
+		
 		String uploadPath = "C:\\workspace\\blogMap\\src\\main\\webapp\\pds\\partner";
 		File dir = new File(uploadPath);
-		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
-			dir.mkdirs();
-		}
+			if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
+				dir.mkdirs();
+			}
+			
 		Iterator<String> iter=request.getFileNames();
 		while(iter.hasNext()){
 			String uploadFileName=iter.next();
