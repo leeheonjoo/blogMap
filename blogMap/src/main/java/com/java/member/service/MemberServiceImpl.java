@@ -478,7 +478,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		int currentPage=Integer.parseInt(pageNumber);
 		
-		int boardSize=2;
+		int boardSize=1;
 		int startRow=(currentPage-1)*boardSize+1;
 		int endRow=currentPage*boardSize;
 		int count=memberDao.point_info_count(member_id);
@@ -523,6 +523,16 @@ public class MemberServiceImpl implements MemberService {
 		String member_id=request.getParameter("member_id");
 		logger.info("member_id:"+member_id);
 		
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
+		
+		int currentPage=Integer.parseInt(pageNumber);
+		
+		int boardSize=1;
+		int startRow=(currentPage-1)*boardSize+1;
+		int endRow=currentPage*boardSize;
+		int count=memberDao.totalBoard(member_id);
+		
 		List<BoardDto> boardDtoList=null;
 		List<BoardReadDto> boardReadDtoList=null;
 		
@@ -533,15 +543,16 @@ public class MemberServiceImpl implements MemberService {
 		List<HashMap<String,Object>> boardInfoList=new ArrayList<HashMap<String,Object>>();
 		boardInfoList.add(hMap);
 		
-		boardInfoList=memberDao.board_info(member_id);
+		boardInfoList=memberDao.board_info(member_id,startRow,endRow);
 		logger.info("boardInfoList"+boardInfoList);
 		
 		Gson gson=new Gson();
 		String boardInfo_json=gson.toJson(boardInfoList);
 		
+		String board_info_pack=boardInfo_json+"|"+boardSize+"|"+count+"|"+currentPage;
 		try {
 			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(boardInfo_json);
+			response.getWriter().print(board_info_pack);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -556,6 +567,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		String member_id=request.getParameter("member_id");
 		logger.info("member_id:"+member_id);
+		
 		
 		List<BoardDto> boardDtoList=null;
 		List<BoardReadDto> favoriteList=null;
@@ -603,7 +615,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		int currentPage=Integer.parseInt(pageNumber);
 		
-		int boardSize=2;
+		int boardSize=1;
 		int startRow=(currentPage-1)*boardSize+1;
 		int endRow=currentPage*boardSize;
 		int count=memberDao.totalCoupon(member_id);
