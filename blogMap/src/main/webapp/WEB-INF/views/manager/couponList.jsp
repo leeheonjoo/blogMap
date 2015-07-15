@@ -223,6 +223,28 @@
 		};	
 
 	};
+	
+	 $(function(){
+		 /******************************************/ 
+		/*			          					  */
+		/*			검색버튼 클릭시 실행				  */
+		/*										  */
+		/******************************************/ 
+		$("#searchCoupon").click(function(){
+			var searchTag=$("input[id='CouponSearchTag']").val();
+			alert(searchTag);
+			$.ajax({
+				type:'get',
+				url:'${root}/manager/searchCouponInfo.do?name=' + searchTag,
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					
+				}
+			});
+		});
+		
+	 });
+			
 </script>
 </head>
 <body>
@@ -233,7 +255,7 @@
 			<input type="button" id="getPartnerList" value="Reset"/>&nbsp;&nbsp;
 			<input type="radio" name="coupon_yn" id="y"/><span>승인쿠폰</span> &nbsp;&nbsp;
 			<input type="radio" name="coupon_yn" id="n"/><span>미승인쿠폰</span>&nbsp;&nbsp;
-			<input type="text" placeholder="Name Search" id="searchTag"/> 
+			<input type="text" placeholder="Name Search" id="CouponSearchTag"/> 
 			<input type="submit" id="searchCoupon" value="Search"/>	
 	</div><br/>
 	
