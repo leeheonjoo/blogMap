@@ -150,47 +150,43 @@ li { list-style-type:none;}
 		$.ajax({
 			type:'post',
 			url:'${root}/coupon/couponMain.do',
-			data : {
-				member_id : email
-			},
 			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(responseData) {
 				var data = JSON.parse(responseData);
 				/* alert(data); */
 			
 				var count=0;
+				
 				/* 데이타를 채우기 위해 복사 */
 				$.each(data, function(i){
 					var pic=data[i].COUPON_PIC_NAME;
 					var partner_name=data[i].PARTNER_NAME;
-					alert("사진 이름 : "+pic + " / " + "업체명 : " + partner_name);
+					alert("사진 이름 : "+pic + " / " + "업체명 : " + partner_name + " / " + " I 값 : " + i);
 					
-// 					for(var pageCount=0; pageCount < couponCount/8; pageCountCount++){
-// 						for(var couponCount=0; couponCount < 8; couponCount++){
+					if(count > 7){
+
+						$("#junk").css("display", "block");
 						
+						$("#coupon_slide_ListSub").append($("#coupon_slide_List_L").clone().css("display", "block"));
+						$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+						$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);
 						
+					}
+					
+					if(count < 7){
 						
-						if(count < 8){
-							$("#coupon_slide_ListMain").append($("#coupon_slide_List_L").clone().css("display", "block"));
-							$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
-							$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
-						}
-						
-						if(count > 8){
-							$("#coupon_List").append($("#mmm").clone().css("display", "block"));
-							$("#coupon_List").append($("#mmm").clone().attr("id", count));
-							
-						}
-						
-						count ++;
-// 						}	
-// 					}
 					
 					
+					$("#coupon_slide_ListMain").append($("#coupon_slide_List_L").clone().css("display", "block"));
+					$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+					$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
+					}
+					
+					count++;
 					// 각 업체를 클릭했을때 이벤트
 					$("#coupon_" + data[i].PARTNER_NO).click(function(){
-// 						alert("쿠폰" + data[i].partner_no + "클릭");
-						couponData(data[i].partner_no);	
+// 						alert("쿠폰" + data[i].PARTNER_NO + "클릭");
+						couponData(data[i].PARTNER_NO);	
 					});
 				});
 				
@@ -225,7 +221,7 @@ li { list-style-type:none;}
 	             	</div><!-- /Slide1 --> 
 <!-- 		            	<div class="caption" id="coupon_slide_List_L" style="display: none;"> -->
 <!--    		                    <ul class="thumbnails"> -->
-		                        <li class="col-md-3 col-sm-3 col-xs-3" id="coupon_slide_List_L">
+		                        <li class="col-md-3 col-sm-3 col-xs-3" id="coupon_slide_List_L" style="display: none;">
 		    						<div class="fff">
 										<div class="thumbnail">
 											<a href="#" class="coupon_list_no"><img class="img-responsive" id="coupon_L_images"></a>
@@ -234,10 +230,25 @@ li { list-style-type:none;}
 		                        </li>
 <!-- 		                    </ul> -->
                     	</div>
-				</div>
 				
-				<div class="item" id="mmm" style="display: none;">	
-					</div>    <!--  /Slide2  -->
+				
+				<div class="item" id="junk" style="display: none;">
+					<div class="caption">
+						<ul class="thumbnails"  id="coupon_slide_ListSub">	
+   		        			
+   		        		</ul>
+   		        	</div>            
+				</div>    <!--  /Slide2  -->
+				
+				<div class="item" id="sub1" style="display: none;">
+					<div class="caption">
+						<ul class="thumbnails"  id="coupon_slide_ListSub">	
+   		        			
+   		        		</ul>
+   		        	</div>            
+				</div>    <!--  /Slide2  -->
+				
+				</div>
 				
 				<nav>
 					<ul class="control-box pager">
