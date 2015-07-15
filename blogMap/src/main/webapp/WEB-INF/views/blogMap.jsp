@@ -542,33 +542,39 @@
 							</div>
 							<div class="col-md-9">
 								<div class="form-group">
-									<label class="col-xs-3 control-label">업체명</label>
+									<label class="col-xs-3 control-label">카테고리:</label>
+									<div class="col-xs-9">
+ 										<p class="form-control-static name" name="p_category_code"></p> 
+									</div>
+								</div>
+							
+								<div class="form-group">
+									<label class="col-xs-3 control-label">업체명:</label>
 									<div class="col-xs-9">
  										<p class="form-control-static name" name="p_name"></p> 
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label class="col-xs-3 control-label">전화번호</label>
+									<label class="col-xs-3 control-label">전화번호:</label>
 									<div class="col-xs-9">
  										<p class="form-control-static phone" name="p_phone"></p>  
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label class="col-xs-3 control-label">주소</label>
+									<label class="col-xs-3 control-label">주소:</label>
 									<div class="col-xs-9">
 										<p class="form-control-static address" name="p_addr"></p> 
 									</div>
 								</div>
 							</div>
 						</div>						
-					</div>
-					
-					<div class="row">
-						<div class="col-xs-12 text-right">
-							<input type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#mainCoupon_Registration" value="쿠폰등록"/>								
-							<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+						<div class="row">
+							<div class="col-xs-12 text-right">
+								<input type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#mainCoupon_Registration" value="쿠폰등록"/>								
+								<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -591,29 +597,40 @@
 						<div class="modal-body" id="data-body">							
 							<input type="hidden"  id="category_code" name="category_code"/>
 							<input type="hidden"  id="member_id" name="member_id"/>
+							
 							<div class="form-group">
-								<label class="col-xs-4 control-label">업체명</label>
+								<label class="col-xs-4 control-label">카테고리:</label> 
+								<select id="headCategory" name="category_mname" class="selectpicker" data-width="140px" style="display: none" onchange="blogWrite_ChangeCategory(this.id)">
+									<option value="%">대분류[전체]</option>
+								</select> 
+								<select id="detailCategory" name="category_sname"  class="selectpicker" data-width="140px" style="display: none">
+									<option value="%">소분류[전체]</option>
+								</select>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-xs-4 control-label">업체명:</label>
 								<div class="col-xs-8">
 									<input type="text" class="form-control" name="partner_name" id="name" value="" required="required" placeholder="업체명"/>
 								</div>
 							</div>
 	
 							<div class="form-group">
-								<label class="col-xs-4 control-label">전화번호</label>
+								<label class="col-xs-4 control-label">전화번호:</label>
 								<div class="col-xs-8">
 									<input type="text" class="form-control" name="partner_phone" id="phone" value="" required="required" placeholder="전화번호"/>
 								</div>
 							</div>
 	
 							<div class="form-group">
-								<label class="col-xs-4 control-label">주소</label>
+								<label class="col-xs-4 control-label">주소:</label>
 								<div class="col-xs-8">
 									<input type="text" class="form-control" name="partner_addr" id="address" value="" required="required" placeholder="주소를 입력하세요"/>
 								</div>											
 							</div>
 	
 							<div class="form-group">
-								<label class="col-xs-4 control-label">업체사진</label>
+								<label class="col-xs-4 control-label">업체사진:</label>
 								<div class="col-xs-8">
 									<input type="file" class="form-control" name="img_src" id="partner_imagers"/>
 								</div>

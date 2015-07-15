@@ -38,10 +38,10 @@ public class PartnerDaoImpl implements PartnerDao {
  * @description: 제휴업체 리스트 (getPartnerList)
  */
 @Override
-	public List<PartnerDto> getTourPartnerList() {
+	public List<PartnerDto> getwriteList() {
 		logger.info("PartnerMapper.getTourPartnerList----------------------------------");
-		List<PartnerDto> list=session.selectList("dao.PartnerMapper.getTourPartnerList");
-		logger.info(String.valueOf("getTourPartnerList_Size:"+list.size()) );
+		List<PartnerDto> list=session.selectList("dao.PartnerMapper.getWriteList");
+		logger.info(String.valueOf("getWriteList_Size:"+list.size()) );
 		
 		return list;
 	}
@@ -58,22 +58,6 @@ public class PartnerDaoImpl implements PartnerDao {
 		
 		return session.selectOne("dao.PartnerMapper.getTourPartnerListDate", partnerNo);
 	}
-@Override
-	public List<PartnerDto> getRestaurantPartnerList() {
-		logger.info("PartnerMapper.getRestaurantPartnerList------------------------");
-		List<PartnerDto>restaurantList=session.selectList("dao.PartnerMapper.getRestaurantPartnerList");
-		logger.info(String.valueOf("getRestaurantPartnerList_Size:"+restaurantList.size()));
-		
-		return restaurantList;
-	}
-@Override
-public PartnerDto getRestaurantPartnerListDate(int partnerNo) {
-	logger.info("PartnerMapper.getRestaurantPartnerListDate----------------------");
-	logger.info("partnerNo 맴퍼가기전 : "+ partnerNo);
-	//PartnerDto getPartnerListDate=session.selectOne("dao.PartnerMapper.getPartnerListDate", partnerNo);
-	
-	return session.selectOne("dao.PartnerMapper.getRestaurantPartnerListDate", partnerNo);
-}
 @Override
 	public int couponRegister(CouponDto couponDto,int partner_no) {
 		logger.info("CouponMapper.couponRegister-------------------------------------");

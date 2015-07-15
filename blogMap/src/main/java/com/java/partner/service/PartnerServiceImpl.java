@@ -54,20 +54,28 @@ public class PartnerServiceImpl implements PartnerService {
 		logger.info(partnerDto.getPartner_addr());
 	
 		boolean isSuccess = false;			//성공했는지 실패했는지 여부 확인한다
-		String uploadPath = "C:\\Users\\Taylor\\git\\blogMap\\blogMap\\src\\main\\webapp\\css\\images\\partner";
-		File dir = new File(uploadPath);
-		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
-			dir.mkdirs();
-		}
+//		String uploadPath = "C:/workspace/blogMap/blogMap/src/main/webapp/pds/partner";
+//		File dir = new File(uploadPath,originalFileName);
+//		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
+//			dir.mkdirs();
+//		}
 		Iterator<String> iter=request.getFileNames();
 		while(iter.hasNext()){
 			String uploadFileName=iter.next();
 			MultipartFile mFile = request.getFile(uploadFileName);
 			String originalFileName = mFile.getOriginalFilename();
 			String saveFileName = originalFileName;
+			
+			String uploadPath = "C:/workspace/blogMap/src/main/webapp/pds/partner/";
+			File dir = new File(uploadPath,originalFileName);
+			
+			if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
+				dir.mkdirs();
+			}
+			
 			if(saveFileName != null && !saveFileName.equals("")) {
 				if(new File(uploadPath + saveFileName).exists()) {
-					saveFileName = saveFileName + "_" + System.currentTimeMillis();
+					saveFileName = System.currentTimeMillis()+ "_" +saveFileName;
 				}
 				try {
 					mFile.transferTo(new File(uploadPath + saveFileName));
@@ -76,12 +84,14 @@ public class PartnerServiceImpl implements PartnerService {
 					long fileImgSize=mFile.getSize();
 					partnerDto.setPartner_pic_size(fileImgSize);
 					
-					logger.info(partnerDto.getPartner_pic_name());
-					logger.info(partnerDto.getPartner_pic_path());
+					logger.info("파일이름이 뭐냐!!!!:"+partnerDto.getPartner_pic_name());
+					logger.info("파일경로가 뭐냐!!!!:"+partnerDto.getPartner_pic_path());
 					long lo=partnerDto.getPartner_pic_size();
 					logger.info(String.valueOf(lo));
 					int check=partnerDao.partnerRegister(partnerDto);
 					logger.info("partner_check:"+check);
+					
+					mav.addObject("check", check);
 					
 					isSuccess = true;
 					
@@ -97,14 +107,14 @@ public class PartnerServiceImpl implements PartnerService {
 		return isSuccess;
 	}
 /**
- * @name: write
+ * @name: writeList
  * @date:2015. 7. 5.
  * @author: 변태훈
  * @description:  제휴업체 리스트
  */
 	@Override
-	public void tourList(ModelAndView mav) {
-		logger.info("PartnerServiceImp tourList----------------");
+	public void writeList(ModelAndView mav) {
+		logger.info("PartnerServiceImp writeList----------------");
 	
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
@@ -113,21 +123,21 @@ public class PartnerServiceImpl implements PartnerService {
 		int count=partnerDao.getPartnerCount();
 		logger.info("count:" + count);
 		
-		List<PartnerDto> tourPartnerList=null;
+		List<PartnerDto> writeList=null;
 		if(count>0){
-			tourPartnerList=partnerDao.getTourPartnerList();
-			logger.info("partnerListSize:"+tourPartnerList.size());
+			writeList=partnerDao.getwriteList();
+			logger.info("partnerWriteListSize:"+writeList.size());
 		}
 //		메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
 		Gson gson=new Gson();
-		String json=gson.toJson(tourPartnerList);
-		logger.info("partnerList:"+tourPartnerList);
+		String json=gson.toJson(writeList);
+		logger.info("writeList:"+writeList);
 		logger.info("json:"+json);
 		
 //		JSON 에 저장된 정보를 조회
 		//System.out.println("json: " + json);
 	
-		mav.addObject("partnerList",tourPartnerList);
+		mav.addObject("writeList",writeList);
 		mav.addObject("json", json);
 	}
 	
@@ -152,61 +162,12 @@ public class PartnerServiceImpl implements PartnerService {
 		//mav.addObject("getPartnerListDate",getPartnerListDate);
 		mav.addObject("json",json);
 	}
-	@Override
-	public void restaurantList(ModelAndView mav) {
-		logger.info("PartnerServiceImp restaurantList------------- ");
-		
-		Map<String,Object> map=  mav.getModelMap();
-		HttpServletRequest request=(HttpServletRequest)map.get("request");
-		HttpServletResponse response=(HttpServletResponse)map.get("response");
-		
-		int count=partnerDao.getPartnerCount();
-		logger.info("count:"+count);
-		
-		List<PartnerDto> restaurantPartnerList=null;
-		if(count>0){
-			restaurantPartnerList=partnerDao.getRestaurantPartnerList();
-			logger.info("restaurantPartnerList:"+restaurantPartnerList.size());
-		}
-		
-		Gson gson=new Gson();
-		String json=gson.toJson(restaurantPartnerList);
-		logger.info("restaurantPartnerList:"+restaurantPartnerList);
-		logger.info("json:"+json);
-		
-		System.out.println("json"+json);
-		
-		mav.addObject("restaurantPartnerList",restaurantPartnerList);
-		mav.addObject("json",json);
-	}
-	@Override
-	public void getRestaurantPartnerListDate(ModelAndView mav) {
-		logger.info("PartnerServiceImp getRestaurantPartnerListDate start----------------");
-		
-		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request=(HttpServletRequest)map.get("request");
-		HttpServletResponse response=(HttpServletResponse)map.get("response");
-		
-		int partnerNo=Integer.parseInt(request.getParameter("partnerNo"));
-		logger.info("partnerNo : " + partnerNo);
-	
-		PartnerDto getRestaurantPartnerListDate=partnerDao.getRestaurantPartnerListDate(partnerNo);
-		logger.info("맵퍼 갔다와서:"+getRestaurantPartnerListDate);
-		
-		Gson gson=new Gson();
-		String json=gson.toJson(getRestaurantPartnerListDate);
-		logger.info("json으로 담은후에" + json);
-			
-		//mav.addObject("getPartnerListDate",getPartnerListDate);
-		mav.addObject("json",json);
-		
-	}
 	
 /**
- * @name: write
+ * @name: couponWrite
  * @date:2015. 7. 5.
  * @author: 변태훈
- * @description:  제휴업체 등록
+ * @description:  제휴업체 쿠폰등록
  */
 	@Override
 	public boolean couponWrite(ModelAndView mav) {
@@ -232,7 +193,7 @@ public class PartnerServiceImpl implements PartnerService {
 		logger.info("" +couponDto.getCoupon_eymd());
 	
 		boolean isSuccess = false;			//성공했는지 실패했는지 여부 확인한다
-		String uploadPath = "C:\\Users\\Taylor\\git\\blogMap\\blogMap\\src\\main\\webapp\\css\\coupon_images";
+		String uploadPath = "C:\\workspace\\blogMap\\src\\main\\webapp\\pds\\partner";
 		File dir = new File(uploadPath);
 		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
 			dir.mkdirs();
@@ -275,7 +236,7 @@ public class PartnerServiceImpl implements PartnerService {
 		return isSuccess;
 	}
 	@Override
-	public void couponList(ModelAndView mav) {
+	public void couponWriteList(ModelAndView mav) {
 		// TODO Auto-generated method stub
 		
 	}
