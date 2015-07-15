@@ -24,22 +24,38 @@
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 			success:function(responseData){
 				var data=JSON.parse(responseData);	// 가지고 온 데이타를 data변수에 저장 
-				//alert("managerList:" + data)
+				//alert("managerList:" + data[0].manager_id);
+				
 				if(!data){
 					alert("데이타가 없습니다.");
 					return false;
 				}
 				
 				$.each(data, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
-					$("#managerListResult").append($("#managerList").clone().css("display","block"));		// #managerList를 복사하여 #managerListResult에 복사함
-					$("#managerList:last-child #managerId").append(data[i].manager_id);
-					$("#managerList:last-child #managerName").append(data[i].manager_name);
-					$("#managerList:last-child #managerEmail").append(data[i].manager_email);
-					$("#managerList:last-child #managerRgDate").append(data[i].manager_rgdate);
-					$("#managerList:last-child #managerExDate").append(data[i].manager_exdate);
-					$("#managerList:last-child #managerYN").append(data[i].manager_yn);
-					/* $("#managerList:last-child #managerLogResult").attr("name",data[i].manager_id); */
-					$("#managerList:last-child #log").attr("name", data[i].manager_id);
+					var getRgdate = new Date(data[i].manager_rgdate);	// 등록일 날짜 변환
+					var rgyear = getRgdate.getFullYear();
+					var rgmonth = getRgdate.getMonth() + 1;
+					var rgday = getRgdate.getDate();
+					var rgDate = rgyear + "년 " + rgmonth + "월 "	+ rgday + "일";
+					//alert(rgDate);
+					
+					var getYdate = new Date(data[i].manager_exdate);	// 승인일 날짜 변환
+					var exyear = getYdate.getFullYear();
+					var exmonth = getYdate.getMonth() + 1;
+					var exday = getYdate.getDate();
+					var exDate = exyear + "년 " + exmonth + "월 "	+ exday + "일";
+					//alert(yDate);
+					
+					$("#managerListResult").append("<tr style='text-align:center;'>"
+							+ "<td>" + data[i].manager_id + "</td>"			// 아이디
+							+ "<td>" + data[i].manager_name + "</td>"			// 이름	
+							+ "<td>" + data[i].manager_email + "</td>"		//
+							+ "<td>" + rgDate + "</td>"		//							
+							+ "<td>" + exDate + "</td>"						// 등록일
+							+ "<td>" + data[i].manager_yn + "</td>"		//
+							+ "<td>"
+							+"<input id='log' type='button' value='로그' name='"+data[i].manager_id+"'/></td>"
+							+ "</tr>");
 					
 					$("#log[name='"+data[i].manager_id+"']").click(function(){		// log버튼 클릭하면 로그기록을 불러옴
 						//alert("로그버튼");
@@ -63,13 +79,13 @@
 								
 								$.each(Logdata, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
 									
-									$("#managerLogResult").append($("#managerLog").clone().css("display","block"));		// #memberList를 복사하여 memberListSResult에 복사함 
-									$("#managerLog:last-child #LogNo").append(Logdata[i].log_no);
-									$("#managerLog:last-child #managerId").append(Logdata[i].manager_id);
-									$("#managerLog:last-child #LogDate").append(Logdata[i].log_date);
-									$("#managerLog:last-child #LogCode").append(Logdata[i].log_code);
-									$("#managerLog:last-child #LogContent").append(Logdata[i].log_content);
-								
+									$("#managerLogResult").append("<tr style='text-align:center;'>"
+											+ "<td>" + Logdata[i].log_no + "</td>"			// 아이디
+											+ "<td>" + Logdata[i].manager_id + "</td>"			// 이름	
+											+ "<td>" + Logdata[i].log_date + "</td>"		//
+											+ "<td>" + Logdata[i].log_code + "</td>"		//							
+											+ "<td>" + Logdata[i].log_content + "</td>"						// 등록일	
+											+ "</tr>");
 								});
 								
 							},error:function(data){
@@ -89,11 +105,52 @@
 		});
 
 	}
+	
+	$(function(){
+		$("#logHide").click(function(){
+			$("#managerLogList").hide();
+			
+		})
+	})
 </script>
 </head>
-<body>	
+<body>
+
+
+<div class="caption">
+	
 	<div>
-<!-- 관리자정보 타이틀 -->
+		<div class="span7">   
+			<div class="widget stacked widget-table action-table">
+	    				
+					
+					<div class="widget-content">
+						
+						<table class="table table-striped table-bordered" >
+							<thead>
+								<tr class="widget-header" >
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">아이디</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">이름</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">이메일</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">등록일</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">종료일</th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center;">사용</th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center;">기록</th>
+								</tr>
+							</thead>
+							<tbody id="managerListResult"></tbody>  <!-- 자료를 붙일 바디 -->
+							</table>
+						
+					</div> <!-- /widget-content -->
+				
+			</div> <!-- /widget -->
+	    </div>
+	</div>
+</div>
+
+<!-- 	
+	<div>
+관리자정보 타이틀
 	<div class="row" id="managerTitle" align="center">
         <div class="col-md-2 col-sm-2 col-xs-2">아이디</div>
         <div class="col-md-2 col-sm-2 col-xs-2">이름</div>
@@ -104,7 +161,7 @@
         <div class="col-md-1 col-sm-1 col-xs-1">기록</div>
     </div>
 	
-<!-- 관리자 정보를 불러올 기본틀 -->
+관리자 정보를 불러올 기본틀
 	<div class="row" id="managerList" style="display:none;" align="center">
 		<div class="col-md-2 col-sm-2 col-xs-2" id="managerId"></div>
         <div class="col-md-2 col-sm-2 col-xs-2" id="managerName"></div>
@@ -117,34 +174,41 @@
         </div>
 	</div>
 	
-<!-- 관리자 정보를 삽입시킬 div테그 -->	
+관리자 정보를 삽입시킬 div테그	
 	<div class="row" id="managerListResult" align="center"></div>
 </div>
-
-<!-- 관리자 로그 삽입 -->
-	<div id="managerLogList" >
-<!-- 관리자 로그 타이틀 -->	
-		<div class="row" id="managerLogTitle" align="center">
-	        <div class="col-md-2 col-sm-2 col-xs-2">순번</div>
-	        <div class="col-md-3 col-sm-3 col-xs-3">관리자</div>
-	        <div class="col-md-3 col-sm-3 col-xs-3">로그데이트</div>
-	        <div class="col-md-2 col-sm-2 col-xs-2">로그코드</div>
-	        <div class="col-md-2 col-sm-2 col-xs-2">내용</div>
-	        
+ -->
+ 
+ <div class="caption" id="managerLogList" >
+	
+	<div>
+		<div class="span7">   
+			<div class="widget stacked widget-table action-table">
+	    				
+					
+					<div class="widget-content">
+					<div style="text-align:right;"><input type="button" id="logHide" value="Close"/>	</div>
+											
+						<table class="table table-striped table-bordered" >
+							<thead>
+								<tr class="widget-header">
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">순번</th>
+									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center;">관리자</th>
+									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center;">로그데이트</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">로그코드</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">내용</th>
+								</tr>
+							</thead>
+							<tbody id="managerLogResult"></tbody>  <!-- 자료를 붙일 바디 -->
+							</table>
+						
+					</div> <!-- /widget-content -->
+				
+			</div> <!-- /widget -->
 	    </div>
-<!-- 관리자 행위 로그를 불러올 기본틀 -->
-		<div id="managerLog" style="display:none;" align="center">
-			<div class="col-md-2 col-sm-2 col-xs-2" id="LogNo"></div>
-	        <div class="col-md-3 col-sm-3 col-xs-3" id="managerId"></div>
-	        <div class="col-md-3 col-sm-3 col-xs-3" id="LogDate"></div>
-	        <div class="col-md-2 col-sm-2 col-xs-2" id="LogCode"></div>
-	        <div class="col-md-2 col-sm-2 col-xs-2" id="LogContent"></div>
-		</div>
-	
-<!--  로그기록을 삽입시킬 divtag -->	
-		<div id="managerLogResult"></div>
 	</div>
-	
+</div>
+
 </body>
 </html>
 

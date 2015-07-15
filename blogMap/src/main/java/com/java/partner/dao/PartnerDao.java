@@ -16,13 +16,9 @@ public interface PartnerDao {
 	
 	public int getPartnerCount();
 	
-	public List<PartnerDto> getTourPartnerList();
+	public List<PartnerDto> getwriteList();
 	
 	public PartnerDto getTourPartnerListDate(int partnerNo);
-
-	public List<PartnerDto> getRestaurantPartnerList();
-
-	public PartnerDto getRestaurantPartnerListDate(int partnerNo);
 	
 	public int couponRegister(CouponDto couponDto,int partner_no);
 }

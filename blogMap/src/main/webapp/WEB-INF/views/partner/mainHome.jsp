@@ -64,6 +64,7 @@ $(function() {
 					</div>
 				</div>
 			</section>
+		</div>
 	</article>
 		<script type="text/javascript">
 			/*
@@ -149,7 +150,7 @@ $(function() {
 					alert("ok"); */	
 				$.ajax({
 					type:'post',
-					url:'${root}/partner/tour_partner_List.do',
+					url:'${root}/partner/writeList.do',
 					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 					success : function(responseData) {
 						var data = JSON.parse(responseData);
@@ -162,11 +163,11 @@ $(function() {
 							$("#tour_item:last-child #list_partner_name").append(data[i].partner_name);
 							$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
 							$("input[name='partner_no']").append(data[i].partner_no);
-							$("#tour_item:last-child #partner_imagers").attr("src","${root}/css/images/partner/"+data[i].partner_pic_name);
+							$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
 							
 							// 각 업체를 클릭했을때 이벤트
 							$("#partner_" + data[i].partner_no).click(function(){
-								alert("업체클릭" + data[i].partner_no)
+								//alert("업체클릭" + data[i].partner_no)
 								partnerData(data[i].partner_no);	
 							});
 						});
@@ -210,11 +211,12 @@ $(function() {
 						var data = JSON.parse(responseData);
 	//		 			alert("업체이름" + data.partner_name);
 						
+//  					$("p[name='p_category_code']").html(data.category_code);
 						$("p[name='p_name']").html(data.partner_name);
 						$("p[name='p_phone']").html(data.partner_phone);
 						$("p[name='p_addr']").html(data.partner_addr);
 // 						$("img[id='partnerDetail_imagers']").attr("src","${root}/css/images/partner/"+data.partner_pic_name);
-						$("#data-body:#partnerDetail_imagers").attr("src","${root}/css/images/partner/"+data.partner_pic_name);
+						$("img[id='partnerDetail_imagers']").attr("src","${root}/pds/partner/"+data.partner_pic_name);
 					}
 				});
 			};

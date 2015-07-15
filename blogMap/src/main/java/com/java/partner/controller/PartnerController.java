@@ -41,23 +41,21 @@ public class PartnerController {
 
 		partnerService.write(mav);
 	}
-	
-	
 	/**
 	 * @name: list
 	 * @date:2015. 7. 7.
 	 * @author: 변태훈
 	 * @description: 제휴업체 Tour리스트 컨트롤러
 	 */
-	@RequestMapping(value="/partner/tour_partner_List.do", method=RequestMethod.POST)
-	public void list(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Partner tour_partner_List 시작!!!--------------------------------------------");
+	@RequestMapping(value="/partner/writeList.do", method=RequestMethod.POST)
+	public void writeList(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Partner writeList 시작!!!--------------------------------------------");
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 	
-		partnerService.tourList(mav);
+		partnerService.writeList(mav);
 		
 		Map<String, Object> map=mav.getModel();
 		
@@ -69,7 +67,6 @@ public class PartnerController {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-
 	}
 	/**
 	 * @name: getTourPartnerListDate
@@ -99,64 +96,6 @@ public class PartnerController {
 		}
 		
 	}
-	
-	/**
-	 * @name: list
-	 * @date:2015. 7. 9.
-	 * @author: 변태훈
-	 * @description: 제휴업체 리스트 컨트롤러
-	 */
-	@RequestMapping(value="/partner/restaurant_partner_List.do", method=RequestMethod.POST)
-	public void restaurantList(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Partner restaurantList 시작!!!--------------------------------------------");
-		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("response", response);
-	
-		partnerService.restaurantList(mav);
-		
-		Map<String, Object> map=mav.getModel();
-		
-		String json=(String)map.get("json");
-		
-		try{
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(json);
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-
-	}
-	
-	/**
-	 * @name: getPartner
-	 * @date:2015. 7. 9.
-	 * @author: 변태훈
-	 * @description: 제휴업체 업체정보 팝업
-	 */
-	@RequestMapping(value="/partner/getRestaurantPartnerListDate.do", method=RequestMethod.GET)
-	public void getRestaurantPartnerListDate(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Partner getRestaurantPartnerListDate 시작!!!--------------------------------------------");
-		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("response", response);
-		
-		partnerService.getRestaurantPartnerListDate(mav);
-		
-		Map<String, Object> map=mav.getModel();
-		
-		String json=(String)map.get("json");
-		
-		try{
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(json);
-		}catch(IOException e){
-			e.printStackTrace();
-		}	
-	}
-	
 	/**
 	 * @name: couponWrite
 	 * @date:2015. 7. 5.
@@ -188,7 +127,7 @@ public class PartnerController {
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 	
-		partnerService.restaurantList(mav);
+		partnerService.couponWriteList(mav);
 		
 		Map<String, Object> map=mav.getModel();
 		
