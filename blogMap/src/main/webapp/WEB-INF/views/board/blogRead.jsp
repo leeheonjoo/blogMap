@@ -260,50 +260,52 @@ function reply_delete(DThis) {
 	</div>
 	
 	<!-- 이미지 슬라이드 -->
-<section class="section-white">
-  <div class="container">
-
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-      </ol>
-
-      <!-- Wrapper for slides -->
-      <div class="carousel-inner">
-        <div class="item active">
-          <img src="http://placehold.it/800x400" alt="...">
-          <div class="carousel-caption">
-            <h2>Heading</h2>
-          </div>
-        </div>
-        <div class="item">
-          <img src="http://placehold.it/800x400" alt="...">
-          <div class="carousel-caption">
-            <h2>Heading</h2>
-          </div>
-        </div>
-        <div class="item">
-          <img src="http://placehold.it/800x400" alt="...">
-          <div class="carousel-caption">
-            <h2>Heading</h2>
-          </div>
-        </div>
-      </div>
-
-      <!-- Controls -->
-      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>
-    </div>
-
-  </div>
-</section>
+<div class="row">
+	<section class="section-white">
+	  <div class="container container1">
+	
+	    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+	      <!-- Indicators -->
+	      <ol class="carousel-indicators">
+	        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+	        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+	        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+	      </ol>
+	
+	      <!-- Wrapper for slides -->
+	      <div class="carousel-inner carousel-inner1">
+	        <div class="item active">
+	          <img src="http://placehold.it/600x200" alt="...">
+	          <div class="carousel-caption">
+	            <h2>Heading</h2>
+	          </div>
+	        </div>
+	        <div class="item">
+	          <img src="http://placehold.it/600x200" alt="...">
+	          <div class="carousel-caption">
+	            <h2>Heading</h2>
+	          </div>
+	        </div>
+	        <div class="item">
+	          <img src="http://placehold.it/600x200" alt="...">
+	          <div class="carousel-caption">
+	            <h2>Heading</h2>
+	          </div>
+	        </div>
+	      </div>
+	
+	      <!-- Controls -->
+	      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+	        <span class="glyphicon glyphicon-chevron-left"></span>
+	      </a>
+	      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+	        <span class="glyphicon glyphicon-chevron-right"></span>
+	      </a>
+	    </div>
+	
+	  </div>
+	</section>
+</div>
 <br/>
 
 <!-- 	<div style="display: none;"> -->
