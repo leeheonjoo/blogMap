@@ -564,10 +564,19 @@ public class MemberServiceImpl implements MemberService {
 		Map<String,Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		HttpServletResponse response = (HttpServletResponse) map.get("response");
-		
+
 		String member_id=request.getParameter("member_id");
 		logger.info("member_id:"+member_id);
 		
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
+		
+		int currentPage=Integer.parseInt(pageNumber);
+		
+		int boardSize=1;
+		int startRow=(currentPage-1)*boardSize+1;
+		int endRow=currentPage*boardSize;
+		int count=memberDao.totalFavorite(member_id);
 		
 		List<BoardDto> boardDtoList=null;
 		List<BoardReadDto> favoriteList=null;
@@ -579,15 +588,16 @@ public class MemberServiceImpl implements MemberService {
 		List<HashMap<String,Object>> favoriteInfoList=new ArrayList<HashMap<String,Object>>();
 		favoriteInfoList.add(hMap);
 		
-		favoriteInfoList=memberDao.favorite_info(member_id);
+		favoriteInfoList=memberDao.favorite_info(member_id,startRow,endRow);
 		logger.info("favoriteInfoList"+favoriteInfoList);
 		
 		Gson gson=new Gson();
 		String favoriteInfo_json=gson.toJson(favoriteInfoList);
 		
+		String favorite_info_pack=favoriteInfo_json+"|"+boardSize+"|"+count+"|"+currentPage;
 		try {
 			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(favoriteInfo_json);
+			response.getWriter().print(favorite_info_pack);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

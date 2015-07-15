@@ -14,7 +14,7 @@
 			select * from coupon c,
 			   (select partner_no, member_id, partner_name from partner) p
 			        where c.partner_no = p.partner_no
-			            and coupon_discount = '50' and coupon_yn='Y'      
+			            and coupon_yn='Y'      
 			                order by coupon_discount desc
 		]]>
 	</select>
