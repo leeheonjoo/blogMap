@@ -306,8 +306,16 @@ a {
         line-height: 0.88rem;
         color: #000;
         }
-
-
+        
+.page-header2 {
+    background: #f9f9f9;
+    margin: -30px -40px 40px;
+    padding: 30px 40px;
+    border-top: 4px solid #ccc;
+    color: #999;
+    text-transform: uppercase;
+    }
+    
 
 /* Thumbnail Box */
 .caption h4 {

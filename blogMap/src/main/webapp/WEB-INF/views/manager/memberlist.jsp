@@ -172,12 +172,13 @@ vertical-align: middle;
 								
 								if(data== "1"){
 									alert("삭제되었습니다.");
+									getMemberList();
 								}
 							},error:function(data){
 								alert("에러가 발생하였습니다.");
 							}
 						});
-						 $(this).parent().parent().remove();;
+						 //$(this).parent().parent().remove();;
 
 					});
 					
@@ -248,12 +249,13 @@ vertical-align: middle;
 								
 								if(data== "1"){
 									alert("삭제되었습니다.");
+									getMemberList();
 								}
 							},error:function(data){
 								alert("에러가 발생하였습니다.");
 							}
 						});
-						 $(this).parent().parent().remove();;
+						 //$(this).parent().parent().remove();;
 
 					});
 					
@@ -334,12 +336,13 @@ vertical-align: middle;
 								
 								if(data== "1"){
 									alert("삭제되었습니다.");
+									getMemberList();
 								}
 							},error:function(data){
 								alert("에러가 발생하였습니다.");
 							}
 						});
-						 $(this).parent().parent().remove();;
+						// $(this).parent().parent().remove();;
 
 					});
 					

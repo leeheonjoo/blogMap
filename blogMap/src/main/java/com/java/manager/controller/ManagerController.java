@@ -453,4 +453,10 @@ public class ManagerController {
 		}
 	}
 	
+	@RequestMapping("/manager/searchCouponInfo.do")
+	public void searchCouponList(HttpServletRequest request, HttpServletResponse Response){
+		logger.info("Manager searchCouponList Start");
+	}
+	
+	
 }
