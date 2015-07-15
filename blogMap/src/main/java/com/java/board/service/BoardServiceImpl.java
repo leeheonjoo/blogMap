@@ -444,6 +444,7 @@ public class BoardServiceImpl implements BoardService {
 					if (!file.isDirectory()) {			//파일이 존재하지 않을 때 
 						file.mkdirs();
 					}
+					
 					upFile.get(j).transferTo(file); //입출력
 					
 					attach_fileDto.setFile_name(originalNames[j]);

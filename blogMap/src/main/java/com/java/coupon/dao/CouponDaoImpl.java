@@ -24,16 +24,16 @@ public int getCouponCount() {
 }
 
 @Override
-public List<HashMap<String, Object>> getCouponList_L(String member_id) {
-	List<HashMap<String, Object>> list=session.selectList("dao.CouponMapper.couponList_L", member_id);
+public List<HashMap<String, Object>> getCouponList() {
+	List<HashMap<String, Object>> list=session.selectList("dao.CouponMapper.couponList_L");
 	return list;
 }
 
-@Override
-public List<HashMap<String, Object>> getCouponList_S(String member_id) {
-	List<HashMap<String, Object>> list=session.selectList("dao.CouponMapper.couponList_S", member_id);
-	return list;
-}
+//@Override
+//public List<HashMap<String, Object>> getCouponList_S(String member_id) {
+//	List<HashMap<String, Object>> list=session.selectList("dao.CouponMapper.couponList_S", member_id);
+//	return list;
+//}
 
 
 }
