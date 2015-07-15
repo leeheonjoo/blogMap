@@ -5,13 +5,13 @@
 <mapper namespace="dao.PartnerMapper">
 	
 	<insert id="partnerRegister" parameterType="com.java.partner.dto.PartnerDto">
-	  	insert into partner(partner_no,member_id,category_code,partner_name,partner_phone,partner_addr,partner_rgdate,partner_yn,partner_ydate,partner_pic_name,partner_pic_path,partner_pic_size) values(partner_partner_no_seq.nextval,#{member_id},#{category_code},#{partner_name},#{partner_phone},#{partner_addr},sysdate,'n',null,#{partner_pic_name},#{partner_pic_path},#{partner_pic_size})
+	  	insert into partner(partner_no,member_id,category_code,partner_name,partner_phone,partner_addr,partner_rgdate,partner_yn,partner_ydate,partner_pic_name,partner_pic_path,partner_pic_size) values(partner_partner_no_seq.nextval,#{member_id},#{category_code},#{partner_name},#{partner_phone},#{partner_addr},sysdate,'N',null,#{partner_pic_name},#{partner_pic_path},#{partner_pic_size})
 	</insert>
 	<select id="partnerCount" resultType="int">
 	select count(*) from partner
 	</select>
-	<select id="getTourPartnerList" resultType="com.java.partner.dto.PartnerDto">
-		select * from partner where category_code=100000 order by partner_no desc
+	<select id="getWriteList" resultType="com.java.partner.dto.PartnerDto">
+		select * from partner order by partner_no desc
 	</select>
 	<select id="getTourPartnerListDate" parameterType="Integer" resultType="com.java.partner.dto.PartnerDto">
 		select * from partner where partner_no=#{partnerNo}
