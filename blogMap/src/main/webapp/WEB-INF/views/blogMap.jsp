@@ -225,7 +225,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<a data-toggle="modal" href="#blogMapCoupon">
-									<img src="${root}/images/blogMap/coupon_2.png" class="img-responsive"/>
+									<img src="${root}/images/blogMap/coupon.png" class="img-responsive"/>
 								</a>
 							</div>
 						</div>
@@ -355,30 +355,16 @@
 			
 		</div>
 	</div>
-	<br/><br/>
+	<br/>
 
 	<div class="container" style="max-width:1170px; height:50px; padding:0 0 0 0;">
-		<div class="navbar" style="height:50px; color:gray; width:inherit;">
-				<div class="col-sm-10 col-xs-9">
-					<div style="width:100%; height:50px; text-align:center;">
+					<div style="width:100%; height:50px; text-align:right;">
 						<p style="width:100%; line-height:46px;">
-							<b style="width:100%;"></b>
+							<a data-toggle="modal" href="#partnerMain" id ="partner_Registration"><img src="${root}/images/blogMap/Partnership_32.png"></a>
+							&nbsp;&nbsp;
+							<a data-toggle="modal" href="#ManagerMain"><img src="${root}/images/blogMap/gear_24.png"></img></a>
 						</p>
 					</div>
-				</div>
-				<div class="col-sm-2 col-xs-3" >
-					<div style="width:100%; height:50px; text-align:center;">
-						<p style="width:100%; line-height:46px;">
-							<b style="width:100%;"><a data-toggle="modal" href="#partnerMain" id ="partner_Registration" style="color:gray;">제휴업체</a></b>
-						</p>
-					</div>
-				</div>
-		</div>
-		<div style="text-align:right;">
-			<a data-toggle="modal" href="#ManagerMain"><img src="${root}/images/blogMap/gear_24.png"></img></a>
-			
-		</div>
-
 	</div>
 	<br/><br/>
 
