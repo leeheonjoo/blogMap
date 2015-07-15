@@ -221,6 +221,27 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectList("dao.MemberMapper.coupon_info",hMap);
 	}
 
+	@Override
+	public int managerRgCheck(String member_id) {
+		int value=0;
+		
+		String manager_id=sqlSession.selectOne("dao.MemberMapper.managerRgCheck",member_id);
+		if(manager_id!=null){
+			value=1;
+		}else{
+			value=0;
+		}
+		return value;
+	}
+
+	@Override
+	public String managerLogin(String id, String password) {
+		HashMap<String, String> hMap = new HashMap<String, String>();
+		hMap.put("id", id);
+		hMap.put("password", password);
+		return sqlSession.selectOne("dao.MemberMapper.managerLogin",hMap);
+	}
+
 	
 
 }
