@@ -49,6 +49,9 @@ if(sessionStorage.getItem('email')!=null){
 				/* $("#myPage_member_point").val(data[1]);
 				$("#myPage_member_point").attr("disabled","disabled"); */
 				
+				if(data[1]>20){
+					$("#myPage_member_rate").text("새싹(my point:"+data[1]+")");
+				}
 				$("#myPage_member_boardCount").val(data[2]);
 				$("#myPage_member_boardCount").attr("disabled","disabled");
 				
@@ -191,6 +194,7 @@ if(sessionStorage.getItem('email')!=null){
 					//alert("endPage:"+endPage);
 					//alert("pageCount:"+pageCount);
 					//다음
+					alert(p_endPage+","+pageCount);
 					if(p_endPage<pageCount){
 						//alert("aaaaa");
 						$("#myPage_member_point_list_after").css("display","inline-block");
@@ -995,12 +999,13 @@ if(sessionStorage.getItem('email')!=null){
 						});
 					}
 					
+					
 					//다음
 					if(b_endPage<pageCount){
 						$("#myPage_member_board_list_after").css("display","inline-block");
 					}
 					
-					if(f_endPage>=pageCount){
+					if(b_endPage>=pageCount){
 						$("#myPage_member_board_list_after").css("display","none");
 					}
 				}
