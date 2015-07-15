@@ -1,5 +1,6 @@
 package com.java.manager.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.java.coupon.dto.CouponDto;
@@ -38,11 +39,17 @@ public interface ManagerDao {
 		
 		public void partnerDeleteLog(String id);
 		
-		public List<CouponDto> getCouponData();
+		public List<HashMap<String, Object>> getCouponData();
 		
 		public int couponSubmit(int couponNo);
 		
 		public void couponSubmitLog(int couponNo);
+		
+		public int couponCancle(int couponNo);
+		
+		public void couponCancleLog(int couponNo);
+		
+		public List<HashMap<String, Object>> couponDetail(int coupon_no);
 		
 		public PartnerDto partnerDetail(int partnerNo);
 		

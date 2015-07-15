@@ -47,7 +47,7 @@
 					var yday = getYdate.getDate();
 					var yDate = yyear + "년 " + ymonth + "월 "	+ yday + "일";
 					//alert(yDate);
-					 if(data[i].partner_yn == "y"){ 
+					 if(data[i].partner_yn == "Y"){ 
 							$("#partnerListResult").append("<tr style='text-align:center;'>"
 									+ "<td>" + data[i].partner_no + "</td>"			// 아이디
 									+ "<td>" + data[i].member_id + "</td>"			// 이름	
@@ -58,7 +58,7 @@
 									+ "<td>"
 									+"<input type='button' id='partner' value = '삭제' name='"+data[i].member_id+"'/></td>"
 									+ "</tr>");
-					 }else if(data[i].partner_yn =="n"){ 
+					 }else if(data[i].partner_yn =="N"){ 
 							$("#partnerListResult").append("<tr style='text-align:center;'>"
 									+ "<td>" + data[i].partner_no + "</td>"			// 아이디
 									+ "<td>" + data[i].member_id + "</td>"			// 이름								
@@ -164,22 +164,21 @@
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					var data=JSON.parse(responseData);
-					
-					var filename=data.partner_pic_name
+					//var filename=data.partner_pic_name
 					
 					$("#partnerDetailResult").append($("#partnerDetailMain").clone().css("display","block"));
 					$("#partnerDetailMain:last-child #member_id").html(data.member_id);
-					$("#partnerDetailMain:last-child #partner_img").attr("src", "${root}/css/partner/images/"+filename);
+					$("#partnerDetailMain:last-child #partner_img").attr("src", "${root}/css/partner/images/"+data.partner_pic_name);
 					$("#partnerDetailMain:last-child #partner_name").html(data.partner_name);
 					$("#partnerDetailMain:last-child #partner_phone").html(data.partner_phone);
 					$("#partnerDetailMain:last-child #partner_address").html(data.partner_addr);
 					$("#partnerDetailMain:last-child #partner_rgdate").html(data.partner_rgdate);					
 					$("#partnerDetailMain:last-child #partner_ydate").html(data.partner_ydate);
 					
-					if(data.partner_yn == "y"){
+					if(data.partner_yn == "Y"){
 						//$("#partner_submit").css("display", "none");
 						$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.member_id, "value":"삭제"});
-					}else if(data.partner_yn == "n"){
+					}else if(data.partner_yn == "N"){
 						//$("#partner_delete").css("display", "none");
 						$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.member_id, "value":"승인"});
 					}
@@ -213,7 +212,7 @@
 		
 	};
 	
-	/* $(function(){ */
+	 $(function(){
 		/******************************************/ 
 		/*			          					  */
 		/*			검색버튼 클릭시 실행				  */
@@ -252,7 +251,7 @@
 						var yday = getYdate.getDate();
 						var yDate = yyear + "년 " + ymonth + "월 "	+ yday + "일";
 						//alert(yDate);
-						 if(data[i].partner_yn == "y"){ 
+						 if(data[i].partner_yn == "Y"){ 
 								$("#partnerListResult").append("<tr style='text-align:center;'>"
 										+ "<td>" + data[i].partner_no + "</td>"			// 아이디
 										+ "<td>" + data[i].member_id + "</td>"			// 이름	
@@ -263,7 +262,7 @@
 										+ "<td>"
 										+"<input type='button' id='partner' value = '삭제' name='"+data[i].member_id+"'/></td>"
 										+ "</tr>");
-						 }else if(data[i].partner_yn =="n"){ 
+						 }else if(data[i].partner_yn =="N"){ 
 								$("#partnerListResult").append("<tr style='text-align:center;'>"
 										+ "<td>" + data[i].partner_no + "</td>"			// 아이디
 										+ "<td>" + data[i].member_id + "</td>"			// 이름								
@@ -361,6 +360,7 @@
 				
 			}
 			
+			
 			function partnerDetail(partnerNo){
 				$("#partnerDetailResult").empty();
 				$.ajax({
@@ -378,10 +378,10 @@
 						$("#partnerDetailMain:last-child #partner_name").html(data.partner_name);
 						$("#partnerDetailMain:last-child #partner_phone").html(data.partner_phone);
 						$("#partnerDetailMain:last-child #partner_address").html(data.partner_addr);
-						if(data.partner_yn == "y"){
+						if(data.partner_yn == "Y"){
 							//$("#partner_submit").css("display", "none");
 							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.member_id, "value":"삭제"});
-						}else if(data.partner_yn == "n"){
+						}else if(data.partner_yn == "N"){
 							//$("#partner_delete").css("display", "none");
 							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.member_id, "value":"승인"});
 						}
@@ -413,7 +413,10 @@
 				});
 			};	
 			
-		/* }); */
+		}); 
+		
+		
+		
 		
 		/******************************************/ 
 		/*			          					  */
@@ -453,7 +456,7 @@
 						var yday = getYdate.getDate();
 						var yDate = yyear + "년 " + ymonth + "월 "	+ yday + "일";
 						//alert(yDate);
-						 if(data[i].partner_yn == "y"){ 
+						 if(data[i].partner_yn == "Y"){ 
 								$("#partnerListResult").append("<tr style='text-align:center;'>"
 										+ "<td>" + data[i].partner_no + "</td>"			// 아이디
 										+ "<td>" + data[i].member_id + "</td>"			// 이름	
@@ -464,7 +467,7 @@
 										+ "<td>"
 										+"<input type='button' id='partner' value = '삭제' name='"+data[i].member_id+"'/></td>"
 										+ "</tr>");
-						 }else if(data[i].partner_yn =="n"){ 
+						 }else if(data[i].partner_yn =="N"){ 
 								$("#partnerListResult").append("<tr style='text-align:center;'>"
 										+ "<td>" + data[i].partner_no + "</td>"			// 아이디
 										+ "<td>" + data[i].member_id + "</td>"			// 이름								
@@ -579,10 +582,10 @@
 						$("#partnerDetailMain:last-child #partner_name").html(data.partner_name);
 						$("#partnerDetailMain:last-child #partner_phone").html(data.partner_phone);
 						$("#partnerDetailMain:last-child #partner_address").html(data.partner_addr);
-						if(data.partner_yn == "y"){
+						if(data.partner_yn == "Y"){
 							//$("#partner_submit").css("display", "none");
 							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.member_id, "value":"삭제"});
-						}else if(data.partner_yn == "n"){
+						}else if(data.partner_yn == "N"){
 							//$("#partner_delete").css("display", "none");
 							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.member_id, "value":"승인"});
 						}
@@ -622,13 +625,13 @@
 <body>
 <div class="caption">
 
-	<div class="row" id="searchTag">
-			<input type="button" id="getPartnerList" value="리셋"/>
-			<input type="radio" name="partner_yn" id="y"/><span>승인업체</span> &nbsp;&nbsp;
-			<input type="radio" name="partner_yn" id="n"/><span>미승인업체</span>&nbsp;&nbsp;
-			<input type="text" placeholder="Search" id="searchTag"/> 
+	<div>
+			<input type="button" id="getPartnerList" value="Reset"/>&nbsp;&nbsp;
+			<input type="radio" name="partner_yn" id="Y" checked="checked"/><span>Approval</span> &nbsp;&nbsp;
+			<input type="radio" name="partner_yn" id="N"/><span>Disapproved</span>&nbsp;&nbsp;
+			<input type="text" placeholder="Name Search" id="searchTag"/> 
 			<input type="submit" id="searchPartner" value="Search"/>	
-	</div>
+	</div><br/>
 	
 	<div>
 		<div class="span7">   

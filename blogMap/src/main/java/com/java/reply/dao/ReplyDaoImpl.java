@@ -27,6 +27,16 @@ public class ReplyDaoImpl implements ReplyDao {
 		return sqlSession.insert("dao.ReplyMapper.blogWriteReply",hMap);
 		
 	}
+
+	public int blogReadReplyUpdate(HashMap<String, Object> hMap) {
+		logger.info("BoardReadDao blogReadReplyUpdate-------------------------");
+		return sqlSession.insert("dao.ReplyMapper.blogReadReplyUpdate",hMap);
+	}
+
+	public int blogReadReplyDelete(HashMap<String, Object> hMap) {
+		logger.info("BoardReadDao blogReadReplyDelete-------------------------");
+		return sqlSession.insert("dao.ReplyMapper.blogReadReplyDelete",hMap);
+	}
 	
 
 }

@@ -12,7 +12,7 @@
 	</delete>
 	
 	<delete id="delLog" parameterType="String">
-		insert into MANAGER_LOG values(manager_log_seq.nextval,'lucyman@nate.com',SYSDATE,'03',#{id})
+		insert into MANAGER_LOG values(manager_log_seq.nextval,'lucyman@nate.com',SYSDATE,'0001',#{id})
 	</delete>
 	
 	<select id="getSearchMemberList" parameterType="String" resultType="com.java.member.dto.MemberDto">
@@ -45,11 +45,11 @@
 	</select>	
 	
 	<update id="partnerSubmit" parameterType="String">
-		update PARTNER SET partner_yn='y', partner_ydate=sysdate where member_id=#{id}
+		update PARTNER SET partner_yn='Y', partner_ydate=sysdate where member_id=#{id}
 	</update>
 	
 	<insert id="submitLog" parameterType="String">
-		insert into manager_log values(manager_log_seq.nextval,'lucyman@nate.com',SYSDATE,'02',#{id})
+		insert into manager_log values(manager_log_seq.nextval,'lucyman@nate.com',SYSDATE,'0002',#{id})
 	</insert>
 	
 	<delete id="partnerDelete" parameterType="String">
@@ -57,22 +57,36 @@
 	</delete>
 	
 	<insert id="partnerDeleteLog" parameterType="String">
-		insert into manager_log values(manager_log_seq.nextval,'lucyman@nate.com',sysdate,'03',#{id})
-	</insert>
-	
-	<select id="getCouponData" resultType="com.java.coupon.dto.CouponDto">
-		select * from coupon
-	</select>
-	
-	<update id="couponSubmit" parameterType="Integer">
-		update coupon set coupon_yn='y' where coupon_no=#{couponNo}
-	</update>
-	
-	<insert id="couponSubmitLog" parameterType="Integer">
-		insert into manager_log values(manager_log_seq.nextval, 'lucyman@nate.com', sysdate, '04', #{couponNo})
+		insert into manager_log values(manager_log_seq.nextval,'lucyman@nate.com',sysdate,'0003',#{id})
 	</insert>
 	
 	<select id="partnerDetail" parameterType="Integer" resultType="com.java.partner.dto.PartnerDto">
 		select * from partner where partner_no=#{partnerNo}
 	</select>
+	
+	<select id="getCouponData" resultType="java.util.HashMap">
+		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no
+	</select>
+	
+	<update id="couponSubmit" parameterType="Integer">
+		update coupon set coupon_yn='Y' where coupon_no=#{couponNo}
+	</update>
+	
+	<insert id="couponSubmitLog" parameterType="Integer">
+		insert into manager_log values(manager_log_seq.nextval, 'lucyman@nate.com', sysdate, '0004', #{couponNo})
+	</insert>
+	
+	<update id="couponCancle" parameterType="Integer">
+		update coupon set coupon_yn='N' where coupon_no=#{couponNo}
+	</update>
+	
+	<insert id="couponCancleLog" parameterType="Integer">
+		insert into manager_log values(manager_log_seq.nextval, 'lucyman@nate.com', sysdate, '0005', #{couponNo})
+	</insert>
+	
+	<select id="couponDetail" parameterType="Integer" resultType="java.util.HashMap">
+		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no and c.coupon_no=#{couponNo}
+	</select>
+	
+	
 </mapper> 

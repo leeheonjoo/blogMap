@@ -1,5 +1,6 @@
 package com.java.manager.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -103,7 +104,7 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public List<CouponDto> getCouponData() {
+	public List<HashMap<String, Object>> getCouponData() {
 		// TODO Auto-generated method stub
 		return session.selectList("dao.ManagerMapper.getCouponData");
 	}
@@ -121,11 +122,31 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
+	public int couponCancle(int couponNo) {
+		// TODO Auto-generated method stub
+		return session.update("dao.ManagerMapper.couponCancle", couponNo);
+	}
+	
+	@Override
+	public void couponCancleLog(int couponNo) {
+		// TODO Auto-generated method stub
+		session.insert("dao.ManagerMapper.couponCancleLog", couponNo);
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> couponDetail(int couponNo) {
+		// TODO Auto-generated method stub
+		return session.selectList("dao.ManagerMapper.couponDetail", couponNo);
+	}
+	
+	@Override
 	public PartnerDto partnerDetail(int partnerNo) {
 		// TODO Auto-generated method stub
 		return session.selectOne("dao.ManagerMapper.partnerDetail", partnerNo);
 	}
+	
+	
+	
 
-	
-	
+
 }

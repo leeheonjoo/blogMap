@@ -307,15 +307,28 @@ v\:* {
                                                 contentType:'application/x-www-form-urlencoded;charset=UTF-8',
                                                 success : function(data) {
                                                    var data=JSON.parse(data);
+                                                   var i=0;
                                                    $.each(data,function(i){
                                                       var fileNo=data[i].file_no;
                                                       var filePath=data[i].file_path;
                                                       var fileComment=data[i].file_comment;
+                                                                                                            
+//                                                       if(i!=0){
+//                                                     	  $(".carousel-indicators").append("<li data-target='.carousel' data-slide-to="+i+"></li>");
+                                                    	                                                     	  
+//                                                     	  $("#imageSlideBox").append("<div class='item'><img src="+filePath+"><div class='carousel-caption'>"+fileComment+"</div></div>");
+//                                                     	  $("#imageSlideBox").append($("#imgHidden").clone().clone().css("display","block"));
+//                                                       }
+//                                                   	<div id="imgHidden" class="item" style="display:none;">
+// 	                                              	  <img src="">
+// 	                                              	  <div class="carousel-caption"></div>
+// 	                                              	</div>
                                                       
-                                                      $("#imgDisplay").append($("#imgHidden").clone());
-                                                       $("#imgDisplay > #imgHidden").attr("id","imgHidden"+i);
-                                                       $("#imgHidden"+i).find("#imgsrc").attr("src",filePath);
+//                                                       $("#imgDisplay").append($("#imgHidden").clone());
+//                                                        $("#imgDisplay > #imgHidden").attr("id","imgHidden"+i);
+//                                                        $("#imgHidden"+i).find("#imgsrc").attr("src",filePath);
                                                       
+                                                      i++;
                                                    });
                                                 },
                                                 error:function(data){
@@ -352,7 +365,14 @@ v\:* {
                                                          $("#reply_content_insert"+i+" > span:eq(1)").text(memberId);
                                                          $("#reply_content_insert"+i+" > span:eq(2)").text(replyContent);
                                                          $("#reply_content_insert"+i+" > span:eq(3)").text(replyfullDate);
+                                                         $("#reply_content_insert"+i+" > span:eq(4)").attr("id","reply_buttons"+i);
+                        								 $("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
+                        								 $("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
                                                          
+                        								 if(email!=memberId){
+                        										$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
+                        										$("#reply_buttons"+i+" > button:eq(1)").css("display","none");
+                        									}
                                                       });
                                                    }
                                                 },
