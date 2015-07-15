@@ -7,8 +7,8 @@ public interface CouponDao {
 
 	public int getCouponCount();
 
-	public List<HashMap<String, Object>> getCouponList_L(String member_id);
+	public List<HashMap<String, Object>> getCouponList();
 
-	public List<HashMap<String, Object>> getCouponList_S(String member_id);
+//	public List<HashMap<String, Object>> getCouponList_S(String member_id);
 
 }
