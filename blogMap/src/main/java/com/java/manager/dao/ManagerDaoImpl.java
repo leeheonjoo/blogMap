@@ -145,6 +145,17 @@ public class ManagerDaoImpl implements ManagerDao {
 		return session.selectOne("dao.ManagerMapper.partnerDetail", partnerNo);
 	}
 	
+	@Override
+	public List<HashMap<String, Object>> coupnSearch(String partner_name) {
+		// TODO Auto-generated method stub
+		return session.selectList("dao.ManagerMapper.couponSearch", partner_name);
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> searchCouponYN(String coupon_yn) {
+		// TODO Auto-generated method stub
+		return session.selectList("dao.ManagerMapper.searchCouponYN", coupon_yn);
+	}
 	
 	
 

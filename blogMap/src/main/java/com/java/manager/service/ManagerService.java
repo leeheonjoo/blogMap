@@ -36,5 +36,7 @@ public interface ManagerService {
 	
 	public void partnerDetail(ModelAndView mav);
 	
+	public void searchCouponList(ModelAndView mav);
 	
+	public void searchCouponYN(ModelAndView mav);
 }

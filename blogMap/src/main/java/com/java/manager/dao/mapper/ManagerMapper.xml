@@ -88,5 +88,12 @@
 		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no and c.coupon_no=#{couponNo}
 	</select>
 	
+	<select id="couponSearch" parameterType="String" resultType="java.util.HashMap">
+		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no and p.partner_name like '%'||#{partner_name}||'%'		
+	</select>
+	
+	<select id="searchCouponYN" parameterType="String" resultType="java.util.HashMap">
+		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no and c.coupon_yn=#{coupon_yn}		
+	</select>
 	
 </mapper> 
