@@ -214,7 +214,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/board_info.do",method=RequestMethod.POST)
 	public void board_info(HttpServletRequest request,HttpServletResponse response){
-		logger.info("point_info-------------------------");
+		logger.info("board_info-------------------------");
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request",request);
