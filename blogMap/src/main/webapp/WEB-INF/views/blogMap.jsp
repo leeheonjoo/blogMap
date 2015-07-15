@@ -1133,6 +1133,18 @@
 						<br/>
 					</div>
 					<div class="modal-footer">
+						 <div class="col-md-6">
+	                     <div id="custom-search-input">
+	                            <div class="input-group col-md-12">
+	                                <input type="text" class="form-control input-lg" name="coupon_search" id="coupon_search" placeholder="search for partner_name" />
+	                                <span class="input-group-btn">
+	                                    <button class="btn btn-info btn-lg" type="button" id="coupon_search_btn">
+	                                        <i class="glyphicon glyphicon-search"></i>
+	                                    </button>
+	                                </span>
+	                            </div>
+	                        </div>
+	                     </div>
 						<a href="#" data-dismiss="modal" class="btn">Close</a>
 						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
