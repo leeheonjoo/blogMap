@@ -438,7 +438,7 @@ public class BoardServiceImpl implements BoardService {
 				try{
 					
 					//20150715_1243 이헌주 : 파일업로드 절대경로 수정
-					String dir = "c:/images/board";
+					String dir = "C:/workspace/blogMap/src/main/webapp/pds/board";
 					
 					file=new File(dir,originalNames[j]);
 					if (!file.isDirectory()) {			//파일이 존재하지 않을 때 

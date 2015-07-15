@@ -7,50 +7,145 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>BLOG MAP</title>
+<style>
+/* Global */
 
+img { max-width:100%; }
+
+a {
+    -webkit-transition: all 150ms ease;
+	-moz-transition: all 150ms ease;
+	-ms-transition: all 150ms ease;
+	-o-transition: all 150ms ease;
+	transition: all 150ms ease; 
+	}
+    a:hover {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE 8 */
+        filter: alpha(opacity=50); /* IE7 */
+        opacity: 0.6;
+        text-decoration: none;
+    }
+
+.thumbnails li> .fff .caption { background:#fff !important; padding:10px }
+/* Page Header */
+.page-header {
+    background: #f9f9f9;
+    margin: -30px -40px 40px;
+    padding: 20px 40px;
+    border-top: 4px solid #ccc;
+    color: #999;
+    text-transform: uppercase;
+    }
+    .page-header h3 {
+        line-height: 0.88rem;
+        color: #000;
+        }
+
+
+
+/* Thumbnail Box */
+.caption h4 {
+   
+    color: #444;
+    }
+    .caption p {
+       
+        color: #999;
+        }
+        .btn.btn-mini {
+            
+            }
+
+
+/* Carousel Control */
+.control-box {
+    text-align: center;
+    width: 100%;
+    }
+    .carousel-control{
+        background: #666;
+        border: 0px;
+        border-radius: 0px;
+        display: inline-block;
+        font-size: 34px;
+        font-weight: 200;
+        line-height: 18px;
+        opacity: 0.5;
+        padding: 4px 10px 0px;
+        position: static;
+        height: 30px;
+        width: 15px;
+        }
+
+/* Mobile Only */
+@media (max-width: 767px) {
+    .page-header, .control-box {
+    text-align: center;
+    } 
+}
+@media (max-width: 479px) {
+    .caption {
+    word-break: break-all;
+    }
+}
+
+
+li { list-style-type:none;}
+
+::selection { background: #ff5e99; color: #FFFFFF; text-shadow: 0; }
+::-moz-selection { background: #ff5e99; color: #FFFFFF; }
+</style>
+<script type="text/javascript">
+	//Carousel Auto-Cycle
+	$(document).ready(function() {
+	  $('.carousel').carousel({
+	    interval: 6000
+	  })
+	});
+</script>
 <script type="text/javascript">
  $(document).ready(function(){		 
 	$("#tile4").click(function(){	
 		
-		$.ajax({
-			type:'get',
-			url:'${root}/coupon/couponMain.do',
-			data : {
-				member_id : email
-			},
-			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-			success : function(responseData) {
-				var data = JSON.parse(responseData);
-				/* alert(data);  */
+// 		$.ajax({
+// 			type:'get',
+// 			url:'${root}/coupon/couponMain.do',
+// 			data : {
+// 				member_id : email
+// 			},
+// 			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+// 			success : function(responseData) {
+// 				var data = JSON.parse(responseData);
+// 				/* alert(data);  */
 			
-				/* 데이타를 채우기 위해 복사 */
-				$.each(data, function(i){
-					var pic=data[i].coupon_pic_name;
-					var partner_name=data[i].partner_name
-					alert(pic + "/" + partner_name);
+// 				/* 데이타를 채우기 위해 복사 */
+// 				$.each(data, function(i){
+// 					var pic=data[i].coupon_pic_name;
+// 					var partner_name=data[i].partner_name
+// 					alert(pic + "/" + partner_name);
 					
-					$("#coupon_item_list_S").append($("#coupon_item_S").clone().css("display", "block"));
-					$("#coupon_item_S:last-child #list_coupon_S_item").append(partner_name);
-					$("#coupon_item_S:last-child a[class='list_coupon_no1']").attr("id", data[i].coupon_no);
-					$("#coupon_item_S:last-child #coupon_images1").attr("src", "${root}/css/coupon_images/" + pic);
+// 					$("#coupon_item_list_S").append($("#coupon_item_S").clone().css("display", "block"));
+// 					$("#coupon_item_S:last-child #list_coupon_S_item").append(partner_name);
+// 					$("#coupon_item_S:last-child a[class='list_coupon_no1']").attr("id", data[i].coupon_no);
+// 					$("#coupon_item_S:last-child #coupon_images1").attr("src", "${root}/css/coupon_images/" + pic);
 					
-					/* $("#item1:last_child .phone").append(data[i].partner_phone);
-					$("#item1:last_child .addr").append(data[i].partner_addr); */
-					//$("#item1:last_child .img").attr('src', data.data_img);
+// 					/* $("#item1:last_child .phone").append(data[i].partner_phone);
+// 					$("#item1:last_child .addr").append(data[i].partner_addr); */
+// 					//$("#item1:last_child .img").attr('src', data.data_img);
 					
-					// 각 업체를 클릭했을때 이벤트
-					$("#coupon_" + data[i].partner_no).click(function(){
-						alert("쿠폰" + data[i].partner_no + "클릭");
-						couponData(data[i].partner_no);	
-					});
-				});
+// 					// 각 업체를 클릭했을때 이벤트
+// 					$("#coupon_" + data[i].partner_no).click(function(){
+// 						alert("쿠폰" + data[i].partner_no + "클릭");
+// 						couponData(data[i].partner_no);	
+// 					});
+// 				});
 				
-				if (!data) {
-					alert("등록된 정보가 없습니다.");
-					return false;
-				}
-			}
-		});
+// 				if (!data) {
+// 					alert("등록된 정보가 없습니다.");
+// 					return false;
+// 				}
+// 			}
+// 		});
 		
 		$.ajax({
 			type:'post',
@@ -65,15 +160,21 @@
 			
 				/* 데이타를 채우기 위해 복사 */
 				$.each(data, function(i){
-					var pic=data[i].coupon_pic_name;
-					var partner_name=data[i].partner_name;
-					/* alert("L"+pic); */
+					var pic=data[i].COUPON_PIC_NAME;
+					var partner_name=data[i].PARTNER_NAME;
+					alert("coupon L : "+pic + " / " + partner_name);
 					
-					$("#coupon_item_list_L").append($("#coupon_item_L").clone().css("display", "block"));
-					$("#coupon_item_L:last-child #list_coupon_L_item").append(partner_name);
-					$("#coupon_item_L:last-child a[class='list_coupon_no']").attr("id", data[i].coupon_no);
-					$("#coupon_item_L:last-child #coupon_images").attr("src", "${root}/css/coupon_images/" + pic);
+					var count=0;
+					count++;
+					$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+					$("#coupon_slide_List_L:last-child #coupon_images1").attr("src", "${root}/css/coupon_images/" + pic);
 					
+					if(count == 8){
+						$("#coupon_slide_List_1").append($("#coupon_slide_List_L").clone());
+						$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+						$("#coupon_slide_List_L:last-child #coupon_images1").attr("src", "${root}/css/coupon_images/" + pic);
+						return false;
+					}
 					/* $("#item1:last_child .phone").append(data[i].partner_phone);
 					$("#item1:last_child .addr").append(data[i].partner_addr); */
 					//$("#item1:last_child .img").attr('src', data.data_img);
@@ -96,188 +197,175 @@
 </script>
 </head>
 <body>
-<div class="container-fluid">
-<div class="col-xs-12">
+<article class="container-fluid">
+<!-- 	<div class="row"> -->
+<!-- 		<section class="page-header"> -->
+<!-- 		<h2 class="page-title">Coupon List</h2> -->
+<!-- 		</section> -->
+<!-- 	</div> -->
+	<div class="row">
+		<div>	
+			<div class="carousel slide" id="myCarousel">
+		        <div class="carousel-inner col-md-12 col-sm-12 col-xs-12" id="coupon_List">
+		            <div class="item active">
+		            <div class="caption" id="coupon_slide_List_L">
+<!-- 		                    <ul class="thumbnails"> -->
+<!-- 		                        <li class="col-md-4 col-sm-4 col-xs-4"> -->
+<!-- 		    						<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img class="img-responsive" id="coupon_images"></a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+<!-- 		                        <li class="col-md-4 col-sm-4 col-xs-4"> -->
+<!-- 									<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img class="img-responsive" id="coupon_images"></a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+<!-- 		                        <li class="col-md-4 col-sm-4 col-xs-4"> -->
+<!-- 									<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img class="img-responsive" id="coupon_images"></a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
 
-    <div class="page-header">
-        <h3>Coupon List</h3>
-    </div>
-        
-    <div class="carousel slide" id="myCarousel">
-        <div class="carousel-inner">
-            <div class="item active">
-                    <ul class="thumbnails">
-                        <li class="col-sm-3">
-    						<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                    </ul>
-              </div><!-- /Slide1 --> 
-            <div class="item">
-                    <ul class="thumbnails">
-                        <li class="col-sm-3">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                    </ul>
-              </div><!-- /Slide2 --> 
-            <div class="item">
-                    <ul class="thumbnails">
-                        <li class="col-sm-3">	
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                        <li class="col-sm-3">
-							<div class="fff">
-								<div class="thumbnail">
-									<a href="#"><img src="http://placehold.it/360x240" alt=""></a>
-								</div>
-								<div class="caption">
-									<h4>Praesent commodo</h4>
-									<p>Nullam Condimentum Nibh Etiam Sem</p>
-									<a class="btn btn-mini" href="#">» Read More</a>
-								</div>
-                            </div>
-                        </li>
-                    </ul>
-              </div><!-- /Slide3 --> 
-        </div>
-        
-       
-<!-- 	   <nav> -->
-<!-- 			<ul class="control-box pager"> -->
-<!-- 				<li><a data-slide="prev" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-left"></i></a></li> -->
-<!-- 				<li><a data-slide="next" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-right"></i></li> -->
-<!-- 			</ul> -->
-<!-- 		</nav> -->
-	   <!-- /.control-box -->   
-                              
-    </div><!-- /#myCarousel -->
-        
-</div><!-- /.col-xs-12 -->          
-
-</div><!-- /.container -->
-
+<!-- 		                    </ul> -->
+		                     <ul class="thumbnails">
+		                         <li class="col-md-3 col-sm-3 col-xs-3">
+		    						<div class="fff">
+										<div class="thumbnail">
+											<a href="#" class="coupon_list_no"><img class="img-responsive" id="coupon_images1"></a>
+										</div>
+		                            </div>
+		                        </li>
+<!-- 		                         <li class="col-md-3 col-sm-3 col-xs-3"> -->
+<!-- 		    						<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+<!-- 		                        <li class="col-md-3 col-sm-3 col-xs-3"> -->
+<!-- 		    						<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+<!-- 		                        <li class="col-md-3 col-sm-3 col-xs-3"> -->
+<!-- 		    						<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+<!-- 		                    </ul> -->
+<!-- 		                    <ul class="thumbnails"> -->
+<!-- 		                         <li class="col-md-3 col-sm-3 col-xs-3"> -->
+<!-- 		    						<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+<!-- 		                         <li class="col-md-3 col-sm-3 col-xs-3"> -->
+<!-- 		    						<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+<!-- 		                        <li class="col-md-3 col-sm-3 col-xs-3"> -->
+<!-- 		    						<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+<!-- 		                        <li class="col-md-3 col-sm-3 col-xs-3"> -->
+<!-- 		    						<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img class="img-responsive" id="coupon_images1" src="http://placehold.it/200x200" alt=""></a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+		                    </ul>
+		                    </div>
+		              </div><!-- /Slide1 --> 
+		            <div class="item" id="coupon_slide_List_1">
+		              </div><!-- /Slide2 --> 
+		              
+		              
+<!-- 		            <div class="item"> -->
+<!-- 		                    <ul class="thumbnails"> -->
+<!-- 		                        <li class="col-sm-3">	 -->
+<!-- 									<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img src="http://placehold.it/360x240" alt=""></a> -->
+<!-- 										</div> -->
+<!-- 										<div class="caption"> -->
+<!-- 											<h4>Praesent commodo</h4> -->
+<!-- 											<p>Nullam Condimentum Nibh Etiam Sem</p> -->
+<!-- 											<a class="btn btn-mini" href="#">» Read More</a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+<!-- 		                        <li class="col-sm-3"> -->
+<!-- 									<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img src="http://placehold.it/360x240" alt=""></a> -->
+<!-- 										</div> -->
+<!-- 										<div class="caption"> -->
+<!-- 											<h4>Praesent commodo</h4> -->
+<!-- 											<p>Nullam Condimentum Nibh Etiam Sem</p> -->
+<!-- 											<a class="btn btn-mini" href="#">» Read More</a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+<!-- 		                        <li class="col-sm-3"> -->
+<!-- 									<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img src="http://placehold.it/360x240" alt=""></a> -->
+<!-- 										</div> -->
+<!-- 										<div class="caption"> -->
+<!-- 											<h4>Praesent commodo</h4> -->
+<!-- 											<p>Nullam Condimentum Nibh Etiam Sem</p> -->
+<!-- 											<a class="btn btn-mini" href="#">» Read More</a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+<!-- 		                        <li class="col-sm-3"> -->
+<!-- 									<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#"><img src="http://placehold.it/360x240" alt=""></a> -->
+<!-- 										</div> -->
+<!-- 										<div class="caption"> -->
+<!-- 											<h4>Praesent commodo</h4> -->
+<!-- 											<p>Nullam Condimentum Nibh Etiam Sem</p> -->
+<!-- 											<a class="btn btn-mini" href="#">» Read More</a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
+<!-- 		                    </ul> -->
+<!-- 		              </div>/Slide3  -->
+		        </div>
+		        
+		       
+			   <nav>
+					<ul class="control-box pager">
+						<li><a data-slide="prev" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-left"></i></a></li>
+						<li><a data-slide="next" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-right"></i></li>
+					</ul>
+				</nav>
+			   <!-- /.control-box -->   
+		                              
+		    </div><!-- /#myCarousel -->
+		</div>
+	</div>
+</article> 
 
 
 <!-- <article class="container-fluid"> -->
@@ -322,6 +410,6 @@
 <!-- 			</div> -->
 <!-- 		</div> -->
 <!-- 	</div> -->
-<!-- </article> -->
+<!-- </article>  -->
 </body>
 </html>

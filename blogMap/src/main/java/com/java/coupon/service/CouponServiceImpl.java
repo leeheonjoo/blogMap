@@ -1,5 +1,6 @@
 package com.java.coupon.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -30,14 +31,21 @@ public class CouponServiceImpl implements CouponService {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
-
+		
 		String member_id=request.getParameter("member_id");
 		logger.info("CouponList member_id : " + member_id);
 		
 		int count=couponDao.getCouponCount();
 		logger.info("count:" + count);
+
+		PartnerDto partnerDto=null;
+		CouponDto couponDto=null;
 		
-		List<CouponDto> couponList_L=null;
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("partnerDto", partnerDto);
+		hMap.put("couponDto", couponDto);
+		
+		List<HashMap<String, Object>> couponList_L=null;
 		if(count>0){
 			couponList_L=couponDao.getCouponList_L(member_id);
 			logger.info("ListSize:"+couponList_L.size());
@@ -69,7 +77,14 @@ public class CouponServiceImpl implements CouponService {
 		int count=couponDao.getCouponCount();
 		logger.info("count:" + count);
 		
-		List<CouponDto> couponList_S=null;
+		PartnerDto partnerDto=null;
+		CouponDto couponDto=null;
+		
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("partnerDto", partnerDto);
+		hMap.put("couponDto", couponDto);
+		
+		List<HashMap<String, Object>> couponList_S=null;
 		if(count>0){
 			couponList_S=couponDao.getCouponList_S(member_id);
 			logger.info("ListSize:"+couponList_S.size());

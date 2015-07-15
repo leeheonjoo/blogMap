@@ -9,17 +9,17 @@
 		select count(*) from coupon
 	</select>
 	
-	<select id="couponList_L" resultType="com.java.coupon.dto.CouponDto">
+	<select id="couponList_L" parameterType="String" resultType="java.util.HashMap">
 		<![CDATA[
 			select * from coupon c,
 			   (select partner_no, member_id, partner_name from partner where member_id=#{member_id}) p
 			        where c.partner_no = p.partner_no
-			            and coupon_discount = '50' and coupon_yn='Y'      
+			            and coupon_discount = '50' and coupon_yn='N'      
 			                order by coupon_discount desc
 		]]>
 	</select>
 	
-	<select id="couponList_S" resultType="com.java.coupon.dto.CouponDto">
+	<select id="couponList_S" parameterType="String" resultType="java.util.HashMap">
 		<![CDATA[	
 			select * from coupon c,
 			   (select partner_no, member_id, partner_name from partner where member_id=#{member_id}) p

@@ -18,7 +18,7 @@
 	<resources mapping="/partner/**" location="/partner"/>
 	<resources mapping="/editor/**" location="/editor/" />
 	<resources mapping="/images/**" location="/images/" />
-	<resources mapping="c:/images/**" location="c:/images/" />
+	<resources mapping="/pds/**" location="/pds/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
