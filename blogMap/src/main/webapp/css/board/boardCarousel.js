@@ -1,18 +1,19 @@
-/**
- * boardCarousel
- */
+$(document).ready(function () {
+    $('#myCarousel').carousel({
+        interval: 10000
+    })
+    $('.fdi-Carousel .item').each(function () {
+        var next = $(this).next();
+        if (!next.length) {
+            next = $(this).siblings(':first');
+        }
+        next.children(':first-child').clone().appendTo($(this));
 
-$(document).ready(function() {    
-	$('section.awSlider .carousel').carousel({
-	    pause: "hover",
-	  interval: 2000
-	});
-
-	var startImage = $('section.awSlider .item.active > img').attr('src');
-	$('section.awSlider').append('<img src="' + startImage + '">');
-
-	$('section.awSlider .carousel').on('slid.bs.carousel', function () {
-	 var bscn = $(this).find('.item.active > img').attr('src');
-	    $('section.awSlider > img').attr('src',bscn);
-	});
+        if (next.next().length > 0) {
+            next.next().children(':first-child').clone().appendTo($(this));
+        }
+        else {
+            $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
+        }
+    });
 });
