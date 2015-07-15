@@ -66,8 +66,8 @@ public class PartnerServiceImpl implements PartnerService {
 			String originalFileName = mFile.getOriginalFilename();
 			String saveFileName = originalFileName;
 			
-			String uploadPath = "C:/workspace/blogMap/src/main/webapp/pds/partner";
-			File dir = new File(uploadPath);
+			String uploadPath = "C:/workspace/blogMap/src/main/webapp/pds/partner/";
+			File dir = new File(uploadPath,originalFileName);
 			
 			if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
 				dir.mkdirs();

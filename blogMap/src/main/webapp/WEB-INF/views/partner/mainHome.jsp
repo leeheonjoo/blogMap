@@ -64,7 +64,6 @@ $(function() {
 					</div>
 				</div>
 			</section>
-		</div>
 	</article>
 		<script type="text/javascript">
 			/*
