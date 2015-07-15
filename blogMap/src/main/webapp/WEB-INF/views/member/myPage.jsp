@@ -194,7 +194,7 @@ if(sessionStorage.getItem('email')!=null){
 					//alert("endPage:"+endPage);
 					//alert("pageCount:"+pageCount);
 					//다음
-					alert(p_endPage+","+pageCount);
+					//alert(p_endPage+","+pageCount);
 					if(p_endPage<pageCount){
 						//alert("aaaaa");
 						$("#myPage_member_point_list_after").css("display","inline-block");
@@ -1085,7 +1085,7 @@ if(sessionStorage.getItem('email')!=null){
 					+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 					+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
 				});
-				alert(f_endPage+","+pageCount);
+				//alert(f_endPage+","+pageCount);
 				if(f_endPage>pageCount){
 					f_endPage=pageCount;
 				}
