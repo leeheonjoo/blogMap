@@ -37,7 +37,7 @@ public interface MemberDao {
 
 	public List<HashMap<String, Object>> board_info(String member_id,int startRow,int endRow);
 
-	public List<HashMap<String, Object>> favorite_info(String member_id);
+	public List<HashMap<String, Object>> favorite_info(String member_id,int startRow,int endRow);
 
 	public int totalFavorite(String member_id);
 

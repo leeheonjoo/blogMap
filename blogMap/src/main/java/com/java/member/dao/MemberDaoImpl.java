@@ -191,9 +191,12 @@ public class MemberDaoImpl implements MemberDao {
 	}
 	
 	@Override
-	public List<HashMap<String, Object>> favorite_info(String member_id) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectList("dao.MemberMapper.favorite_info",member_id);
+	public List<HashMap<String, Object>> favorite_info(String member_id,int startRow,int endRow) {
+		HashMap<String,Object> hMap=new HashMap<String,Object>();
+		hMap.put("member_id", member_id);
+		hMap.put("startRow", startRow);
+		hMap.put("endRow", endRow);
+		return sqlSession.selectList("dao.MemberMapper.favorite_info",hMap);
 	}
 
 	@Override
