@@ -312,19 +312,21 @@ v\:* {
                                                       var fileNo=data[i].file_no;
                                                       var filePath=data[i].file_path;
                                                       var fileComment=data[i].file_comment;
-                                                      
-                                                      
-                                                      
-                                                      if(i!=0){
-                                                    	  $(".carousel-indicators").append("<li data-target='.carousel' data-slide-to="+i+"></li>");
+                                                                                                            
+//                                                       if(i!=0){
+//                                                     	  $(".carousel-indicators").append("<li data-target='.carousel' data-slide-to="+i+"></li>");
                                                     	                                                     	  
-                                                    	  $("#imageSlideBox").append("<div class='item'><img src="+filePath+"><div class='carousel-caption'>"+fileComment+"</div></div>");
-                                                      }
-                                                  
+//                                                     	  $("#imageSlideBox").append("<div class='item'><img src="+filePath+"><div class='carousel-caption'>"+fileComment+"</div></div>");
+//                                                     	  $("#imageSlideBox").append($("#imgHidden").clone().clone().css("display","block"));
+//                                                       }
+//                                                   	<div id="imgHidden" class="item" style="display:none;">
+// 	                                              	  <img src="">
+// 	                                              	  <div class="carousel-caption"></div>
+// 	                                              	</div>
                                                       
-                                                      $("#imgDisplay").append($("#imgHidden").clone());
-                                                       $("#imgDisplay > #imgHidden").attr("id","imgHidden"+i);
-                                                       $("#imgHidden"+i).find("#imgsrc").attr("src",filePath);
+//                                                       $("#imgDisplay").append($("#imgHidden").clone());
+//                                                        $("#imgDisplay > #imgHidden").attr("id","imgHidden"+i);
+//                                                        $("#imgHidden"+i).find("#imgsrc").attr("src",filePath);
                                                       
                                                       i++;
                                                    });

@@ -171,11 +171,13 @@ $(function() {
     <!-- Indicators -->
     <ol class="carousel-indicators">
       <li data-target=".carousel" data-slide-to="0" class="active"></li>
-<!--       <li data-target=".carousel" data-slide-to="1"></li> -->
-<!--       <li data-target=".carousel" data-slide-to="2"></li> -->
-<!--       <li data-target=".carousel" data-slide-to="3"></li> -->
-<!--       <li data-target=".carousel" data-slide-to="4"></li> -->
+      <li data-target=".carousel" data-slide-to="1"></li>
     </ol>
+
+<!-- 	<div id="imgHidden" class="item" style="display:none;"> -->
+<!-- 	  <img src=""> -->
+<!-- 	  <div class="carousel-caption"></div> -->
+<!-- 	</div> -->
 
     <!-- Wrapper for slides -->
     <div id="imageSlideBox" class="carousel-inner" role="listbox">
@@ -183,22 +185,10 @@ $(function() {
         <img src="${root }/css/board/images/no_detail_img.gif">
         <div class="carousel-caption">이미지가 없습니다.</div>
       </div>
-<!--       <div class="item"> -->
-<!--         <img src=""> -->
-<!--         <div class="carousel-caption">Görsel #2</div> -->
-<!--       </div> -->
-<!--       <div class="item"> -->
-<!--         <img src=""> -->
-<!--         <div class="carousel-caption">Görsel #3</div> -->
-<!--       </div> -->
-<!--       <div class="item"> -->
-<!--         <img src=""> -->
-<!--         <div class="carousel-caption">Görsel #4</div> -->
-<!--       </div> -->
-<!--       <div class="item"> -->
-<!--         <img src=""> -->
-<!--         <div class="carousel-caption">Görsel #5</div> -->
-<!--       </div> -->
+      <div class="item">
+        <img src="/images/board/1436888556546_a030_anwansoon.png">
+        <div class="carousel-caption">Görsel #2</div>
+      </div>
     </div>
 
     <!-- Controls -->
@@ -217,14 +207,14 @@ $(function() {
 		<label>내용:</label>
 		<div></div>
 	</div>
-	<div style="display: none;">
-	 <div id="imgHidden" class="item active">
-        <div class="col-md-4">
-            <a href="#"><img id="imgsrc" src="" class="img-responsive center-block"></a>
-            <div class="text-center">1</div>
-        </div>
-    </div>
-	</div>
+<!-- 	<div style="display: none;"> -->
+<!-- 	 <div id="imgHidden" class="item active"> -->
+<!--         <div class="col-md-4"> -->
+<!--             <a href="#"><img id="imgsrc" src="" class="img-responsive center-block"></a> -->
+<!--             <div class="text-center">1</div> -->
+<!--         </div> -->
+<!--     </div> -->
+<!-- 	</div> -->
 	<div id="blogRead_grade">
 		<label>평점:</label>
 		<img src="" width="150" height="30"/><br /> 
