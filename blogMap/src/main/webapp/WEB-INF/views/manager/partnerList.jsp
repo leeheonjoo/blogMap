@@ -168,7 +168,7 @@
 					
 					$("#partnerDetailResult").append($("#partnerDetailMain").clone().css("display","block"));
 					$("#partnerDetailMain:last-child #member_id").html(data.member_id);
-					$("#partnerDetailMain:last-child #partner_img").attr("src", "${root}/css/partner/images/"+data.partner_pic_name);
+					$("#partnerDetailMain:last-child #partner_img").attr("src", "${root}/pds/partner/"+data.partner_pic_name);
 					$("#partnerDetailMain:last-child #partner_name").html(data.partner_name);
 					$("#partnerDetailMain:last-child #partner_phone").html(data.partner_phone);
 					$("#partnerDetailMain:last-child #partner_address").html(data.partner_addr);
@@ -627,8 +627,8 @@
 
 	<div>
 			<input type="button" id="getPartnerList" value="Reset"/>&nbsp;&nbsp;
-			<input type="radio" name="partner_yn" id="Y" checked="checked"/><span>Approval</span> &nbsp;&nbsp;
-			<input type="radio" name="partner_yn" id="N"/><span>Disapproved</span>&nbsp;&nbsp;
+			<input type="radio" name="partner_yn" id="Y"/><span>승인업체</span> &nbsp;&nbsp;
+			<input type="radio" name="partner_yn" id="N"/><span>미승인업체</span>&nbsp;&nbsp;
 			<input type="text" placeholder="Name Search" id="searchTag"/> 
 			<input type="submit" id="searchPartner" value="Search"/>	
 	</div><br/>

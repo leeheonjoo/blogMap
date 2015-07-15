@@ -1,5 +1,6 @@
 package com.java.coupon.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -23,14 +24,14 @@ public int getCouponCount() {
 }
 
 @Override
-public List<CouponDto> getCouponList_L(String member_id) {
-	List<CouponDto> list=session.selectList("dao.CouponMapper.couponList_L", member_id);
+public List<HashMap<String, Object>> getCouponList_L(String member_id) {
+	List<HashMap<String, Object>> list=session.selectList("dao.CouponMapper.couponList_L", member_id);
 	return list;
 }
 
 @Override
-public List<CouponDto> getCouponList_S(String member_id) {
-	List<CouponDto> list=session.selectList("dao.CouponMapper.couponList_S", member_id);
+public List<HashMap<String, Object>> getCouponList_S(String member_id) {
+	List<HashMap<String, Object>> list=session.selectList("dao.CouponMapper.couponList_S", member_id);
 	return list;
 }
 

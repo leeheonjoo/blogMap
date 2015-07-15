@@ -356,7 +356,7 @@ vertical-align: middle;
 	
 </script>
 </head>
-<body>
+<body onload="getMemberList()">
 
 <div class="caption">
 
