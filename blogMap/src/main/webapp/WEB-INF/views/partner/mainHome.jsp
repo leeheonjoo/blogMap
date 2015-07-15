@@ -32,28 +32,24 @@ $(function() {
 		<!-- 큰 사이즈 화면에서 탭 목록-->					
 		<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
 			<li role="presentation" class="active">
-				<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour</a>
+				<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
 			</li>
 		</ul>
 		
 		<!-- 작은 사이즈 화면에서 탭 목록-->
 		<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist">
 			<li role="presentation" class="active">
-				<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour</a>
+				<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
 			</li>
 		</ul>
 
-		<!-- tour 탭 내용 --> 
+		<!-- tour 탭 내용 -->
 		<div class="tab-content col-md-9">
 			<section role="tabpanel" class="tab-pane active" id="tab_tour">
 				<div class="row" id="tour_item_list">	
 					<div class="col-md-2 col-sm-3 col-xs-4" id="tour_item" role="button" style="display:none;">
 						<div id="tour_info" class="thumbnail">	
 							<a data-toggle="modal" href="#modal_info" class="list_partner_no">
-								<!-- var filename=data.partner_pic_name;
-									var filepath=data.partner_pic_path;
-								$("#partner_imagers").attr("src", )
-								 -->
 								<img class="img-responsive" id="partner_imagers"/> 
 									<div class="caption">
 									<p id="list_partner_name"></p>
@@ -62,14 +58,12 @@ $(function() {
 						</div>
 					</div>
 				</div>
-				<div class="row">	
-					<hr/>
+				<div class="row">
 					<div class="col-xs-12 text-right">
-						<button type="button" id="partner_tour_button" name="partner_tour_button"  class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">tour 업체등록</button>								
+						<button type="button" id="partner_tour_button" name="partner_tour_button"  class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">업체등록</button>								
 					</div>
 				</div>
 			</section>
-		<div role="tabpanel" class="tab-pane" id="tab_restaurant"/>	
 	</article>
 		<script type="text/javascript">
 			/*
@@ -151,8 +145,8 @@ $(function() {
 			 $(document).ready(function(){	
 				/* 데이타를 채우기 위해 복사 */
 				
-				$("#partner_Registration").click(function(){
-					/* alert("ok"); */	
+				/* $("#partner_Registration").click(function(){
+					alert("ok"); */	
 				$.ajax({
 					type:'post',
 					url:'${root}/partner/tour_partner_List.do',
@@ -168,11 +162,7 @@ $(function() {
 							$("#tour_item:last-child #list_partner_name").append(data[i].partner_name);
 							$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
 							$("input[name='partner_no']").append(data[i].partner_no);
-							$("#tour_item:last-child #partner_imagers").append(data[i].img_src);
-							
-							/* $("#item1:last_child .phone").append(data[i].partner_phone);
-							$("#item1:last_child .addr").append(data[i].partner_addr); */
-							//$("#item1:last_child .img").attr('src', data.data_img);
+							$("#tour_item:last-child #partner_imagers").attr("src","${root}/css/images/partner/"+data[i].partner_pic_name);
 							
 							// 각 업체를 클릭했을때 이벤트
 							$("#partner_" + data[i].partner_no).click(function(){
@@ -180,43 +170,25 @@ $(function() {
 								partnerData(data[i].partner_no);	
 							});
 						});
-					}
+					}	
 				});
-			});
-		});
-			 
-		 function partnerData(no){
-				$.ajax({
-					type:'get',
-					url:'${root}/partner/getTourPartnerListDate.do?partnerNo=' + no,
-					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-					success : function(responseData) {
-					var data = JSON.parse(responseData);
-//		 			alert("업체이름" + data.partner_name);
-					
-					$("p[name='p_name']").html(data.partner_name);
-					$("p[name='p_phone']").html(data.partner_phone);
-					$("p[name='p_addr']").html(data.partner_addr);
-					$("p[name='tour_image']").attr(data.img_src);
-					}
-				});
-			}
-	
-		 function form_coupon(){
-		 
-			 $(document).ready(function(){	
-				/* 데이타를 채우기 위해 복사 */
-			 var data = new FormData();
-				$.each($('#attachFile')[0].files,function(i,file){
-					data.append('file',file);
-				})
-				$.ajax({
-					type: 'POST',
-					url : '${root}/partner/conponWrite.do',
-					data : data ,
+			/* }); */
+		
+				 $("#coupon_Register").click(function(){			 
+					alert("쿠폰등록하기123123");
+					/* var data = new FormData();
+					$.each($('#attachFile')[0].files,function(i,file){
+						data.append('file',file);
+					})
+					$.ajax({
+					type: 'post',
+					url : '${root}/partner/couponWrite.do',
+					data : {
+						coupon_no:$("#coupon_no").val()
+					},
 					processData:false,
-					contentType:false,
-					success:function(data)
+					contentType:false, */
+					/* success:function(data)
 					{
 						alert(data);
 					},
@@ -224,56 +196,8 @@ $(function() {
 					{
 						alert("서버와의 데이터 연결에 실패하였습니다.");
 						return false;
-					}
-				});
-				// 실제 폼이 전송되어 페이지가 변경되는것을 막기위해 false 리턴
-				return false;
-				
-				$("#coupon_Registration").click(function(){
-					/* alert("ok"); */	
-				$.ajax({
-					type:'post',
-					url:'${root}/partner/coupon_List.do',
-					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-					success : function(responseData) {
-						var data = JSON.parse(responseData);
-						//alert(data);
-					
-						/* 데이타를 채우기 위해 복사 */
-						$.each(data, function(i){
-							
-							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
-							$("#tour_item:last-child #list_partner_name").append(data[i].partner_name);
-							$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
-							$("#tour_item:last-child #partner_imagers").append(data[i].img_src);
-							
-							/* $("#item1:last_child .phone").append(data[i].partner_phone);
-							$("#item1:last_child .addr").append(data[i].partner_addr); */
-							//$("#item1:last_child .img").attr('src', data.data_img);
-							
-							// 각 업체를 클릭했을때 이벤트
-							$("#partner_" + data[i].partner_no).click(function(){
-								alert("업체클릭" + data[i].partner_no)
-								partnerData(data[i].partner_no);	
-							});
-						});
-					
-					$("#modal_info").modal({
-						'show' : false,
-						'backdrop' : 'static'
-					}).on('hidden.bs.modal', function(){
-						// 가져왓던 정보를 초기화
-						$("#modal_info .name").text('');
-						$("#modal_info .phone").text('');
-						$("#modal_info .addr").text('');
-						$("#modal_info .img").attr('src','');
-					});
-						if (!data) {
-							alert("등록된 정보가 없습니다.");
-							return false;
-						}
-					}
-				});
+					} 
+				});*/
 			});
 		});
 			 
@@ -283,17 +207,23 @@ $(function() {
 					url:'${root}/partner/getTourPartnerListDate.do?partnerNo=' + no,
 					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 					success : function(responseData) {
-					var data = JSON.parse(responseData);
-//		 			alert("업체이름" + data.partner_name);
-					
-					$("p[name='p_name']").html(data.partner_name);
-					$("p[name='p_phone']").html(data.partner_phone);
-					$("p[name='p_addr']").html(data.partner_addr);
-					$("p[name='tour_image']").attr(data.img_src);
+						var data = JSON.parse(responseData);
+	//		 			alert("업체이름" + data.partner_name);
+						
+						$("p[name='p_name']").html(data.partner_name);
+						$("p[name='p_phone']").html(data.partner_phone);
+						$("p[name='p_addr']").html(data.partner_addr);
+// 						$("img[id='partnerDetail_imagers']").attr("src","${root}/css/images/partner/"+data.partner_pic_name);
+						$("#data-body:#partnerDetail_imagers").attr("src","${root}/css/images/partner/"+data.partner_pic_name);
 					}
 				});
-			}
-		 }
+			};
+		 
+		 
+	
+		/*888888888888888888888888888888888888888888888  */
+		/* 여기에 복사하기 */
+		/*888888888888888888888888888888888888888888888  */
 		</script>
 	</body>
 </html>

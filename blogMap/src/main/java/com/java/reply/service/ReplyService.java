@@ -8,4 +8,8 @@ public interface ReplyService {
 
 	void blogReadReply(ModelAndView mav);
 
+	void blogReadReplyUpdate(ModelAndView mav);
+
+	void blogReadReplyDelete(ModelAndView mav);
+
 }

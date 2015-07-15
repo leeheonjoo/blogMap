@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
@@ -436,8 +437,8 @@ public class BoardServiceImpl implements BoardService {
 				attach_fileDto=new Attach_fileDto();
 				try{
 					
-					String dir = "c:/file/blogWriteImages";
-					
+					//20150715_1243 이헌주 : 파일업로드 절대경로 수정
+					String dir = "c:/images/board";
 					
 					file=new File(dir,originalNames[j]);
 					if (!file.isDirectory()) {			//파일이 존재하지 않을 때 

@@ -8,67 +8,77 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Home</title>
+<title>PartnerDetail</title>
+
 </head>
 <body>
-<article class="container-fluid">
-	<div class="row">
-		<section class="page-header">
-			<h2 class="page-title">메시지</h2>
-		</section>
+<div id="couponDetailMain" style="display: none;">
+	<%--  <img src="${root }/css/manager/images/star0.jpg" width="300px" height="300px"/> --%>
+	
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">쿠폰 정보</h4>
+			</div>
+			
+			<div class="modal-body" id="partner_data-body">
+				<div class="row form-horizontal">
+					<div class="col-md-3">
+						<img class="img-responsive img" id="coupon_img"/>
+						
+					</div>
+					<div class="col-md-9">
+					
+						<div class="form-group">
+							<label class="col-xs-3 control-label">업체명</label>
+							<div class="col-xs-9">
+								<p class="form-control-static address" id="partner_no"></p>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-xs-3 control-label">상품</label>
+							<div class="col-xs-9">
+								<p class="form-control-static name" id="coupon_item"></p>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-xs-3 control-label">할인율</label>
+							<div class="col-xs-9">
+								<p class="form-control-static phone" id="coupon_discount"></p>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-xs-3 control-label">시작일</label>
+							<div class="col-xs-9">
+								<p class="form-control-static address" id="coupon_bymd"></p>
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-xs-3 control-label">종료일</label>
+							<div class="col-xs-9">
+								<p class="form-control-static address" id="coupon_eymd"></p>
+							</div>
+						</div>
+												
+					</div>
+				</div>						
+			</div>
+			
+			<div class="modal-footer">
+				<input type="button" class="btn btn-default" id="coupon_detail_button"/>
+				<input type="button" class="btn btn-default" data-dismiss="modal" value="닫기"/>				
+			</div>
+		</div>
 	</div>
-<form class="form-horizontal">
-	<div class="col-md-12 col-sm-12 col-xs-12">
-		<div class="form-group form-group-lg">
-			<div class="col-md-3 col-sm-3 col-xs-3">
-				<label class="control-label" for="formGroupInputLarge">메시지 번호</label>
-			</div>
-			
-			<div class="col-md-3 col-sm-3 col-xs-3">
-				<input type="text" class="form-control" name="message_no"/>
-			</div>
-			
-			<div class="col-md-2 col-sm-2 col-xs-2">
-				<label class="control-label" for="formGroupInputLarge">수신자</label>
-			</div>
-			
-			<div class="col-md-4 col-sm-4 col-xs-4">
-				<input type="text" class="form-control" name="message_receiver"/>
-			</div>
-		</div>
-		<br/>
-		
-		<div class="form-group form-group-lg">
-			<div class="col-md-3 col-sm-3 col-xs-3">
-				<label class="control-label" for="formGroupInputLarge">발신자</label>
-			</div>
-			
-			<div class="col-md-3 col-sm-3 col-xs-3">
-				<input type="text" class="form-control" name="member_id"/>
-			</div>
-			
-			<div class="col-md-2 col-sm-2 col-xs-2">
-				<label class="control-label" for="formGroupInputLarge">발신일</label>
-			</div>
-			
-			<div class="col-md-4 col-sm-4 col-xs-4">
-				<input type="text" class="form-control" name="message_sDate"/>
-			</div>
-		</div>
-		<br/>
-		
-		<div class="form-group form-group-lg">
-			<div class="col-md-3 col-sm-3 col-xs-3">
-				<label class="control-label" for="formGroupInputLarge">메시지 내용</label>
-			</div>
-			
-			<div class="col-md-9 col-sm-9 col-xs-9">
-				<textarea rows="5" class="form-control" name="message_content"></textarea>
-			</div>
-		</div>
-		<br/>	
-	</div>	
-</form>
-</article>
+</div>
+
+<div id="couponDetailResult"></div>
 </body>
 </html>

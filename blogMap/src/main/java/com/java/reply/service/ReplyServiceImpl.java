@@ -32,7 +32,6 @@ public class ReplyServiceImpl implements ReplyService{
 		HttpServletResponse response=(HttpServletResponse) map.get("response");
 		
 		int boardNo=Integer.parseInt(request.getParameter("board_no"));
-		System.out.println("replyList_boardNo:"+boardNo);
 		
 		List<ReplyDto> replyList=null;
 		
@@ -44,7 +43,7 @@ public class ReplyServiceImpl implements ReplyService{
 		try {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(replyList_json);
-			System.out.println(replyList_json);
+			logger.info("replyList_json:"+replyList_json);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,7 +62,6 @@ public class ReplyServiceImpl implements ReplyService{
 		String reply_content=request.getParameter("reply_content");
 		String member_id=request.getParameter("reply_member_id");
 		
-		System.out.println(boardNo+"/"+reply_content+"/"+member_id);
 		HashMap<String, Object> hMap=new HashMap<String, Object>();
 		hMap.put("boardNo", boardNo);
 		hMap.put("reply_content", reply_content);
@@ -81,5 +79,63 @@ public class ReplyServiceImpl implements ReplyService{
 				}
 		}
 		
+	}
+
+	@Override
+	public void blogReadReplyUpdate(ModelAndView mav) {
+		logger.info("BoardReadService blogReadReplyUpdate------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int reply_no=Integer.parseInt(request.getParameter("reply_no"));
+		String reply_content=request.getParameter("reply_content");
+		String member_id=request.getParameter("member_id");
+		
+		HashMap<String , Object> hMap=new HashMap<String, Object>();
+		hMap.put("reply_no", reply_no);
+		hMap.put("member_id", member_id);
+		hMap.put("reply_content", reply_content);
+		
+		int check=0;
+		check=replyDao.blogReadReplyUpdate(hMap);
+		if(check>0){
+			logger.info("blogReadReplyUpdate_check:"+check);
+				try {
+					response.getWriter().print(check);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		
+		
+	}
+
+	@Override
+	public void blogReadReplyDelete(ModelAndView mav) {
+		logger.info("BoardReadService blogReadReplyDelete------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int reply_no=Integer.parseInt(request.getParameter("reply_no"));
+		String member_id=request.getParameter("member_id");
+		
+		HashMap<String , Object> hMap=new HashMap<String, Object>();
+		hMap.put("reply_no", reply_no);
+		hMap.put("member_id", member_id);
+		
+		int check=0;
+		check=replyDao.blogReadReplyDelete(hMap);
+		if(check>0){
+			logger.info("blogReadReplyDelete_check:"+check);
+				try {
+					response.getWriter().print(check);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
 	}
 }

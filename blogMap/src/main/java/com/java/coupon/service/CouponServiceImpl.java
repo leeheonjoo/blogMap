@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.java.coupon.dao.CouponDao;
+import com.java.coupon.dto.CouponDto;
 import com.java.partner.dto.PartnerDto;
 
 @Component
@@ -30,18 +31,21 @@ public class CouponServiceImpl implements CouponService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 
+		String member_id=request.getParameter("member_id");
+		logger.info("CouponList member_id : " + member_id);
+		
 		int count=couponDao.getCouponCount();
 		logger.info("count:" + count);
 		
-		List<PartnerDto> couponList_L=null;
+		List<CouponDto> couponList_L=null;
 		if(count>0){
-			couponList_L=couponDao.getCouponList_L();
-			logger.info("partnerListSize:"+couponList_L.size());
+			couponList_L=couponDao.getCouponList_L(member_id);
+			logger.info("ListSize:"+couponList_L.size());
 		}
 //		메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
 		Gson gson=new Gson();
 		String json=gson.toJson(couponList_L);
-		logger.info("partnerList:"+couponList_L);
+		logger.info("List:"+couponList_L);
 		logger.info("json:"+json);
 		
 //		JSON 에 저장된 정보를 조회
@@ -58,23 +62,23 @@ public class CouponServiceImpl implements CouponService {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		
+		String member_id=request.getParameter("member_id");
+		logger.info("CouponList member_id : " + member_id);
 
 		int count=couponDao.getCouponCount();
 		logger.info("count:" + count);
 		
-		List<PartnerDto> couponList_S=null;
+		List<CouponDto> couponList_S=null;
 		if(count>0){
-			couponList_S=couponDao.getCouponList_S();
-			logger.info("partnerListSize:"+couponList_S.size());
+			couponList_S=couponDao.getCouponList_S(member_id);
+			logger.info("ListSize:"+couponList_S.size());
 		}
 //		메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
 		Gson gson=new Gson();
 		String json=gson.toJson(couponList_S);
-		logger.info("partnerList:"+couponList_S);
+		logger.info("List:"+couponList_S);
 		logger.info("json:"+json);
-		
-//		JSON 에 저장된 정보를 조회
-		//System.out.println("json: " + json);
 	
 		mav.addObject("couponList",couponList_S);
 		mav.addObject("json", json);
