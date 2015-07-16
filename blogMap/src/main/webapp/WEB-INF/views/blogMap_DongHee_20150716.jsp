@@ -65,12 +65,12 @@
 				
 				$("#blogmap_main_myPage").css("display","inline-block");
 				$("#blogmap_before_login").attr("data-toggle","");
-		// 메니저 로그인 추가--------------------------------------------------------------
+		// 메니저 로그인 추가-------------------------------------------------------------- 여기부터 
 				if(sessionStorage.getItem('email')=="lucyman@nate.com"){
 					$("#manager_page_icon").css("display","inline-block");
 					$("#blogmap_main_myPage").css("display","none");
 				}
-		// 메니저 로그인 추가--------------------------------------------------------------
+		// 메니저 로그인 추가--------------------------------------------------------------  여기까지
 				$("#login_text").text("Logout");
 				
 				if($("#login_text").text()=="Logout"){

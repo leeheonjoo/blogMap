@@ -78,11 +78,18 @@
 								}
 								
 								$.each(Logdata, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
+									var getLogDate = new Date(Logdata[i].log_date);	// 등록일 날짜 변환
+									var logyear = getLogDate.getFullYear();
+									var logmonth = getLogDate.getMonth() + 1;
+									var logday = getLogDate.getDate();
+									var logDate = logyear + "년 " + logmonth + "월 "	+ logday + "일";
+									//alert(rgDate);
+									
 									
 									$("#managerLogResult").append("<tr style='text-align:center;'>"
 											+ "<td>" + Logdata[i].log_no + "</td>"			// 아이디
 											+ "<td>" + Logdata[i].manager_id + "</td>"			// 이름	
-											+ "<td>" + Logdata[i].log_date + "</td>"		//
+											+ "<td>" + logDate + "</td>"		//
 											+ "<td>" + Logdata[i].log_code + "</td>"		//							
 											+ "<td>" + Logdata[i].log_content + "</td>"						// 등록일	
 											+ "</tr>");

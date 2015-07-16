@@ -28,7 +28,15 @@
 	</select>
 	
 	<select id="getManagerLog" parameterType="String" resultType="com.java.manager.dto.ManagerLogDto" >
-		select * from manager_log where manager_id=#{id} order by log_no desc
+		select log_no, manager_id, log_date,
+		       (select d_name
+		          from DETAIL_CODE
+		         where h_code='0003'
+		           and d_code=log_code) log_code,
+		       log_content
+		  from MANAGER_LOG
+		 where manager_id=#{id}
+		 order by log_no DESC
 	</select>
 	
 	<select id="getPartnerList" resultType="com.java.partner.dto.PartnerDto">
