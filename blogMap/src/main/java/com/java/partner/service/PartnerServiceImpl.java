@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.java.coupon.dto.CouponDto;
+
 import com.java.partner.dao.PartnerDao;
 import com.java.partner.dto.PartnerDto;
 /**
@@ -91,7 +92,7 @@ public class PartnerServiceImpl implements PartnerService {
 					int check=partnerDao.partnerRegister(partnerDto);
 					logger.info("partner_check:"+check);
 					
-					mav.addObject("check", check);
+					response.getWriter().print(check);
 					
 					isSuccess = true;
 					
@@ -241,5 +242,32 @@ public class PartnerServiceImpl implements PartnerService {
 	public void couponWriteList(ModelAndView mav) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	/**
+	 * @name:getSearchPartnerDate
+	 * @date:2015. 7. 16.
+	 * @author:변태훈
+	 * @description: partnerList 조회시 조회한 이름으로 DB에서 데이타를 가지고 온다.
+	 */
+	@Override
+	public void getSearchPartnerDate(ModelAndView mav) {
+		
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		
+		String partner_name=request.getParameter("name");
+		logger.info("partner_name:" + partner_name);
+		
+		List<PartnerDto> searchPartnerList=partnerDao.getSearchParnterData(partner_name);
+		logger.info("searchPartnerList : " + searchPartnerList);
+		
+		Gson gson=new Gson();								//Gson의 객체를 생성
+		String searchjson=gson.toJson(searchPartnerList);	//Log를 json으로 변환
+		
+		logger.info("searchjson: " + searchjson);
+		
+		mav.addObject("searchjson", searchjson);
 	}
 }
