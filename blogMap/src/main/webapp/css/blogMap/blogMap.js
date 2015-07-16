@@ -36,9 +36,9 @@ $( document ).ready(function(){
  * blogMap.jsp Metro style dynamic Tiles javascript
  */
 $( document ).ready(function() {
-    $(".tile").height($("#tile1").width());
-    $(".carousel").height($("#tile1").width());
-     $(".item").height($("#tile1").width());
+    $("#metro .tile").height($("#tile1").width());
+    $("#metro .carousel").height($("#tile1").width());
+     $("#metro .item").height($("#tile1").width());
      
     $(window).resize(function() {
     if(this.resizeTO) clearTimeout(this.resizeTO);
@@ -48,9 +48,9 @@ $( document ).ready(function() {
     });
     
     $(window).bind('resizeEnd', function() {
-    	$(".tile").height($("#tile1").width());
-        $(".carousel").height($("#tile1").width());
-        $(".item").height($("#tile1").width());
+    	$("#metro .tile").height($("#tile1").width());
+        $("#metro .carousel").height($("#tile1").width());
+        $("#metro .item").height($("#tile1").width());
     });
     
 });
