@@ -183,7 +183,9 @@ function reply_update(UThis) {
 	
 
 	// carousel 호출
-	$('.carousel').carousel()
+	$('.carousel').carousel({
+		interval : 3000
+	})
 }
 function reply_delete(DThis) {
 	var deleteId=$(DThis).attr('id');
@@ -256,20 +258,15 @@ function reply_delete(DThis) {
 	<!-- 이미지 슬라이드 -->
 	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 	  <!-- Indicators -->
-	  <ol class="carousel-indicators">
+	  <ol id="carousel_page" class="carousel-indicators">
 	    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-	    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
 	  </ol>
 	
 	  <!-- Wrapper for slides -->
-	  <div id="blogRead_carousel" class="carousel-inner" role="listbox">
+	  <div id="carousel_image" class="carousel-inner" role="listbox">
 	    <div class="item active">
-	      <img src="${root }/pds/board/1436920213315_a027_anwansoon.png" alt="...">
-	      <div class="carousel-caption"><h4>테스트1</h4></div>
-	    </div>
-	    <div class="item">
-	      <img src="${root }/pds/board/1436920213324_a029_anwansoon.png" alt="...">
-	      <div class="carousel-caption"><h4>테스트2</h4></div>
+	      <img src="" alt="...">
+	      <div class="carousel-caption"></div>
 	    </div>
 	  </div>
 	</div>
