@@ -9,6 +9,6 @@ public interface CouponDao {
 
 	public List<HashMap<String, Object>> getCouponList();
 
-//	public List<HashMap<String, Object>> getCouponList_S(String member_id);
+	public List<HashMap<String, Object>> getCouponList_S(String partner_name);
 
 }

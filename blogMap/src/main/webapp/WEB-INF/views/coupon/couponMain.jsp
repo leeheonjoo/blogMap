@@ -95,6 +95,39 @@ li { list-style-type:none;}
 ::selection { background: #ff5e99; color: #FFFFFF; text-shadow: 0; }
 ::-moz-selection { background: #ff5e99; color: #FFFFFF; }
 </style>
+<style>
+#custom-search-input{
+    padding: 3px;
+    border: solid 1px #E4E4E4;
+    border-radius: 6px;
+    background-color: #fff;
+}
+
+#custom-search-input input{
+    border: 0;
+    box-shadow: none;
+}
+
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px #ccc;
+}
+
+#custom-search-input .glyphicon-search{
+    font-size: 23px;
+}
+</style>
 <script type="text/javascript">
 	//Carousel Auto-Cycle
 	$(document).ready(function() {
@@ -154,8 +187,6 @@ li { list-style-type:none;}
 			success : function(responseData) {
 				var data = JSON.parse(responseData);
 				/* alert(data); */
-			
-				var count=0;
 				
 				/* 데이타를 채우기 위해 복사 */
 				$.each(data, function(i){
@@ -163,7 +194,9 @@ li { list-style-type:none;}
 					var partner_name=data[i].PARTNER_NAME;
 					alert("사진 이름 : "+pic + " / " + "업체명 : " + partner_name + " / " + " I 값 : " + i);
 					
-					if(count > 7){
+					
+					
+					if(i > 7){
 
 						$("#junk").css("display", "block");
 						
@@ -171,18 +204,17 @@ li { list-style-type:none;}
 						$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
 						$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);
 						
+						
 					}
 					
-					if(count < 7){
-						
-					
-					
+					if(i < 8){
+			
 					$("#coupon_slide_ListMain").append($("#coupon_slide_List_L").clone().css("display", "block"));
 					$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
 					$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
+					
 					}
 					
-					count++;
 					// 각 업체를 클릭했을때 이벤트
 					$("#coupon_" + data[i].PARTNER_NO).click(function(){
 // 						alert("쿠폰" + data[i].PARTNER_NO + "클릭");
@@ -197,7 +229,67 @@ li { list-style-type:none;}
 			}
 		});	
 	});
+	
+	$("coupon_search_btn").click(function(){
+		$("coupon_slide_ListMain").empty();
+		
+		$.ajax({
+			type:'get',
+			url:'${root}/coupon/couponMain.do',
+			data : {
+				member_id : email,
+				partner_name : $("input[name='coupon_search']").val()
+			},
+			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+			success : function(responseData) {
+				var data = JSON.parse(responseData);
+				/* alert(data); */
+				
+				/* 데이타를 채우기 위해 복사 */
+				$.each(data, function(i){
+					var pic=data[i].COUPON_PIC_NAME;
+					var partner_name=data[i].PARTNER_NAME;
+					alert("사진 이름 : "+pic + " / " + "업체명 : " + partner_name + " / " + " I 값 : " + i);
+					
+					
+					
+					if(i > 7){
+
+						$("#junk").css("display", "block");
+						
+						$("#coupon_slide_ListSub").append($("#coupon_slide_List_L").clone().css("display", "block"));
+						$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+						$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);
+						
+						
+					}
+					
+					if(i < 8){
+			
+					$("#coupon_slide_ListMain").append($("#coupon_slide_List_L").clone().css("display", "block"));
+					$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+					$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
+					
+					}
+					
+					// 각 업체를 클릭했을때 이벤트
+					$("#coupon_" + data[i].PARTNER_NO).click(function(){
+// 						alert("쿠폰" + data[i].PARTNER_NO + "클릭");
+						couponData(data[i].PARTNER_NO);	
+					});
+				});
+				
+				if (!data) {
+					alert("등록된 정보가 없습니다.");
+					return false;
+				}
+			}
+		});	
+	});
+ 
 });
+ 
+ 
 </script>
 </head>
 <body>
@@ -233,14 +325,6 @@ li { list-style-type:none;}
 				
 				
 				<div class="item" id="junk" style="display: none;">
-					<div class="caption">
-						<ul class="thumbnails"  id="coupon_slide_ListSub">	
-   		        			
-   		        		</ul>
-   		        	</div>            
-				</div>    <!--  /Slide2  -->
-				
-				<div class="item" id="sub1" style="display: none;">
 					<div class="caption">
 						<ul class="thumbnails"  id="coupon_slide_ListSub">	
    		        			
