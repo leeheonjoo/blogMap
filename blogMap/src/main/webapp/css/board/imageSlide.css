@@ -1,11 +1,12 @@
 @CHARSET "UTF-8";
-#blogRead_carousel{
-	height:250px;
+#carousel_image{
+	height:300px;
 	width:auto;
 }
 
-#blogRead_carousel img{
-	height:250px;
+#carousel_image img{
+	border-radius: 25px;
+	height:300px;
 	width:auto;
 	display:block;
 	margin:auto;
@@ -15,7 +16,13 @@
 	color:gray;	
 }
 
+.carousel-indicators ol{
+	height: 30px;
+	margin-bottom : 0;
+}
+
 .carousel-indicators li{
 	background-color: red;
-	
+	border-color: red;
+	margin-bottom : 0;
 }

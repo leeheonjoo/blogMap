@@ -311,8 +311,30 @@ v\:* {
                                                    $.each(data,function(i){
                                                       var fileNo=data[i].file_no;
                                                       var filePath=data[i].file_path;
+                                                      var fileName=data[i].file_name;
                                                       var fileComment=data[i].file_comment;
-                                                                                                            
+                                                  	  
+                                                      if(i==0){
+                                                          $("#carousel_page").empty();
+                                                          $("#carousel_image").empty();                                                    	  
+                                                      }
+                                                      
+                                                      $("#carousel_page").append("<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>");
+                                                  	  
+                                                  	  var carousel_image = "<div class='item'>";
+                                                  	  carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + ">";
+                                                  	  carousel_image += "<div class='carousel-caption'>";
+                                                  	  carousel_image += "<h4>"+ fileComment +"</h4>";
+                                                  	  carousel_image += "</div>";
+                                                  	  carousel_image += "</div>";
+                                                  	  $("#carousel_image").append(carousel_image);
+                                                  	  
+                                                  	  if(i==0){
+                                                    	$("#carousel_page li").addClass("active");
+                                                    	$("#carousel_image .item").addClass("active");
+                                                   	  }
+               
+                                              	
 //                                                       if(i!=0){
 //                                                     	  $(".carousel-indicators").append("<li data-target='.carousel' data-slide-to="+i+"></li>");
                                                     	                                                     	  
