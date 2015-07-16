@@ -121,48 +121,380 @@ thead {
 	function msgSendList() {
 		$("#receiveMsgResult").empty();
 		$("#sendMsgResult").empty();
-		/* alert("1"); */
-		// 발신메시지 로드하는 부분
-		// 발신 메시지 로드 -> jquery로 해당 리스트에 뿌려준다.
-		$.ajax({
-			type : 'get',
-			url : '${root}/message/mainMessage.do',
-			data : {
-				member_id : email
-			},
-			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-			success : function(responseData) {
-				var data = JSON.parse(responseData);
-				if (!data) {
-					alert("메시지가 비어있습니다.");
-					return false;
-				}
-				//alert(data.category_code);
 
-				/*result Div 안에 listRow Div 를 복사하여 붙이면서 불러온 정보를 차례대로 담는다. */
-				$.each(data,function(i) {
-					var date = new Date(data[i].message_sDate);
+		var pageBlock=2;
+		
+		var r_startPage=0;
+		var r_endPage=0;
+
+		var s_startPage=0;
+		var s_endPage=0;
+		
+		$.ajax({
+			type:'GET',
+			url:'${root}/message/mainMessage.do',
+			data:{
+				member_id:sessionStorage.getItem("email")
+				
+			},
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			success:function(responseData){
+				//alert(responseData);
+				
+				var data=responseData.split("|");
+				
+				var boardSize=data[1];
+				var count=data[2];
+				var currentPage=data[3];
+				
+				var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+				
+				s_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+				s_endPage=s_startPage+pageBlock-1;
+				
+				var send_data=JSON.parse(data[0]);
+				
+				
+				$.each(send_data,function(i){
+					var date = new Date(send_data[i].message_sDate);
 					var sy = date.getFullYear();
 					var sm = date.getMonth() + 1;
 					var sd = date.getDate();
-		
-					var sdate = sy + "/" + sm + "/"	+ sd;
-					/* alert(sdate); */
-					/* alert(date.getFullYear() + "/" + date.getMonth()+1 + "/" + date.getDate() + "/" + date.getHours()); */
-		
-					$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
-					$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].member_id + "</td><td>" + data[i].message_content + "</td></tr>");
+
+					var sdate = sy + "/" + sm + "/" + sd;
+
+					$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
+					$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
 					
-					$("#" + data[i].message_no).click(function() {
-						msgSendimportData(data[i].message_no);
+					$("#" + send_data[i].message_no).click(function() {
+						msgSendimportData(send_data[i].message_no);
 					});
 				});
-			},
-			error : function(data) {
-				alert("로그인을 해 주세요.");
-			}
+				
+				if(s_endPage>pageCount){
+					s_endPage=pageCount;
+				}
+
+				if(s_startPage>pageBlock){
+					$("#send_list_before").css("display","inline-block");
+					
+				}
+				
+				if(s_startPage<=pageBlock){
+					$("#send_list_before").css("display","none");
+				}
+				
+				$("#send_list_pageNum").empty();
+				for(var i=s_startPage;i<=s_endPage;i++){
+					$("#send_list_pageNum").append("<a href='#' id='send_paging_num"+i+"'>"+i+"</a>");
+					$("#send_paging_num"+i).click(function(){
+						$.ajax({
+							type:'GET',
+							url:'${root}/message/mainMessage.do',
+							data:{
+								member_id:sessionStorage.getItem("email"),
+								pageNumber:$(this).text()
+							},
+							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+							success:function(responseData){
+								
+								var data=responseData.split("|");
+								
+								var boardSize=data[1];
+								var count=data[2];
+								var currentPage=data[3];
+								
+								
+								$("#sendMsgResult").empty();
+								var send_data=JSON.parse(data[0]);
+								
+								$.each(send_data,function(i){
+									var date = new Date(send_data[i].message_sDate);
+									var sy = date.getFullYear();
+									var sm = date.getMonth() + 1;
+									var sd = date.getDate();
+
+									var sdate = sy + "/" + sm + "/" + sd;
+
+									$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
+									$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
+									
+									$("#" + send_data[i].message_no).click(function() {
+										msgSendimportData(send_data[i].message_no);
+									});
+								});
+							}
+						});
+					});
+				}
+				if(s_endPage<pageCount){
+					//alert("aaaaa");
+					$("#send_list_after").css("display","inline-block");
+				}
+				
+				if(s_endPage>=pageCount){
+					$("#send_list_after").css("display","none");
+				}
+			}			
 		});
-	}
+		
+		//다음클릭시
+		$("#send_paging_after").click(function(){
+// 		alert("Aa");
+			$.ajax({
+				type:'GET',
+				url:'${root}/message/mainMessage.do',
+				data:{
+					member_id:sessionStorage.getItem("email"),
+					pageNumber:s_startPage+pageBlock
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					
+					var data=responseData.split("|");
+					/* alert(data[0]);
+					alert(data[1]);
+					alert(data[2]);
+					alert(data[3]); */
+					
+					var boardSize=data[1];
+					var count=data[2];
+					var currentPage=data[3];
+					//var pageBlock=1;
+					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+// 					alert(pageCount);
+					s_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					s_endPage=s_startPage+pageBlock-1;
+					
+					$("#sendMsgResult").empty();
+					var send_data=JSON.parse(data[0]);
+					
+					$.each(send_data,function(i){
+						var date = new Date(send_data[i].message_sDate);
+						var sy = date.getFullYear();
+						var sm = date.getMonth() + 1;
+						var sd = date.getDate();
+
+						var sdate = sy + "/" + sm + "/" + sd;
+
+						$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
+						$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
+						
+						$("#" + send_data[i].message_no).click(function() {
+							msgSendimportData(send_data[i].message_no);
+						});
+					});
+					
+					
+					if(s_endPage>pageCount){
+						s_endPage=pageCount;
+					}
+//	 				alert("다음startPage:"+r_startPage);
+//	 				alert("다음endPage:"+r_endPage);
+//	 				alert("다음pageBlock"+pageBlock)
+					
+					//이전
+					if(s_startPage>pageBlock){
+// 						alert("block");
+						$("#send_list_before").css("display","inline-block");
+						$("#send_list_pageNum").css("display","none");
+						$("#send_list_pageNum").css("display","inline-block");
+					}
+					
+					if(s_startPage<=pageBlock){
+						//alert("hidden");
+						$("#send_list_before").css("display","none");
+					}
+					
+					$("#send_list_pageNum").empty();
+					for(var i=s_startPage;i<=s_endPage;i++){
+						$("#send_list_pageNum").append("<a href='#' id='send_paging_num"+i+"'>"+i+"</a>");
+						$("#send_paging_num"+i).click(function(){
+// 							alert($(this).text());
+							$.ajax({
+								type:'GET',
+								url:'${root}/message/mainMessage.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									$("#sendMsgResult").empty();
+									var send_data=JSON.parse(data[0]);
+									
+									$.each(send_data,function(i){
+										var date = new Date(send_data[i].message_sDate);
+										var sy = date.getFullYear();
+										var sm = date.getMonth() + 1;
+										var sd = date.getDate();
+
+										var sdate = sy + "/" + sm + "/" + sd;
+
+										$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
+										$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
+										
+										$("#" + send_data[i].message_no).click(function() {
+											msgSendimportData(send_data[i].message_no);
+										});
+									});
+								}
+							});
+						});
+					}
+// 					alert("다음endPage:"+s_endPage);
+// 					alert("다음pageCount"+pageCount);
+// 					alert("다음마지막startPage:"+s_startPage);
+					//다음
+					if(s_endPage<pageCount){
+// 						alert("다음block");
+						$("#send_list_after").css("display","inline-block");
+					}
+					
+					if(s_endPage>=pageCount){
+// 						alert("다음hidden");
+						$("#send_list_after").css("display","none");
+// 						alert("bbbbbb");
+					}
+					
+				}
+			});
+		});
+		
+		
+		//이전클릭시
+		$("#send_paging_before").click(function(){
+// 			alert("이전startPage:"+r_startPage);
+// 			alert("이전pageBlock:"+pageBlock);
+			$.ajax({
+				type:'GET',
+				url:'${root}/message/mainMessage_info.do',
+				data:{
+					member_id:sessionStorage.getItem("email"),
+					pageNumber:s_startPage-pageBlock
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					
+					var data=responseData.split("|");
+					/* alert(data[0]);
+					alert(data[1]);
+					alert(data[2]);
+					alert(data[3]); */
+					
+					var boardSize=data[1];
+					var count=data[2];
+					var currentPage=data[3];
+					//var pageBlock=1;
+					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+// 					alert(pageCount);
+					s_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					s_endPage=s_startPage+pageBlock-1;
+					
+					$("#sendMsgResult").empty();
+					var send_data=JSON.parse(data[0]);
+					
+					$.each(send_data,function(i){
+						var date = new Date(send_data[i].message_sDate);
+						var sy = date.getFullYear();
+						var sm = date.getMonth() + 1;
+						var sd = date.getDate();
+
+						var sdate = sy + "/" + sm + "/" + sd;
+
+						$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
+						$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
+						
+						$("#" + send_data[i].message_no).click(function() {
+							msgSendimportData(send_data[i].message_no);
+						});
+					});
+					
+// 					alert("startPage:"+r_startPage);
+// 					alert("pageBlock:"+pageBlock);
+					//이전
+					if(s_startPage>pageBlock){
+						$("#send_list_before").css("display","inline-block");
+						
+					}
+					
+					if(r_startPage<=pageBlock){
+						$("#send_list_before").css("display","none");
+					}
+					
+					$("#send_list_pageNum").empty();
+					for(var i=r_startPage;i<=r_endPage;i++){
+						$("#send_list_pageNum").append("<a href='#' id='send_paging_num"+i+"'>"+i+"</a>");
+						$("#send_paging_num"+i).click(function(){
+// 							alert($(this).text());
+							$.ajax({
+								type:'GET',
+								url:'${root}/message/mainMessage.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									//member_id:"kimjh112339@naver.com",
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									/* alert(data[0]);
+									alert(data[1]);
+									alert(data[2]);
+									alert(data[3]); */
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									
+									$("#sendMsgResult").empty();
+									var send_data=JSON.parse(data[0]);
+									
+									$.each(send_data,function(i){
+										var date = new Date(send_data[i].message_sDate);
+										var sy = date.getFullYear();
+										var sm = date.getMonth() + 1;
+										var sd = date.getDate();
+
+										var sdate = sy + "/" + sm + "/" + sd;
+
+										$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
+										$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
+										
+										$("#" + send_data[i].message_no).click(function() {
+											msgSendimportData(send_data[i].message_no);
+										});
+									});
+								}
+							});
+						});
+					}
+					
+					//다음
+					if(s_endPage<pageCount){
+						$("#send_list_after").css("display","inline-block");
+					}
+					
+					if(s_endPage>=pageCount){
+						$("#send_list_after").css("display","none");
+					}
+				}
+			});
+		});		
+ 	}
 	
 	function msgSendimportData(no) {
 		$.ajax({
@@ -193,52 +525,385 @@ thead {
 	}
 	
 
-	function msgReceiveList() {
-		// 메시지 창을 비워준다.
-		$("#receiveMsgResult").empty();
-		$("#sendMsgResult").empty();
-		/* alert("1"); */
-		// 수신메시지 로드하는 부분
-		// 수신 메시지 로드 -> jquery로 해당 리스트에 뿌려준다.
+ 	function msgReceiveList() {		
+ 		// 메시지 창을 비워준다.
+ 		$("#receiveMsgResult").empty();
+ 		$("#sendMsgResult").empty();
+ 		
+		var pageBlock=2;
+		
+		var r_startPage=0;
+		var r_endPage=0;
+
+		var s_startPage=0;
+		var s_endPage=0;
+		
 		$.ajax({
-			type : 'post',
-			url : '${root}/message/mainMessage.do',
-			data : {
-				member_id : email
+			type:'POST',
+			url:'${root}/message/mainMessage.do',
+			data:{
+				member_id:sessionStorage.getItem("email")
+				
 			},
-			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-			success : function(responseData) {
-				var data = JSON.parse(responseData);
-				if (!data) {
-					alert("메시지가 비어있습니다.");
-					return false;
-				}
-				//alert(data.category_code);
-	
-				/*result Div 안에 listRow Div 를 복사하여 붙이면서 불러온 정보를 차례대로 담는다. */
-				$.each(data, function(i) {
-					var date = new Date(data[i].message_sDate);
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			success:function(responseData){
+				//alert(responseData);
+				
+				var data=responseData.split("|");
+				
+				var boardSize=data[1];
+				var count=data[2];
+				var currentPage=data[3];
+				
+				var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+				
+				r_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+				r_endPage=r_startPage+pageBlock-1;
+				
+				var receive_data=JSON.parse(data[0]);
+				
+				
+				$.each(receive_data,function(i){
+					var date = new Date(receive_data[i].message_sDate);
 					var sy = date.getFullYear();
 					var sm = date.getMonth() + 1;
 					var sd = date.getDate();
 
 					var sdate = sy + "/" + sm + "/" + sd;
 
-					$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
-					$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].member_id + "</td><td>" + data[i].message_content + "</td></tr>");
-
-					$("#" + data[i].message_no).click(function() {
-						msgRecieveimportData(data[i].message_no);
+					$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+					$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+					
+					$("#" + receive_data[i].message_no).click(function() {
+						msgReceiveimportData(receive_data[i].message_no);
 					});
 				});
-			},
-			error : function(data) {
-				alert("로그인을 해 주세요.");
-			}
-		});
-	}
+				
+				if(r_endPage>pageCount){
+					r_endPage=pageCount;
+				}
 
-	function msgRecieveimportData(no) {
+				if(r_startPage>pageBlock){
+					$("#receive_list_before").css("display","inline-block");
+					
+				}
+				
+				if(r_startPage<=pageBlock){
+					$("#receive_list_before").css("display","none");
+				}
+				
+				$("#receive_list_pageNum").empty();
+				for(var i=r_startPage;i<=r_endPage;i++){
+					$("#receive_list_pageNum").append("<a href='#' id='receive_paging_num"+i+"'>"+i+"</a>");
+					$("#receive_paging_num"+i).click(function(){
+						$.ajax({
+							type:'POST',
+							url:'${root}/message/mainMessage.do',
+							data:{
+								member_id:sessionStorage.getItem("email"),
+								pageNumber:$(this).text()
+							},
+							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+							success:function(responseData){
+								
+								var data=responseData.split("|");
+								
+								var boardSize=data[1];
+								var count=data[2];
+								var currentPage=data[3];
+								
+								
+								$("#receiveMsgResult").empty();
+								var receive_data=JSON.parse(data[0]);
+								
+								$.each(receive_data,function(i){
+									var date = new Date(receive_data[i].message_sDate);
+									var sy = date.getFullYear();
+									var sm = date.getMonth() + 1;
+									var sd = date.getDate();
+
+									var sdate = sy + "/" + sm + "/" + sd;
+
+									$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+									$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+									
+									$("#" + receive_data[i].message_no).click(function() {
+										msgReceiveimportData(receive_data[i].message_no);
+									});
+								});
+							}
+						});
+					});
+				}
+				if(r_endPage<pageCount){
+					//alert("aaaaa");
+					$("#receive_list_after").css("display","inline-block");
+				}
+				
+				if(r_endPage>=pageCount){
+					$("#receive_list_after").css("display","none");
+				}
+			}			
+		});
+		
+		//다음클릭시
+		$("#receive_paging_after").click(function(){
+// 		alert("Aa");
+			$.ajax({
+				type:'POST',
+				url:'${root}/message/mainMessage.do',
+				data:{
+					member_id:sessionStorage.getItem("email"),
+					pageNumber:r_startPage+pageBlock
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					
+					var data=responseData.split("|");
+					/* alert(data[0]);
+					alert(data[1]);
+					alert(data[2]);
+					alert(data[3]); */
+					
+					var boardSize=data[1];
+					var count=data[2];
+					var currentPage=data[3];
+					//var pageBlock=1;
+					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+// 					alert(pageCount);
+					r_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					r_endPage=r_startPage+pageBlock-1;
+					
+					$("#receiveMsgResult").empty();
+					var receive_data=JSON.parse(data[0]);
+					
+					$.each(receive_data,function(i){
+						var date = new Date(receive_data[i].message_sDate);
+						var sy = date.getFullYear();
+						var sm = date.getMonth() + 1;
+						var sd = date.getDate();
+
+						var sdate = sy + "/" + sm + "/" + sd;
+
+						$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+						$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+						
+						$("#" + receive_data[i].message_no).click(function() {
+							msgReceiveimportData(receive_data[i].message_no);
+						});
+					});
+					
+					
+					if(r_endPage>pageCount){
+						r_endPage=pageCount;
+					}
+//	 				alert("다음startPage:"+r_startPage);
+//	 				alert("다음endPage:"+r_endPage);
+//	 				alert("다음pageBlock"+pageBlock)
+					
+					//이전
+					if(r_startPage>pageBlock){
+// 						alert("block");
+						$("#receive_list_before").css("display","inline-block");
+						$("#receive_list_pageNum").css("display","none");
+						$("#receive_list_pageNum").css("display","inline-block");
+					}
+					
+					if(r_startPage<=pageBlock){
+						//alert("hidden");
+						$("#receive_list_before").css("display","none");
+					}
+					
+					$("#receive_list_pageNum").empty();
+					for(var i=r_startPage;i<=r_endPage;i++){
+						$("#receive_list_pageNum").append("<a href='#' id='receive_paging_num"+i+"'>"+i+"</a>");
+						$("#receive_paging_num"+i).click(function(){
+// 							alert($(this).text());
+							$.ajax({
+								type:'POST',
+								url:'${root}/message/mainMessage.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									$("#receiveMsgResult").empty();
+									var receive_data=JSON.parse(data[0]);
+									
+									$.each(receive_data,function(i){
+										var date = new Date(receive_data[i].message_sDate);
+										var sy = date.getFullYear();
+										var sm = date.getMonth() + 1;
+										var sd = date.getDate();
+
+										var sdate = sy + "/" + sm + "/" + sd;
+
+										$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+										$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+										
+										$("#" + receive_data[i].message_no).click(function() {
+											msgReceiveimportData(receive_data[i].message_no);
+										});
+									});
+								}
+							});
+						});
+					}
+// 					alert("다음endPage:"+r_endPage);
+// 					alert("다음pageCount"+pageCount);
+// 					alert("다음마지막startPage:"+r_startPage);
+					//다음
+					if(r_endPage<pageCount){
+// 						alert("다음block");
+						$("#receive_list_after").css("display","inline-block");
+					}
+					
+					if(r_endPage>=pageCount){
+// 						alert("다음hidden");
+						$("#receive_list_after").css("display","none");
+// 						alert("bbbbbb");
+					}
+					
+				}
+			});
+		});
+		
+		
+		//이전클릭시
+		$("#receive_paging_before").click(function(){
+// 			alert("이전startPage:"+r_startPage);
+// 			alert("이전pageBlock:"+pageBlock);
+			$.ajax({
+				type:'POST',
+				url:'${root}/message/mainMessage_info.do',
+				data:{
+					member_id:sessionStorage.getItem("email"),
+					pageNumber:r_startPage-pageBlock
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					
+					var data=responseData.split("|");
+					/* alert(data[0]);
+					alert(data[1]);
+					alert(data[2]);
+					alert(data[3]); */
+					
+					var boardSize=data[1];
+					var count=data[2];
+					var currentPage=data[3];
+					//var pageBlock=1;
+					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+// 					alert(pageCount);
+					r_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					r_endPage=r_startPage+pageBlock-1;
+					
+					$("#receiveMsgResult").empty();
+					var receive_data=JSON.parse(data[0]);
+					
+					$.each(receive_data,function(i){
+						var date = new Date(receive_data[i].message_sDate);
+						var sy = date.getFullYear();
+						var sm = date.getMonth() + 1;
+						var sd = date.getDate();
+
+						var sdate = sy + "/" + sm + "/" + sd;
+
+						$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+						$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+						
+						$("#" + receive_data[i].message_no).click(function() {
+							msgReceiveimportData(receive_data[i].message_no);
+						});
+					});
+					
+// 					alert("startPage:"+r_startPage);
+// 					alert("pageBlock:"+pageBlock);
+					//이전
+					if(r_startPage>pageBlock){
+						$("#receive_list_before").css("display","inline-block");
+						
+					}
+					
+					if(r_startPage<=pageBlock){
+						$("#receive_list_before").css("display","none");
+					}
+					
+					$("#receive_list_pageNum").empty();
+					for(var i=r_startPage;i<=r_endPage;i++){
+						$("#receive_list_pageNum").append("<a href='#' id='receive_paging_num"+i+"'>"+i+"</a>");
+						$("#receive_paging_num"+i).click(function(){
+// 							alert($(this).text());
+							$.ajax({
+								type:'POST',
+								url:'${root}/message/mainMessage.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									//member_id:"kimjh112339@naver.com",
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									/* alert(data[0]);
+									alert(data[1]);
+									alert(data[2]);
+									alert(data[3]); */
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									
+									$("#receiveMsgResult").empty();
+									var receive_data=JSON.parse(data[0]);
+									
+									$.each(receive_data,function(i){
+										var date = new Date(receive_data[i].message_sDate);
+										var sy = date.getFullYear();
+										var sm = date.getMonth() + 1;
+										var sd = date.getDate();
+
+										var sdate = sy + "/" + sm + "/" + sd;
+
+										$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+										$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+										
+										$("#" + receive_data[i].message_no).click(function() {
+											msgReceiveimportData(receive_data[i].message_no);
+										});
+									});
+								}
+							});
+						});
+					}
+					
+					//다음
+					if(r_endPage<pageCount){
+						$("#receive_list_after").css("display","inline-block");
+					}
+					
+					if(r_endPage>=pageCount){
+						$("#receive_list_after").css("display","none");
+					}
+				}
+			});
+		});
+ 	}
+	function msgReceiveimportData(no) {
 		$.ajax({
 			type : 'get',
 			url : '${root}/message/messageRead.do?message_no=' + no,
@@ -279,45 +944,379 @@ thead {
 		// 메시지 창을 비워준다.
 		$("#receiveMsgResult").empty();
 		$("#sendMsgResult").empty();
-		// 수신메시지 로드하는 부분
-		// 수신 메시지 로드 -> jquery로 해당 리스트에 뿌려준다.
+		
+		var pageBlock=2;
+		
+		var r_startPage=0;
+		var r_endPage=0;
+
+		var s_startPage=0;
+		var s_endPage=0;
+		
 		$.ajax({
-			type : 'post',
-			url : '${root}/message/mainMessage.do',
-			data : {
-				member_id : email
+			type:'POST',
+			url:'${root}/message/mainMessage.do',
+			data:{
+				member_id:sessionStorage.getItem("email")
+				
 			},
-			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-			success : function(responseData) {
-				var data = JSON.parse(responseData);
-				if (!data) {
-					alert("메시지가 비어있습니다.");
-					return false;
-				}
-				//alert(data.category_code);
-	
-				/*result Div 안에 listRow Div 를 복사하여 붙이면서 불러온 정보를 차례대로 담는다. */
-				$.each(data, function(i) {
-					var date = new Date(data[i].message_sDate);
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			success:function(responseData){
+				//alert(responseData);
+				
+				var data=responseData.split("|");
+				
+				var boardSize=data[1];
+				var count=data[2];
+				var currentPage=data[3];
+				
+				var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+				
+				r_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+				r_endPage=r_startPage+pageBlock-1;
+				
+				var receive_data=JSON.parse(data[0]);
+				
+				
+				$.each(receive_data,function(i){
+					var date = new Date(receive_data[i].message_sDate);
 					var sy = date.getFullYear();
 					var sm = date.getMonth() + 1;
 					var sd = date.getDate();
 
 					var sdate = sy + "/" + sm + "/" + sd;
 
-					$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].message_no + "</td><td>" + data[i].message_content + "</td><td>" + data[i].member_id + "</td><td>" + sdate + "</td><td>" + data[i].message_yn + "</td></tr>");
-					$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+data[i].message_no+"'><td>" + data[i].member_id + "</td><td>" + data[i].message_content + "</td></tr>");
+					$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+					$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
 					
-					$("#" + data[i].message_no).click(function() {
-						msgimportData(data[i].message_no);
+					$("#" + receive_data[i].message_no).click(function() {
+						msgimportData(receive_data[i].message_no);
 					});
 				});
-			},
-			error : function(data) {
-				alert("로그인을 해 주세요.");
-			}
+				
+				if(r_endPage>pageCount){
+					r_endPage=pageCount;
+				}
+
+				if(r_startPage>pageBlock){
+					$("#receive_list_before").css("display","inline-block");
+					
+				}
+				
+				if(r_startPage<=pageBlock){
+					$("#receive_list_before").css("display","none");
+				}
+				
+				$("#receive_list_pageNum").empty();
+				for(var i=r_startPage;i<=r_endPage;i++){
+					$("#receive_list_pageNum").append("<a href='#' id='receive_paging_num"+i+"'>"+i+"</a>");
+					$("#receive_paging_num"+i).click(function(){
+						$.ajax({
+							type:'POST',
+							url:'${root}/message/mainMessage.do',
+							data:{
+								member_id:sessionStorage.getItem("email"),
+								pageNumber:$(this).text()
+							},
+							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+							success:function(responseData){
+								
+								var data=responseData.split("|");
+								
+								var boardSize=data[1];
+								var count=data[2];
+								var currentPage=data[3];
+								
+								
+								$("#receiveMsgResult").empty();
+								var receive_data=JSON.parse(data[0]);
+								
+								$.each(receive_data,function(i){
+									var date = new Date(receive_data[i].message_sDate);
+									var sy = date.getFullYear();
+									var sm = date.getMonth() + 1;
+									var sd = date.getDate();
+
+									var sdate = sy + "/" + sm + "/" + sd;
+
+									$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+									$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+									
+									$("#" + receive_data[i].message_no).click(function() {
+										msgimportData(receive_data[i].message_no);
+									});
+								});
+							}
+						});
+					});
+				}
+				if(r_endPage<pageCount){
+					//alert("aaaaa");
+					$("#receive_list_after").css("display","inline-block");
+				}
+				
+				if(r_endPage>=pageCount){
+					$("#receive_list_after").css("display","none");
+				}
+			}			
 		});
-	}
+		
+		//다음클릭시
+		$("#receive_paging_after").click(function(){
+// 		alert("Aa");
+			$.ajax({
+				type:'POST',
+				url:'${root}/message/mainMessage.do',
+				data:{
+					member_id:sessionStorage.getItem("email"),
+					pageNumber:r_startPage+pageBlock
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					
+					var data=responseData.split("|");
+					/* alert(data[0]);
+					alert(data[1]);
+					alert(data[2]);
+					alert(data[3]); */
+					
+					var boardSize=data[1];
+					var count=data[2];
+					var currentPage=data[3];
+					//var pageBlock=1;
+					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+// 					alert(pageCount);
+					r_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					r_endPage=r_startPage+pageBlock-1;
+					
+					$("#receiveMsgResult").empty();
+					var receive_data=JSON.parse(data[0]);
+					
+					$.each(receive_data,function(i){
+						var date = new Date(receive_data[i].message_sDate);
+						var sy = date.getFullYear();
+						var sm = date.getMonth() + 1;
+						var sd = date.getDate();
+
+						var sdate = sy + "/" + sm + "/" + sd;
+
+						$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+						$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+						
+						$("#" + receive_data[i].message_no).click(function() {
+							msgimportData(receive_data[i].message_no);
+						});
+					});
+					
+					
+					if(r_endPage>pageCount){
+						r_endPage=pageCount;
+					}
+//	 				alert("다음startPage:"+r_startPage);
+//	 				alert("다음endPage:"+r_endPage);
+//	 				alert("다음pageBlock"+pageBlock)
+					
+					//이전
+					if(r_startPage>pageBlock){
+// 						alert("block");
+						$("#receive_list_before").css("display","inline-block");
+						$("#receive_list_pageNum").css("display","none");
+						$("#receive_list_pageNum").css("display","inline-block");
+					}
+					
+					if(r_startPage<=pageBlock){
+						//alert("hidden");
+						$("#receive_list_before").css("display","none");
+					}
+					
+					$("#receive_list_pageNum").empty();
+					for(var i=r_startPage;i<=r_endPage;i++){
+						$("#receive_list_pageNum").append("<a href='#' id='receive_paging_num"+i+"'>"+i+"</a>");
+						$("#receive_paging_num"+i).click(function(){
+// 							alert($(this).text());
+							$.ajax({
+								type:'POST',
+								url:'${root}/message/mainMessage.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									$("#receiveMsgResult").empty();
+									var receive_data=JSON.parse(data[0]);
+									
+									$.each(receive_data,function(i){
+										var date = new Date(receive_data[i].message_sDate);
+										var sy = date.getFullYear();
+										var sm = date.getMonth() + 1;
+										var sd = date.getDate();
+
+										var sdate = sy + "/" + sm + "/" + sd;
+
+										$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+										$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+										
+										$("#" + receive_data[i].message_no).click(function() {
+											msgimportData(receive_data[i].message_no);
+										});
+									});
+								}
+							});
+						});
+					}
+// 					alert("다음endPage:"+r_endPage);
+// 					alert("다음pageCount"+pageCount);
+// 					alert("다음마지막startPage:"+r_startPage);
+					//다음
+					if(r_endPage<pageCount){
+// 						alert("다음block");
+						$("#receive_list_after").css("display","inline-block");
+					}
+					
+					if(r_endPage>=pageCount){
+// 						alert("다음hidden");
+						$("#receive_list_after").css("display","none");
+// 						alert("bbbbbb");
+					}
+					
+				}
+			});
+		});
+		
+		
+		//이전클릭시
+		$("#receive_paging_before").click(function(){
+// 			alert("이전startPage:"+r_startPage);
+// 			alert("이전pageBlock:"+pageBlock);
+			$.ajax({
+				type:'POST',
+				url:'${root}/message/mainMessage_info.do',
+				data:{
+					member_id:sessionStorage.getItem("email"),
+					pageNumber:r_startPage-pageBlock
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					
+					var data=responseData.split("|");
+					/* alert(data[0]);
+					alert(data[1]);
+					alert(data[2]);
+					alert(data[3]); */
+					
+					var boardSize=data[1];
+					var count=data[2];
+					var currentPage=data[3];
+					//var pageBlock=1;
+					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+// 					alert(pageCount);
+					r_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					r_endPage=r_startPage+pageBlock-1;
+					
+					$("#receiveMsgResult").empty();
+					var receive_data=JSON.parse(data[0]);
+					
+					$.each(receive_data,function(i){
+						var date = new Date(receive_data[i].message_sDate);
+						var sy = date.getFullYear();
+						var sm = date.getMonth() + 1;
+						var sd = date.getDate();
+
+						var sdate = sy + "/" + sm + "/" + sd;
+
+						$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+						$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+						
+						$("#" + receive_data[i].message_no).click(function() {
+							msgimportData(receive_data[i].message_no);
+						});
+					});
+					
+// 					alert("startPage:"+r_startPage);
+// 					alert("pageBlock:"+pageBlock);
+					//이전
+					if(r_startPage>pageBlock){
+						$("#receive_list_before").css("display","inline-block");
+						
+					}
+					
+					if(r_startPage<=pageBlock){
+						$("#receive_list_before").css("display","none");
+					}
+					
+					$("#receive_list_pageNum").empty();
+					for(var i=r_startPage;i<=r_endPage;i++){
+						$("#receive_list_pageNum").append("<a href='#' id='receive_paging_num"+i+"'>"+i+"</a>");
+						$("#receive_paging_num"+i).click(function(){
+// 							alert($(this).text());
+							$.ajax({
+								type:'POST',
+								url:'${root}/message/mainMessage.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									//member_id:"kimjh112339@naver.com",
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									/* alert(data[0]);
+									alert(data[1]);
+									alert(data[2]);
+									alert(data[3]); */
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									
+									$("#receiveMsgResult").empty();
+									var receive_data=JSON.parse(data[0]);
+									
+									$.each(receive_data,function(i){
+										var date = new Date(receive_data[i].message_sDate);
+										var sy = date.getFullYear();
+										var sm = date.getMonth() + 1;
+										var sd = date.getDate();
+
+										var sdate = sy + "/" + sm + "/" + sd;
+
+										$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+										$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+										
+										$("#" + receive_data[i].message_no).click(function() {
+											msgimportData(receive_data[i].message_no);
+										});
+									});
+								}
+							});
+						});
+					}
+					
+					//다음
+					if(r_endPage<pageCount){
+						$("#receive_list_after").css("display","inline-block");
+					}
+					
+					if(r_endPage>=pageCount){
+						$("#receive_list_after").css("display","none");
+					}
+				}
+			});
+		});
 
 	function msgimportData(no) {
 		$.ajax({
@@ -346,6 +1345,7 @@ thead {
 			}
 		});
 	}
+}
 </script>
 </head>
 <body>
@@ -422,6 +1422,14 @@ thead {
 											<tbody id="receiveMsgResult">		<!-- 자료를 담기 위한 그릇 -->
 											</tbody>
 										</table>
+										
+										<div id="receive_paging" class="container">
+											<ul class="pagination">
+								              <li id="receive_list_before" style="display:'none';"><a href="#" id="receive_paging_before">«</a></li>
+								              <li id="receive_list_pageNum"></li>
+								              <li id="receive_list_after" style="display:'none';"><a href="#" id="receive_paging_after">»</a></li>
+						           			</ul>
+										</div> 
 									</div>		<!-- /widget-content -->
 								</div>			<!-- /widget -->
 							</div>
@@ -439,30 +1447,39 @@ thead {
 									<div class="widget stacked widget-table action-table">
 										<div class="widget-content">
 											<table class="table table-striped table-bordered">
-											<thead>
-												<tr class="hidden-xs" id="send_message">
-													<th class="col-md-1 col-sm-1 col-xs-1"
-														style="text-align: center;">No</th>
-													<th class="col-md-5 col-sm-5 col-xs-5"
-														style="text-align: center;">Message_Content</th>
-													<th class="col-md-3 col-sm-3 col-xs-3"
-														style="text-align: center;">Writer</th>
-													<th class="col-md-2 col-sm-2 col-xs-2"
-														style="text-align: center;">WriteDate</th>
-													<th class="col-md-1 col-sm-1 col-xs-1"
-														style="text-align: center;">Reception</th>
-												</tr>
+												<thead>
+													<tr class="hidden-xs" id="send_message">
+														<th class="col-md-1 col-sm-1 col-xs-1"
+															style="text-align: center;">No</th>
+														<th class="col-md-5 col-sm-5 col-xs-5"
+															style="text-align: center;">Message_Content</th>
+														<th class="col-md-3 col-sm-3 col-xs-3"
+															style="text-align: center;">Writer</th>
+														<th class="col-md-2 col-sm-2 col-xs-2"
+															style="text-align: center;">WriteDate</th>
+														<th class="col-md-1 col-sm-1 col-xs-1"
+															style="text-align: center;">Reception</th>
+													</tr>
+													
+													<tr class="visible-xs" id="send_message">
+														<th class="col-xs-5"
+															style="text-align: center;">Writer</th>
+														<th class="col-xs-7"
+															style="text-align: center;">Message_Content</th>
+													</tr>
+												</thead>
 												
-												<tr class="visible-xs" id="send_message">
-													<th class="col-xs-5"
-														style="text-align: center;">Writer</th>
-													<th class="col-xs-7"
-														style="text-align: center;">Message_Content</th>
-												</tr>
-											</thead>
-											<tbody id="sendMsgResult">		<!-- 자료를 담기 위한 그릇 -->
-											</tbody>
-										</table>
+												<tbody id="sendMsgResult">		<!-- 자료를 담기 위한 그릇 -->
+												</tbody>
+											</table>
+											
+											<div id="send_paging" class="container">
+												<ul class="pagination">
+									              <li id="send_list_before" style="display:'none';"><a href="#" id="send_paging_before">«</a></li>
+									              <li id="send_list_pageNum"></li>
+									              <li id="send_list_after" style="display:'none';"><a href="#" id="send_paging_after">»</a></li>
+							           			</ul>
+											</div>
 										</div>		<!-- /widget-content -->
 									</div>			<!-- /widget -->
 								</div>
@@ -479,6 +1496,5 @@ thead {
 		</div>
 	</div>
 	</article>
-
 </body>
 </html>
