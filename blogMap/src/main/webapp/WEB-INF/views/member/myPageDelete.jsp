@@ -33,7 +33,7 @@ $(function(){
 				if(responseData=="1"){
 					alert("삭제 되었습니다.");
 					sessionStorage.clear();
-					location.href="${root}/1";
+					location.href="${root}/";
 				}else{
 					alert("삭제 실패");
 				}
