@@ -432,7 +432,6 @@ public class ManagerServiceImpl implements ManagerService {
 		hMap.put("couponDto", couponDto);
 		hMap.put("partnerDto", partnerDto);
 		
-		
 		List<HashMap<String, Object>> couponInfo = managerDao.couponDetail(coupon_no);
 		logger.info("couponInfo:" + couponInfo);
 		
@@ -463,8 +462,58 @@ public class ManagerServiceImpl implements ManagerService {
 		mav.addObject("json", json);			
 	}
 
+	@Override
+	public void searchCouponList(ModelAndView mav) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		String partner_name=request.getParameter("name");
+		logger.info("coupon Search : " + partner_name);
+		
+		CouponDto couponDto=null;
+		PartnerDto partnerDto=null;
+		
+		HashMap<String, Object> hMap=new HashMap<String,Object>();
+		hMap.put("couponDto", couponDto);
+		hMap.put("partnerDto", partnerDto);
+		
+		List<HashMap<String, Object>> couponSearch=managerDao.coupnSearch(partner_name);
+		logger.info("couponSearch : "+couponSearch);
+		
+		Gson gson=new Gson();					//Gson의 객체를 생성
+		String json=gson.toJson(couponSearch);			//Log를 json으로 변환
+		logger.info("json: " + json);
+		
+		mav.addObject("json", json);
+	}
 	
-	
-	
+	@Override
+	public void searchCouponYN(ModelAndView mav) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		String coupon_yn=request.getParameter("coupon_yn");
+		logger.info("coupon_yn : " + coupon_yn);
+		
+		CouponDto couponDto=null;
+		PartnerDto partnerDto=null;
+		
+		HashMap<String, Object> hMap=new HashMap<String,Object>();
+		hMap.put("couponDto", couponDto);
+		hMap.put("partnerDto", partnerDto);
+		
+		List<HashMap<String, Object>> searchCouponYN=managerDao.searchCouponYN(coupon_yn);
+		logger.info("searchCouponYN" + searchCouponYN);
+		
+		Gson gson=new Gson();					//Gson의 객체를 생성
+		String json=gson.toJson(searchCouponYN);			//Log를 json으로 변환
+		logger.info("json: " + json);
+		
+		mav.addObject("json", json);
+	}
 	
 }

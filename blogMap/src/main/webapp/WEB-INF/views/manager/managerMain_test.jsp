@@ -21,7 +21,7 @@
 		});
 		
 		 // couponList
-		$("input#couponInfo2").click(function(){		// 쿠폰 정보버튼 클릭시 실행
+		$("input#getCouponList").click(function(){		// 쿠폰 정보버튼 클릭시 실행
 			getCouponlist()		// 제휴업체 정보를 불러오는 함수 호출
 		}); 
 		

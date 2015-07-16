@@ -53,5 +53,9 @@ public interface ManagerDao {
 		
 		public PartnerDto partnerDetail(int partnerNo);
 		
+		public List<HashMap<String, Object>> coupnSearch(String partner_name);
+		
+		public List<HashMap<String, Object>> searchCouponYN(String coupon_yn);
+		
 
 }

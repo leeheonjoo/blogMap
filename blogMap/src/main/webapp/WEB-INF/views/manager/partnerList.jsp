@@ -118,7 +118,7 @@
 						return false;
 					};
 					
-					if(submitChcek == "1"){
+					if(submitChcek.length >= 1){
 						alert("승인되었습니다.");
 						getPartnerList();
 					};

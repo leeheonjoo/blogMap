@@ -39,7 +39,7 @@
 <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-dropdown.js"></script>		<!-- bootstrap-dropdown javascript를 로드 -->
 <!-- Modal, Metro style javascript를 로드 -->
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
-<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=3933720084832bd83c88c654d3c6b08a"></script>
+<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=60e9ac7ab8734daca3d2053c1e713dbd"></script>
 <!-- 네이버 스마트에디터 -->
 <script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- 컨폼 확인창 -->	
@@ -225,7 +225,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<a data-toggle="modal" href="#blogMapCoupon">
-									<img src="${root}/images/blogMap/coupon_2.png" class="img-responsive"/>
+									<img src="${root}/images/blogMap/coupon.png" class="img-responsive"/>
 								</a>
 							</div>
 						</div>
@@ -355,30 +355,16 @@
 			
 		</div>
 	</div>
-	<br/><br/>
+	<br/>
 
 	<div class="container" style="max-width:1170px; height:50px; padding:0 0 0 0;">
-		<div class="navbar navbar-inverse" style="height:50px; color:gray; width:inherit;">
-				<div class="col-sm-10 col-xs-9">
-					<div style="width:100%; height:50px; text-align:center;">
+					<div style="width:100%; height:50px; text-align:right;">
 						<p style="width:100%; line-height:46px;">
-							<b style="width:100%;">경기도 분당시 삼평동 752-18 유스페이스 B동</b>
+							<a data-toggle="modal" href="#partnerMain" id ="partner_Registration"><img src="${root}/images/blogMap/Partnership_32.png"></a>
+							&nbsp;&nbsp;
+							<a data-toggle="modal" href="#ManagerMain"><img src="${root}/images/blogMap/gear_24.png"></img></a>
 						</p>
 					</div>
-				</div>
-				<div class="col-sm-2 col-xs-3" >
-					<div style="width:100%; height:50px; text-align:center;">
-						<p style="width:100%; line-height:46px;">
-							<b style="width:100%;"><a data-toggle="modal" href="#partnerMain" id ="partner_Registration" style="color:gray;">제휴업체</a></b>
-						</p>
-					</div>
-				</div>
-		</div>
-		<div style="text-align:right;">
-			<a data-toggle="modal" href="#ManagerMain"><img src="${root}/images/blogMap/gear_24.png"></img></a>
-			
-		</div>
-
 	</div>
 	<br/><br/>
 
@@ -1055,7 +1041,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">BlogMap</h4>
+						<h4 class="modal-title">Message</h4>
 					</div>
 					<div class="modal-body">
 						<jsp:include page="message/mainMessage.jsp"/>
@@ -1077,7 +1063,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">BlogMap</h5>
+						<h5 class="modal-title">MessageRead</h5>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1133,6 +1119,18 @@
 						<br/>
 					</div>
 					<div class="modal-footer">
+						 <div class="col-md-6">
+	                     <div id="custom-search-input">
+	                            <div class="input-group col-md-12">
+	                                <input type="text" class="form-control input-lg" name="coupon_search" id="coupon_search" placeholder="search for partner_name" />
+	                                <span class="input-group-btn">
+	                                    <button class="btn btn-info btn-lg" type="button" id="coupon_search_btn">
+	                                        <i class="glyphicon glyphicon-search"></i>
+	                                    </button>
+	                                </span>
+	                            </div>
+	                        </div>
+	                     </div>
 						<a href="#" data-dismiss="modal" class="btn">Close</a>
 						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
