@@ -185,6 +185,12 @@ public class ManagerController {
 		}
 	}
 	
+	/**
+	 * @name:searchPartnerYN
+	 * @date:2015. 7. 15.
+	 * @author:이동희
+	 * @description: 제휴업체 승인/미승인 여부로 제휴업체의 정보를 가지고 오는 메소드
+	 */
 	@RequestMapping("/manager/searchPartnerYN.do")
 	public void searchPartnerYN(HttpServletRequest request, HttpServletResponse response){
 		logger.info("Manager PartnerList start");
@@ -405,6 +411,12 @@ public class ManagerController {
 		
 	}
 	
+	/**
+	 * @name:couponDetail
+	 * @date:2015. 7. 15.
+	 * @author:이동희
+	 * @description: 쿠폰 상세 정보를 가지고 오는 메소드
+	 */
 	@RequestMapping("/manager/couponDetail.do")
 	public void couponDetail(HttpServletRequest request, HttpServletResponse response){
 		logger.info("Manager CouponDetail Start");
@@ -453,9 +465,53 @@ public class ManagerController {
 		}
 	}
 	
+	/**
+	 * @name:searchCouponList
+	 * @date:2015. 7. 15.
+	 * @author:이동희
+	 * @description: 제휴업체 이름검색으로 발급된 쿠폰 정보를 가지고오는 메소드
+	 */
 	@RequestMapping("/manager/searchCouponInfo.do")
-	public void searchCouponList(HttpServletRequest request, HttpServletResponse Response){
+	public void searchCouponList(HttpServletRequest request, HttpServletResponse response){
 		logger.info("Manager searchCouponList Start");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.searchCouponList(mav);
+		
+		Map<String, Object> map=mav.getModel();
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/manager/searchCouponYN.do")
+	public void searchCouponYN(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager searchCouponYN Start");		
+
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.searchCouponYN(mav);
+		
+		Map<String, Object> map=mav.getModel();
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

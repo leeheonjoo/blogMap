@@ -49,7 +49,7 @@ $(function(){
 							if(responseUpData=="1"){
 								alert("수정완료!");
 								//$("#myPageUpdate_layer_div").fadeOut();
-								location.href="${root}/1";
+								location.href="${root}/";
 							}else{
 								alert("수정실패");
 							}
