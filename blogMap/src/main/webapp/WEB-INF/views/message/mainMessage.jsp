@@ -350,11 +350,11 @@ thead {
 </head>
 <body>
 	<article class="container-fluid">
-	<div class="row">
-		<section class="page-header">
-		<h2 class="page-title">메시지</h2>
-		</section>
-	</div>
+<!-- 	<div class="row"> -->
+<!-- 		<section class="page-header"> -->
+<!-- 		<h2 class="page-title">메시지</h2> -->
+<!-- 		</section> -->
+<!-- 	</div> -->
 	<div class="row">
 		<div>
 			<!-- 큰 사이즈 화면에서 탭 목록-->
