@@ -15,6 +15,7 @@
 	color:gray;	
 }
 
-#carousel-example-generic li{
-	color:red;
+.carousel-indicators li{
+	background-color: red;
+	
 }
