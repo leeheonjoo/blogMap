@@ -48,5 +48,9 @@ public interface MemberDao {
 	public List<HashMap<String, Object>> coupon_info(String member_id, int startRow,
 			int endRow);
 
+	public int managerRgCheck(String member_id);
+
+	public String managerLogin(String id, String password);
+
 	
 }

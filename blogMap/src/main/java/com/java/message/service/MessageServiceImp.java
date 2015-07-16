@@ -1,6 +1,8 @@
 package com.java.message.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -13,8 +15,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.java.board.dto.BoardDto;
 import com.java.message.dao.MessageDao;
 import com.java.message.dto.MessageDto;
+import com.java.point.dto.PointDto;
 
 /**
  * @name:MessageServiceImp
@@ -73,29 +77,23 @@ public class MessageServiceImp implements MessageService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
-		String pageNumber=request.getParameter("pageNumber");
-		if(pageNumber==null) pageNumber="1";
-		
 //		사용자 아이디 임의로 등록
 		String member_id=request.getParameter("member_id");
 		logger.info("SendMessage member_id" + member_id);
 		
-//		한페이지에 뿌려줄 게시물 수
-		int boardSize=10;
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
 		
-		// 페이지
 		int currentPage=Integer.parseInt(pageNumber);
+		
+		int boardSize=10;
 		int startRow=(currentPage-1)*boardSize+1;
 		int endRow=currentPage*boardSize;
 		
 		// 메시지 수
-		int count=messageDao.getMessageCount();
+		int count=messageDao.sendCount(member_id);
 		logger.info("count : "+count);
-		
-		logger.info("currentPage : "+currentPage);
-		logger.info("startRow : "+startRow);
-		logger.info("endRow : "+endRow);
-		
+	
 		List<MessageDto> messageList=null;
 		
 		if(count>0){
@@ -109,12 +107,10 @@ public class MessageServiceImp implements MessageService {
 //		JSON 에 저장된 정보를 조회
 		System.out.println("json: " + json);
 		
-		mav.addObject("count",count);
-		mav.addObject("boardSize",boardSize);
-		mav.addObject("currentPage",currentPage);	
+		String send_pack=json+"|"+boardSize+"|"+count+"|"+currentPage;
 		try {
 			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(json);
+			response.getWriter().print(send_pack);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -132,48 +128,40 @@ public class MessageServiceImp implements MessageService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
-		String pageNumber=request.getParameter("pageNumber");
-		if(pageNumber==null) pageNumber="1";
-		
 		String member_id=request.getParameter("member_id");
 		logger.info("receive member_id : " + member_id);
 		
-//		게시물 수
-		int boardSize=10;
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
 		
-		// 페이지
 		int currentPage=Integer.parseInt(pageNumber);
+		
+		int boardSize=10;
 		int startRow=(currentPage-1)*boardSize+1;
 		int endRow=currentPage*boardSize;
-		
-		// 메시지 수
-		int count=messageDao.getMessageCount();
-		logger.info("count : "+count);
-		
-		logger.info("currentPage : "+currentPage);
-		logger.info("startRow : "+startRow);
-		logger.info("endRow : "+endRow);
-		
+		int count=messageDao.receiveCount(member_id);
+
 		List<MessageDto> messageList=null;
 		
 		if(count>0){
 			messageList=messageDao.getReceiveMessageList(startRow,endRow, member_id);
 		}
 		
+		logger.info("messageList:"+messageList);
+		
 		Gson gson=new Gson();
 		String json=gson.toJson(messageList);
 		
-		System.out.println("json: " + json);
+		System.out.println("json: " + json);	
 		
-		mav.addObject("count",count);
-		mav.addObject("boardSize",boardSize);
-		mav.addObject("currentPage",currentPage);		
+		String receive_pack=json+"|"+boardSize+"|"+count+"|"+currentPage;
 		try {
 			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(json);
+			response.getWriter().print(receive_pack);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	/**

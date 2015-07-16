@@ -26,26 +26,28 @@
 		]]>
 	</insert>
 	
-	<select id="messageCount" resultType="int">
-		select count(*) from message
+	<select id="sendMessageCount" parameterType="String" resultType="int">
+		select count(*) from message where member_id=#{member_id}
+	</select>
+	
+	<select id="receiveMessageCount" parameterType="String" resultType="int">
+		select count(*) from message where message_receiver=#{message_receiver}
 	</select>
 	
 	<select id="sendmessageList" parameterType="java.util.Map" resultMap="messageDto">
-		<![CDATA[
-			select * from 
-				(select rownum rnum,a.* from
-					(select * from message order by member_id asc,message_no asc)a)
-				where rnum>=#{startRow} and rnum<=#{endRow} and member_id=#{member_id}
-		]]>
+		SELECT *
+		  FROM (SELECT A.*, row_number() over (order by message_no desc) rnum
+		          FROM message A
+		         WHERE A.member_id=#{member_id})
+		 WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
 	<select id="receivemessageList" parameterType="java.util.Map" resultMap="messageDto">
-		<![CDATA[
-			select * from 
-				(select rownum rnum,a.* from
-					(select * from message order by member_id asc,message_no desc)a)
-						where rnum>=#{startRow} and rnum<=#{endRow} and message_receiver=#{member_id}
-		]]>
+		SELECT *
+		  FROM (SELECT A.*, row_number() over (order by message_no desc) rnum
+		          FROM message A
+		         WHERE A.message_receiver=#{member_id})
+		 WHERE RNUM BETWEEN #{startRow} AND #{endRow}
 	</select>
 	
 	<update id="read_yn" parameterType="com.java.message.dto.MessageDto">

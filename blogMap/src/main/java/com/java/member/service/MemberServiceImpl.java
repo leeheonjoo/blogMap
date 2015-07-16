@@ -64,8 +64,14 @@ public class MemberServiceImpl implements MemberService {
 		String password = request.getParameter("password");
 		logger.info("id:" + id);
 		logger.info("password:" + password);
-
-		String email = memberDao.login(id, password);
+		
+		String email=null;
+		email=memberDao.managerLogin(id,password);
+		
+		if(email==null){
+			email = memberDao.login(id, password);
+		}
+		
 		logger.info("email:" + email);
 
 		// mav.addObject("email",email);
@@ -94,8 +100,16 @@ public class MemberServiceImpl implements MemberService {
 
 		String member_id = request.getParameter("member_id");
 		logger.info("member_id:" + member_id);
-		int check = memberDao.registerCheck(member_id);
-
+		
+		int managerCheck=memberDao.managerRgCheck(member_id);
+		
+		int check=0;
+		if(managerCheck==0){
+			check = memberDao.registerCheck(member_id);
+		}else{
+			check=1;
+		}
+		
 		try {
 			response.getWriter().print(check);
 		} catch (IOException e) {

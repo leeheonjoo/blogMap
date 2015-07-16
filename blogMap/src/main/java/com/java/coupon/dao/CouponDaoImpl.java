@@ -29,11 +29,11 @@ public List<HashMap<String, Object>> getCouponList() {
 	return list;
 }
 
-//@Override
-//public List<HashMap<String, Object>> getCouponList_S(String member_id) {
-//	List<HashMap<String, Object>> list=session.selectList("dao.CouponMapper.couponList_S", member_id);
-//	return list;
-//}
+@Override
+public List<HashMap<String, Object>> getCouponList_S(String partner_name) {
+	List<HashMap<String, Object>> list=session.selectList("dao.CouponMapper.couponList_S", partner_name);
+	return list;
+}
 
 
 }

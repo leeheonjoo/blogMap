@@ -14,7 +14,7 @@ public interface MessageDao {
 
 	public int insert(MessageDto messageDto);
 
-	public int getMessageCount();
+	public int sendCount(String member_id);
 
 	public List<MessageDto> getSendMessageList(int startRow, int endRow, String member_id);
 	
@@ -25,5 +25,7 @@ public interface MessageDao {
 	public MessageDto messageRead_S(int message_no);
 
 	public int messageDelete(int message_no, String member_id);
+
+	public int receiveCount(String member_id);
 
 }

@@ -35,11 +35,22 @@ public class MessageDaoImpl implements MessageDao {
 	 * @description: 총 메시지의 개수를 조회
 	 */
 	@Override	
-	public int getMessageCount() {
+	public int sendCount(String member_id) {
 		
-		return sqlSession.selectOne("dao.MessageMapper.messageCount");
+		return sqlSession.selectOne("dao.MessageMapper.sendMessageCount", member_id);
 	}
-
+	
+	/**
+	 * @name:getMessageCount
+	 * @date:2015. 6. 26.
+	 * @author:정기창
+	 * @description: 수신함 메시지의 개수를 조회
+	 */
+	@Override
+	public int receiveCount(String member_id) {
+		return sqlSession.selectOne("dao.MessageMapper.receiveMessageCount", member_id);
+	}
+	
 	/**
 	 * @name:getSendMessageList
 	 * @date:2015. 6. 26.
