@@ -1,0 +1,32 @@
+@CHARSET "UTF-8";
+#carousel_image{
+	height:400px;
+	width:auto;
+}
+
+#carousel_image img{
+	border-radius: 25px;
+	height:300px;
+	width:auto;
+	display:block;
+	margin:auto;
+}
+
+#carousel-example-generic .carousel-caption{
+	position: static;
+}
+
+#carousel-example-generic h4{
+	color:gray;	
+}
+
+.carousel-indicators ol{
+	height: 30px;
+	margin-bottom : 0;
+}
+
+.carousel-indicators li{
+	background-color: red;
+	border-color: red;
+	margin-bottom : 0;
+}

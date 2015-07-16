@@ -26,8 +26,12 @@
 		]]>
 	</insert>
 	
-	<select id="messageCount" resultType="int">
-		select count(*) from message
+	<select id="sendMessageCount" parameterType="String" resultType="int">
+		select count(*) from message where member_id=#{member_id}
+	</select>
+	
+	<select id="receiveMessageCount" parameterType="String" resultType="int">
+		select count(*) from message where message_receiver=#{message_receiver}
 	</select>
 	
 	<select id="sendmessageList" parameterType="java.util.Map" resultMap="messageDto">

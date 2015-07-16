@@ -27,5 +27,9 @@
 	  	insert into coupon(coupon_no,partner_no,coupon_item,coupon_discount,coupon_bymd,coupon_eymd,coupon_pic_name,coupon_pic_path,coupon_pic_size,coupon_yn) values(coupon_coupon_no_seq.nextval,#{partner_no},#{coupon_item},#{coupon_discount},#{coupon_bymd},#{coupon_eymd},#{coupon_pic_name},#{coupon_pic_path},#{coupon_pic_size},'N')
 	</insert>
 	
+	<select id="getSearchPartnerList" parameterType="String" resultType="com.java.partner.dto.PartnerDto">
+		select * from partner where partner_name like '%'||#{partner_name}||'%' order by partner_name asc
+	</select>
+	
 	
 </mapper>

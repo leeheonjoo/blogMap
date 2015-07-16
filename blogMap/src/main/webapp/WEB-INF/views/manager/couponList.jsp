@@ -22,7 +22,7 @@
 				$("#couponListResult").empty();		// 데이타를 가지고 오기전에 리셋 (중복삽입을 방지하기 위해)
 				var data=JSON.parse(responseData);	// 가지고 온 데이타를 data변수에 저장 
 				//alert(data.length)
-				if(!data){
+				if(data.length < 1){
 					alert("데이타가 없습니다.");
 					return false;
 				}
@@ -41,6 +41,7 @@
 					var eday = geteymd.getDate();
 					var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
 					//alert(eymd);
+					
 					
 					if(data[i].COUPON_YN == "N"){
 						$("#couponListResult").append("<tr style='text-align:center;'>"
@@ -117,9 +118,10 @@
 					};
 					
 					if(cancleCheck == "1"){		//삭제가 정상적으로 이루어지면 시행
-						alert("취소되었습니다.");
+						alert("취소되었습니다.");						
 						getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
-						$("#coupon_detail_button[name='"+couponNo +"']").attr("value","승인").refresh();
+						//$("#couponDetailResult").refresh();
+						couponDetail(couponNo);						
 					};
 					
 				},error:function(deleteCheck){
@@ -147,7 +149,8 @@
 					if(submitChcek == "1"){
 						alert("승인되었습니다.");
 						getCouponlist();
-						$("#coupon_detail_button[name='"+couponNo +"']").attr("value","취소").refresh();
+						//$("#couponDetailResult").refresh();
+						couponDetail(couponNo);
 					};
 					
 				},error:function(submitChcek){
@@ -240,6 +243,7 @@
 				url:'${root}/manager/searchCouponInfo.do?name=' + searchTag,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
+					$("input[id='CouponSearchTag']").val("");
 					var data=JSON.parse(responseData);
 					//alert(data.length);
 					
@@ -338,6 +342,7 @@
 						if(cancleCheck == "1"){		//삭제가 정상적으로 이루어지면 시행
 							alert("취소되었습니다.");
 							getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
+							$("#coupon_detail_button[name='"+couponNo +"']").attr("value","승인").refresh();
 						};
 						
 					},error:function(deleteCheck){
@@ -364,6 +369,7 @@
 						
 						if(submitChcek == "1"){
 							alert("승인되었습니다.");
+							$("#coupon_detail_button[name='"+couponNo +"']").attr("value","취소").refresh();
 							getCouponlist();
 						};
 						
@@ -561,6 +567,7 @@
 					if(cancleCheck == "1"){		//삭제가 정상적으로 이루어지면 시행
 						alert("취소되었습니다.");
 						getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
+						$("#coupon_detail_button[name='"+couponNo +"']").attr("value","승인").refresh();
 					};
 					
 				},error:function(deleteCheck){
@@ -587,6 +594,7 @@
 					
 					if(submitChcek == "1"){
 						alert("승인되었습니다.");
+						$("#coupon_detail_button[name='"+couponNo +"']").attr("value","취소").refresh();
 						getCouponlist();
 					};
 					

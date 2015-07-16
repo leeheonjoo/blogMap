@@ -131,27 +131,34 @@ vertical-align: middle;
 				$("#memberListResult").empty();		// 데이타를 가지고 오기전에 리셋 (중복삽입을 방지하기 위해)
 				var data=JSON.parse(responseData);	// 가지고 온 데이타를 data변수에 저장 
 				
-				if(!data){
+				if(data.length < 1){
 					alert("데이타가 없습니다.");
 					return false;
 				}
-				
+				var jointype=null;
 				$.each(data, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
 					var date = new Date(data[i].member_joindate);
 					var year = date.getFullYear();
 					var month = date.getMonth() + 1;
 					var day = date.getDate();
-					
 					var rgDate = year + "년 " + month + "월 "	+ day + "일";
+					
+					var type=data[i].member_jointype;
+					//alert(type);
+					if(type == "0001"){
+						jointype="BlogMap";
+					}else if(type =="0002"){
+						jointype="FaceBook";
+					}
 					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
 										+ "<td>" + data[i].member_id + "</td>"			// 아이디
 										+ "<td>" + data[i].member_name + "</td>"		// 이름
 										+ "<td>" + rgDate + "</td>"						// 가입일
-										+ "<td>" + data[i].member_jointype + "</td>"	//
+										+ "<td>" + jointype + "</td>"	//
 										+ "<td>" + data[i].member_point + "</td>"		//
 										+ "<td class='td-actions'><input type='button' id='delete' value = '삭제' name='"+data[i].member_id+"'/></td>"
-										+ "</tr>")
+										+ "</tr>");
 					
 					
 					$("#delete[name='"+data[i].member_id+"']").click(function(){	// 각 회원ID의  name속성을 가진 delete 버튼을 클릭시 각 행을 삭제
@@ -193,11 +200,15 @@ vertical-align: middle;
 
 	}
 	
-	
+	/******************************************/ 
+	/*			          					  */
+	/*			검색버튼 클릭시 실행				  */
+	/*										  */
+	/******************************************/ 
 	$("#searchMember").click(function(){
-		alert("회원검색");
+		//alert("회원검색");
 		var searchTag=$("input[id='memberSearchTag']").val();
-		alert(searchTag);
+		//alert(searchTag);
 		
 		$.ajax({
 			type:'get',
@@ -206,9 +217,10 @@ vertical-align: middle;
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 			success:function(responseData){
 				$("#memberListResult").empty();		// 데이타를 가지고 오기전에 리셋 (중복삽입을 방지하기 위해)
+				$("input[id='memberSearchTag']").val("");
 				var data=JSON.parse(responseData);	// 가지고 온 데이타를 data변수에 저장 
 				
-				if(!data){
+				if(data.length < 1){
 					alert("데이타가 없습니다.");
 					return false;
 				}
@@ -221,19 +233,27 @@ vertical-align: middle;
 					
 					var rgDate = year + "년 " + month + "월 "	+ day + "일";
 					
+					var type=data[i].member_jointype;
+					//alert(type);
+					if(type == "0001"){
+						jointype="BlogMap";
+					}else if(type =="0002"){
+						jointype="FaceBook";
+					}
+					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
 										+ "<td>" + data[i].member_id + "</td>"			// 아이디
 										+ "<td>" + data[i].member_name + "</td>"		// 이름
 										+ "<td>" + rgDate + "</td>"						// 가입일
-										+ "<td>" + data[i].member_jointype + "</td>"	//
+										+ "<td>" + jointype + "</td>"	//
 										+ "<td>" + data[i].member_point + "</td>"		//
 										+ "<td class='td-actions'><input type='button' id='delete' value = '삭제' name='"+data[i].member_id+"'/></td>"
-										+ "</tr>")
+										+ "</tr>");
 					
 					
 					$("#delete[name='"+data[i].member_id+"']").click(function(){	// 각 회원ID의  name속성을 가진 delete 버튼을 클릭시 각 행을 삭제
 						var tagId = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
-						alert(tagId);
+						//alert(tagId);
 
 						$.ajax({
 							type:'get',
@@ -295,7 +315,7 @@ vertical-align: middle;
 				$("#memberListResult").empty();		// 데이타를 가지고 오기전에 리셋 (중복삽입을 방지하기 위해)
 				var data=JSON.parse(responseData);	// 가지고 온 데이타를 data변수에 저장 
 				
-				if(!data){
+				if(data.length < 1){
 					alert("데이타가 없습니다.");
 					return false;
 				}
@@ -308,14 +328,22 @@ vertical-align: middle;
 					
 					var rgDate = year + "년 " + month + "월 "	+ day + "일";
 					
+					var type=data[i].member_jointype;
+					//alert(type);
+					if(type == "0001"){
+						jointype="BlogMap";
+					}else if(type =="0002"){
+						jointype="FaceBook";
+					}
+					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
 										+ "<td>" + data[i].member_id + "</td>"			// 아이디
 										+ "<td>" + data[i].member_name + "</td>"		// 이름
 										+ "<td>" + rgDate + "</td>"						// 가입일
-										+ "<td>" + data[i].member_jointype + "</td>"	//
+										+ "<td>" + jointype + "</td>"	//
 										+ "<td>" + data[i].member_point + "</td>"		//
 										+ "<td class='td-actions'><input type='button' id='delete' value = '삭제' name='"+data[i].member_id+"'/></td>"
-										+ "</tr>")
+										+ "</tr>");
 					
 					
 					$("#delete[name='"+data[i].member_id+"']").click(function(){	// 각 회원ID의  name속성을 가진 delete 버튼을 클릭시 각 행을 삭제

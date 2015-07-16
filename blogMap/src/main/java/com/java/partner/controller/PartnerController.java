@@ -40,6 +40,7 @@ public class PartnerController {
 		mav.addObject("partnerDto",partnerDto);
 
 		partnerService.write(mav);
+		
 	}
 	/**
 	 * @name: list
@@ -139,6 +140,32 @@ public class PartnerController {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-
+	}
+	
+	/**
+	 * @name:searchPartnerList
+	 * @date:2015. 7. 16.
+	 * @author:변태훈
+	 * @description: 제휴업체이름으로 리스트 검색하는 메소드
+	 */
+	@RequestMapping("/partner/search_Partnerinfo.do")
+	public void search_PartnerList(HttpServletRequest request, HttpServletResponse response){
+		logger.info("partner search_PartnerList Start");
+		
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		partnerService.getSearchPartnerDate(mav);
+		Map<String, Object> map=mav.getModel();
+		
+		String json=(String)map.get("searchjson");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 }

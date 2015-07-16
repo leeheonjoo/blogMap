@@ -70,4 +70,10 @@ public class PartnerDaoImpl implements PartnerDao {
 		
 		return check;
 	}
+@Override
+	public List<PartnerDto> getSearchParnterData(String partner_name) {
+		logger.info("PartnerMapper.getSearchParnterData-------------------------------------");
+		logger.info("partner_name 맴퍼가기전 : "+ partner_name);
+		return session.selectList("dao.PartnerMapper.getSearchPartnerList",partner_name);
+	}
 }

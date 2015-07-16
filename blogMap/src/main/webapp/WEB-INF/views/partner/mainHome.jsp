@@ -21,56 +21,63 @@ $(function() {
 </head>
 <body>
 	<article class="container">
-	<div class="row">
-		<section class="page-header">
-			<h2 class="page-title">제휴업체 정보</h2>
-		</section>
-	</div>
-
-	<div class="row">
-		<div>
-		<!-- 큰 사이즈 화면에서 탭 목록-->					
-		<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
-			<li role="presentation" class="active">
-				<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
-			</li>
-		</ul>
 		
-		<!-- 작은 사이즈 화면에서 탭 목록-->
-		<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist">
-			<li role="presentation" class="active">
-				<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
-			</li>
-		</ul>
+		<div class="row">
+			<section class="page-header">
+				<h2 class="page-title">제휴업체 정보</h2>
+			</section>
+		</div>
+		
+		<div class="row">
+		
+			<div>
+				<!-- 큰 사이즈 화면에서 탭 목록-->					
+				<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
+				<li role="presentation" class="active">
+					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
+				</li>
+			</ul>
+		
+				<!-- 작은 사이즈 화면에서 탭 목록-->
+				<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist">
+				<li role="presentation" class="active">
+					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
+				</li>
+			</ul>
 
-		<!-- tour 탭 내용 -->
-		<div class="tab-content col-md-9">
-			<section role="tabpanel" class="tab-pane active" id="tab_tour">
-				<div class="row" id="tour_item_list">	
-					<div class="col-md-2 col-sm-3 col-xs-4" id="tour_item" role="button" style="display:none;">
-						<div id="tour_info" class="thumbnail">	
-							<a data-toggle="modal" href="#modal_info" class="list_partner_no">
-								<img class="img-responsive" id="partner_imagers"/> 
-									<div class="caption">
-									<p id="list_partner_name"></p>
-								</div>								
-							</a>
+			<!-- tour 탭 내용 -->
+			<div class="tab-content col-md-9">
+				<section role="tabpanel" class="tab-pane active" id="tab_tour">
+					<div class="row" id="tour_item_list">	
+						
+					</div>
+					<div id="partnerListResult"></div>  <!-- 자료를 붙일 바디 -->
+				<div class="row">
+						<div class="col-xs-12 text-right">
+							<button type="button" id="partner_tour_button" name="partner_tour_button"  class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">업체등록</button>								
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-12 text-right">
-						<button type="button" id="partner_tour_button" name="partner_tour_button"  class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">업체등록</button>								
+				</section>
+				
+				<div class="col-md-2 col-sm-3 col-xs-4" id="tour_item" role="button" style="display:none;">
+					<div id="tour_info" class="thumbnail">	
+						<a data-toggle="modal" href="#modal_info" class="list_partner_no">
+							<img class="img-responsive" id="partner_imagers"/> 
+								<div class="caption">
+									<p id="list_partner_name"></p>
+								</div>								
+						</a>
 					</div>
 				</div>
-			</section>
+				
+			</div>
+			
 	</article>
 		<script type="text/javascript">
 			/*
 			 * 제휴 업체 신청전 폼유효성 검증
 			 */
-			  
-			function form_validation()
+			function form_partnerWrite()
 			{
 				var returnVal = false;
 				// 빈값이 있는지 확인
@@ -85,7 +92,6 @@ $(function() {
 					$("#name").focus();
 					return false;
 				} 
-				
 				// 핸드폰 번호 유효성 체크
 				var phoneRegex = /^\d{2,3}-\d{3,4}-\d{4}$/;
 				
@@ -99,22 +105,48 @@ $(function() {
 				// 사용자 확인창
 				if(! confirm("신청하시겠습니까?")) return null;		
 				
-				var data = new FormData();
-				$.each($('#attachFile')[0].files,function(i,file){
-					data.append('file',file);
-				})
-				/* $.ajax({
+// 				$("#partnerWriteSave_button").click(function() {
+// 					var partnerName=$("input type[name='partner_name']").val();
+// 					var partnerPhone=$("input type[name='partner_phone']").val();
+// 					var partnerAddr=$("input type[name='partner_addr']").val();
+// 					var partnerImage=$("#partner_imagers").val();
+					
+// 					alert(partnerName);
+// 					alert(partnerPhone);
+// 					alert(partnerAddr);
+// 					alert(partnerImage);
+					
+					
+// 					var content=$("#board_content").val();
+// 					var realAddr=$("input type[name='addr_sido']").val();
+				
+					//id가 smarteditor인 textarea에 에디터에서 대입
+// 					obj.getById["board_content"].exec("UPDATE_CONTENTS_FIELD",[]);
+					//폼 submit();
+					
+					
+// 					$("#write_form").submit();
+// 				});
+				
+				
+// 				var data = new FormData();
+// 				alert(data[0]);
+ 				alert("푸푸푸푸ㅜㅍ");
+				
+//				$.each($('#attachFile')[0].files,function(i,file){
+// 					data[i].append('file',file);
+// 				});
+				
+ 				alert("넘어오나마지막");
+				 $.ajax({
 					type: 'POST',
 					url : '${root}/partner/write.do',
-					data :{
-						couponDto : data,
-						data : data,
-						partner_no : $("input[name='partner_no']").val()
-					},
+					data :data,
 					processData:false,
-					contentType:false,
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(data)
 					{
+						alert("Aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 						alert(data);
 					},
 					error:function()
@@ -122,11 +154,10 @@ $(function() {
 						alert("서버와의 데이터 연결에 실패하였습니다.");
 						return false;
 					}
-				}); */
+				}); 
 				// 실제 폼이 전송되어 페이지가 변경되는것을 막기위해 false 리턴
 				return false;
 			}
-
 			/*
 			 * 해당 엘리먼트의 값이 비어있는지 확인하고,
 			 * 비어있을시 경고창을 띄운후 False 반환
@@ -141,7 +172,7 @@ $(function() {
 				}
 				return true;
 			}
-
+			
 			 $(document).ready(function(){	
 				/* 데이타를 채우기 위해 복사 */
 				
@@ -159,23 +190,57 @@ $(function() {
 						$.each(data, function(i){
 							
 							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
-							$("#tour_item:last-child #list_partner_name").append(data[i].partner_name);
-							$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_"+data[i].partner_no);
-							$("input[name='partner_no']").append(data[i].partner_no);
+							$("#tour_item:last-child #list_partner_name").html(data[i].partner_name);
+							$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_no"+data[i].partner_no);
+							$("input[name='partner_no']").html(data[i].partner_no);
 							$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
 							
 							// 각 업체를 클릭했을때 이벤트
-							$("#partner_" + data[i].partner_no).click(function(){
+							$("#partner_no" + data[i].partner_no).click(function(){
 								//alert("업체클릭" + data[i].partner_no)
 								partnerData(data[i].partner_no);	
 							});
 						});
 					}	
-				});
-		
-		
+				});	
 		});
-			 
+		$("#search_Partner").click(function(){
+			alert("제휴업체");
+			var searchTag=$("input[id='partnerSearchTag']").val();
+			alert(searchTag);
+		
+			$.ajax({
+				type:'get',
+				url:'${root}/partner/search_Partnerinfo.do?name='+searchTag,
+				cache:false,
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+			
+					$("#tour_item_list").empty();	//데이터를 가지고 오기전에 리셋(중복삽입을 방지하기 위해)
+					var data=JSON.parse(responseData);	//가지고 온 데이터를 data 변수에 저장
+
+					if(!data){
+						alert("데이터가 없습니다.");
+						return false;
+					}
+					$.each(data,function(i){	//화면에 뿌려주기 위해 each문으로 루프돌림
+						$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
+						$("#tour_item:last-child #list_partner_name").html(data[i].partner_name);
+						$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_no"+data[i].partner_no);
+						$("input[name='partner_no']").html(data[i].partner_no);
+						$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
+						
+						// 각 업체를 클릭했을때 이벤트
+						$("#partner_no" + data[i].partner_no).click(function(){
+							//alert("업체클릭" + data[i].partner_no)
+							partnerData(data[i].partner_no);	
+						});
+						
+					});
+				}
+			});
+		 	
+		});
 		 function partnerData(no){
 				$.ajax({
 					type:'get',
@@ -185,7 +250,7 @@ $(function() {
 						var data = JSON.parse(responseData);
 //		 				alert("업체이름" + data.partner_name);
 						
-//  					$("p[name='p_category_code']").html(data.category_code);
+  						//$("p[name='p_category_code']").html(data.category_code);
 						$("p[name='p_name']").html(data.partner_name);
 						$("p[name='p_phone']").html(data.partner_phone);
 						$("p[name='p_addr']").html(data.partner_addr);
@@ -195,7 +260,7 @@ $(function() {
 				});
 			};
 		/*888888888888888888888888888888888888888888888  */
-		/* 여기에 복사하기 */
+		/* 여기에 복사하기 */ 
 		/*888888888888888888888888888888888888888888888  */
 		</script>
 	</body>

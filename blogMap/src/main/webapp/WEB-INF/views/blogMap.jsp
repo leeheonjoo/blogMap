@@ -160,7 +160,7 @@
 
 
 	<!-- Metro style dynamic Tiles -->
-	<div class="container dynamicTile">
+	<div id="metro" class="container dynamicTile">
 		<div class="row ">
 	    	<div class="col-sm-2 col-xs-4">
 	    		<div id="tile1" class="tile">
@@ -366,8 +366,6 @@
 						</p>
 					</div>
 	</div>
-	<br/><br/>
-
 
 <div class="container-fluid">
 
@@ -492,9 +490,9 @@
 						<div class="row">
 					  		<div class="col-lg-4">
 							    <div class="input-group">
-					      			<input type="text" class="form-control" placeholder="Search for..."/>
+						      		<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
 						      		<span class="input-group-btn">
-						        		<button class="btn btn-default" type="button">검색</button>
+						        		<button class="btn btn-default" type="button" id="search_Partner">검색</button>
 						      		</span>
 							    </div>	<!-- /input-group -->
 					  		</div>	<!-- /.col-lg-6 -->
@@ -569,7 +567,7 @@
 		<!-- 제휴업체 - 제휴업체 등록 팝업 레이어 -->
 		<section class="modal fade" id="write_pop">
 			<div class="modal-dialog modal-lg">
-				<form id="write_form" class="col-xs-12 form-horizontal" method="post" action="${root}/partner/write.do" autocomplete="off" enctype="multipart/form-data">
+				<form name="partnerWriter_form" id="write_form" class="col-xs-12 form-horizontal" method="post" action="${root}/partner/write.do" autocomplete="off" enctype="multipart/form-data">
 					<div class="modal-content">
 						
 						<div class="modal-header">
@@ -623,7 +621,7 @@
 						</div>
 	
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary" onclick="return form_validation();">신청하기</button>
+							<input type="button" class="btn btn-primary" id="partnerWriteSave_button" value="업체등록" onclick="return form_partnerWrite();"/>
 						</div>
 					</div>
 				</form>

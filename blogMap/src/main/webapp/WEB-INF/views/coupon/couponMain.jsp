@@ -209,9 +209,9 @@ li { list-style-type:none;}
 					
 					if(i < 8){
 			
-					$("#coupon_slide_ListMain").append($("#coupon_slide_List_L").clone().css("display", "block"));
-					$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
-					$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
+						$("#coupon_slide_ListMain").append($("#coupon_slide_List_L").clone().css("display", "block"));
+						$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+						$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
 					
 					}
 					
