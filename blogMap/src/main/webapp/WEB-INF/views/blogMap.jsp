@@ -623,7 +623,7 @@
 						</div>
 	
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary" onclick="return form_validation();">신청하기</button>
+							<button type="submit" class="btn btn-primary" onclick="return form_partnerWrite();">신청하기</button>
 						</div>
 					</div>
 				</form>
