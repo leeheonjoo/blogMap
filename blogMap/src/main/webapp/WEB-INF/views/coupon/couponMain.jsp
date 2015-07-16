@@ -295,20 +295,6 @@ li { list-style-type:none;}
 <body>
 <article class="container-fluid">
 	<div class="row">
-	
-		 <div class="col-md-6">
-			<div id="custom-search-input">
-                <div class="input-group col-md-12">
-                    <input type="text" class="form-control input-lg" name="coupon_search" id="coupon_search" placeholder="search for partner_name" />
-       	            <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button" id="coupon_search_btn">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </span>
-                </div>
-           	</div>
-           </div>
-           
 		<div>	
 			<div class="carousel slide" id="myCarousel">
 		        <div class="carousel-inner col-md-12 col-sm-12 col-xs-12" id="coupon_List">
