@@ -16,6 +16,9 @@
 			
 			$("div[id='blogmap_registerCheckOk'].modal").modal('hide');
 			$("#member_id_confirm").show();
+			$("#member_id_confirm").attr("data-placement","left");
+			$("#member_id_confirm").attr("title","이메일 인증을 받으셔야 합니다");
+			
 		});
 		
 		$("input[name='cancel']").click(function(){

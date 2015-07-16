@@ -242,6 +242,12 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("dao.MemberMapper.managerLogin",hMap);
 	}
 
+	@Override
+	public int fbMemberDelete(String member_id) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("dao.MemberMapper.fbMemberDelete",member_id);
+	}
+
 	
 
 }

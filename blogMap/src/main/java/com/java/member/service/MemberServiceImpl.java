@@ -672,4 +672,24 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	@Override
+	public void fb_myPage_delete(ModelAndView mav) {
+		Map<String,Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpServletResponse response = (HttpServletResponse) map.get("response");
+		
+		String member_id=request.getParameter("member_id");
+		logger.info("member_id:"+member_id);
+		
+		int check=memberDao.fbMemberDelete(member_id);
+		logger.info("check:"+check);
+		
+		try {
+			response.getWriter().print(check);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }

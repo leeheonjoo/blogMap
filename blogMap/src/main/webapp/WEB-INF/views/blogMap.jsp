@@ -910,6 +910,30 @@
 		    </div>
 		</div>
 		
+		<!-- fb회원탈퇴시 이메일 인증 -->
+		<div class="modal fade" id="blogmap_fb_myPageDelete" data-backdrop="static">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title">Modal Main</h4>
+					</div>
+					<div class="modal-body">
+						<div id="mainResult">
+							<jsp:include page="member/fb_delete_email_confirm.jsp"/>
+						</div>
+						<br/>
+						<br/>
+						
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">Close</a>
+						<a href="#" class="btn btn-primary">Save changes</a>
+					</div>
+				</div>
+		    </div>
+		</div>
+		
 	<!-- **********************************
 				관리자페이지 : 이동희
 	     ***********************************-->

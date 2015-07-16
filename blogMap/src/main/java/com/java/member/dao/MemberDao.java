@@ -52,5 +52,7 @@ public interface MemberDao {
 
 	public String managerLogin(String id, String password);
 
+	public int fbMemberDelete(String member_id);
+
 	
 }
