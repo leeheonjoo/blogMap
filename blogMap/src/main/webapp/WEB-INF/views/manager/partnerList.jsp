@@ -229,6 +229,7 @@
 				url:'${root}/manager/searchPartnerInfo.do?name=' + searchTag,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
+					$("input[id='searchTag']").val("");
 					var data=JSON.parse(responseData);
 					//alert(data);
 					
