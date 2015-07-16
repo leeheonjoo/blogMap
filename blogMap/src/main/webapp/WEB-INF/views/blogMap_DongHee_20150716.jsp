@@ -28,7 +28,6 @@
 
 
 </style>
-
 <!--[if lt IE 9]>
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
@@ -42,33 +41,36 @@
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
 <script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=60e9ac7ab8734daca3d2053c1e713dbd"></script>
 <!-- 네이버 스마트에디터 -->
-<script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>	
+<script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<!-- 컨폼 확인창 -->	
+<script type="text/javascript" src="${root }/css/board/jquery.popconfirm.js"></script>
 <!-- modal, session check -->
 <script type="text/javascript">
 	$(document).ready(function() {
-		 $('#myCarousel').carousel({
-		        interval: 10000
-		    })
-		    $('.fdi-Carousel .item').each(function () {
-		        var next = $(this).next();
-		        if (!next.length) {
-		            next = $(this).siblings(':first');
-		        } t.children(':first-child').clone().appendTo($(this));
-
-		        if (next.next().length > 0) {
-		            next.next().children(':first-child').clone().appendTo($(this));
-		        }
-		        else {
-		            $(this).siblings(':first').children(':first-child').clone().appendTo($(this));
-		        }
-		    });
-
+			
 //			<session check -> button change>
 			if(sessionStorage.getItem('email')!=null){
 				//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
 				//$("#blogmap_login_bar").fadeOut();
 				$("#blogmap_before_login span").remove();
+				
+				/* if($("#blogmap_main_myPage b").text()=="MyPage"){
+					$("#blogmap_main_myPage").parent().remove();
+				} */
+				/* if(sessionStorage.getItem('jointype')=="0002"){
+					$("#blogmap_main_myPage").empty();
+				}
+				
+				$("#blogmap_main_myPage").append('<a id="blogmap_main_myPage" data-toggle="modal" href="#blogmap_myPage" class="btn" style="text-align:left;"><b>MyPage</b></a>'); */
+				
+				$("#blogmap_main_myPage").css("display","inline-block");
 				$("#blogmap_before_login").attr("data-toggle","");
+		// 메니저 로그인 추가--------------------------------------------------------------
+				if(sessionStorage.getItem('email')=="lucyman@nate.com"){
+					$("#manager_page_icon").css("display","inline-block");
+					$("#blogmap_main_myPage").css("display","none");
+				}
+		// 메니저 로그인 추가--------------------------------------------------------------
 				$("#login_text").text("Logout");
 				
 				if($("#login_text").text()=="Logout"){
@@ -108,7 +110,8 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav navbar-right">
-			      	<li> <a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
+			      	<li><a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
+			      	<li><a id="blogmap_main_myPage" data-toggle="modal" href="#blogmap_myPage" class="btn" style="text-align:left; display:none"><b>MyPage</b></a></li>
 			        <li id="blogmap_login_bar" class="dropdown">
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a>
 						<ul id="login-dp" class="dropdown-menu">
@@ -136,7 +139,12 @@
 											  	
 
 												<div class="social-buttons" style="text-align:center;">
-													<a href="#" class="btn btn-fb"  onclick="FB.login();"><i class="fa fa-facebook"></i> Facebook</a>
+													<!-- <a href="#" class="btn btn-fb" onclick="FB.login();"><i class="fa fa-facebook"></i> Facebook</a> -->
+													<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size="large">Facebook 
+													</fb:login-button>
+													<!-- <br/><br/>
+													<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false" style="width:200px;">Facebook</div> -->
+													
 												</div>
 										</div>
 										
@@ -167,7 +175,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<a data-toggle="modal" href="#blogListMain">
-									<img src="${root}/css/blogMap/images/search.png" class="img-responsive"/>
+									<img src="${root}/images/blogMap/search.png" class="img-responsive"/>
 								</a>
 							</div>
 						</div>
@@ -205,7 +213,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<a data-toggle="modal" href="#blogMapWrite">
-									<img src="${root}/css/blogMap/images/write_go.png" class="img-responsive"/>
+									<img src="${root}/images/blogMap/write_go.png" class="img-responsive"/>
 								</a>
 							</div>
 						</div>
@@ -222,7 +230,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<a data-toggle="modal" href="#blogMapCoupon">
-									<img src="${root}/css/blogMap/images/coupon_2.png" class="img-responsive"/>
+									<img src="${root}/images/blogMap/coupon.png" class="img-responsive"/>
 								</a>
 							</div>
 						</div>
@@ -352,30 +360,16 @@
 			
 		</div>
 	</div>
-	<br/><br/>
+	<br/>
 
 	<div class="container" style="max-width:1170px; height:50px; padding:0 0 0 0;">
-		<div class="navbar navbar-inverse" style="height:50px; color:gray; width:inherit;">
-				<div class="col-sm-10 col-xs-9">
-					<div style="width:100%; height:50px; text-align:center;">
+					<div style="width:100%; height:50px; text-align:right;">
 						<p style="width:100%; line-height:46px;">
-							<b style="width:100%;">경기도 분당시 삼평동 752-18 유스페이스 B동</b>
+							<a data-toggle="modal" href="#partnerMain" id ="partner_Registration"><img src="${root}/images/blogMap/Partnership_32.png"></a>
+							&nbsp;&nbsp;
+							<a data-toggle="modal" href="#ManagerMain" id="manager_page_icon" style="display:none; "><img src="${root}/images/blogMap/gear_24.png"></img></a>
 						</p>
 					</div>
-				</div>
-				<div class="col-sm-2 col-xs-3" >
-					<div style="width:100%; height:50px; text-align:center;">
-						<p style="width:100%; line-height:46px;">
-							<b style="width:100%;"><a data-toggle="modal" href="#partnerMain" id ="partner_Registration" style="color:gray;">제휴업체</a></b>
-						</p>
-					</div>
-				</div>
-		</div>
-		<div style="text-align:right;">
-			<a data-toggle="modal" href="#ManagerMain"><img src="${root}/css/blogMap/images/gear_24.png"></img></a>
-			
-		</div>
-
 	</div>
 	<br/><br/>
 
@@ -534,35 +528,44 @@
 					<div class="modal-body" id="data-body">
 						<div class="row form-horizontal">
 							<div class="col-md-3">
-								<img class="img-responsive img" name="tour_image" src="http://placehold.it/300x300"/>
+								<img class="img-responsive img" id="partnerDetail_imagers"/>
 							</div>
 							<div class="col-md-9">
 								<div class="form-group">
-									<label class="col-xs-3 control-label">업체명</label>
+									<label class="col-xs-3 control-label">카테고리:</label>
+									<div class="col-xs-9">
+ 										<p class="form-control-static name" name="p_category_code"></p> 
+									</div>
+								</div>
+							
+								<div class="form-group">
+									<label class="col-xs-3 control-label">업체명:</label>
 									<div class="col-xs-9">
  										<p class="form-control-static name" name="p_name"></p> 
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label class="col-xs-3 control-label">전화번호</label>
+									<label class="col-xs-3 control-label">전화번호:</label>
 									<div class="col-xs-9">
  										<p class="form-control-static phone" name="p_phone"></p>  
 									</div>
 								</div>
 								
 								<div class="form-group">
-									<label class="col-xs-3 control-label">주소</label>
+									<label class="col-xs-3 control-label">주소:</label>
 									<div class="col-xs-9">
 										<p class="form-control-static address" name="p_addr"></p> 
 									</div>
 								</div>
 							</div>
 						</div>						
-					</div>
-					
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+						<div class="row">
+							<div class="col-xs-12 text-right">
+								<input type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#mainCoupon_Registration" value="쿠폰등록"/>								
+								<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -584,32 +587,42 @@
 						<div class="modal-body" id="data-body">							
 							<input type="hidden"  id="category_code" name="category_code"/>
 							<input type="hidden"  id="member_id" name="member_id"/>
+							
 							<div class="form-group">
-								<label class="col-xs-4 control-label">업체명</label>
+								<label class="col-xs-4 control-label">카테고리:</label> 
+								<select id="headCategory" name="category_mname" class="selectpicker" data-width="140px" style="display: none" onchange="blogWrite_ChangeCategory(this.id)">
+									<option value="%">대분류[전체]</option>
+								</select> 
+								<select id="detailCategory" name="category_sname"  class="selectpicker" data-width="140px" style="display: none">
+									<option value="%">소분류[전체]</option>
+								</select>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-xs-4 control-label">업체명:</label>
 								<div class="col-xs-8">
 									<input type="text" class="form-control" name="partner_name" id="name" value="" required="required" placeholder="업체명"/>
 								</div>
 							</div>
 	
 							<div class="form-group">
-								<label class="col-xs-4 control-label">전화번호</label>
+								<label class="col-xs-4 control-label">전화번호:</label>
 								<div class="col-xs-8">
 									<input type="text" class="form-control" name="partner_phone" id="phone" value="" required="required" placeholder="전화번호"/>
 								</div>
 							</div>
 	
 							<div class="form-group">
-								<label class="col-xs-4 control-label">주소</label>
+								<label class="col-xs-4 control-label">주소:</label>
 								<div class="col-xs-8">
 									<input type="text" class="form-control" name="partner_addr" id="address" value="" required="required" placeholder="주소를 입력하세요"/>
-									<a data-toggle="modal" href="#blogWriteSub" class="btn btn-primary" onclick="mapSearch();">위치검색</a>
 								</div>											
 							</div>
 	
 							<div class="form-group">
-								<label class="col-xs-4 control-label">업체사진</label>
+								<label class="col-xs-4 control-label">업체사진:</label>
 								<div class="col-xs-8">
-									<input type="file" class="form-control" name="img_src" id="img_src"/>
+									<input type="file" class="form-control" name="img_src" id="partner_imagers"/>
 								</div>
 							</div>
 						</div>
@@ -624,11 +637,10 @@
 	
 	<!-- 제휴업체 - 쿠폰정보등록 팝업 레이어 -->	
 	<!-- 쿠폰 등록 작성 - 쿠폰정보등록 -->
-      <section class="modal fade" id="couponMain">
+      <section class="modal fade" id="mainCoupon_Registration">
       <div class="modal-dialog modal-lg">
          <form id="couponWrite_form" class="col-xs-12 form-horizontal" method="post" action="${root}/partner/couponWrite.do" autocomplete="off" enctype="multipart/form-data">
             <div class="modal-content">
-               <input type="hidden" name="partner_no"/>
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
@@ -637,7 +649,8 @@
                </div>
 
                <div class="modal-body" id="data-body">                     
-
+				<input type="hidden" id="coupon_no" name="coupon_no"/>
+				<input type="hidden" id="partner_no" name="partner_no"/>
                   <div class="form-group">
                      <label class="col-xs-4 control-label">할인상품</label>
                      <div class="col-xs-8">
@@ -669,12 +682,12 @@
                   <div class="form-group">
                      <label class="col-xs-4 control-label">쿠폰사진</label>
                      <div class="col-xs-8">
-                        <input type="file" class="form-control" name="img_src" id="img_src"/>
+                        <input type="file" class="form-control" name="img_src" id="coupon_imagers"/>
                      </div>
                   </div>
                </div>
                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary" onclick="return form_coupon();">신청하기</button>
+                  <button type="button"  id="coupon_Register" class="btn btn-primary">신청하기</button>
                </div>
             </div>
          </form>
@@ -830,8 +843,6 @@
 		</div>
 	
 		<!-- 회원관리 - 마이페이지 -->
-		<a data-toggle="modal" href="#blogmap_myPage" class="btn btn-primary">blogMapMypage</a>
-		<br/><br/>
 		<!-- 마이페이지 -->
 		<div class="modal fade" id="blogmap_myPage" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -1001,10 +1012,6 @@
 			</div>
 		</div>
 		
-		
-		<!-- //////////////////////////////////////////////////////////// 여기부터 -->
-		
-		
 		<!-- 관리자페이지 - 쿠폰 상세조회 (관리자페이지 - 제휴업체 페이지 제휴업체 상세 페이지)-->
 		<div class="modal fade" id="couponDetail" data-backdrop="static">
 			<div class="modal-dialog">
@@ -1028,7 +1035,6 @@
 			</div>
 		</div>
 
-	<!-- //////////////////////////////////////////////////////////// 여기까지 -->
 
 
 	<!-- **********************************
@@ -1040,7 +1046,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">BlogMap</h4>
+						<h4 class="modal-title">Message</h4>
 					</div>
 					<div class="modal-body">
 						<jsp:include page="message/mainMessage.jsp"/>
@@ -1062,7 +1068,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">BlogMap</h5>
+						<h5 class="modal-title">MessageRead</h5>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1104,7 +1110,7 @@
 
 		<!-- 메시지박스 - 메시지 삭제 -->
 		<div class="modal fade" id="blogMapCoupon" data-backdrop="static">
-			<div class="modal-dialog">
+			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -1118,6 +1124,18 @@
 						<br/>
 					</div>
 					<div class="modal-footer">
+						 <div class="col-md-6">
+	                     <div id="custom-search-input">
+	                            <div class="input-group col-md-12">
+	                                <input type="text" class="form-control input-lg" name="coupon_search" id="coupon_search" placeholder="search for partner_name" />
+	                                <span class="input-group-btn">
+	                                    <button class="btn btn-info btn-lg" type="button" id="coupon_search_btn">
+	                                        <i class="glyphicon glyphicon-search"></i>
+	                                    </button>
+	                                </span>
+	                            </div>
+	                        </div>
+	                     </div>
 						<a href="#" data-dismiss="modal" class="btn">Close</a>
 						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>

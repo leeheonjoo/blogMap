@@ -117,9 +117,10 @@
 					};
 					
 					if(cancleCheck == "1"){		//삭제가 정상적으로 이루어지면 시행
-						alert("취소되었습니다.");
+						alert("취소되었습니다.");						
 						getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
-						$("#coupon_detail_button[name='"+couponNo +"']").attr("value","승인").refresh();
+						//$("#couponDetailResult").refresh();
+						couponDetail(couponNo);						
 					};
 					
 				},error:function(deleteCheck){
@@ -147,7 +148,8 @@
 					if(submitChcek == "1"){
 						alert("승인되었습니다.");
 						getCouponlist();
-						$("#coupon_detail_button[name='"+couponNo +"']").attr("value","취소").refresh();
+						//$("#couponDetailResult").refresh();
+						couponDetail(couponNo);
 					};
 					
 				},error:function(submitChcek){
@@ -338,6 +340,7 @@
 						if(cancleCheck == "1"){		//삭제가 정상적으로 이루어지면 시행
 							alert("취소되었습니다.");
 							getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
+							$("#coupon_detail_button[name='"+couponNo +"']").attr("value","승인").refresh();
 						};
 						
 					},error:function(deleteCheck){
@@ -364,6 +367,7 @@
 						
 						if(submitChcek == "1"){
 							alert("승인되었습니다.");
+							$("#coupon_detail_button[name='"+couponNo +"']").attr("value","취소").refresh();
 							getCouponlist();
 						};
 						
@@ -561,6 +565,7 @@
 					if(cancleCheck == "1"){		//삭제가 정상적으로 이루어지면 시행
 						alert("취소되었습니다.");
 						getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
+						$("#coupon_detail_button[name='"+couponNo +"']").attr("value","승인").refresh();
 					};
 					
 				},error:function(deleteCheck){
@@ -587,6 +592,7 @@
 					
 					if(submitChcek == "1"){
 						alert("승인되었습니다.");
+						$("#coupon_detail_button[name='"+couponNo +"']").attr("value","취소").refresh();
 						getCouponlist();
 					};
 					
