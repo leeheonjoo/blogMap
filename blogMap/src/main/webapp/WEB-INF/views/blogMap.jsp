@@ -160,7 +160,7 @@
 
 
 	<!-- Metro style dynamic Tiles -->
-	<div class="container dynamicTile">
+	<div id="metro" class="container dynamicTile">
 		<div class="row ">
 	    	<div class="col-sm-2 col-xs-4">
 	    		<div id="tile1" class="tile">
@@ -366,8 +366,6 @@
 						</p>
 					</div>
 	</div>
-	<br/><br/>
-
 
 <div class="container-fluid">
 
