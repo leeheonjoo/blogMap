@@ -21,56 +21,57 @@ $(function() {
 </head>
 <body>
 	<article class="container">
-	<div class="row">
-		<section class="page-header">
-			<h2 class="page-title">제휴업체 정보</h2>
-		</section>
-	</div>
-
-	<div class="row">
-		<div>
-		<!-- 큰 사이즈 화면에서 탭 목록-->					
-		<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
-			<li role="presentation" class="active">
-				<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
-			</li>
-		</ul>
+	
+			<section class="page-header">
+				<h2 class="page-title">제휴업체 정보</h2>
+			</section>
 		
-		<!-- 작은 사이즈 화면에서 탭 목록-->
-		<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist">
-			<li role="presentation" class="active">
-				<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
-			</li>
-		</ul>
+		<div class="row">
+		
+			<div>
+				<!-- 큰 사이즈 화면에서 탭 목록-->					
+				<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
+				<li role="presentation" class="active">
+					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
+				</li>
+			</ul>
+		
+				<!-- 작은 사이즈 화면에서 탭 목록-->
+				<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist">
+				<li role="presentation" class="active">
+					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
+				</li>
+			</ul>
 
-		<!-- tour 탭 내용 -->
-		<div class="tab-content col-md-9">
-			<section role="tabpanel" class="tab-pane active" id="tab_tour">
-				<div class="row" id="tour_item_list">	
-					<div class="col-md-2 col-sm-3 col-xs-4" id="tour_item" role="button" style="display:none;">
-						<div id="tour_info" class="thumbnail">	
-							<a data-toggle="modal" href="#modal_info" class="list_partner_no">
-								<img class="img-responsive" id="partner_imagers"/> 
-									<div class="caption">
-									<p id="list_partner_name"></p>
-								</div>								
-							</a>
+			<!-- tour 탭 내용 -->
+			<div class="tab-content col-md-9">
+				<section role="tabpanel" class="tab-pane active" id="tab_tour">
+					<div class="row" id="tour_item_list">	
+						<div class="col-md-2 col-sm-3 col-xs-4" id="tour_item" role="button" style="display:none;">
+							<div id="tour_info" class="thumbnail">	
+								<a data-toggle="modal" href="#modal_info" class="list_partner_no">
+									<img class="img-responsive" id="partner_imagers"/> 
+										<div class="caption">
+											<p id="list_partner_name"></p>
+										</div>								
+								</a>
+							</div>
 						</div>
 					</div>
-				</div>
 				<div class="row">
-					<div class="col-xs-12 text-right">
-						<button type="button" id="partner_tour_button" name="partner_tour_button"  class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">업체등록</button>								
+					<hr>
+						<div class="col-xs-12 text-right">
+							<button type="button" id="partner_tour_button" name="partner_tour_button"  class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">업체등록</button>								
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
 	</article>
 		<script type="text/javascript">
 			/*
 			 * 제휴 업체 신청전 폼유효성 검증
 			 */
 			  
-			function form_validation()
+			function form_partnerWrite()
 			{
 				var returnVal = false;
 				// 빈값이 있는지 확인
