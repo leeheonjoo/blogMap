@@ -58,16 +58,10 @@
 	float:left;
 }
 </style>
-<link rel="stylesheet" type="text/css" href="${root }/css/board/boardCarousel.css"/>
-<%-- <link rel="stylesheet" type="text/css" href="${root }/css/board/slick.css"/> --%>
-<!--  Add the new slick-theme.css if you want the default styling -->
-<%-- <link rel="stylesheet" type="text/css" href="${root }/css/board/slick-theme.css"/> --%>
 
 <script type="text/javascript" src="${root }/css/replyWrite.js"></script>
 <script type="text/javascript" src="${root }/css/replyDelete.js"></script>
 <script type="text/javascript" src="${root }/css/replyUpdate.js"></script>
-<%-- <script type="text/javascript" src="${root }/css/board/slick.js"></script> --%>
-<%-- <script type="text/javascript" src="${root }/css/board/boardCarousel.js"></script> --%>
 <script type="text/javascript">
 $(function() {
 	var email=sessionStorage.getItem('email');
@@ -260,62 +254,43 @@ function reply_delete(DThis) {
 	</div>
 	
 	<!-- 이미지 슬라이드 -->
-<div class="row">
-	<section class="section-white">
-	  <div class="container container1">
-	
-	    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-	      <!-- Indicators -->
-	      <ol class="carousel-indicators">
-	        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-	        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-	        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-	      </ol>
-	
-	      <!-- Wrapper for slides -->
-	      <div class="carousel-inner carousel-inner1">
-	        <div class="item active">
-	          <img src="http://placehold.it/600x200" alt="...">
-	          <div class="carousel-caption">
-	            <h2>Heading</h2>
-	          </div>
-	        </div>
-	        <div class="item">
-	          <img src="http://placehold.it/600x200" alt="...">
-	          <div class="carousel-caption">
-	            <h2>Heading</h2>
-	          </div>
-	        </div>
-	        <div class="item">
-	          <img src="http://placehold.it/600x200" alt="...">
-	          <div class="carousel-caption">
-	            <h2>Heading</h2>
-	          </div>
-	        </div>
-	      </div>
-	
-	      <!-- Controls -->
-	      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-	        <span class="glyphicon glyphicon-chevron-left"></span>
-	      </a>
-	      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-	        <span class="glyphicon glyphicon-chevron-right"></span>
-	      </a>
-	    </div>
-	
-	  </div>
-	</section>
-</div>
-<br/>
 
-<!-- 	<div style="display: none;"> -->
-<!-- 	 <div id="imgHidden" class="item active"> -->
-<!--         <div class="col-md-4"> -->
-<!--             <a href="#"><img id="imgsrc" src="" class="img-responsive center-block"></a> -->
-<!--             <div class="text-center">1</div> -->
-<!--         </div> -->
-<!--     </div> -->
-<!-- 	</div> -->
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="..." alt="...">
+      <div class="carousel-caption">
+        ...
+      </div>
+    </div>
+    <div class="item">
+      <img src="..." alt="...">
+      <div class="carousel-caption">
+        ...
+      </div>
+    </div>
+    ...
+  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
 	<div id="blogRead_grade">
 		<label>평점:</label>
 		<img src="" width="150" height="30"/><br /> 
