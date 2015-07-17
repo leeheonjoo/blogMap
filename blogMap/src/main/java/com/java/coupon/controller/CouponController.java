@@ -30,7 +30,7 @@ public class CouponController {
 	 */
 	@RequestMapping(value="/coupon/couponMain.do", method=RequestMethod.POST)
 	public void coupon_List(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Partner tour_partner_List 시작!!!--------------------------------------------");
+		logger.info("-------------------------- Coupon List --------------------------");
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
@@ -59,7 +59,7 @@ public class CouponController {
 	 */
 	@RequestMapping(value="/coupon/couponMain.do", method=RequestMethod.GET)
 	public void coupon_List_S(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Partner tour_partner_List 시작!!!--------------------------------------------");
+		logger.info("-------------------------- Coupon Search --------------------------");
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
