@@ -490,9 +490,9 @@
 						<div class="row">
 					  		<div class="col-lg-4">
 							    <div class="input-group">
-					      			<input type="text" class="form-control" placeholder="Search for..."/>
+						      		<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
 						      		<span class="input-group-btn">
-						        		<button class="btn btn-default" type="button">검색</button>
+						        		<button class="btn btn-default" type="button" id="search_Partner">검색</button>
 						      		</span>
 							    </div>	<!-- /input-group -->
 					  		</div>	<!-- /.col-lg-6 -->
@@ -567,7 +567,7 @@
 		<!-- 제휴업체 - 제휴업체 등록 팝업 레이어 -->
 		<section class="modal fade" id="write_pop">
 			<div class="modal-dialog modal-lg">
-				<form id="write_form" class="col-xs-12 form-horizontal" method="post" action="${root}/partner/write.do" autocomplete="off" enctype="multipart/form-data">
+				<form name="partnerWriter_form" id="write_form" class="col-xs-12 form-horizontal" method="post" action="${root}/partner/write.do" autocomplete="off" enctype="multipart/form-data">
 					<div class="modal-content">
 						
 						<div class="modal-header">
@@ -621,7 +621,7 @@
 						</div>
 	
 						<div class="modal-footer">
-							<button type="submit" class="btn btn-primary" onclick="return form_partnerWrite();">신청하기</button>
+							<input type="button" class="btn btn-primary" id="partnerWriteSave_button" value="업체등록" onclick="return form_partnerWrite();"/>
 						</div>
 					</div>
 				</form>
@@ -895,6 +895,30 @@
 					<div class="modal-body">
 						<div id="mainResult">
 							<jsp:include page="member/myPageDelete.jsp"/>
+						</div>
+						<br/>
+						<br/>
+						
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">Close</a>
+						<a href="#" class="btn btn-primary">Save changes</a>
+					</div>
+				</div>
+		    </div>
+		</div>
+		
+		<!-- fb회원탈퇴시 이메일 인증 -->
+		<div class="modal fade" id="blogmap_fb_myPageDelete" data-backdrop="static">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title">Modal Main</h4>
+					</div>
+					<div class="modal-body">
+						<div id="mainResult">
+							<jsp:include page="member/fb_delete_email_confirm.jsp"/>
 						</div>
 						<br/>
 						<br/>

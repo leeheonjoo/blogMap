@@ -19,4 +19,6 @@ public interface PartnerService {
 	
 	public void couponWriteList(ModelAndView mav);
 	
+	public void getSearchPartnerDate(ModelAndView mav);
+	
 }

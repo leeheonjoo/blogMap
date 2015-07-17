@@ -252,4 +252,15 @@ public class MemberController {
 		memberService.coupon_info(mav);
 		
 	}
+	
+	@RequestMapping(value="/member/myPage_fb_delete.do",method=RequestMethod.POST)
+	public void fb_myPage_delete(HttpServletRequest request,HttpServletResponse response){
+		logger.info("fb_myPage_delete------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		memberService.fb_myPage_delete(mav);
+	}
 }

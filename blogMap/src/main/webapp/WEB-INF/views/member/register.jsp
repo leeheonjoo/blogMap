@@ -12,6 +12,14 @@ $(document).ready(function(){
 	$("#member_id_confirm").hide();
 	
 	$("#member_id_check").click(function(){
+		var emailCheck = $("#member_register_id").val();  
+		var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;   
+		if(regex.test(emailCheck) === false) {  
+		    alert("잘못된 이메일 형식입니다.");  
+		    return false;  
+		} 
+		
+		
 		if($("#member_register_id").val()!=""){
 			$.ajax({
 				type:'POST',
@@ -61,29 +69,36 @@ $(document).ready(function(){
 	
 	$("#register").click(function(){
 		if($("#member_register_id_hidden").val()!=""){//아이디 인증햇을때
-			
-			$.ajax({
-				type:'POST',
-				url:'${root}/member/register.do',
-				data:{
-					member_id:$("#member_register_id_hidden").val(),
-					member_pwd:$("input[name='member_pwd']").val(),
-					member_name:$("input[name='member_name']").val()
-				},
-				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-				success:function(responseData){
-					alert(responseData);
-					
-					if(responseData=="1"){
-						alert("회원가입완료");
-						location.href="${root}/";
-					}
-					
-					if(responseData!="1"){
-						alert("회원가입실패");
-					}
+			if($("input[ame='member_pwd']").val()!=""&&$("input[name='member_name']").val()!=""){
+				if($("input[name='member_pwd']").val()==$("input[name='member_pwd_check']").val()){
+					$.ajax({
+						type:'POST',
+						url:'${root}/member/register.do',
+						data:{
+							member_id:$("#member_register_id_hidden").val(),
+							member_pwd:$("input[name='member_pwd']").val(),
+							member_name:$("input[name='member_name']").val()
+						},
+						contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+						success:function(responseData){
+							alert(responseData);
+								
+							if(responseData=="1"){
+								alert("회원가입완료");
+								location.href="${root}/";
+							}
+							
+							if(responseData!="1"){
+								alert("회원가입실패");
+							}
+						}
+					});
+				}else{
+					alert("비밀번호가 일치하지않습니다.");
 				}
-			});
+			}else{
+				alert("비밀번호와 이름을 입력해주세요.");
+			}
 		}else{
 			alert("아이디 중복체크와 인증을 해주세요");
 		} 
@@ -185,6 +200,32 @@ function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
 			alert("인증번호가 맞지 않습니다.");
 		} 
 	});
+	
+	$("#fb_delete_email_confirm_check_btn").click(function(){
+		 if($("#fb_delete_email_confirm_num").val()==confirm_num){
+				$.ajax({
+					type:"post",
+					url:"${root}/member/myPage_fb_delete.do",
+					data:{
+						member_id:sessionStorage.getItem('email')
+					},
+					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+					success:function(responseData){
+						alert(responseData);
+						if(responseData=="1"){
+							alert("삭제되었습니다.");
+							sessionStorage.clear();
+							FB.logout();
+							
+						}else{
+							alert("삭제실패");
+						}
+					}	
+				});
+			}else{
+				alert("인증번호가 맞지 않습니다.");
+			}
+	});
 }
 </script>
 </head>
@@ -215,7 +256,7 @@ function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
         <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
         	<div class="panel panel-default">
         		<div class="panel-heading">
-			    		<h3 class="panel-title">Please sign up for Bootsnipp <small>It's free!</small></h3>
+			    		<h3 class="panel-title">Please sign up for BlogMap</h3>
 			 			</div>
 			 			<div class="panel-body">
 			    		<!-- <form role="form"> -->
@@ -223,7 +264,7 @@ function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
 							<div class="row">
 			    				<div class="col-xs-8 col-sm-8 col-md-8">
 			    					<div class="form-group">
-			               				<input type="email" id="member_register_id" class="form-control input-sm" placeholder="Email Address"/>
+			               				<input type="email" id="member_register_id" class="form-control input-sm" placeholder="Email Address" required autofocus/>
 			    					</div>
 			    				</div>
 			    				

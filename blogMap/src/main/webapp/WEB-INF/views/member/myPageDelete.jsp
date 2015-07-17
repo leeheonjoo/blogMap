@@ -10,43 +10,48 @@
 
 <script type="text/javascript">
 if(sessionStorage.getItem('email')!=null){
-$(function(){
-	var email=sessionStorage.getItem('email');
-	//$("#myPageUpdate_member_id").val(email);
-	
-	//var email="kimjh112339@naver.com";
-	
-	$("#myPageDelete_OkayBtn").click(function(){
-		//유효성검사
+	$(function(){
 		
-		$.ajax({
-			type:"post",
-			url:"${root}/member/myPageDelete.do",
-			data:{
-				member_id:email,
-				member_pwd:$("#myPageDelete_pwd").val()
-			},
-			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-			success:function(responseData){
-				alert(responseData);
-				
-				if(responseData=="1"){
-					alert("삭제 되었습니다.");
-					sessionStorage.clear();
-					location.href="${root}/";
-				}else{
-					alert("삭제 실패");
-				}
+		var email=sessionStorage.getItem('email');
+		//$("#myPageUpdate_member_id").val(email);
+		
+		//var email="kimjh112339@naver.com";
+		
+		$("#myPageDelete_OkayBtn").click(function(){
+			//유효성검사
+			if($("#myPageDelete_pwd").val()!=""){
+				$.ajax({
+					type:"post",
+					url:"${root}/member/myPageDelete.do",
+					data:{
+						member_id:email,
+						member_pwd:$("#myPageDelete_pwd").val()
+					},
+					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+					success:function(responseData){
+						alert(responseData);
+						
+						if(responseData=="1"){
+							alert("삭제 되었습니다.");
+							sessionStorage.clear();
+							location.href="${root}/";
+						}else{
+							alert("비밀번호가 맞지 않습니다.");
+						}
+					}
+				});
+			}else{
+				alert("비밀번호를 입력해주세요");
 			}
+			
 		});
+		
+		$("#myPageDelete_CancelBtn").click(function(){
+			//$("#myPageDelete_layer_div").fadeOut();
+			$("div[id='blogmap_myPageDelete'].modal").modal('hide');
+		});
+		
 	});
-	
-	$("#myPageDelete_CancelBtn").click(function(){
-		//$("#myPageDelete_layer_div").fadeOut();
-		$("div[id='blogmap_myPageDelete'].modal").modal('hide');
-	});
-	
-});
 }
 </script>
 </head>

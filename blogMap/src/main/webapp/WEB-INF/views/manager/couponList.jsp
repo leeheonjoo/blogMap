@@ -22,7 +22,7 @@
 				$("#couponListResult").empty();		// 데이타를 가지고 오기전에 리셋 (중복삽입을 방지하기 위해)
 				var data=JSON.parse(responseData);	// 가지고 온 데이타를 data변수에 저장 
 				//alert(data.length)
-				if(!data){
+				if(data.length < 1){
 					alert("데이타가 없습니다.");
 					return false;
 				}
@@ -41,6 +41,7 @@
 					var eday = geteymd.getDate();
 					var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
 					//alert(eymd);
+					
 					
 					if(data[i].COUPON_YN == "N"){
 						$("#couponListResult").append("<tr style='text-align:center;'>"
@@ -242,6 +243,7 @@
 				url:'${root}/manager/searchCouponInfo.do?name=' + searchTag,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
+					$("input[id='CouponSearchTag']").val("");
 					var data=JSON.parse(responseData);
 					//alert(data.length);
 					
