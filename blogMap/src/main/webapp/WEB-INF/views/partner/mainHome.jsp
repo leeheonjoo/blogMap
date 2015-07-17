@@ -103,51 +103,71 @@ $(function() {
 				}
 				
 				// 사용자 확인창
-				if(! confirm("신청하시겠습니까?")) return null;		
+// 				if(! confirm("신청하시겠습니까?")) return null;		
 				
-// 				$("#partnerWriteSave_button").click(function() {
-// 					var partnerName=$("input type[name='partner_name']").val();
-// 					var partnerPhone=$("input type[name='partner_phone']").val();
-// 					var partnerAddr=$("input type[name='partner_addr']").val();
-// 					var partnerImage=$("#partner_imagers").val();
-					
-// 					alert(partnerName);
-// 					alert(partnerPhone);
-// 					alert(partnerAddr);
-// 					alert(partnerImage);
-					
-					
-// 					var content=$("#board_content").val();
-// 					var realAddr=$("input type[name='addr_sido']").val();
-				
-					//id가 smarteditor인 textarea에 에디터에서 대입
+// 					id가 smarteditor인 textarea에 에디터에서 대입
 // 					obj.getById["board_content"].exec("UPDATE_CONTENTS_FIELD",[]);
-					//폼 submit();
+// 					폼 submit();
+
+					var partnerName=$("input type[name='partner_name']").val();
+					var partnerPhone=$("input type[name='partner_phone']").val();
+					var partnerAddr=$("input type[name='partner_addr']").val();
+					var partnerImage=$("#partner_imagers").val();
 					
-					
-// 					$("#write_form").submit();
-// 				});
+			/* 		alert(partnerName);
+					alert(partnerPhone);
+					alert(partnerAddr);
+					alert(partnerImage);
+					$("#write_form").submit(); */
 				
+				var data = new FormData($('#write_form')[0]);
 				
-// 				var data = new FormData();
-// 				alert(data[0]);
- 				alert("푸푸푸푸ㅜㅍ");
-				
-//				$.each($('#attachFile')[0].files,function(i,file){
-// 					data[i].append('file',file);
-// 				});
+ 			 	/* $.each($('#write_form')[0].files,function(i,file){
+ 					data[i].append('file',file);
+				});  */
 				
  				alert("넘어오나마지막");
 				 $.ajax({
 					type: 'POST',
 					url : '${root}/partner/write.do',
 					data :data,
-					processData:false,
-					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+ 					processData:false,
+ 					contentType:false,
+					/* contentType : 'application/x-www-form-urlencoded;charset=UTF-8', */
 					success:function(data)
 					{
-						alert("Aaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-						alert(data);
+						alert("성공");
+						$("section[id=write_pop].modal").modal("hide");
+						$("#tour_item_list").empty();	//데이터를 가지고 오기전에 리셋(중복삽입을 방지하기 위해)
+						
+						$.ajax({
+							type:'post',
+							url:'${root}/partner/writeList.do',
+							contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+							success : function(responseData) {
+								var data = JSON.parse(responseData);
+								
+								
+								/* 데이타를 채우기 위해 복사 */
+								$.each(data, function(i){
+										
+									$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
+									$("#tour_item:last-child #list_partner_name").html(data[i].partner_name);
+									$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_no"+data[i].partner_no);
+									$("input[name='partner_no']").html(data[i].partner_no);
+									$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
+									
+									// 각 업체를 클릭했을때 이벤트
+									$("#partner_no" + data[i].partner_no).click(function(){
+										//alert("업체클릭" + data[i].partner_no)
+										partnerData(data[i].partner_no);	
+									});
+								});
+								$(document).refresh();
+							}	
+						});	
+						
+						
 					},
 					error:function()
 					{
