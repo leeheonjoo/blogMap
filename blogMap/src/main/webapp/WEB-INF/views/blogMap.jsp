@@ -53,7 +53,7 @@
 				//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
 				//$("#blogmap_login_bar").fadeOut();
 				$("#blogmap_before_login span").remove();
-				
+				$("#myPage_fb_delete_btn").css("display","none");
 				/* if($("#blogmap_main_myPage b").text()=="MyPage"){
 					$("#blogmap_main_myPage").parent().remove();
 				} */
@@ -65,6 +65,11 @@
 				
 				$("#blogmap_main_myPage").css("display","inline-block");
 				$("#blogmap_before_login").attr("data-toggle","");
+				
+				if(sessionStorage.getItem('email')=="lucyman@nate.com"){
+					$("#manager_page_icon").css("display","inline-block");
+					$("#blogmap_main_myPage").css("display","none");
+				}
 				
 				$("#login_text").text("Logout");
 				
@@ -362,7 +367,7 @@
 						<p style="width:100%; line-height:46px;">
 							<a data-toggle="modal" href="#partnerMain" id ="partner_Registration"><img src="${root}/images/blogMap/Partnership_32.png"></a>
 							&nbsp;&nbsp;
-							<a data-toggle="modal" href="#ManagerMain"><img src="${root}/images/blogMap/gear_24.png"></img></a>
+							<a data-toggle="modal" href="#ManagerMain" id="manager_page_icon" style="display:none; "><img src="${root}/images/blogMap/gear_24.png"></img></a>
 						</p>
 					</div>
 	</div>
@@ -697,7 +702,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title">BlogMap Login</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -706,10 +711,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -721,7 +722,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -730,10 +731,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -745,7 +742,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -754,10 +751,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -769,7 +762,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -777,11 +770,6 @@
 						</div>
 						<br/>
 						<br/>
-						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -793,7 +781,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -803,10 +791,7 @@
 						<br/>
 						
 					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
-					</div>
+					
 				</div>
 		    </div>
 		</div>
@@ -817,7 +802,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title">이메일 인증</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -826,10 +811,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -842,7 +823,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title">MyPage</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -851,10 +832,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -866,7 +843,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title">회원 수정</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -875,10 +852,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -890,7 +863,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title">회원 탈퇴</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -899,10 +872,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -914,7 +883,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title">이메일 인증</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -923,10 +892,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>

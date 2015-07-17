@@ -15,8 +15,8 @@
 		select member_id from member where member_id=#{member_id}
 	</select>
 	
-	<select id="fbRegisterCheck" parameterType="String" resultType="String">
-		select member_id from member where member_id=#{member_id}
+	<select id="fbRegisterCheck" parameterType="String" resultType="com.java.member.dto.MemberDto">
+		select * from member where member_id=#{member_id}
 	</select>
 	
 	<insert id="fbRegister" parameterType="com.java.member.dto.MemberDto">
