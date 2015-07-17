@@ -702,7 +702,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title">BlogMap Login</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -711,10 +711,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -726,7 +722,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -735,10 +731,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -750,7 +742,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -759,10 +751,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -774,7 +762,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -782,11 +770,6 @@
 						</div>
 						<br/>
 						<br/>
-						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -798,7 +781,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -808,10 +791,7 @@
 						<br/>
 						
 					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
-					</div>
+					
 				</div>
 		    </div>
 		</div>
@@ -822,7 +802,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title">이메일 인증</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -831,10 +811,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -847,7 +823,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title">MyPage</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -856,10 +832,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -871,7 +843,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title">회원 수정</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -880,10 +852,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -895,7 +863,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title">회원 탈퇴</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -904,10 +872,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
@@ -919,7 +883,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Modal Main</h4>
+						<h4 class="modal-title">이메일 인증</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -928,10 +892,6 @@
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 				</div>
 		    </div>
