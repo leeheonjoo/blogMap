@@ -15,7 +15,7 @@ public interface MemberDao {
 
 	public int registerCheck(String member_id);
 
-	public int fbRegisterCheck(String member_id);
+	public MemberDto fbRegisterCheck(String member_id);
 
 	public int fbRegister(MemberDto memberDto);
 
