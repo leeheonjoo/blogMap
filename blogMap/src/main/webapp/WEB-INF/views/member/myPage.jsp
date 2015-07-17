@@ -9,61 +9,32 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 if(sessionStorage.getItem('email')!=null){
+	
 	$(function(){
-		var p_startPage=0; 
-		var p_endPage=0;
-		var pageBlock=2;
 		
-		var b_startPage=0;
-		var b_endPage=0;
-		
-		var c_startPage=0;
-		var c_endPage=0;
-		
-		var f_startPage=0;
-		var f_endPage=0;
-		$.ajax({
-			type:'POST',
-			url:"${root}/member/myPage.do",
-			data:{
-				member_id:sessionStorage.getItem("email")
-				//member_id:"kimjh112339@naver.com"
-			},
-			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-			success:function(responseData){
-				//alert(responseData);
-			 	var data=responseData.split("|");
-				
-			 	memberData=JSON.parse(data[0])
-				
-				$("#myPage_member_id").text(memberData.member_id);
-				//$("#myPage_member_id").attr("disabled","disabled");
-				
-				$("#myPage_member_name").text(memberData.member_name);
-				//$("#myPage_member_name").attr("disabled","disabled");
-				
-				$("#myPage_member_joindate").text(memberData.member_joindate);
-				//$("#myPage_member_joindate").attr("disabled","disabled");
-				
-				$("#myPage_member_point_total").text(data[1]+"points");
-				/* $("#myPage_member_point").val(data[1]);
-				$("#myPage_member_point").attr("disabled","disabled"); */
-				
-				if(data[1]>20){
-					$("#myPage_member_rate").text("새싹(my point:"+data[1]+")");
+		if(sessionStorage.getItem('jointype')!=null){
+			$("#myPage_update_btn").css("display","none");
+			$("#myPage_delete_btn").css("display","none");
+			$("#myPage_fb_delete_btn").show();
+		}
+		//페북으로 등록한 인원이 회원탈퇴버튼누를때
+		$("#myPage_fb_delete_btn").click(function(){
+			$.ajax({
+				type:'post',
+				url:'${root}/member/email_confirm.do',
+				data:{
+					member_id:sessionStorage.getItem("email")
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					//alert("aaaa");
+					email_confirm_check(responseData);
 				}
-				$("#myPage_member_boardCount").val(data[2]);
-				$("#myPage_member_boardCount").attr("disabled","disabled");
-				
-				$("#myPage_member_favoriteCount").val(data[3]);
-				$("#myPage_member_favoriteCount").attr("disabled","disabled");
-				
-				$("#myPage_member_couponCount").val(data[4]);
-				$("#myPage_member_couponCount").attr("disabled","disabled");
-			}
+			});
 		});
 		
-		$("#member_info_tabBtn").click(function(){
+		$("#blogmap_main_myPage").click(function(){
 			$.ajax({
 				type:'POST',
 				url:"${root}/member/myPage.do",
@@ -91,20 +62,98 @@ if(sessionStorage.getItem('email')!=null){
 					/* $("#myPage_member_point").val(data[1]);
 					$("#myPage_member_point").attr("disabled","disabled"); */
 					
+					$("#myPage_member_point_total").click(function(){
+						$(".abc").attr("class","abc");
+						$("#bbb").attr("class","active");
+						
+					});
+					
 					if(data[1]>20){
-						$("#myPage_member_rate").text("새싹(my point:"+data[1]+")");
+						$("#myPage_member_rate").text("새싹");
 					}
-					$("#myPage_member_boardCount").val(data[2]);
-					$("#myPage_member_boardCount").attr("disabled","disabled");
 					
-					$("#myPage_member_favoriteCount").val(data[3]);
-					$("#myPage_member_favoriteCount").attr("disabled","disabled");
+					$("#myPage_member_board_total").text(data[2]+" EA");
+					//$("#myPage_member_boardCount").attr("disabled","disabled");
+					$("#myPage_member_board_total").click(function(){
+						$(".abc").attr("class","abc");
+						$("#ccc").attr("class","active");
+						
+					});
 					
-					$("#myPage_member_couponCount").val(data[4]);
-					$("#myPage_member_couponCount").attr("disabled","disabled");
+					$("#myPage_member_favorite_total").text(data[3]+ " EA");
+					//$("#myPage_member_favoriteCount").attr("disabled","disabled");
+					$("#myPage_member_favorite_total").click(function(){
+						$(".abc").attr("class","abc");
+						$("#ddd").attr("class","active");
+						
+					});
+					
+					$("#myPage_member_coupon_total").text(data[4]+ " EA");
+					//$("#myPage_member_couponCount").attr("disabled","disabled");
+					$("#myPage_member_coupon_total").click(function(){
+						$(".abc").attr("class","abc");
+						$("#eee").attr("class","active");
+						
+					});
 				}
 			});
 		});
+		var p_startPage=0; 
+		var p_endPage=0;
+		var pageBlock=2;
+		
+		var b_startPage=0;
+		var b_endPage=0;
+		
+		var c_startPage=0;
+		var c_endPage=0;
+		
+		var f_startPage=0;
+		var f_endPage=0;
+		
+		
+// 		$("#member_info_tabBtn").click(function(){
+// 			$.ajax({
+// 				type:'POST',
+// 				url:"${root}/member/myPage.do",
+// 				data:{
+// 					member_id:sessionStorage.getItem("email")
+// 					//member_id:"kimjh112339@naver.com"
+// 				},
+// 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+// 				success:function(responseData){
+// 					//alert(responseData);
+// 				 	var data=responseData.split("|");
+					
+// 				 	memberData=JSON.parse(data[0])
+					
+// 					$("#myPage_member_id").text(memberData.member_id);
+// 					//$("#myPage_member_id").attr("disabled","disabled");
+					
+// 					$("#myPage_member_name").text(memberData.member_name);
+// 					//$("#myPage_member_name").attr("disabled","disabled");
+					
+// 					$("#myPage_member_joindate").text(memberData.member_joindate);
+// 					//$("#myPage_member_joindate").attr("disabled","disabled");
+					
+// 					$("#myPage_member_point_total").text(data[1]+"points");
+// 					/* $("#myPage_member_point").val(data[1]);
+// 					$("#myPage_member_point").attr("disabled","disabled"); */
+					
+// 					if(data[1]>20){
+// 						$("#myPage_member_rate").text("새싹(my point:"+data[1]+")");
+// 					}
+// 					$("#myPage_member_boardCount").val(data[2]+" EA");
+// 					$("#myPage_member_boardCount").attr("disabled","disabled");
+					
+// 					$("#myPage_member_favoriteCount").val(data[3]+ " EA");
+// 					$("#myPage_member_favoriteCount").attr("disabled","disabled");
+					
+// 					$("#myPage_member_couponCount").val(data[4] + " EA");
+// 					$("#myPage_member_couponCount").attr("disabled","disabled");
+// 				}
+// 			});
+// 		});
 		
 		
 		/* $("#myPage_update_btn").click(function(){
@@ -118,7 +167,11 @@ if(sessionStorage.getItem('email')!=null){
 			$("div[id='blogmap_myPageDelete'].modal").modal();
 		}); */
 		
-		//$("#point_info_btn").click(function(){
+		//포인트정보클릭시
+		$("#myPage_point_info_tabBtn").click(function(){
+			$("#myPage_member_point_list_title").empty();
+			$("#myPage_member_point_list_content").empty();
+			$("#myPage_member_point_list_pageNum").empty();
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/point_info.do',
@@ -261,7 +314,7 @@ if(sessionStorage.getItem('email')!=null){
 					} 			 */
 				}			
 			});
-		//});
+		});
 		
 		//다음클릭시
 		$("#point_paging_after").click(function(){
@@ -564,102 +617,111 @@ if(sessionStorage.getItem('email')!=null){
 			});
 		}); */
 		
-		//쿠폰정보
-		$.ajax({
-			type:'post',
-			url:'${root}/member/coupon_info.do',
-			data:{
-				member_id:sessionStorage.getItem("email")
-			},
-			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-			success:function(responseData){
-				var couponData=responseData.split("|");
-				
-				var couponInfo=JSON.parse(couponData[0]);
-				var boardSize=couponData[1];
-				var count=couponData[2];
-				var currentPage=couponData[3];
-				
-				$.each(couponInfo,function(i){
-					$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-				});
-				
-				var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-				//alert(pageCount);
-				c_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
-				c_endPage=c_startPage+pageBlock-1;
-
-				if(c_endPage>pageCount){
-					c_endPage=pageCount;
-				}
-				
-				//이전
-				//alert("startPage"+startPage);
-				//alert("pageCount"+pageCount);
-				if(c_startPage>pageBlock){
-					$("#myPage_member_coupon_list_before").css("display","inline-block");
-				}
-				
-				if(c_startPage<=pageBlock){
-					$("#myPage_member_coupon_list_before").css("display","none");
-				}
-				
-				
-				for(var i=c_startPage;i<=c_endPage;i++){
-					$("#myPage_member_coupon_list_pageNum").append("<a href='#' id='coupon_paging_num"+i+"'>"+i+"</a>");
-					$("#coupon_paging_num"+i).click(function(){
-						//alert($(this).text());
-						$.ajax({
-							type:'POST',
-							url:'${root}/member/coupon_info.do',
-							data:{
-								member_id:sessionStorage.getItem("email"),
-								//member_id:"kimjh112339@naver.com",
-								pageNumber:$(this).text()
-							},
-							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-							success:function(responseData){
-								//alert(responseData);
-								
-								var data=responseData.split("|");
-								/* alert(data[0]);
-								alert(data[1]);
-								alert(data[2]);
-								alert(data[3]); */
-								
-								var boardSize=data[1];
-								var count=data[2];
-								var currentPage=data[3];
-								
-								$("#myPage_member_coupon_list_content").empty();
-								var couponInfo=JSON.parse(data[0]);
-								
-								$.each(couponInfo,function(i){
-									//alert(data[i].BOARD_TITLE);
-									//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-									//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-									$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-								});
-							}
-						});
+		//쿠폰정보클릭시
+		$("#myPage_coupon_info_tabBtn").click(function(){
+			
+			$("#myPage_member_coupon_list_content").empty();
+			$("#myPage_member_coupon_list_pageNum").empty();
+			$.ajax({
+				type:'post',
+				url:'${root}/member/coupon_info.do',
+				data:{
+					member_id:sessionStorage.getItem("email")
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					var couponData=responseData.split("|");
+					
+					var couponInfo=JSON.parse(couponData[0]);
+					var boardSize=couponData[1];
+					var count=couponData[2];
+					var currentPage=couponData[3];
+					
+					
+					$.each(couponInfo,function(i){
+						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+						$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'</label></h4></div></div><p style="font-size:14px;">'+couponInfo[i].COUPON_EYMD+'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
 					});
-				}
-				
-				
-				
-				//alert("endPage:"+endPage);
-				//alert("pageCount:"+pageCount);
-				//다음
-				if(c_endPage<pageCount){
-					$("#myPage_member_coupon_list_after").css("display","inline-block");
+					
+					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+					//alert(pageCount);
+					c_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					c_endPage=c_startPage+pageBlock-1;
+	
+					if(c_endPage>pageCount){
+						c_endPage=pageCount;
+					}
+					
+					//이전
+					//alert("startPage"+startPage);
+					//alert("pageCount"+pageCount);
+					if(c_startPage>pageBlock){
+						$("#myPage_member_coupon_list_before").css("display","inline-block");
+					}
+					
+					if(c_startPage<=pageBlock){
+						$("#myPage_member_coupon_list_before").css("display","none");
+					}
 					
 					
+					for(var i=c_startPage;i<=c_endPage;i++){
+						$("#myPage_member_coupon_list_pageNum").append("<a href='#' id='coupon_paging_num"+i+"'>"+i+"</a>");
+						$("#coupon_paging_num"+i).click(function(){
+							//alert($(this).text());
+							$.ajax({
+								type:'POST',
+								url:'${root}/member/coupon_info.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									//member_id:"kimjh112339@naver.com",
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									/* alert(data[0]);
+									alert(data[1]);
+									alert(data[2]);
+									alert(data[3]); */
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									$("#myPage_member_coupon_list_content").empty();
+									var couponInfo=JSON.parse(data[0]);
+									
+									$.each(couponInfo,function(i){
+										//alert(data[i].BOARD_TITLE);
+										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+										$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'</label></h4></div></div><p style="font-size:14px;">'+couponInfo[i].COUPON_EYMD+'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
+	
+									});
+								}
+							});
+						});
+					}
+					
+					
+					
+					//alert("endPage:"+endPage);
+					//alert("pageCount:"+pageCount);
+					//다음
+					if(c_endPage<pageCount){
+						$("#myPage_member_coupon_list_after").css("display","inline-block");
+						
+						
+					}
+					
+					if(c_endPage>=pageCount){
+						$("#myPage_member_coupon_list_after").css("display","none");
+					}
 				}
-				
-				if(c_endPage>=pageCount){
-					$("#myPage_member_coupon_list_after").css("display","none");
-				}
-			}
+			});
 		});
 		
 		//다음클릭시
@@ -699,7 +761,9 @@ if(sessionStorage.getItem('email')!=null){
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-						$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+						$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'</label></h4></div></div><p style="font-size:14px;">'+couponInfo[i].COUPON_EYMD+'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
+
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -760,7 +824,9 @@ if(sessionStorage.getItem('email')!=null){
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+										$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'</label></h4></div></div><p style="font-size:14px;">'+couponInfo[i].COUPON_EYMD+'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
+
 									});
 								}
 							});
@@ -824,7 +890,9 @@ if(sessionStorage.getItem('email')!=null){
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-						$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+						$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'</label></h4></div></div><p style="font-size:14px;">'+couponInfo[i].COUPON_EYMD+'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
+
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -877,7 +945,9 @@ if(sessionStorage.getItem('email')!=null){
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+										$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'</label></h4></div></div><p style="font-size:14px;">'+couponInfo[i].COUPON_EYMD+'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
+
 									});
 								}
 							});
@@ -897,140 +967,144 @@ if(sessionStorage.getItem('email')!=null){
 		});
 		
 		//게시글 정보
-		$.ajax({
-			type:'POST',
-			url:'${root}/member/board_info.do',
-			data:{
-				member_id:sessionStorage.getItem("email")
-				//member_id:"kimjh112339@naver.com"
-				
-			},
-			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-			success:function(responseData){
-				//alert(responseData);
-				
-				var data=responseData.split("|");
-				/* alert(data[0]);
-				alert(data[1]);
-				alert(data[2]);
-				alert(data[3]); */
-				
-				var boardSize=data[1];
-				var count=data[2];
-				var currentPage=data[3];
-				
-				var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-				//alert(pageCount);
-				b_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
-				b_endPage=b_startPage+pageBlock-1;
-				
-				
-				//$("#myPage_member_point_list").empty();
-				//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
-				//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
-				$("#myPage_member_board_list_title").append("<div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
-				var board_data=JSON.parse(data[0]);
-				
-				
-				$.each(board_data,function(i){
-					//alert(data[i].BOARD_TITLE);
-					//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-					//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-					$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-					+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
-					+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
-					+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
-				});
-				
-				if(b_endPage>pageCount){
-					b_endPage=pageCount;
-				}
-				//
-				//페이징
-				//$("#myPage_member_point_list_pageNum").empty();
-				/* $("#myPage_member_point_list").after("<span id='myPage_member_point_list_before'></span>");
-				$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
-				$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
-				
-				//이전
-				//alert("startPage"+startPage);
-				//alert("pageCount"+pageCount);
-				if(b_startPage>pageBlock){
-					$("#myPage_member_board_list_before").css("display","inline-block");
-				}
-				
-				if(b_startPage<=pageBlock){
-					$("#myPage_member_board_list_before").css("display","none");
-				}
-				
-				
-				for(var i=b_startPage;i<=b_endPage;i++){
-					$("#myPage_member_board_list_pageNum").append("<a href='#' id='board_paging_num"+i+"'>"+i+"</a>");
-					$("#board_paging_num"+i).click(function(){
-						//alert($(this).text());
-						$.ajax({
-							type:'POST',
-							url:'${root}/member/board_info.do',
-							data:{
-								member_id:sessionStorage.getItem("email"),
-								pageNumber:$(this).text()
-							},
-							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-							success:function(responseData){
-								//alert(responseData);
-								
-								var data=responseData.split("|");
-								
-								var boardSize=data[1];
-								var count=data[2];
-								var currentPage=data[3];
-								
-								$("#myPage_member_board_list_title").empty();
-								$("#myPage_member_board_list_content").empty();
-								$("#myPage_member_board_list_title").append("<div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
-								var board_data=JSON.parse(data[0]);
-								
-								
-								$.each(board_data,function(i){
-									//alert(data[i].BOARD_TITLE);
-									//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-									//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-									$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-									+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
-									+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
-									+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
-								});
-							}
-						});
+		$("#myPage_board_info_tabBtn").click(function(){
+			$("#myPage_member_board_list_title").empty();
+			$("#myPage_member_board_list_content").empty();
+			$("#myPage_member_board_list_pageNum").empty();
+			$.ajax({
+				type:'POST',
+				url:'${root}/member/board_info.do',
+				data:{
+					member_id:sessionStorage.getItem("email")
+					//member_id:"kimjh112339@naver.com"
+					
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					
+					var data=responseData.split("|");
+					/* alert(data[0]);
+					alert(data[1]);
+					alert(data[2]);
+					alert(data[3]); */
+					
+					var boardSize=data[1];
+					var count=data[2];
+					var currentPage=data[3];
+					
+					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+					//alert(pageCount);
+					b_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					b_endPage=b_startPage+pageBlock-1;
+					
+					
+					//$("#myPage_member_point_list").empty();
+					//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+					//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+					$("#myPage_member_board_list_title").append("<div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+					var board_data=JSON.parse(data[0]);
+					
+					
+					$.each(board_data,function(i){
+						//alert(data[i].BOARD_TITLE);
+						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+						+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
 					});
-				}
-				
-				
-				//alert("endPage:"+endPage);
-				//alert("pageCount:"+pageCount);
-				//다음
-				if(b_endPage<pageCount){
-					$("#myPage_member_board_list_after").css("display","inline-block");
+					
+					if(b_endPage>pageCount){
+						b_endPage=pageCount;
+					}
+					//
+					//페이징
+					//$("#myPage_member_point_list_pageNum").empty();
+					/* $("#myPage_member_point_list").after("<span id='myPage_member_point_list_before'></span>");
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
+					
+					//이전
+					//alert("startPage"+startPage);
+					//alert("pageCount"+pageCount);
+					if(b_startPage>pageBlock){
+						$("#myPage_member_board_list_before").css("display","inline-block");
+					}
+					
+					if(b_startPage<=pageBlock){
+						$("#myPage_member_board_list_before").css("display","none");
+					}
 					
 					
-				}
-				
-				if(b_endPage>=pageCount){
-					$("#myPage_member_board_list_after").css("display","none");
-				}
-				
-				
-				/* alert($("#myPage_member_point_list").css("display"));
-				if($("#myPage_member_point_list").css("display")=="none"){
-					alert("aa");
-					$("#myPage_member_point_list").css("display","block");
-				}else if($("#myPage_member_point_list").css("display")=="block"){
-					alert("bb");
-					$("#myPage_member_point_list").css("display","none");
-				} 			 */
-			}			
+					for(var i=b_startPage;i<=b_endPage;i++){
+						$("#myPage_member_board_list_pageNum").append("<a href='#' id='board_paging_num"+i+"'>"+i+"</a>");
+						$("#board_paging_num"+i).click(function(){
+							//alert($(this).text());
+							$.ajax({
+								type:'POST',
+								url:'${root}/member/board_info.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									$("#myPage_member_board_list_title").empty();
+									$("#myPage_member_board_list_content").empty();
+									$("#myPage_member_board_list_title").append("<div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+									var board_data=JSON.parse(data[0]);
+									
+									
+									$.each(board_data,function(i){
+										//alert(data[i].BOARD_TITLE);
+										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
+										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
+										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+										+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+									});
+								}
+							});
+						});
+					}
+					
+					
+					//alert("endPage:"+endPage);
+					//alert("pageCount:"+pageCount);
+					//다음
+					if(b_endPage<pageCount){
+						$("#myPage_member_board_list_after").css("display","inline-block");
+						
+						
+					}
+					
+					if(b_endPage>=pageCount){
+						$("#myPage_member_board_list_after").css("display","none");
+					}
+					
+					
+					/* alert($("#myPage_member_point_list").css("display"));
+					if($("#myPage_member_point_list").css("display")=="none"){
+						alert("aa");
+						$("#myPage_member_point_list").css("display","block");
+					}else if($("#myPage_member_point_list").css("display")=="block"){
+						alert("bb");
+						$("#myPage_member_point_list").css("display","none");
+					} 			 */
+				}			
+			});
 		});
-		//});
 		
 		//다음클릭시
 		$("#board_paging_after").click(function(){
@@ -1327,131 +1401,135 @@ if(sessionStorage.getItem('email')!=null){
 		}); */
 		
 		
-		//즐겨찾기정보
-		$.ajax({
-			type:'POST',
-			url:'${root}/member/favorite_info.do',
-			data:{
-				member_id:sessionStorage.getItem("email")
-				//member_id:"kimjh112339@naver.com"
-				
-			},
-			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-			success:function(responseData){
-				//alert(responseData);
-				
-				var data=responseData.split("|");
-				/* alert(data[0]);
-				alert(data[1]);
-				alert(data[2]);
-				alert(data[3]); */
-				
-				var boardSize=data[1];
-				var count=data[2];
-				var currentPage=data[3];
-				
-				var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-				//alert(pageCount);
-				f_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
-				f_endPage=f_startPage+pageBlock-1;
-				
-				
-				//$("#myPage_member_point_list").empty();
-				//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
-				//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
-				$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
-				var favorite_data=JSON.parse(data[0]);
-				$.each(favorite_data,function(i){
-					$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-					+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
-					+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
-					+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
-				});
-				//alert(f_endPage+","+pageCount);
-				if(f_endPage>pageCount){
-					f_endPage=pageCount;
-				}
-				//
-				//페이징
-				//$("#myPage_member_point_list_pageNum").empty();
-				/* $("#myPage_member_point_list").after("<span id='myPage_member_point_list_before'></span>");
-				$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
-				$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
-				
-				//이전
-				//alert("startPage"+startPage);
-				//alert("pageCount"+pageCount);
-				if(f_startPage>pageBlock){
-					$("#myPage_member_favorite_list_before").css("display","inline-block");
-				}
-				
-				if(f_startPage<=pageBlock){
-					$("#myPage_member_favorite_list_before").css("display","none");
-				}
-				
-				
-				for(var i=f_startPage;i<=f_endPage;i++){
-					$("#myPage_member_favorite_list_pageNum").append("<a href='#' id='favorite_paging_num"+i+"'>"+i+"</a>");
-					$("#favorite_paging_num"+i).click(function(){
-						//alert($(this).text());
-						$.ajax({
-							type:'POST',
-							url:'${root}/member/favorite_info.do',
-							data:{
-								member_id:sessionStorage.getItem("email"),
-								pageNumber:$(this).text()
-							},
-							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-							success:function(responseData){
-								//alert(responseData);
-								
-								var data=responseData.split("|");
-								
-								var boardSize=data[1];
-								var count=data[2];
-								var currentPage=data[3];
-								
-								$("#myPage_member_favorite_list_title").empty();
-								$("#myPage_member_favorite_list_content").empty();
-								$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
-								var favorite_data=JSON.parse(data[0]);
-								$.each(favorite_data,function(i){
-									$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-									+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
-									+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
-									+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
-								});
-							}
-						});
+		//즐겨찾기정보클릭시
+		$("#myPage_favorite_info_tabBtn").click(function(){
+			$("#myPage_member_favorite_list_title").empty();
+			$("#myPage_member_favorite_list_content").empty();
+			$("#myPage_member_favorite_list_pageNum").empty();
+			$.ajax({
+				type:'POST',
+				url:'${root}/member/favorite_info.do',
+				data:{
+					member_id:sessionStorage.getItem("email")
+					//member_id:"kimjh112339@naver.com"
+					
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					
+					var data=responseData.split("|");
+					/* alert(data[0]);
+					alert(data[1]);
+					alert(data[2]);
+					alert(data[3]); */
+					
+					var boardSize=data[1];
+					var count=data[2];
+					var currentPage=data[3];
+					
+					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
+					//alert(pageCount);
+					f_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
+					f_endPage=f_startPage+pageBlock-1;
+					
+					
+					//$("#myPage_member_point_list").empty();
+					//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
+					//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
+					$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+					var favorite_data=JSON.parse(data[0]);
+					$.each(favorite_data,function(i){
+						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
 					});
-				}
-				
-				
-				//alert("endPage:"+endPage);
-				//alert("pageCount:"+pageCount);
-				//다음
-				if(f_endPage<pageCount){
-					$("#myPage_member_favorite_list_after").css("display","inline-block");
+					//alert(f_endPage+","+pageCount);
+					if(f_endPage>pageCount){
+						f_endPage=pageCount;
+					}
+					//
+					//페이징
+					//$("#myPage_member_point_list_pageNum").empty();
+					/* $("#myPage_member_point_list").after("<span id='myPage_member_point_list_before'></span>");
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
+					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
+					
+					//이전
+					//alert("startPage"+startPage);
+					//alert("pageCount"+pageCount);
+					if(f_startPage>pageBlock){
+						$("#myPage_member_favorite_list_before").css("display","inline-block");
+					}
+					
+					if(f_startPage<=pageBlock){
+						$("#myPage_member_favorite_list_before").css("display","none");
+					}
 					
 					
-				}
-				
-				if(f_endPage>=pageCount){
-					$("#myPage_member_favorite_list_after").css("display","none");
-				}
-				
-				
-				/* alert($("#myPage_member_point_list").css("display"));
-				if($("#myPage_member_point_list").css("display")=="none"){
-					alert("aa");
-					$("#myPage_member_point_list").css("display","block");
-				}else if($("#myPage_member_point_list").css("display")=="block"){
-					alert("bb");
-					$("#myPage_member_point_list").css("display","none");
-				} 			 */
-			}			
+					for(var i=f_startPage;i<=f_endPage;i++){
+						$("#myPage_member_favorite_list_pageNum").append("<a href='#' id='favorite_paging_num"+i+"'>"+i+"</a>");
+						$("#favorite_paging_num"+i).click(function(){
+							//alert($(this).text());
+							$.ajax({
+								type:'POST',
+								url:'${root}/member/favorite_info.do',
+								data:{
+									member_id:sessionStorage.getItem("email"),
+									pageNumber:$(this).text()
+								},
+								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+								success:function(responseData){
+									//alert(responseData);
+									
+									var data=responseData.split("|");
+									
+									var boardSize=data[1];
+									var count=data[2];
+									var currentPage=data[3];
+									
+									$("#myPage_member_favorite_list_title").empty();
+									$("#myPage_member_favorite_list_content").empty();
+									$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+									var favorite_data=JSON.parse(data[0]);
+									$.each(favorite_data,function(i){
+										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
+									});
+								}
+							});
+						});
+					}
+					
+					
+					//alert("endPage:"+endPage);
+					//alert("pageCount:"+pageCount);
+					//다음
+					if(f_endPage<pageCount){
+						$("#myPage_member_favorite_list_after").css("display","inline-block");
+						
+						
+					}
+					
+					if(f_endPage>=pageCount){
+						$("#myPage_member_favorite_list_after").css("display","none");
+					}
+					
+					
+					/* alert($("#myPage_member_point_list").css("display"));
+					if($("#myPage_member_point_list").css("display")=="none"){
+						alert("aa");
+						$("#myPage_member_point_list").css("display","block");
+					}else if($("#myPage_member_point_list").css("display")=="block"){
+						alert("bb");
+						$("#myPage_member_point_list").css("display","none");
+					} 			 */
+				}			
+			});
 		});
-		//});
 		
 		//다음클릭시
 		$("#favorite_paging_after").click(function(){
@@ -1796,11 +1874,11 @@ if(sessionStorage.getItem('email')!=null){
 	<div class="col-sm-2">
     <nav class="nav-sidebar">
 		<ul class="nav tabs">
-		  <li class="active"><a id="member_info_tabBtn" href="#tab1" data-toggle="tab">회원정보</a></li>
-          <li class=""><a id="myPage_point_info_tabBtn" href="#tab2" data-toggle="tab">포인트</a></li>
-          <li class=""><a id="myPage_board_info_tabBtn" href="#tab3" data-toggle="tab">게시글</a></li>
-          <li class=""><a id="myPage_favorite_info_tabBtn" href="#tab4" data-toggle="tab">즐겨찾기</a></li>  
-          <li class=""><a id="myPage_coupon_info_tabBtn" href="#tab5" data-toggle="tab">쿠폰</a></li>                              
+		  <li id="aaa" class="abc active"><a id="member_info_tabBtn" href="#tab1" data-toggle="tab">회원정보</a></li>
+          <li id="bbb" class="abc"><a id="myPage_point_info_tabBtn" href="#tab2" data-toggle="tab">포인트</a></li>
+          <li id="ccc" class="abc"><a id="myPage_board_info_tabBtn" href="#tab3" data-toggle="tab">게시글</a></li>
+          <li id="ddd" class="abc"><a id="myPage_favorite_info_tabBtn" href="#tab4" data-toggle="tab">즐겨찾기</a></li>  
+          <li id="eee" class="abc"><a id="myPage_coupon_info_tabBtn" href="#tab5" data-toggle="tab">쿠폰</a></li>                              
 		</ul>
 	</nav>
 		<!-- <div><h2 class="add">Place for your add!</h2></div> -->
@@ -1808,7 +1886,7 @@ if(sessionStorage.getItem('email')!=null){
 <!-- tab content -->
 	<div class="tab-content">
 		<div class="tab-pane active text-style" id="tab1">
- 			 <div class=" col-md-9 col-lg-9 "> 
+ 			 <div class=" col-md-7 col-lg-7 "> 
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
@@ -1829,11 +1907,31 @@ if(sessionStorage.getItem('email')!=null){
                         <td id="myPage_member_joindate"></td>
                       </tr>
                      
+                      <tr>
+                        <td>포인트:</td>
+                        <td><a href="#tab2" data-toggle="tab" id="myPage_member_point_total"></a></td>
+                      </tr>
+                      
+                      <tr>
+                        <td>게시글:</td>
+                        <td><a href="#tab3" data-toggle="tab" id="myPage_member_board_total"></a></td>
+                      </tr>
+                      
+                      <tr>
+                        <td>즐겨찾기:</td>
+                        <td><a href="#tab4" data-toggle="tab" id="myPage_member_favorite_total"></a></td>
+                      </tr>
+                      
+                      <tr>
+                        <td>쿠폰:</td>
+                        <td><a href="#tab5" data-toggle="tab" id="myPage_member_coupon_total"></a></td>
+                      </tr>
                     </tbody>
                   </table>
                   
                   <a data-toggle="modal" href="#blogmap_myPageUpdate" id="myPage_update_btn" class="btn btn-primary">정보수정</a>
                   <a data-toggle="modal" href="#blogmap_myPageDelete" id="myPage_delete_btn" class="btn btn-primary">회원탈퇴</a>
+                  <a data-toggle="modal" href="#blogmap_fb_myPageDelete" id="myPage_fb_delete_btn" class="btn btn-primary" style="display:'none';">회원탈퇴</a>
                 </div>
  			
  			 <!-- <h3>회원정보</h3><br/><br/>
@@ -1846,7 +1944,7 @@ if(sessionStorage.getItem('email')!=null){
 		</div>
 		<div class="tab-pane text-style" id="tab2">
 			<div class="col-md-9 col-lg-9" id="myPage_member_point_list">
-				<h2 id="myPage_member_point_total"></h2>
+				<h4>나의 포인트 정보</h4>
 			
 				<div class="method">
 			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_point_list_title">
@@ -1875,7 +1973,7 @@ if(sessionStorage.getItem('email')!=null){
 		
 		<div class="tab-pane text-style" id="tab3">
   			<div class="col-md-9 col-lg-9" id="myPage_member_board_list">
-				<h2 id="myPage_member_board_total"></h2>
+				<h4>나의 게시글 정보</h4>
 			
 				<div class="method">
 			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_board_list_title">
@@ -1904,7 +2002,7 @@ if(sessionStorage.getItem('email')!=null){
 		
 		<div class="tab-pane text-style" id="tab4">
   			<div class="col-md-9 col-lg-9" id="myPage_member_favorite_list">
-				<h2 id="myPage_member_favorite_total"></h2>
+				<h4>내 즐겨찾기 정보</h4>
 			
 				<div class="method">
 			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_favorite_list_title">
@@ -1934,32 +2032,77 @@ if(sessionStorage.getItem('email')!=null){
 		
 		<!-- 쿠폰정보 -->
 		<div class="tab-pane text-style" id="tab5">
-			<div class="col-md-9 col-lg-9">
+			<!-- <div class="col-md-9 col-lg-9">
+			<h4>내 쿠폰 정보</h4>
           		 <div class="item active" id="myPage_member_coupon_list">
-          		 	<ul class="thumbnails" id="myPage_member_coupon_list_content" style="display:block;">
-	               <!--  	<li class="col-sm-3">
-	   						<div class="fff">
-								<div class="thumbnail">
-									<img src="http://placehold.it/360x240" alt="">
-									<div class="caption">
-										<h4>Praesent commodo</h4>
-										<p>Nullam Condimentum Nibh Etiam Sem</p>
-									</div> 	
-								</div>
-	                         </div>
-	                     </li> -->
-	                 </ul>
-	                   
-	                 <div id="myPage_member_coupon_paging" class="container" style="display:block;">
+          		 	<div>
+	          		 	<ul class="thumbnails" id="myPage_member_coupon_list_content">
+		                	<li class="col-sm-3">
+		   						<div class="fff">
+									<div class="thumbnail">
+										<img src="http://placehold.it/360x240" alt="">
+										<div class="caption">
+											<h4>Praesent commodo</h4>
+											<p>Nullam Condimentum Nibh Etiam Sem</p>
+										</div> 	
+									</div>
+		                         </div>
+		                     </li> 
+		                 </ul>
+	                 </div>   
+	                 
+	             </div>
+             </div> -->
+        
+             
+	        <div class="row">
+		    	<div class="col-md-8">
+					<div class="col-sm-6 col-md-4">
+						<div class="thumbnail" id="myPage_member_coupon_list">
+							<div id="myPage_member_coupon_list_content">
+								<!-- <h4 class="text-center"><span class="label label-info">업체명</span></h4>
+								<img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive">
+								<div class="caption">
+									<div class="row">
+										<div class="col-md-6 col-xs-6">
+											<h4>할인품목</h4>
+										</div>
+										
+										<div class="col-md-6 col-xs-6 price">
+											<h4><label>할인율</label></h4>
+										</div>
+									</div>
+									
+									<p style="font-size:14px;">사용기한</p>
+								
+									<p style="font-size:14px;">업체 전화번호</p>
+								</div> -->
+							</div>
+							
+						</div>
+					</div>
+					
+		        </div> 
+		        
+				
+			</div>
+	        
+	        <div class="row">
+	        	<center>
+	        	<div id="myPage_member_coupon_paging" class="container">
 						<ul class="pagination">
 			              <li id="myPage_member_coupon_list_before" style="display:'none';"><a href="#" id="coupon_paging_before">«</a></li>
 			              <li id="myPage_member_coupon_list_pageNum"></li>
 			              <li id="myPage_member_coupon_list_after" style="display:'none';"><a href="#" id="coupon_paging_after">»</a></li>
 	           			</ul>
-					</div> 
-	             </div>
-             </div>
+				</div> 
+				</center>
+	        </div>     
         </div>	
+        
+        
+	    
+
 	</div>
 </div>
 	

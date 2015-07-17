@@ -15,7 +15,7 @@ public interface MemberDao {
 
 	public int registerCheck(String member_id);
 
-	public int fbRegisterCheck(String member_id);
+	public MemberDto fbRegisterCheck(String member_id);
 
 	public int fbRegister(MemberDto memberDto);
 
@@ -51,6 +51,8 @@ public interface MemberDao {
 	public int managerRgCheck(String member_id);
 
 	public String managerLogin(String id, String password);
+
+	public int fbMemberDelete(String member_id);
 
 	
 }

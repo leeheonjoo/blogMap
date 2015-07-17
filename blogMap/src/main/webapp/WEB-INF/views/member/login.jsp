@@ -104,6 +104,9 @@
       } */
 
       window.fbAsyncInit = function() {
+    	var email = null;  
+   		var jointype = null;
+   		
         FB.init({
           appId      : '371551513047868', // 앱 ID
           status     : true,          // 로그인 상태를 확인
@@ -157,9 +160,9 @@
 		
 		
           
-          
-          
+        
         FB.getLoginStatus(function(response) {
+        	 
             if (response.status === 'connected') {
                 
                 FB.api('/me', function(user) {
@@ -183,41 +186,120 @@
                         	success:function(responseData){
                         		alert(responseData);
                         		var data=JSON.parse(responseData);
-                        		
-                        		if(data!=null){
-            	 					 if (window.sessionStorage) {
-            	 		                sessionStorage.setItem('email', data.member_id);
-            	 		                var email = sessionStorage.getItem('email');
-            	 		                
-            	 		                sessionStorage.setItem('jointype', data.member_jointype);
-           	 		                	var jointype = sessionStorage.getItem('jointype');
-            	 		                alert(email);
-            	 		                alert(jointype);
-            	 		                //$("input[name='member_id']").attr("value",sessionStorage.getItem('email'));
-            	 		                $("#loginCheck").text(email);
-            	 		                
-            	 		            }
-            	 					 
-            	 					alert("로그인 성공");
-            	 					
-            	 					$("#blogmap_before_login span").remove();
-            	 					$("#blogmap_main_myPage").css("display","inline-block");
-            	 					$("#blogmap_before_login").attr("data-toggle","");
-            	 					$("#login_text").text("Logout");
-            	 					
-            	 					if($("#login_text").text()=="Logout"){
-            	 						$("#blogmap_before_login").click(function(){
-                	 						if(sessionStorage.getItem('jointype')=="0002"){
-                	 							FB.logout();
-                	 						}
-                	 						sessionStorage.clear();
-                	 						//$("#blogmap_after_login").css("display","none");
-                	 						//$("#blogmap_login_bar").fadeIn();
-                	 						location.href="${root}/";
-            	 						});
-            	 					}
-            	 					
+                        		alert("jointype:"+data.member_jointype);
+                        		alert("member_pwd:"+data.member_pwd);
+                        		if(data.member_jointype=="0001"&&data.member_pwd!="undefined"){
+                        			alert("기존에 등록한 아이디가 있습니다.");
+                        			FB.logout();
+                        		}else{
+                        			if(data!=null){
+	               	 					if (window.sessionStorage) {
+	               	 		                sessionStorage.setItem('email', data.member_id);
+	               	 		                email = sessionStorage.getItem('email');
+	               	 		                
+	               	 		                sessionStorage.setItem('jointype', data.member_jointype);
+	              	 		                	jointype = sessionStorage.getItem('jointype');
+	               	 		                alert(email);
+	               	 		                alert(jointype);
+	               	 		                //$("input[name='member_id']").attr("value",sessionStorage.getItem('email'));
+	               	 		                $("#loginCheck").text(email);
+	               	 		               
+	               	 		            }
+	               	 					 
+	               	 					alert("로그인 성공");
+	               	 					
+	               	 					$("#blogmap_before_login span").remove();
+	               	 					$("#blogmap_main_myPage").css("display","inline-block");
+	               	 					$("#blogmap_before_login").attr("data-toggle","");
+	               	 					$("#login_text").text("Logout");
+	               	 					
+	               	 					if(sessionStorage.getItem('jointype')!=null){
+	               	 						$("#myPage_update_btn").css("display","none");
+	               	 						$("#myPage_delete_btn").css("display","none");
+	               	 						$("#myPage_fb_delete_btn").show();
+	               	 					}
+	               	 					
+	               	 					$("#blogmap_main_myPage").click(function(){
+	               	 						$.ajax({
+	               	 							type:'POST',
+	               	 							url:"${root}/member/myPage.do",
+	               	 							data:{
+	               	 								member_id:sessionStorage.getItem("email")
+	               	 								//member_id:"kimjh112339@naver.com"
+	               	 							},
+	               	 							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+	               	 							success:function(responseData){
+	               	 								//alert(responseData);
+	               	 							 	var data=responseData.split("|");
+	               	 								
+	               	 							 	memberData=JSON.parse(data[0])
+	               	 								
+	               	 								$("#myPage_member_id").text(memberData.member_id);
+	               	 								//$("#myPage_member_id").attr("disabled","disabled");
+	               	 								
+	               	 								$("#myPage_member_name").text(memberData.member_name);
+	               	 								//$("#myPage_member_name").attr("disabled","disabled");
+	               	 								
+	               	 								$("#myPage_member_joindate").text(memberData.member_joindate);
+	               	 								//$("#myPage_member_joindate").attr("disabled","disabled");
+	               	 								
+	               	 								$("#myPage_member_point_total").text(data[1]+"points");
+	               	 								/* $("#myPage_member_point").val(data[1]);
+	               	 								$("#myPage_member_point").attr("disabled","disabled"); */
+	               	 								
+	               	 								$("#myPage_member_point_total").click(function(){
+	               	 									$(".abc").attr("class","abc");
+	               	 									$("#bbb").attr("class","active");
+	               	 									
+	               	 								});
+	               	 								
+	               	 								if(data[1]>20){
+	               	 									$("#myPage_member_rate").text("새싹");
+	               	 								}
+	               	 								
+	               	 								$("#myPage_member_board_total").text(data[2]+" EA");
+	               	 								//$("#myPage_member_boardCount").attr("disabled","disabled");
+	               	 								$("#myPage_member_board_total").click(function(){
+	               	 									$(".abc").attr("class","abc");
+	               	 									$("#ccc").attr("class","active");
+	               	 									
+	               	 								});
+	               	 								
+	               	 								$("#myPage_member_favorite_total").text(data[3]+ " EA");
+	               	 								//$("#myPage_member_favoriteCount").attr("disabled","disabled");
+	               	 								$("#myPage_member_favorite_total").click(function(){
+	               	 									$(".abc").attr("class","abc");
+	               	 									$("#ddd").attr("class","active");
+	               	 									
+	               	 								});
+	               	 								
+	               	 								$("#myPage_member_coupon_total").text(data[4]+ " EA");
+	               	 								//$("#myPage_member_couponCount").attr("disabled","disabled");
+	               	 								$("#myPage_member_coupon_total").click(function(){
+	               	 									$(".abc").attr("class","abc");
+	               	 									$("#eee").attr("class","active");
+	               	 									
+	               	 								});
+	               	 							}
+	               	 						});
+	               	 					});
+	               	 					
+	               	 					if($("#login_text").text()=="Logout"){
+	               	 						$("#blogmap_before_login").click(function(){
+	                   	 						if(sessionStorage.getItem('jointype')=="0002"){
+	                   	 							FB.logout();
+	                   	 						}
+	                   	 						sessionStorage.clear();
+	                   	 						//$("#blogmap_after_login").css("display","none");
+	                   	 						//$("#blogmap_login_bar").fadeIn();
+	                   	 						location.href="${root}/";
+	               	 						});
+	               	 					}
+	               	 					
+	                           		}
                         		}
+                        		
+                        		
                         	}
                         	
                         });
@@ -236,9 +318,11 @@
          FB.Event.subscribe('auth.login', function(response) {
         	 //$("#blogmap_login_bar").fadeOut();
 			 //$("#blogmap_after_login").css("display","block");
-			 
+			 //alert("이전:"+email);
+			 //alert("이전:"+jointype);
         	 document.location.reload();
-        	 
+        	 //alert("이후:"+email);
+			// alert("이후:"+jointype);
         }); 
          
       };

@@ -32,5 +32,7 @@ public interface MemberService {
 
 	public void coupon_info(ModelAndView mav);
 
+	public void fb_myPage_delete(ModelAndView mav);
+
 	
 }

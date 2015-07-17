@@ -9,62 +9,73 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 if(sessionStorage.getItem('email')!=null){
-$(function(){
-	var email=sessionStorage.getItem('email');
-	//$("#myPageUpdate_member_id").val(email);
-	
-	//var email="kimjh112339@naver.com";
-	$("#myPageUpdate_member_id").val(email);
-	$("#myPageUpdate_member_id").attr("disabled","disabled");
-	
-	$("#myPageUpdate_btn").click(function(){
-		//유효성검사
-		/* var check=confirm("정말로 수정하시겠습니까?");
-		if(check==true){
+	$(function(){
+		var email=sessionStorage.getItem('email');
+		//$("#myPageUpdate_member_id").val(email);
+		
+		//var email="kimjh112339@naver.com";
+		$("#myPageUpdate_member_id").val(email);
+		$("#myPageUpdate_member_id").attr("disabled","disabled");
+		
+		$("#myPageUpdate_btn").click(function(){
 			
-		} */
-		$.ajax({
-			type:"post",
-			url:"${root}/member/myPageUpdate_pwdCheck.do",
-			data:{
-				member_id:email,
-				member_pwd:$("#myPage_member_pwd").val()
-			},
-			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-			success:function(responseData){
-				alert(responseData);
+			/* var check=confirm("정말로 수정하시겠습니까?");
+			if(check==true){
 				
-				if(responseData=="1"){
+			} */
+			if($("#myPageUpdate_member_name").val()!=""){
+				
+				if($("#myPageUpdate_member_pwd").val()==$("#myPageUpdate_member_pwd_check").val()){
 					$.ajax({
 						type:"post",
-						url:"${root}/member/myPageUpdate.do",
+						url:"${root}/member/myPageUpdate_pwdCheck.do",
 						data:{
 							member_id:email,
-							member_name:$("#myPageUpdate_member_name").val(),
-							member_pwd:$("#myPageUpdate_member_pwd").val()	
+							member_pwd:$("#myPage_member_pwd").val()
 						},
 						contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-						success:function(responseUpData){
+						success:function(responseData){
+							alert(responseData);
 							
-							if(responseUpData=="1"){
-								alert("수정완료!");
-								//$("#myPageUpdate_layer_div").fadeOut();
-								location.href="${root}/";
-							}else{
-								alert("수정실패");
+							if(responseData=="1"){
+								$.ajax({
+									type:"post",
+									url:"${root}/member/myPageUpdate.do",
+									data:{
+										member_id:email,
+										member_name:$("#myPageUpdate_member_name").val(),
+										member_pwd:$("#myPageUpdate_member_pwd").val()	
+									},
+									contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+									success:function(responseUpData){
+										
+										if(responseUpData=="1"){
+											alert("수정완료!");
+											//$("#myPageUpdate_layer_div").fadeOut();
+											location.href="${root}/";
+										}else{
+											alert("수정실패");
+										}
+				
+									}
+								});
 							}
-	
+							
+							if(responseData=="0"){
+								alert("비밀번호가 일치하지 않습니다.");
+							}
 						}
 					});
+				}else{
+					alert("수정할 비밀번호가 일치하지 않습니다.");
 				}
-				
-				if(responseData=="0"){
-					alert("비밀번호가 일치하지 않습니다.");
-				}
+			}else{
+				alert("이름을 입력해주세요.");
 			}
+			
+			
 		});
-	});
-});	
+	});	
 }
 </script>
 </head>

@@ -1,6 +1,6 @@
 @CHARSET "UTF-8";
 #carousel_image{
-	height:300px;
+	height:400px;
 	width:auto;
 }
 
@@ -10,6 +10,10 @@
 	width:auto;
 	display:block;
 	margin:auto;
+}
+
+#carousel-example-generic .carousel-caption{
+	position: static;
 }
 
 #carousel-example-generic h4{

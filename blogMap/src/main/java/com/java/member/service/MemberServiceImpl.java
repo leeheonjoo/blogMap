@@ -157,10 +157,13 @@ public class MemberServiceImpl implements MemberService {
 
 		logger.info("member_id:" + memberDto.getMember_id());
 
-		int check = memberDao.fbRegisterCheck(memberDto.getMember_id());
-		logger.info("check:" + check);
+		MemberDto selectMemberDtoCheck = memberDao.fbRegisterCheck(memberDto.getMember_id());
+		logger.info("selectMemberDto:" + selectMemberDtoCheck);
+		
+//		int check = memberDao.fbRegisterCheck(memberDto.getMember_id());
+//		logger.info("check:" + check);
 
-		if (check == 0) {
+		if (selectMemberDtoCheck==null) {
 			memberDto.setMember_jointype("0002");
 			int fbRegisterCheck = memberDao.fbRegister(memberDto);
 
@@ -666,6 +669,26 @@ public class MemberServiceImpl implements MemberService {
 		try {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(coupon_info_pack);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void fb_myPage_delete(ModelAndView mav) {
+		Map<String,Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpServletResponse response = (HttpServletResponse) map.get("response");
+		
+		String member_id=request.getParameter("member_id");
+		logger.info("member_id:"+member_id);
+		
+		int check=memberDao.fbMemberDelete(member_id);
+		logger.info("check:"+check);
+		
+		try {
+			response.getWriter().print(check);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
