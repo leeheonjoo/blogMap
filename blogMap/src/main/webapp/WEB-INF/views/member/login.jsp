@@ -27,7 +27,7 @@
 	 					 if (window.sessionStorage) {
 	 		                sessionStorage.setItem('email', responseData);
 	 		                var email = sessionStorage.getItem('email');
-	 		                alert(email);
+	 		                //alert(email);
 	 		                $("#loginCheck").text(email);
 	 		            }
 	 	
@@ -184,10 +184,17 @@
                         	},
                         	contentType:'application/x-www-form-urlencoded;charset=UTF-8',
                         	success:function(responseData){
-                        		alert(responseData);
+                        		
+                        		if(sessionStorage.getItem('email') == null){
+                        			alert("로그인 성공");
+                                    document.location.reload();
+                                 }
+                        		
+                        		
+                        		//alert(responseData);
                         		var data=JSON.parse(responseData);
-                        		alert("jointype:"+data.member_jointype);
-                        		alert("member_pwd:"+data.member_pwd);
+                        		//alert("jointype:"+data.member_jointype);
+                        		//alert("member_pwd:"+data.member_pwd);
                         		if(data.member_jointype=="0001"&&data.member_pwd!="undefined"){
                         			alert("기존에 등록한 아이디가 있습니다.");
                         			FB.logout();
@@ -199,14 +206,14 @@
 	               	 		                
 	               	 		                sessionStorage.setItem('jointype', data.member_jointype);
 	              	 		                	jointype = sessionStorage.getItem('jointype');
-	               	 		                alert(email);
-	               	 		                alert(jointype);
+	               	 		                //alert(email);
+	               	 		                //alert(jointype);
 	               	 		                //$("input[name='member_id']").attr("value",sessionStorage.getItem('email'));
 	               	 		                $("#loginCheck").text(email);
 	               	 		               
 	               	 		            }
 	               	 					 
-	               	 					alert("로그인 성공");
+	               	 					
 	               	 					
 	               	 					$("#blogmap_before_login span").remove();
 	               	 					$("#blogmap_main_myPage").css("display","inline-block");
