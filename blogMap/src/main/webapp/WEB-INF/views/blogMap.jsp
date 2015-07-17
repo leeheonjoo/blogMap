@@ -26,7 +26,21 @@
     		overflow-y:scroll;
 	}
 
-
+	.modal-myPage{
+		width: auto;
+		margin: 2% 10% 0px 10%;
+ 		height: 600px;
+/*    		max-height: 600px; */
+    		/* overflow-y:scroll; */
+	}
+	
+	.modal-email-confrim{
+		width: auto;
+		margin: 2% 20% 0px 20%;
+ 		height: 600px;
+/*    		max-height: 600px; */
+    		/* overflow-y:scroll; */
+	}
 </style>
 <!--[if lt IE 9]>
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -713,7 +727,7 @@
 		
 		<!-- 회원관리 - 회원가입 -->
 		<div class="modal fade" id="blogmapRegister" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -733,7 +747,7 @@
 		
 		<!-- 회원관리 - 비밀번호중복확인(사용가능) -->
 		<div class="modal fade" id="blogmap_registerCheckOk" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -753,7 +767,7 @@
 		
 		<!-- 회원관리 - 비밀번호중복확인(불가능) -->
 		<div class="modal fade" id="blogmap_registerCheckNo" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -772,7 +786,7 @@
 		
 		<!-- 회원관리 - 비밀번호 찾기 -->
 		<div class="modal fade" id="blogmap_renew_pwd" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -793,7 +807,7 @@
 
 		<!-- 회원관리 - 메일전송 확인 -->
 		<div class="modal fade" id="blogmap_email_confirm" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -814,7 +828,7 @@
 		<!-- 회원관리 - 마이페이지 -->
 		<!-- 마이페이지 -->
 		<div class="modal fade" id="blogmap_myPage" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-myPage">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -834,7 +848,7 @@
 		
 		<!-- 회원관리 - 수정 -->
 		<div class="modal fade" id="blogmap_myPageUpdate" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-myPage">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -854,7 +868,7 @@
 		
 		<!-- 회원관리 - 탈퇴 -->
 		<div class="modal fade" id="blogmap_myPageDelete" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -874,7 +888,7 @@
 		
 		<!-- fb회원탈퇴시 이메일 인증 -->
 		<div class="modal fade" id="blogmap_fb_myPageDelete" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
