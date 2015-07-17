@@ -524,7 +524,6 @@ thead {
 		});
 	}
 	
-
  	function msgReceiveList() {		
  		// 메시지 창을 비워준다.
  		$("#receiveMsgResult").empty();

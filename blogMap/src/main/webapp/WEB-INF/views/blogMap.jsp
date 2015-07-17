@@ -80,6 +80,11 @@
 				$("#blogmap_main_myPage").css("display","inline-block");
 				$("#blogmap_before_login").attr("data-toggle","");
 				
+				if(sessionStorage.getItem('email')=="lucyman@nate.com"){
+					$("#manager_page_icon").css("display","inline-block");
+					$("#blogmap_main_myPage").css("display","none");
+				}
+				
 				$("#login_text").text("Logout");
 				
 				if($("#login_text").text()=="Logout"){
@@ -376,7 +381,7 @@
 						<p style="width:100%; line-height:46px;">
 							<a data-toggle="modal" href="#partnerMain" id ="partner_Registration"><img src="${root}/images/blogMap/Partnership_32.png"></a>
 							&nbsp;&nbsp;
-							<a data-toggle="modal" href="#ManagerMain"><img src="${root}/images/blogMap/gear_24.png"></img></a>
+							<a data-toggle="modal" href="#ManagerMain" id="manager_page_icon" style="display:none; "><img src="${root}/images/blogMap/gear_24.png"></img></a>
 						</p>
 					</div>
 	</div>
@@ -1044,11 +1049,6 @@
 						<br/>
 						<br/>	
 					</div>
-					
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
-					</div>
 				</div>
 		    </div>
 		</div>	
@@ -1069,7 +1069,6 @@
 						<br/>
 					</div>
 					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
 						<a data-toggle="modal" href="#messageDelete" data-dismiss="modal" class="btn btn-primary btn-delete">메시지 삭제</a>
 					</div>
 			   </div>
@@ -1092,7 +1091,6 @@
 						<br/>
 					</div>
 					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">취소</a>
 						<a class="btn btn-primary delete_btn" data-dismiss="modal" onclick="msgDelete()">메시지 삭제</a>
 					</div>
 			   </div>
@@ -1127,8 +1125,6 @@
 	                            </div>
 	                        </div>
 	                     </div>
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<a href="#" class="btn btn-primary">Save changes</a>
 					</div>
 			   </div>
 			</div>
