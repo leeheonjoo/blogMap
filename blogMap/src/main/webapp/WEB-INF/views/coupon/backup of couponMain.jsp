@@ -41,8 +41,6 @@ a {
         color: #000;
         }
 
-
-
 /* Thumbnail Box */
 .caption h4 {
    
@@ -55,7 +53,6 @@ a {
         .btn.btn-mini {
             
             }
-
 
 /* Carousel Control */
 .control-box {
@@ -88,7 +85,6 @@ a {
     word-break: break-all;
     }
 }
-
 
 li { list-style-type:none;}
 
@@ -139,42 +135,83 @@ li { list-style-type:none;}
 <script type="text/javascript">
  $(document).ready(function(){		 
 	$("#tile4").click(function(){	
-		
+
 		$.ajax({
 			type:'post',
 			url:'${root}/coupon/couponMain.do',
 			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(responseData) {
 				var data = JSON.parse(responseData);
-				var count= 1;
 				/* alert(data); */
 				
-				/* 데이타를 채우기 위해 복사 */
-				$.each(data, function(i){
-					var pic=data[i].COUPON_PIC_NAME;
-					var partner_name=data[i].PARTNER_NAME;
-					alert(count);
-					//alert("사진 이름 : "+pic + " / " + "업체명 : " + partner_name + " / " + " I 값 : " + i);
-										
-					$("#coupon_slide_"+ count).append($("#coupon_slide_List_L").clone());
-					//$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
-					$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
-					alert((i+1) % 8);
+				var coupon_no=0;
+				
+				$("#coupon_List").css("display", "none");
+				
+				
+				
+				for(coupon_no=0;coupon_no > data.size()/8; coupon_no++){
 					
-					if((i+1) % 8 == 0){
-						$("#coupon_List").append($("#couponSlide_0").clone().attr("id","couponslide_"+(count +1)));
-						$("#couponslide_"+(count+1) +" ul[id='coupon_slide_0']").attr("id","coupon_slide_"+(count +1));
-						count += 1;
-							
-					}
 					
-							
-					// 각 업체를 클릭했을때 이벤트
-					$("#coupon_" + data[i].PARTNER_NO).click(function(){
-// 						alert("쿠폰" + data[i].PARTNER_NO + "클릭");
-						couponData(data[i].PARTNER_NO);	
+					var coupon_PageCount="coupon_PageCount" + coupon_no;
+					
+					$("#junk").attr("id", coupon_PageCount);
+					
+					$("#coupon_PageCount").attr("id", coupon_PageCount);
+					
+					$("#coupon_PageCount").css("display", "block");
+					
+					$.each(data, function(i){
+						var pic=data[i].COUPON_PIC_NAME;
+						var partner_name=data[i].PARTNER_NAME;
+						alert("사진 이름 : "+pic + " / " + "업체명 : " + partner_name + " / " + " I 값 : " + i);
+						alert(coupon_PageCount);
+							$("#coupon_slide_ListSub").append($("#coupon_slide_List_L").clone().css("display", "block"));
+							$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+							$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
+						// 각 업체를 클릭했을때 이벤트
+						$("#coupon_" + data[i].PARTNER_NO).click(function(){
+	// 						alert("쿠폰" + data[i].PARTNER_NO + "클릭");
+							couponData(data[i].PARTNER_NO);	
+						});
 					});
-				});
+				}
+				
+				
+				/* 데이타를 채우기 위해 복사 */
+// 				$.each(data, function(i){
+// 					var pic=data[i].COUPON_PIC_NAME;
+// 					var partner_name=data[i].PARTNER_NAME;
+// 					alert("사진 이름 : "+pic + " / " + "업체명 : " + partner_name + " / " + " I 값 : " + i);
+// 					alert(coupon_PageCount);
+					
+// 					if(i > 7){
+
+// 						$("#junk").attr("id", coupon_PageCount);
+// 						$("#coupon_PageCount").css("display", "block");
+						
+// 						$("#coupon_slide_ListSub").append($("#coupon_slide_List_L").clone().css("display", "block"));
+// 						$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+// 						$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);
+						
+// 					}
+					
+// 					if(i < 8){
+						
+// 						$("#coupon_slide_ListMain").append($("#coupon_slide_List_L").clone().css("display", "block"));
+// 						$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+// 						$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
+					
+// 					}
+					
+// 					// 각 업체를 클릭했을때 이벤트
+// 					$("#coupon_" + data[i].PARTNER_NO).click(function(){
+// // 						alert("쿠폰" + data[i].PARTNER_NO + "클릭");
+// 						couponData(data[i].PARTNER_NO);	
+// 					});
+					
+// 					coupon_PageCount ++;
+// 				});
 				
 				if (!data) {
 					alert("등록된 정보가 없습니다.");
@@ -184,8 +221,10 @@ li { list-style-type:none;}
 		});	
 	});
 	
-	$("coupon_search_btn").click(function(){
-		$("coupon_slide_ListMain").empty();
+	$("#coupon_search_btn").click(function(){
+		$("#coupon_slide_ListMain").empty();
+		$("#coupon_slide_ListSub").empty();
+		alert("검색");
 		
 		$.ajax({
 			type:'get',
@@ -197,28 +236,35 @@ li { list-style-type:none;}
 			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(responseData) {
 				var data = JSON.parse(responseData);
-				var count= 1;
-				/* alert(data); */
+// 				alert(data);
 				
 				/* 데이타를 채우기 위해 복사 */
 				$.each(data, function(i){
 					var pic=data[i].COUPON_PIC_NAME;
 					var partner_name=data[i].PARTNER_NAME;
-					alert(count);
-					//alert("사진 이름 : "+pic + " / " + "업체명 : " + partner_name + " / " + " I 값 : " + i);
-										
-					$("#coupon_slide_"+ count).append($("#coupon_slide_List_L").clone());
-					//$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
-					$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
-					alert((i+1) % 8);
+					alert("검색 사진 이름 : "+pic + " / " + "검색 업체명 : " + partner_name + " / " + "검색 I 값 : " + i);
 					
-					if((i+1) % 8 == 0){
-						$("#coupon_List").append($("#couponSlide_0").clone().attr("id","couponslide_"+(count +1)));
-						$("#couponslide_"+(count+1) +" ul[id='coupon_slide_0']").attr("id","coupon_slide_"+(count +1));
-						count += 1;
-							
+					
+					
+// 					if(i > 7){
+
+// 						$("#junk").css("display", "block");
+						
+// 						$("#coupon_slide_ListSub").append($("#coupon_slide_List_L").clone().css("display", "block"));
+// 						$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+// 						$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);
+						
+						
+// 					}
+					
+					if(i < 8){
+			
+					$("#coupon_slide_ListMain").append($("#coupon_slide_List_L").clone().css("display", "block"));
+					$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
+					$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
+					 
 					}
-							
+					
 					// 각 업체를 클릭했을때 이벤트
 					$("#coupon_" + data[i].PARTNER_NO).click(function(){
 // 						alert("쿠폰" + data[i].PARTNER_NO + "클릭");
@@ -245,16 +291,39 @@ li { list-style-type:none;}
 		<div>	
 			<div class="carousel slide" id="myCarousel">
 		        <div class="carousel-inner col-md-12 col-sm-12 col-xs-12" id="coupon_List">
-		            <div class="item active" id="couponSlide_1">
+		            <div class="item active" >
 		            	<div class="caption">
-   		                    <ul class="thumbnails" id="coupon_slide_1">
-								
-								
-		                        
+   		                    <ul class="thumbnails"  id="coupon_slide_ListMain">
+<!-- 		                        <li class="col-md-3 col-sm-3 col-xs-3"> -->
+<!-- 		    						<div class="fff"> -->
+<!-- 										<div class="thumbnail"> -->
+<!-- 											<a href="#" class="coupon_list_no"><img class="img-responsive" id="coupon_images1"></a> -->
+<!-- 										</div> -->
+<!-- 		                            </div> -->
+<!-- 		                        </li> -->
 		                    </ul>
-						</div>
-	             	</div>
-
+<!--                     	</div> -->
+	             	</div><!-- /Slide1 --> 
+<!-- 		            	<div class="caption" id="coupon_slide_List_L" style="display: none;"> -->
+<!--    		                    <ul class="thumbnails"> -->
+		                        <li class="col-md-3 col-sm-3 col-xs-3" id="coupon_slide_List_L" style="display: none;">
+		    						<div class="fff">
+										<div class="thumbnail">
+											<a href="#" class="coupon_list_no"><img class="img-responsive" id="coupon_L_images"></a>
+										</div>
+		                            </div>
+		                        </li>
+<!-- 		                    </ul> -->
+                    	</div>
+				
+				
+				<div class="item" id="coupon_PageCount" style="display: none;">
+					<div class="caption">
+						<ul class="thumbnails"  id="coupon_slide_ListSub">	
+   		        			
+   		        		</ul>
+   		        	</div>            
+				</div>    <!--  /Slide2  -->
 				
 				</div>
 				
@@ -269,25 +338,51 @@ li { list-style-type:none;}
 		    </div><!-- /#myCarousel -->
 		</div>
 	</div>
-</article>
+</article> 
 
-<!--  쿠폰 기본틀 -->            	
-	<li class="col-md-3 col-sm-3 col-xs-3" id="coupon_slide_List_L">
-		<div class="fff">
-			<div class="thumbnail">
-				<a href="#" class="coupon_list_no">
-				<img class="img-responsive" id="coupon_L_images">
-				</a>
-			</div>
-		</div>
-	</li>
-	
-	<div class="item" id="couponSlide_0">
-		<div class="caption">
-			<ul class="thumbnails" id="coupon_slide_0">                     
-			
-			</ul>
-		</div>
-	</div>			
+
+<!-- <article class="container-fluid"> -->
+<!-- 	<div class="row"> -->
+<!-- 		<section class="page-header"> -->
+<!-- 		<h2 class="page-title">Coupon List</h2> -->
+<!-- 		</section> -->
+<!-- 	</div> -->
+<!-- 	<div class="row"> -->
+<!-- 		<div>	 -->
+<!-- 			<div class="tab-content col-md-12"> -->
+<!-- 				<section role="tabpanel" class="tab-pane active" id="coupon_Total"> -->
+<!-- 				<div class="row" id="coupon_item_list_L"> -->
+<!-- 					<p>50% DisCount Coupon</p> -->
+<!-- 					<div class="col-md-6 col-sm-6 col-xs-6" id="coupon_item_L" role="button" style="display:none;"> -->
+<!-- 						<div id="tour_info" class="thumbnail clean2"> -->
+<!-- 							<a data-toggle="modal" href="#modal_info" class="list_coupon_no">  -->
+<!-- 								<img class="img-responsive" id="coupon_images"/>	 -->
+<!-- 								<div class="caption"> -->
+<!-- 									<p id="list_coupon_L_item"></p> -->
+<!-- 								</div> -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div>	 -->
+					
+<!-- 				<div class="row" id="coupon_item_list_S"> -->
+<!-- 				<p>30% DisCount Coupon</p> -->
+<!-- 				<div class="col-md-3 col-sm-3 col-xs-3" id="coupon_item_S" role="button" style="display:none;"> -->
+					
+<!-- 					<div id="tour_info" class="thumbnail clean1"> -->
+<!-- 						<a data-toggle="modal" href="#modal_info" class="list_coupon_no1">  -->
+<!-- 							<img class="img-responsive" id="coupon_images1"/>	 -->
+<!-- 							<div class="caption"> -->
+<!-- 								<p id="list_coupon_S_item"></p> -->
+<!-- 							</div> -->
+<!-- 						</a> -->
+<!-- 					</div> -->
+<!-- 				</div>	 -->
+<!-- 				</div>			 -->
+<!-- 				</section> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- </article>  -->
 </body>
 </html>

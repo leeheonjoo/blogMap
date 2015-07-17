@@ -21,10 +21,10 @@
 	
 	<select id="couponList_S" parameterType="String" resultType="java.util.HashMap">
 		<![CDATA[	
-			select * from coupon c, -->
-			   (select partner_no, member_id, partner_name from partner where partner_name=#{partner_name}) p
+			select * from coupon c,
+			   (select partner_no, member_id, partner_name from partner where partner_name like '%'||#{partner_name}||'%') p
 			        where c.partner_no = p.partner_no
-			            and coupon_discount < '50' and coupon_yn='Y'    
+			            and coupon_yn='Y'    
  			                order by coupon_discount desc
  		]]>
 	</select>

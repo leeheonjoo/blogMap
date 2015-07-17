@@ -74,7 +74,7 @@ public class CouponServiceImpl implements CouponService {
 	 */
 	@Override
 	public void couponList_S(ModelAndView mav) {
-		logger.info("---------------- Coupon List ----------------");
+		logger.info("---------------- Coupon Search List ----------------");
 		
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
@@ -101,7 +101,8 @@ public class CouponServiceImpl implements CouponService {
 			couponList_S=couponDao.getCouponList_S(partner_name);
 			logger.info("ListSize:"+couponList_S.size());
 		}
-//		메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
+		
+	//		메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
 		Gson gson=new Gson();
 		String json=gson.toJson(couponList_S);
 		logger.info("List:"+couponList_S);
@@ -110,7 +111,7 @@ public class CouponServiceImpl implements CouponService {
 		mav.addObject("couponList",couponList_S);
 		mav.addObject("json", json);
 	}
-		
-	}
+
+}
 
 
