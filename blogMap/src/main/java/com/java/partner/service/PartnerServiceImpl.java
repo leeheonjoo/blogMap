@@ -40,7 +40,7 @@ public class PartnerServiceImpl implements PartnerService {
  * @description:  제휴업체 등록
  */
 	@Override
-	public boolean write(ModelAndView mav) {
+	public void write(ModelAndView mav) {
 		logger.info("PartnerServiceImp write----------------");
 		
 		Map<String, Object> map=mav.getModelMap();
@@ -54,7 +54,6 @@ public class PartnerServiceImpl implements PartnerService {
 		logger.info(partnerDto.getPartner_phone());
 		logger.info(partnerDto.getPartner_addr());
 	
-		boolean isSuccess = false;			//성공했는지 실패했는지 여부 확인한다
 //		String uploadPath = "C:/workspace/blogMap/blogMap/src/main/webapp/pds/partner";
 //		File dir = new File(uploadPath,originalFileName);
 //		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
@@ -94,18 +93,14 @@ public class PartnerServiceImpl implements PartnerService {
 					
 					response.getWriter().print(check);
 					
-					isSuccess = true;
 					
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
-					isSuccess = false;
 				} catch (IOException e) {
 					e.printStackTrace();
-					isSuccess = false;
 				}
 			} // if end
 		} // while end
-		return isSuccess;
 	}
 /**
  * @name: writeList
