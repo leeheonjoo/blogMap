@@ -70,17 +70,17 @@ public class MemberDaoImpl implements MemberDao {
 	 * @description:페이스북 계정으로 로그인한 클라이언트중 이전에 방문하여 등록이 되어있는지 확인
 	 */
 	@Override
-	public int fbRegisterCheck(String member_id) {
-		int check = 0;
-		String id = sqlSession.selectOne("dao.MemberMapper.fbRegisterCheck",member_id);
+	public MemberDto fbRegisterCheck(String member_id) {
+//		int check = 0;
+//		String id = sqlSession.selectOne("dao.MemberMapper.fbRegisterCheck",member_id);
 
-		if (id != null){
-			check = 1;
-		}else{
-			check=0;
-		}
+//		if (id != null){
+//			check = 1;
+//		}else{
+//			check=0;
+//		}
 			
-		return check;
+		return sqlSession.selectOne("dao.MemberMapper.fbRegisterCheck",member_id);
 	}
 
 	/**

@@ -53,7 +53,7 @@
 				//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
 				//$("#blogmap_login_bar").fadeOut();
 				$("#blogmap_before_login span").remove();
-				
+				$("#myPage_fb_delete_btn").css("display","none");
 				/* if($("#blogmap_main_myPage b").text()=="MyPage"){
 					$("#blogmap_main_myPage").parent().remove();
 				} */

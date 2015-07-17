@@ -157,10 +157,13 @@ public class MemberServiceImpl implements MemberService {
 
 		logger.info("member_id:" + memberDto.getMember_id());
 
-		int check = memberDao.fbRegisterCheck(memberDto.getMember_id());
-		logger.info("check:" + check);
+		MemberDto selectMemberDtoCheck = memberDao.fbRegisterCheck(memberDto.getMember_id());
+		logger.info("selectMemberDto:" + selectMemberDtoCheck);
+		
+//		int check = memberDao.fbRegisterCheck(memberDto.getMember_id());
+//		logger.info("check:" + check);
 
-		if (check == 0) {
+		if (selectMemberDtoCheck==null) {
 			memberDto.setMember_jointype("0002");
 			int fbRegisterCheck = memberDao.fbRegister(memberDto);
 
