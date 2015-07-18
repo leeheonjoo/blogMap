@@ -318,7 +318,7 @@ if(sessionStorage.getItem('email')!=null){
 		
 		//다음클릭시
 		$("#point_paging_after").click(function(){
-			alert("Aa");
+			//alert("Aa");
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/point_info.do',
@@ -342,7 +342,7 @@ if(sessionStorage.getItem('email')!=null){
 					var currentPage=data[3];
 					//var pageBlock=1;
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-					alert(pageCount);
+					//alert(pageCount);
 					p_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					p_endPage=p_startPage+pageBlock-1;
 					
@@ -372,13 +372,13 @@ if(sessionStorage.getItem('email')!=null){
 					if(p_endPage>pageCount){
 						p_endPage=pageCount;
 					}
-					alert("다음startPage:"+p_startPage);
-					alert("다음endPage:"+p_endPage);
-					alert("다음pageBlock"+pageBlock)
+					//alert("다음startPage:"+p_startPage);
+					//alert("다음endPage:"+p_endPage);
+					//alert("다음pageBlock"+pageBlock)
 					
 					//이전
 					if(p_startPage>pageBlock){
-						alert("block");
+						//alert("block");
 						$("#myPage_member_point_list_before").css("display","inline-block");
 						$("#myPage_member_point_list_pageNum").css("display","none");
 						$("#myPage_member_point_list_pageNum").css("display","inline-block");
@@ -435,17 +435,17 @@ if(sessionStorage.getItem('email')!=null){
 							});
 						});
 					}
-					alert("다음endPage:"+p_endPage);
-					alert("다음pageCount"+pageCount);
-					alert("다음마지막startPage:"+p_startPage);
+					//alert("다음endPage:"+p_endPage);
+					//alert("다음pageCount"+pageCount);
+					//alert("다음마지막startPage:"+p_startPage);
 					//다음
 					if(p_endPage<pageCount){
-						alert("다음block");
+						//alert("다음block");
 						$("#myPage_member_point_list_after").css("display","inline-block");
 					}
 					
 					if(p_endPage>=pageCount){
-						alert("다음hidden");
+						//alert("다음hidden");
 						$("#myPage_member_point_list_after").css("display","none");
 						alert("bbbbbb");
 					}
@@ -457,8 +457,8 @@ if(sessionStorage.getItem('email')!=null){
 		
 		//이전클릭시
 		$("#point_paging_before").click(function(){
-			alert("이전startPage:"+p_startPage);
-			alert("이전pageBlock:"+pageBlock);
+			//alert("이전startPage:"+p_startPage);
+			//alert("이전pageBlock:"+pageBlock);
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/point_info.do',
@@ -482,7 +482,7 @@ if(sessionStorage.getItem('email')!=null){
 					var currentPage=data[3];
 					//var pageBlock=1;
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-					alert(pageCount);
+					//alert(pageCount);
 					p_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					p_endPage=p_startPage+pageBlock-1;
 					
@@ -509,8 +509,8 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
 					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
 					
-					alert("startPage:"+p_startPage);
-					alert("pageBlock:"+pageBlock);
+					//alert("startPage:"+p_startPage);
+					//alert("pageBlock:"+pageBlock);
 					//이전
 					if(p_startPage>pageBlock){
 						$("#myPage_member_point_list_before").css("display","inline-block");
@@ -726,7 +726,7 @@ if(sessionStorage.getItem('email')!=null){
 		
 		//다음클릭시
 		$("#coupon_paging_after").click(function(){
-			alert("Aa");
+			//alert("Aa");
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/coupon_info.do',
@@ -750,7 +750,7 @@ if(sessionStorage.getItem('email')!=null){
 					var currentPage=data[3];
 					//var pageBlock=1;
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-					alert(pageCount);
+					//alert(pageCount);
 					c_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					c_endPage=c_startPage+pageBlock-1;
 					
@@ -774,12 +774,12 @@ if(sessionStorage.getItem('email')!=null){
 					if(c_endPage>pageCount){
 						c_endPage=pageCount;
 					}
-					alert("다음startPage:"+c_startPage);
-					alert("다음endPage:"+c_endPage);
-					alert("다음pageBlock"+pageBlock)
+					//alert("다음startPage:"+c_startPage);
+					//alert("다음endPage:"+c_endPage);
+					//alert("다음pageBlock"+pageBlock)
 					//이전
 					if(c_startPage>pageBlock){
-						alert("block");
+						//alert("block");
 						$("#myPage_member_coupon_list_before").css("display","inline-block");
 						$("#myPage_member_coupon_list_pageNum").css("display","none");
 						$("#myPage_member_coupon_list_pageNum").css("display","inline-block");
@@ -832,19 +832,19 @@ if(sessionStorage.getItem('email')!=null){
 							});
 						});
 					}
-					alert("다음endPage:"+c_endPage);
-					alert("다음pageCount"+pageCount);
-					alert("다음마지막startPage:"+c_startPage);
+// 					alert("다음endPage:"+c_endPage);
+// 					alert("다음pageCount"+pageCount);
+// 					alert("다음마지막startPage:"+c_startPage);
 					//다음
 					if(c_endPage<pageCount){
-						alert("다음block");
+						//alert("다음block");
 						$("#myPage_member_coupon_list_after").css("display","inline-block");
 					}
 					
 					if(c_endPage>=pageCount){
-						alert("다음hidden");
+						//alert("다음hidden");
 						$("#myPage_member_coupon_list_after").css("display","none");
-						alert("bbbbbb");
+						//alert("bbbbbb");
 					}
 					
 				}
@@ -854,8 +854,8 @@ if(sessionStorage.getItem('email')!=null){
 		
 		//이전클릭시
 		$("#coupon_paging_before").click(function(){
-			alert("이전startPage:"+c_startPage);
-			alert("이전pageBlock:"+pageBlock);
+			//alert("이전startPage:"+c_startPage);
+			//alert("이전pageBlock:"+pageBlock);
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/coupon_info.do',
@@ -879,7 +879,7 @@ if(sessionStorage.getItem('email')!=null){
 					var currentPage=data[3];
 					//var pageBlock=1;
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-					alert(pageCount);
+					//alert(pageCount);
 					c_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					c_endPage=c_startPage+pageBlock-1;
 					
@@ -900,8 +900,8 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
 					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
 					
-					alert("startPage:"+c_startPage);
-					alert("pageBlock:"+pageBlock);
+					//alert("startPage:"+c_startPage);
+					//alert("pageBlock:"+pageBlock);
 					//이전
 					if(c_startPage>pageBlock){
 						$("#myPage_member_coupon_list_before").css("display","inline-block");
@@ -1108,7 +1108,7 @@ if(sessionStorage.getItem('email')!=null){
 		
 		//다음클릭시
 		$("#board_paging_after").click(function(){
-			alert("Aa");
+			//alert("Aa");
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/board_info.do',
@@ -1132,7 +1132,7 @@ if(sessionStorage.getItem('email')!=null){
 					var currentPage=data[3];
 					//var pageBlock=1;
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-					alert(pageCount);
+					//alert(pageCount);
 					b_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					b_endPage=b_startPage+pageBlock-1;
 					
@@ -1161,9 +1161,9 @@ if(sessionStorage.getItem('email')!=null){
 						b_endPage=pageCount;
 					}
 					
-					alert("다음startPage:"+b_startPage);
-					alert("다음endPage:"+b_endPage);
-					alert("다음pageBlock"+pageBlock)
+// 					alert("다음startPage:"+b_startPage);
+// 					alert("다음endPage:"+b_endPage);
+// 					alert("다음pageBlock"+pageBlock)
 					//이전
 					if(b_startPage>pageBlock){
 						alert("block");
@@ -1223,19 +1223,19 @@ if(sessionStorage.getItem('email')!=null){
 							});
 						});
 					}
-					alert("다음endPage:"+b_endPage);
-					alert("다음pageCount"+pageCount);
-					alert("다음마지막startPage:"+b_startPage);
+// 					alert("다음endPage:"+b_endPage);
+// 					alert("다음pageCount"+pageCount);
+// 					alert("다음마지막startPage:"+b_startPage);
 					//다음
 					if(b_endPage<pageCount){
-						alert("다음block");
+						//alert("다음block");
 						$("#myPage_member_board_list_after").css("display","inline-block");
 					}
 					
 					if(b_endPage>=pageCount){
-						alert("다음hidden");
+						//alert("다음hidden");
 						$("#myPage_member_board_list_after").css("display","none");
-						alert("bbbbbb");
+						//alert("bbbbbb");
 					}
 					
 				}
@@ -1245,8 +1245,8 @@ if(sessionStorage.getItem('email')!=null){
 		
 		//이전클릭시
 		$("#board_paging_before").click(function(){
-			alert("이전startPage:"+b_startPage);
-			alert("이전pageBlock:"+pageBlock);
+			//alert("이전startPage:"+b_startPage);
+			//alert("이전pageBlock:"+pageBlock);
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/board_info.do',
@@ -1533,7 +1533,7 @@ if(sessionStorage.getItem('email')!=null){
 		
 		//다음클릭시
 		$("#favorite_paging_after").click(function(){
-			alert("Aa");
+			//alert("Aa");
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/favorite_info.do',
@@ -1581,12 +1581,12 @@ if(sessionStorage.getItem('email')!=null){
 						f_endPage=pageCount;
 					}
 					
-					alert("다음startPage:"+f_startPage);
-					alert("다음endPage:"+f_endPage);
-					alert("다음pageBlock"+pageBlock)
+// 					alert("다음startPage:"+f_startPage);
+// 					alert("다음endPage:"+f_endPage);
+// 					alert("다음pageBlock"+pageBlock)
 					//이전
 					if(f_startPage>pageBlock){
-						alert("block");
+						//alert("block");
 						$("#myPage_member_favorite_list_before").css("display","inline-block");
 						$("#myPage_member_favorite_list_pageNum").css("display","none");
 						$("#myPage_member_favorite_list_pageNum").css("display","inline-block");
@@ -1638,19 +1638,19 @@ if(sessionStorage.getItem('email')!=null){
 							});
 						});
 					}
-					alert("다음endPage:"+f_endPage);
-					alert("다음pageCount"+pageCount);
-					alert("다음마지막startPage:"+f_startPage);
+// 					alert("다음endPage:"+f_endPage);
+// 					alert("다음pageCount"+pageCount);
+// 					alert("다음마지막startPage:"+f_startPage);
 					//다음
 					if(f_endPage<pageCount){
-						alert("다음block");
+						//alert("다음block");
 						$("#myPage_member_favorite_list_after").css("display","inline-block");
 					}
 					
 					if(f_endPage>=pageCount){
-						alert("다음hidden");
+						//alert("다음hidden");
 						$("#myPage_member_favorite_list_after").css("display","none");
-						alert("bbbbbb");
+						//alert("bbbbbb");
 					}
 					
 				}
@@ -1660,8 +1660,8 @@ if(sessionStorage.getItem('email')!=null){
 		
 		//이전클릭시
 		$("#favorite_paging_before").click(function(){
-			alert("이전startPage:"+f_startPage);
-			alert("이전pageBlock:"+pageBlock);
+// 			alert("이전startPage:"+f_startPage);
+// 			alert("이전pageBlock:"+pageBlock);
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/favorite_info.do',
@@ -1685,7 +1685,7 @@ if(sessionStorage.getItem('email')!=null){
 					var currentPage=data[3];
 					//var pageBlock=1;
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-					alert(pageCount);
+					//alert(pageCount);
 					f_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					f_endPage=f_startPage+pageBlock-1;
 					
@@ -1705,8 +1705,8 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
 					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
 					
-					alert("startPage:"+f_startPage);
-					alert("pageBlock:"+pageBlock);
+					//alert("startPage:"+f_startPage);
+					//alert("pageBlock:"+pageBlock);
 					//이전
 					if(f_startPage>pageBlock){
 						$("#myPage_member_favorite_list_before").css("display","inline-block");
