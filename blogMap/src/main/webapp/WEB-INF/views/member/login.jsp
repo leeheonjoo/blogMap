@@ -22,26 +22,30 @@
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){  
 	 				//alert(responseData);
+	 				var loginData=JSON.parse(responseData);
 	 				
-	 				if(responseData!="null"){
-	 					 if (window.sessionStorage) {
-	 		                sessionStorage.setItem('email', responseData);
-	 		                var email = sessionStorage.getItem('email');
-	 		                //alert(email);
-	 		                $("#loginCheck").text(email);
-	 		            }
-	 	
-	 					 
-	 					 
+	 				if(loginData!=null){
+	 					//alert("aa");
+	 					if(loginData.member_id!="undefined"){
+	 						if (window.sessionStorage) {
+		 		                sessionStorage.setItem('email', loginData.member_id);
+		 		                var email = sessionStorage.getItem('email');
+		 		            }
+	 					}else if(loginData.manager_id!="undefined"){
+	 						if (window.sessionStorage) {
+		 		                sessionStorage.setItem('email', loginData.manager_id);
+		 		                var email = sessionStorage.getItem('email');
+		 		                sessionStorage.setItem('	',loginData.manager_yn);
+		 		               
+		 		            }
+	 					}	 
 	 					 //$("#blogmap_login_bar").fadeOut();
 	 				   	 //$("#blogmap_after_login").css("display","block");
 	 					 alert("로그인 성공");
 	 					 location.href="${root}/";
-	 					
-	
 	 				}
 	 				
-	 				if(responseData=="null"){
+	 				if(loginData==null){
 	 					alert("아이디와 암호를 확인해주세요");
 	 				
 	 				}
