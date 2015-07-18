@@ -25,7 +25,7 @@
 	 				var loginData=JSON.parse(responseData);
 	 				
 	 				if(loginData!=null){
-	 					alert("aa");
+	 					//alert("aa");
 	 					if(loginData.member_id!="undefined"){
 	 						if (window.sessionStorage) {
 		 		                sessionStorage.setItem('email', loginData.member_id);
