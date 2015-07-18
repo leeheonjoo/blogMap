@@ -15,6 +15,18 @@
 		/* alert("현재 로그인 중인 아이디 : " + email); */
 		
 		$("#write_btn").click(function() {
+			if(!  $("input[name='messageWrite_receiver']").val()){
+				alert("수신자 아이디를 입력하세요.");
+				$("#message_receiver").focus();
+				return false;
+			}
+			
+			if(!  $("textarea#messageWrite_content").val()){
+				alert("내용을 입력하세요.");
+				$("#messageWrite_content").focus();
+				return false;
+			}
+			
 				$.ajax({
 					type : 'post',
 					url : '${root}/message/messageWrite.do',

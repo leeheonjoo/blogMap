@@ -138,9 +138,7 @@ li { list-style-type:none;}
 </script>
 <script type="text/javascript">
  $(document).ready(function(){		 
-	$("#tile4").click(function(){
-		//$("#coupon_slide_List_L").empty();
-		
+	$("#tile4").click(function(){		
 		$.ajax({
 			type:'post',
 			url:'${root}/coupon/couponMain.do',
@@ -154,13 +152,18 @@ li { list-style-type:none;}
 				$("#coupon_List").empty();
 				
 				$.each(data, function(i){
+					
+					var pic=data[i].COUPON_PIC_NAME;
+// 					alert("PIC NAME : " + pic);
+					var coupon_no=data[i].COUPON_NO;
+					
 					var item_var = "<div class='caption'>";
 					item_var += "<ul class='thumbnails' id='coupon_slide_1'>";
 					item_var += "<li class='col-md-3 col-sm-3 col-xs-3' id='coupon_slide_List_L'>";
 					item_var += "<div class='fff'>";
 					item_var += "<div class='thumbnail'>";
-					item_var += "<a href='#' class='coupon_list_no'>";
-					item_var += "<img class='img-responsive' id='coupon_L_images'>";
+					item_var += "<a data-toggle='modal' href='#couponDetail' class='coupon_list_no btn-example' id=coupon_no_" + coupon_no +">";
+					item_var += "<img src=" + "${root}/pds/coupon/" + pic + " class='img-responsive' id='coupon_L_images'>";
 					item_var += "</a>";
 					item_var += "</div>";
 					item_var += "</div>";
@@ -170,105 +173,163 @@ li { list-style-type:none;}
 					
 					if(i%8==0){
 						/* DIV 추가 */
-						$("#coupon_List").append("<div class='item'></div>");
+						$("#coupon_List").append("<div class='item' id='coupon_create_list'></div>");
 							
 						if(i==0){
-							$("#coupon_List .item").addClass("active");
+							$("#coupon_List #coupon_create_list").addClass("active");
 						}
 					}
 					
-					$("#coupont_List > .item:last-child").append(item_var);
-
+					$("#coupon_create_list:last-child").append(item_var);
 					
-							
-// 	=======================================================================================================================
-				
-// 				/* 데이타를 채우기 위해 복사 */
-// 				$.each(data, function(i){
-// 					var pic=data[i].COUPON_PIC_NAME;
-// 					var partner_name=data[i].PARTNER_NAME;
-										
-// 					$("#coupon_slide_"+ count).append($("#coupon_slide_List_L").clone().css("display", "inline-block"));
-					
-// 					$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
-					
-// 					if((i+1) % 8 == 0){
-// 						$("#coupon_List").append($("#couponSlide_0").clone().attr("id","couponslide_"+(count +1)));
-// 						$("#couponslide_"+(count+1) +" ul[id='coupon_slide_0']").attr("id","coupon_slide_"+(count +1));
-// 						count += 1;
-							
-// 					}
-
-// 	=======================================================================================================================				
-							
 					// 각 업체를 클릭했을때 이벤트
-					$("#coupon_" + data[i].PARTNER_NO).click(function(){
+					$("#coupon_no_" + coupon_no).click(function(){
 // 						alert("쿠폰" + data[i].PARTNER_NO + "클릭");
-						couponData(data[i].PARTNER_NO);	
+						couponData(coupon_no);	
 					});
  				});
 				
 				if (!data) {
 					alert("등록된 정보가 없습니다.");
 					return false;
-				}
-			}
+				}	
+			}	
 		});	
 	});
 	
+	function couponData(couponNo){
+		$("#couponDetailResult").empty();
+		$.ajax({
+			type:'get',
+			url:'${root}/manager/couponDetail.do?coupon_no='+couponNo,
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			 success:function(responseData){
+				var data=JSON.parse(responseData);
+				//var filename=data.partner_pic_name
+				//alert(data[0].PARTNER_NAME);
+				var getbymd = new Date(data[0].COUPON_BYMD);	// 등록일 날짜 변환
+				var byear = getbymd.getFullYear();
+				var bmonth = getbymd.getMonth() + 1;
+				var bday = getbymd.getDate();
+				var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+				//alert(bymd);
+				
+				var geteymd = new Date(data[0].COUPON_EYMD);	// 승인일 날짜 변환
+				var eyear = geteymd.getFullYear();
+				var emonth = geteymd.getMonth() + 1;
+				var eday = geteymd.getDate();
+				var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+				//alert(eymd);
+				
+				$("#couponDetailResult").append($("#couponDetailMain").clone().css("display","block"));
+				$("#couponDetailMain:last-child #coupon_img").attr("src", "${root}/pds/coupon/"+data[0].COUPON_PIC_NAME);
+				$("#couponDetailMain:last-child #partner_no").html(data[0].PARTNER_NAME);
+				$("#couponDetailMain:last-child #coupon_item").html(data[0].COUPON_ITEM);
+				$("#couponDetailMain:last-child #coupon_discount").html(data[0].COUPON_DISCOUNT);
+				$("#couponDetailMain:last-child #coupon_bymd").html(bymd);
+				$("#couponDetailMain:last-child #coupon_eymd").html(eymd);					
+				if(data[0].COUPON_YN == "Y"){
+					//$("#partner_submit").css("display", "none");
+					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"취소"});
+				}else if(data[0].COUPON_YN == "N"){
+					//$("#partner_delete").css("display", "none");
+					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"승인"});
+				} 
+				
+				$("#coupon_detail_button[value='취소']").click(function(){
+					var couponNo = $(this).attr('name');
+					//alert(couponNo);
+					var check = confirm("쿠폰 발행을 취소하시겠습니까?");
+					if(check == "1"){
+						couponCancle(couponNo);
+					}else{
+						alert("취소하셨습니다.")
+					}
+				});
+				
+				$("#coupon_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
+					var couponNo = $(this).attr('name');		
+					//alert(couponNo);
+					var check = confirm("쿠폰을 승인 하시겠습니까?");
+					if(check == "1"){
+						couponSubmit(couponNo);
+					}else{
+						alert("취소하셨습니다.")
+					}
+				});	
+			},error:function(data){
+				alert("에러가 발생했습니다.");
+			}
+
+		});
+	};
+	
 	$("#coupon_search_btn").click(function(){
-		//$("#coupon_slide_"+ count).empty();
-		
 		$.ajax({
 			type:'get',
 			url:'${root}/coupon/couponMain.do',
 			data : {
-				member_id : email,
-				partner_name : $("input[name='coupon_search']").val()
+				partner_name : $("input[name='coupon_search']").val(),
+				member_id : email
 			},
 			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(responseData) {
 				var data = JSON.parse(responseData);
-				var count= 1;
+				
+	//				var count= 1;
 				/* alert(data); */
 				
-				/* 데이타를 채우기 위해 복사 */
+				$("#coupon_List").empty();
+				
 				$.each(data, function(i){
+					
 					var pic=data[i].COUPON_PIC_NAME;
 					var partner_name=data[i].PARTNER_NAME;
-					//alert(count);
-					//alert("사진 이름 : "+pic + " / " + "업체명 : " + partner_name + " / " + " I 값 : " + i);
-										
-					$("#coupon_slide_"+ count).append($("#coupon_slide_List_L").clone().css("display", "inline-block"));
-					//$("#coupon_slide_List_L:last-child a[class='coupon_list_no']").attr("id", data[i].COUPON_NO);
-					$("#coupon_slide_List_L:last-child #coupon_L_images").attr("src", "${root}/pds/coupon/" + pic);	
-					//alert((i+1) % 8);
+						alert("PIC NAME : " + pic + " / PARTNER_NAME : " + partner_name);
+					var coupon_no=data[i].COUPON_NO;
 					
-					if((i+1) % 8 == 0){
-						$("#coupon_List").append($("#couponSlide_0").clone().attr("id","couponslide_"+(count +1)));
-						$("#couponslide_"+(count+1) +" ul[id='coupon_slide_0']").attr("id","coupon_slide_"+(count +1));
-						count += 1;
+					var item_var = "<div class='caption'>";
+					item_var += "<ul class='thumbnails' id='coupon_slide_1'>";
+					item_var += "<li class='col-md-3 col-sm-3 col-xs-3' id='coupon_slide_List_L'>";
+					item_var += "<div class='fff'>";
+					item_var += "<div class='thumbnail'>";
+					item_var += "<a data-toggle='modal' href='#couponDetail' class='coupon_list_no btn-example' id=coupon_no_" + coupon_no +">";
+					item_var += "<img src=" + "${root}/pds/coupon/" + pic + " class='img-responsive' id='coupon_L_images'>";
+					item_var += "</a>";
+					item_var += "</div>";
+					item_var += "</div>";
+					item_var += "</li>";
+					item_var += "</ul>";
+					item_var += "</div>";
+					
+					if(i%8==0){
+						/* DIV 추가 */
+						$("#coupon_List").append("<div class='item' id='coupon_create_list'></div>");
 							
+						if(i==0){
+							$("#coupon_List #coupon_create_list").addClass("active");
+						}
 					}
-							
+					
+					$("#coupon_create_list:last-child").append(item_var);
+					
 					// 각 업체를 클릭했을때 이벤트
-					$("#coupon_" + data[i].PARTNER_NO).click(function(){
-// 						alert("쿠폰" + data[i].PARTNER_NO + "클릭");
-						couponData(data[i].PARTNER_NO);	
+					$("#coupon_no_" + coupon_no).click(function(){
+	//						alert("쿠폰" + data[i].PARTNER_NO + "클릭");
+						couponData(coupon_no);	
 					});
-				});
+					});
 				
 				if (!data) {
 					alert("등록된 정보가 없습니다.");
 					return false;
-				}
-			}
+				}	
+			}	
 		});	
-	});
- 
+	});	
 });
- 
- 
+	
+	
 </script>
 </head>
 <body>
@@ -291,11 +352,8 @@ li { list-style-type:none;}
 								</li>		                        
 		                    </ul>
 						</div>
-	             	</div>
-
-				
+	             	</div>			
 				</div>
-				
 				<nav>
 					<ul class="control-box pager">
 						<li><a data-slide="prev" href="#myCarousel" class=""><i class="glyphicon glyphicon-chevron-left"></i></a></li>
@@ -308,24 +366,5 @@ li { list-style-type:none;}
 		</div>
 	</div>
 </article>
-
-<!--  쿠폰 기본틀 -->            	
-<!-- 	<li class="col-md-3 col-sm-3 col-xs-3" id="coupon_slide_List_L" style="display: none;"> -->
-<!-- 		<div class="fff"> -->
-<!-- 			<div class="thumbnail"> -->
-<!-- 				<a href="#" class="coupon_list_no"> -->
-<!-- 				<img class="img-responsive" id="coupon_L_images"> -->
-<!-- 				</a> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</li> -->
-	
-<!-- 	<div class="item" id="couponSlide_0"> -->
-<!-- 		<div class="caption"> -->
-<!-- 			<ul class="thumbnails" id="coupon_slide_0">                      -->
-			
-<!-- 			</ul> -->
-<!-- 		</div> -->
-<!-- 	</div>			 -->
 </body>
 </html>
