@@ -100,12 +100,29 @@
 				}
 			}
 	});
-
-	
-
-
-
 </script>
+<script>
+	$(function(){
+		$.ajax({
+			type:'get',
+			url:'${root}/board/getRecommandBlog.do',
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			success:function(responseData){
+					var data=JSON.parse(responseData);
+					if(!data){
+						alert("blogMap 추천게시물 get Error");
+						return false;
+					}
+// 					blogList_ConditionInsert("si", data.sido);
+// 					blogList_ConditionInsert("headCategory", data.header);
+			},
+			error:function(data){
+				alert("error : blogMap getRecommandBlog");
+			}
+		});	
+	});
+</script>
+
 </head>
 <body>
 	<div class="container" style="max-width:1170px; padding:0 0 0 0;">

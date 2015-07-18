@@ -102,4 +102,7 @@
 		select * from attach_file where board_no=#{boardNo}
 	</select>
 	
+	<select id="getRecommandBlog" resultType="java.util.HashMap">
+	
+	</select>
 </mapper>

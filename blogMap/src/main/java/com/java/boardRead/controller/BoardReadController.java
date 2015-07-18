@@ -50,6 +50,20 @@ public class BoardReadController {
 		}
 	}
 	
+	@RequestMapping(value="/board/getRecommandBlog.do", method=RequestMethod.GET)
+	public void getRecommandBlog(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController getRecommandBlog--------------------------");
+		
+		String json=boardReadService.getRecommandBlog();
+
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * @name : categoryBegin
 	 * @date : 2015. 6. 26.

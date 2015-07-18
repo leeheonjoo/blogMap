@@ -28,6 +28,13 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	
+	@Override
+	public void getRecommandBlog() {
+		sqlSession.selectList("dao.BoardReadMapper.getRecommandBlog");
+		
+	}
+	
 	@Override
 	public BoardReadDto getData() {
 		return sqlSession.selectOne("dao.BoardReadMapper.getData");

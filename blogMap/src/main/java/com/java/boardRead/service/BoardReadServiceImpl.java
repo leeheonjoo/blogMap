@@ -40,6 +40,26 @@ public class BoardReadServiceImpl implements BoardReadService {
 	private BoardReadDao boardReadDao;
 	
 	@Override
+	public String getRecommandBlog() {
+		logger.info("BoardReadService getRecommandBlog------------------------");
+		
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		
+		boardReadDao.getRecommandBlog();
+		
+		map.put("recommendBlogList", "recommendBlogList");
+		
+		Gson gson=new Gson();
+		String json=gson.toJson(map);
+		
+		System.out.println("json: " + json);
+
+		logger.info("getRecommandBlog json: " + json);
+
+		return json;
+	}
+	
+	@Override
 	public void getData(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		
