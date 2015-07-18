@@ -21,23 +21,22 @@
 				
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){  
-	 				//alert(responseData);
 	 				var loginData=JSON.parse(responseData);
 	 				
 	 				if(loginData!=null){
-	 					//alert("aa");
-	 					if(loginData.member_id!="undefined"){
+	 					if(loginData.member_id==null){
+	 						if (window.sessionStorage) {
+		 		                sessionStorage.setItem('email', loginData.manager_id);
+		 		                var email = sessionStorage.getItem('email');
+		 		                sessionStorage.setItem('manager_yn',loginData.manager_yn);
+		 		                //alert(sessionStorage.getItem('manager_yn'));
+		 		            }
+	 					}else if(loginData.manager_id==null){
 	 						if (window.sessionStorage) {
 		 		                sessionStorage.setItem('email', loginData.member_id);
 		 		                var email = sessionStorage.getItem('email');
 		 		            }
-	 					}else if(loginData.manager_id!="undefined"){
-	 						if (window.sessionStorage) {
-		 		                sessionStorage.setItem('email', loginData.manager_id);
-		 		                var email = sessionStorage.getItem('email');
-		 		                sessionStorage.setItem('	',loginData.manager_yn);
-		 		               
-		 		            }
+	 						
 	 					}	 
 	 					 //$("#blogmap_login_bar").fadeOut();
 	 				   	 //$("#blogmap_after_login").css("display","block");

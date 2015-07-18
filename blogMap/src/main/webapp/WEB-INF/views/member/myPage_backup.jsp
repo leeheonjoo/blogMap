@@ -656,7 +656,7 @@ if(sessionStorage.getItem('email')!=null){
 						//alert(eymd);
 						
 						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-						$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
+						$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
 					});
 					/////////////////////////////////////----------------------------- 여기까지
 					
