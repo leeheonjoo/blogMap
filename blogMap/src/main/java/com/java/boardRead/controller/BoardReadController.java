@@ -196,6 +196,46 @@ public class BoardReadController {
 		
 	}
 	
+	@RequestMapping(value="/board/blogReadReference",method=RequestMethod.POST)
+	public void blogReadReference(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogReadReference-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogReadReference(mav);
+		
+		
+	}
+	@RequestMapping(value="/board/blogReadNoreference",method=RequestMethod.POST)
+	public void blogReadNoreference(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogReadNoreference-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogReadNoReference(mav);
+		
+		
+	}
+	@RequestMapping(value="/board/referenceRefresh.do",method=RequestMethod.POST)
+	public void referenceRefresh(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController referenceRefresh-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.referenceRefresh(mav);
+		
+		
+	}
+	
 	
 	
 }

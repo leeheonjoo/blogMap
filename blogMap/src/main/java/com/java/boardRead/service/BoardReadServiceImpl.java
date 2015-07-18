@@ -30,6 +30,7 @@ import com.java.board.dto.Board_addr_infoDto;
 import com.java.boardRead.dao.BoardReadDao;
 import com.java.boardRead.dto.BoardReadDto;
 import com.java.boardRead.dto.CategoryDto;
+import com.java.boardRead.dto.RecommandDto;
 import com.java.reply.dto.ReplyDto;
 
 @Component
@@ -427,6 +428,90 @@ public class BoardReadServiceImpl implements BoardReadService {
 			} catch (UnsupportedEncodingException e1) {
 				e1.printStackTrace();
 			}
+	}
+
+	@Override
+	public void blogReadReference(ModelAndView mav) {
+		logger.info("BoardReadService blogReadReference------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int board_no=Integer.parseInt(request.getParameter("board_no"));
+		String member_id = request.getParameter("member_id");
+		
+		System.out.println(board_no+"|"+member_id);
+		
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("board_no", board_no);
+		hMap.put("member_id", member_id);
+		
+		int check=boardReadDao.blogReadReference(hMap);
+		System.out.println(check);
+		if(check > 0){
+			logger.info("blogReadReference_check:"+check);
+			 try {
+				response.getWriter().print(check);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void blogReadNoReference(ModelAndView mav) {
+		logger.info("BoardReadService blogReadReference------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int board_no=Integer.parseInt(request.getParameter("board_no"));
+		String member_id = request.getParameter("member_id");
+		
+		System.out.println(board_no+"|"+member_id);
+		
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("board_no", board_no);
+		hMap.put("member_id", member_id);
+		
+		int check=boardReadDao.blogReadNoReference(hMap);
+		System.out.println(check);
+		if(check > 0){
+			logger.info("blogReadNoReference_check:"+check);
+			 try {
+				response.getWriter().print(check);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void referenceRefresh(ModelAndView mav) {
+		logger.info("BoardReadService blogReadReference------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int board_no=Integer.parseInt(request.getParameter("board_no"));
+		List<RecommandDto> recommandDto=null;
+	    recommandDto=boardReadDao.referenceRefresh(board_no);
+	    logger.info("referenceRefresh:"+recommandDto);
+	    Gson gson=new Gson();
+		String recommandDto_json=gson.toJson(recommandDto);
+		
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(recommandDto_json);
+			System.out.println(recommandDto_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 }
