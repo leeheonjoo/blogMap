@@ -26,5 +26,17 @@ public interface BoardReadService {
 
 	public void blogListSearchSub2(ModelAndView mav);
 
+	public void blogReadReference(ModelAndView mav);
+
+	public void blogReadNoReference(ModelAndView mav);
+
+	public void referenceRefresh(ModelAndView mav);
+
+	public void bookMark(ModelAndView mav);
+
+	public void NobookMark(ModelAndView mav);
+
+	public void blogDelete(ModelAndView mav);
+
 	
 }

@@ -13,6 +13,7 @@ import com.java.board.dto.BoardDto;
 import com.java.board.dto.Board_addr_infoDto;
 import com.java.boardRead.dto.BoardReadDto;
 import com.java.boardRead.dto.CategoryDto;
+import com.java.boardRead.dto.RecommandDto;
 import com.java.reply.dto.ReplyDto;
 
 /**
@@ -169,6 +170,42 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	public List<Attach_fileDto> getblogImg(int boardNo) {
 		logger.info("BoardReadDao getblogImg-------------------------");
 		return sqlSession.selectList("dao.BoardReadMapper.getblogImg",boardNo);
+	}
+
+	@Override
+	public int blogReadReference(HashMap<String, Object> hMap) {
+		logger.info("BoardReadDao blogReadReference-------------------------");
+		return sqlSession.update("dao.BoardReadMapper.blogReadReference",hMap);
+	}
+
+	@Override
+	public int blogReadNoReference(HashMap<String, Object> hMap) {
+		logger.info("BoardReadDao blogReadNoReference-------------------------");
+		return sqlSession.update("dao.BoardReadMapper.blogReadNoReference",hMap);
+	}
+
+	@Override
+	public List<RecommandDto> referenceRefresh(int board_no) {
+		logger.info("BoardReadDao referenceRefresh-------------------------");
+		return sqlSession.selectList("dao.BoardReadMapper.referenceRefresh",board_no);
+	}
+
+	@Override
+	public int bookMark(HashMap<String, Object> hMap) {
+		logger.info("BoardReadDao bookMark-------------------------");
+		return sqlSession.insert("dao.BoardReadMapper.bookMark",hMap);
+	}
+
+	@Override
+	public int NobookMark(HashMap<String, Object> hMap) {
+		logger.info("BoardReadDao NobookMark-------------------------");
+		return sqlSession.insert("dao.BoardReadMapper.NobookMark",hMap);
+	}
+
+	@Override
+	public int blogDelete(HashMap<String, Object> hMap) {
+		logger.info("BoardReadDao blogDelete-------------------------");
+		return sqlSession.delete("dao.BoardReadMapper.blogDelete",hMap);
 	}
 
 	

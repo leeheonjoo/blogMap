@@ -74,8 +74,6 @@
 			<div class="modal-footer">
 				<input type="button" class="btn btn-default" id="coupon_detail_button"/>
 				<input type="button" class="btn btn-default" data-dismiss="modal" value="닫기" />	
-				
-				<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">click</button>	
 			</div>
 		</div>
 	</div>
