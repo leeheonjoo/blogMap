@@ -202,5 +202,11 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		return sqlSession.insert("dao.BoardReadMapper.NobookMark",hMap);
 	}
 
+	@Override
+	public int blogDelete(HashMap<String, Object> hMap) {
+		logger.info("BoardReadDao blogDelete-------------------------");
+		return sqlSession.delete("dao.BoardReadMapper.blogDelete",hMap);
+	}
+
 	
 }

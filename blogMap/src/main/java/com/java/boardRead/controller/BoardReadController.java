@@ -258,10 +258,19 @@ public class BoardReadController {
 		mav.addObject("response",response);
 		
 		boardReadService.NobookMark(mav);
-		
-		
 	}
 	
+	@RequestMapping(value="/board/blogDelete.do",method=RequestMethod.POST)
+	public void blogDelete(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogDelete-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogDelete(mav);
+	}
 	
 	
 }

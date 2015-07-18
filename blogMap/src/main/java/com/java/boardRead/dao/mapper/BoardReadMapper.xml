@@ -143,4 +143,10 @@
     	where member_id=#{member_id} 
     	and board_no=#{board_no}
     </delete>
+    
+    <delete id="blogDelete" parameterType="java.util.HashMap">
+    	delete from board 
+    	where member_id=#{member_id} 
+    	and board_no=#{board_no}
+    </delete>
 </mapper>

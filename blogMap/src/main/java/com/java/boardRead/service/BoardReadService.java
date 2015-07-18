@@ -36,5 +36,7 @@ public interface BoardReadService {
 
 	public void NobookMark(ModelAndView mav);
 
+	public void blogDelete(ModelAndView mav);
+
 	
 }

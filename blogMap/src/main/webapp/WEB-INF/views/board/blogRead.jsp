@@ -237,9 +237,7 @@ $(function() {
 				},
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success : function(data) {
-					if(data!="0"){
-						
-					}
+					
 				},
 				error: function(data) {
 					
@@ -258,9 +256,7 @@ $(function() {
 				},
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success : function(data) {
-					if(data!="0"){
-						
-					}
+					 
 				},
 				error: function(data) {
 					
@@ -268,6 +264,31 @@ $(function() {
 			});
 		}
 	})
+	/*목록보기 기능*/
+	$("#Listbutton").click(function() {
+		
+	})
+	
+	/*삭제 기능*/
+	$("#Debutton").click(function() {
+		alert("하하");
+		var boardNo=$("#blogRead_boardno > label:eq(0)").text();
+		$.ajax({
+			type:'post',
+			url:'${root}/board/blogDelete.do',
+			data:{
+				board_no: boardNo,
+				member_id: email
+			},
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			success : function(data) {
+				location.reload();
+			},
+			error: function(data) {
+				
+			}
+	})
+	});
 });
 function reply_update(UThis) {
 	var updateId=$(UThis).attr("id");
@@ -450,7 +471,7 @@ function reply_delete(DThis) {
 	<div align="right">
 		<input type="button" class="btn btn-primary" id="Upbutton" value="수정" /> 
 		<input type="button" class="btn btn-primary" id="Debutton" value="삭제" /> 
-		<input type="button" class="btn btn-primary" value="목록" />
+		<input type="button" class="btn btn-primary" id="Listbutton" value="목록" />
 	</div>
 	
 

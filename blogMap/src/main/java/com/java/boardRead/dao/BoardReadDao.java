@@ -45,6 +45,8 @@ public interface BoardReadDao {
 
 	public int NobookMark(HashMap<String, Object> hMap);
 
+	public int blogDelete(HashMap<String, Object> hMap);
+
 
 	
 }

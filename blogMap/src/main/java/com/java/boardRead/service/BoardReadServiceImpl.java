@@ -565,5 +565,31 @@ public class BoardReadServiceImpl implements BoardReadService {
 		}
 		
 	}
+
+	@Override
+	public void blogDelete(ModelAndView mav) {
+		logger.info("BoardReadService blogDelete------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int board_no=Integer.parseInt(request.getParameter("board_no"));
+		String member_id=request.getParameter("member_id");
+		
+		System.out.println(board_no+"|"+member_id);
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("board_no", board_no);
+		hMap.put("member_id", member_id);
+		int check=boardReadDao.blogDelete(hMap);
+		if(check>0){
+			logger.info("blogDelete_check:"+check);
+			 try {
+					response.getWriter().print(check);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	}
 	
 }
