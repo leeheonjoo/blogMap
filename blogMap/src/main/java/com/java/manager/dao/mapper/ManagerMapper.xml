@@ -7,9 +7,9 @@
 		select * from member order by member_id asc
 	</select>
 	
-	<delete id="memberDelete" parameterType="String">
-		delete from member where member_id=#{id}
-	</delete>
+	<update id="memberDelete" parameterType="String">
+		update MEMBER SET member_name=null, member_pwd=null, member_jointype='0003', member_point=0 where member_id=#{id}
+	</update>
 	
 	<delete id="delLog" parameterType="String">
 		insert into MANAGER_LOG values(manager_log_seq.nextval,'lucyman@nate.com',SYSDATE,'0001',#{id})
