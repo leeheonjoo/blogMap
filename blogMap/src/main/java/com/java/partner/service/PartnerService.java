@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public interface PartnerService {
 	
-	public boolean write(ModelAndView mav);	
+	public void write(ModelAndView mav);	
 	
 	public void writeList(ModelAndView mav);
 	

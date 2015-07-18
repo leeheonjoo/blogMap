@@ -13,6 +13,11 @@
 	function msgDelete() {
 		var email=sessionStorage.getItem('email');
 		
+		if(! $("input[name='member_Delid']").val()){
+			alert("아이디를 입력하세요.");
+			return false;
+		}
+		
 		//alert($("input[name='message_no']").val());
 		$.ajax({
 			type : 'post',
@@ -29,8 +34,6 @@
 					$("#receiveMsgResult").empty();
 					$("#sendMsgResult").empty();
 					$("input[name='member_Delid']").val("");
-					
-					
 					
 					$("#receiveMsgResult").empty();
 					$("#sendMsgResult").empty();
@@ -434,8 +437,8 @@
 						error : function(data) {
 							alert("로그인을 해 주세요.");
 						}
-					});
-				}	
+					});			
+				}
 			}
 		});
 	}

@@ -95,7 +95,6 @@ public class PartnerController {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-		
 	}
 	/**
 	 * @name: couponWrite
