@@ -135,6 +135,7 @@ $(function() {
 			alert("NULL값으로 입력해주세요.");			
 		}
 })
+	/*추천 기능*/
 	$("#blog_reference").click(function() {
 		alert("추천 클릭하였습니다.");
 		var boardNo=$("#blogRead_boardno > label:eq(0)").text()
@@ -175,6 +176,7 @@ $(function() {
 					}
 				});
 	})
+	/*비추천 기능 */
 	$("#blog_noreference").click(function() {
 		alert("비추천 클릭하였습니다.");
 		var boardNo=$("#blogRead_boardno > label:eq(0)").text()
@@ -216,6 +218,55 @@ $(function() {
 						
 					}
 				});
+	})
+	/* 즐겨찾기 기능 */
+	$("#blogBookmark").click(function() {
+		var transImage=$("#blogBookmark > img").attr("src");
+		alert(transImage);
+		if(transImage=="${root}/images/blogMap/Bookmark1.png"){
+			alert("즐겨찾기 추가 되었습니다.");
+			$("#blogBookmark > img").attr("src","${root}/images/blogMap/Bookmark0.png");
+			var boardNo=$("#blogRead_boardno > label:eq(0)").text();
+			
+			$.ajax({
+				type:'post',
+				url:'${root}/board/bookMark.do',
+				data:{
+					board_no: boardNo,
+					member_id: email
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success : function(data) {
+					if(data!="0"){
+						
+					}
+				},
+				error: function(data) {
+					
+				}
+			});
+		}else{
+			alert("즐겨찾기 해제 되었습니다.");
+			var boardNo=$("#blogRead_boardno > label:eq(0)").text();
+			$("#blogBookmark > img").attr("src","${root}/images/blogMap/Bookmark1.png");
+			$.ajax({
+				type:'post',
+				url:'${root}/board/NobookMark.do',
+				data:{
+					board_no: boardNo,
+					member_id: email
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success : function(data) {
+					if(data!="0"){
+						
+					}
+				},
+				error: function(data) {
+					
+				}
+			});
+		}
 	})
 });
 function reply_update(UThis) {
@@ -295,10 +346,10 @@ function reply_delete(DThis) {
 		return;
 	}
 	/* $("#reply_content_delete"+i).popConfirm({
-		title: "Delete",
-		content: "정말로 삭제 하시겠습니까?",
-		placement: "bottom"
-	});	 */
+	title: "Delete",
+	content: "정말로 삭제 하시겠습니까?",
+	placement: "bottom"
+});	 */
 	
 }
 </script>
@@ -365,7 +416,7 @@ function reply_delete(DThis) {
 	<img src="${root}/images/blogMap/reference1.jpg">
 	<span id="blog_noreference_count"></span>
 	</span>
-	<input type="button" class="btn btn-primary" value="즐겨찾기" />
+	<span id="blogBookmark"><img src="${root}/images/blogMap/Bookmark1.png"/><b style="color: #03A9F4;">즐겨찾기</b></span>
 	<input type="button" class="btn btn-primary" value="쿠폰발급" />
 	</div>
 	<br/>

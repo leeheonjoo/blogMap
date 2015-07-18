@@ -235,6 +235,32 @@ public class BoardReadController {
 		
 		
 	}
+	@RequestMapping(value="/board/bookMark.do",method=RequestMethod.POST)
+	public void bookMark(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController bookMark-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.bookMark(mav);
+		
+		
+	}
+	@RequestMapping(value="/board/NobookMark.do",method=RequestMethod.POST)
+	public void NobookMark(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController NobookMark-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.NobookMark(mav);
+		
+		
+	}
 	
 	
 	

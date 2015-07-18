@@ -132,5 +132,15 @@
         from recommand
         where board_no=#{board_no}
         group by board_no
-    </select>    
+    </select>
+    
+    <insert id="bookMark" parameterType="java.util.HashMap">
+    	insert into FAVORITE(favorite_no,member_id,board_no,favorite_rgdate) values(FAVORITE_FAVORITE_NO_SEQ.nextval,#{member_id},#{board_no},current_date)
+    </insert>   
+    
+    <delete id="NobookMark" parameterType="java.util.HashMap">
+    	delete from FAVORITE
+    	where member_id=#{member_id} 
+    	and board_no=#{board_no}
+    </delete>
 </mapper>

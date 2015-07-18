@@ -41,6 +41,10 @@ public interface BoardReadDao {
 
 	public List<RecommandDto> referenceRefresh(int board_no);
 
+	public int bookMark(HashMap<String, Object> hMap);
+
+	public int NobookMark(HashMap<String, Object> hMap);
+
 
 	
 }

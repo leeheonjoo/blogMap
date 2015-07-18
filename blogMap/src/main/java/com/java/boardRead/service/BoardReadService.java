@@ -32,5 +32,9 @@ public interface BoardReadService {
 
 	public void referenceRefresh(ModelAndView mav);
 
+	public void bookMark(ModelAndView mav);
+
+	public void NobookMark(ModelAndView mav);
+
 	
 }

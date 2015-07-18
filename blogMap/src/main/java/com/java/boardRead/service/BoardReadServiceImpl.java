@@ -13,12 +13,14 @@ import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.dsig.spec.HMACParameterSpec;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import org.omg.CORBA.OBJ_ADAPTER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -511,6 +513,56 @@ public class BoardReadServiceImpl implements BoardReadService {
 			e.printStackTrace();
 		}
 		
+		
+	}
+
+	@Override
+	public void bookMark(ModelAndView mav) {
+		logger.info("BoardReadService bookMark------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int board_no=Integer.parseInt(request.getParameter("board_no"));
+		String member_id=request.getParameter("member_id");
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("board_no", board_no);
+		hMap.put("member_id", member_id);
+		int check=boardReadDao.bookMark(hMap);
+		if(check>0){
+			logger.info("bookMark_check:"+check);
+			 try {
+					response.getWriter().print(check);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+		
+	}
+
+	@Override
+	public void NobookMark(ModelAndView mav) {
+		logger.info("BoardReadService NobookMark------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int board_no=Integer.parseInt(request.getParameter("board_no"));
+		String member_id=request.getParameter("member_id");
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("board_no", board_no);
+		hMap.put("member_id", member_id);
+		int check=boardReadDao.NobookMark(hMap);
+		if(check>0){
+			logger.info("NobookMark_check:"+check);
+			 try {
+					response.getWriter().print(check);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
 		
 	}
 	

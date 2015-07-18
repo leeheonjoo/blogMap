@@ -190,5 +190,17 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		return sqlSession.selectList("dao.BoardReadMapper.referenceRefresh",board_no);
 	}
 
+	@Override
+	public int bookMark(HashMap<String, Object> hMap) {
+		logger.info("BoardReadDao bookMark-------------------------");
+		return sqlSession.insert("dao.BoardReadMapper.bookMark",hMap);
+	}
+
+	@Override
+	public int NobookMark(HashMap<String, Object> hMap) {
+		logger.info("BoardReadDao NobookMark-------------------------");
+		return sqlSession.insert("dao.BoardReadMapper.NobookMark",hMap);
+	}
+
 	
 }
