@@ -306,12 +306,6 @@
 							<div class="item active">
 								<img src="http://handsontek.net/demoimages/tiles/hot.png" class="img-responsive"/>
 							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/hot2.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/hot3.png" class="img-responsive"/>
-							</div>
 						</div>
 					</div>
 			        
