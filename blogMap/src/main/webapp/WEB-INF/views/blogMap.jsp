@@ -125,34 +125,26 @@
                     	var fileName=data[i].FILE_NAME;
                    	  
                        if(i==0){
-                           $("#carousel_image").empty();                                                    	  
+                           $("#tile7 .carousel-inner").empty();                                                    	  
                        }
                        
                    	  var carousel_image = "<div class='item'>";
                    	  carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + ">";
-                   	  carousel_image += "<div class='carousel-caption'>";
-                   	  carousel_image += "<h4>"+ fileComment +"</h4>";
+//                    	  carousel_image += "<div class='carousel-caption'>";
+//                    	  carousel_image += "<h4>"+ fileComment +"</h4>";
+//                    	  carousel_image += "</div>";
                    	  carousel_image += "</div>";
-                   	  carousel_image += "</div>";
-                   	  $("#carousel_image").append(carousel_image);
+                   	  $("#tile7 .carousel-inner").append(carousel_image);
                    	  
                    	  if(i==0){
-                     	$("#carousel_page li").addClass("active");
-                     	$("#carousel_image .item").addClass("active");
-                    	  }
+                     	$("#tile7 .item").addClass("active");
+                      }
                                    
                        i++;
                     });
+                    
+                    $("#tile7 .item").height($("#tile1").width());
 					
-					$.each(data, function(i){
-						alert("getRecommandBlog: " + data[i].CATEGORY + " " + data[i].BOARD_NO + " " + data[i].BOARD_TITLE);
-						
-
-						
-					});
-					board_no, board_title, yes, no, file_name
-// 					blogList_ConditionInsert("si", data.sido);
-// 					blogList_ConditionInsert("headCategory", data.header);
 			},
 			error:function(data){
 				alert("error : blogMap getRecommandBlog");
