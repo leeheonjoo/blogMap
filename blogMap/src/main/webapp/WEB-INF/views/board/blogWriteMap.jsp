@@ -368,7 +368,7 @@ v\:* {
                                                 contentType:'application/x-www-form-urlencoded;charset=UTF-8',
                                                 success : function(data) {
                                                    if(data=="[]"){
-                                                      alert("null값");
+                                                	   
                                                    }else{
                                                    var data=JSON.parse(data);
                                                    $("#listAllDiv").empty();

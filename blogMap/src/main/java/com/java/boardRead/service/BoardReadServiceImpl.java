@@ -1,5 +1,6 @@
 package com.java.boardRead.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -23,6 +24,8 @@ import org.json.simple.JSONValue;
 import org.omg.CORBA.OBJ_ADAPTER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -291,7 +294,6 @@ public class BoardReadServiceImpl implements BoardReadService {
 		HttpServletResponse response=(HttpServletResponse) map.get("response");
 		
 		int boardNo=Integer.parseInt(request.getParameter("board_no"));
-		System.out.println("board_no:"+boardNo);
 		
 		
 		List<BoardDto> boardDtoList=null;
@@ -442,7 +444,6 @@ public class BoardReadServiceImpl implements BoardReadService {
 		int board_no=Integer.parseInt(request.getParameter("board_no"));
 		String member_id = request.getParameter("member_id");
 		
-		System.out.println(board_no+"|"+member_id);
 		
 		HashMap<String, Object> hMap=new HashMap<String, Object>();
 		hMap.put("board_no", board_no);
@@ -471,7 +472,6 @@ public class BoardReadServiceImpl implements BoardReadService {
 		int board_no=Integer.parseInt(request.getParameter("board_no"));
 		String member_id = request.getParameter("member_id");
 		
-		System.out.println(board_no+"|"+member_id);
 		
 		HashMap<String, Object> hMap=new HashMap<String, Object>();
 		hMap.put("board_no", board_no);
@@ -576,7 +576,6 @@ public class BoardReadServiceImpl implements BoardReadService {
 		int board_no=Integer.parseInt(request.getParameter("board_no"));
 		String member_id=request.getParameter("member_id");
 		
-		System.out.println(board_no+"|"+member_id);
 		HashMap<String, Object> hMap=new HashMap<String, Object>();
 		hMap.put("board_no", board_no);
 		hMap.put("member_id", member_id);
@@ -590,6 +589,148 @@ public class BoardReadServiceImpl implements BoardReadService {
 					e.printStackTrace();
 				}
 		}
+	}
+
+	@Override
+	public void blogUpdate(ModelAndView mav) {
+		logger.info("BoardReadService blogUpdate------------------------");
+		Map<String, Object> map=mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		int board_no=Integer.parseInt(request.getParameter("board_no"));
+		
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("board_no", board_no);
+		
+		
+
+		List<BoardDto> boardDtoList=null;
+		List<Board_addr_infoDto> boardAddrInfoDtoList=null;
+		List<CategoryDto> categoryDtoList=null;
+		List<Attach_fileDto> attachFileDto=null;
+		hMap.put("boardDtoList", boardDtoList);
+		hMap.put("boardAddrInfoDtoList", boardAddrInfoDtoList);
+		hMap.put("categoryDtoList", categoryDtoList);
+		hMap.put("attachFileDto", attachFileDto);
+		
+		List<HashMap<String,Object>> boardReadList=new ArrayList<HashMap<String,Object>>();
+		
+		
+		boardReadList=boardReadDao.blogUpdate(hMap);
+		
+		 Gson gson=new Gson();
+			String boardReadList_json=gson.toJson(boardReadList);
+			
+			try {
+				response.setCharacterEncoding("utf-8");
+				response.getWriter().print(boardReadList_json);
+				System.out.println(boardReadList_json);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+
+	@Override
+	public void blogUpdateOk(ModelAndView mav) {
+		logger.info("BoardReadService blogUpdate------------------------");
+		Map<String, Object> map=mav.getModel();
+		MultipartHttpServletRequest request=(MultipartHttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		Attach_fileDto attach_fileDto=(Attach_fileDto) map.get("Attach_fileDto");
+		BoardDto boardDto=(BoardDto) map.get("BoardDto");
+		Board_addr_infoDto board_addr_infoDto=(Board_addr_infoDto) map.get("Board_addr_infoDto");
+		BoardReadDto boardreadDto=(BoardReadDto) map.get("BoardReadDto");
+		
+		//회원 ID만(작성자) 받아옴
+		String member_id=request.getParameter("member_id");
+				
+		HashMap<String, Object> hashMap=new HashMap<String, Object>();
+		hashMap.put("boardDto", boardDto);
+		hashMap.put("board_addr_infoDto", board_addr_infoDto);
+		hashMap.put("boardreadDto", boardreadDto);
+		hashMap.put("member_id", member_id);
+	
+		System.out.println(boardDto.getBoard_title());
+		System.out.println(boardDto.getBoard_grade());
+		System.out.println(boardreadDto.getCategory_mname());
+		System.out.println(boardreadDto.getCategory_sname());
+		
+		//게시판 글작성
+		int check=boardReadDao.blogUpdateOk(hashMap);
+		
+		System.out.println("check1: " + check);
+		
+		//이미지
+		List<MultipartFile> upFile=request.getFiles("file");
+		//이미지 코멘트
+		String[] comment=request.getParameterValues("comment");
+		String file_no=request.getParameter("file_nos");
+		String[] fileNo=file_no.split(",");
+		String timeName=null;
+		String[] originalNames = new String[5];
+		long[] fileSize = new long[5];
+		
+		ArrayList<Attach_fileDto> attachList=new ArrayList<Attach_fileDto>();
+		File file=null;
+		for (int j = 0; j < upFile.size(); j++) {
+			String originalName=upFile.get(j).getOriginalFilename();
+			if(originalName!=null||originalName!=""){
+			timeName=Long.toString(System.currentTimeMillis()) + "_" +originalName;
+			originalNames[j]=timeName;
+			}
+			fileSize[j]=upFile.get(j).getSize();
+			
+			if(fileSize[j]!=0){
+				attach_fileDto=new Attach_fileDto();
+				try{
+					
+					String dir = "C:/workspace/blogMap/src/main/webapp/pds/board";
+					
+					file=new File(dir,originalNames[j]);
+					if (!file.isDirectory()) {			//파일이 존재하지 않을 때 
+						file.mkdirs();
+					}
+					upFile.get(j).transferTo(file); //입출력
+					if(fileNo[j].equals("")||fileNo[j]==null){
+						
+					}else{
+					attach_fileDto.setFile_no(Integer.parseInt(fileNo[j]));
+					attach_fileDto.setFile_name(originalNames[j]);
+					attach_fileDto.setFile_size(fileSize[j]);
+					attach_fileDto.setFile_path(file.getAbsolutePath());
+					attach_fileDto.setFile_comment(comment[j]);
+					
+//					System.out.println("파일이름:"+originalNames[j]);
+//					System.out.println("파일사이즈:"+fileSize[j]);
+//					System.out.println("파일경로:"+file.getAbsolutePath());
+//					System.out.println("코맨트:"+comment[j]);
+					}
+					if(check>0){
+						//첨푸파일 DB적용
+						attachList.add(j,attach_fileDto);
+						
+						
+//						System.out.println("!"+attachList.size());
+//						System.out.println(j+"!"+attachList.get(j).getFile_name());
+					}
+					
+				}catch(Exception e){
+					logger.info("파일 입출력 에러" + e);
+					
+				}
+				
+			}
+
+		}
+		hashMap.put("attachList", attachList);
+	/*	attachList=(ArrayList<Attach_fileDto>) hashMap.get("attachList");
+		for (int i = 0; i < attachList.size(); i++) {
+			System.out.println("j"+attachList.get(i).getFile_name());
+		}*/
+		check=boardReadDao.blogUpdateOk_attach(hashMap);
 	}
 	
 }

@@ -495,7 +495,33 @@
 			   </div>
 			</div>
 		</div>
-				
+		<!-- **********************************
+	                        블로그 수정 : 황준
+	     ***********************************-->
+	     <!-- 블로그 작성 - blogMapWrite -->	
+		<div class="modal fade" id="blogMapUpdate" data-backdrop="static">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title">Blog Update</h4>
+					</div>
+					<div class="modal-body">
+						<div id="mainResult">
+							<jsp:include page="board/blogUpdate.jsp"/>
+						</div>
+						<br/>
+						<br/>
+						
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">Close</a>
+					</div>
+				</div>
+		    </div>
+		</div>
+	     
+	     		
 	<!-- **********************************
 	                        제휴업체 : 변태훈
 	     ***********************************-->

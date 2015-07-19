@@ -38,5 +38,9 @@ public interface BoardReadService {
 
 	public void blogDelete(ModelAndView mav);
 
+	public void blogUpdate(ModelAndView mav);
+
+	public void blogUpdateOk(ModelAndView mav);
+
 	
 }
