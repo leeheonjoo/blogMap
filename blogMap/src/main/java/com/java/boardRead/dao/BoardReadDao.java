@@ -34,6 +34,6 @@ public interface BoardReadDao {
 
 	public List<Attach_fileDto> getblogImg(int boardNo);
 
-	public void getRecommandBlog();
+	public List<Object> getRecommandBlog();
 	
 }
