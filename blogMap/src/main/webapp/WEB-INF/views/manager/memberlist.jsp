@@ -149,6 +149,8 @@ vertical-align: middle;
 						jointype="BlogMap";
 					}else if(type =="0002"){
 						jointype="FaceBook";
+					}else if(type =="0003"){
+						jointype="탈퇴";
 					}
 					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
@@ -239,6 +241,8 @@ vertical-align: middle;
 						jointype="BlogMap";
 					}else if(type =="0002"){
 						jointype="FaceBook";
+					}else if(type =="0003"){
+						jointype="탈퇴";
 					}
 					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
@@ -305,6 +309,9 @@ vertical-align: middle;
 		}else if(type == "faceBook"){
 			type="0002";
 			alert(type);
+		}else if(type =="delMember"){
+			type="0003";
+			alert(type);
 		}
 		
 		$.ajax({
@@ -334,6 +341,8 @@ vertical-align: middle;
 						jointype="BlogMap";
 					}else if(type =="0002"){
 						jointype="FaceBook";
+					}else if(type =="0003"){
+						jointype="탈퇴";
 					}
 					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
@@ -395,6 +404,7 @@ vertical-align: middle;
 		<input type="button" id="getMemberList" value="Reset"/>
 		<input type="radio" name="joinType" id="blogmap"/><span>BlogMap</span>&nbsp;&nbsp;
 		<input type="radio" name="joinType" id="faceBook"/><span>FaceBook</span> &nbsp;&nbsp;
+		<input type="radio" name="joinType" id="delMember"/><span>탈퇴</span> &nbsp;&nbsp;
 		<input type="text" placeholder="Name Search" id="memberSearchTag"/> 
 		<input type="submit" id="searchMember" value="Search"/>
 	</div><br/>

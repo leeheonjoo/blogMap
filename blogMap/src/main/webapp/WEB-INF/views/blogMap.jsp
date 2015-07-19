@@ -80,7 +80,7 @@
 				$("#blogmap_main_myPage").css("display","inline-block");
 				$("#blogmap_before_login").attr("data-toggle","");
 				
-				if(sessionStorage.getItem('email')=="lucyman@nate.com"){
+				if(sessionStorage.getItem('manager_yn')=="Y"){
 					$("#manager_page_icon").css("display","inline-block");
 					$("#blogmap_main_myPage").css("display","none");
 				}

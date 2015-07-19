@@ -29,6 +29,7 @@ import com.google.gson.Gson;
 import com.java.board.dto.BoardDto;
 import com.java.boardRead.dto.BoardReadDto;
 import com.java.coupon.dto.CouponDto;
+import com.java.manager.dto.ManagerDto;
 import com.java.member.dao.MemberDao;
 import com.java.member.dto.MemberDto;
 import com.java.partner.dto.PartnerDto;
@@ -65,14 +66,19 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("id:" + id);
 		logger.info("password:" + password);
 		
-		String email=null;
-		email=memberDao.managerLogin(id,password);
 		
-		if(email==null){
-			email = memberDao.login(id, password);
+		String loginData=null;
+		ManagerDto managerDto=memberDao.managerLogin(id,password);
+		Gson gson=new Gson();
+		
+		if(managerDto==null){
+			MemberDto memberDto=memberDao.login(id, password);
+			loginData=gson.toJson(memberDto);
+		}else{
+			loginData=gson.toJson(managerDto);
 		}
 		
-		logger.info("email:" + email);
+		logger.info("loginData:" + loginData);
 
 		// mav.addObject("email",email);
 		// mav.setViewName("member/loginOk");
@@ -80,7 +86,7 @@ public class MemberServiceImpl implements MemberService {
 
 		try {
 			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(email);
+			response.getWriter().print(loginData);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -105,7 +111,15 @@ public class MemberServiceImpl implements MemberService {
 		
 		int check=0;
 		if(managerCheck==0){
-			check = memberDao.registerCheck(member_id);
+			MemberDto deleteMemberDto=memberDao.fbRegisterSelect(member_id);
+			if(deleteMemberDto!=null){
+				if(deleteMemberDto.getMember_jointype()=="0003"){
+					check=0;
+				}
+			}else{
+				check = memberDao.registerCheck(member_id);
+			}
+			
 		}else{
 			check=1;
 		}
@@ -131,9 +145,19 @@ public class MemberServiceImpl implements MemberService {
 
 		logger.info("member_name:" + memberDto.getMember_name());
 
-		memberDto.setMember_jointype("0001");
-
-		int check = memberDao.register(memberDto);
+		memberDto.setMember_jointype("0001");		
+		int check=0;
+		
+		//삭제했다가 다시 가입했을때
+		MemberDto deleteMemberDto=memberDao.fbRegisterCheck(memberDto.getMember_id());
+		
+		System.out.println(deleteMemberDto.getMember_jointype());
+		if(deleteMemberDto.getMember_jointype().equals("0003")){
+			check=memberDao.reRegister(memberDto);
+		}else{
+			check=memberDao.register(memberDto);
+		}
+		
 		logger.info("check:" + check);
 
 		try {
@@ -159,15 +183,16 @@ public class MemberServiceImpl implements MemberService {
 
 		MemberDto selectMemberDtoCheck = memberDao.fbRegisterCheck(memberDto.getMember_id());
 		logger.info("selectMemberDto:" + selectMemberDtoCheck);
-		
+		memberDto.setMember_jointype("0002");
 //		int check = memberDao.fbRegisterCheck(memberDto.getMember_id());
 //		logger.info("check:" + check);
-
+		
 		if (selectMemberDtoCheck==null) {
-			memberDto.setMember_jointype("0002");
 			int fbRegisterCheck = memberDao.fbRegister(memberDto);
-
 			logger.info("fbRegisterCheck:" + fbRegisterCheck);
+		}else if(selectMemberDtoCheck.getMember_jointype().equals("0003")){
+			int fbReRegisterCheck = memberDao.fbReRegister(memberDto);
+			logger.info("fbReRegisterCheck:"+fbReRegisterCheck);
 		}
 
 		MemberDto memberDtoSelect = memberDao.fbRegisterSelect(memberDto.getMember_id());

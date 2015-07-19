@@ -28,7 +28,7 @@ public class ManagerDaoImpl implements ManagerDao {
 	@Override
 	public int memberDel(String id) {
 		// TODO Auto-generated method stub
-		return session.delete("dao.ManagerMapper.memberDelete", id);
+		return session.update("dao.ManagerMapper.memberDelete", id);
 	}
 	
 	@Override

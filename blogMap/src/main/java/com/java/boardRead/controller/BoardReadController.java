@@ -217,6 +217,81 @@ public class BoardReadController {
 		
 	}
 	
+	@RequestMapping(value="/board/blogReadReference",method=RequestMethod.POST)
+	public void blogReadReference(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogReadReference-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogReadReference(mav);
+		
+		
+	}
+	@RequestMapping(value="/board/blogReadNoreference",method=RequestMethod.POST)
+	public void blogReadNoreference(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogReadNoreference-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogReadNoReference(mav);
+		
+		
+	}
+	@RequestMapping(value="/board/referenceRefresh.do",method=RequestMethod.POST)
+	public void referenceRefresh(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController referenceRefresh-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.referenceRefresh(mav);
+		
+		
+	}
+	@RequestMapping(value="/board/bookMark.do",method=RequestMethod.POST)
+	public void bookMark(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController bookMark-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.bookMark(mav);
+		
+		
+	}
+	@RequestMapping(value="/board/NobookMark.do",method=RequestMethod.POST)
+	public void NobookMark(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController NobookMark-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.NobookMark(mav);
+	}
+	
+	@RequestMapping(value="/board/blogDelete.do",method=RequestMethod.POST)
+	public void blogDelete(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogDelete-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogDelete(mav);
+	}
 	
 	
 }
