@@ -29,6 +29,21 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	
+	/**
+	 * @name : getRecommandBlog
+	 * @date : 2015. 7. 19.
+	 * @author : 이헌주
+	 * @description : DB에서 추천 블로그게시물을 조회하여 리스트를 반환
+	 */
+	@Override
+	public List<Object> getRecommandBlog() {
+		logger.info("BoardReadDao getRecommandBlog-------------------------");
+		List<Object> resultList=sqlSession.selectList("dao.BoardReadMapper.getRecommandBlog");
+		
+		return resultList;
+	}
+	
 	@Override
 	public BoardReadDto getData() {
 		return sqlSession.selectOne("dao.BoardReadMapper.getData");

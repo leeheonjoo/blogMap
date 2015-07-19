@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.java.board.dto.BoardDto;
 import com.java.coupon.dto.CouponDto;
+import com.java.manager.dto.ManagerDto;
 import com.java.member.dto.MemberDto;
 import com.java.point.dto.PointDto;
 
@@ -25,7 +26,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @description:id와 password가 일치하는 member_id를 DB에서 가져옴
 	 */
 	@Override
-	public String login(String id, String password) {
+	public MemberDto login(String id, String password) {
 		// TODO Auto-generated method stub
 		HashMap<String, String> hMap = new HashMap<String, String>();
 		hMap.put("id", id);
@@ -149,7 +150,7 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public int myPageDelete(MemberDto memberDto) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete("dao.MemberMapper.myPageDelete",memberDto);
+		return sqlSession.update("dao.MemberMapper.myPageDelete",memberDto);
 	}
 
 	@Override
@@ -235,7 +236,7 @@ public class MemberDaoImpl implements MemberDao {
 	}
 
 	@Override
-	public String managerLogin(String id, String password) {
+	public ManagerDto managerLogin(String id, String password) {
 		HashMap<String, String> hMap = new HashMap<String, String>();
 		hMap.put("id", id);
 		hMap.put("password", password);
@@ -246,6 +247,18 @@ public class MemberDaoImpl implements MemberDao {
 	public int fbMemberDelete(String member_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("dao.MemberMapper.fbMemberDelete",member_id);
+	}
+
+	@Override
+	public int reRegister(MemberDto memberDto) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("dao.MemberMapper.reRegister",memberDto);
+	}
+
+	@Override
+	public int fbReRegister(MemberDto memberDto) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("dao.MemberMapper.fbReRegister",memberDto);
 	}
 
 	

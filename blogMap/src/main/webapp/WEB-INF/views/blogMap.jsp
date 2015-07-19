@@ -80,7 +80,7 @@
 				$("#blogmap_main_myPage").css("display","inline-block");
 				$("#blogmap_before_login").attr("data-toggle","");
 				
-				if(sessionStorage.getItem('email')=="lucyman@nate.com"){
+				if(sessionStorage.getItem('manager_yn')=="Y"){
 					$("#manager_page_icon").css("display","inline-block");
 					$("#blogmap_main_myPage").css("display","none");
 				}
@@ -100,12 +100,67 @@
 				}
 			}
 	});
-
-	
-
-
-
 </script>
+<script>
+	$(function(){
+		$.ajax({
+			type:'get',
+			url:'${root}/board/getRecommandBlog.do',
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			success:function(responseData){
+					var data=JSON.parse(responseData);
+					if(!data){
+						alert("blogMap 추천게시물 get Error");
+						return false;
+					}
+
+                    var food_count=0;
+                    var travel_count=0;
+                    $.each(data,function(i){
+                    	var category=data[i].CATEGORY;
+                    	var boardNo=data[i].BOARD_NO;
+                    	var boardTitle=data[i].BOARD_TITLE;
+                    	var yes=data[i].YES;
+                    	var no=data[i].NO;
+                    	var fileName=data[i].FILE_NAME;
+                   	  
+                       if(i==0){
+                           $("#carousel_image").empty();                                                    	  
+                       }
+                       
+                   	  var carousel_image = "<div class='item'>";
+                   	  carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + ">";
+                   	  carousel_image += "<div class='carousel-caption'>";
+                   	  carousel_image += "<h4>"+ fileComment +"</h4>";
+                   	  carousel_image += "</div>";
+                   	  carousel_image += "</div>";
+                   	  $("#carousel_image").append(carousel_image);
+                   	  
+                   	  if(i==0){
+                     	$("#carousel_page li").addClass("active");
+                     	$("#carousel_image .item").addClass("active");
+                    	  }
+                                   
+                       i++;
+                    });
+					
+					$.each(data, function(i){
+						alert("getRecommandBlog: " + data[i].CATEGORY + " " + data[i].BOARD_NO + " " + data[i].BOARD_TITLE);
+						
+
+						
+					});
+					board_no, board_title, yes, no, file_name
+// 					blogList_ConditionInsert("si", data.sido);
+// 					blogList_ConditionInsert("headCategory", data.header);
+			},
+			error:function(data){
+				alert("error : blogMap getRecommandBlog");
+			}
+		});	
+	});
+</script>
+
 </head>
 <body>
 	<div class="container" style="max-width:1170px; padding:0 0 0 0;">

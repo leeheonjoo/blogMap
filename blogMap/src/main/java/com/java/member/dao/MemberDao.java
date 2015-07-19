@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import com.java.coupon.dto.CouponDto;
+import com.java.manager.dto.ManagerDto;
 import com.java.member.dto.MemberDto;
 
 public interface MemberDao {
 
-	public String login(String id, String password);
+	public MemberDto login(String id, String password);
 
 	public int register(MemberDto memberDto);
 
@@ -50,9 +51,13 @@ public interface MemberDao {
 
 	public int managerRgCheck(String member_id);
 
-	public String managerLogin(String id, String password);
+	public ManagerDto managerLogin(String id, String password);
 
 	public int fbMemberDelete(String member_id);
+
+	public int reRegister(MemberDto memberDto);
+
+	public int fbReRegister(MemberDto memberDto);
 
 	
 }

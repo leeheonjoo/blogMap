@@ -35,6 +35,8 @@ public interface BoardReadDao {
 
 	public List<Attach_fileDto> getblogImg(int boardNo);
 
+	public List<Object> getRecommandBlog();
+
 	public int blogReadReference(HashMap<String, Object> hMap);
 
 	public int blogReadNoReference(HashMap<String, Object> hMap);
@@ -46,7 +48,6 @@ public interface BoardReadDao {
 	public int NobookMark(HashMap<String, Object> hMap);
 
 	public int blogDelete(HashMap<String, Object> hMap);
-
 
 	
 }
