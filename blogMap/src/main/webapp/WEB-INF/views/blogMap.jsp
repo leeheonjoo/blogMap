@@ -21,9 +21,9 @@
 	.modal-lg{
 		width: auto;
 		margin: 1% 1% 0px 1%;
- 		height: 600px;
-/*    		max-height: 600px; */
-    		overflow-y:scroll;
+ 		max-height: 600px;
+		overflow-y:scroll;
+    	overflow-x:hidden
 	}
 
 	.modal-myPage{
@@ -132,26 +132,45 @@
                        	carousel_image += "</div>";
                     	
                        	if(category=='100'){
-                            if(travel_count==0){
+                           if(travel_count==0){
                                 $("#tile7 .carousel-inner").empty();                                                  	  
-                            }
+                           }else if(travel_count==2){
+                        	    $("#tile8 .carousel-inner").empty();
+                           }
+
+                           if(travel_count<2){
+                           	  $("#tile7 .carousel-inner").append(carousel_image);
+                           }else{
+                        	  $("#tile8 .carousel-inner").append(carousel_image);
+                           }
                             
-                            $("#tile7 .carousel-inner").append(carousel_image);
+                            
                        	    
                             if(travel_count==0){
                              	$("#tile7 .item").addClass("active");
+                            }else if(travel_count==2){
+                            	$("#tile8 .item").addClass("active");
                             }
                             
                             travel_count++;                       		
                        	}else if(category=='200'){
                             if(food_count==0){
-                                $("#tile10 .carousel-inner").empty();                                                  	  
+                                $("#tile10 .carousel-inner").empty();                                          	  
+                            }else if(food_count==2){
+                            	$("#tile9 .carousel-inner").empty();
                             }
                             
-                            $("#tile10 .carousel-inner").append(carousel_image);
+                            if(food_count<2){
+                            	 $("#tile10 .carousel-inner").append(carousel_image);
+                            }else{
+                            	 $("#tile9 .carousel-inner").append(carousel_image);
+                            }
+                           
                        	    
-                            if(i==0){
+                            if(food_count==0){
                              	$("#tile10 .item").addClass("active");
+                            }else if(food_count==2){
+                            	$("#tile9 .item").addClass("active");
                             }
                             
                             food_count++;
@@ -160,9 +179,23 @@
                     });
                     
                     $("#tile7 .item").height($("#tile1").width());
+                    $("#tile7 img").css("height","100%");
+                    $("#tile7 img").css("width","100%");
                     $("#tile7 .carousel-caption").css("top","50%");
                     
+                    $("#tile8 .item").height($("#tile1").width());
+                    $("#tile8 img").css("height","60%");
+                    $("#tile8 img").css("width","100%");
+					$("#tile8 .carousel-caption").css("top","50%");
+
+                    $("#tile9 .item").height($("#tile1").width());
+                    $("#tile9 img").css("height","60%");
+                    $("#tile9 img").css("width","100%");
+					$("#tile9 .carousel-caption").css("top","50%");
+					
                     $("#tile10 .item").height($("#tile1").width());
+                    $("#tile10 img").css("height","100%");
+                    $("#tile10 img").css("width","100%");
 					$("#tile10 .carousel-caption").css("top","50%");
 			},
 			error:function(data){
@@ -364,13 +397,6 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 					    	<div class="item active">
-								<img src="http://handsontek.net/demoimages/tiles/gallery.png" class="img-responsive"/>
-						    </div>
-						    <div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/gallery2.png" class="img-responsive"/>
-						    </div>
-						    <div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/gallery3.png" class="img-responsive"/>
 						    </div>
 						</div>
 					</div>
@@ -385,10 +411,6 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<img src="http://handsontek.net/demoimages/tiles/music.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/music2.png" class="img-responsive"/>
 							</div>
 						</div>
 					</div>
@@ -403,10 +425,6 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<img src="http://handsontek.net/demoimages/tiles/calendar.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/calendar2.png" class="img-responsive"/>
 							</div>
 						</div>
 					</div>
@@ -421,16 +439,6 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<h3 class="tilecaption"><i class="fa fa-child fa-4x"></i></h3>
-							</div>
-							<div class="item">
-								<h3 class="tilecaption">Customize your tiles</h3>
-							</div>
-							<div class="item">
-								<h3 class="tilecaption">Text, Icons, Images</h3>
-							</div>
-							<div class="item">
-								<h3 class="tilecaption">Combine them and create your metro style</h3>
 							</div>
 						</div>
 					</div>
