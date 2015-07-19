@@ -45,6 +45,27 @@ public class BoardReadServiceImpl implements BoardReadService {
 	@Autowired
 	private BoardReadDao boardReadDao;
 	
+	/**
+	 * @name : getRecommandBlog
+	 * @date : 2015. 7. 19.
+	 * @author : 이헌주
+	 * @description : 추천 블로그게시물을 조회하기위한 메소드
+	 * 				    검색 결과를 Json 타입으로 변환하여 반환
+	 */
+	@Override
+	public String getRecommandBlog() {
+		logger.info("BoardReadService getRecommandBlog------------------------");
+		
+		List<Object> resultList= boardReadDao.getRecommandBlog();
+		
+		Gson gson=new Gson();
+		String json=gson.toJson(resultList);
+
+		logger.info("getRecommandBlog json: " + json);
+
+		return json;
+	}
+	
 	@Override
 	public void getData(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();

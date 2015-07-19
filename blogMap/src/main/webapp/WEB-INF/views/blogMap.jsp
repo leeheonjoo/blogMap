@@ -100,12 +100,59 @@
 				}
 			}
 	});
-
-	
-
-
-
 </script>
+<script>
+	$(function(){
+		$.ajax({
+			type:'get',
+			url:'${root}/board/getRecommandBlog.do',
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			success:function(responseData){
+					var data=JSON.parse(responseData);
+					if(!data){
+						alert("blogMap 추천게시물 get Error");
+						return false;
+					}
+
+                    var food_count=0;
+                    var travel_count=0;
+                    $.each(data,function(i){
+                    	var category=data[i].CATEGORY;
+                    	var boardNo=data[i].BOARD_NO;
+                    	var boardTitle=data[i].BOARD_TITLE;
+                    	var yes=data[i].YES;
+                    	var no=data[i].NO;
+                    	var fileName=data[i].FILE_NAME;
+                   	  
+                       if(i==0){
+                           $("#tile7 .carousel-inner").empty();                                                    	  
+                       }
+                       
+                   	  var carousel_image = "<div class='item'>";
+                   	  carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + ">";
+//                    	  carousel_image += "<div class='carousel-caption'>";
+//                    	  carousel_image += "<h4>"+ fileComment +"</h4>";
+//                    	  carousel_image += "</div>";
+                   	  carousel_image += "</div>";
+                   	  $("#tile7 .carousel-inner").append(carousel_image);
+                   	  
+                   	  if(i==0){
+                     	$("#tile7 .item").addClass("active");
+                      }
+                                   
+                       i++;
+                    });
+                    
+                    $("#tile7 .item").height($("#tile1").width());
+					
+			},
+			error:function(data){
+				alert("error : blogMap getRecommandBlog");
+			}
+		});	
+	});
+</script>
+
 </head>
 <body>
 	<div class="container" style="max-width:1170px; padding:0 0 0 0;">

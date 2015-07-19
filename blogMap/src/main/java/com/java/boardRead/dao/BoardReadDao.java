@@ -35,6 +35,8 @@ public interface BoardReadDao {
 
 	public List<Attach_fileDto> getblogImg(int boardNo);
 
+	public List<Object> getRecommandBlog();
+
 	public int blogReadReference(HashMap<String, Object> hMap);
 
 	public int blogReadNoReference(HashMap<String, Object> hMap);
@@ -47,6 +49,7 @@ public interface BoardReadDao {
 
 	public int blogDelete(HashMap<String, Object> hMap);
 
+
 	public List<HashMap<String, Object>> blogUpdate(HashMap<String, Object> hMap);
 
 	public int blogUpdateOk(HashMap<String, Object> hashMap);
@@ -54,5 +57,5 @@ public interface BoardReadDao {
 	public int blogUpdateOk_attach(HashMap<String, Object> hashMap);
 
 
-	
+
 }
