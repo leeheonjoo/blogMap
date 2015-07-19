@@ -226,25 +226,26 @@ $(function() {
 								partnerData(data[i].partner_no);	
 							});
 						});
-						/*
-						var max_height = 0;
 						
-						$(".tour_items").each(function(){
+// 						var max_height = 0;
+						
+// 						$(".tour_items").each(function(){
 							
-							if(max_height < $(this).height())
-							{
-								max_height = $(this).height();
-							}
-						});
+// 							if(max_height < $(this).height())
+// 							{
+// 								max_height = $(this).height();
+// 							}
+// 						});
 						
-						$(".tour_items").css({
-							'height': max_height
-						});
+// 						$(".tour_items").css({
+// 							'height': max_height
+// 						});
 						
 						$(".tour_items .img-responsive").css({
-							'max-height' : "100%"
+ 							'max-width':"100%",
+							'height': "100px"
 						});
-						*/
+						
 					}	
 				});	
 		});
