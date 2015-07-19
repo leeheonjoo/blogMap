@@ -138,7 +138,7 @@
                             
                             $("#tile7 .carousel-inner").append(carousel_image);
                        	    
-                            if(i==0){
+                            if(travel_count==0){
                              	$("#tile7 .item").addClass("active");
                             }
                             
