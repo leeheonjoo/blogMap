@@ -114,8 +114,8 @@
 						return false;
 					}
 
+					var travel_count=0;
                     var food_count=0;
-                    var travel_count=0;
                     $.each(data,function(i){
                     	var category=data[i].CATEGORY;
                     	var boardNo=data[i].BOARD_NO;
@@ -123,28 +123,47 @@
                     	var yes=data[i].YES;
                     	var no=data[i].NO;
                     	var fileName=data[i].FILE_NAME;
-                   	  
-                       if(i==0){
-                           $("#tile7 .carousel-inner").empty();                                                    	  
-                       }
-                       
-                   	  var carousel_image = "<div class='item'>";
-                   	  carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + ">";
-//                    	  carousel_image += "<div class='carousel-caption'>";
-//                    	  carousel_image += "<h4>"+ fileComment +"</h4>";
-//                    	  carousel_image += "</div>";
-                   	  carousel_image += "</div>";
-                   	  $("#tile7 .carousel-inner").append(carousel_image);
-                   	  
-                   	  if(i==0){
-                     	$("#tile7 .item").addClass("active");
-                      }
+
+                     	var carousel_image = "<div class='item'>";
+                       	carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + "/>";
+                       	carousel_image += "<div class='carousel-caption'>";
+                       	carousel_image += "<h6>"+ boardTitle +"</h6>";
+                       	carousel_image += "</div>";
+                       	carousel_image += "</div>";
+                    	
+                       	if(category=='100'){
+                            if(travel_count==0){
+                                $("#tile7 .carousel-inner").empty();                                                  	  
+                            }
+                            
+                            $("#tile7 .carousel-inner").append(carousel_image);
+                       	    
+                            if(i==0){
+                             	$("#tile7 .item").addClass("active");
+                            }
+                            
+                            travel_count++;                       		
+                       	}else if(category=='200'){
+                            if(food_count==0){
+                                $("#tile10 .carousel-inner").empty();                                                  	  
+                            }
+                            
+                            $("#tile10 .carousel-inner").append(carousel_image);
+                       	    
+                            if(i==0){
+                             	$("#tile10 .item").addClass("active");
+                            }
+                            
+                            food_count++;
+                    	}
                                    
-                       i++;
                     });
                     
                     $("#tile7 .item").height($("#tile1").width());
-					
+                    $("#tile7 .carousel-caption").css("top","50%");
+                    
+                    $("#tile10 .item").height($("#tile1").width());
+					$("#tile10 .carousel-caption").css("top","50%");
 			},
 			error:function(data){
 				alert("error : blogMap getRecommandBlog");
