@@ -2,7 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
 <mapper namespace="dao.BoardReadMapper">
+		
+
 	<select id="getData" resultType="com.java.boardRead.dto.BoardReadDto">
 		select *
 		  from category
@@ -171,4 +174,41 @@
     	where member_id=#{member_id} 
     	and board_no=#{board_no}
     </delete>
+    
+    <select id="blogUpdate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    	select b.*,a.addr_sido,a.addr_sigugun,a.addr_dongri,a.addr_bunji,c.category_mname,c.category_sname,f.file_no,f.file_name,f.file_size,f.file_path,f.file_comment
+    	from board b,board_addr_info a,category c,attach_file f
+    	 where b.board_no=a.board_no
+     	 and b.category_code=c.category_code
+      	 and b.board_no=f.board_no(+)
+      	 and b.board_no=#{board_no} 
+    </select>
+    
+    <update id="blogUpdateOk" parameterType="java.util.HashMap">
+    update board set category_code=(select category_code from category where category_mname=#{boardreadDto.category_mname} and category_sname=#{boardreadDto.category_sname}),board_title=#{boardDto.board_title},board_rgdate=current_date,board_content=#{boardDto.board_content},board_grade=#{boardDto.board_grade}
+    where board_no=#{boardDto.board_no}
+    </update>
+    
+    <update id="blogUpdateOk_addr" parameterType="java.util.HashMap">
+		update board_addr_info set addr_sido=#{board_addr_infoDto.addr_sido}, addr_sigugun=#{board_addr_infoDto.addr_sigugun},addr_dongri=#{board_addr_infoDto.addr_dongri},addr_bunji=#{board_addr_infoDto.addr_bunji}
+		where board_no=#{boardDto.board_no}
+	</update>
+	
+	<update id="blogUpdateOk_attach" parameterType="java.util.HashMap">
+		<foreach collection="attachList" item="item" separator=";">
+			update attach_file
+			<set>
+				file_name=#{item.file_name},
+				file_size=#{item.file_size},
+				file_path=#{item.file_path},
+				file_comment=#{item.file_comment}
+			</set>
+			<where>
+			 board_no=#{boardDto.board_no} and file_no=#{item.file_no}
+			</where>
+		</foreach>
+	</update> 
 </mapper>
+
+ 
+

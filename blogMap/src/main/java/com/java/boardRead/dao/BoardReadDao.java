@@ -49,5 +49,13 @@ public interface BoardReadDao {
 
 	public int blogDelete(HashMap<String, Object> hMap);
 
-	
+
+	public List<HashMap<String, Object>> blogUpdate(HashMap<String, Object> hMap);
+
+	public int blogUpdateOk(HashMap<String, Object> hashMap);
+
+	public int blogUpdateOk_attach(HashMap<String, Object> hashMap);
+
+
+
 }

@@ -271,7 +271,7 @@ $(function() {
 	
 	/*삭제 기능*/
 	$("#Debutton").click(function() {
-		alert("하하");
+		alert("삭제클릭");
 		var boardNo=$("#blogRead_boardno > label:eq(0)").text();
 		$.ajax({
 			type:'post',
@@ -282,13 +282,97 @@ $(function() {
 			},
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(data) {
-				location.reload();
+				alert("삭제성공")
+				location.href="${root}/";
 			},
 			error: function(data) {
 				
 			}
-	})
+		})
 	});
+	/* 수정 기능 */
+	$("#Upbutton").click(function() {
+		
+		 $("div[id='blogMapUpdate'].modal").modal();
+		 var boardNo=$("#blogRead_boardno > label:eq(0)").text();
+			$.ajax({
+				type:'post',
+				url:'${root}/board/blogUpdate.do',
+				data:{
+					board_no: boardNo
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success : function(data) {
+					var data=JSON.parse(data);
+					var file_no="";
+					$.each(data,function(i){
+						file_no+=data[i].FILE_NO+",";
+						var file_size=data[i].FILE_SIZE;
+						var file_path=data[i].FILE_PATH;
+						var file_name=data[i].FILE_NAME;
+						var file_comment=data[i].FILE_COMMENT;
+						
+						var category_code=data[i].CATEGORY_CODE;
+						var category_mname=data[i].CATEGORY_MNAME;
+						var category_sname=data[i].CATEGORY_SNAME;
+						
+						var addr_bunji=data[i].ADDR_BUNJI;
+						var addr_sido=data[i].ADDR_SIDO;
+						var addr_sigugn=data[i].ADDR_SIGUGUN;
+						var addr_dongri=data[i].ADDR_DONGRI;
+						
+						var board_no=data[i].BOARD_NO;
+						var board_grade=data[i].BOARD_GRADE;
+						var board_content=data[i].BOARD_CONTENT;
+						var board_title=data[i].BOARD_TITLE;
+						var board_rgdate=data[i].BOARD_RGDATE;
+						
+						$("#blogUpdateAddr > input[name='addr_sido']").val(addr_sido);
+						$("#blogUpdateAddr > input[name='addr_sigugun']").val(addr_sigugn);
+						$("#blogUpdateAddr > input[name='addr_dongri']").val(addr_dongri);
+						$("#blogUpdateAddr > input[name='addr_bunji']").val(addr_bunji);
+						$("#blogUpdateAddr > input[name='realAddr']").val(addr_sido+" "+addr_sigugn+" "+addr_dongri+" "+addr_bunji);
+						
+						$("#blogUpdateTitle > input[name='board_title']").val(board_title);
+						$("#blogUpdateContent > textarea[name='board_content']").html(board_content);
+						
+						if(board_grade=="0"){
+							$("#blogUpdateGrade > input:eq(0)").attr("checked","checked");
+						}else if(board_grade=="1"){
+							$("#blogUpdateGrade > input:eq(1)").attr("checked","checked");
+						}else if(board_grade=="2"){
+							$("#blogUpdateGrade > input:eq(2)").attr("checked","checked");
+						}else if(board_grade=="3"){
+							$("#blogUpdateGrade > input:eq(3)").attr("checked","checked");
+						}else if(board_grade=="4"){
+							$("#blogUpdateGrade > input:eq(4)").attr("checked","checked");
+						}else{
+							$("#blogUpdateGrade > input:eq(5)").attr("checked","checked");
+						}
+							
+						$("#blogUpdateattach >span:eq("+i+")").css("display","");
+						$("#blogUpdateattach >span:eq("+i+") > input[name='comment']" ).val(file_comment);
+						$("#blogUpdateBoard_no").val(board_no);
+						
+						
+						
+						/* var option_length=$("#blogUpdateSelect > #headCategory option").length;
+						
+						for (var j = 0; j < option_length; j++) {
+							var option_value=$("#blogUpdateSelect > #headCategory option:eq("+j+")").val();
+							if(option_value==category_mname){
+								$("#blogUpdateSelect > #headCategory option:eq("+j+")")attr('selected', 'selected');
+							}
+						} */
+					});
+					$("#blogUpdateFile_no").val(file_no);
+				},
+				error: function(data) {
+					
+				}
+			})
+	})
+	
 });
 function reply_update(UThis) {
 	var updateId=$(UThis).attr("id");

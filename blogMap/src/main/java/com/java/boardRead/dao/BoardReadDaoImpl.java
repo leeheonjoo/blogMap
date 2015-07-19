@@ -223,5 +223,29 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		return sqlSession.delete("dao.BoardReadMapper.blogDelete",hMap);
 	}
 
+	@Override
+	public List<HashMap<String, Object>> blogUpdate(HashMap<String, Object> hMap) {
+		logger.info("BoardReadDao blogUpdate-------------------------");
+		return sqlSession.selectList("dao.BoardReadMapper.blogUpdate",hMap);
+	}
+
+	@Override
+	public int blogUpdateOk(HashMap<String, Object> hashMap) {
+		logger.info("BoardReadDao blogUpdateOk-------------------------");
+		int check= sqlSession.update("dao.BoardReadMapper.blogUpdateOk",hashMap);
+
+		if(check>0){
+			check=sqlSession.insert("dao.BoardReadMapper.blogUpdateOk_addr",hashMap);
+		}
+		return check;
+		 
+	}
+
+	@Override
+	public int blogUpdateOk_attach(HashMap<String, Object> hashMap) {
+		logger.info("BoardReadDao blogUpdateOk_attach-------------------------");
+		return sqlSession.update("dao.BoardReadMapper.blogUpdateOk_attach",hashMap);
+	}
+
 	
 }
