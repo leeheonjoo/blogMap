@@ -21,11 +21,11 @@ $(function() {
 </head>
 <style>
 .img-responsive {height:}
-#list_partner_name {width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+#list_partner_name {width:100%;text-overflow:ellipsis;white-space:inherit;overflow:initial;}
 </style>
 <body>
 	<article class="container">
-			<div>
+			<div class="row">
 				<!-- 큰 사이즈 화면에서 탭 목록-->					
 				<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
 				<li role="presentation" class="active">
@@ -41,17 +41,10 @@ $(function() {
 			</ul>
 
 			<!-- tour 탭 내용 -->
-			<div class="tab-content col-md-9">
+			<div class="tab-content col-md-9 thumbnail">
 				<section role="tabpanel" class="tab-pane active" id="tab_tour">
-					<div class="row" id="tour_item_list">	
-						
-					</div>
+					<div class="row" id="tour_item_list"></div>
 					<div id="partnerListResult"></div>  <!-- 자료를 붙일 바디 -->
-				<div class="row">
-						<div class="col-xs-12 text-right">
-							<button type="button" id="partner_tour_button" name="partner_tour_button"  class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">업체등록</button>								
-						</div>
-					</div>
 				</section>
 				<div class="col-md-2 col-sm-3 col-xs-4 tour_items" id="tour_item" role="button" style="display:none;">
 					<div id="tour_info" class="thumbnail">	
@@ -67,7 +60,10 @@ $(function() {
 					</div>
 				</div>
 			</div>
-			
+		</div>
+		<div class="modal-footer">
+                  <button type="button"  id="partner_tour_button" name="partner_tour_button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop"">업체등록</button>
+        </div>
 	</article>
 		<script type="text/javascript">
 			/*
@@ -341,7 +337,7 @@ $(function() {
 						
 						$(".tour_items .img-responsive").css({
 							'max-width':"100%",
-							'height': "100px"
+							'height': "90px"
 						});
 						
 					}	
