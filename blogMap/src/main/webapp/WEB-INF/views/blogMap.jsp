@@ -18,28 +18,39 @@
 <link rel="stylesheet" type="text/css" href="${root}/css/layer.css"/>
 <link rel="stylesheet" type="text/css" href="${root}/css/blogMap/blogMap.css"/>											<!-- Metro style dynamic Tiles stylesheet 로드 -->
 <style>
-	.modal-lg{
+	.modal-dialog{
 		width: auto;
 		margin: 1% 1% 0px 1%;
- 		max-height: 600px;
-		overflow-y:scroll;
-    	overflow-x:hidden
+		height:auto;
+  		max-height: 90%; 
+	    overflow-y: initial !important;
+     	overflow-x:hidden;
 	}
 
-	.modal-myPage{
-		width: auto;
-		margin: 2% 10% 0px 10%;
- 		height: 600px;
-/*    		max-height: 600px; */
-    		/* overflow-y:scroll; */
-	}
+ 	.modal-myPage{
+ 		width: auto; 
+ 		margin: 2% 10% 0px 10%;
+/*   	height: 600px;  */
+/*   	max-height: 600px; */
+/*     	overflow-y:scroll; */ 
+ 	}
 	
-	.modal-email-confrim{
-		width: auto;
-		margin: 2% 20% 0px 20%;
- 		height: 600px;
-/*    		max-height: 600px; */
-    		/* overflow-y:scroll; */
+ 	.modal-email-confrim{
+ 		width: auto;
+ 		margin: 2% 20% 0px 20%;
+  		height: 600px;
+   		max-height: 600px;
+     	overflow-y:scroll;
+ 	}
+	
+/*  	.modal{  */
+/*      display: block !important;  */
+/*  }  */
+
+	#mainResult{
+	  height: 80%;
+	  overflow-y: auto;
+	  overflow-x: hidden;
 	}
 </style>
 <!--[if lt IE 9]>
@@ -125,7 +136,7 @@
                     	var fileName=data[i].FILE_NAME;
 
                      	var carousel_image = "<div class='item'>";
-                       	carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + "/>";
+                       	carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + " name="+ boardNo + " />";
                        	carousel_image += "<div class='carousel-caption'>";
                        	carousel_image += "<h6>"+ boardTitle +"</h6>";
                        	carousel_image += "</div>";
@@ -171,11 +182,15 @@
                              	$("#tile10 .item").addClass("active");
                             }else if(food_count==2){
                             	$("#tile9 .item").addClass("active");
-                            }
+                            }           
                             
                             food_count++;
                     	}
-                                   
+                        
+                        $("#metro img[name="+ boardNo +"]").click(function(){
+                            blogListDetails(boardNo);
+                        	$("div[id='blogListDetail'].modal").modal();
+                        });
                     });
                     
                     $("#tile7 .item").height($("#tile1").width());
@@ -305,12 +320,6 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<img src="http://handsontek.net/demoimages/tiles/hot.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/hot2.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/hot3.png" class="img-responsive"/>
 							</div>
 						</div>
 					</div>
