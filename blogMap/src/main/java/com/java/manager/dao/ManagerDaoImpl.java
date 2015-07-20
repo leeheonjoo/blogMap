@@ -26,9 +26,9 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public int memberDel(String id) {
+	public int memberDel(HashMap<String, Object> hMap) {
 		// TODO Auto-generated method stub
-		return session.update("dao.ManagerMapper.memberDelete", id);
+		return session.update("dao.ManagerMapper.memberDelete", hMap);
 	}
 	
 	@Override
@@ -44,9 +44,9 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public void delLog(String id) {
+	public void delLog(HashMap<String, Object> hMap) {
 		// TODO Auto-generated method stub
-		session.insert("dao.ManagerMapper.delLog", id);
+		session.insert("dao.ManagerMapper.delLog", hMap);
 	}
 	
 	@Override

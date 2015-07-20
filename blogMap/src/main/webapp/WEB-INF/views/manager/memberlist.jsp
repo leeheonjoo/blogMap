@@ -164,12 +164,13 @@ vertical-align: middle;
 					
 					
 					$("#delete[name='"+data[i].member_id+"']").click(function(){	// 각 회원ID의  name속성을 가진 delete 버튼을 클릭시 각 행을 삭제
-						var tagId = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
-						alert(tagId);
-
+						var member = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
+						//alert(member);
+						var manager = sessionStorage.getItem('email');
+						//alert(manager);
 						$.ajax({
 							type:'get',
-							url:'${root}/manager/delete.do?name='+tagId,
+							url:'${root}/manager/delete.do?member_id='+member + '&manager_id='+ manager,
 							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 							success:function(responseData){
 								var data=JSON.parse(responseData);
@@ -256,12 +257,13 @@ vertical-align: middle;
 					
 					
 					$("#delete[name='"+data[i].member_id+"']").click(function(){	// 각 회원ID의  name속성을 가진 delete 버튼을 클릭시 각 행을 삭제
-						var tagId = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
-						//alert(tagId);
-
+						var member = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
+						//alert(member);
+						var manager = sessionStorage.getItem('email');
+						//alert(manager);
 						$.ajax({
 							type:'get',
-							url:'${root}/manager/delete.do?name='+tagId,
+							url:'${root}/manager/delete.do?member_id='+member + '&manager_id='+ manager,
 							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 							success:function(responseData){
 								var data=JSON.parse(responseData);
@@ -356,12 +358,13 @@ vertical-align: middle;
 					
 					
 					$("#delete[name='"+data[i].member_id+"']").click(function(){	// 각 회원ID의  name속성을 가진 delete 버튼을 클릭시 각 행을 삭제
-						var tagId = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
-						alert(tagId);
-
+						var member = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
+						//alert(member);
+						var manager = sessionStorage.getItem('email');
+						//alert(manager);
 						$.ajax({
 							type:'get',
-							url:'${root}/manager/delete.do?name='+tagId,
+							url:'${root}/manager/delete.do?member_id='+member + '&manager_id='+ manager,
 							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 							success:function(responseData){
 								var data=JSON.parse(responseData);

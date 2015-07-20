@@ -72,13 +72,19 @@ public class ManagerServiceImpl implements ManagerService {
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		HttpServletResponse response=(HttpServletResponse) map.get("response");
 		
-		String id=request.getParameter("name");
-		logger.info(id);
+		String member=request.getParameter("member_id");
+		logger.info(member);
+		String manager=request.getParameter("manager_id");
+		logger.info(manager);
 		
-		int check=managerDao.memberDel(id);
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("member",member);
+		hMap.put("manager",manager);
+		
+		int check=managerDao.memberDel(hMap);
 		logger.info("memberDelete Check:" + check);
 		if(check == 1){
-			managerDao.delLog(id);			// 관리자 로그 저장
+			managerDao.delLog(hMap);			// 관리자 로그 저장
 		}
 		Gson gson=new Gson();				//Gson의 객체를 생성
 		String json=gson.toJson(check);		//삭제 결과를 json으로 변환함
