@@ -303,6 +303,7 @@ $(function() {
 						//alert(data);
 					
 						/* 데이타를 채우기 위해 복사 */
+						$("#tour_item_list").empty();
 						$.each(data, function(i){
 							
 							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));

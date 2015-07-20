@@ -19,27 +19,6 @@
 
 //검색조건 시작
 $(function(){
-	
-	$("#save_button").click(function(){
-		if(!$("input[name='addrress']").val()){
-			alert("주소를 입력하세요.");
-			$("#addr").focus();
-			return false;
-		}
-		
-		if(!$("input[name='board_title']").val()){
-			alert("제목을 입력하세요.");
-			$("#board_title").focus();
-			return false;
-		}
-		
-		if(!$("textarea#board_content").val()){
-			alert("내용을 입력하세요.");
-			$("#board_content").focus();
-			return false;
-		}
-	});	
-		
 	$.ajax({
 		type:'get',
 		url:'${root}/board/getCategory.do',
@@ -137,63 +116,6 @@ function blogWrite_getCategorySelect(el, headData){
 		}
 	});
 
-	function blogWrite_optionInsert(el, data){
-		for (var i = 0; i < data.length; i++) {
-			$("#blogWriteSelect #" + el).append("<option value=" + data[i] + ">" + data[i] + "</option>");
-			$("#blogUpdateSelect #" + el).append("<option value=" + data[i] + ">" + data[i] + "</option>");
-		}
-	
-			$("#blogWriteSelect #" + el).selectpicker('refresh');
-			$("#blogUpdateSelect #" + el).selectpicker('refresh');
-	};
-	
-	//카테고리 select 변경
-	function blogWrite_ChangeCategory(el){
-		var headData=$("#blogWriteSelect #headCategory").val();
-		var headDatas=$("#blogUpdateSelect #headCategory").val();
-		
-		if(el=="headCategory"){
-			$("#blogWriteSelect #detailCategory").empty();
-			$("#blogWriteSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
-			$("#blogWriteSelect #detailCategory").selectpicker("refresh");
-			
-			$("#blogUpdateSelect #detailCategory").empty();
-			$("#blogUpdateSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
-			$("#blogUpdateSelect #detailCategory").selectpicker("refresh");
-			
-			if(headData!="%"){
-				blogWrite_getCategorySelect(el, headData);
-			}else if(headData=="%" && headDatas!="%"){
-				blogWrite_getCategorySelect(el, headDatas);	
-			}
-		}
-	}
-
-
-	//카테고리 select 로드
-	function blogWrite_getCategorySelect(el, headData){
-		$.ajax({
-			type:'get',
-			url:'${root}/board/getCategoryCondition.do?el='+ el + '&headData=' + headData,
-			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-			success:function(responseData){
-					var data=JSON.parse(responseData);
-					if(!data){
-						alert("존재하지 않는 ID입니다");
-						return false;
-					}
-					
-					$("#blogWriteSelect #detailCategory").empty();
-					$("#blogWriteSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
-					
-					$("#blogUpdateSelect #detailCategory").empty();
-					$("#blogUpdateSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
-					blogWrite_optionInsert('detailCategory', data);
-			},
-			error:function(data){
-				alert("error : blogWrite getBeginCondition");
-			}
-		});
 	}
 	
 	//이미지 미리보기
@@ -380,6 +302,21 @@ function blogWrite_getCategorySelect(el, headData){
 		$("#save_button").click(function() {
 			var content=$("#board_content").val();
 			var realAddr=$("input type[name='addr_sido']").val();
+			
+			if(!$("input[name='addrress']").val()){
+				alert("주소를 입력하세요.");
+				$("#addr").focus();
+				return false;
+			}
+			
+			if(!$("input[name='board_title']").val()){
+				alert("제목을 입력하세요.");
+				$("#board_title").focus();
+				return false;
+			}
+			
+			
+			
 		
 			//id가 smarteditor인 textarea에 에디터에서 대입
 			obj.getById["board_content"].exec("UPDATE_CONTENTS_FIELD",[]);
