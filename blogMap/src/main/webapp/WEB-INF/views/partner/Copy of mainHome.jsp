@@ -24,17 +24,10 @@ $(function() {
 #list_partner_name {width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
 </style>
 <body>
-<div class="caption">
-	
-		<div class="col-md-5 input-group">
-			<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
-     		<span class="input-group-btn">
-     			<input type="button" class="btn btn-default" id="search_Partner" value="검색"/>
-     		</span>
-       	</div><br/><br/>
-		<article class="container">
+	<article class="container">
+			<div>
 				<!-- 큰 사이즈 화면에서 탭 목록-->					
-			<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
+				<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
 				<li role="presentation" class="active">
 					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
 				</li>
@@ -76,7 +69,6 @@ $(function() {
 			</div>
 			
 	</article>
-	</div>
 		<script type="text/javascript">
 			/*
 			 * 제휴 업체 신청전 폼유효성 검증

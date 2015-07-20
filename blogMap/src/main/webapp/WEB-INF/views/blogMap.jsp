@@ -682,7 +682,12 @@ $(function(){
 							</div>		<!-- /.row -->
 						</div>					
 					</div>
-					<jsp:include page="partner/mainHome.jsp" />
+					<div class="thumbnail">
+						<div class="caption">	
+							<jsp:include page="partner/mainHome.jsp" />
+						</div>
+					</div>
+					
 				</div>
 		    </div>
 		</div>
@@ -1158,7 +1163,7 @@ $(function(){
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h5 class="modal-title">쿠폰</h5>
 					</div><div class="container"></div>
 					<div class="modal-body">
