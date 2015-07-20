@@ -131,6 +131,11 @@ li { list-style-type:none;}
 <script type="text/javascript">
  $(document).ready(function(){		 
 	$("#tile4").click(function(){		
+		couponListView();
+	});
+ });
+		
+ 	function couponListView(){
 		$.ajax({
 			type:'post',
 			url:'${root}/coupon/couponMain.do',
@@ -187,8 +192,8 @@ li { list-style-type:none;}
 				}	
 			}	
 		});	
-	});
-	
+ 	}
+ 	
 	function couponData(couponNo){
 		$("#couponDetailResult").empty();
 		$.ajax({
@@ -252,7 +257,6 @@ li { list-style-type:none;}
 			},error:function(data){
 				alert("에러가 발생했습니다.");
 			}
-
 		});
 	};
 	
@@ -267,10 +271,7 @@ li { list-style-type:none;}
 			contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(responseData) {
 				var data = JSON.parse(responseData);
-				
-	//				var count= 1;
-				/* alert(data); */
-				
+						
 				$("#coupon_List").empty();
 				
 				$.each(data, function(i){
@@ -307,10 +308,10 @@ li { list-style-type:none;}
 					
 					// 각 업체를 클릭했을때 이벤트
 					$("#coupon_no_" + coupon_no).click(function(){
-	//						alert("쿠폰" + data[i].PARTNER_NO + "클릭");
+//						alert("쿠폰" + data[i].PARTNER_NO + "클릭");
 						couponData(coupon_no);	
 					});
-					});
+				});
 				
 				if (!data) {
 					alert("등록된 정보가 없습니다.");
@@ -319,9 +320,6 @@ li { list-style-type:none;}
 			}	
 		});	
 	});	
-});
-	
-	
 </script>
 </head>
 <body>
