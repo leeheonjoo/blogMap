@@ -113,6 +113,7 @@
 	});
 </script>
 <script>
+    // blogMap 메인화면의 추천게시물 로드 스크립트
 	$(function(){
 		$.ajax({
 			type:'get',
