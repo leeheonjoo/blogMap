@@ -253,17 +253,13 @@ thead {
 					//alert(responseData);
 					
 					var data=responseData.split("|");
-					/* alert(data[0]);
-					alert(data[1]);
-					alert(data[2]);
-					alert(data[3]); */
 					
 					var boardSize=data[1];
 					var count=data[2];
 					var currentPage=data[3];
-					//var pageBlock=1;
+
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-// 					alert(pageCount);
+
 					s_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					s_endPage=s_startPage+pageBlock-1;
 					
@@ -290,9 +286,6 @@ thead {
 					if(s_endPage>pageCount){
 						s_endPage=pageCount;
 					}
-//	 				alert("다음startPage:"+r_startPage);
-//	 				alert("다음endPage:"+r_endPage);
-//	 				alert("다음pageBlock"+pageBlock)
 					
 					//이전
 					if(s_startPage>pageBlock){
@@ -351,9 +344,7 @@ thead {
 							});
 						});
 					}
-// 					alert("다음endPage:"+s_endPage);
-// 					alert("다음pageCount"+pageCount);
-// 					alert("다음마지막startPage:"+s_startPage);
+
 					//다음
 					if(s_endPage<pageCount){
 // 						alert("다음block");
@@ -363,18 +354,13 @@ thead {
 					if(s_endPage>=pageCount){
 // 						alert("다음hidden");
 						$("#send_list_after").css("display","none");
-// 						alert("bbbbbb");
 					}
-					
 				}
 			});
-		});
-		
+		});		
 		
 		//이전클릭시
 		$("#send_paging_before").click(function(){
-// 			alert("이전startPage:"+r_startPage);
-// 			alert("이전pageBlock:"+pageBlock);
 			$.ajax({
 				type:'GET',
 				url:'${root}/message/mainMessage_info.do',
@@ -387,11 +373,7 @@ thead {
 					//alert(responseData);
 					
 					var data=responseData.split("|");
-					/* alert(data[0]);
-					alert(data[1]);
-					alert(data[2]);
-					alert(data[3]); */
-					
+
 					var boardSize=data[1];
 					var count=data[2];
 					var currentPage=data[3];
@@ -420,12 +402,9 @@ thead {
 						});
 					});
 					
-// 					alert("startPage:"+r_startPage);
-// 					alert("pageBlock:"+pageBlock);
 					//이전
 					if(s_startPage>pageBlock){
-						$("#send_list_before").css("display","inline-block");
-						
+						$("#send_list_before").css("display","inline-block");						
 					}
 					
 					if(r_startPage<=pageBlock){
@@ -442,7 +421,6 @@ thead {
 								url:'${root}/message/mainMessage.do',
 								data:{
 									member_id:sessionStorage.getItem("email"),
-									//member_id:"kimjh112339@naver.com",
 									pageNumber:$(this).text()
 								},
 								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
@@ -450,15 +428,10 @@ thead {
 									//alert(responseData);
 									
 									var data=responseData.split("|");
-									/* alert(data[0]);
-									alert(data[1]);
-									alert(data[2]);
-									alert(data[3]); */
 									
 									var boardSize=data[1];
 									var count=data[2];
-									var currentPage=data[3];
-									
+									var currentPage=data[3];		
 									
 									$("#sendMsgResult").empty();
 									var send_data=JSON.parse(data[0]);
@@ -542,7 +515,6 @@ thead {
 			url:'${root}/message/mainMessage.do',
 			data:{
 				member_id:sessionStorage.getItem("email")
-				
 			},
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 			success:function(responseData){
@@ -560,7 +532,6 @@ thead {
 				r_endPage=r_startPage+pageBlock-1;
 				
 				var receive_data=JSON.parse(data[0]);
-				
 				
 				$.each(receive_data,function(i){
 					var date = new Date(receive_data[i].message_sDate);
@@ -583,8 +554,7 @@ thead {
 				}
 
 				if(r_startPage>pageBlock){
-					$("#receive_list_before").css("display","inline-block");
-					
+					$("#receive_list_before").css("display","inline-block");	
 				}
 				
 				if(r_startPage<=pageBlock){
@@ -611,7 +581,6 @@ thead {
 								var count=data[2];
 								var currentPage=data[3];
 								
-								
 								$("#receiveMsgResult").empty();
 								var receive_data=JSON.parse(data[0]);
 								
@@ -634,6 +603,7 @@ thead {
 						});
 					});
 				}
+				
 				if(r_endPage<pageCount){
 					//alert("aaaaa");
 					$("#receive_list_after").css("display","inline-block");
@@ -660,17 +630,13 @@ thead {
 					//alert(responseData);
 					
 					var data=responseData.split("|");
-					/* alert(data[0]);
-					alert(data[1]);
-					alert(data[2]);
-					alert(data[3]); */
 					
 					var boardSize=data[1];
 					var count=data[2];
 					var currentPage=data[3];
-					//var pageBlock=1;
+				
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-// 					alert(pageCount);
+
 					r_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					r_endPage=r_startPage+pageBlock-1;
 					
@@ -691,19 +657,15 @@ thead {
 						$("#" + receive_data[i].message_no).click(function() {
 							msgReceiveimportData(receive_data[i].message_no);
 						});
-					});
-					
+					});					
 					
 					if(r_endPage>pageCount){
 						r_endPage=pageCount;
 					}
-//	 				alert("다음startPage:"+r_startPage);
-//	 				alert("다음endPage:"+r_endPage);
-//	 				alert("다음pageBlock"+pageBlock)
-					
+
 					//이전
 					if(r_startPage>pageBlock){
-// 						alert("block");
+
 						$("#receive_list_before").css("display","inline-block");
 						$("#receive_list_pageNum").css("display","none");
 						$("#receive_list_pageNum").css("display","inline-block");
@@ -758,9 +720,7 @@ thead {
 							});
 						});
 					}
-// 					alert("다음endPage:"+r_endPage);
-// 					alert("다음pageCount"+pageCount);
-// 					alert("다음마지막startPage:"+r_startPage);
+
 					//다음
 					if(r_endPage<pageCount){
 // 						alert("다음block");
@@ -772,16 +732,13 @@ thead {
 						$("#receive_list_after").css("display","none");
 // 						alert("bbbbbb");
 					}
-					
 				}
 			});
 		});
 		
-		
 		//이전클릭시
 		$("#receive_paging_before").click(function(){
-// 			alert("이전startPage:"+r_startPage);
-// 			alert("이전pageBlock:"+pageBlock);
+
 			$.ajax({
 				type:'POST',
 				url:'${root}/message/mainMessage_info.do',
@@ -794,17 +751,13 @@ thead {
 					//alert(responseData);
 					
 					var data=responseData.split("|");
-					/* alert(data[0]);
-					alert(data[1]);
-					alert(data[2]);
-					alert(data[3]); */
-					
+
 					var boardSize=data[1];
 					var count=data[2];
 					var currentPage=data[3];
-					//var pageBlock=1;
+
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-// 					alert(pageCount);
+
 					r_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					r_endPage=r_startPage+pageBlock-1;
 					
@@ -827,12 +780,9 @@ thead {
 						});
 					});
 					
-// 					alert("startPage:"+r_startPage);
-// 					alert("pageBlock:"+pageBlock);
 					//이전
 					if(r_startPage>pageBlock){
-						$("#receive_list_before").css("display","inline-block");
-						
+						$("#receive_list_before").css("display","inline-block");	
 					}
 					
 					if(r_startPage<=pageBlock){
@@ -857,16 +807,11 @@ thead {
 									//alert(responseData);
 									
 									var data=responseData.split("|");
-									/* alert(data[0]);
-									alert(data[1]);
-									alert(data[2]);
-									alert(data[3]); */
-									
+
 									var boardSize=data[1];
 									var count=data[2];
 									var currentPage=data[3];
-									
-									
+
 									$("#receiveMsgResult").empty();
 									var receive_data=JSON.parse(data[0]);
 									
@@ -902,7 +847,8 @@ thead {
 			});
 		});
  	}
-	function msgReceiveimportData(no) {
+
+ 	function msgReceiveimportData(no) {
 		$.ajax({
 			type : 'get',
 			url : '${root}/message/messageRead.do?message_no=' + no,
@@ -975,8 +921,7 @@ thead {
 				r_endPage=r_startPage+pageBlock-1;
 				
 				var receive_data=JSON.parse(data[0]);
-				
-				
+
 				$.each(receive_data,function(i){
 					var date = new Date(receive_data[i].message_sDate);
 					var sy = date.getFullYear();
@@ -998,8 +943,7 @@ thead {
 				}
 
 				if(r_startPage>pageBlock){
-					$("#receive_list_before").css("display","inline-block");
-					
+					$("#receive_list_before").css("display","inline-block");					
 				}
 				
 				if(r_startPage<=pageBlock){
@@ -1025,8 +969,7 @@ thead {
 								var boardSize=data[1];
 								var count=data[2];
 								var currentPage=data[3];
-								
-								
+
 								$("#receiveMsgResult").empty();
 								var receive_data=JSON.parse(data[0]);
 								
@@ -1075,17 +1018,13 @@ thead {
 					//alert(responseData);
 					
 					var data=responseData.split("|");
-					/* alert(data[0]);
-					alert(data[1]);
-					alert(data[2]);
-					alert(data[3]); */
-					
+
 					var boardSize=data[1];
 					var count=data[2];
 					var currentPage=data[3];
-					//var pageBlock=1;
+
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-// 					alert(pageCount);
+
 					r_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					r_endPage=r_startPage+pageBlock-1;
 					
@@ -1107,18 +1046,14 @@ thead {
 							msgimportData(receive_data[i].message_no);
 						});
 					});
-					
-					
+
 					if(r_endPage>pageCount){
 						r_endPage=pageCount;
 					}
-//	 				alert("다음startPage:"+r_startPage);
-//	 				alert("다음endPage:"+r_endPage);
-//	 				alert("다음pageBlock"+pageBlock)
-					
+
 					//이전
 					if(r_startPage>pageBlock){
-// 						alert("block");
+
 						$("#receive_list_before").css("display","inline-block");
 						$("#receive_list_pageNum").css("display","none");
 						$("#receive_list_pageNum").css("display","inline-block");
@@ -1173,30 +1108,21 @@ thead {
 							});
 						});
 					}
-// 					alert("다음endPage:"+r_endPage);
-// 					alert("다음pageCount"+pageCount);
-// 					alert("다음마지막startPage:"+r_startPage);
+
 					//다음
 					if(r_endPage<pageCount){
-// 						alert("다음block");
 						$("#receive_list_after").css("display","inline-block");
 					}
 					
 					if(r_endPage>=pageCount){
-// 						alert("다음hidden");
 						$("#receive_list_after").css("display","none");
-// 						alert("bbbbbb");
 					}
-					
 				}
 			});
-		});
-		
+		});		
 		
 		//이전클릭시
 		$("#receive_paging_before").click(function(){
-// 			alert("이전startPage:"+r_startPage);
-// 			alert("이전pageBlock:"+pageBlock);
 			$.ajax({
 				type:'POST',
 				url:'${root}/message/mainMessage_info.do',
@@ -1209,17 +1135,13 @@ thead {
 					//alert(responseData);
 					
 					var data=responseData.split("|");
-					/* alert(data[0]);
-					alert(data[1]);
-					alert(data[2]);
-					alert(data[3]); */
-					
+
 					var boardSize=data[1];
 					var count=data[2];
 					var currentPage=data[3];
-					//var pageBlock=1;
+
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-// 					alert(pageCount);
+
 					r_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					r_endPage=r_startPage+pageBlock-1;
 					
@@ -1241,13 +1163,10 @@ thead {
 							msgimportData(receive_data[i].message_no);
 						});
 					});
-					
-// 					alert("startPage:"+r_startPage);
-// 					alert("pageBlock:"+pageBlock);
+
 					//이전
 					if(r_startPage>pageBlock){
-						$("#receive_list_before").css("display","inline-block");
-						
+						$("#receive_list_before").css("display","inline-block");						
 					}
 					
 					if(r_startPage<=pageBlock){
@@ -1264,7 +1183,6 @@ thead {
 								url:'${root}/message/mainMessage.do',
 								data:{
 									member_id:sessionStorage.getItem("email"),
-									//member_id:"kimjh112339@naver.com",
 									pageNumber:$(this).text()
 								},
 								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
@@ -1272,16 +1190,11 @@ thead {
 									//alert(responseData);
 									
 									var data=responseData.split("|");
-									/* alert(data[0]);
-									alert(data[1]);
-									alert(data[2]);
-									alert(data[3]); */
-									
+
 									var boardSize=data[1];
 									var count=data[2];
 									var currentPage=data[3];
-									
-									
+
 									$("#receiveMsgResult").empty();
 									var receive_data=JSON.parse(data[0]);
 									
