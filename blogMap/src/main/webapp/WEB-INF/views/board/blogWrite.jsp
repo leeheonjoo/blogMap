@@ -60,6 +60,81 @@ $(function(){
 	
 	var email=sessionStorage.getItem('email');
 	$("input[name='member_id']").attr("value",email);
+
+	
+});
+
+function blogWrite_optionInsert(el, data){
+	for (var i = 0; i < data.length; i++) {
+		$("#blogWriteSelect #" + el).append("<option value=" + data[i] + ">" + data[i] + "</option>");
+		$("#blogUpdateSelect #" + el).append("<option value=" + data[i] + ">" + data[i] + "</option>");
+		$("#blogPartnerSelect #" + el).append("<option value=" + data[i] + ">" + data[i] + "</option>");
+	}
+
+		$("#blogWriteSelect #" + el).selectpicker('refresh');
+		$("#blogUpdateSelect #" + el).selectpicker('refresh');
+		$("#blogPartnerSelect #" + el).selectpicker('refresh');
+};
+
+//카테고리 select 변경
+function blogWrite_ChangeCategory(el){
+	var headData=$("#blogWriteSelect #headCategory").val();
+	var headDatas=$("#blogUpdateSelect #headCategory").val();
+	var headDatass=$("#blogPartnerSelect #headCategory").val();
+	
+	
+	if(el=="headCategory"){
+		$("#blogWriteSelect #detailCategory").empty();
+		$("#blogWriteSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
+		$("#blogWriteSelect #detailCategory").selectpicker("refresh");
+		
+		$("#blogUpdateSelect #detailCategory").empty();
+		$("#blogUpdateSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
+		$("#blogUpdateSelect #detailCategory").selectpicker("refresh");
+		
+		$("#blogPartnerSelect #detailCategory").empty();
+		$("#blogPartnerSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
+		$("#blogPartnerSelect #detailCategory").selectpicker("refresh");
+		
+		if(headData!="%"){
+			blogWrite_getCategorySelect(el, headData);
+		}else if(headData=="%" && headDatas!="%"){
+			blogWrite_getCategorySelect(el, headDatas);
+			
+		} else if(headData=="%" && headDatas=="%" && headDatass!="%"){
+			blogWrite_getCategorySelect(el, headDatass);
+		} 
+		
+	}
+}
+
+
+//카테고리 select 로드
+function blogWrite_getCategorySelect(el, headData){
+	$.ajax({
+		type:'get',
+		url:'${root}/board/getCategoryCondition.do?el='+ el + '&headData=' + headData,
+		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+		success:function(responseData){
+				var data=JSON.parse(responseData);
+				if(!data){
+					alert("존재하지 않는 ID입니다");
+					return false;
+				}
+				
+				$("#blogWriteSelect #detailCategory").empty();
+				$("#blogWriteSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
+				
+				$("#blogUpdateSelect #detailCategory").empty();
+				$("#blogUpdateSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
+				
+			 	$("#blogPartnerSelect #detailCategory").empty();
+				$("#blogPartnerSelect #detailCategory").append("<option value='%'>소분류[전체]</option>"); 
+				blogWrite_optionInsert('detailCategory', data);
+		},
+		error:function(data){
+			alert("error : blogWrite getBeginCondition");
+		}
 	});
 
 	function blogWrite_optionInsert(el, data){

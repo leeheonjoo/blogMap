@@ -12,7 +12,7 @@
 <script type="text/javascript" src="${root }/css/manager/script.js"></script>
 <script type="text/javascript">
 	function getCouponlist(){
-		$("#couponListResult").empty();
+		
 		$.ajax({
 			type:'get',
 			url:'${root}/manager/couponInfo.do',
@@ -48,7 +48,7 @@
 								+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 								+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 								+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
-								+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
+								+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 								+ "<td>" + bymd + "</td>"						// 등록일
 								+ "<td>" + eymd + "</td>"		//
 								+ "<td>"
@@ -59,7 +59,7 @@
 								+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 								+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 								+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
-								+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
+								+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 								+ "<td>" + bymd + "</td>"						// 등록일
 								+ "<td>" + eymd + "</td>"		//
 								+ "<td>"
@@ -103,12 +103,13 @@
 		});
 		
 		function couponCancle(couponNo){
+			var manager = sessionStorage.getItem('email');
 			$.ajax({
 				type:'get',
-				url:'${root}/manager/couponCancle.do?couponNo='+couponNo,
+				url:'${root}/manager/couponCancle.do?couponNo='+couponNo  + '&manager_id='+ manager,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
-					
+					$("#couponListResult").empty();
 					var cancleCheck=JSON.parse(responseData);
 					//alert("couponCancle :" + cancleCheck);
 					
@@ -120,7 +121,6 @@
 					if(cancleCheck == "1"){		//삭제가 정상적으로 이루어지면 시행
 						alert("취소되었습니다.");						
 						getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
-						//$("#couponDetailResult").refresh();
 						couponDetail(couponNo);						
 					};
 					
@@ -132,12 +132,13 @@
 		};		
 		
 		function couponSubmit(couponNo){
+			var manager = sessionStorage.getItem('email');
 			$.ajax({
 				type:'get',
-				url:'${root}/manager/couponSubmit.do?couponNo='+couponNo,
+				url:'${root}/manager/couponSubmit.do?couponNo='+couponNo  + '&manager_id='+ manager,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
-					
+					$("#couponListResult").empty();
 					var submitChcek=JSON.parse(responseData);
 					//alert("couponSubmit :" + submitChcek);
 					
@@ -148,9 +149,8 @@
 					
 					if(submitChcek == "1"){
 						alert("승인되었습니다.");
-						getCouponlist();
-						//$("#couponDetailResult").refresh();
-						couponDetail(couponNo);
+						getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
+						couponDetail(couponNo);						
 					};
 					
 				},error:function(submitChcek){
@@ -235,7 +235,7 @@
 		/*										  */
 		/******************************************/ 
 		$("#searchCoupon").click(function(){
-			$("#couponListResult").empty();
+			
 			var searchTag=$("input[id='CouponSearchTag']").val();
 			//alert(searchTag);
 			$.ajax({
@@ -243,6 +243,7 @@
 				url:'${root}/manager/searchCouponInfo.do?name=' + searchTag,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
+					$("#couponListResult").empty();
 					$("input[id='CouponSearchTag']").val("");
 					var data=JSON.parse(responseData);
 					//alert(data.length);
@@ -272,7 +273,7 @@
 									+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 									+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
-									+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
+									+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 									+ "<td>" + bymd + "</td>"						// 등록일
 									+ "<td>" + eymd + "</td>"		//
 									+ "<td>"
@@ -283,7 +284,7 @@
 									+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 									+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
-									+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
+									+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 									+ "<td>" + bymd + "</td>"						// 등록일
 									+ "<td>" + eymd + "</td>"		//
 									+ "<td>"
@@ -325,12 +326,13 @@
 			});
 			
 			function couponCancle(couponNo){
+				var manager = sessionStorage.getItem('email');
 				$.ajax({
 					type:'get',
-					url:'${root}/manager/couponCancle.do?couponNo='+couponNo,
+					url:'${root}/manager/couponCancle.do?couponNo='+couponNo  + '&manager_id='+ manager,
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
-						
+						$("#couponListResult").empty();
 						var cancleCheck=JSON.parse(responseData);
 						//alert("couponCancle :" + cancleCheck);
 						
@@ -342,7 +344,7 @@
 						if(cancleCheck == "1"){		//삭제가 정상적으로 이루어지면 시행
 							alert("취소되었습니다.");
 							getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
-							$("#coupon_detail_button[name='"+couponNo +"']").attr("value","승인").refresh();
+							couponDetail(couponNo);						
 						};
 						
 					},error:function(deleteCheck){
@@ -353,12 +355,13 @@
 			};		
 			
 			function couponSubmit(couponNo){
+				var manager = sessionStorage.getItem('email');
 				$.ajax({
 					type:'get',
-					url:'${root}/manager/couponSubmit.do?couponNo='+couponNo,
+					url:'${root}/manager/couponSubmit.do?couponNo='+couponNo  + '&manager_id='+ manager,
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
-						
+						$("#couponListResult").empty();
 						var submitChcek=JSON.parse(responseData);
 						//alert("couponSubmit :" + submitChcek);
 						
@@ -369,8 +372,8 @@
 						
 						if(submitChcek == "1"){
 							alert("승인되었습니다.");
-							$("#coupon_detail_button[name='"+couponNo +"']").attr("value","취소").refresh();
-							getCouponlist();
+							getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
+							couponDetail(couponNo);						
 						};
 						
 					},error:function(submitChcek){
@@ -494,7 +497,7 @@
 									+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 									+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
-									+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
+									+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 									+ "<td>" + bymd + "</td>"						// 등록일
 									+ "<td>" + eymd + "</td>"		//
 									+ "<td>"
@@ -505,7 +508,7 @@
 									+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 									+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
-									+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
+									+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 									+ "<td>" + bymd + "</td>"						// 등록일
 									+ "<td>" + eymd + "</td>"		//
 									+ "<td>"
@@ -550,9 +553,10 @@
 		});
 		
 		function couponCancle(couponNo){
+			var manager = sessionStorage.getItem('email');
 			$.ajax({
 				type:'get',
-				url:'${root}/manager/couponCancle.do?couponNo='+couponNo,
+				url:'${root}/manager/couponCancle.do?couponNo='+couponNo  + '&manager_id='+ manager,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					
@@ -567,7 +571,7 @@
 					if(cancleCheck == "1"){		//삭제가 정상적으로 이루어지면 시행
 						alert("취소되었습니다.");
 						getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
-						$("#coupon_detail_button[name='"+couponNo +"']").attr("value","승인").refresh();
+						couponDetail(couponNo);						
 					};
 					
 				},error:function(deleteCheck){
@@ -578,9 +582,10 @@
 		};		
 		
 		function couponSubmit(couponNo){
+			var manager = sessionStorage.getItem('email');
 			$.ajax({
 				type:'get',
-				url:'${root}/manager/couponSubmit.do?couponNo='+couponNo,
+				url:'${root}/manager/couponSubmit.do?couponNo='+couponNo  + '&manager_id='+ manager,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					
@@ -594,8 +599,8 @@
 					
 					if(submitChcek == "1"){
 						alert("승인되었습니다.");
-						$("#coupon_detail_button[name='"+couponNo +"']").attr("value","취소").refresh();
-						getCouponlist();
+						getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
+						couponDetail(couponNo);						
 					};
 					
 				},error:function(submitChcek){
@@ -645,7 +650,7 @@
 					
 					$("#coupon_detail_button[value='취소']").click(function(){
 						var couponNo = $(this).attr('name');
-						alert(couponNo);
+						//alert(couponNo);
 						var check = confirm("쿠폰 발행을 취소하시겠습니까?");
 						if(check == "1"){
 							couponCancle(couponNo);
@@ -656,7 +661,7 @@
 					
 					$("#coupon_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
 						var couponNo = $(this).attr('name');		
-						alert(couponNo);
+						//alert(couponNo);
 						var check = confirm("쿠폰을 승인 하시겠습니까?");
 						if(check == "1"){
 							couponSubmit(couponNo);

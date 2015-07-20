@@ -18,7 +18,7 @@
 /******************************************/ 
 	function getPartnerList(){
 		//alert("getPartnerList : "+ searchTag);
-		$("#partnerListResult").empty();	// 제휴업체 정보를 불러오기전 리셋(중복 삽입을 방지하기 위해)
+		$("#partnerListResult1").empty();	// 제휴업체 정보를 불러오기전 리셋(중복 삽입을 방지하기 위해)
 		//alert("파트너리스트")
 		$.ajax({
 			type:'get',
@@ -48,7 +48,7 @@
 					var yDate = yyear + "년 " + ymonth + "월 "	+ yday + "일";
 					//alert(yDate);
 					 if(data[i].partner_yn == "Y"){ 
-							$("#partnerListResult").append("<tr style='text-align:center;'>"
+							$("#partnerListResult1").append("<tr style='text-align:center;'>"
 									+ "<td>" + data[i].partner_no + "</td>"			// 아이디
 									+ "<td>" + data[i].member_id + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#partnerDetail' class='btn-example' id='partner"+data[i].partner_no+"'>" + data[i].partner_name + "</a></td>"		//
@@ -56,10 +56,10 @@
 									+ "<td>" + rgDate + "</td>"						// 등록일
 									+ "<td>" + yDate + "</td>"		//
 									+ "<td>"
-									+"<input type='button' id='partner' value = '삭제' name='"+data[i].member_id+"'/></td>"
+									+"<input type='button' id='partner' value = '삭제' name='"+data[i].partner_no+"'/></td>"
 									+ "</tr>");
 					 }else if(data[i].partner_yn =="N"){ 
-							$("#partnerListResult").append("<tr style='text-align:center;'>"
+							$("#partnerListResult1").append("<tr style='text-align:center;'>"
 									+ "<td>" + data[i].partner_no + "</td>"			// 아이디
 									+ "<td>" + data[i].member_id + "</td>"			// 이름								
 									+ "<td><a data-toggle='modal' href='#partnerDetail' class='btn-example' id='partner"+data[i].partner_no+"'>" + data[i].partner_name + "</a></td>"		//
@@ -67,7 +67,7 @@
 									+ "<td>" + rgDate + "</td>"						// 등록일
 									+ "<td>" + yDate + "</td>"		//
 									+ "<td>"
-									+"<input type='button' id='partner' value = '승인' name='"+data[i].member_id+"'/></td>"
+									+"<input type='button' id='partner' value = '승인' name='"+data[i].partner_no+"'/></td>"
 									+ "</tr>");
 					}
 					
@@ -79,7 +79,7 @@
 								
 				$("#partner[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
 					var tagId = $(this).attr('name');		
-					var check = confirm(tagId + "를(을) 승인 하시겠습니까?");
+					var check = confirm("정말로 승인 하시겠습니까?");
 					if(check == "1"){
 						partnerSubmit(tagId);
 					}else{
@@ -89,7 +89,7 @@
 				
 				$("#partner[value='삭제']").click(function(){			// 삭제버튼을 클릭시 실행
 					var tagId = $(this).attr('name');
-					var check=confirm(tagId + "를(을) 삭제 하시겠습니까?");
+					var check=confirm("정말로 삭제 하시겠습니까?");
 					if(check == "1"){
 						partnerDelete(tagId);
 					}else{
@@ -103,24 +103,26 @@
 			
 		});
 		
-		function partnerSubmit(tagId){
+		/* function partnerSubmit(tagId){
+			var manager = sessionStorage.getItem('email');
 			$.ajax({
 				type:'get',
-				url:'${root}/manager/partnerSubmit.do?id='+tagId,
+				url:'${root}/manager/partnerSubmit.do?partner_no='+tagId + '&manager_id='+ manager,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					
 					var submitChcek=JSON.parse(responseData);
-					alert("partnerSubmit :" + submitChcek);
+					//alert("partnerSubmit :" + submitChcek);
 					
 					if(!submitChcek){
 						alert("데이타가 없습니다.");
 						return false;
 					};
 					
-					if(submitChcek.length >= 1){
+					if(submitChcek = "1"){
 						alert("승인되었습니다.");
 						getPartnerList();
+						//$("#partnerDetail").modal().dismiss();
 					};
 					
 				},error:function(submitChcek){
@@ -129,10 +131,12 @@
 			});
 		}
 		
-		function partnerDelete(tagId){	
+		function partnerDelete(tagId){
+			var manager = sessionStorage.getItem('email');
+			alert(tagId);
 			$.ajax({
 				type:'get',
-				url:'${root}/manager/partnerDelete.do?id='+tagId,
+				url:'${root}/manager/partnerDelete.do?partner_no='+tagId + '&manager_id='+ manager,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					
@@ -152,7 +156,7 @@
 				},error:function(deleteCheck){
 					alert("에러가 발생하였습니다.");
 				}
-			});
+			}); */
 			
 		}
 		
@@ -177,15 +181,15 @@
 					
 					if(data.partner_yn == "Y"){
 						//$("#partner_submit").css("display", "none");
-						$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.member_id, "value":"삭제"});
+						$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.partner_no, "value":"삭제"});
 					}else if(data.partner_yn == "N"){
 						//$("#partner_delete").css("display", "none");
-						$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.member_id, "value":"승인"});
+						$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.partner_no, "value":"승인"});
 					}
 					
 					$("#partner_detail_button[value='삭제']").click(function(){
 						var tagId = $(this).attr('name');
-						var check=confirm(tagId + "를(을) 삭제 하시겠습니까?");
+						var check=confirm("정말로 삭제 하시겠습니까?");
 						if(check == "1"){
 							partnerDelete(tagId);
 						}else{
@@ -195,7 +199,7 @@
 					
 					$("#partner_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
 						var tagId = $(this).attr('name');
-						var check = confirm(tagId + "를(을) 승인 하시겠습니까?");
+						var check = confirm("정말로 승인 하시겠습니까?");
 						if(check == "1"){
 							partnerSubmit(tagId);
 						}else{
@@ -210,7 +214,7 @@
 			});
 		};	
 		
-	};
+	
 	
 	 $(function(){
 		/******************************************/ 
@@ -223,12 +227,14 @@
 			var searchTag=$("input[id='searchTag']").val();
 			alert(searchTag);
 			/* searchPartnerList(searchTag); */
-			$("#partnerListResult").empty();	// 제휴업체 정보를 불러오기전 리셋(중복 삽입을 방지하기 위해)
+		
 			$.ajax({
 				type:'get',
 				url:'${root}/manager/searchPartnerInfo.do?name=' + searchTag,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
+					$("#partnerListResult1").empty();	// 제휴업체 정보를 불러오기전 리셋(중복 삽입을 방지하기 위해)
+				
 					$("input[id='searchTag']").val("");
 					var data=JSON.parse(responseData);
 					//alert(data);
@@ -252,28 +258,28 @@
 						var yday = getYdate.getDate();
 						var yDate = yyear + "년 " + ymonth + "월 "	+ yday + "일";
 						//alert(yDate);
-						 if(data[i].partner_yn == "Y"){ 
-								$("#partnerListResult").append("<tr style='text-align:center;'>"
-										+ "<td>" + data[i].partner_no + "</td>"			// 아이디
-										+ "<td>" + data[i].member_id + "</td>"			// 이름	
-										+ "<td><a data-toggle='modal' href='#partnerDetail' class='btn-example' id='partner"+data[i].partner_no+"'>" + data[i].partner_name + "</a></td>"		//
-										+ "<td>" + data[i].partner_phone + "</td>"		//							
-										+ "<td>" + rgDate + "</td>"						// 등록일
-										+ "<td>" + yDate + "</td>"		//
-										+ "<td>"
-										+"<input type='button' id='partner' value = '삭제' name='"+data[i].member_id+"'/></td>"
-										+ "</tr>");
+						if(data[i].partner_yn == "Y"){ 
+							$("#partnerListResult1").append("<tr style='text-align:center;'>"
+									+ "<td>" + data[i].partner_no + "</td>"			// 아이디
+									+ "<td>" + data[i].member_id + "</td>"			// 이름	
+									+ "<td><a data-toggle='modal' href='#partnerDetail' class='btn-example' id='partner"+data[i].partner_no+"'>" + data[i].partner_name + "</a></td>"		//
+									+ "<td>" + data[i].partner_phone + "</td>"		//							
+									+ "<td>" + rgDate + "</td>"						// 등록일
+									+ "<td>" + yDate + "</td>"		//
+									+ "<td>"
+									+"<input type='button' id='partner' value = '삭제' name='"+data[i].partner_no+"'/></td>"
+									+ "</tr>");
 						 }else if(data[i].partner_yn =="N"){ 
-								$("#partnerListResult").append("<tr style='text-align:center;'>"
-										+ "<td>" + data[i].partner_no + "</td>"			// 아이디
-										+ "<td>" + data[i].member_id + "</td>"			// 이름								
-										+ "<td><a data-toggle='modal' href='#partnerDetail' class='btn-example' id='partner"+data[i].partner_no+"'>" + data[i].partner_name + "</a></td>"		//
-										+ "<td>" + data[i].partner_phone + "</td>"		//							
-										+ "<td>" + rgDate + "</td>"						// 등록일
-										+ "<td>" + yDate + "</td>"		//
-										+ "<td>"
-										+"<input type='button' id='partner' value = '승인' name='"+data[i].member_id+"'/></td>"
-										+ "</tr>");
+							$("#partnerListResult1").append("<tr style='text-align:center;'>"
+									+ "<td>" + data[i].partner_no + "</td>"			// 아이디
+									+ "<td>" + data[i].member_id + "</td>"			// 이름								
+									+ "<td><a data-toggle='modal' href='#partnerDetail' class='btn-example' id='partner"+data[i].partner_no+"'>" + data[i].partner_name + "</a></td>"		//
+									+ "<td>" + data[i].partner_phone + "</td>"		//							
+									+ "<td>" + rgDate + "</td>"						// 등록일
+									+ "<td>" + yDate + "</td>"		//
+									+ "<td>"
+									+"<input type='button' id='partner' value = '승인' name='"+data[i].partner_no+"'/></td>"
+									+ "</tr>");
 						}
 						
 						$("#partner"+data[i].partner_no).click(function(){
@@ -284,7 +290,7 @@
 									
 					$("#partner[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
 						var tagId = $(this).attr('name');		
-						var check = confirm(tagId + "를(을) 승인 하시겠습니까?");
+						var check = confirm("정말로 승인 하시겠습니까?");
 						if(check == "1"){
 							partnerSubmit(tagId);
 						}else{
@@ -294,7 +300,7 @@
 					
 					$("#partner[value='삭제']").click(function(){			// 삭제버튼을 클릭시 실행
 						var tagId = $(this).attr('name');
-						var check=confirm(tagId + "를(을) 삭제 하시겠습니까?");
+						var check=confirm("정말로 삭제 하시겠습니까?");
 						if(check == "1"){
 							partnerDelete(tagId);
 						}else{
@@ -309,9 +315,10 @@
 			});
 			
 			function partnerSubmit(tagId){
+				var manager = sessionStorage.getItem('email');
 				$.ajax({
 					type:'get',
-					url:'${root}/manager/partnerSubmit.do?id='+tagId,
+					url:'${root}/manager/partnerSubmit.do?partner_no='+tagId + '&manager_id='+ manager,
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
 						
@@ -335,9 +342,10 @@
 			}
 			
 			function partnerDelete(tagId){	
+				var manager = sessionStorage.getItem('email');
 				$.ajax({
 					type:'get',
-					url:'${root}/manager/partnerDelete.do?id='+tagId,
+					url:'${root}/manager/partnerDelete.do?partner_no='+tagId + '&manager_id='+ manager,
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
 						
@@ -381,15 +389,15 @@
 						$("#partnerDetailMain:last-child #partner_address").html(data.partner_addr);
 						if(data.partner_yn == "Y"){
 							//$("#partner_submit").css("display", "none");
-							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.member_id, "value":"삭제"});
+							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.partner_no, "value":"삭제"});
 						}else if(data.partner_yn == "N"){
 							//$("#partner_delete").css("display", "none");
-							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.member_id, "value":"승인"});
+							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.partner_no, "value":"승인"});
 						}
 						
 						$("#partner_detail_button[value='삭제']").click(function(){
 							var tagId = $(this).attr('name');
-							var check=confirm(tagId + "를(을) 삭제 하시겠습니까?");
+							var check=confirm("정말로 삭제 하시겠습니까?");
 							if(check == "1"){
 								partnerDelete(tagId);
 							}else{
@@ -399,7 +407,7 @@
 						
 						$("#partner_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
 							var tagId = $(this).attr('name');
-							var check = confirm(tagId + "를(을) 승인 하시겠습니까?");
+							var check = confirm("정말로 승인 하시겠습니까?");
 							if(check == "1"){
 								partnerSubmit(tagId);
 							}else{
@@ -426,9 +434,9 @@
 		/******************************************/ 
 		$("input[name='partner_yn']").click(function(){
 			var status=$(this).attr("id");
-			alert(status);
+			//alert(status);
 			
-			$("#partnerListResult").empty();	// 제휴업체 정보를 불러오기전 리셋(중복 삽입을 방지하기 위해)
+			$("#partnerListResult1").empty();	// 제휴업체 정보를 불러오기전 리셋(중복 삽입을 방지하기 위해)
 			
 			$.ajax({
 				type:'get',
@@ -457,28 +465,28 @@
 						var yday = getYdate.getDate();
 						var yDate = yyear + "년 " + ymonth + "월 "	+ yday + "일";
 						//alert(yDate);
-						 if(data[i].partner_yn == "Y"){ 
-								$("#partnerListResult").append("<tr style='text-align:center;'>"
-										+ "<td>" + data[i].partner_no + "</td>"			// 아이디
-										+ "<td>" + data[i].member_id + "</td>"			// 이름	
-										+ "<td><a data-toggle='modal' href='#partnerDetail' class='btn-example' id='partner"+data[i].partner_no+"'>" + data[i].partner_name + "</a></td>"		//
-										+ "<td>" + data[i].partner_phone + "</td>"		//							
-										+ "<td>" + rgDate + "</td>"						// 등록일
-										+ "<td>" + yDate + "</td>"		//
-										+ "<td>"
-										+"<input type='button' id='partner' value = '삭제' name='"+data[i].member_id+"'/></td>"
-										+ "</tr>");
+						if(data[i].partner_yn == "Y"){ 
+								$("#partnerListResult1").append("<tr style='text-align:center;'>"
+									+ "<td>" + data[i].partner_no + "</td>"			// 아이디
+									+ "<td>" + data[i].member_id + "</td>"			// 이름	
+									+ "<td><a data-toggle='modal' href='#partnerDetail' class='btn-example' id='partner"+data[i].partner_no+"'>" + data[i].partner_name + "</a></td>"		//
+									+ "<td>" + data[i].partner_phone + "</td>"		//							
+									+ "<td>" + rgDate + "</td>"						// 등록일
+									+ "<td>" + yDate + "</td>"		//
+									+ "<td>"
+									+"<input type='button' id='partner' value = '삭제' name='"+data[i].partner_no+"'/></td>"
+									+ "</tr>");
 						 }else if(data[i].partner_yn =="N"){ 
-								$("#partnerListResult").append("<tr style='text-align:center;'>"
+								$("#partnerListResult1").append("<tr style='text-align:center;'>"
 										+ "<td>" + data[i].partner_no + "</td>"			// 아이디
-										+ "<td>" + data[i].member_id + "</td>"			// 이름								
-										+ "<td><a data-toggle='modal' href='#partnerDetail' class='btn-example' id='partner"+data[i].partner_no+"'>" + data[i].partner_name + "</a></td>"		//
-										+ "<td>" + data[i].partner_phone + "</td>"		//							
-										+ "<td>" + rgDate + "</td>"						// 등록일
-										+ "<td>" + yDate + "</td>"		//
-										+ "<td>"
-										+"<input type='button' id='partner' value = '승인' name='"+data[i].member_id+"'/></td>"
-										+ "</tr>");
+									+ "<td>" + data[i].member_id + "</td>"			// 이름								
+									+ "<td><a data-toggle='modal' href='#partnerDetail' class='btn-example' id='partner"+data[i].partner_no+"'>" + data[i].partner_name + "</a></td>"		//
+									+ "<td>" + data[i].partner_phone + "</td>"		//							
+									+ "<td>" + rgDate + "</td>"						// 등록일
+									+ "<td>" + yDate + "</td>"		//
+									+ "<td>"
+									+"<input type='button' id='partner' value = '승인' name='"+data[i].partner_no+"'/></td>"
+									+ "</tr>");
 						}
 						
 						$("#partner"+data[i].partner_no).click(function(){
@@ -489,7 +497,7 @@
 									
 					$("#partner[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
 						var tagId = $(this).attr('name');		
-						var check = confirm(tagId + "를(을) 승인 하시겠습니까?");
+						var check = confirm("정말로 승인 하시겠습니까?");
 						if(check == "1"){
 							partnerSubmit(tagId);
 						}else{
@@ -499,7 +507,7 @@
 					
 					$("#partner[value='삭제']").click(function(){			// 삭제버튼을 클릭시 실행
 						var tagId = $(this).attr('name');
-						var check=confirm(tagId + "를(을) 삭제 하시겠습니까?");
+						var check=confirm("정말로 삭제 하시겠습니까?");
 						if(check == "1"){
 							partnerDelete(tagId);
 						}else{
@@ -514,9 +522,10 @@
 			});
 			
 			function partnerSubmit(tagId){
+				var manager = sessionStorage.getItem('email');
 				$.ajax({
 					type:'get',
-					url:'${root}/manager/partnerSubmit.do?id='+tagId,
+					url:'${root}/manager/partnerSubmit.do?partner_no='+tagId + '&manager_id='+ manager,
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
 						
@@ -540,9 +549,10 @@
 			}
 			
 			function partnerDelete(tagId){	
+				var manager = sessionStorage.getItem('email');
 				$.ajax({
 					type:'get',
-					url:'${root}/manager/partnerDelete.do?id='+tagId,
+					url:'${root}/manager/partnerDelete.do?partner_no='+tagId + '&manager_id='+ manager,
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
 						
@@ -585,15 +595,15 @@
 						$("#partnerDetailMain:last-child #partner_address").html(data.partner_addr);
 						if(data.partner_yn == "Y"){
 							//$("#partner_submit").css("display", "none");
-							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.member_id, "value":"삭제"});
+							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.partner_no, "value":"삭제"});
 						}else if(data.partner_yn == "N"){
 							//$("#partner_delete").css("display", "none");
-							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.member_id, "value":"승인"});
+							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.partner_no, "value":"승인"});
 						}
 						
 						$("#partner_detail_button[value='삭제']").click(function(){
 							var tagId = $(this).attr('name');
-							var check=confirm(tagId + "를(을) 삭제 하시겠습니까?");
+							var check=confirm("정말로 삭제 하시겠습니까?");
 							if(check == "1"){
 								partnerDelete(tagId);
 							}else{
@@ -603,7 +613,7 @@
 						
 						$("#partner_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
 							var tagId = $(this).attr('name');
-							var check = confirm(tagId + "를(을) 승인 하시겠습니까?");
+							var check = confirm("정말로 승인 하시겠습니까?");
 							if(check == "1"){
 								partnerSubmit(tagId);
 							}else{
@@ -654,7 +664,7 @@
 									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center;">구분</th>
 								</tr>
 							</thead>
-							<tbody id="partnerListResult"></tbody>  <!-- 자료를 붙일 바디 -->
+							<tbody id="partnerListResult1"></tbody>  <!-- 자료를 붙일 바디 -->
 							</table>
 						
 					</div> <!-- /widget-content -->

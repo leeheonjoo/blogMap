@@ -25,15 +25,6 @@ $(function() {
 </style>
 <body>
 	<article class="container">
-		
-		<div class="row">
-			<section class="page-header">
-				<h2 class="page-title">제휴업체 정보</h2>
-			</section>
-		</div>
-		
-		<div class="row">
-		
 			<div>
 				<!-- 큰 사이즈 화면에서 탭 목록-->					
 				<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
@@ -163,6 +154,7 @@ $(function() {
 									// 각 업체를 클릭했을때 이벤트
 									$("#partner_no" + data[i].partner_no).click(function(){
 										//alert("업체클릭" + data[i].partner_no)
+										
 										partnerData(data[i].partner_no);	
 									});
 									
@@ -179,7 +171,7 @@ $(function() {
 						alert("서버와의 데이터 연결에 실패하였습니다.");
 						return false;
 					}
-				}); 
+				});
 				// 실제 폼이 전송되어 페이지가 변경되는것을 막기위해 false 리턴
 				return false;
 			}
@@ -197,58 +189,6 @@ $(function() {
 				}
 				return true;
 			}
-			
-			 $(document).ready(function(){	
-				/* 데이타를 채우기 위해 복사 */
-				
-				/* $("#partner_Registration").click(function(){
-					alert("ok"); */	
-				$.ajax({
-					type:'post',
-					url:'${root}/partner/writeList.do',
-					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-					success : function(responseData) {
-						var data = JSON.parse(responseData);
-						//alert(data);
-					
-						/* 데이타를 채우기 위해 복사 */
-						$.each(data, function(i){
-							
-							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
-							$("#tour_item:last-child #list_partner_name").html(data[i].partner_name);
-							$("#tour_item:last-child a.list_partner_no").attr("id", "partner_no"+data[i].partner_no);
-							$("input[name='partner_no']").html(data[i].partner_no);
-							$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
-							
-							// 각 업체를 클릭했을때 이벤트
-							$("#partner_no" + data[i].partner_no).click(function(){
-								//alert("업체클릭" + data[i].partner_no)
-								partnerData(data[i].partner_no);	
-							});
-						});
-						
-// 						var max_height = 0;
-						
-// 						$(".tour_items").each(function(){
-							
-// 							if(max_height < $(this).height())
-// 							{
-// 								max_height = $(this).height();
-// 							}
-// 						});
-						
-// 						$(".tour_items").css({
-// 							'height': max_height
-// 						});
-						
-						$(".tour_items .img-responsive").css({
- 							'max-width':"100%",
-							'height': "100px"
-						});
-						
-					}	
-				});	
-		});
 // function get_list(page){
 						
 // }
@@ -285,7 +225,7 @@ $(function() {
 						
 						// 각 업체를 클릭했을때 이벤트
 						$("#partner_no" + data[i].partner_no).click(function(){
-						
+							
 							//alert("업체클릭" + data[i].partner_no)
 							partnerData(data[i].partner_no);	
 						});
@@ -315,6 +255,98 @@ $(function() {
 		/*888888888888888888888888888888888888888888888  */
 		/* 여기에 복사하기 */ 
 		/*888888888888888888888888888888888888888888888  */
+		
+		
+		function form_couponWrite(){
+			
+			var data = new FormData($('#couponWrite_form')[0]);
+			
+			$.ajax({
+				type: 'POST',
+				url : '${root}/partner/couponWrite.do',
+				data :data,
+					processData:false,
+					contentType:false,
+				/* contentType : 'application/x-www-form-urlencoded;charset=UTF-8', */
+				success:function(data)
+				{
+					alert("성공");
+// 					$("section[id=write_pop].modal").modal("hide");
+// 					$("#tour_item_list").empty();	//데이터를 가지고 오기전에 리셋(중복삽입을 방지하기 위해)
+					if(data=="1"){
+						alert("쿠폰이 등록되었습니다.");
+						$("section[id='mainCoupon_Registration'].modal").modal("hide");
+						$("#coupon_item").val("");
+						$("#coupon_discount").val("");
+						$("#coupon_bymd").val("");
+						$("#coupon_eymd").val("");
+						$("#coupon_imagers").val("");
+						
+					}
+				},
+				error:function()
+				{
+					alert("서버와의 데이터 연결에 실패하였습니다.");
+					return false;
+				}
+			}); 
+			// 실제 폼이 전송되어 페이지가 변경되는것을 막기위해 false 리턴
+			return false;
+		};
+		
+		
+		 function getPartnerInfo(){	
+				/* 데이타를 채우기 위해 복사 */
+				
+				$.ajax({
+					type:'post',
+					url:'${root}/partner/writeList.do',
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+					success : function(responseData) {
+						var data = JSON.parse(responseData);
+						//alert(data);
+					
+						/* 데이타를 채우기 위해 복사 */
+						$.each(data, function(i){
+							
+							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
+							$("#tour_item:last-child #list_partner_name").html(data[i].partner_name);
+							$("#tour_item:last-child a.list_partner_no").attr("id", "partner_no"+data[i].partner_no);
+							$("input[name='partner_no']").html(data[i].partner_no);
+							$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
+							
+							// 각 업체를 클릭했을때 이벤트
+							$("#partner_no" + data[i].partner_no).click(function(){
+								alert("업체클릭" + data[i].partner_no)
+								$("#partner_no").val(data[i].partner_no);
+										
+								//alert($("#partner_no").val());
+								partnerData(data[i].partner_no);	
+							});
+						});
+						
+//						var max_height = 0;
+						
+//						$(".tour_items").each(function(){
+							
+//							if(max_height < $(this).height())
+//							{
+//								max_height = $(this).height();
+//							}
+//						});
+						
+//						$(".tour_items").css({
+//							'height': max_height
+//						});
+						
+						$(".tour_items .img-responsive").css({
+							'max-width':"100%",
+							'height': "100px"
+						});
+						
+					}	
+				});
+		 };
 		</script>
 	</body>
 </html>
