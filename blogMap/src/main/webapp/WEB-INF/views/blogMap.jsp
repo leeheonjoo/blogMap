@@ -666,7 +666,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">제휴업체등록</h4>
+						<h2 class="modal-title">Partner</h2>
 						<div class="row">
 					  		<div class="col-lg-4">
 							    <div class="input-group">
@@ -695,7 +695,7 @@ $(function(){
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h4 class="modal-title">업체 정보</h4>
+						<h2 class="modal-title">PartnerInfo</h2>
 					</div>
 					
 					<div class="modal-body" id="data-body">
@@ -754,7 +754,7 @@ $(function(){
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<h4 class="modal-title">신규 업체 등록</h4>
+							<h2 class="modal-title">PartnerRegister</h2>
 						</div>
 	
 						<div class="modal-body" id="data-body">							
@@ -818,7 +818,7 @@ $(function(){
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                   </button>
-                  <h4 class="modal-title">쿠폰 등록</h4>
+                  <h2 class="modal-title">CouponRegister</h2>
                </div>
 
                <div class="modal-body" id="data-body">                     
