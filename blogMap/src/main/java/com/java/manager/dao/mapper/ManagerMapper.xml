@@ -7,12 +7,12 @@
 		select * from member order by member_id asc
 	</select>
 	
-	<update id="memberDelete" parameterType="String">
-		update MEMBER SET member_name=null, member_pwd=null, member_jointype='0003', member_point=0 where member_id=#{id}
+	<update id="memberDelete" parameterType="java.util.HashMap">
+		update MEMBER SET member_name=null, member_pwd=null, member_jointype='0003', member_point=0 where member_id=#{member}
 	</update>
 	
-	<delete id="delLog" parameterType="String">
-		insert into MANAGER_LOG values(manager_log_seq.nextval,'lucyman@nate.com',SYSDATE,'0001',#{id})
+	<delete id="delLog" parameterType="java.util.HashMap">
+		insert into MANAGER_LOG values(manager_log_seq.nextval,#{manager},SYSDATE,'0001',#{member})
 	</delete>
 	
 	<select id="getSearchMemberList" parameterType="String" resultType="com.java.member.dto.MemberDto">
