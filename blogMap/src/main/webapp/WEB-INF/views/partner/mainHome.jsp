@@ -180,7 +180,7 @@ $(function() {
 						alert("서버와의 데이터 연결에 실패하였습니다.");
 						return false;
 					}
-				}); 
+				});
 				// 실제 폼이 전송되어 페이지가 변경되는것을 막기위해 false 리턴
 				return false;
 			}
@@ -198,61 +198,6 @@ $(function() {
 				}
 				return true;
 			}
-			
-			 $(document).ready(function(){	
-				/* 데이타를 채우기 위해 복사 */
-				
-				/* $("#partner_Registration").click(function(){
-					alert("ok"); */	
-				$.ajax({
-					type:'post',
-					url:'${root}/partner/writeList.do',
-					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-					success : function(responseData) {
-						var data = JSON.parse(responseData);
-						//alert(data);
-					
-						/* 데이타를 채우기 위해 복사 */
-						$.each(data, function(i){
-							
-							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
-							$("#tour_item:last-child #list_partner_name").html(data[i].partner_name);
-							$("#tour_item:last-child a.list_partner_no").attr("id", "partner_no"+data[i].partner_no);
-							$("input[name='partner_no']").html(data[i].partner_no);
-							$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
-							
-							// 각 업체를 클릭했을때 이벤트
-							$("#partner_no" + data[i].partner_no).click(function(){
-								alert("업체클릭" + data[i].partner_no)
-								$("#partner_no").val(data[i].partner_no);
-										
-								//alert($("#partner_no").val());
-								partnerData(data[i].partner_no);	
-							});
-						});
-						
-// 						var max_height = 0;
-						
-// 						$(".tour_items").each(function(){
-							
-// 							if(max_height < $(this).height())
-// 							{
-// 								max_height = $(this).height();
-// 							}
-// 						});
-						
-// 						$(".tour_items").css({
-// 							'height': max_height
-// 						});
-						
-						$(".tour_items .img-responsive").css({
- 							'max-width':"100%",
-							'height': "100px"
-						});
-						
-					}	
-				});	
-		});
 // function get_list(page){
 						
 // }
@@ -358,6 +303,59 @@ $(function() {
 			return false;
 		};
 		
+		
+		 function getPartnerInfo(){	
+				/* 데이타를 채우기 위해 복사 */
+				
+				$.ajax({
+					type:'post',
+					url:'${root}/partner/writeList.do',
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+					success : function(responseData) {
+						var data = JSON.parse(responseData);
+						//alert(data);
+					
+						/* 데이타를 채우기 위해 복사 */
+						$.each(data, function(i){
+							
+							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
+							$("#tour_item:last-child #list_partner_name").html(data[i].partner_name);
+							$("#tour_item:last-child a.list_partner_no").attr("id", "partner_no"+data[i].partner_no);
+							$("input[name='partner_no']").html(data[i].partner_no);
+							$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
+							
+							// 각 업체를 클릭했을때 이벤트
+							$("#partner_no" + data[i].partner_no).click(function(){
+								alert("업체클릭" + data[i].partner_no)
+								$("#partner_no").val(data[i].partner_no);
+										
+								//alert($("#partner_no").val());
+								partnerData(data[i].partner_no);	
+							});
+						});
+						
+//						var max_height = 0;
+						
+//						$(".tour_items").each(function(){
+							
+//							if(max_height < $(this).height())
+//							{
+//								max_height = $(this).height();
+//							}
+//						});
+						
+//						$(".tour_items").css({
+//							'height': max_height
+//						});
+						
+						$(".tour_items .img-responsive").css({
+							'max-width':"100%",
+							'height': "100px"
+						});
+						
+					}	
+				});
+		 };
 		</script>
 	</body>
 </html>

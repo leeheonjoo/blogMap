@@ -33,7 +33,7 @@ public interface ManagerDao {
 		
 		public int partnerSubmit(int partnerNo);
 		
-		public void submitLog(HashMap<String, Object> hMap);
+		public void partnerSubmitLog(HashMap<String, Object> hMap);
 		
 		public int partnerDelete(int partnerNo);
 		
@@ -43,11 +43,11 @@ public interface ManagerDao {
 		
 		public int couponSubmit(int couponNo);
 		
-		public void couponSubmitLog(int couponNo);
+		public void couponSubmitLog(HashMap<String, Object> hMap);
 		
 		public int couponCancle(int couponNo);
 		
-		public void couponCancleLog(int couponNo);
+		public void couponCancleLog(HashMap<String, Object> hMap);
 		
 		public List<HashMap<String, Object>> couponDetail(int coupon_no);
 		

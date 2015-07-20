@@ -300,7 +300,7 @@ public class ManagerServiceImpl implements ManagerService {
 		int check=managerDao.partnerSubmit(partnerNo);
 		logger.info("partnerSubmit check:" + check);
 		if(check == 1){
-			managerDao.submitLog(hMap);		// 관리자 로그 저장
+			managerDao.partnerSubmitLog(hMap);		// 관리자 로그 저장
 		}
 		
 		Gson gson=new Gson();				//Gson의 객체를 생성
@@ -394,12 +394,18 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		int couponNo=Integer.parseInt(request.getParameter("couponNo"));
 		logger.info("couponNo:" + couponNo);
+		String manager=request.getParameter("manager_id");
+		logger.info("manager : " + manager);
+		
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("couponNo", couponNo);
+		hMap.put("manager", manager);
 		
 		int check=managerDao.couponSubmit(couponNo);
 		logger.info("couponSubmit check :" + check);
 		
 		if(check == 1){
-			managerDao.couponSubmitLog(couponNo);	// 관리자 로그 저장
+			managerDao.couponSubmitLog(hMap);	// 관리자 로그 저장
 		}
 		
 		Gson gson=new Gson();					//Gson의 객체를 생성
@@ -419,12 +425,18 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		int couponNo=Integer.parseInt(request.getParameter("couponNo"));
 		logger.info("couponNo:" + couponNo);
+		String manager=request.getParameter("manager_id");
+		logger.info("manager : " + manager);
+		
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("couponNo", couponNo);
+		hMap.put("manager", manager);
 		
 		int check=managerDao.couponCancle(couponNo);
 		logger.info("couponCancle check :" + check);
 		
 		if(check == 1){
-			managerDao.couponCancleLog(couponNo);	// 관리자 로그 저장
+			managerDao.couponCancleLog(hMap);	// 관리자 로그 저장
 		}
 		
 		Gson gson=new Gson();					//Gson의 객체를 생성
