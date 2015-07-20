@@ -25,15 +25,6 @@ $(function() {
 </style>
 <body>
 	<article class="container">
-		
-		<div class="row">
-			<section class="page-header">
-				<h2 class="page-title">제휴업체 정보</h2>
-			</section>
-		</div>
-		
-		<div class="row">
-		
 			<div>
 				<!-- 큰 사이즈 화면에서 탭 목록-->					
 				<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">

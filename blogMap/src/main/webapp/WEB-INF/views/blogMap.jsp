@@ -666,23 +666,23 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h2 class="modal-title">Partner</h2>
-						<div class="row">
-					  		<div class="col-lg-4">
-							    <div class="input-group">
-						      		<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
-						      		<span class="input-group-btn">
-						        		<button class="btn btn-default" type="button" id="search_Partner">검색</button>
-						      		</span>
-							    </div>	<!-- /input-group -->
-					  		</div>	<!-- /.col-lg-6 -->
-						</div>		<!-- /.row -->	
+						<h2 class="modal-title">Partner</h2>	
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
-							<jsp:include page="partner/mainHome.jsp" />
-						</div>
+							<div class="row">
+						  		<div class="col-lg-4">
+								    <div class="input-group">
+							      		<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
+							      		<span class="input-group-btn">
+							        		<button class="btn btn-default" type="button" id="search_Partner">검색</button>	
+							      		</span>
+								    </div>	<!-- /input-group -->
+						  		</div>	<!-- /.col-lg-6 -->
+							</div>		<!-- /.row -->
+						</div>					
 					</div>
+					<jsp:include page="partner/mainHome.jsp" />
 				</div>
 		    </div>
 		</div>
