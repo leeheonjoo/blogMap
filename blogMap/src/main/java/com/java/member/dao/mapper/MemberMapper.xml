@@ -3,12 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.MemberMapper">
-	<select id="login" parameterType="java.util.HashMap" resultType="String">
-		select member_id from member where member_id=#{id} and member_pwd=#{password}
+	<select id="login" parameterType="java.util.HashMap" resultType="com.java.member.dto.MemberDto">
+		select * from member where member_id=#{id} and member_pwd=#{password}
 	</select>
 	
 	<insert id="register" parameterType="com.java.member.dto.MemberDto">
-		insert into member(member_id,member_pwd,member_name,member_joindate,member_jointype) values(#{member_id},#{member_pwd},#{member_name},sysdate,#{member_jointype})
+		insert into member(member_id,member_pwd,member_name,member_joindate,member_jointype) values(#{member_id},#{member_pwd},#{member_name},current_date,#{member_jointype})
 	</insert>
 	
 	<select id="registerCheck" parameterType="String" resultType="String">
@@ -20,7 +20,7 @@
 	</select>
 	
 	<insert id="fbRegister" parameterType="com.java.member.dto.MemberDto">
-		insert into member(member_id,member_name,member_joindate,member_jointype) values(#{member_id},#{member_name},sysdate,#{member_jointype})
+		insert into member(member_id,member_name,member_joindate,member_jointype) values(#{member_id},#{member_name},current_date,#{member_jointype})
 	</insert>
 	
 	<select id="fbRegisterSelect" parameterType="String" resultType="com.java.member.dto.MemberDto">
@@ -40,7 +40,7 @@
 	</update>
 	
 	<delete id="myPageDelete" parameterType="com.java.member.dto.MemberDto">
-		delete from member where member_id=#{member_id} and member_pwd=#{member_pwd}
+		update member set member_name=null,member_pwd=null,member_jointype='0003' where member_id=#{member_id} and member_pwd=#{member_pwd}
 	</delete>
 	
 	<select id="totalPoint" parameterType="String" resultType="Integer">
@@ -83,11 +83,19 @@
 		select manager_id from manager where manager_id=#{member_id}
 	</select>
 	
-	<select id="managerLogin" parameterType="String" resultType="String">
-		select manager_id from manager where manager_id=#{id} and manager_pwd=#{password}
+	<select id="managerLogin" parameterType="String" resultType="com.java.manager.dto.ManagerDto">
+		select * from manager where manager_id=#{id} and manager_pwd=#{password}
 	</select>
 	
 	<delete id="fbMemberDelete" parameterType="String">
-		delete from member where member_id=#{member_id}
+		update member set member_name=null,member_pwd=null,member_jointype='0003' where member_id=#{member_id}
 	</delete>
+	
+	<update id="reRegister" parameterType="com.java.member.dto.MemberDto">
+		update member set member_name=#{member_name},member_pwd=#{member_pwd},member_joindate=current_date,member_jointype=#{member_jointype} where member_id=#{member_id}
+	</update>
+	
+	<update id="fbReRegister" parameterType="com.java.member.dto.MemberDto">
+		update member set member_name=#{member_name}, member_joindate=current_date, member_jointype=#{member_jointype} where member_id=#{member_id}
+	</update>
 </mapper>

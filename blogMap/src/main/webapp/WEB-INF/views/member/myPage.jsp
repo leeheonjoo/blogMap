@@ -97,7 +97,13 @@ if(sessionStorage.getItem('email')!=null){
 					});
 				}
 			});
+			
+			myPagePointInfo();
+			myPageBoardInfo();
+			myPageFavoriteInfo();
+			myPageCouponInfo();
 		});
+		
 		var p_startPage=0; 
 		var p_endPage=0;
 		var pageBlock=2;
@@ -168,10 +174,15 @@ if(sessionStorage.getItem('email')!=null){
 		}); */
 		
 		//포인트정보클릭시
-		$("#myPage_point_info_tabBtn").click(function(){
+		//$("#myPage_point_info_tabBtn").click(function(){
+			
+		//});
+		
+		function myPagePointInfo(){
 			$("#myPage_member_point_list_title").empty();
 			$("#myPage_member_point_list_content").empty();
 			$("#myPage_member_point_list_pageNum").empty();
+			
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/point_info.do',
@@ -314,11 +325,11 @@ if(sessionStorage.getItem('email')!=null){
 					} 			 */
 				}			
 			});
-		});
+		};
 		
 		//다음클릭시
 		$("#point_paging_after").click(function(){
-			alert("Aa");
+			//alert("Aa");
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/point_info.do',
@@ -342,7 +353,7 @@ if(sessionStorage.getItem('email')!=null){
 					var currentPage=data[3];
 					//var pageBlock=1;
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-					alert(pageCount);
+					//alert(pageCount);
 					p_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					p_endPage=p_startPage+pageBlock-1;
 					
@@ -372,13 +383,13 @@ if(sessionStorage.getItem('email')!=null){
 					if(p_endPage>pageCount){
 						p_endPage=pageCount;
 					}
-					alert("다음startPage:"+p_startPage);
-					alert("다음endPage:"+p_endPage);
-					alert("다음pageBlock"+pageBlock)
+					//alert("다음startPage:"+p_startPage);
+					//alert("다음endPage:"+p_endPage);
+					//alert("다음pageBlock"+pageBlock)
 					
 					//이전
 					if(p_startPage>pageBlock){
-						alert("block");
+						//alert("block");
 						$("#myPage_member_point_list_before").css("display","inline-block");
 						$("#myPage_member_point_list_pageNum").css("display","none");
 						$("#myPage_member_point_list_pageNum").css("display","inline-block");
@@ -435,17 +446,17 @@ if(sessionStorage.getItem('email')!=null){
 							});
 						});
 					}
-					alert("다음endPage:"+p_endPage);
-					alert("다음pageCount"+pageCount);
-					alert("다음마지막startPage:"+p_startPage);
+					//alert("다음endPage:"+p_endPage);
+					//alert("다음pageCount"+pageCount);
+					//alert("다음마지막startPage:"+p_startPage);
 					//다음
 					if(p_endPage<pageCount){
-						alert("다음block");
+						//alert("다음block");
 						$("#myPage_member_point_list_after").css("display","inline-block");
 					}
 					
 					if(p_endPage>=pageCount){
-						alert("다음hidden");
+						//alert("다음hidden");
 						$("#myPage_member_point_list_after").css("display","none");
 						alert("bbbbbb");
 					}
@@ -457,8 +468,8 @@ if(sessionStorage.getItem('email')!=null){
 		
 		//이전클릭시
 		$("#point_paging_before").click(function(){
-			alert("이전startPage:"+p_startPage);
-			alert("이전pageBlock:"+pageBlock);
+			//alert("이전startPage:"+p_startPage);
+			//alert("이전pageBlock:"+pageBlock);
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/point_info.do',
@@ -482,7 +493,7 @@ if(sessionStorage.getItem('email')!=null){
 					var currentPage=data[3];
 					//var pageBlock=1;
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-					alert(pageCount);
+					//alert(pageCount);
 					p_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					p_endPage=p_startPage+pageBlock-1;
 					
@@ -509,8 +520,8 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
 					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
 					
-					alert("startPage:"+p_startPage);
-					alert("pageBlock:"+pageBlock);
+					//alert("startPage:"+p_startPage);
+					//alert("pageBlock:"+pageBlock);
 					//이전
 					if(p_startPage>pageBlock){
 						$("#myPage_member_point_list_before").css("display","inline-block");
@@ -618,8 +629,8 @@ if(sessionStorage.getItem('email')!=null){
 		}); */
 		
 		//쿠폰정보클릭시
-		$("#myPage_coupon_info_tabBtn").click(function(){
-			
+		//$("#myPage_coupon_info_tabBtn").click(function(){
+		function myPageCouponInfo(){	
 			$("#myPage_member_coupon_list_content").empty();
 			$("#myPage_member_coupon_list_pageNum").empty();
 			$.ajax({
@@ -639,8 +650,22 @@ if(sessionStorage.getItem('email')!=null){
 					
 					
 					$.each(couponInfo,function(i){
+						var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
+						var byear = getbymd.getFullYear();
+						var bmonth = getbymd.getMonth() + 1;
+						var bday = getbymd.getDate();
+						var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+						//alert(bymd);
+						
+						var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
+						var eyear = geteymd.getFullYear();
+						var emonth = geteymd.getMonth() + 1;
+						var eday = geteymd.getDate();
+						var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+						//alert(eymd);
+						
 						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-						$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'</label></h4></div></div><p style="font-size:14px;">'+couponInfo[i].COUPON_EYMD+'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
+						$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
 					});
 					
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
@@ -694,12 +719,22 @@ if(sessionStorage.getItem('email')!=null){
 									var couponInfo=JSON.parse(data[0]);
 									
 									$.each(couponInfo,function(i){
-										//alert(data[i].BOARD_TITLE);
-										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-										$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'</label></h4></div></div><p style="font-size:14px;">'+couponInfo[i].COUPON_EYMD+'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
-	
+										var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
+										var byear = getbymd.getFullYear();
+										var bmonth = getbymd.getMonth() + 1;
+										var bday = getbymd.getDate();
+										var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+										//alert(bymd);
+										
+										var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
+										var eyear = geteymd.getFullYear();
+										var emonth = geteymd.getMonth() + 1;
+										var eday = geteymd.getDate();
+										var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+										//alert(eymd);
+										
+										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+										$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
 									});
 								}
 							});
@@ -722,11 +757,11 @@ if(sessionStorage.getItem('email')!=null){
 					}
 				}
 			});
-		});
+		};
 		
 		//다음클릭시
 		$("#coupon_paging_after").click(function(){
-			alert("Aa");
+			//alert("Aa");
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/coupon_info.do',
@@ -750,7 +785,7 @@ if(sessionStorage.getItem('email')!=null){
 					var currentPage=data[3];
 					//var pageBlock=1;
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-					alert(pageCount);
+					//alert(pageCount);
 					c_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					c_endPage=c_startPage+pageBlock-1;
 					
@@ -758,12 +793,22 @@ if(sessionStorage.getItem('email')!=null){
 					var couponInfo=JSON.parse(data[0]);
 					
 					$.each(couponInfo,function(i){
-						//alert(data[i].BOARD_TITLE);
-						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-						$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'</label></h4></div></div><p style="font-size:14px;">'+couponInfo[i].COUPON_EYMD+'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
-
+						var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
+						var byear = getbymd.getFullYear();
+						var bmonth = getbymd.getMonth() + 1;
+						var bday = getbymd.getDate();
+						var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+						//alert(bymd);
+						
+						var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
+						var eyear = geteymd.getFullYear();
+						var emonth = geteymd.getMonth() + 1;
+						var eday = geteymd.getDate();
+						var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+						//alert(eymd);
+						
+						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+						$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -774,12 +819,12 @@ if(sessionStorage.getItem('email')!=null){
 					if(c_endPage>pageCount){
 						c_endPage=pageCount;
 					}
-					alert("다음startPage:"+c_startPage);
-					alert("다음endPage:"+c_endPage);
-					alert("다음pageBlock"+pageBlock)
+					//alert("다음startPage:"+c_startPage);
+					//alert("다음endPage:"+c_endPage);
+					//alert("다음pageBlock"+pageBlock)
 					//이전
 					if(c_startPage>pageBlock){
-						alert("block");
+						//alert("block");
 						$("#myPage_member_coupon_list_before").css("display","inline-block");
 						$("#myPage_member_coupon_list_pageNum").css("display","none");
 						$("#myPage_member_coupon_list_pageNum").css("display","inline-block");
@@ -821,30 +866,40 @@ if(sessionStorage.getItem('email')!=null){
 									var couponInfo=JSON.parse(data[0]);
 									
 									$.each(couponInfo,function(i){
-										//alert(data[i].BOARD_TITLE);
-										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-										$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'</label></h4></div></div><p style="font-size:14px;">'+couponInfo[i].COUPON_EYMD+'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
-
+										var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
+										var byear = getbymd.getFullYear();
+										var bmonth = getbymd.getMonth() + 1;
+										var bday = getbymd.getDate();
+										var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+										//alert(bymd);
+										
+										var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
+										var eyear = geteymd.getFullYear();
+										var emonth = geteymd.getMonth() + 1;
+										var eday = geteymd.getDate();
+										var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+										//alert(eymd);
+										
+										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+										$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
 									});
 								}
 							});
 						});
 					}
-					alert("다음endPage:"+c_endPage);
-					alert("다음pageCount"+pageCount);
-					alert("다음마지막startPage:"+c_startPage);
+// 					alert("다음endPage:"+c_endPage);
+// 					alert("다음pageCount"+pageCount);
+// 					alert("다음마지막startPage:"+c_startPage);
 					//다음
 					if(c_endPage<pageCount){
-						alert("다음block");
+						//alert("다음block");
 						$("#myPage_member_coupon_list_after").css("display","inline-block");
 					}
 					
 					if(c_endPage>=pageCount){
-						alert("다음hidden");
+						//alert("다음hidden");
 						$("#myPage_member_coupon_list_after").css("display","none");
-						alert("bbbbbb");
+						//alert("bbbbbb");
 					}
 					
 				}
@@ -854,8 +909,8 @@ if(sessionStorage.getItem('email')!=null){
 		
 		//이전클릭시
 		$("#coupon_paging_before").click(function(){
-			alert("이전startPage:"+c_startPage);
-			alert("이전pageBlock:"+pageBlock);
+			//alert("이전startPage:"+c_startPage);
+			//alert("이전pageBlock:"+pageBlock);
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/coupon_info.do',
@@ -879,7 +934,7 @@ if(sessionStorage.getItem('email')!=null){
 					var currentPage=data[3];
 					//var pageBlock=1;
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-					alert(pageCount);
+					//alert(pageCount);
 					c_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					c_endPage=c_startPage+pageBlock-1;
 					
@@ -887,12 +942,22 @@ if(sessionStorage.getItem('email')!=null){
 					var couponInfo=JSON.parse(data[0]);
 					
 					$.each(couponInfo,function(i){
-						//alert(data[i].BOARD_TITLE);
-						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-						$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'</label></h4></div></div><p style="font-size:14px;">'+couponInfo[i].COUPON_EYMD+'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
-
+						var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
+						var byear = getbymd.getFullYear();
+						var bmonth = getbymd.getMonth() + 1;
+						var bday = getbymd.getDate();
+						var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+						//alert(bymd);
+						
+						var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
+						var eyear = geteymd.getFullYear();
+						var emonth = geteymd.getMonth() + 1;
+						var eday = geteymd.getDate();
+						var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+						//alert(eymd);
+						
+						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+						$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -900,8 +965,8 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
 					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
 					
-					alert("startPage:"+c_startPage);
-					alert("pageBlock:"+pageBlock);
+					//alert("startPage:"+c_startPage);
+					//alert("pageBlock:"+pageBlock);
 					//이전
 					if(c_startPage>pageBlock){
 						$("#myPage_member_coupon_list_before").css("display","inline-block");
@@ -942,12 +1007,22 @@ if(sessionStorage.getItem('email')!=null){
 									var couponInfo=JSON.parse(data[0]);
 									
 									$.each(couponInfo,function(i){
-										//alert(data[i].BOARD_TITLE);
-										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
-										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="http://placehold.it/360x240" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-										$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="http://placehold.it/650x450&text=Galaxy S5" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'</label></h4></div></div><p style="font-size:14px;">'+couponInfo[i].COUPON_EYMD+'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
-
+										var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
+										var byear = getbymd.getFullYear();
+										var bmonth = getbymd.getMonth() + 1;
+										var bday = getbymd.getDate();
+										var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+										//alert(bymd);
+										
+										var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
+										var eyear = geteymd.getFullYear();
+										var emonth = geteymd.getMonth() + 1;
+										var eday = geteymd.getDate();
+										var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+										//alert(eymd);
+										
+										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
+										$("#myPage_member_coupon_list_content").append('<h4 class="text-center"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div>');
 									});
 								}
 							});
@@ -967,7 +1042,8 @@ if(sessionStorage.getItem('email')!=null){
 		});
 		
 		//게시글 정보
-		$("#myPage_board_info_tabBtn").click(function(){
+		//$("#myPage_board_info_tabBtn").click(function(){
+		function myPageBoardInfo(){	
 			$("#myPage_member_board_list_title").empty();
 			$("#myPage_member_board_list_content").empty();
 			$("#myPage_member_board_list_pageNum").empty();
@@ -1104,11 +1180,11 @@ if(sessionStorage.getItem('email')!=null){
 					} 			 */
 				}			
 			});
-		});
+		};
 		
 		//다음클릭시
 		$("#board_paging_after").click(function(){
-			alert("Aa");
+			//alert("Aa");
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/board_info.do',
@@ -1132,7 +1208,7 @@ if(sessionStorage.getItem('email')!=null){
 					var currentPage=data[3];
 					//var pageBlock=1;
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-					alert(pageCount);
+					//alert(pageCount);
 					b_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					b_endPage=b_startPage+pageBlock-1;
 					
@@ -1161,9 +1237,9 @@ if(sessionStorage.getItem('email')!=null){
 						b_endPage=pageCount;
 					}
 					
-					alert("다음startPage:"+b_startPage);
-					alert("다음endPage:"+b_endPage);
-					alert("다음pageBlock"+pageBlock)
+// 					alert("다음startPage:"+b_startPage);
+// 					alert("다음endPage:"+b_endPage);
+// 					alert("다음pageBlock"+pageBlock)
 					//이전
 					if(b_startPage>pageBlock){
 						alert("block");
@@ -1223,19 +1299,19 @@ if(sessionStorage.getItem('email')!=null){
 							});
 						});
 					}
-					alert("다음endPage:"+b_endPage);
-					alert("다음pageCount"+pageCount);
-					alert("다음마지막startPage:"+b_startPage);
+// 					alert("다음endPage:"+b_endPage);
+// 					alert("다음pageCount"+pageCount);
+// 					alert("다음마지막startPage:"+b_startPage);
 					//다음
 					if(b_endPage<pageCount){
-						alert("다음block");
+						//alert("다음block");
 						$("#myPage_member_board_list_after").css("display","inline-block");
 					}
 					
 					if(b_endPage>=pageCount){
-						alert("다음hidden");
+						//alert("다음hidden");
 						$("#myPage_member_board_list_after").css("display","none");
-						alert("bbbbbb");
+						//alert("bbbbbb");
 					}
 					
 				}
@@ -1245,8 +1321,8 @@ if(sessionStorage.getItem('email')!=null){
 		
 		//이전클릭시
 		$("#board_paging_before").click(function(){
-			alert("이전startPage:"+b_startPage);
-			alert("이전pageBlock:"+pageBlock);
+			//alert("이전startPage:"+b_startPage);
+			//alert("이전pageBlock:"+pageBlock);
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/board_info.do',
@@ -1402,7 +1478,8 @@ if(sessionStorage.getItem('email')!=null){
 		
 		
 		//즐겨찾기정보클릭시
-		$("#myPage_favorite_info_tabBtn").click(function(){
+		//$("#myPage_favorite_info_tabBtn").click(function(){
+		function myPageFavoriteInfo(){	
 			$("#myPage_member_favorite_list_title").empty();
 			$("#myPage_member_favorite_list_content").empty();
 			$("#myPage_member_favorite_list_pageNum").empty();
@@ -1529,11 +1606,11 @@ if(sessionStorage.getItem('email')!=null){
 					} 			 */
 				}			
 			});
-		});
+		};
 		
 		//다음클릭시
 		$("#favorite_paging_after").click(function(){
-			alert("Aa");
+			//alert("Aa");
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/favorite_info.do',
@@ -1581,12 +1658,12 @@ if(sessionStorage.getItem('email')!=null){
 						f_endPage=pageCount;
 					}
 					
-					alert("다음startPage:"+f_startPage);
-					alert("다음endPage:"+f_endPage);
-					alert("다음pageBlock"+pageBlock)
+// 					alert("다음startPage:"+f_startPage);
+// 					alert("다음endPage:"+f_endPage);
+// 					alert("다음pageBlock"+pageBlock)
 					//이전
 					if(f_startPage>pageBlock){
-						alert("block");
+						//alert("block");
 						$("#myPage_member_favorite_list_before").css("display","inline-block");
 						$("#myPage_member_favorite_list_pageNum").css("display","none");
 						$("#myPage_member_favorite_list_pageNum").css("display","inline-block");
@@ -1638,19 +1715,19 @@ if(sessionStorage.getItem('email')!=null){
 							});
 						});
 					}
-					alert("다음endPage:"+f_endPage);
-					alert("다음pageCount"+pageCount);
-					alert("다음마지막startPage:"+f_startPage);
+// 					alert("다음endPage:"+f_endPage);
+// 					alert("다음pageCount"+pageCount);
+// 					alert("다음마지막startPage:"+f_startPage);
 					//다음
 					if(f_endPage<pageCount){
-						alert("다음block");
+						//alert("다음block");
 						$("#myPage_member_favorite_list_after").css("display","inline-block");
 					}
 					
 					if(f_endPage>=pageCount){
-						alert("다음hidden");
+						//alert("다음hidden");
 						$("#myPage_member_favorite_list_after").css("display","none");
-						alert("bbbbbb");
+						//alert("bbbbbb");
 					}
 					
 				}
@@ -1660,8 +1737,8 @@ if(sessionStorage.getItem('email')!=null){
 		
 		//이전클릭시
 		$("#favorite_paging_before").click(function(){
-			alert("이전startPage:"+f_startPage);
-			alert("이전pageBlock:"+pageBlock);
+// 			alert("이전startPage:"+f_startPage);
+// 			alert("이전pageBlock:"+pageBlock);
 			$.ajax({
 				type:'POST',
 				url:'${root}/member/favorite_info.do',
@@ -1685,7 +1762,7 @@ if(sessionStorage.getItem('email')!=null){
 					var currentPage=data[3];
 					//var pageBlock=1;
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
-					alert(pageCount);
+					//alert(pageCount);
 					f_startPage=parseInt((currentPage-1)/pageBlock)*pageBlock+1;
 					f_endPage=f_startPage+pageBlock-1;
 					
@@ -1705,8 +1782,8 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_pageNum'></span>");
 					$("#myPage_member_point_list").after("<span id='myPage_member_point_list_after'></span>"); */
 					
-					alert("startPage:"+f_startPage);
-					alert("pageBlock:"+pageBlock);
+					//alert("startPage:"+f_startPage);
+					//alert("pageBlock:"+pageBlock);
 					//이전
 					if(f_startPage>pageBlock){
 						$("#myPage_member_favorite_list_before").css("display","inline-block");

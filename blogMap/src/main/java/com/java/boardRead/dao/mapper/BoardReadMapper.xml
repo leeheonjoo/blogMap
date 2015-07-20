@@ -2,7 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
 <mapper namespace="dao.BoardReadMapper">
+		
+
 	<select id="getData" resultType="com.java.boardRead.dto.BoardReadDto">
 		select *
 		  from category
@@ -91,15 +94,121 @@
 	</update>
 	
 	<select id="getReadList1" parameterType="int" resultType="java.util.HashMap">
-		select b.*,a.addr_sido,a.addr_sigugun,a.addr_dongri,a.addr_bunji,c.category_mname,c.category_sname
-		from board b,board_addr_info a,category c
-		where b.board_no=a.board_no
-		and b.category_code=c.category_code
-		and b.board_no=#{boardNo}
+	  select b.*,a.addr_sido,a.addr_sigugun,a.addr_dongri,a.addr_bunji,c.category_mname,c.category_sname,
+       nvl(r.yes,0) yes, nvl(r.no,0) no
+      from board b,board_addr_info a,category c,
+           (select board_no, sum(decode(recommand_yn, 'Y', 1)) yes, sum(decode(recommand_yn, 'N', 1)) no
+              from recommand
+             where board_no=#{board_no}
+             group by board_no) r
+      where b.board_no=a.board_no
+      and b.category_code=c.category_code
+      and b.board_no=r.board_no(+)
+      and b.board_no=#{board_no}
 	</select>
 	
 	<select id="getblogImg" parameterType="int" resultType="com.java.board.dto.Attach_fileDto">
 		select * from attach_file where board_no=#{boardNo}
 	</select>
 	
+	<select id="getRecommandBlog" resultType="java.util.HashMap">
+	    <![CDATA[
+	    select category, board_no, board_title, yes, no, file_name
+	      from (select a.category, a.board_no, a.board_title, a.yes, a.no, b.file_no, b.file_name,
+	                   row_number() over (partition by a.board_no order by b.file_no) file_seq
+	              from (select a.category, a.board_no, a.board_title, a.yes, a.no
+	                      from (select category, board_no, board_title, yes, no,
+	                                   row_number() over (partition by category order by yes desc, no) rnum
+	                              from (select r.board_no, substr(b.category_code, 1, 3) category, b.board_title,
+	                                           nvl(sum(decode(r.recommand_yn, 'Y', 1)),0) yes,
+	                                           nvl(sum(decode(r.recommand_yn, 'N', 1)),0) no
+	                                      from recommand r, board b
+	                                     where r.board_no=b.board_no
+	                                       and r.recommand_date between current_date-7 and current_date
+		                                 group by r.board_no, substr(b.category_code, 1, 3), b.board_title)) a
+		                         where rnum <= 5) a,
+		                attach_file b
+		          where a.board_no=b.board_no)
+		   where file_seq = 1
+		]]>
+	</select>
+
+	<update id="blogReadReference" parameterType="java.util.HashMap">
+	merge into recommand r
+	using (select #{member_id} member_id,#{board_no} board_no
+           from dual) s
+	on (r.member_id = s.member_id and r.board_no = s.board_no)
+	when matched then update set r.recommand_yn='Y'
+	when not matched then insert (r.recommand_no, r.board_no, r.member_id, r.recommand_yn,r.recommand_date)
+	values(RECOMMAND_RECOMMAND_NO_SEQ.nextval, #{board_no}, #{member_id}, 'Y', current_date)
+	</update>
+	<update id="blogReadNoReference" parameterType="java.util.HashMap">
+	merge into recommand r
+	using (select #{member_id} member_id,#{board_no} board_no
+           from dual) s
+	on (r.member_id = s.member_id and r.board_no = s.board_no)
+	when matched then update set r.recommand_yn='N'
+	when not matched then insert (r.recommand_no, r.board_no, r.member_id, r.recommand_yn,r.recommand_date)
+	values(RECOMMAND_RECOMMAND_NO_SEQ.nextval, #{board_no}, #{member_id}, 'N', current_date)
+	</update>
+	
+	<select id="referenceRefresh" parameterType="int" resultType="com.java.boardRead.dto.RecommandDto">
+		select board_no, nvl(sum(decode(recommand_yn, 'Y', 1)),0) yes, nvl(sum(decode(recommand_yn, 'N', 1)),0) no
+        from recommand
+        where board_no=#{board_no}
+        group by board_no
+    </select>
+    
+    <insert id="bookMark" parameterType="java.util.HashMap">
+    	insert into FAVORITE(favorite_no,member_id,board_no,favorite_rgdate) values(FAVORITE_FAVORITE_NO_SEQ.nextval,#{member_id},#{board_no},current_date)
+    </insert>   
+    
+    <delete id="NobookMark" parameterType="java.util.HashMap">
+    	delete from FAVORITE
+    	where member_id=#{member_id} 
+    	and board_no=#{board_no}
+    </delete>
+    
+    <delete id="blogDelete" parameterType="java.util.HashMap">
+    	delete from board 
+    	where member_id=#{member_id} 
+    	and board_no=#{board_no}
+    </delete>
+    
+    <select id="blogUpdate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    	select b.*,a.addr_sido,a.addr_sigugun,a.addr_dongri,a.addr_bunji,c.category_mname,c.category_sname,f.file_no,f.file_name,f.file_size,f.file_path,f.file_comment
+    	from board b,board_addr_info a,category c,attach_file f
+    	 where b.board_no=a.board_no
+     	 and b.category_code=c.category_code
+      	 and b.board_no=f.board_no(+)
+      	 and b.board_no=#{board_no} 
+    </select>
+    
+    <update id="blogUpdateOk" parameterType="java.util.HashMap">
+    update board set category_code=(select category_code from category where category_mname=#{boardreadDto.category_mname} and category_sname=#{boardreadDto.category_sname}),board_title=#{boardDto.board_title},board_rgdate=current_date,board_content=#{boardDto.board_content},board_grade=#{boardDto.board_grade}
+    where board_no=#{boardDto.board_no}
+    </update>
+    
+    <update id="blogUpdateOk_addr" parameterType="java.util.HashMap">
+		update board_addr_info set addr_sido=#{board_addr_infoDto.addr_sido}, addr_sigugun=#{board_addr_infoDto.addr_sigugun},addr_dongri=#{board_addr_infoDto.addr_dongri},addr_bunji=#{board_addr_infoDto.addr_bunji}
+		where board_no=#{boardDto.board_no}
+	</update>
+	
+	<update id="blogUpdateOk_attach" parameterType="java.util.HashMap">
+		<foreach collection="attachList" item="item" separator=";">
+			update attach_file
+			<set>
+				file_name=#{item.file_name},
+				file_size=#{item.file_size},
+				file_path=#{item.file_path},
+				file_comment=#{item.file_comment}
+			</set>
+			<where>
+			 board_no=#{boardDto.board_no} and file_no=#{item.file_no}
+			</where>
+		</foreach>
+	</update> 
 </mapper>
+
+ 
+

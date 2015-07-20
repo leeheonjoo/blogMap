@@ -44,23 +44,34 @@ $(function(){
 function blogWrite_optionInsert(el, data){
 	for (var i = 0; i < data.length; i++) {
 		$("#blogWriteSelect #" + el).append("<option value=" + data[i] + ">" + data[i] + "</option>");
+		$("#blogUpdateSelect #" + el).append("<option value=" + data[i] + ">" + data[i] + "</option>");
 	}
 
 		$("#blogWriteSelect #" + el).selectpicker('refresh');
+		$("#blogUpdateSelect #" + el).selectpicker('refresh');
 };
 
 //카테고리 select 변경
 function blogWrite_ChangeCategory(el){
 	var headData=$("#blogWriteSelect #headCategory").val();
+	var headDatas=$("#blogUpdateSelect #headCategory").val();
 	
 	if(el=="headCategory"){
 		$("#blogWriteSelect #detailCategory").empty();
 		$("#blogWriteSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
 		$("#blogWriteSelect #detailCategory").selectpicker("refresh");
 		
+		$("#blogUpdateSelect #detailCategory").empty();
+		$("#blogUpdateSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
+		$("#blogUpdateSelect #detailCategory").selectpicker("refresh");
+		
 		if(headData!="%"){
 			blogWrite_getCategorySelect(el, headData);
+		}else if(headData=="%" && headDatas!="%"){
+			blogWrite_getCategorySelect(el, headDatas);
+			
 		}
+		
 	}
 }
 
@@ -80,6 +91,9 @@ function blogWrite_getCategorySelect(el, headData){
 				
 				$("#blogWriteSelect #detailCategory").empty();
 				$("#blogWriteSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
+				
+				$("#blogUpdateSelect #detailCategory").empty();
+				$("#blogUpdateSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
 				blogWrite_optionInsert('detailCategory', data);
 		},
 		error:function(data){
@@ -160,7 +174,9 @@ $(document).ready(function(){
 		
 		//맛집,주소 입력값
 		var addrValue=$("#addr").val();
-		
+		if(addrValue==""){
+			addrValue=$("#Upaddr").val();
+		}
 		
 		
 		//입력값을 상세주소로 반환하는 검색(지역) api 이용(xml 파싱)

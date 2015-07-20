@@ -19,6 +19,10 @@ $(function() {
 })
 </script>
 </head>
+<style>
+.img-responsive {height:}
+#list_partner_name {width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+</style>
 <body>
 	<article class="container">
 		
@@ -58,18 +62,19 @@ $(function() {
 						</div>
 					</div>
 				</section>
-				
-				<div class="col-md-2 col-sm-3 col-xs-4" id="tour_item" role="button" style="display:none;">
+				<div class="col-md-2 col-sm-3 col-xs-4 tour_items" id="tour_item" role="button" style="display:none;">
 					<div id="tour_info" class="thumbnail">	
 						<a data-toggle="modal" href="#modal_info" class="list_partner_no">
+							
 							<img class="img-responsive" id="partner_imagers"/> 
-								<div class="caption">
-									<p id="list_partner_name"></p>
-								</div>								
+<!-- 							<div class='clearfix'></div> -->
+							
+							<div class="caption">
+								<p id="list_partner_name"></p>
+							</div>								
 						</a>
 					</div>
 				</div>
-				
 			</div>
 			
 	</article>
@@ -146,13 +151,11 @@ $(function() {
 							contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 							success : function(responseData) {
 								var data = JSON.parse(responseData);
-								
-								
 								/* 데이타를 채우기 위해 복사 */
 								$.each(data, function(i){
 										
 									$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
-									$("#tour_item:last-child #list_partner_name").html(data[i].partner_name);
+									$("#tour_item:last-child .list_partner_name").html(data[i].partner_name);
 									$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_no"+data[i].partner_no);
 									$("input[name='partner_no']").html(data[i].partner_no);
 									$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
@@ -162,12 +165,14 @@ $(function() {
 										//alert("업체클릭" + data[i].partner_no)
 										partnerData(data[i].partner_no);	
 									});
+									
+									$(".asdasd").click(function(){
+										var id = $(this).find('.list_partner_no').attr('id');
+										$("#modal_info").modal('show');
+									});
 								});
-								$(document).refresh();
 							}	
 						});	
-						
-						
 					},
 					error:function()
 					{
@@ -211,7 +216,7 @@ $(function() {
 							
 							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
 							$("#tour_item:last-child #list_partner_name").html(data[i].partner_name);
-							$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_no"+data[i].partner_no);
+							$("#tour_item:last-child a.list_partner_no").attr("id", "partner_no"+data[i].partner_no);
 							$("input[name='partner_no']").html(data[i].partner_no);
 							$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
 							
@@ -221,9 +226,37 @@ $(function() {
 								partnerData(data[i].partner_no);	
 							});
 						});
+						
+// 						var max_height = 0;
+						
+// 						$(".tour_items").each(function(){
+							
+// 							if(max_height < $(this).height())
+// 							{
+// 								max_height = $(this).height();
+// 							}
+// 						});
+						
+// 						$(".tour_items").css({
+// 							'height': max_height
+// 						});
+						
+						$(".tour_items .img-responsive").css({
+ 							'max-width':"100%",
+							'height': "100px"
+						});
+						
 					}	
 				});	
 		});
+// function get_list(page){
+						
+// }
+// $(document).ready(function(){
+// 	});
+// }
+// $("#search_Partner").click(get_list);
+
 		$("#search_Partner").click(function(){
 			alert("제휴업체");
 			var searchTag=$("input[id='partnerSearchTag']").val();
@@ -252,6 +285,7 @@ $(function() {
 						
 						// 각 업체를 클릭했을때 이벤트
 						$("#partner_no" + data[i].partner_no).click(function(){
+						
 							//alert("업체클릭" + data[i].partner_no)
 							partnerData(data[i].partner_no);	
 						});
@@ -259,7 +293,6 @@ $(function() {
 					});
 				}
 			});
-		 	
 		});
 		 function partnerData(no){
 				$.ajax({

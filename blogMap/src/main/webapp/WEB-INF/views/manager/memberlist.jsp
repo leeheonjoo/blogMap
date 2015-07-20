@@ -149,6 +149,8 @@ vertical-align: middle;
 						jointype="BlogMap";
 					}else if(type =="0002"){
 						jointype="FaceBook";
+					}else if(type =="0003"){
+						jointype="탈퇴";
 					}
 					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
@@ -162,12 +164,13 @@ vertical-align: middle;
 					
 					
 					$("#delete[name='"+data[i].member_id+"']").click(function(){	// 각 회원ID의  name속성을 가진 delete 버튼을 클릭시 각 행을 삭제
-						var tagId = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
-						alert(tagId);
-
+						var member = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
+						//alert(member);
+						var manager = sessionStorage.getItem('email');
+						//alert(manager);
 						$.ajax({
 							type:'get',
-							url:'${root}/manager/delete.do?name='+tagId,
+							url:'${root}/manager/delete.do?member_id='+member + '&manager_id='+ manager,
 							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 							success:function(responseData){
 								var data=JSON.parse(responseData);
@@ -239,6 +242,8 @@ vertical-align: middle;
 						jointype="BlogMap";
 					}else if(type =="0002"){
 						jointype="FaceBook";
+					}else if(type =="0003"){
+						jointype="탈퇴";
 					}
 					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
@@ -252,12 +257,13 @@ vertical-align: middle;
 					
 					
 					$("#delete[name='"+data[i].member_id+"']").click(function(){	// 각 회원ID의  name속성을 가진 delete 버튼을 클릭시 각 행을 삭제
-						var tagId = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
-						//alert(tagId);
-
+						var member = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
+						//alert(member);
+						var manager = sessionStorage.getItem('email');
+						//alert(manager);
 						$.ajax({
 							type:'get',
-							url:'${root}/manager/delete.do?name='+tagId,
+							url:'${root}/manager/delete.do?member_id='+member + '&manager_id='+ manager,
 							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 							success:function(responseData){
 								var data=JSON.parse(responseData);
@@ -305,6 +311,9 @@ vertical-align: middle;
 		}else if(type == "faceBook"){
 			type="0002";
 			alert(type);
+		}else if(type =="delMember"){
+			type="0003";
+			alert(type);
 		}
 		
 		$.ajax({
@@ -334,6 +343,8 @@ vertical-align: middle;
 						jointype="BlogMap";
 					}else if(type =="0002"){
 						jointype="FaceBook";
+					}else if(type =="0003"){
+						jointype="탈퇴";
 					}
 					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
@@ -347,12 +358,13 @@ vertical-align: middle;
 					
 					
 					$("#delete[name='"+data[i].member_id+"']").click(function(){	// 각 회원ID의  name속성을 가진 delete 버튼을 클릭시 각 행을 삭제
-						var tagId = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
-						alert(tagId);
-
+						var member = $(this).attr('name');		// button의 name 속성값을 tagId에 저장
+						//alert(member);
+						var manager = sessionStorage.getItem('email');
+						//alert(manager);
 						$.ajax({
 							type:'get',
-							url:'${root}/manager/delete.do?name='+tagId,
+							url:'${root}/manager/delete.do?member_id='+member + '&manager_id='+ manager,
 							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 							success:function(responseData){
 								var data=JSON.parse(responseData);
@@ -395,6 +407,7 @@ vertical-align: middle;
 		<input type="button" id="getMemberList" value="Reset"/>
 		<input type="radio" name="joinType" id="blogmap"/><span>BlogMap</span>&nbsp;&nbsp;
 		<input type="radio" name="joinType" id="faceBook"/><span>FaceBook</span> &nbsp;&nbsp;
+		<input type="radio" name="joinType" id="delMember"/><span>탈퇴</span> &nbsp;&nbsp;
 		<input type="text" placeholder="Name Search" id="memberSearchTag"/> 
 		<input type="submit" id="searchMember" value="Search"/>
 	</div><br/>

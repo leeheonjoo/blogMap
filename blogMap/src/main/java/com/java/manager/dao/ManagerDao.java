@@ -13,13 +13,13 @@ public interface ManagerDao {
 	
 		public List<MemberDto> getData();
 		
-		public int memberDel(String id);
+		public int memberDel(HashMap<String, Object> hMap);
 		
 		public List<MemberDto> getSearchMemberData(String member_name);
 		
 		public List<MemberDto> getSearchMemberType(String member_jointype);
 		
-		public void delLog(String id);
+		public void delLog(HashMap<String, Object> hMap);
 		
 		public List<PartnerDto> getPartnerData();
 		

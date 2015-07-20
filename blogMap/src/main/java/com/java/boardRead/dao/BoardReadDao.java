@@ -7,6 +7,7 @@ import com.java.board.dto.Attach_fileDto;
 import com.java.board.dto.BoardDto;
 import com.java.board.dto.Board_addr_infoDto;
 import com.java.boardRead.dto.BoardReadDto;
+import com.java.boardRead.dto.RecommandDto;
 import com.java.reply.dto.ReplyDto;
 
 public interface BoardReadDao {
@@ -34,5 +35,27 @@ public interface BoardReadDao {
 
 	public List<Attach_fileDto> getblogImg(int boardNo);
 
-	
+	public List<Object> getRecommandBlog();
+
+	public int blogReadReference(HashMap<String, Object> hMap);
+
+	public int blogReadNoReference(HashMap<String, Object> hMap);
+
+	public List<RecommandDto> referenceRefresh(int board_no);
+
+	public int bookMark(HashMap<String, Object> hMap);
+
+	public int NobookMark(HashMap<String, Object> hMap);
+
+	public int blogDelete(HashMap<String, Object> hMap);
+
+
+	public List<HashMap<String, Object>> blogUpdate(HashMap<String, Object> hMap);
+
+	public int blogUpdateOk(HashMap<String, Object> hashMap);
+
+	public int blogUpdateOk_attach(HashMap<String, Object> hashMap);
+
+
+
 }

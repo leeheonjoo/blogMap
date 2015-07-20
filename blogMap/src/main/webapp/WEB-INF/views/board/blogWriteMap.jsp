@@ -163,15 +163,12 @@ v\:* {
                   // 마커 클릭하면
                   if (oTarget instanceof nhn.api.map.Marker) {
                      var pullAddr=oCustomEvent.target.getTitle();
-                     var pAddrs=pullAddr.split("]");
-                     //alert(pAddrs);
-                     
-                     var pAddr=pAddrs[1].split("/");
-                     var pAddr0=pAddr[0];
-                     pAddr0=pAddr0.trim();
-                     var pAddr1=pAddr[1];
-                     var pAddr2=pAddr[2];
-                     var pAddr3=pAddr[3];
+                     var pAddrs=pullAddr.split("/");
+                    
+                     var pAddr0=pAddrs[0];
+                     var pAddr1=pAddrs[1];
+                     var pAddr2=pAddrs[2];
+                     var pAddr3=pAddrs[3]; 
                      
                      $.ajax({
                            type : 'post',
@@ -273,6 +270,8 @@ v\:* {
                                              var fullDate=rgdate.getFullYear()+"/"+(rgdate.getMonth()+1)+"/"+rgdate.getDate();
                                              var grade=data[0].BOARD_GRADE;
                                              var boardno=data[0].BOARD_NO;
+                                             var recommand_y=data[0].YES;
+                                             var recommand_n=data[0].NO;
                                              //데이터 입력
                                              $("#blogRead_rgdate > label:eq(1)").text(fullDate); 
                                              $("#blogRead_addr > label:eq(1)").text(pullAddr); 
@@ -282,6 +281,8 @@ v\:* {
                                              $("#blogRead_category > label:eq(1)").text(mcategory);
                                              $("#blogRead_category > label:eq(2)").text(scategory);
                                              $("#blogRead_boardno > label:eq(0)").text(boardno);
+                                             $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
+                                             $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
                                              
                                              //평점
                                              if(grade=="0"){
@@ -333,22 +334,6 @@ v\:* {
                                                     	$("#carousel_page li").addClass("active");
                                                     	$("#carousel_image .item").addClass("active");
                                                    	  }
-               
-                                              	
-//                                                       if(i!=0){
-//                                                     	  $(".carousel-indicators").append("<li data-target='.carousel' data-slide-to="+i+"></li>");
-                                                    	                                                     	  
-//                                                     	  $("#imageSlideBox").append("<div class='item'><img src="+filePath+"><div class='carousel-caption'>"+fileComment+"</div></div>");
-//                                                     	  $("#imageSlideBox").append($("#imgHidden").clone().clone().css("display","block"));
-//                                                       }
-//                                                   	<div id="imgHidden" class="item" style="display:none;">
-// 	                                              	  <img src="">
-// 	                                              	  <div class="carousel-caption"></div>
-// 	                                              	</div>
-                                                      
-//                                                       $("#imgDisplay").append($("#imgHidden").clone());
-//                                                        $("#imgDisplay > #imgHidden").attr("id","imgHidden"+i);
-//                                                        $("#imgHidden"+i).find("#imgsrc").attr("src",filePath);
                                                       
                                                       i++;
                                                    });
@@ -358,7 +343,6 @@ v\:* {
                                                 }
                                              });
                                              
-                                             alert(boardno);
                                              $.ajax({
                                                 type : 'post',
                                                 url : '${root}/board/blogReadReply.do',
@@ -368,7 +352,7 @@ v\:* {
                                                 contentType:'application/x-www-form-urlencoded;charset=UTF-8',
                                                 success : function(data) {
                                                    if(data=="[]"){
-                                                      alert("null값");
+                                                	   
                                                    }else{
                                                    var data=JSON.parse(data);
                                                    $("#listAllDiv").empty();
@@ -476,7 +460,11 @@ v\:* {
 
           for(var i=0;i<m.length;i++){ //마커생성 
                     var oPoint = m[i]; 
+          			if(titleArray[i]==null){
+          				var oMarker = new nhn.api.map.Marker(oIcon, { title :sidoArray[i]+"/"+sigugunArray[i]+"/"+dongmyunArray[i]+"/"+restArray[i]});
+          			}else{
                     var oMarker = new nhn.api.map.Marker(oIcon, { title :"["+titleArray[i]+"]"+" "+sidoArray[i]+"/"+sigugunArray[i]+"/"+dongmyunArray[i]+"/"+restArray[i]});
+                    }
                     oMarker.setPoint(oPoint); 
                     oMap.addOverlay(oMarker); 
                    /*  mapInfoTestWindow

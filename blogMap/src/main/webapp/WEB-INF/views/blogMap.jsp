@@ -21,12 +21,26 @@
 	.modal-lg{
 		width: auto;
 		margin: 1% 1% 0px 1%;
- 		height: 600px;
-/*    		max-height: 600px; */
-    		overflow-y:scroll;
+ 		max-height: 600px;
+		overflow-y:scroll;
+    	overflow-x:hidden
 	}
 
-
+	.modal-myPage{
+		width: auto;
+		margin: 2% 10% 0px 10%;
+ 		height: 600px;
+/*    		max-height: 600px; */
+    		/* overflow-y:scroll; */
+	}
+	
+	.modal-email-confrim{
+		width: auto;
+		margin: 2% 20% 0px 20%;
+ 		height: 600px;
+/*    		max-height: 600px; */
+    		/* overflow-y:scroll; */
+	}
 </style>
 <!--[if lt IE 9]>
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -66,7 +80,7 @@
 				$("#blogmap_main_myPage").css("display","inline-block");
 				$("#blogmap_before_login").attr("data-toggle","");
 				
-				if(sessionStorage.getItem('email')=="lucyman@nate.com"){
+				if(sessionStorage.getItem('manager_yn')=="Y"){
 					$("#manager_page_icon").css("display","inline-block");
 					$("#blogmap_main_myPage").css("display","none");
 				}
@@ -86,12 +100,111 @@
 				}
 			}
 	});
-
-	
-
-
-
 </script>
+<script>
+	$(function(){
+		$.ajax({
+			type:'get',
+			url:'${root}/board/getRecommandBlog.do',
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			success:function(responseData){
+					var data=JSON.parse(responseData);
+					if(!data){
+						alert("blogMap 추천게시물 get Error");
+						return false;
+					}
+
+					var travel_count=0;
+                    var food_count=0;
+                    $.each(data,function(i){
+                    	var category=data[i].CATEGORY;
+                    	var boardNo=data[i].BOARD_NO;
+                    	var boardTitle=data[i].BOARD_TITLE;
+                    	var yes=data[i].YES;
+                    	var no=data[i].NO;
+                    	var fileName=data[i].FILE_NAME;
+
+                     	var carousel_image = "<div class='item'>";
+                       	carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + "/>";
+                       	carousel_image += "<div class='carousel-caption'>";
+                       	carousel_image += "<h6>"+ boardTitle +"</h6>";
+                       	carousel_image += "</div>";
+                       	carousel_image += "</div>";
+                    	
+                       	if(category=='100'){
+                           if(travel_count==0){
+                                $("#tile7 .carousel-inner").empty();                                                  	  
+                           }else if(travel_count==2){
+                        	    $("#tile8 .carousel-inner").empty();
+                           }
+
+                           if(travel_count<2){
+                           	  $("#tile7 .carousel-inner").append(carousel_image);
+                           }else{
+                        	  $("#tile8 .carousel-inner").append(carousel_image);
+                           }
+                            
+                            
+                       	    
+                            if(travel_count==0){
+                             	$("#tile7 .item").addClass("active");
+                            }else if(travel_count==2){
+                            	$("#tile8 .item").addClass("active");
+                            }
+                            
+                            travel_count++;                       		
+                       	}else if(category=='200'){
+                            if(food_count==0){
+                                $("#tile10 .carousel-inner").empty();                                          	  
+                            }else if(food_count==2){
+                            	$("#tile9 .carousel-inner").empty();
+                            }
+                            
+                            if(food_count<2){
+                            	 $("#tile10 .carousel-inner").append(carousel_image);
+                            }else{
+                            	 $("#tile9 .carousel-inner").append(carousel_image);
+                            }
+                           
+                       	    
+                            if(food_count==0){
+                             	$("#tile10 .item").addClass("active");
+                            }else if(food_count==2){
+                            	$("#tile9 .item").addClass("active");
+                            }
+                            
+                            food_count++;
+                    	}
+                                   
+                    });
+                    
+                    $("#tile7 .item").height($("#tile1").width());
+                    $("#tile7 img").css("height","100%");
+                    $("#tile7 img").css("width","100%");
+                    $("#tile7 .carousel-caption").css("top","50%");
+                    
+                    $("#tile8 .item").height($("#tile1").width());
+                    $("#tile8 img").css("height","60%");
+                    $("#tile8 img").css("width","100%");
+					$("#tile8 .carousel-caption").css("top","50%");
+
+                    $("#tile9 .item").height($("#tile1").width());
+                    $("#tile9 img").css("height","60%");
+                    $("#tile9 img").css("width","100%");
+					$("#tile9 .carousel-caption").css("top","50%");
+					
+                    $("#tile10 .item").height($("#tile1").width());
+                    $("#tile10 img").css("height","100%");
+                    $("#tile10 img").css("width","100%");
+					$("#tile10 .carousel-caption").css("top","50%");
+			},
+			error:function(data){
+				alert("error : blogMap getRecommandBlog");
+			}
+		});	
+	});
+</script>
+
 </head>
 <body>
 	<div class="container" style="max-width:1170px; padding:0 0 0 0;">
@@ -284,13 +397,6 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 					    	<div class="item active">
-								<img src="http://handsontek.net/demoimages/tiles/gallery.png" class="img-responsive"/>
-						    </div>
-						    <div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/gallery2.png" class="img-responsive"/>
-						    </div>
-						    <div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/gallery3.png" class="img-responsive"/>
 						    </div>
 						</div>
 					</div>
@@ -305,10 +411,6 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<img src="http://handsontek.net/demoimages/tiles/music.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/music2.png" class="img-responsive"/>
 							</div>
 						</div>
 					</div>
@@ -323,10 +425,6 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<img src="http://handsontek.net/demoimages/tiles/calendar.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/calendar2.png" class="img-responsive"/>
 							</div>
 						</div>
 					</div>
@@ -341,16 +439,6 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<h3 class="tilecaption"><i class="fa fa-child fa-4x"></i></h3>
-							</div>
-							<div class="item">
-								<h3 class="tilecaption">Customize your tiles</h3>
-							</div>
-							<div class="item">
-								<h3 class="tilecaption">Text, Icons, Images</h3>
-							</div>
-							<div class="item">
-								<h3 class="tilecaption">Combine them and create your metro style</h3>
 							</div>
 						</div>
 					</div>
@@ -481,7 +569,33 @@
 			   </div>
 			</div>
 		</div>
-				
+		<!-- **********************************
+	                        블로그 수정 : 황준
+	     ***********************************-->
+	     <!-- 블로그 작성 - blogMapWrite -->	
+		<div class="modal fade" id="blogMapUpdate" data-backdrop="static">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title">Blog Update</h4>
+					</div>
+					<div class="modal-body">
+						<div id="mainResult">
+							<jsp:include page="board/blogUpdate.jsp"/>
+						</div>
+						<br/>
+						<br/>
+						
+					</div>
+					<div class="modal-footer">
+						<a href="#" data-dismiss="modal" class="btn">Close</a>
+					</div>
+				</div>
+		    </div>
+		</div>
+	     
+	     		
 	<!-- **********************************
 	                        제휴업체 : 변태훈
 	     ***********************************-->
@@ -718,7 +832,7 @@
 		
 		<!-- 회원관리 - 회원가입 -->
 		<div class="modal fade" id="blogmapRegister" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -738,7 +852,7 @@
 		
 		<!-- 회원관리 - 비밀번호중복확인(사용가능) -->
 		<div class="modal fade" id="blogmap_registerCheckOk" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -758,7 +872,7 @@
 		
 		<!-- 회원관리 - 비밀번호중복확인(불가능) -->
 		<div class="modal fade" id="blogmap_registerCheckNo" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -777,7 +891,7 @@
 		
 		<!-- 회원관리 - 비밀번호 찾기 -->
 		<div class="modal fade" id="blogmap_renew_pwd" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -798,7 +912,7 @@
 
 		<!-- 회원관리 - 메일전송 확인 -->
 		<div class="modal fade" id="blogmap_email_confirm" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -819,7 +933,7 @@
 		<!-- 회원관리 - 마이페이지 -->
 		<!-- 마이페이지 -->
 		<div class="modal fade" id="blogmap_myPage" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-myPage">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -839,7 +953,7 @@
 		
 		<!-- 회원관리 - 수정 -->
 		<div class="modal fade" id="blogmap_myPageUpdate" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-myPage">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -859,7 +973,7 @@
 		
 		<!-- 회원관리 - 탈퇴 -->
 		<div class="modal fade" id="blogmap_myPageDelete" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -879,7 +993,7 @@
 		
 		<!-- fb회원탈퇴시 이메일 인증 -->
 		<div class="modal fade" id="blogmap_fb_myPageDelete" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
