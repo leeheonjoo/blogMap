@@ -18,29 +18,40 @@
 <link rel="stylesheet" type="text/css" href="${root}/css/layer.css"/>
 <link rel="stylesheet" type="text/css" href="${root}/css/blogMap/blogMap.css"/>											<!-- Metro style dynamic Tiles stylesheet 로드 -->
 <style>
-	.modal-lg{
+	.modal-dialog{
 		width: auto;
 		margin: 1% 1% 0px 1%;
- 		max-height: 600px;
-		overflow-y:scroll;
-    	overflow-x:hidden
+		height:auto;
+  		max-height: 90%; 
+	    overflow-y: initial !important;
+     	overflow-x:hidden;
 	}
 
-	.modal-myPage{
-		width: auto;
-		margin: 2% 10% 0px 10%;
- 		height: 600px;
-/*    		max-height: 600px; */
-    		/* overflow-y:scroll; */
-	}
+ 	.modal-myPage{
+ 		width: auto; 
+ 		margin: 2% 10% 0px 10%;
+/*   	height: 600px;  */
+/*   	max-height: 600px; */
+/*     	overflow-y:scroll; */ 
+ 	}
 	
-	.modal-email-confrim{
-		width: auto;
-		margin: 2% 20% 0px 20%;
- 		height: 600px;
-/*    		max-height: 600px; */
-    		/* overflow-y:scroll; */
-	}
+ 	.modal-email-confrim{
+ 		width: auto;
+ 		margin: 2% 20% 0px 20%;
+  		height: 600px;
+   		max-height: 600px;
+     	overflow-y:scroll;
+ 	}
+	
+/*  	.modal{  */
+/*      display: block !important;  */
+/*  }  */
+
+#mainResult{
+  height: 80%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 </style>
 <!--[if lt IE 9]>
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
