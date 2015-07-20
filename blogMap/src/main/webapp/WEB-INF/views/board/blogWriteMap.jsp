@@ -334,22 +334,6 @@ v\:* {
                                                     	$("#carousel_page li").addClass("active");
                                                     	$("#carousel_image .item").addClass("active");
                                                    	  }
-               
-                                              	
-//                                                       if(i!=0){
-//                                                     	  $(".carousel-indicators").append("<li data-target='.carousel' data-slide-to="+i+"></li>");
-                                                    	                                                     	  
-//                                                     	  $("#imageSlideBox").append("<div class='item'><img src="+filePath+"><div class='carousel-caption'>"+fileComment+"</div></div>");
-//                                                     	  $("#imageSlideBox").append($("#imgHidden").clone().clone().css("display","block"));
-//                                                       }
-//                                                   	<div id="imgHidden" class="item" style="display:none;">
-// 	                                              	  <img src="">
-// 	                                              	  <div class="carousel-caption"></div>
-// 	                                              	</div>
-                                                      
-//                                                       $("#imgDisplay").append($("#imgHidden").clone());
-//                                                        $("#imgDisplay > #imgHidden").attr("id","imgHidden"+i);
-//                                                        $("#imgHidden"+i).find("#imgsrc").attr("src",filePath);
                                                       
                                                       i++;
                                                    });
@@ -368,7 +352,7 @@ v\:* {
                                                 contentType:'application/x-www-form-urlencoded;charset=UTF-8',
                                                 success : function(data) {
                                                    if(data=="[]"){
-                                                      alert("null값");
+                                                	   
                                                    }else{
                                                    var data=JSON.parse(data);
                                                    $("#listAllDiv").empty();

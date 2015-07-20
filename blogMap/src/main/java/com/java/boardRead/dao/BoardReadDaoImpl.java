@@ -29,6 +29,21 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	
+	/**
+	 * @name : getRecommandBlog
+	 * @date : 2015. 7. 19.
+	 * @author : 이헌주
+	 * @description : DB에서 추천 블로그게시물을 조회하여 리스트를 반환
+	 */
+	@Override
+	public List<Object> getRecommandBlog() {
+		logger.info("BoardReadDao getRecommandBlog-------------------------");
+		List<Object> resultList=sqlSession.selectList("dao.BoardReadMapper.getRecommandBlog");
+		
+		return resultList;
+	}
+	
 	@Override
 	public BoardReadDto getData() {
 		return sqlSession.selectOne("dao.BoardReadMapper.getData");
@@ -206,6 +221,30 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	public int blogDelete(HashMap<String, Object> hMap) {
 		logger.info("BoardReadDao blogDelete-------------------------");
 		return sqlSession.delete("dao.BoardReadMapper.blogDelete",hMap);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> blogUpdate(HashMap<String, Object> hMap) {
+		logger.info("BoardReadDao blogUpdate-------------------------");
+		return sqlSession.selectList("dao.BoardReadMapper.blogUpdate",hMap);
+	}
+
+	@Override
+	public int blogUpdateOk(HashMap<String, Object> hashMap) {
+		logger.info("BoardReadDao blogUpdateOk-------------------------");
+		int check= sqlSession.update("dao.BoardReadMapper.blogUpdateOk",hashMap);
+
+		if(check>0){
+			check=sqlSession.insert("dao.BoardReadMapper.blogUpdateOk_addr",hashMap);
+		}
+		return check;
+		 
+	}
+
+	@Override
+	public int blogUpdateOk_attach(HashMap<String, Object> hashMap) {
+		logger.info("BoardReadDao blogUpdateOk_attach-------------------------");
+		return sqlSession.update("dao.BoardReadMapper.blogUpdateOk_attach",hashMap);
 	}
 
 	

@@ -11,8 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.java.board.dto.Attach_fileDto;
+import com.java.board.dto.BoardDto;
+import com.java.board.dto.Board_addr_infoDto;
+import com.java.boardRead.dto.BoardReadDto;
 import com.java.boardRead.service.BoardReadService;
 
 
@@ -45,6 +50,27 @@ public class BoardReadController {
 		try {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print("test");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * @name : getRecommandBlog
+	 * @date : 2015. 7. 19.
+	 * @author : 이헌주
+	 * @description : 추천 블로그게시물 load를 위한 메소드
+	 * 				  boardReadService에서 전달받은 게시물 정보 json을 print
+	 */
+	@RequestMapping(value="/board/getRecommandBlog.do", method=RequestMethod.GET)
+	public void getRecommandBlog(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController getRecommandBlog--------------------------");
+		
+		String json=boardReadService.getRecommandBlog();
+
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -270,6 +296,35 @@ public class BoardReadController {
 		mav.addObject("response",response);
 		
 		boardReadService.blogDelete(mav);
+	}
+	@RequestMapping(value="/board/blogUpdate.do",method=RequestMethod.POST)
+	public void blogUpdate(HttpServletRequest request, HttpServletResponse response){
+		logger.info("BoardReadController blogUpdate-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		
+		boardReadService.blogUpdate(mav);
+	}
+	@RequestMapping(value="/board/blogUpdateOk.do",method=RequestMethod.POST)
+	public void blogUpdateOk(MultipartHttpServletRequest request, HttpServletResponse response,
+			Attach_fileDto attach_fileDto,BoardDto boardDto,Board_addr_infoDto board_addr_infoDto,BoardReadDto boardreadDto){
+		logger.info("BoardReadController blogUpdateOk-------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+
+		mav.addObject("Attach_fileDto",attach_fileDto);
+		mav.addObject("Board_addr_infoDto",board_addr_infoDto);
+		mav.addObject("BoardDto",boardDto);
+		mav.addObject("BoardReadDto",boardreadDto);
+		
+		mav.addObject("request",request);
+		mav.addObject("response",response);
+		mav.setViewName("blogMap");
+		
+		boardReadService.blogUpdateOk(mav);
 	}
 	
 	
