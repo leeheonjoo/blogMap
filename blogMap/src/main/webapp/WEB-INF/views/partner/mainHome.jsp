@@ -21,22 +21,20 @@ $(function() {
 </head>
 <style>
 .img-responsive {height:}
-#list_partner_name {width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+#list_partner_name {width:100%;text-overflow:ellipsis;white-space:inherit;overflow:initial;}
 </style>
 <body>
-	<article class="container">
-		
-		<div class="row">
-			<section class="page-header">
-				<h2 class="page-title">제휴업체 정보</h2>
-			</section>
-		</div>
-		
-		<div class="row">
-		
-			<div>
+<div class="caption">
+		<div class="col-md-5 input-group">
+			<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
+     		<span class="input-group-btn">
+     			<input type="button" class="btn btn-default" id="search_Partner" value="검색"/>
+     		</span>
+       	</div><br/><br/>
+		<article class="container">
+			<div class="row">
 				<!-- 큰 사이즈 화면에서 탭 목록-->					
-				<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
+			<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
 				<li role="presentation" class="active">
 					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
 				</li>
@@ -50,17 +48,10 @@ $(function() {
 			</ul>
 
 			<!-- tour 탭 내용 -->
-			<div class="tab-content col-md-9">
+			<div class="tab-content col-md-9 thumbnail">
 				<section role="tabpanel" class="tab-pane active" id="tab_tour">
-					<div class="row" id="tour_item_list">	
-						
-					</div>
+					<div class="row" id="tour_item_list"></div>
 					<div id="partnerListResult"></div>  <!-- 자료를 붙일 바디 -->
-				<div class="row">
-						<div class="col-xs-12 text-right">
-							<button type="button" id="partner_tour_button" name="partner_tour_button"  class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">업체등록</button>								
-						</div>
-					</div>
 				</section>
 				<div class="col-md-2 col-sm-3 col-xs-4 tour_items" id="tour_item" role="button" style="display:none;">
 					<div id="tour_info" class="thumbnail">	
@@ -76,8 +67,12 @@ $(function() {
 					</div>
 				</div>
 			</div>
-			
+		</div>
+		<div class="modal-footer">
+                  <button type="button"  id="partner_tour_button" name="partner_tour_button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop"">업체등록</button>
+        </div>
 	</article>
+	</div>
 		<script type="text/javascript">
 			/*
 			 * 제휴 업체 신청전 폼유효성 검증
@@ -180,7 +175,7 @@ $(function() {
 						alert("서버와의 데이터 연결에 실패하였습니다.");
 						return false;
 					}
-				}); 
+				});
 				// 실제 폼이 전송되어 페이지가 변경되는것을 막기위해 false 리턴
 				return false;
 			}
@@ -198,61 +193,6 @@ $(function() {
 				}
 				return true;
 			}
-			
-			 $(document).ready(function(){	
-				/* 데이타를 채우기 위해 복사 */
-				
-				/* $("#partner_Registration").click(function(){
-					alert("ok"); */	
-				$.ajax({
-					type:'post',
-					url:'${root}/partner/writeList.do',
-					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
-					success : function(responseData) {
-						var data = JSON.parse(responseData);
-						//alert(data);
-					
-						/* 데이타를 채우기 위해 복사 */
-						$.each(data, function(i){
-							
-							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
-							$("#tour_item:last-child #list_partner_name").html(data[i].partner_name);
-							$("#tour_item:last-child a.list_partner_no").attr("id", "partner_no"+data[i].partner_no);
-							$("input[name='partner_no']").html(data[i].partner_no);
-							$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
-							
-							// 각 업체를 클릭했을때 이벤트
-							$("#partner_no" + data[i].partner_no).click(function(){
-								alert("업체클릭" + data[i].partner_no)
-								$("#partner_no").val(data[i].partner_no);
-										
-								//alert($("#partner_no").val());
-								partnerData(data[i].partner_no);	
-							});
-						});
-						
-// 						var max_height = 0;
-						
-// 						$(".tour_items").each(function(){
-							
-// 							if(max_height < $(this).height())
-// 							{
-// 								max_height = $(this).height();
-// 							}
-// 						});
-						
-// 						$(".tour_items").css({
-// 							'height': max_height
-// 						});
-						
-						$(".tour_items .img-responsive").css({
- 							'max-width':"100%",
-							'height': "100px"
-						});
-						
-					}	
-				});	
-		});
 // function get_list(page){
 						
 // }
@@ -358,6 +298,60 @@ $(function() {
 			return false;
 		};
 		
+		
+		 function getPartnerInfo(){	
+				/* 데이타를 채우기 위해 복사 */
+				
+				$.ajax({
+					type:'post',
+					url:'${root}/partner/writeList.do',
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+					success : function(responseData) {
+						var data = JSON.parse(responseData);
+						//alert(data);
+					
+						/* 데이타를 채우기 위해 복사 */
+						$("#tour_item_list").empty();
+						$.each(data, function(i){
+							
+							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
+							$("#tour_item:last-child #list_partner_name").html(data[i].partner_name);
+							$("#tour_item:last-child a.list_partner_no").attr("id", "partner_no"+data[i].partner_no);
+							$("input[name='partner_no']").html(data[i].partner_no);
+							$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
+							
+							// 각 업체를 클릭했을때 이벤트
+							$("#partner_no" + data[i].partner_no).click(function(){
+								alert("업체클릭" + data[i].partner_no)
+								$("#partner_no").val(data[i].partner_no);
+										
+								//alert($("#partner_no").val());
+								partnerData(data[i].partner_no);	
+							});
+						});
+						
+//						var max_height = 0;
+						
+//						$(".tour_items").each(function(){
+							
+//							if(max_height < $(this).height())
+//							{
+//								max_height = $(this).height();
+//							}
+//						});
+						
+//						$(".tour_items").css({
+//							'height': max_height
+//						});
+						
+						$(".tour_items .img-responsive").css({
+							'max-width':"100%",
+							'height': "90px"
+						});
+						
+					}	
+				});
+		 };
 		</script>
 	</body>
 </html>

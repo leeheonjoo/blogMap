@@ -15,15 +15,8 @@
 <div id="partnerDetailMain" style="display: none;">
 	<%--  <img src="${root }/css/manager/images/star0.jpg" width="300px" height="300px"/> --%>
 	
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog modal-lg" style="width:100%; margin:auto;">
 		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">업체 정보</h4>
-			</div>
-			
 			<div class="modal-body" id="partner_data-body">
 				<div class="row form-horizontal">
 					<div class="col-md-3">

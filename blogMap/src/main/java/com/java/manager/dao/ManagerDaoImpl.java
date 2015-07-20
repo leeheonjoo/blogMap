@@ -86,7 +86,7 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public void submitLog(HashMap<String, Object> hMap) {
+	public void partnerSubmitLog(HashMap<String, Object> hMap) {
 		// TODO Auto-generated method stub
 		session.insert("dao.ManagerMapper.submitLog", hMap);
 	}
@@ -116,9 +116,9 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public void couponSubmitLog(int couponNo) {
+	public void couponSubmitLog(HashMap<String, Object> hMap) {
 		// TODO Auto-generated method stub
-		session.insert("dao.ManagerMapper.couponSubmitLog", couponNo);
+		session.insert("dao.ManagerMapper.couponSubmitLog", hMap);
 	}
 	
 	@Override
@@ -128,9 +128,9 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public void couponCancleLog(int couponNo) {
+	public void couponCancleLog(HashMap<String, Object> hMap) {
 		// TODO Auto-generated method stub
-		session.insert("dao.ManagerMapper.couponCancleLog", couponNo);
+		session.insert("dao.ManagerMapper.couponCancleLog", hMap);
 	}
 	
 	@Override

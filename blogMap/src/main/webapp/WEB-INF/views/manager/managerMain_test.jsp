@@ -39,11 +39,11 @@
 <body>
 		<article class="container-fluid">
 
-			<div class="row" >
+			<!-- <div class="row" >
 				<section class="page-header2" >
 					<h2 class="page-title">관리자 모드</h2>
 				</section>
-			</div>
+			</div> -->
 
 			<div class="row">
 
@@ -91,10 +91,10 @@
 						<section role="tabpanel" class="tab-pane active" id="tab_member">
 							<div class="row" id="memberInfo_list">
 								<div class="thumbnail">
-									<div class="caption">	
+									
 									<!-- 메인 탭 내용시작 -->	
 										<jsp:include page="memberlist.jsp"/>										
-									</div>
+									
 								</div>
 							</div>								
 						</section>				
