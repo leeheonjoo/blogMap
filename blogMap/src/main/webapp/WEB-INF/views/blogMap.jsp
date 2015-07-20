@@ -1030,7 +1030,7 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">Manager Main</h5>
+						<h2 class="modal-title">Manager Main</h2>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
