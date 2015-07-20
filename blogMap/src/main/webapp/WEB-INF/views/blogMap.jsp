@@ -69,7 +69,7 @@
 <script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- 컨폼 확인창 -->	
 <script type="text/javascript" src="${root }/css/board/jquery.popconfirm.js"></script>
-<!-- modal, session check -->z
+<!-- modal, session check -->
 <script type="text/javascript">
 	$(document).ready(function() {
 
