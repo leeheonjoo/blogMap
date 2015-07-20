@@ -25,15 +25,6 @@ $(function() {
 </style>
 <body>
 	<article class="container">
-		
-		<div class="row">
-			<section class="page-header">
-				<h2 class="page-title">제휴업체 정보</h2>
-			</section>
-		</div>
-		
-		<div class="row">
-		
 			<div>
 				<!-- 큰 사이즈 화면에서 탭 목록-->					
 				<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
@@ -316,6 +307,7 @@ $(function() {
 						//alert(data);
 					
 						/* 데이타를 채우기 위해 복사 */
+						$("#tour_item_list").empty();
 						$.each(data, function(i){
 							
 							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));

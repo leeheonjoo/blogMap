@@ -242,7 +242,7 @@ $(function(){
 	    }
 	});
 	
-	// 제휴업체 등록
+	// 제휴업체 메인
 	$("#partner_Registration").click(function(){
 		if (window.sessionStorage) {
 	    	var email = sessionStorage.getItem('email');
@@ -676,22 +676,22 @@ $(function(){
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title">Partner</h4>
-						<div class="row">
-					  		<div class="col-lg-4">
-							    <div class="input-group">
-						      		<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
-						      		<span class="input-group-btn">
-						        		<button class="btn btn-default" type="button" id="search_Partner">검색</button>
-						      		</span>
-							    </div>	<!-- /input-group -->
-					  		</div>	<!-- /.col-lg-6 -->
-						</div>		<!-- /.row -->	
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
-							<jsp:include page="partner/mainHome.jsp" />
-						</div>
+							<div class="row">
+						  		<div class="col-lg-4">
+								    <div class="input-group">
+							      		<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
+							      		<span class="input-group-btn">
+							        		<button class="btn btn-default" type="button" id="search_Partner">검색</button>	
+							      		</span>
+								    </div>	<!-- /input-group -->
+						  		</div>	<!-- /.col-lg-6 -->
+							</div>		<!-- /.row -->
+						</div>					
 					</div>
+					<jsp:include page="partner/mainHome.jsp" />
 				</div>
 		    </div>
 		</div>
@@ -770,7 +770,7 @@ $(function(){
 							<input type="hidden"  id="category_code" name="category_code"/>
 							<input type="hidden"  id="member_id" name="member_id"/>
 							
-							<div class="form-group">
+							<div id="blogPartnerSelect" class="form-group">
 								<label class="col-xs-4 control-label">카테고리:</label> 
 								<select id="headCategory" name="category_mname" class="selectpicker" data-width="140px" style="display: none" onchange="blogWrite_ChangeCategory(this.id)">
 									<option value="%">대분류[전체]</option>
