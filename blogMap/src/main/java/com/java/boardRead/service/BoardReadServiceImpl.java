@@ -242,15 +242,15 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		
 		
-		if(boardList!=null){
-			System.out.println("블로그조회 갯수:"+boardList.size());;
+		if(boardLists!=null){
+			
 			/*hashMap.put("boardList", boardList);
 			List<Board_addr_infoDto> board_Addr_infoDto=null;
 			board_Addr_infoDto=boardReadDao.blogSearchAddr(hashMap);
 			System.out.println("블로그조회에 검색값에 따른 주소 갯수:"+board_Addr_infoDto.size());
 			*/
 			Gson gson=new Gson();
-			String boardList_json=gson.toJson(boardList);
+			String boardList_json=gson.toJson(boardLists);
 			try {
 				response.getWriter().println(boardList_json);
 				System.out.println("여기"+boardList_json);
