@@ -243,155 +243,12 @@ v\:* {
                                  $("#blogList_result_content").append("<p>");
                                  $("#blogList_result_content").append("<br/>");       */
                                  
-                                 $("#result_button"+i).click(function() {
-                                    $("div[id='blogListDetail'].modal").modal(); 
-                                       var Readno=$("#result_no"+i).text();
-                                       var blogRead_no=Readno.split(":");
-                                       blogRead_no=blogRead_no[1].trim();
-                                        $.ajax({
-                                          type : 'post',
-                                          url : '${root}/board/blogReadDetail.do',
-                                          data : {
-                                             board_no : blogRead_no
-                                          },
-                                          contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-                                          success : function(data) {
-                                             var data=JSON.parse(data);
-                                             
-                                             //데이터 추출
-                                             var pullAddr=data[0].ADDR_SIDO+" "+data[0].ADDR_SIGUGUN+" "
-                                             +data[0].ADDR_DONGRI+" "+data[0].ADDR_BUNJI;
-                                             var content=data[0].BOARD_CONTENT;
-                                             var writer=data[0].MEMBER_ID;
-                                             var title=data[0].BOARD_TITLE;
-                                             var mcategory=data[0].CATEGORY_MNAME;               
-                                             var scategory=data[0].CATEGORY_SNAME;
-                                             var rgdate=new Date(data[0].BOARD_RGDATE);
-                                             var fullDate=rgdate.getFullYear()+"/"+(rgdate.getMonth()+1)+"/"+rgdate.getDate();
-                                             var grade=data[0].BOARD_GRADE;
-                                             var boardno=data[0].BOARD_NO;
-                                             var recommand_y=data[0].YES;
-                                             var recommand_n=data[0].NO;
-                                             //데이터 입력
-                                             $("#blogRead_rgdate > label:eq(1)").text(fullDate); 
-                                             $("#blogRead_addr > label:eq(1)").text(pullAddr); 
-                                             $("#blogRead_content > div").html(content);
-                                             $("#blogRead_writer > label:eq(1)").text(writer);
-                                             $("#blogRead_title > label:eq(1)").text(title);
-                                             $("#blogRead_category > label:eq(1)").text(mcategory);
-                                             $("#blogRead_category > label:eq(2)").text(scategory);
-                                             $("#blogRead_boardno > label:eq(0)").text(boardno);
-                                             $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
-                                             $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
-                                             
-                                             //평점
-                                             if(grade=="0"){
-                                                $("#blogRead_grade > img").attr("src","${root}/css/images/star0.jpg");
-                                             }else if(grade=="1"){
-                                                $("#blogRead_grade > img").attr("src","${root}/css/images/star1.jpg");
-                                             }else if(grade=="2"){
-                                                $("#blogRead_grade > img").attr("src","${root}/css/images/star2.jpg");
-                                             }else if(grade=="3"){
-                                                $("#blogRead_grade > img").attr("src","${root}/css/images/star3.jpg");
-                                             }else if(grade=="4"){
-                                                $("#blogRead_grade > img").attr("src","${root}/css/images/star4.jpg");
-                                             }else{
-                                                $("#blogRead_grade > img").attr("src","${root}/css/images/star5.jpg");
-                                             }
-                                             //첨부파일(이미지)
-                                             $.ajax({
-                                                type : 'post',
-                                                url : '${root}/board/blogReadDetailImg.do',
-                                                data : {
-                                                   board_no : boardno
-                                                },
-                                                contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-                                                success : function(data) {
-                                                   var data=JSON.parse(data);
-                                                   var i=0;
-                                                   $.each(data,function(i){
-                                                      var fileNo=data[i].file_no;
-                                                      var filePath=data[i].file_path;
-                                                      var fileName=data[i].file_name;
-                                                      var fileComment=data[i].file_comment;
-                                                  	  
-                                                      if(i==0){
-                                                          $("#carousel_page").empty();
-                                                          $("#carousel_image").empty();                                                    	  
-                                                      }
-                                                      
-                                                      $("#carousel_page").append("<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>");
-                                                  	  
-                                                  	  var carousel_image = "<div class='item'>";
-                                                  	  carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + ">";
-                                                  	  carousel_image += "<div class='carousel-caption'>";
-                                                  	  carousel_image += "<h4>"+ fileComment +"</h4>";
-                                                  	  carousel_image += "</div>";
-                                                  	  carousel_image += "</div>";
-                                                  	  $("#carousel_image").append(carousel_image);
-                                                  	  
-                                                  	  if(i==0){
-                                                    	$("#carousel_page li").addClass("active");
-                                                    	$("#carousel_image .item").addClass("active");
-                                                   	  }
-                                                      
-                                                      i++;
-                                                   });
-                                                },
-                                                error:function(data){
-                                                   
-                                                }
-                                             });
-                                             
-                                             $.ajax({
-                                                type : 'post',
-                                                url : '${root}/board/blogReadReply.do',
-                                                data : {
-                                                   board_no : boardno
-                                                },
-                                                contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-                                                success : function(data) {
-                                                   if(data=="[]"){
-                                                	   
-                                                   }else{
-                                                   var data=JSON.parse(data);
-                                                   $("#listAllDiv").empty();
-                                                   $.each(data,function(i){
-                                                         var replyNo=data[i].reply_no;
-                                                         var boardNo=data[i].board_no;
-                                                         var memberId=data[i].member_id;
-                                                         var replyContent=data[i].reply_content;
-                                                         var replyDate=new Date(data[i].reply_date);
-                                                         var replyfullDate=replyDate.getFullYear()+"/"+(replyDate.getMonth()+1)+"/"+replyDate.getDate();
-                                                         
-                                                         $("#listAllDiv").append($("#reply_content_insert").clone());
-                                                         $("#listAllDiv > #reply_content_insert").css("display","block");
-                                                         $("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
-                                                         $("#reply_content_insert"+i+" > span:eq(0)").text(replyNo);
-                                                         $("#reply_content_insert"+i+" > span:eq(1)").text(memberId);
-                                                         $("#reply_content_insert"+i+" > span:eq(2)").text(replyContent);
-                                                         $("#reply_content_insert"+i+" > span:eq(3)").text(replyfullDate);
-                                                         $("#reply_content_insert"+i+" > span:eq(4)").attr("id","reply_buttons"+i);
-                        								 $("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
-                        								 $("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
-                                                         
-                        								 if(email!=memberId){
-                        										$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
-                        										$("#reply_buttons"+i+" > button:eq(1)").css("display","none");
-                        									}
-                                                      });
-                                                   }
-                                                },
-                                                error:function(data){
-                                                   
-                                                }
-                                             });
-                                             
-                                          },
-                                          error:function(data){
-                                             
-                                          }
-                                       }); 
+                                 $("#result_button"+i).click(function(){
+                                	 $("div[id='blogListDetail'].modal").modal(); 
+                                     var Readno=$("#result_no"+i).text();
+                                     var blogRead_no=Readno.split(":");
+                                     blogRead_no=blogRead_no[1].trim();
+                                     blogListDetails(blogRead_no);
                                  });
                               });
                               
@@ -477,6 +334,153 @@ v\:* {
       };
    };
 
+function blogListDetails(blogRead_no) {
+
+   $.ajax({
+     type : 'post',
+     url : '${root}/board/blogReadDetail.do',
+     data : {
+        board_no : blogRead_no
+     },
+     contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+     success : function(data) {
+        var data=JSON.parse(data);
+        
+        //데이터 추출
+        var pullAddr=data[0].ADDR_SIDO+" "+data[0].ADDR_SIGUGUN+" "
+        +data[0].ADDR_DONGRI+" "+data[0].ADDR_BUNJI;
+        var content=data[0].BOARD_CONTENT;
+        var writer=data[0].MEMBER_ID;
+        var title=data[0].BOARD_TITLE;
+        var mcategory=data[0].CATEGORY_MNAME;               
+        var scategory=data[0].CATEGORY_SNAME;
+        var rgdate=new Date(data[0].BOARD_RGDATE);
+        var fullDate=rgdate.getFullYear()+"/"+(rgdate.getMonth()+1)+"/"+rgdate.getDate();
+        var grade=data[0].BOARD_GRADE;
+        var boardno=data[0].BOARD_NO;
+        var recommand_y=data[0].YES;
+        var recommand_n=data[0].NO;
+        //데이터 입력
+        $("#blogRead_rgdate > label:eq(1)").text(fullDate); 
+        $("#blogRead_addr > label:eq(1)").text(pullAddr); 
+        $("#blogRead_content > div").html(content);
+        $("#blogRead_writer > label:eq(1)").text(writer);
+        $("#blogRead_title > label:eq(1)").text(title);
+        $("#blogRead_category > label:eq(1)").text(mcategory);
+        $("#blogRead_category > label:eq(2)").text(scategory);
+        $("#blogRead_boardno > label:eq(0)").text(boardno);
+        $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
+        $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
+        
+        //평점
+        if(grade=="0"){
+           $("#blogRead_grade > img").attr("src","${root}/css/images/star0.jpg");
+        }else if(grade=="1"){
+           $("#blogRead_grade > img").attr("src","${root}/css/images/star1.jpg");
+        }else if(grade=="2"){
+           $("#blogRead_grade > img").attr("src","${root}/css/images/star2.jpg");
+        }else if(grade=="3"){
+           $("#blogRead_grade > img").attr("src","${root}/css/images/star3.jpg");
+        }else if(grade=="4"){
+           $("#blogRead_grade > img").attr("src","${root}/css/images/star4.jpg");
+        }else{
+           $("#blogRead_grade > img").attr("src","${root}/css/images/star5.jpg");
+        }
+        //첨부파일(이미지)
+        $.ajax({
+           type : 'post',
+           url : '${root}/board/blogReadDetailImg.do',
+           data : {
+              board_no : boardno
+           },
+           contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+           success : function(data) {
+              var data=JSON.parse(data);
+              var i=0;
+              $.each(data,function(i){
+                 var fileNo=data[i].file_no;
+                 var filePath=data[i].file_path;
+                 var fileName=data[i].file_name;
+                 var fileComment=data[i].file_comment;
+             	  
+                 if(i==0){
+                     $("#carousel_page").empty();
+                     $("#carousel_image").empty();                                                    	  
+                 }
+                 
+                 $("#carousel_page").append("<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>");
+             	  
+             	  var carousel_image = "<div class='item'>";
+             	  carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + ">";
+             	  carousel_image += "<div class='carousel-caption'>";
+             	  carousel_image += "<h4>"+ fileComment +"</h4>";
+             	  carousel_image += "</div>";
+             	  carousel_image += "</div>";
+             	  $("#carousel_image").append(carousel_image);
+             	  
+             	  if(i==0){
+               	$("#carousel_page li").addClass("active");
+               	$("#carousel_image .item").addClass("active");
+              	  }
+                 
+                 i++;
+              });
+           },
+           error:function(data){
+              
+           }
+        });
+        
+        $.ajax({
+           type : 'post',
+           url : '${root}/board/blogReadReply.do',
+           data : {
+              board_no : boardno
+           },
+           contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+           success : function(data) {
+              if(data=="[]"){
+           	   
+              }else{
+              var data=JSON.parse(data);
+              $("#listAllDiv").empty();
+              $.each(data,function(i){
+                    var replyNo=data[i].reply_no;
+                    var boardNo=data[i].board_no;
+                    var memberId=data[i].member_id;
+                    var replyContent=data[i].reply_content;
+                    var replyDate=new Date(data[i].reply_date);
+                    var replyfullDate=replyDate.getFullYear()+"/"+(replyDate.getMonth()+1)+"/"+replyDate.getDate();
+                    
+                    $("#listAllDiv").append($("#reply_content_insert").clone());
+                    $("#listAllDiv > #reply_content_insert").css("display","block");
+                    $("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
+                    $("#reply_content_insert"+i+" > span:eq(0)").text(replyNo);
+                    $("#reply_content_insert"+i+" > span:eq(1)").text(memberId);
+                    $("#reply_content_insert"+i+" > span:eq(2)").text(replyContent);
+                    $("#reply_content_insert"+i+" > span:eq(3)").text(replyfullDate);
+                    $("#reply_content_insert"+i+" > span:eq(4)").attr("id","reply_buttons"+i);
+					 $("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
+					 $("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
+                    
+					 if(email!=memberId){
+							$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
+							$("#reply_buttons"+i+" > button:eq(1)").css("display","none");
+						}
+                 });
+              }
+           },
+           error:function(data){
+              
+           }
+        });
+        
+     },
+     error:function(data){
+        
+     }
+  }); 
+}
 </script>
 </head>
 <body>
