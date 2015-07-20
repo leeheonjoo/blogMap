@@ -220,6 +220,59 @@
 		});	
 	});
 </script>
+<script>
+//세션 체크
+$(function(){
+	$("#mainMessageLink").click(function(){
+		if (window.sessionStorage) {
+	    	var email = sessionStorage.getItem('email');
+	    	if(email!=null){
+	    		$("div[id='mainMessage'].modal").modal();
+	    	}else{
+	    		alert("로그인 후 이용가능합니다.");
+	    	}
+	    }
+		
+	});
+	
+	$("#partner_Registration").click(function(){
+		if (window.sessionStorage) {
+	    	var email = sessionStorage.getItem('email');
+	    	if(email!=null){
+	    		$("div[id='partnerMain'].modal").modal();
+	    	}else{
+	    		alert("로그인 후 이용가능합니다.");
+	    	}
+	    }
+		
+	});
+	
+	$("#blogMain_write").click(function(){
+		if (window.sessionStorage) {
+	    	var email = sessionStorage.getItem('email');
+	    	if(email!=null){
+	    		$("div[id='blogMapWrite'].modal").modal();
+	    	}else{
+	    		alert("로그인 후 이용가능합니다.");
+	    	}
+	    }
+		
+	});
+	
+	$("#blogMain_coupon").click(function(){
+		if (window.sessionStorage) {
+	    	var email = sessionStorage.getItem('email');
+	    	if(email!=null){
+	    		$("div[id='blogMapCoupon'].modal").modal();
+	    	}else{
+	    		alert("로그인 후 이용가능합니다.");
+	    	}
+	    }
+		
+	});
+});
+
+</script>
 
 </head>
 <body>
@@ -239,7 +292,7 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 			   <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav navbar-right">
-			      	<li><a id="mainMessageLink" data-toggle="modal" href="#mainMessage" class="btn" style="text-align:left;"><b>Message</b></a></li>
+			      	<li id="mainMessageLink"><a style="cursor:Pointer"><b>Message</b></a></li>
 			      	<li><a id="blogmap_main_myPage" data-toggle="modal" href="#blogmap_myPage" class="btn" style="text-align:left; display:none"><b>MyPage</b></a></li>
 			        <li id="blogmap_login_bar" class="dropdown">
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="blogmap_before_login"><b id="login_text">Login</b> <span id="login_dropdown_btn" class="caret"></span></a>
@@ -335,7 +388,7 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<a data-toggle="modal" href="#blogMapWrite">
+								<a id="blogMain_write" style="cursor:Pointer">
 									<img src="${root}/images/blogMap/write_go.png" class="img-responsive"/>
 								</a>
 							</div>
@@ -352,7 +405,7 @@
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<a data-toggle="modal" href="#blogMapCoupon">
+								<a id="blogMain_coupon" style="cursor:Pointer">
 									<img src="${root}/images/blogMap/coupon.png" class="img-responsive"/>
 								</a>
 							</div>
@@ -463,7 +516,7 @@
 	<div class="container" style="max-width:1170px; height:50px; padding:0 0 0 0;">
 					<div style="width:100%; height:50px; text-align:right;">
 						<p style="width:100%; line-height:46px;">
-							<a data-toggle="modal" href="#partnerMain" id ="partner_Registration"><img src="${root}/images/blogMap/Partnership_32.png"></a>
+							<a id="partner_Registration" style="cursor:Pointer"><img src="${root}/images/blogMap/Partnership_32.png"></a>
 							&nbsp;&nbsp;
 							<a data-toggle="modal" href="#ManagerMain" id="manager_page_icon" style="display:none; "><img src="${root}/images/blogMap/gear_24.png"></img></a>
 						</p>
