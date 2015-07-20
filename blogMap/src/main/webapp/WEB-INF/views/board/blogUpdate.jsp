@@ -16,12 +16,18 @@
 <script type="text/javascript">
 	//이미지 미리보기
 	$(function(){
-	    function readURL(input,index) {
+		
+/* 네이버 스마트 에디터(크기,색상,글꼴 등) */
+		
+	
+		
+		
+	    function readURLS(input,index) {
 	        if (input.files && input.files[0]) {
 	            var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
 	            reader.onload = function (e) { 
 	            //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-	                $('#UploadedImg'+index).attr('src', e.target.result);
+	                $('#UpdateloadedImg'+index).attr('src', e.target.result);
 	                //이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
 	                //(아래 코드에서 읽어들인 dataURL형식)
 	            }                    
@@ -36,9 +42,9 @@
 	    	var index=fileId.substring(6,7);
 	    		$("#"+fileId).change(function(){
 	    	        if(this.value==""||this.value==null){
-	    	        	  $('#UploadedImg'+index).attr('src', e.target.result);
+	    	        	  $('#UpdateloadedImg'+index).attr('src', e.target.result);
 	    	        }
-	    	        readURL(this,index);
+	    	        readURLS(this,index);
 	    	    });
 	    });
 	    
@@ -64,10 +70,7 @@
 	    });
 		
 		
-		$("#blogUpdateButton").click(function() {
-			alert("수정돌아라");
-			$("#up_frm").submit();
-		});	
+		
 	 });
 
 	
@@ -98,7 +101,7 @@
 </head>
 <body>
 
-<form name="blogUpdateForm" action="${root }/board/blogUpdateOk.do" method="POST" id="up_frm" enctype="multipart/form-data">
+<form name="blogUpdateForm" action="${root }/board/blogUpdateOk" method="POST" id="up_frm" enctype="multipart/form-data">
 <div>
 	<input id="blogUpdateFile_no" type="hidden" name="file_nos"/>
 	<input id="blogUpdateBoard_no" type="hidden" name="board_no"/>
@@ -135,7 +138,7 @@
 	</div>
 	<div id="blogUpdateContent">
 		<label>내용:</label>
-		<textarea name="board_content" id="board_content"  rows="10" cols="100" style="width:766px; height:200px;"></textarea>
+		<textarea name="board_content" id="Upboard_content"  rows="10" cols="100" style="width:766px; height:200px;"></textarea>
 	</div>
 	<div id="blogUpdateattach">
 		<label>첨부파일|코멘트:</label>
@@ -149,32 +152,32 @@
 		</select>
 		<br/>
 		<span class="spanStyle" style="display:">
-		<input id="imgInp0" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
-		<img id="UploadedImg0" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
+		<input id="imgInp0" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<img id="UpdateloadedImg0" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>
 		<input type="text" name="comment" style="width:100px;" placeholder="예)최고에요"/>
 		</span>
 		<span class="spanStyle" style="display: none;">
-		<input id="imgInp1" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
-		<img id="UploadedImg1" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
+		<input id="imgInp1" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<img id="UpdateloadedImg1" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>
 		<input type="text" name="comment" style="width:100px;" placeholder="예)최고에요"/>
 		</span>
 		<span class="spanStyle" style="display: none;">
-		<input id="imgInp2" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
-		<img id="UploadedImg2" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
+		<input id="imgInp2" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<img id="UpdateloadedImg2" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>
 		<input type="text" name="comment" style="width:100px;"placeholder="예)최고에요"/>
 		</span>
 		<span class="spanStyle" style="display: none;">
-		<input id="imgInp3" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
-		<img id="UploadedImg3" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
+		<input id="imgInp3" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<img id="UpdateloadedImg3" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>
 		<input type="text" name="comment" style="width:100px;" placeholder="예)최고에요"/>
 		</span>
 		<span class="spanStyle" style="display: none;">
-		<input id="imgInp4" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
-		<img id="UploadedImg4" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
+		<input id="imgInp4" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<img id="UpdateloadedImg4" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>
 		<input type="text" name="comment" style="width:100px;" placeholder="예)최고에요"/>
 		</span>
@@ -196,6 +199,7 @@
 	</div>
 	
 </div>	
+
 </form>
 </body>
 </html>
