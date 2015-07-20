@@ -12,7 +12,7 @@
 <script type="text/javascript" src="${root }/css/manager/script.js"></script>
 <script type="text/javascript">
 	function getCouponlist(){
-		$("#couponListResult").empty();
+		
 		$.ajax({
 			type:'get',
 			url:'${root}/manager/couponInfo.do',
@@ -109,7 +109,7 @@
 				url:'${root}/manager/couponCancle.do?couponNo='+couponNo  + '&manager_id='+ manager,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
-					
+					$("#couponListResult").empty();
 					var cancleCheck=JSON.parse(responseData);
 					//alert("couponCancle :" + cancleCheck);
 					
@@ -121,7 +121,6 @@
 					if(cancleCheck == "1"){		//삭제가 정상적으로 이루어지면 시행
 						alert("취소되었습니다.");						
 						getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
-						//$("#couponDetailResult").refresh();
 						couponDetail(couponNo);						
 					};
 					
@@ -139,7 +138,7 @@
 				url:'${root}/manager/couponSubmit.do?couponNo='+couponNo  + '&manager_id='+ manager,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
-					
+					$("#couponListResult").empty();
 					var submitChcek=JSON.parse(responseData);
 					//alert("couponSubmit :" + submitChcek);
 					
@@ -150,9 +149,8 @@
 					
 					if(submitChcek == "1"){
 						alert("승인되었습니다.");
-						getCouponlist();
-						//$("#couponDetailResult").refresh();
-						couponDetail(couponNo);
+						getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
+						couponDetail(couponNo);						
 					};
 					
 				},error:function(submitChcek){
@@ -237,7 +235,7 @@
 		/*										  */
 		/******************************************/ 
 		$("#searchCoupon").click(function(){
-			$("#couponListResult").empty();
+			
 			var searchTag=$("input[id='CouponSearchTag']").val();
 			//alert(searchTag);
 			$.ajax({
@@ -245,6 +243,7 @@
 				url:'${root}/manager/searchCouponInfo.do?name=' + searchTag,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
+					$("#couponListResult").empty();
 					$("input[id='CouponSearchTag']").val("");
 					var data=JSON.parse(responseData);
 					//alert(data.length);
@@ -333,7 +332,7 @@
 					url:'${root}/manager/couponCancle.do?couponNo='+couponNo  + '&manager_id='+ manager,
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
-						
+						$("#couponListResult").empty();
 						var cancleCheck=JSON.parse(responseData);
 						//alert("couponCancle :" + cancleCheck);
 						
@@ -345,7 +344,7 @@
 						if(cancleCheck == "1"){		//삭제가 정상적으로 이루어지면 시행
 							alert("취소되었습니다.");
 							getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
-							$("#coupon_detail_button[name='"+couponNo +"']").attr("value","승인").refresh();
+							couponDetail(couponNo);						
 						};
 						
 					},error:function(deleteCheck){
@@ -362,7 +361,7 @@
 					url:'${root}/manager/couponSubmit.do?couponNo='+couponNo  + '&manager_id='+ manager,
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
-						
+						$("#couponListResult").empty();
 						var submitChcek=JSON.parse(responseData);
 						//alert("couponSubmit :" + submitChcek);
 						
@@ -373,8 +372,8 @@
 						
 						if(submitChcek == "1"){
 							alert("승인되었습니다.");
-							$("#coupon_detail_button[name='"+couponNo +"']").attr("value","취소").refresh();
-							getCouponlist();
+							getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
+							couponDetail(couponNo);						
 						};
 						
 					},error:function(submitChcek){
@@ -572,7 +571,7 @@
 					if(cancleCheck == "1"){		//삭제가 정상적으로 이루어지면 시행
 						alert("취소되었습니다.");
 						getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
-						$("#coupon_detail_button[name='"+couponNo +"']").attr("value","승인").refresh();
+						couponDetail(couponNo);						
 					};
 					
 				},error:function(deleteCheck){
@@ -600,8 +599,8 @@
 					
 					if(submitChcek == "1"){
 						alert("승인되었습니다.");
-						$("#coupon_detail_button[name='"+couponNo +"']").attr("value","취소").refresh();
-						getCouponlist();
+						getCouponlist();		// 함수를 다시 호출하여 변경사항 표시
+						couponDetail(couponNo);						
 					};
 					
 				},error:function(submitChcek){
