@@ -62,5 +62,10 @@
     text-align: center;
     color:white;
     font-family: Segoe UI;
-    font-weight: lighter;
+    font-weight: lighter; 
+}
+
+#tile7 .carousel-caption{
+    color:white;
+    
 }

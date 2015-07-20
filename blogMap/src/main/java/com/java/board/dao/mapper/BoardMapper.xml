@@ -16,7 +16,7 @@
 	</select>
 	
 	<insert id="blogWrite" parameterType="java.util.HashMap">
-		insert into board(board_no,member_id,category_code,board_title,board_rgdate,board_content,board_grade,board_count) values(BOARD_BOARD_NO_SEQ.nextval,#{member_id},(select category_code from category where category_mname=#{boardreadDto.category_mname} and category_sname=#{boardreadDto.category_sname}),#{boardDto.board_title},current_date,#{boardDto.board_content},#{boardDto.board_grade},0)
+		insert into board(board_no,member_id,category_code,board_title,board_rgdate,board_content,board_grade,board_count) values(BOARD_BOARD_NO_SEQ.nextval,#{member_id},(select category_code from category where category_mname=#{boardreadDto.category_mname} and category_sname like #{boardreadDto.category_sname}),#{boardDto.board_title},current_date,#{boardDto.board_content},#{boardDto.board_grade},0)
 	<selectKey keyProperty="board_no" resultType="int" order="AFTER">
 		select BOARD_BOARD_NO_SEQ.currval from dual
 	</selectKey>	
