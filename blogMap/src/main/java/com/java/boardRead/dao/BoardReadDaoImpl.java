@@ -244,7 +244,8 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	@Override
 	public int blogUpdateOk_attach(HashMap<String, Object> hashMap) {
 		logger.info("BoardReadDao blogUpdateOk_attach-------------------------");
-		return sqlSession.update("dao.BoardReadMapper.blogUpdateOk_attach",hashMap);
+		int check= sqlSession.update("dao.BoardReadMapper.blogUpdateOk_attach",hashMap);
+		return check;
 	}
 
 	

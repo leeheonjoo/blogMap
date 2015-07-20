@@ -20,7 +20,6 @@ import com.java.board.dto.Board_addr_infoDto;
 import com.java.boardRead.dto.BoardReadDto;
 import com.java.boardRead.service.BoardReadService;
 
-
 /**
  * @name : BoardReadController
  * @date : 2015. 6. 26.
@@ -142,6 +141,7 @@ public class BoardReadController {
 		
 		return mav;
 	}
+
 	@RequestMapping(value="/board/blogListSearch.do",method=RequestMethod.POST)
 	public void blogListSearch(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogListSearch-------------------------");
@@ -152,9 +152,8 @@ public class BoardReadController {
 		mav.addObject("response",response);
 		
 		boardReadService.blogListSearch(mav);
-		
-		
 	}
+	
 	@RequestMapping(value="/board/blogListResult.do",method=RequestMethod.POST)
 	public void blogListResult(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogListResult-------------------------");
@@ -164,10 +163,9 @@ public class BoardReadController {
 		mav.addObject("request",request);
 		mav.addObject("response",response);
 		
-		boardReadService.blogListResult(mav);
-		
-		
+		boardReadService.blogListResult(mav);	
 	}
+	
 	@RequestMapping(value="/board/blogReadDetail.do",method=RequestMethod.POST)
 	public void blogReadDetail(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogReadDetail-------------------------");
@@ -177,10 +175,9 @@ public class BoardReadController {
 		mav.addObject("request",request);
 		mav.addObject("response",response);
 		
-		boardReadService.blogReadDetail(mav);
-		
-		
+		boardReadService.blogReadDetail(mav);	
 	}
+	
 	@RequestMapping(value="/board/blogReadDetailImg",method=RequestMethod.POST)
 	public void blogReadDetailImg(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogReadDetailImg-------------------------");
@@ -190,10 +187,9 @@ public class BoardReadController {
 		mav.addObject("request",request);
 		mav.addObject("response",response);
 		
-		boardReadService.blogReadDetailImg(mav); 
-		
-		
+		boardReadService.blogReadDetailImg(mav); 	
 	}
+	
 	@RequestMapping(value="/board/blogListSearchSub1",method=RequestMethod.POST)
 	public void blogListSearchSub1(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogListSearchSub1-------------------------");
@@ -204,8 +200,6 @@ public class BoardReadController {
 		mav.addObject("response",response);
 		
 		boardReadService.blogListSearchSub1(mav);
-		
-		
 	}
 	
 	@RequestMapping(value="/board/blogListSearchSub2",method=RequestMethod.POST)
@@ -218,8 +212,6 @@ public class BoardReadController {
 		mav.addObject("response",response);
 		
 		boardReadService.blogListSearchSub2(mav);
-		
-		
 	}
 	
 	@RequestMapping(value="/board/blogReadReference",method=RequestMethod.POST)
@@ -231,10 +223,9 @@ public class BoardReadController {
 		mav.addObject("request",request);
 		mav.addObject("response",response);
 		
-		boardReadService.blogReadReference(mav);
-		
-		
+		boardReadService.blogReadReference(mav);	
 	}
+	
 	@RequestMapping(value="/board/blogReadNoreference",method=RequestMethod.POST)
 	public void blogReadNoreference(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogReadNoreference-------------------------");
@@ -244,10 +235,9 @@ public class BoardReadController {
 		mav.addObject("request",request);
 		mav.addObject("response",response);
 		
-		boardReadService.blogReadNoReference(mav);
-		
-		
+		boardReadService.blogReadNoReference(mav);	
 	}
+
 	@RequestMapping(value="/board/referenceRefresh.do",method=RequestMethod.POST)
 	public void referenceRefresh(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController referenceRefresh-------------------------");
@@ -257,10 +247,9 @@ public class BoardReadController {
 		mav.addObject("request",request);
 		mav.addObject("response",response);
 		
-		boardReadService.referenceRefresh(mav);
-		
-		
+		boardReadService.referenceRefresh(mav);	
 	}
+	
 	@RequestMapping(value="/board/bookMark.do",method=RequestMethod.POST)
 	public void bookMark(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController bookMark-------------------------");
@@ -270,10 +259,9 @@ public class BoardReadController {
 		mav.addObject("request",request);
 		mav.addObject("response",response);
 		
-		boardReadService.bookMark(mav);
-		
-		
+		boardReadService.bookMark(mav);		
 	}
+
 	@RequestMapping(value="/board/NobookMark.do",method=RequestMethod.POST)
 	public void NobookMark(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController NobookMark-------------------------");
@@ -297,6 +285,7 @@ public class BoardReadController {
 		
 		boardReadService.blogDelete(mav);
 	}
+	
 	@RequestMapping(value="/board/blogUpdate.do",method=RequestMethod.POST)
 	public void blogUpdate(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogUpdate-------------------------");
@@ -308,8 +297,9 @@ public class BoardReadController {
 		
 		boardReadService.blogUpdate(mav);
 	}
-	@RequestMapping(value="/board/blogUpdateOk.do",method=RequestMethod.POST)
-	public void blogUpdateOk(MultipartHttpServletRequest request, HttpServletResponse response,
+	
+	@RequestMapping(value="/board/blogUpdateOk",method=RequestMethod.POST)
+	public ModelAndView blogUpdateOk(MultipartHttpServletRequest request, HttpServletResponse response,
 			Attach_fileDto attach_fileDto,BoardDto boardDto,Board_addr_infoDto board_addr_infoDto,BoardReadDto boardreadDto){
 		logger.info("BoardReadController blogUpdateOk-------------------------");
 		
@@ -322,10 +312,10 @@ public class BoardReadController {
 		
 		mav.addObject("request",request);
 		mav.addObject("response",response);
-		mav.setViewName("blogMap");
-		
+			
 		boardReadService.blogUpdateOk(mav);
-	}
-	
-	
+		
+		mav.setViewName("blogMap");
+		return mav;
+	}	
 }
