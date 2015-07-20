@@ -136,7 +136,7 @@
                     	var fileName=data[i].FILE_NAME;
 
                      	var carousel_image = "<div class='item'>";
-                       	carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + "/>";
+                       	carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + " name="+ boardNo + " />";
                        	carousel_image += "<div class='carousel-caption'>";
                        	carousel_image += "<h6>"+ boardTitle +"</h6>";
                        	carousel_image += "</div>";
@@ -182,11 +182,15 @@
                              	$("#tile10 .item").addClass("active");
                             }else if(food_count==2){
                             	$("#tile9 .item").addClass("active");
-                            }
+                            }           
                             
                             food_count++;
                     	}
-                                   
+                        
+                        $("#metro img[name="+ boardNo +"]").click(function(){
+                            blogListDetails(boardNo);
+                        	$("div[id='blogListDetail'].modal").modal();
+                        });
                     });
                     
                     $("#tile7 .item").height($("#tile1").width());
