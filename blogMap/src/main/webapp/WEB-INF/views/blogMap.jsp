@@ -69,7 +69,7 @@
 <script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- 컨폼 확인창 -->	
 <script type="text/javascript" src="${root }/css/board/jquery.popconfirm.js"></script>
-<!-- modal, session check -->z
+<!-- modal, session check -->
 <script type="text/javascript">
 	$(document).ready(function() {
 
@@ -223,6 +223,14 @@
 <script>
 //세션 체크후 모달 오픈
 $(function(){
+	// 블로그 검색
+	$("#blogSearch").click(function(){
+		getBeginCondition();
+		
+   		$("div[id='blogListMain'].modal").modal();
+	});	
+	
+	// 메세지 메인
 	$("#mainMessageLink").click(function(){
 		if (window.sessionStorage) {
 	    	var email = sessionStorage.getItem('email');
@@ -234,6 +242,7 @@ $(function(){
 	    }
 	});
 	
+	// 제휴업체 등록
 	$("#partner_Registration").click(function(){
 		if (window.sessionStorage) {
 	    	var email = sessionStorage.getItem('email');
@@ -247,6 +256,7 @@ $(function(){
 	    }
 	});
 	
+	// 블로그 작성
 	$("#blogMain_write").click(function(){
 		if (window.sessionStorage) {
 	    	var email = sessionStorage.getItem('email');
@@ -258,6 +268,7 @@ $(function(){
 	    }
 	});
 	
+	// 쿠폰정보
 	$("#blogMain_coupon").click(function(){
 		if (window.sessionStorage) {
 	    	var email = sessionStorage.getItem('email');
@@ -354,9 +365,7 @@ $(function(){
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<a data-toggle="modal" href="#blogListMain">
-									<img src="${root}/images/blogMap/search.png" class="img-responsive"/>
-								</a>
+									<img id="blogSearch" src="${root}/images/blogMap/search.png" class="img-responsive" style="cursor:Pointer"/>
 							</div>
 						</div>
 					</div>
@@ -532,7 +541,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">blogListMain</h5>
+						<h4 class="modal-title">Blog Search</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -551,7 +560,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">조회 결과</h5>
+						<h4 class="modal-title">Blog List</h4>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -570,7 +579,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">블로그 읽기</h5>
+						<h4 class="modal-title">Blog Read</h4>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -615,7 +624,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Map Search</h4>
+						<h4 class="modal-title">Blog Write Map</h4>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -666,7 +675,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h2 class="modal-title">Partner</h2>
+						<h4 class="modal-title">Partner</h4>
 						<div class="row">
 					  		<div class="col-lg-4">
 							    <div class="input-group">
@@ -695,7 +704,7 @@ $(function(){
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-						<h2 class="modal-title">PartnerInfo</h2>
+						<h4 class="modal-title">Partner Info</h4>
 					</div>
 					
 					<div class="modal-body" id="data-body">
@@ -754,7 +763,7 @@ $(function(){
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
-							<h2 class="modal-title">PartnerRegister</h2>
+							<h4 class="modal-title">Partner Register</h4>
 						</div>
 	
 						<div class="modal-body" id="data-body">							
@@ -818,7 +827,7 @@ $(function(){
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                      <span aria-hidden="true">&times;</span>
                   </button>
-                  <h2 class="modal-title">CouponRegister</h2>
+                  <h4 class="modal-title">Coupon Register</h4>
                </div>
 
                <div class="modal-body" id="data-body">                     
@@ -897,7 +906,6 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -917,7 +925,6 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -937,7 +944,6 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -956,7 +962,6 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -977,7 +982,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">이메일 인증</h4>
+						<h4 class="modal-title">Email Confirm</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1018,7 +1023,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">회원 수정</h4>
+						<h4 class="modal-title">Member Update</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1038,7 +1043,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">회원 탈퇴</h4>
+						<h4 class="modal-title">Member Withdraw</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1058,7 +1063,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">이메일 인증</h4>
+						<h4 class="modal-title">Email Confirm</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1082,7 +1087,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h2 class="modal-title">Manager</h2>
+						<h4 class="modal-title">Manager</h4>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1102,7 +1107,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">MemberInfo</h5>
+						<h5 class="modal-title">Member Manage</h5>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1121,7 +1126,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">PartnerInfo</h5>
+						<h4 class="modal-title">Partner Manage</h4>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1140,7 +1145,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">제휴업체</h5>
+						<h4 class="modal-title">PartnerDetail Manage</h4>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1159,7 +1164,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
-						<h5 class="modal-title">쿠폰</h5>
+						<h4 class="modal-title">Coupon Manage</h4>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1200,7 +1205,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">MessageRead</h5>
+						<h4 class="modal-title">Message Read</h4>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1222,7 +1227,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">BlogMap</h5>
+						<h4 class="modal-title">Message Delete</h4>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1238,13 +1243,13 @@ $(function(){
 			</div>
 		</div>
 
-		<!-- 메시지박스 - 메시지 삭제 -->
+		<!-- 메시지박스 - 쿠폰메인 -->
 		<div class="modal fade" id="blogMapCoupon" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">Coupon</h5>
+						<h4 class="modal-title">Coupon</h4>
 					</div><div class="container"></div>
 					<div class="modal-body">
 						<div id="mainResult">
