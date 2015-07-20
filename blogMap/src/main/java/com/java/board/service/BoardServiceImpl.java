@@ -474,12 +474,13 @@ public class BoardServiceImpl implements BoardService {
 
 		}
 		hashMap.put("attachList", attachList);
-		attachList=(ArrayList<Attach_fileDto>) hashMap.get("attachList");
-		for (int i = 0; i < attachList.size(); i++) {
-			System.out.println("j"+attachList.get(i).getFile_name());
+		if(attachList.size()==0){
+			logger.info("블로그작성_파일 추가안함:"+attachList.size());
+		}else{
+			check=boardDao.blogWrite_attach(hashMap);
 		}
 		
-		check=boardDao.blogWrite_attach(hashMap);
+		
 		
 		
 		
