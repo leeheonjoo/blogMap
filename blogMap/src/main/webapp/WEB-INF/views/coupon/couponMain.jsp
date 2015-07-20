@@ -129,14 +129,6 @@ li { list-style-type:none;}
 }
 </style>
 <script type="text/javascript">
-	//Carousel Auto-Cycle
-	$(document).ready(function() {
-	  $('.carousel').carousel({
-	    interval: 6000
-	  })
-	});
-</script>
-<script type="text/javascript">
  $(document).ready(function(){		 
 	$("#tile4").click(function(){		
 		$.ajax({
