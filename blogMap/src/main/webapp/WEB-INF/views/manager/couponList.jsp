@@ -103,9 +103,10 @@
 		});
 		
 		function couponCancle(couponNo){
+			var manager = sessionStorage.getItem('email');
 			$.ajax({
 				type:'get',
-				url:'${root}/manager/couponCancle.do?couponNo='+couponNo,
+				url:'${root}/manager/couponCancle.do?couponNo='+couponNo  + '&manager_id='+ manager,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					
@@ -132,9 +133,10 @@
 		};		
 		
 		function couponSubmit(couponNo){
+			var manager = sessionStorage.getItem('email');
 			$.ajax({
 				type:'get',
-				url:'${root}/manager/couponSubmit.do?couponNo='+couponNo,
+				url:'${root}/manager/couponSubmit.do?couponNo='+couponNo  + '&manager_id='+ manager,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					
@@ -325,9 +327,10 @@
 			});
 			
 			function couponCancle(couponNo){
+				var manager = sessionStorage.getItem('email');
 				$.ajax({
 					type:'get',
-					url:'${root}/manager/couponCancle.do?couponNo='+couponNo,
+					url:'${root}/manager/couponCancle.do?couponNo='+couponNo  + '&manager_id='+ manager,
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
 						
@@ -353,9 +356,10 @@
 			};		
 			
 			function couponSubmit(couponNo){
+				var manager = sessionStorage.getItem('email');
 				$.ajax({
 					type:'get',
-					url:'${root}/manager/couponSubmit.do?couponNo='+couponNo,
+					url:'${root}/manager/couponSubmit.do?couponNo='+couponNo  + '&manager_id='+ manager,
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
 						
@@ -550,9 +554,10 @@
 		});
 		
 		function couponCancle(couponNo){
+			var manager = sessionStorage.getItem('email');
 			$.ajax({
 				type:'get',
-				url:'${root}/manager/couponCancle.do?couponNo='+couponNo,
+				url:'${root}/manager/couponCancle.do?couponNo='+couponNo  + '&manager_id='+ manager,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					
@@ -578,9 +583,10 @@
 		};		
 		
 		function couponSubmit(couponNo){
+			var manager = sessionStorage.getItem('email');
 			$.ajax({
 				type:'get',
-				url:'${root}/manager/couponSubmit.do?couponNo='+couponNo,
+				url:'${root}/manager/couponSubmit.do?couponNo='+couponNo  + '&manager_id='+ manager,
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					

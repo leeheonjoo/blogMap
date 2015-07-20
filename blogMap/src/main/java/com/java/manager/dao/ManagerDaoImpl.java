@@ -80,27 +80,27 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public int partnerSubmit(String id) {
+	public int partnerSubmit(int partnerNo) {
 		// TODO Auto-generated method stub
-		return session.update("dao.ManagerMapper.partnerSubmit", id);
+		return session.update("dao.ManagerMapper.partnerSubmit", partnerNo);
 	}
 	
 	@Override
-	public void submitLog(String id) {
+	public void submitLog(HashMap<String, Object> hMap) {
 		// TODO Auto-generated method stub
-		session.insert("dao.ManagerMapper.submitLog", id);
+		session.insert("dao.ManagerMapper.submitLog", hMap);
 	}
 	
 	@Override
-	public int partnerDelete(String id) {
+	public int partnerDelete(int partnerNo) {
 		// TODO Auto-generated method stub
-		return session.delete("dao.ManagerMapper.partnerDelete", id);
+		return session.delete("dao.ManagerMapper.partnerDelete", partnerNo);
 	}
 	
 	@Override
-	public void partnerDeleteLog(String id) {
+	public void partnerDeleteLog(HashMap<String, Object> hMap) {
 		// TODO Auto-generated method stub
-		session.insert("dao.ManagerMapper.partnerDeleteLog", id);
+		session.insert("dao.ManagerMapper.partnerDeleteLog", hMap);
 	}
 	
 	@Override

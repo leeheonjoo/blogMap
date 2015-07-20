@@ -287,13 +287,20 @@ public class ManagerServiceImpl implements ManagerService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
-		String id=request.getParameter("id");
-		logger.info("partner id :" + id);
+		int partnerNo=Integer.parseInt(request.getParameter("partner_no"));
+		logger.info("partner_nO :" + partnerNo);
 		
-		int check=managerDao.partnerSubmit(id);
+		String manager=request.getParameter("manager_id");
+		logger.info(manager);
+		
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("partnerNo",partnerNo);
+		hMap.put("manager",manager);
+		
+		int check=managerDao.partnerSubmit(partnerNo);
 		logger.info("partnerSubmit check:" + check);
 		if(check == 1){
-			managerDao.submitLog(id);		// 관리자 로그 저장
+			managerDao.submitLog(hMap);		// 관리자 로그 저장
 		}
 		
 		Gson gson=new Gson();				//Gson의 객체를 생성
@@ -317,14 +324,21 @@ public class ManagerServiceImpl implements ManagerService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
-		String id=request.getParameter("id");
-		logger.info("partner id :"+ id);
+		int partnerNo=Integer.parseInt(request.getParameter("partner_no"));
+		logger.info("partner_No :" + partnerNo);
 		
-		int check=managerDao.partnerDelete(id);
+		String manager=request.getParameter("manager_id");
+		logger.info(manager);
+		
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("partnerNo",partnerNo);
+		hMap.put("manager",manager);
+		
+		int check=managerDao.partnerDelete(partnerNo);
 		logger.info("partnerDelete check :" + check);
 		
 		if(check == 1){
-			managerDao.partnerDeleteLog(id);	// 관리자 로그 저장
+			managerDao.partnerDeleteLog(hMap);	// 관리자 로그 저장
 		}
 		
 		Gson gson=new Gson();					//Gson의 객체를 생성

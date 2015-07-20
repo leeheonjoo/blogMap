@@ -31,13 +31,13 @@ public interface ManagerDao {
 		
 		public List<ManagerLogDto> getManagerLog(String id);
 		
-		public int partnerSubmit(String id);
+		public int partnerSubmit(int partnerNo);
 		
-		public void submitLog(String id);
+		public void submitLog(HashMap<String, Object> hMap);
 		
-		public int partnerDelete(String id);
+		public int partnerDelete(int partnerNo);
 		
-		public void partnerDeleteLog(String id);
+		public void partnerDeleteLog(HashMap<String, Object> hMap);
 		
 		public List<HashMap<String, Object>> getCouponData();
 		

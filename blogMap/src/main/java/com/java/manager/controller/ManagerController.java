@@ -148,6 +148,7 @@ public class ManagerController {
 		Map<String, Object> map=mav.getModel();
 		
 		String json=(String) map.get("json");
+		logger.info("파트너리스트:" + json);
 		
 		try{
 			response.setCharacterEncoding("utf-8");
