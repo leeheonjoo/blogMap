@@ -238,6 +238,8 @@ $(function(){
 		if (window.sessionStorage) {
 	    	var email = sessionStorage.getItem('email');
 	    	if(email!=null){
+	    		getPartnerInfo();
+	    		
 	    		$("div[id='partnerMain'].modal").modal();
 	    	}else{
 	    		alert("로그인 후 이용가능합니다.");
@@ -1080,7 +1082,7 @@ $(function(){
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h2 class="modal-title">Manager Main</h2>
+						<h2 class="modal-title">Manager</h2>
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
@@ -1089,10 +1091,6 @@ $(function(){
 						<br/>
 						<br/>
 						
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<!-- <a href="#" class="btn btn-primary">Save changes</a> -->
 					</div>
 				</div>
 		    </div>
@@ -1113,10 +1111,6 @@ $(function(){
 						<br/>
 						<br/>
 					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<!-- <a href="#" class="btn btn-primary">Save changes</a> -->
-					</div>
 			   </div>
 			</div>
 		</div>
@@ -1135,10 +1129,6 @@ $(function(){
 						</div>
 						<br/>
 						<br/>
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<!-- <a href="#" class="btn btn-primary">Save changes</a> -->
 					</div>
 			   </div>
 			</div>
@@ -1159,10 +1149,6 @@ $(function(){
 						<br/>
 						<br/>
 					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<!-- <a href="#" class="btn btn-primary">Save changes</a> -->
-					</div>
 			   </div>
 			</div>
 		</div>
@@ -1181,10 +1167,6 @@ $(function(){
 						</div>
 						<br/>
 						<br/>
-					</div>
-					<div class="modal-footer">
-						<a href="#" data-dismiss="modal" class="btn">Close</a>
-						<!-- <a href="#" class="btn btn-primary">Save changes</a> -->
 					</div>
 			   </div>
 			</div>
