@@ -23,7 +23,7 @@ public interface BoardReadDao {
 	
 	public List<String> getDetailCategoryCondition(String headData);
 
-	public List<BoardDto> getboardList(HashMap<String, Object> hashMap);
+	public List<HashMap<String, Object>> getboardList(HashMap<String, Object> hashMap);
 
 	public List<Board_addr_infoDto> blogSearchAddr(int board_no);
 

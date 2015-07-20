@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.google.gson.Gson;
 import com.java.board.dto.Attach_fileDto;
 import com.java.board.dto.BoardDto;
 import com.java.board.dto.Board_addr_infoDto;
@@ -125,7 +126,7 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	 * @description : 블로그 리스트 카테고리 검색 조건에 따른 검색결과 반환
 	 */
 	@Override
-	public List<BoardDto> getboardList(HashMap<String, Object> hashMap) {
+	public List<HashMap<String, Object>> getboardList(HashMap<String, Object> hashMap) {
 		logger.info("BoardReadDao getboardList-------------------------");
 		
 		/*Board_addr_infoDto board_addr_info=(Board_addr_infoDto) hashMap.get("board_addr_info");
@@ -138,8 +139,7 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		System.out.println(category.getCategory_sname());
 		System.out.println(search_value);*/
 		
-		
-		List<BoardDto> boardList=sqlSession.selectList("dao.BoardReadMapper.getboardList",hashMap);
+		List<HashMap<String, Object>> boardList=sqlSession.selectList("dao.BoardReadMapper.getboardList",hashMap);
 		return boardList;
 	}
 

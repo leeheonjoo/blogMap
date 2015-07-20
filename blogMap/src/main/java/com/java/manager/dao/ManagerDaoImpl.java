@@ -26,9 +26,9 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public int memberDel(String id) {
+	public int memberDel(HashMap<String, Object> hMap) {
 		// TODO Auto-generated method stub
-		return session.update("dao.ManagerMapper.memberDelete", id);
+		return session.update("dao.ManagerMapper.memberDelete", hMap);
 	}
 	
 	@Override
@@ -44,9 +44,9 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public void delLog(String id) {
+	public void delLog(HashMap<String, Object> hMap) {
 		// TODO Auto-generated method stub
-		session.insert("dao.ManagerMapper.delLog", id);
+		session.insert("dao.ManagerMapper.delLog", hMap);
 	}
 	
 	@Override
@@ -80,27 +80,27 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public int partnerSubmit(String id) {
+	public int partnerSubmit(int partnerNo) {
 		// TODO Auto-generated method stub
-		return session.update("dao.ManagerMapper.partnerSubmit", id);
+		return session.update("dao.ManagerMapper.partnerSubmit", partnerNo);
 	}
 	
 	@Override
-	public void submitLog(String id) {
+	public void submitLog(HashMap<String, Object> hMap) {
 		// TODO Auto-generated method stub
-		session.insert("dao.ManagerMapper.submitLog", id);
+		session.insert("dao.ManagerMapper.submitLog", hMap);
 	}
 	
 	@Override
-	public int partnerDelete(String id) {
+	public int partnerDelete(int partnerNo) {
 		// TODO Auto-generated method stub
-		return session.delete("dao.ManagerMapper.partnerDelete", id);
+		return session.delete("dao.ManagerMapper.partnerDelete", partnerNo);
 	}
 	
 	@Override
-	public void partnerDeleteLog(String id) {
+	public void partnerDeleteLog(HashMap<String, Object> hMap) {
 		// TODO Auto-generated method stub
-		session.insert("dao.ManagerMapper.partnerDeleteLog", id);
+		session.insert("dao.ManagerMapper.partnerDeleteLog", hMap);
 	}
 	
 	@Override

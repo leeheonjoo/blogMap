@@ -7,12 +7,12 @@
 		select * from member order by member_id asc
 	</select>
 	
-	<update id="memberDelete" parameterType="String">
-		update MEMBER SET member_name=null, member_pwd=null, member_jointype='0003', member_point=0 where member_id=#{id}
+	<update id="memberDelete" parameterType="java.util.HashMap">
+		update MEMBER SET member_name=null, member_pwd=null, member_jointype='0003', member_point=0 where member_id=#{member}
 	</update>
 	
-	<delete id="delLog" parameterType="String">
-		insert into MANAGER_LOG values(manager_log_seq.nextval,'lucyman@nate.com',SYSDATE,'0001',#{id})
+	<delete id="delLog" parameterType="java.util.HashMap">
+		insert into MANAGER_LOG values(manager_log_seq.nextval,#{manager},SYSDATE,'0001',#{member})
 	</delete>
 	
 	<select id="getSearchMemberList" parameterType="String" resultType="com.java.member.dto.MemberDto">
@@ -40,32 +40,32 @@
 	</select>
 	
 	<select id="getPartnerList" resultType="com.java.partner.dto.PartnerDto">
-		select * from partner order by partner_name desc
+		select * from partner order by partner_no desc
 	</select>
 
 	<select id="getSearchPartnerList" parameterType="String" resultType="com.java.partner.dto.PartnerDto">
-		select * from partner where partner_name like '%'||#{partner_name}||'%' order by partner_name asc
+		select * from partner where partner_name like '%'||#{partner_name}||'%' order by partner_no desc
 						
 	</select>
 	
 	<select id="getSearchPartnerYN" parameterType="String" resultType="com.java.partner.dto.PartnerDto">
-		select * from partner where partner_yn=#{partner_yn} order by partner_name desc
+		select * from partner where partner_yn=#{partner_yn} order by partner_no desc
 	</select>	
 	
-	<update id="partnerSubmit" parameterType="String">
-		update PARTNER SET partner_yn='Y', partner_ydate=sysdate where member_id=#{id}
+	<update id="partnerSubmit" parameterType="Integer">
+		update PARTNER SET partner_yn='Y', partner_ydate=SYSDATE where partner_no=#{partnerNo}
 	</update>
 	
-	<insert id="submitLog" parameterType="String">
-		insert into manager_log values(manager_log_seq.nextval,'lucyman@nate.com',SYSDATE,'0002',#{id})
+	<insert id="submitLog" parameterType="java.util.HashMap">
+		insert into manager_log values(manager_log_seq.nextval,#{manager},SYSDATE,'0002',#{partnerNo})
 	</insert>
 	
-	<delete id="partnerDelete" parameterType="String">
-		delete from partner where member_id=#{id}
+	<delete id="partnerDelete" parameterType="Integer">
+		delete from partner where partner_no=#{partnerNo}
 	</delete>
 	
-	<insert id="partnerDeleteLog" parameterType="String">
-		insert into manager_log values(manager_log_seq.nextval,'lucyman@nate.com',sysdate,'0003',#{id})
+	<insert id="partnerDeleteLog" parameterType="java.util.HashMap">
+		insert into manager_log values(manager_log_seq.nextval,#{manager},SYSDATE,'0003',#{partnerNo})
 	</insert>
 	
 	<select id="partnerDetail" parameterType="Integer" resultType="com.java.partner.dto.PartnerDto">

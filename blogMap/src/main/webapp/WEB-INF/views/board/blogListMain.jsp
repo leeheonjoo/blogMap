@@ -65,8 +65,8 @@
 			//타이틀 배열
 			var titleArray=new Array();
 			var pullAddr="";
-			var mapDiv='map';
 			
+			var mapDiv='map';
 			$.ajax({
 				type:'post',
 				url:'${root}/board/blogListSearch.do',
@@ -82,15 +82,16 @@
 				success:function(data){
 					var data=JSON.parse(data);
 					$.each(data,function(i){
-						var board_no=data[i].board_no;
-						var member_id=data[i].member_id;
-						var category_code=data[i].category_code;
-						var board_rgdate=data[i].board_rgdate;
-						var board_title=data[i].board_title;
-						var board_content=data[i].board_content;
-						var board_grade=data[i].board_grade;
-						var board_count=data[i].board_count;
-						
+						var board_no=data[i].BOARD_NO;
+						var member_id=data[i].MEMBER_ID;
+						var category_code=data[i].CATEGORY_CODE;
+						var board_rgdate=data[i].BOARD_RGDATE;
+						var board_title=data[i].BOARD_TITLE;
+						var board_content=data[i].BOARD_CONTENT;
+						var board_grade=data[i].BOARD_GRADE;
+						var board_count=data[i].BOARD_COUNT;
+						var total_cnt=data[i].TOT_CNT;
+						total_cnt=parseInt(total_cnt);
 						$.ajax({
 							type:'post',
 							url:'${root}/board/blogListSearchSub1.do',
@@ -114,6 +115,8 @@
 								
 								if(addr_sigugun!=null){
 								pullAddr=addr_sido+" "+addr_sigugun+" "+addr_dongri+" "+addr_bunji;
+								}else if(addr_bunji==""||addr_bunji=="undefined"){
+									pullAddr=addr_sido+" "+addr_sigugun+" "+addr_dongri;
 								}else{
 									pullAddr=addr_sido+" "+addr_dongri+" "+addr_bunji;	
 								}
@@ -146,10 +149,10 @@
 										dongmyunArray.push(dongmyun);
 										restArray.push(rest);
 										
-										
+										if(total_cnt==m.length){
 											$("#map").empty();
 											mapLoad(m,addrArray,sidoArray,sigugunArray,dongmyunArray,restArray,titleArray,mapDiv,search_value);
-									
+										}
 									},
 									error:function(data){
 										

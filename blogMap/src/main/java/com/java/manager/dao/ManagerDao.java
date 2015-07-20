@@ -13,13 +13,13 @@ public interface ManagerDao {
 	
 		public List<MemberDto> getData();
 		
-		public int memberDel(String id);
+		public int memberDel(HashMap<String, Object> hMap);
 		
 		public List<MemberDto> getSearchMemberData(String member_name);
 		
 		public List<MemberDto> getSearchMemberType(String member_jointype);
 		
-		public void delLog(String id);
+		public void delLog(HashMap<String, Object> hMap);
 		
 		public List<PartnerDto> getPartnerData();
 		
@@ -31,13 +31,13 @@ public interface ManagerDao {
 		
 		public List<ManagerLogDto> getManagerLog(String id);
 		
-		public int partnerSubmit(String id);
+		public int partnerSubmit(int partnerNo);
 		
-		public void submitLog(String id);
+		public void submitLog(HashMap<String, Object> hMap);
 		
-		public int partnerDelete(String id);
+		public int partnerDelete(int partnerNo);
 		
-		public void partnerDeleteLog(String id);
+		public void partnerDeleteLog(HashMap<String, Object> hMap);
 		
 		public List<HashMap<String, Object>> getCouponData();
 		
