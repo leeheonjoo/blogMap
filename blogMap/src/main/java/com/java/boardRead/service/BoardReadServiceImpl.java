@@ -211,12 +211,12 @@ public class BoardReadServiceImpl implements BoardReadService {
 		String detailCategory=request.getParameter("search_detailCategory");
 		String search_value=request.getParameter("search_search_value");
 		
-		System.out.println("sido:"+sido);
+		/*System.out.println("sido:"+sido);
 		System.out.println("sigugun:"+sigugun);
 		System.out.println("dongmyunri:"+dongmyunri);
 		System.out.println("headCategor:"+headCategor);
 		System.out.println("detailCategory:"+detailCategory);
-		System.out.println("search_value:"+search_value);
+		System.out.println("search_value:"+search_value);*/
 	
 		Board_addr_infoDto board_addr_infoDto=new Board_addr_infoDto();
 		board_addr_infoDto.setAddr_sido(sido);
@@ -229,11 +229,18 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		
 		List<BoardDto> boardList=null;
+		List<Board_addr_infoDto> boar_addr_infoList=null;
 		HashMap<String , Object> hashMap=new HashMap<String, Object>();
 		hashMap.put("board_addr_info", board_addr_infoDto);
 		hashMap.put("category", categoryDto);
 		hashMap.put("search_value", search_value);
-		boardList=boardReadDao.getboardList(hashMap);
+		hashMap.put("boardList", boardList);
+		hashMap.put("boar_addr_infoList", boar_addr_infoList);
+		List<HashMap<String, Object>> boardLists=new ArrayList<HashMap<String, Object>>();
+		
+		boardLists=boardReadDao.getboardList(hashMap);
+		
+		
 		
 		if(boardList!=null){
 			System.out.println("블로그조회 갯수:"+boardList.size());;
@@ -246,7 +253,7 @@ public class BoardReadServiceImpl implements BoardReadService {
 			String boardList_json=gson.toJson(boardList);
 			try {
 				response.getWriter().println(boardList_json);
-				System.out.println(boardList_json);
+				System.out.println("여기"+boardList_json);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

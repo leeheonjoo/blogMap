@@ -243,6 +243,7 @@ v\:* {
                                  $("#blogList_result_content").append("<p>");
                                  $("#blogList_result_content").append("<br/>");       */
                                  
+                                 //자세히 버튼 클릭시
                                  $("#result_button"+i).click(function(){
                                 	 $("div[id='blogListDetail'].modal").modal(); 
                                      var Readno=$("#result_no"+i).text();
@@ -431,6 +432,7 @@ function blogListDetails(blogRead_no) {
            }
         });
         
+        //댓글
         $.ajax({
            type : 'post',
            url : '${root}/board/blogReadReply.do',

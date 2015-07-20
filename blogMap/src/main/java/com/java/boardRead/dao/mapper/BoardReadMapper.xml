@@ -47,10 +47,11 @@
 		 order by 1
 	</select>
 	
-	<select id="getboardList" parameterType="java.util.HashMap" resultType="com.java.board.dto.BoardDto">
+	<select id="getboardList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		<![CDATA[
-		select * from board
-		where board_no in(select board_no from 
+		select a.*,count(*) over (partition by 1) tot_cnt from board a,board_addr_info b
+		where a.board_no=b.board_no
+		and a.board_no in(select board_no from 
 		board_addr_info 
 		where 
 		(('%'=#{board_addr_info.addr_sido} and addr_sido like '%') or ('%'<>#{board_addr_info.addr_sido} and addr_sido = #{board_addr_info.addr_sido}))

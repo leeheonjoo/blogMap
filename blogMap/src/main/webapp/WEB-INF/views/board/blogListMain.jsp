@@ -66,7 +66,6 @@
 			var titleArray=new Array();
 			var pullAddr="";
 			var mapDiv='map';
-			
 			$.ajax({
 				type:'post',
 				url:'${root}/board/blogListSearch.do',
