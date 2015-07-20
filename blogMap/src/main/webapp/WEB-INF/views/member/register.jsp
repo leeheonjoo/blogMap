@@ -13,12 +13,12 @@ $(document).ready(function(){
 	
 	$("#member_id_check").click(function(){
 		var emailCheck = $("#member_register_id").val();  
-		var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;   
+		var regex=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;//이메일 유효성검사
+		
 		if(regex.test(emailCheck) === false) {  
 		    alert("잘못된 이메일 형식입니다.");  
 		    return false;  
 		} 
-		
 		
 		if($("#member_register_id").val()!=""){
 			$.ajax({
@@ -68,6 +68,20 @@ $(document).ready(function(){
 	
 	
 	$("#register").click(function(){
+		var RegexName = /^[가-힣]{2,5}$/; //이름 유효성 검사 2~5자 사이
+		
+		if ( !RegexName.test($.trim($("input[name='member_name']").val())) )
+		{
+			alert("이름을 2~5자로 입력해주세요.");
+			//$("input[name='member_name']").focus();
+			return false;
+		}
+		
+		if ($("input[name='member_pwd']").val().length<6 || $("input[name='member_pwd']").val().length>12){
+			 alert ("비밀번호를 6~12자까지 입력해주세요.");
+			 return false;
+		}
+		
 		if($("#member_register_id_hidden").val()!=""){//아이디 인증햇을때
 			if($("input[ame='member_pwd']").val()!=""&&$("input[name='member_name']").val()!=""){
 				if($("input[name='member_pwd']").val()==$("input[name='member_pwd_check']").val()){
@@ -251,9 +265,9 @@ function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
 	
 	<input id="register" type="button" value="가입"/>-->
 	
-	<div class="container">
+	<div class="container" style="width:100%;">
         <div class="row centered-form">
-        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+        <div>
         	<div class="panel panel-default">
         		<div class="panel-heading">
 			    		<h3 class="panel-title">Please sign up for BlogMap</h3>
@@ -268,14 +282,15 @@ function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
 			    					</div>
 			    				</div>
 			    				
-			    				<div class="col-xs-2 col-sm-2 col-md-2">
+			    				&nbsp;&nbsp;
+			    				<div style="display:inline-block; min-width:80px;">
 			    					<div class="form-group">
 			    						<input type="button" id="member_id_check" value="중복확인" class="btn btn-info btn-block"/>
 			    						<!-- <button id="member_id_check" class="btn btn-default">중복확인</button> -->
 			    					</div>
-			    				</div>
+			    				</div>&nbsp;&nbsp;&nbsp;&nbsp;
 			    				
-			    				<div class="col-xs-2 col-sm-2 col-md-2">
+			    				<div style="display:inline-block; min-width:80px;">
 			    					<div class="form-group">
 			    						<input type="button" id="member_id_confirm" value="이메일인증" class="btn btn-info btn-block"/>
 			    						<!-- <button id="member_id_confirm" class="btn btn-default">이메일인증</button> -->

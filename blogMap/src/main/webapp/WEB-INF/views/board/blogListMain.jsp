@@ -13,23 +13,6 @@
 <script type="text/javascript">
 	// 	20150626 이헌주 - blogListMain.jsp 호출시 검색조건(시도,대분류 카테고리) load를 위한 function
 	$(function(){
-		$.ajax({
-			type:'get',
-			url:'${root}/board/getBeginCondition.do',
-			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-			success:function(responseData){
-					var data=JSON.parse(responseData);
-					if(!data){
-						alert("blogListMain 최초 조회조건 get error");
-						return false;
-					}
-					blogList_ConditionInsert("si", data.sido);
-					blogList_ConditionInsert("headCategory", data.header);
-			},
-			error:function(data){
-				alert("error : blogListMain getBeginCondition");
-			}
-		});
 		
 		$("#blogList_Search").click(function() {
 			var sido=$("#si_select:first-child").text();
@@ -181,6 +164,28 @@
 		})
 		
 	})
+	
+	function getBeginCondition(){
+		$.ajax({
+			type:'get',
+			url:'${root}/board/getBeginCondition.do',
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			success:function(responseData){
+					var data=JSON.parse(responseData);
+					if(!data){
+						alert("blogListMain 최초 조회조건 get error");
+						return false;
+					}
+					blogList_ConditionInsert("si", data.sido);
+					blogList_ConditionInsert("headCategory", data.header);
+			},
+			error:function(data){
+				alert("error : blogListMain getBeginCondition");
+			}
+		});		
+	}
+	
+
 
 	// 	20150629 이헌주 - select 메뉴에 option을 추가하기 위한 function 
 	//  el : option id     |     va : 추가 option

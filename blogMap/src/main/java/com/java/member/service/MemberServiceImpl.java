@@ -520,7 +520,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		int currentPage=Integer.parseInt(pageNumber);
 		
-		int boardSize=1;
+		int boardSize=10;
 		int startRow=(currentPage-1)*boardSize+1;
 		int endRow=currentPage*boardSize;
 		int count=memberDao.point_info_count(member_id);
@@ -570,7 +570,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		int currentPage=Integer.parseInt(pageNumber);
 		
-		int boardSize=1;
+		int boardSize=10;
 		int startRow=(currentPage-1)*boardSize+1;
 		int endRow=currentPage*boardSize;
 		int count=memberDao.totalBoard(member_id);
@@ -615,7 +615,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		int currentPage=Integer.parseInt(pageNumber);
 		
-		int boardSize=1;
+		int boardSize=10;
 		int startRow=(currentPage-1)*boardSize+1;
 		int endRow=currentPage*boardSize;
 		int count=memberDao.totalFavorite(member_id);
@@ -667,7 +667,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		int currentPage=Integer.parseInt(pageNumber);
 		
-		int boardSize=1;
+		int boardSize=10;
 		int startRow=(currentPage-1)*boardSize+1;
 		int endRow=currentPage*boardSize;
 		int count=memberDao.totalCoupon(member_id);
