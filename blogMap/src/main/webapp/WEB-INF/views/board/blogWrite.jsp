@@ -45,16 +45,20 @@ function blogWrite_optionInsert(el, data){
 	for (var i = 0; i < data.length; i++) {
 		$("#blogWriteSelect #" + el).append("<option value=" + data[i] + ">" + data[i] + "</option>");
 		$("#blogUpdateSelect #" + el).append("<option value=" + data[i] + ">" + data[i] + "</option>");
+		$("#blogPartnerSelect #" + el).append("<option value=" + data[i] + ">" + data[i] + "</option>");
 	}
 
 		$("#blogWriteSelect #" + el).selectpicker('refresh');
 		$("#blogUpdateSelect #" + el).selectpicker('refresh');
+		$("#blogPartnerSelect #" + el).selectpicker('refresh');
 };
 
 //카테고리 select 변경
 function blogWrite_ChangeCategory(el){
 	var headData=$("#blogWriteSelect #headCategory").val();
 	var headDatas=$("#blogUpdateSelect #headCategory").val();
+	var headDatass=$("#blogPartnerSelect #headCategory").val();
+	
 	
 	if(el=="headCategory"){
 		$("#blogWriteSelect #detailCategory").empty();
@@ -65,12 +69,18 @@ function blogWrite_ChangeCategory(el){
 		$("#blogUpdateSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
 		$("#blogUpdateSelect #detailCategory").selectpicker("refresh");
 		
+		$("#blogPartnerSelect #detailCategory").empty();
+		$("#blogPartnerSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
+		$("#blogPartnerSelect #detailCategory").selectpicker("refresh");
+		
 		if(headData!="%"){
 			blogWrite_getCategorySelect(el, headData);
 		}else if(headData=="%" && headDatas!="%"){
 			blogWrite_getCategorySelect(el, headDatas);
 			
-		}
+		} else if(headData=="%" && headDatas=="%" && headDatass!="%"){
+			blogWrite_getCategorySelect(el, headDatass);
+		} 
 		
 	}
 }
@@ -94,6 +104,9 @@ function blogWrite_getCategorySelect(el, headData){
 				
 				$("#blogUpdateSelect #detailCategory").empty();
 				$("#blogUpdateSelect #detailCategory").append("<option value='%'>소분류[전체]</option>");
+				
+			 	$("#blogPartnerSelect #detailCategory").empty();
+				$("#blogPartnerSelect #detailCategory").append("<option value='%'>소분류[전체]</option>"); 
 				blogWrite_optionInsert('detailCategory', data);
 		},
 		error:function(data){

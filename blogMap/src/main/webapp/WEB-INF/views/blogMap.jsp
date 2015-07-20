@@ -761,7 +761,7 @@ $(function(){
 							<input type="hidden"  id="category_code" name="category_code"/>
 							<input type="hidden"  id="member_id" name="member_id"/>
 							
-							<div class="form-group">
+							<div id="blogPartnerSelect" class="form-group">
 								<label class="col-xs-4 control-label">카테고리:</label> 
 								<select id="headCategory" name="category_mname" class="selectpicker" data-width="140px" style="display: none" onchange="blogWrite_ChangeCategory(this.id)">
 									<option value="%">대분류[전체]</option>
