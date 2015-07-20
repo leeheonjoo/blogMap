@@ -2,6 +2,9 @@ package com.java.partner.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.java.coupon.dto.CouponDto;
-
 import com.java.partner.dao.PartnerDao;
 import com.java.partner.dto.PartnerDto;
 /**
@@ -166,45 +168,60 @@ public class PartnerServiceImpl implements PartnerService {
  * @description:  제휴업체 쿠폰등록
  */
 	@Override
-	public boolean couponWrite(ModelAndView mav) {
+	public void couponWrite(ModelAndView mav) {
 		logger.info("PartnerServiceImp couponWrite----------------");
-		
+
 		Map<String, Object> map=mav.getModelMap();
 		MultipartHttpServletRequest request=(MultipartHttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		CouponDto couponDto=new CouponDto();
 		
-		logger.info("111111111111111111111111111111");
-
-		CouponDto couponDto=(CouponDto)map.get("couponDto");
-		logger.info("222222222222222222222222222222222");
+		System.out.println("aaa"+request.getParameter("partner_no"));
+		couponDto.setPartner_no(Integer.parseInt(request.getParameter("partner_no")));
+		couponDto.setCoupon_item(request.getParameter("coupon_item"));
+		couponDto.setCoupon_discount(Float.parseFloat(request.getParameter("coupon_discount")));
 		
-		String partner=(String) request.getSession().getAttribute("partner_no");
-		int partner_no=Integer.parseInt(partner);
+		SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+		Date coupon_bymd=null;
+		Date coupon_eymd=null;
+		try {
+			coupon_bymd = format.parse(request.getParameter("coupon_bymd"));
+			coupon_eymd=format.parse(request.getParameter("coupon_eymd"));
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		couponDto.setCoupon_bymd(coupon_bymd);
+		couponDto.setCoupon_eymd(coupon_eymd);
 		
-		logger.info("33333333333333333333333333333333333");
-		logger.info("partner_no : " + partner_no);
-		logger.info("" +couponDto.getPartner_no());
-		logger.info(couponDto.getCoupon_item());
-		logger.info("" +couponDto.getCoupon_discount());
-		logger.info("" +couponDto.getCoupon_eymd());
+//		logger.info("a:"+couponDto.getPartner_no());
+//		logger.info("b:"+couponDto.getCoupon_no());
+//		logger.info("c:"+couponDto.getCoupon_bymd());
+//		logger.info("d:"+couponDto.getCoupon_discount());
+//		logger.info("e:"+couponDto.getCoupon_item());
 	
-		boolean isSuccess = false;			//성공했는지 실패했는지 여부 확인한다
-		
-		String uploadPath = "C:\\workspace\\blogMap\\src\\main\\webapp\\pds\\partner";
-		File dir = new File(uploadPath);
-			if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
-				dir.mkdirs();
-			}
-			
+//		String uploadPath = "C:/workspace/blogMap/blogMap/src/main/webapp/pds/partner";
+//		File dir = new File(uploadPath,originalFileName);
+//		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
+//			dir.mkdirs();
+//		}
 		Iterator<String> iter=request.getFileNames();
 		while(iter.hasNext()){
 			String uploadFileName=iter.next();
 			MultipartFile mFile = request.getFile(uploadFileName);
 			String originalFileName = mFile.getOriginalFilename();
 			String saveFileName = originalFileName;
+			
+			String uploadPath = "C:/workspace/blogMap/src/main/webapp/pds/coupon/";
+			File dir = new File(uploadPath,originalFileName);
+			
+			if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
+				dir.mkdirs();
+			}
+			
 			if(saveFileName != null && !saveFileName.equals("")) {
 				if(new File(uploadPath + saveFileName).exists()) {
-					saveFileName = saveFileName + "_" + System.currentTimeMillis();
+					saveFileName = System.currentTimeMillis()+ "_" +saveFileName;
 				}
 				try {
 					mFile.transferTo(new File(uploadPath + saveFileName));
@@ -213,25 +230,23 @@ public class PartnerServiceImpl implements PartnerService {
 					long fileImgSize=mFile.getSize();
 					couponDto.setCoupon_pic_size(fileImgSize);
 					
-					logger.info(couponDto.getCoupon_pic_path());
-					logger.info(couponDto.getCoupon_pic_name());
+					logger.info("파일이름이 뭐냐!!!!:"+couponDto.getCoupon_pic_name());
+					logger.info("파일경로가 뭐냐!!!!:"+couponDto.getCoupon_pic_path());
 					long lo=couponDto.getCoupon_pic_size();
 					logger.info(String.valueOf(lo));
-					int check=partnerDao.couponRegister(couponDto, partner_no);
-					logger.info("coupon_check:"+check);
+					int check=partnerDao.coupon_Register(couponDto);
+					logger.info("partner_check:"+check);
 					
-					isSuccess = true;
+					response.getWriter().print(check);
+					
 					
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
-					isSuccess = false;
 				} catch (IOException e) {
 					e.printStackTrace();
-					isSuccess = false;
 				}
 			} // if end
 		} // while end
-		return isSuccess;
 	}
 	@Override
 	public void couponWriteList(ModelAndView mav) {

@@ -24,4 +24,6 @@ public interface PartnerDao {
 
 	public List<PartnerDto> getSearchParnterData(String partner_name);
 
+	public int coupon_Register(CouponDto couponDto);
+
 }

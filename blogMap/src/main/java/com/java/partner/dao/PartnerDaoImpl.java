@@ -76,4 +76,9 @@ public class PartnerDaoImpl implements PartnerDao {
 		logger.info("partner_name 맴퍼가기전 : "+ partner_name);
 		return session.selectList("dao.PartnerMapper.getSearchPartnerList",partner_name);
 	}
+@Override
+public int coupon_Register(CouponDto couponDto) {
+	// TODO Auto-generated method stub
+	return session.insert("dao.PartnerMapper.coupon_register",couponDto);
+}
 }

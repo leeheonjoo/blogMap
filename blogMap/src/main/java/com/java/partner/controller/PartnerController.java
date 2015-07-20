@@ -103,13 +103,13 @@ public class PartnerController {
 	 * @description: 제휴업체 쿠폰등록 컨트롤러
 	 */
 		@RequestMapping(value="/partner/couponWrite.do", method=RequestMethod.POST)
-		public void couponWrite(MultipartHttpServletRequest request, HttpServletResponse response,CouponDto couponDto){
+		public void couponWrite(MultipartHttpServletRequest request, HttpServletResponse response){
 			logger.info("Partner couponWrite 시작!!!--------------------------------------------");
 			
 			ModelAndView mav=new ModelAndView();
 			mav.addObject("request", request);
 			mav.addObject("response", response);
-			mav.addObject("couponDto",couponDto);
+			//mav.addObject("couponDto",couponDto);
 
 			partnerService.couponWrite(mav);
 		}

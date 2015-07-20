@@ -789,14 +789,14 @@
                   <div class="form-group">
                      <label class="col-xs-4 control-label">쿠폰적용시작일</label>
                      <div class="col-xs-8">
-                        <input type="text" class="form-control" name="coupon_bymd" id="coupon_bymd" required="required" placeholder="쿠폰 시작일"/>
+                        <input type="date" class="form-control" name="coupon_bymd" id="coupon_bymd" required="required" placeholder="쿠폰 시작일"/>
                      </div>                                 
                   </div>
                   
                   <div class="form-group">
                      <label class="col-xs-4 control-label">쿠폰적용종료일</label>
                      <div class="col-xs-8">
-                        <input type="text" class="form-control" name="coupon_eymd" id="coupon_eymd" required="required" placeholder="쿠폰 종료일"/>
+                        <input type="date" class="form-control" name="coupon_eymd" id="coupon_eymd" required="required" placeholder="쿠폰 종료일"/>
                      </div>                                 
                   </div>
 
@@ -808,7 +808,7 @@
                   </div>
                </div>
                <div class="modal-footer">
-                  <button type="button"  id="coupon_Register" class="btn btn-primary">신청하기</button>
+                  <button type="button"  id="coupon_Register" class="btn btn-primary" onclick="return form_couponWrite();">신청하기</button>
                </div>
             </div>
          </form>

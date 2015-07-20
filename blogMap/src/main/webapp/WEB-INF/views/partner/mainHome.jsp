@@ -163,6 +163,7 @@ $(function() {
 									// 각 업체를 클릭했을때 이벤트
 									$("#partner_no" + data[i].partner_no).click(function(){
 										//alert("업체클릭" + data[i].partner_no)
+										
 										partnerData(data[i].partner_no);	
 									});
 									
@@ -222,7 +223,10 @@ $(function() {
 							
 							// 각 업체를 클릭했을때 이벤트
 							$("#partner_no" + data[i].partner_no).click(function(){
-								//alert("업체클릭" + data[i].partner_no)
+								alert("업체클릭" + data[i].partner_no)
+								$("#partner_no").val(data[i].partner_no);
+										
+								//alert($("#partner_no").val());
 								partnerData(data[i].partner_no);	
 							});
 						});
@@ -285,7 +289,7 @@ $(function() {
 						
 						// 각 업체를 클릭했을때 이벤트
 						$("#partner_no" + data[i].partner_no).click(function(){
-						
+							
 							//alert("업체클릭" + data[i].partner_no)
 							partnerData(data[i].partner_no);	
 						});
@@ -315,6 +319,45 @@ $(function() {
 		/*888888888888888888888888888888888888888888888  */
 		/* 여기에 복사하기 */ 
 		/*888888888888888888888888888888888888888888888  */
+		
+		
+		function form_couponWrite(){
+			
+			var data = new FormData($('#couponWrite_form')[0]);
+			
+			$.ajax({
+				type: 'POST',
+				url : '${root}/partner/couponWrite.do',
+				data :data,
+					processData:false,
+					contentType:false,
+				/* contentType : 'application/x-www-form-urlencoded;charset=UTF-8', */
+				success:function(data)
+				{
+					alert("성공");
+// 					$("section[id=write_pop].modal").modal("hide");
+// 					$("#tour_item_list").empty();	//데이터를 가지고 오기전에 리셋(중복삽입을 방지하기 위해)
+					if(data=="1"){
+						alert("쿠폰이 등록되었습니다.");
+						$("section[id='mainCoupon_Registration'].modal").modal("hide");
+						$("#coupon_item").val("");
+						$("#coupon_discount").val("");
+						$("#coupon_bymd").val("");
+						$("#coupon_eymd").val("");
+						$("#coupon_imagers").val("");
+						
+					}
+				},
+				error:function()
+				{
+					alert("서버와의 데이터 연결에 실패하였습니다.");
+					return false;
+				}
+			}); 
+			// 실제 폼이 전송되어 페이지가 변경되는것을 막기위해 false 리턴
+			return false;
+		};
+		
 		</script>
 	</body>
 </html>
