@@ -221,7 +221,7 @@
 	});
 </script>
 <script>
-//세션 체크
+//세션 체크후 모달 오픈
 $(function(){
 	$("#mainMessageLink").click(function(){
 		if (window.sessionStorage) {
@@ -232,7 +232,6 @@ $(function(){
 	    		alert("로그인 후 이용가능합니다.");
 	    	}
 	    }
-		
 	});
 	
 	$("#partner_Registration").click(function(){
@@ -244,7 +243,6 @@ $(function(){
 	    		alert("로그인 후 이용가능합니다.");
 	    	}
 	    }
-		
 	});
 	
 	$("#blogMain_write").click(function(){
@@ -256,7 +254,6 @@ $(function(){
 	    		alert("로그인 후 이용가능합니다.");
 	    	}
 	    }
-		
 	});
 	
 	$("#blogMain_coupon").click(function(){
@@ -268,7 +265,6 @@ $(function(){
 	    		alert("로그인 후 이용가능합니다.");
 	    	}
 	    }
-		
 	});
 });
 
