@@ -15,7 +15,11 @@
 	</select>
 	
 	<update id="memberDelete" parameterType="java.util.HashMap">	
-		update MEMBER SET member_name=null, member_pwd=null, member_jointype='0003', member_point=0 where member_id=#{member}
+		update MEMBER SET member_name=null, 
+		              member_pwd=null, 
+		              member_jointype='0003', 
+		              member_point=0 
+		        where member_id=#{member}
 	</update>
 	
 	<delete id="delLog" parameterType="java.util.HashMap">
@@ -23,15 +27,39 @@
 	</delete>
 	
 	<select id="getSearchMemberList" parameterType="String" resultType="com.java.member.dto.MemberDto">
-		select * from member where member_name like '%'||#{member_name}||'%' order by member_name asc						
+		select m.member_id, m.member_pwd, m.member_name, m.member_joindate, 
+                    (select d_name 
+                       from DETAIL_CODE 
+                     where h_code='0001'
+                       and d_code=member_jointype) member_jointype, 
+                  NVL(SUM(p.point_value),0) member_point 
+         from MEMBER m, POINT_INFO p 
+        where m.member_id = p.member_id(+)
+          and m.member_name like '%'||#{member_name}||'%'
+         group by m.member_id, m.member_pwd, m.member_name, m.member_joindate, member_jointype
+         order by m.member_name asc
+         
+		<!-- select * from member where member_name like '%'||#{member_name}||'%' order by member_name asc		 -->				
 	</select> 
 	
 	<select id="getSearchMemberType" parameterType="String" resultType="com.java.member.dto.MemberDto">
-		select * from member where member_jointype=#{member_jointype} order by member_name asc
+		select m.member_id, m.member_pwd, m.member_name, m.member_joindate, 
+                    (select d_name 
+                       from DETAIL_CODE 
+                     where h_code='0001'
+                       and d_code=member_jointype) member_jointype, 
+                  NVL(SUM(p.point_value),0) member_point 
+         from MEMBER m, POINT_INFO p 
+        where m.member_id = p.member_id(+)
+          and m.member_jointype=#{member_jointype}
+         group by m.member_id, m.member_pwd, m.member_name, m.member_joindate, member_jointype
+         order by m.member_name asc
+         
+		<!-- select * from member where member_jointype=#{member_jointype} order by member_name asc -->
 	</select>
 	
 	<select id="getManagerList" resultType="com.java.manager.dto.ManagerDto">
-		select * from manager
+		select * from manager order by manager_yn desc
 	</select>
 	
 	<select id="getManagerLog" parameterType="String" resultType="com.java.manager.dto.ManagerLogDto" >

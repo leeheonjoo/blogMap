@@ -39,11 +39,11 @@
 <body>
 		<article class="container-fluid">
 
-			<div class="row" >
+			<!-- <div class="row" >
 				<section class="page-header2" >
 					<h2 class="page-title">관리자 모드</h2>
 				</section>
-			</div>
+			</div> -->
 
 			<div class="row">
 

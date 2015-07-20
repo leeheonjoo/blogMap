@@ -236,15 +236,15 @@ vertical-align: middle;
 					
 					var rgDate = year + "년 " + month + "월 "	+ day + "일";
 					
-					var type=data[i].member_jointype;
-					//alert(type);
+					var jointype=data[i].member_jointype;
+					/* //alert(type);
 					if(type == "0001"){
 						jointype="BlogMap";
 					}else if(type =="0002"){
 						jointype="FaceBook";
 					}else if(type =="0003"){
 						jointype="탈퇴";
-					}
+					} */
 					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
 										+ "<td>" + data[i].member_id + "</td>"			// 아이디
@@ -307,13 +307,13 @@ vertical-align: middle;
 		
 		if(type == "blogmap"){
 			type="0001";
-			alert(type);
+			//alert(type);
 		}else if(type == "faceBook"){
 			type="0002";
-			alert(type);
+			//alert(type);
 		}else if(type =="delMember"){
 			type="0003";
-			alert(type);
+			//alert(type);
 		}
 		
 		$.ajax({
@@ -337,15 +337,15 @@ vertical-align: middle;
 					
 					var rgDate = year + "년 " + month + "월 "	+ day + "일";
 					
-					var type=data[i].member_jointype;
-					//alert(type);
+					var jointype=data[i].member_jointype;
+					/* //alert(type);
 					if(type == "0001"){
 						jointype="BlogMap";
 					}else if(type =="0002"){
 						jointype="FaceBook";
 					}else if(type =="0003"){
 						jointype="탈퇴";
-					}
+					} */
 					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
 										+ "<td>" + data[i].member_id + "</td>"			// 아이디

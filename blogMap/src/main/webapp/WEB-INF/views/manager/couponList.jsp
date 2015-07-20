@@ -48,7 +48,7 @@
 								+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 								+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 								+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
-								+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
+								+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 								+ "<td>" + bymd + "</td>"						// 등록일
 								+ "<td>" + eymd + "</td>"		//
 								+ "<td>"
@@ -59,7 +59,7 @@
 								+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 								+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 								+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
-								+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
+								+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 								+ "<td>" + bymd + "</td>"						// 등록일
 								+ "<td>" + eymd + "</td>"		//
 								+ "<td>"
@@ -273,7 +273,7 @@
 									+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 									+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
-									+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
+									+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 									+ "<td>" + bymd + "</td>"						// 등록일
 									+ "<td>" + eymd + "</td>"		//
 									+ "<td>"
@@ -284,7 +284,7 @@
 									+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 									+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
-									+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
+									+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 									+ "<td>" + bymd + "</td>"						// 등록일
 									+ "<td>" + eymd + "</td>"		//
 									+ "<td>"
@@ -497,7 +497,7 @@
 									+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 									+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
-									+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
+									+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 									+ "<td>" + bymd + "</td>"						// 등록일
 									+ "<td>" + eymd + "</td>"		//
 									+ "<td>"
@@ -508,7 +508,7 @@
 									+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 									+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
-									+ "<td>" + data[i].COUPON_DISCOUNT + "</td>"		//							
+									+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 									+ "<td>" + bymd + "</td>"						// 등록일
 									+ "<td>" + eymd + "</td>"		//
 									+ "<td>"
@@ -650,7 +650,7 @@
 					
 					$("#coupon_detail_button[value='취소']").click(function(){
 						var couponNo = $(this).attr('name');
-						alert(couponNo);
+						//alert(couponNo);
 						var check = confirm("쿠폰 발행을 취소하시겠습니까?");
 						if(check == "1"){
 							couponCancle(couponNo);
@@ -661,7 +661,7 @@
 					
 					$("#coupon_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
 						var couponNo = $(this).attr('name');		
-						alert(couponNo);
+						//alert(couponNo);
 						var check = confirm("쿠폰을 승인 하시겠습니까?");
 						if(check == "1"){
 							couponSubmit(couponNo);
