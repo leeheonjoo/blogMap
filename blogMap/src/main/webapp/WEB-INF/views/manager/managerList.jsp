@@ -13,8 +13,8 @@
 <script type="text/javascript">
 
 	function getManagerList(){
-		var email=sessionStorage.getItem('email');
-		alert(email);
+		//var email=sessionStorage.getItem('email');
+		//alert(email);
 		$("#managerListResult").empty();	// 관리자 정보를 가져오기전 리셋 시킴 (중복을 삽입을 방지하기 위해)
 		$("#managerLogList").hide();
 		$.ajax({
@@ -72,7 +72,7 @@
 								var Logdata=JSON.parse(responseData);
 								//alert("button:" + Logdata[0].manager_id);
 								
-								if(!Logdata){
+								if(Logdata.length < 0){
 									alert("데이타가 없습니다.");
 									return false;
 								}
