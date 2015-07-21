@@ -114,7 +114,7 @@ public class BoardController {
 			mav.addObject("BoardReadDto",boardreadDto);
 			
 			boardService.blogWrite(mav);
-			mav.setViewName("blogMap");
+			mav.setViewName("redirect:/");
 			
 			return mav;
 			

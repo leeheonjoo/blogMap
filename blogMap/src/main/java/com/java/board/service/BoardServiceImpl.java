@@ -478,6 +478,7 @@ public class BoardServiceImpl implements BoardService {
 			logger.info("블로그작성_파일 추가안함:"+attachList.size());
 		}else{
 			check=boardDao.blogWrite_attach(hashMap);
+			logger.info("첨부파일 DB추가완료:"+check);
 		}
 		
 		

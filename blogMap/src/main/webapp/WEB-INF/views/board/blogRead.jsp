@@ -317,12 +317,23 @@ $(function() {
 					var file_no="";
 					var board_content="";
 					$.each(data,function(i){
-						file_no+=data[i].FILE_NO+",";
-						alert(file_no);
 						var file_size=data[i].FILE_SIZE;
 						var file_path=data[i].FILE_PATH;
 						var file_name=data[i].FILE_NAME;
 						var file_comment=data[i].FILE_COMMENT;
+						
+						if(data[i].FILE_NO==undefined){
+							$("#blogUpdateattach option:eq(0)").attr("selected","selected");
+							$("#blogUpdateattach >span").css("display","");
+						}else{
+							$("#blogUpdateattach option:eq("+(i+1)+")").attr("selected","selected");
+							$("#blogUpdateattach >span:eq("+i+")").css("display","");
+							$("#blogUpdateattach >span:eq("+i+") > input[name='comment']" ).val(file_comment);
+						}
+						
+						file_no+=data[i].FILE_NO+",";
+						
+						
 						
 						var category_code=data[i].CATEGORY_CODE;
 						var category_mname=data[i].CATEGORY_MNAME;
@@ -362,8 +373,8 @@ $(function() {
 							$("#blogUpdateGrade > input:eq(5)").attr("checked","checked");
 						}
 							
-						$("#blogUpdateattach >span:eq("+i+")").css("display","");
-						$("#blogUpdateattach >span:eq("+i+") > input[name='comment']" ).val(file_comment);
+						
+						
 						$("#blogUpdateBoard_no").val(board_no);
 						$("#blogUpdateFile_no").val(file_no);
 						
@@ -379,6 +390,7 @@ $(function() {
 						} */
 					});
 					$("#blogUpdateFile_no").val(file_no);
+					$("#blogUpdateContent > iframe").remove();
 					//전역변수
 					var obj=[];
 					//스마트에디터 프레임생성
@@ -403,6 +415,41 @@ $(function() {
 					});
 					
 					$("#blogUpdateButton").click(function() {
+						
+						/* 유효성 검사 */
+						if($("#blogUpdateSelect > #headCategory option:selected").val()=="%"){
+							alert("대분류 카테고리를 여행,음식 중 선택해주세요.");
+							return false;
+						}
+						
+						
+						if(!$("#blogUpdateTitle > input[name='board_title']").val()){
+							alert("제목을 입력하세요.");
+							$("#blogUpdateTitle > input[name='board_title']").focus();
+							return false;
+						}
+
+						
+						
+						var select_value=$("#blogUpdateattach option:selected").val();
+						if(select_value!="0"){
+						var int_select_value=parseInt(select_value);
+						for (var i = 0; i < int_select_value; i++) {
+								if($("#blogUpdateattach > span:eq("+i+") > input:eq(1)").val()==""){
+									alert("첨부이미지에 대한 간단한 코멘트를 입력해주세요.");
+									return false;
+								}
+								if($("#blogUpdateattach > span:eq("+i+") > input[type='file']").val()==""){
+									alert("첨부할 이미지를 추가해주세요.");
+									return false;
+								}
+							}
+						}
+						
+						if(!($("input[type='radio']").is(":checked"))){
+							alert("평점을 선택해주세요.")
+							return false;
+						}
 						
 						obj.getById["Upboard_content"].exec("UPDATE_CONTENTS_FIELD",[]);
 						$("#up_frm").submit();
@@ -495,11 +542,6 @@ function reply_delete(DThis) {
 	}else{ //취소
 		return;
 	}
-	/* $("#reply_content_delete"+i).popConfirm({
-	title: "Delete",
-	content: "정말로 삭제 하시겠습니까?",
-	placement: "bottom"
-});	 */
 	
 }
 </script>
@@ -554,7 +596,7 @@ function reply_delete(DThis) {
 
 	<div id="blogRead_grade">
 		<label>평점:</label>
-		<img src="" width="150" height="30"/><br /> 
+		<img src="" width="100" height="20"/><br /> 
 	</div>
 	<br/>
 	<!-- 추천 /비추천 -->

@@ -95,13 +95,12 @@
 								var addr_sigugun=data[0].addr_sigugun;
 								var addr_dongri=data[0].addr_dongri
 								var addr_bunji=data[0].addr_bunji;
-								
-								if(addr_sigugun!=null){
-								pullAddr=addr_sido+" "+addr_sigugun+" "+addr_dongri+" "+addr_bunji;
-								}else if(addr_bunji==""||addr_bunji=="undefined"){
+								if(addr_bunji==""||addr_bunji==undefined||addr_bunji==null){
 									pullAddr=addr_sido+" "+addr_sigugun+" "+addr_dongri;
-								}else{
+								}else if(addr_sigugun==null||addr_sigugun==undefined){
 									pullAddr=addr_sido+" "+addr_dongri+" "+addr_bunji;	
+								}else{
+									pullAddr=addr_sido+" "+addr_sigugun+" "+addr_dongri+" "+addr_bunji;
 								}
 								
 								$.ajax({
