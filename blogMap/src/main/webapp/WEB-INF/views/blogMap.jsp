@@ -706,24 +706,11 @@ $(function(){
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
-							<div class="row">
-						  		<div class="col-lg-4">
-								    <div class="input-group">
-							      		<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
-							      		<span class="input-group-btn">
-							        		<button class="btn btn-default" type="button" id="search_Partner">검색</button>	
-							      		</span>
-								    </div>	<!-- /input-group -->
-						  		</div>	<!-- /.col-lg-6 -->
-							</div>		<!-- /.row -->
+							<div class="caption">	
+								<jsp:include page="partner/mainHome.jsp" />
+							</div>
 						</div>					
 					</div>
-					<div class="thumbnail">
-						<div class="caption">	
-							<jsp:include page="partner/mainHome.jsp" />
-						</div>
-					</div>
-					
 				</div>
 		    </div>
 		</div>

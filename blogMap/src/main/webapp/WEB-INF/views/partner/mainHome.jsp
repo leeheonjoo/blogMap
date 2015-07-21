@@ -19,57 +19,63 @@ $(function() {
 })
 </script>
 </head>
+
 <style>
 .img-responsive {height:}
-#list_partner_name {width:100%;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+#list_partner_name {width:100%;text-overflow:ellipsis;white-space:inherit;overflow:initial;}
 </style>
+
 <body>
+
 	<article class="container">
-			<div>
-				<!-- 큰 사이즈 화면에서 탭 목록-->					
-				<ul class="nav nav-pills nav-stacked col-md-3 hidden-xs hidden-sm" role="tablist">
+		<div class="row">
+			<!-- 큰 사이즈 화면에서 탭 목록-->					
+			<ul class="nav nav-pills nav-stacked col-md-2 hidden-xs hidden-sm" role="tablist">
 				<li role="presentation" class="active">
 					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
 				</li>
 			</ul>
 		
-				<!-- 작은 사이즈 화면에서 탭 목록-->
-				<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist">
+			<!-- 작은 사이즈 화면에서 탭 목록-->
+			<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist">
 				<li role="presentation" class="active">
 					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
 				</li>
 			</ul>
 
 			<!-- tour 탭 내용 -->
-			<div class="tab-content col-md-9">
+			<div class="tab-content col-md-10 thumbnail">
+				<div class="col-md-5 input-group">
+					<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
+		     		<span class="input-group-btn">
+		     			<input type="button" class="btn btn-default" id="search_Partner" value="검색"/>
+		     		</span>
+       			</div><br/>
 				<section role="tabpanel" class="tab-pane active" id="tab_tour">
-					<div class="row" id="tour_item_list">	
-						
-					</div>
+					<div class="row" id="tour_item_list"></div>
 					<div id="partnerListResult"></div>  <!-- 자료를 붙일 바디 -->
-				<div class="row">
-						<div class="col-xs-12 text-right">
-							<button type="button" id="partner_tour_button" name="partner_tour_button"  class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop">업체등록</button>								
+				
+					<div class="col-md-3 col-sm-4 col-xs-4 tour_items" id="tour_item" role="button" style="display:none;">
+						<div id="tour_info" class="thumbnail">	
+							<a data-toggle="modal" href="#modal_info" class="list_partner_no">
+								
+								<img class="img-responsive" id="partner_imagers"/> 
+								
+								<div class="caption">
+									<p id="list_partner_name"></p>
+								</div>								
+							</a>
 						</div>
 					</div>
 				</section>
-				<div class="col-md-2 col-sm-3 col-xs-4 tour_items" id="tour_item" role="button" style="display:none;">
-					<div id="tour_info" class="thumbnail">	
-						<a data-toggle="modal" href="#modal_info" class="list_partner_no">
-							
-							<img class="img-responsive" id="partner_imagers"/> 
-<!-- 							<div class='clearfix'></div> -->
-							
-							<div class="caption">
-								<p id="list_partner_name"></p>
-							</div>								
-						</a>
-					</div>
-				</div>
 			</div>
-			
-	</article>
-		<script type="text/javascript">
+		</div>
+		<div class="modal-footer">
+        	<button type="button"  id="partner_tour_button" name="partner_tour_button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#write_pop"">업체등록</button>
+        </div>
+	</article> 
+
+	<script type="text/javascript">
 			/*
 			 * 제휴 업체 신청전 폼유효성 검증
 			 */
@@ -99,18 +105,16 @@ $(function() {
 				}
 				
 				// 사용자 확인창
-				if(! confirm("신청하시겠습니까?")) return null;		
+// 				if(! confirm("신청하시겠습니까?")) return null;		
 				
 // 					id가 smarteditor인 textarea에 에디터에서 대입
 // 					obj.getById["board_content"].exec("UPDATE_CONTENTS_FIELD",[]);
 // 					폼 submit();
 
-// 					var partnerName=$("input type[name='partner_name']").val();
-// 					var partnerPhone=$("input type[name='partner_phone']").val();
-// 					var partnerAddr=$("input type[name='partner_addr']").val();
-// 					var partnerImage=$("#partner_imagers").val();
-// 					var category_mname=data[i].CATEGORY_MNAME;
-// 					var category_sname=data[i].CATEGORY_SNAME;
+					var partnerName=$("input type[name='partner_name']").val();
+					var partnerPhone=$("input type[name='partner_phone']").val();
+					var partnerAddr=$("input type[name='partner_addr']").val();
+					var partnerImage=$("#partner_imagers").val();
 					
 			/* 		alert(partnerName);
 					alert(partnerPhone);
@@ -309,6 +313,7 @@ $(function() {
 						//alert(data);
 					
 						/* 데이타를 채우기 위해 복사 */
+						$("#tour_item_list").empty();
 						$.each(data, function(i){
 							
 							$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
@@ -343,7 +348,7 @@ $(function() {
 						
 						$(".tour_items .img-responsive").css({
 							'max-width':"100%",
-							'height': "100px"
+							'height': "150px"
 						});
 						
 					}	
