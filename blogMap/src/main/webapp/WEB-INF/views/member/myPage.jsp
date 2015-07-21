@@ -233,11 +233,16 @@ if(sessionStorage.getItem('email')!=null){
 					
 					
 					$.each(point_data,function(i){
+						var dt;
+
+						dt = new Date(point_data[i].POINT_DATE);
+						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+						
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-						+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+point_data[i].POINT_DATE+'</div></div></div>'
+						+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 						+'<div class="col-xs-6 col-sm-6 col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
 						+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 					});
@@ -299,13 +304,18 @@ if(sessionStorage.getItem('email')!=null){
 									var point_data=JSON.parse(data[0]);
 									
 									$.each(point_data,function(i){
+										var dt;
+
+										dt = new Date(point_data[i].POINT_DATE);
+										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+										
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-												+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
-												+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
-												+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+										+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+										+'<div class="col-xs-6 col-sm-6 col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+										+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 									});
 								}
 							});
@@ -380,13 +390,18 @@ if(sessionStorage.getItem('email')!=null){
 					var point_data=JSON.parse(data[0]);
 					
 					$.each(point_data,function(i){
+						var dt;
+
+						dt = new Date(point_data[i].POINT_DATE);
+						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+						
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-								+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
-								+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
-								+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+						+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+						+'<div class="col-xs-6 col-sm-6 col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+						+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -448,13 +463,18 @@ if(sessionStorage.getItem('email')!=null){
 									$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 									var point_data=JSON.parse(data[0]);
 									$.each(point_data,function(i){
+										var dt;
+
+										dt = new Date(point_data[i].POINT_DATE);
+										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+										
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-												+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
-												+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
-												+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+										+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+										+'<div class="col-xs-6 col-sm-6 col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+										+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 									});
 								}
 							});
@@ -520,13 +540,18 @@ if(sessionStorage.getItem('email')!=null){
 					var point_data=JSON.parse(data[0]);
 					
 					$.each(point_data,function(i){
+						var dt;
+
+						dt = new Date(point_data[i].POINT_DATE);
+						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+						
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-								+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
-								+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
-								+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+						+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+						+'<div class="col-xs-6 col-sm-6 col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+						+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -582,13 +607,18 @@ if(sessionStorage.getItem('email')!=null){
 									var point_data=JSON.parse(data[0]);
 									
 									$.each(point_data,function(i){
+										var dt;
+
+										dt = new Date(point_data[i].POINT_DATE);
+										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+										
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-												+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
-												+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
-												+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+										+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+										+'<div class="col-xs-6 col-sm-6 col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+										+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
 									});
 								}
 							});
@@ -668,14 +698,14 @@ if(sessionStorage.getItem('email')!=null){
 						var byear = getbymd.getFullYear();
 						var bmonth = getbymd.getMonth() + 1;
 						var bday = getbymd.getDate();
-						var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+						var bymd = byear + "-" + bmonth + "-" + bday;
 						//alert(bymd);
 						
 						var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
 						var eyear = geteymd.getFullYear();
 						var emonth = geteymd.getMonth() + 1;
 						var eday = geteymd.getDate();
-						var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+						var eymd = eyear + "-" + emonth + "-" + eday;
 						//alert(eymd);
 						
 						
@@ -738,14 +768,14 @@ if(sessionStorage.getItem('email')!=null){
 										var byear = getbymd.getFullYear();
 										var bmonth = getbymd.getMonth() + 1;
 										var bday = getbymd.getDate();
-										var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+										var bymd = byear + "-" + bmonth + "-"	+ bday;
 										//alert(bymd);
 										
 										var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
 										var eyear = geteymd.getFullYear();
 										var emonth = geteymd.getMonth() + 1;
 										var eday = geteymd.getDate();
-										var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+										var eymd = eyear + "-" + emonth + "-"	+ eday;
 										//alert(eymd);
 										
 										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
@@ -812,14 +842,14 @@ if(sessionStorage.getItem('email')!=null){
 						var byear = getbymd.getFullYear();
 						var bmonth = getbymd.getMonth() + 1;
 						var bday = getbymd.getDate();
-						var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+						var bymd = byear + "-" + bmonth + "-"	+ bday;
 						//alert(bymd);
 						
 						var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
 						var eyear = geteymd.getFullYear();
 						var emonth = geteymd.getMonth() + 1;
 						var eday = geteymd.getDate();
-						var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+						var eymd = eyear + "-" + emonth + "-"	+ eday;
 						//alert(eymd);
 						
 						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
@@ -885,14 +915,14 @@ if(sessionStorage.getItem('email')!=null){
 										var byear = getbymd.getFullYear();
 										var bmonth = getbymd.getMonth() + 1;
 										var bday = getbymd.getDate();
-										var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+										var bymd = byear + "-" + bmonth + "-"	+ bday ;
 										//alert(bymd);
 										
 										var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
 										var eyear = geteymd.getFullYear();
 										var emonth = geteymd.getMonth() + 1;
 										var eday = geteymd.getDate();
-										var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+										var eymd = eyear + "-" + emonth + "-"	+ eday ;
 										//alert(eymd);
 										
 										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
@@ -961,14 +991,14 @@ if(sessionStorage.getItem('email')!=null){
 						var byear = getbymd.getFullYear();
 						var bmonth = getbymd.getMonth() + 1;
 						var bday = getbymd.getDate();
-						var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+						var bymd = byear + "-" + bmonth + "-"	+ bday ;
 						//alert(bymd);
 						
 						var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
 						var eyear = geteymd.getFullYear();
 						var emonth = geteymd.getMonth() + 1;
 						var eday = geteymd.getDate();
-						var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+						var eymd = eyear + "-" + emonth + "-"	+ eday;
 						//alert(eymd);
 						
 						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
@@ -1026,14 +1056,14 @@ if(sessionStorage.getItem('email')!=null){
 										var byear = getbymd.getFullYear();
 										var bmonth = getbymd.getMonth() + 1;
 										var bday = getbymd.getDate();
-										var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+										var bymd = byear + "-" + bmonth + "-"	+ bday;
 										//alert(bymd);
 										
 										var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
 										var eyear = geteymd.getFullYear();
 										var emonth = geteymd.getMonth() + 1;
 										var eday = geteymd.getDate();
-										var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+										var eymd = eyear + "-" + emonth + "-"	+ eday;
 										//alert(eymd);
 										
 										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
@@ -1096,13 +1126,17 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_board_list_title").append("<div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
 					var board_data=JSON.parse(data[0]);
 					
-					
 					$.each(board_data,function(i){
+						var dt;
+
+						dt = new Date(board_data[i].BOARD_RGDATE);
+						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+					
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
 						+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
 					});
@@ -1157,11 +1191,16 @@ if(sessionStorage.getItem('email')!=null){
 									
 									
 									$.each(board_data,function(i){
+										var dt;
+
+										dt = new Date(board_data[i].BOARD_RGDATE);
+										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+									
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
 										+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
 									});
@@ -1234,11 +1273,16 @@ if(sessionStorage.getItem('email')!=null){
 					
 					
 					$.each(board_data,function(i){
+						var dt;
+
+						dt = new Date(board_data[i].BOARD_RGDATE);
+						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+					
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
 						+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
 					});
@@ -1302,11 +1346,16 @@ if(sessionStorage.getItem('email')!=null){
 									
 									
 									$.each(board_data,function(i){
+										var dt;
+
+										dt = new Date(board_data[i].BOARD_RGDATE);
+										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+									
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
 										+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
 									});
@@ -1372,11 +1421,16 @@ if(sessionStorage.getItem('email')!=null){
 					
 					
 					$.each(board_data,function(i){
+						var dt;
+
+						dt = new Date(board_data[i].BOARD_RGDATE);
+						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+					
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
 						+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
 					});
@@ -1433,11 +1487,16 @@ if(sessionStorage.getItem('email')!=null){
 									
 									
 									$.each(board_data,function(i){
+										var dt;
+
+										dt = new Date(board_data[i].BOARD_RGDATE);
+										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+									
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
 										+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
 									});
@@ -1531,9 +1590,15 @@ if(sessionStorage.getItem('email')!=null){
 					//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
 					$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
 					var favorite_data=JSON.parse(data[0]);
+					
 					$.each(favorite_data,function(i){
+						var dt;
+
+						dt = new Date(favorite_data[i].FAVORITE_RGDATE);
+						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+					
 						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 						+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
 					});
@@ -1586,8 +1651,13 @@ if(sessionStorage.getItem('email')!=null){
 									$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
 									var favorite_data=JSON.parse(data[0]);
 									$.each(favorite_data,function(i){
+										var dt;
+
+										dt = new Date(favorite_data[i].FAVORITE_RGDATE);
+										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+									
 										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 										+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
 									});
@@ -1658,8 +1728,13 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
 					var favorite_data=JSON.parse(data[0]);
 					$.each(favorite_data,function(i){
+						var dt;
+
+						dt = new Date(favorite_data[i].FAVORITE_RGDATE);
+						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+					
 						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 						+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
 					});
@@ -1721,8 +1796,13 @@ if(sessionStorage.getItem('email')!=null){
 									$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
 									var favorite_data=JSON.parse(data[0]);
 									$.each(favorite_data,function(i){
+										var dt;
+
+										dt = new Date(favorite_data[i].FAVORITE_RGDATE);
+										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+									
 										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 										+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
 									});
@@ -1786,8 +1866,13 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
 					var favorite_data=JSON.parse(data[0]);
 					$.each(favorite_data,function(i){
+						var dt;
+
+						dt = new Date(favorite_data[i].FAVORITE_RGDATE);
+						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+					
 						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 						+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
 					});
@@ -1841,8 +1926,13 @@ if(sessionStorage.getItem('email')!=null){
 									$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
 									var favorite_data=JSON.parse(data[0]);
 									$.each(favorite_data,function(i){
+										var dt;
+
+										dt = new Date(favorite_data[i].FAVORITE_RGDATE);
+										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+									
 										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
 										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 										+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
 									});
