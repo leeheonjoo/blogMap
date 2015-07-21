@@ -95,16 +95,18 @@ $(function() {
 				}
 				
 				// 사용자 확인창
-// 				if(! confirm("신청하시겠습니까?")) return null;		
+				if(! confirm("신청하시겠습니까?")) return null;		
 				
 // 					id가 smarteditor인 textarea에 에디터에서 대입
 // 					obj.getById["board_content"].exec("UPDATE_CONTENTS_FIELD",[]);
 // 					폼 submit();
 
-					var partnerName=$("input type[name='partner_name']").val();
-					var partnerPhone=$("input type[name='partner_phone']").val();
-					var partnerAddr=$("input type[name='partner_addr']").val();
-					var partnerImage=$("#partner_imagers").val();
+// 					var partnerName=$("input type[name='partner_name']").val();
+// 					var partnerPhone=$("input type[name='partner_phone']").val();
+// 					var partnerAddr=$("input type[name='partner_addr']").val();
+// 					var partnerImage=$("#partner_imagers").val();
+// 					var category_mname=data[i].CATEGORY_MNAME;
+// 					var category_sname=data[i].CATEGORY_SNAME;
 					
 			/* 		alert(partnerName);
 					alert(partnerPhone);
