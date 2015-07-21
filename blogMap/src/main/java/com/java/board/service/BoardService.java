@@ -14,5 +14,9 @@ public interface BoardService {
 	public void getCategory(ModelAndView mav);
 
 	public void blogWrite(ModelAndView mav);
+
+	public void coupon_issue(ModelAndView mav);
+
+	public void getCoupon(ModelAndView mav);
 	
 }

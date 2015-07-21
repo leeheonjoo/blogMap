@@ -41,5 +41,15 @@
 		</foreach> A
 	</insert> 
 	
+	<select id="coupon_data_list" parameterType="Integer" resultType="java.util.HashMap">
+		<![CDATA[select * from coupon c, (select * from partner where partner_addr=(select rtrim(addr_sido||' '||addr_sigugun||' '||addr_dongri||' '||addr_bunji) from board_addr_info where board_no=#{board_no}) and partner_yn='Y')a where a.partner_no=c.partner_no and c.coupon_yn='Y']]>
+	</select>
 	
+	<insert id="insertCouponIssue" parameterType="java.util.HashMap">
+		insert into coupon_issue values(COUPON_ISSUE_COUPON_NO_SEQ.nextval,#{coupon_no},#{member_id},current_date)
+	</insert>
+	
+	<select id="checkCoupon" parameterType="java.util.HashMap" resultType="String">
+		select member_id from coupon_issue where member_id=#{member_id} and coupon_no=#{coupon_no}
+	</select>
 </mapper>

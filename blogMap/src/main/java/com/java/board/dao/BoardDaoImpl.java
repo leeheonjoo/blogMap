@@ -82,4 +82,31 @@ public class BoardDaoImpl implements BoardDao {
 		int check=sqlSession.insert("dao.BoardMapper.blogWrite_attach",hashMap);
 		return check;
 	}
+
+	@Override
+	public List<HashMap<String, Object>> coupon_data_list(int board_no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("dao.BoardMapper.coupon_data_list",board_no);
+	}
+
+	@Override
+	public int getCoupon(String member_id, String coupon_no) {
+		HashMap<String,Object> hMap=new HashMap<String,Object>();
+		hMap.put("member_id", member_id);
+		hMap.put("coupon_no", coupon_no);
+		return sqlSession.insert("dao.BoardMapper.insertCouponIssue",hMap);
+	}
+
+	@Override
+	public int checkCoupon(String member_id, String coupon_no) {
+		HashMap<String,Object> hMap=new HashMap<String,Object>();
+		hMap.put("member_id", member_id);
+		hMap.put("coupon_no", coupon_no);
+		
+		int check=0;
+		String checkId=sqlSession.selectOne("dao.BoardMapper.checkCoupon",hMap);
+		if(checkId!=null) check=2;
+		
+		return check;
+	}
 }

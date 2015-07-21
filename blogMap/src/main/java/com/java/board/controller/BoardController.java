@@ -114,11 +114,32 @@ public class BoardController {
 			mav.addObject("BoardReadDto",boardreadDto);
 			
 			boardService.blogWrite(mav);
-			mav.setViewName("blogMap");
+			mav.setViewName("redirect:/");
 			
 			return mav;
 			
 		}
 		
+		@RequestMapping(value="/board/coupon_issue.do", method=RequestMethod.POST)
+		public void coupon_issue(HttpServletRequest request,HttpServletResponse response){
+			logger.info("coupon_issue--------------------------------");
+			
+			ModelAndView mav=new ModelAndView();
+			mav.addObject("request",request);
+			mav.addObject("response", response);
+			
+			boardService.coupon_issue(mav);
+		}
+		
+		@RequestMapping(value="/board/getCoupon.do", method=RequestMethod.POST)
+		public void getCoupon(HttpServletRequest request,HttpServletResponse response){
+			logger.info("getCoupon--------------------------------");
+			
+			ModelAndView mav=new ModelAndView();
+			mav.addObject("request",request);
+			mav.addObject("response", response);
+			
+			boardService.getCoupon(mav);
+		}
 		
 }
