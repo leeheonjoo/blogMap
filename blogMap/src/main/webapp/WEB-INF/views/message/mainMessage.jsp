@@ -876,15 +876,6 @@ thead {
 		});
 	}
 
-	$(function() {
-		var email = sessionStorage.getItem('email');
-		/* alert("현재 사용중인 아이디: " + email); */
-
-		$("#mainMessageLink").click(function() {
-			messageView();
-		});
-	});
-
 	function messageView() {
 		// 메시지 창을 비워준다.
 		$("#receiveMsgResult").empty();
@@ -1229,7 +1220,8 @@ thead {
 				}
 			});
 		});
-
+	}
+	
 	function msgimportData(no) {
 		$.ajax({
 			type : 'get',
@@ -1257,7 +1249,7 @@ thead {
 			}
 		});
 	}
-}
+
 </script>
 </head>
 <body>

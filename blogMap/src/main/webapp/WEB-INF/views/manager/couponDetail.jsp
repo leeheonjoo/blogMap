@@ -22,47 +22,47 @@ $("#coupon_img").css({
 <div id="couponDetailMain" style="display: none;">
 	<%--  <img src="${root }/css/manager/images/star0.jpg" width="300px" height="300px"/> --%>
 	
-	<div class="modal-dialog modal-lg" style="width:100%; margin:auto;">
+	<div class="modal-dialog modal-lg" style="width:98%; margin:auto;">
 		<div class="modal-content">
 			<div class="modal-body" id="coupon_data-body">
 				<div class="row form-horizontal">
-					<div class="col-md-5">
+					<div class="col-md-6">
 						<img class="img-responsive img" id="coupon_img"/>
 						
 					</div>
-					<div class="col-md-7">
+					<div class="col-md-6">
 					
 						<div class="form-group">
-							<label class="col-xs-3 control-label">업체명</label>
-							<div class="col-xs-9">
+							<label class="col-xs-4 control-label">업체명</label>
+							<div class="col-xs-8">
 								<p class="form-control-static address" id="partner_no"></p>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-xs-3 control-label">상품</label>
-							<div class="col-xs-9">
+							<label class="col-xs-4 control-label">상품</label>
+							<div class="col-xs-8">
 								<p class="form-control-static name" id="coupon_item"></p>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-xs-3 control-label">할인율</label>
-							<div class="col-xs-9">
+							<label class="col-xs-4 control-label">할인율</label>
+							<div class="col-xs-8">
 								<p class="form-control-static phone" id="coupon_discount"></p>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-xs-3 control-label">시작일</label>
-							<div class="col-xs-9">
+							<label class="col-xs-4 control-label">시작일</label>
+							<div class="col-xs-8">
 								<p class="form-control-static address" id="coupon_bymd"></p>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-xs-3 control-label">종료일</label>
-							<div class="col-xs-9">
+							<label class="col-xs-4 control-label">종료일</label>
+							<div class="col-xs-8">
 								<p class="form-control-static address" id="coupon_eymd"></p>
 							</div>
 						</div>
@@ -72,13 +72,13 @@ $("#coupon_img").css({
 			</div>
 			
 			<div class="modal-footer">
-				<input type="button" class="btn btn-default" id="coupon_detail_button"/>
+				<input type="button" class="btn btn-default" id="coupon_detail_button" style="display: none;"/>
 				<input type="button" class="btn btn-default" data-dismiss="modal" value="닫기" />	
 			</div>
 		</div>
 	</div>
 </div>
 
-<div id="couponDetailResult"></div>
+<div id="couponDetailResult" style="width:99%; margin:auto;"></div>
 </body>
 </html>

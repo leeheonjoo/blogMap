@@ -201,7 +201,12 @@ li { list-style-type:none;}
 		});	
  	}
  	
-	function couponData(couponNo){
+ 	function couponData(couponNo){
+		
+		if(sessionStorage.getItem('manager_yn')=="Y"){
+			$("#coupon_detail_button").css("display","inline-block");
+		}
+		
 		$("#couponDetailResult").empty();
 		$.ajax({
 			type:'get',
@@ -229,7 +234,7 @@ li { list-style-type:none;}
 				$("#couponDetailMain:last-child #coupon_img").attr("src", "${root}/pds/coupon/"+data[0].COUPON_PIC_NAME);
 				$("#couponDetailMain:last-child #partner_no").html(data[0].PARTNER_NAME);
 				$("#couponDetailMain:last-child #coupon_item").html(data[0].COUPON_ITEM);
-				$("#couponDetailMain:last-child #coupon_discount").html(data[0].COUPON_DISCOUNT);
+				$("#couponDetailMain:last-child #coupon_discount").html(data[0].COUPON_DISCOUNT+"%");
 				$("#couponDetailMain:last-child #coupon_bymd").html(bymd);
 				$("#couponDetailMain:last-child #coupon_eymd").html(eymd);					
 				if(data[0].COUPON_YN == "Y"){
@@ -264,6 +269,7 @@ li { list-style-type:none;}
 			},error:function(data){
 				alert("에러가 발생했습니다.");
 			}
+
 		});
 	};
 	
