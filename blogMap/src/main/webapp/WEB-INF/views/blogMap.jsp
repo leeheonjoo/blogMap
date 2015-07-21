@@ -1161,8 +1161,9 @@ $(function(){
 		</div>
 
 		<!-- 관리자페이지 - 제휴업체 상세조회 (관리자페이지 - 제휴업체 페이지 제휴업체 상세 페이지)-->
+		
 		<div class="modal fade" id="partnerDetail" data-backdrop="static">
-			<div class="modal-dialog">
+			<div class="modal-dialog" style="max-width:800px; margin:auto;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -1181,7 +1182,7 @@ $(function(){
 		
 		<!-- 관리자페이지 - 쿠폰 상세조회 (관리자페이지 - 제휴업체 페이지 제휴업체 상세 페이지)-->
 		<div class="modal fade" id="couponDetail" data-backdrop="static">
-			<div class="modal-dialog">
+			<div class="modal-dialog" style="max-width:800px; margin:auto;">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

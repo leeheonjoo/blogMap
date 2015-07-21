@@ -111,7 +111,6 @@ public class CouponServiceImpl implements CouponService {
 		mav.addObject("couponList",couponList_S);
 		mav.addObject("json", json);
 	}
-
 }
 
 

@@ -101,7 +101,7 @@
 										
 						
 						<div role="tabpanel" class="tab-pane" id="tab_partner">
-							<div class="row" id="memberInfo_list">
+							<div class="row" id="partnerInfo_list">
 								<div class="thumbnail">
 									<div class="caption">	
 										<jsp:include page="partnerList.jsp"/>
@@ -111,7 +111,7 @@
 						</div>
 						
 						<div role="tabpanel" class="tab-pane" id="tab_coupon">
-							<div class="row" id="memberInfo_list">
+							<div class="row" id="couponInfo_list">
 								<div class="thumbnail">
 									<div class="caption">	
 										<jsp:include page="couponList.jsp"/>
@@ -121,7 +121,7 @@
 						</div>
 						
 						<div role="tabpanel" class="tab-pane" id="tab_manager">
-							<div class="row" id="memberInfo_list">
+							<div class="row" id="managerInfo_list">
 								<div class="thumbnail">
 									<div class="caption">	
 										<jsp:include page="managerList.jsp"/>

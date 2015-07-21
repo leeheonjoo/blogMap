@@ -456,9 +456,12 @@
 <body>
 	<form class="form-horizontal">		<!-- 전체적인 폼 내에서 Label / Text 창의 크기를 조절하기 위해 필요한 폼 -->
 		<!-- <input type="hidden" name="member_id"/> -->
-			
+		
+		<div class="thumbnail">	
+		<div class="caption">
 		<div class="col-md-12 col-sm-12 col-xs-12">		<!-- Div 를 3화면에서 12 칸 모두 사용 -->
 			<br/>
+		</div>
 			
 			<div class="form-group form-group-lg">		<!-- 크기 조절을 하기 위한 기본 틀 -->
 				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputLarge">받는사람</label></div> 
@@ -472,10 +475,14 @@
 				</div>
 			</div>
 	
-			<div class="form-group form-group-lg">
-				<input type="button" class="btn btn-primary" id="write_btn" value="작성"/>
-				<input type="reset" class="btn btn-primary" value="취소" />
+			<div class="form-group form-group-lg" style="text-align: right;">
+				<div style="display: inline-block; margin-right: 15px;">
+					<input type="button" class="btn btn-primary" id="write_btn" value="작성"/>
+					<input type="reset" class="btn btn-primary" value="취소" />
+				</div>
 			</div>		
+		</div>
+		
 		</div>
 	</form>
 </body>

@@ -419,8 +419,7 @@ $(function() {
 							alert("제목을 입력하세요.");
 							$("#blogUpdateTitle > input[name='board_title']").focus();
 							return false;
-						}
-						
+						}	
 						
 						var select_value=$("#blogUpdateattach option:selected").val();
 						if(select_value!="0"){
@@ -602,7 +601,11 @@ function reply_delete(DThis) {
 	<span id="blogBookmark"><img src="${root}/images/blogMap/Bookmark1.png"/><b style="color: #03A9F4;">즐겨찾기</b></span>
 
 	<input type="button" class="btn btn-primary" id="coupon_issue_btn" value="쿠폰발급" />
+<<<<<<< HEAD
 	
+=======
+	
+>>>>>>> branch 'master' of https://github.com/leeheonjoo/blogMap.git
 	<br/>
 	<div id="blogRead_reply">
 		<label>답글:</label>
