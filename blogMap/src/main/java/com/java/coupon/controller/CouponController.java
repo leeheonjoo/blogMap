@@ -77,6 +77,5 @@ public class CouponController {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-
 	}
 }

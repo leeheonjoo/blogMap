@@ -169,9 +169,11 @@ v\:* {
                      var pAddr1=pAddrs[1];
                      var pAddr2=pAddrs[2];
                      var pAddr3=pAddrs[3]; 
+                     if(pAddr3==""||pAddr3==null||pAddr3=="undefined"){
+                    	 pAddr3="";
+                     }
                      
 					var search_value=$("#blogList_text").val();
-					alert(search_value);
                      $.ajax({
                            type : 'post',
                            url : '${root}/board/blogListResult.do',
@@ -187,7 +189,6 @@ v\:* {
                               //alert(data); 전체값 갖고오는지 확인
                               var data=JSON.parse(data);
                               
-                              $("div[id='blogListSub'].modal").modal();
                               $("#list_items").empty();
                               $.each(data,function(i){
                                  var board_no=data[i].board_no;
@@ -199,7 +200,7 @@ v\:* {
                                  var board_content=data[i].board_content;
                               
                                  //검색 리스트개수에 따른 복사
-                                 $("#list_items").append($("#listItem").clone());
+                                 var this_item=$("#list_items").append($("#listItem").clone());
                                   $("#list_items > a:eq("+i+")").find('#result_title').attr("id","result_title"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_content').attr("id","result_content"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_count').attr("id","result_count"+i); 
@@ -246,12 +247,9 @@ v\:* {
                                  $("#blogList_result_content").append("<br/>");       */
                                  
                                  //자세히 버튼 클릭시
-                                 $("#result_button"+i).click(function(){
+                                 this_item.click(function(){
                                 	 $("div[id='blogListDetail'].modal").modal(); 
-                                     var Readno=$("#result_no"+i).text();
-                                     var blogRead_no=Readno.split(":");
-                                     blogRead_no=blogRead_no[1].trim();
-                                     blogListDetails(blogRead_no);
+                                     blogListDetails(board_no);
                                  });
                               });
                               

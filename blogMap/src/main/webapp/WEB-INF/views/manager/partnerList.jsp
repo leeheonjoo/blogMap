@@ -103,7 +103,7 @@
 			
 		});
 		
-		/* function partnerSubmit(tagId){
+		function partnerSubmit(tagId){
 			var manager = sessionStorage.getItem('email');
 			$.ajax({
 				type:'get',
@@ -141,7 +141,7 @@
 				success:function(responseData){
 					
 					var deleteCheck=JSON.parse(responseData);
-					alert("partnerDelete :" + deleteCheck);
+					//alert("partnerDelete :" + deleteCheck);
 					
 					if(!deleteCheck){
 						alert("데이타가 없습니다.");
@@ -156,7 +156,7 @@
 				},error:function(deleteCheck){
 					alert("에러가 발생하였습니다.");
 				}
-			}); */
+			});
 			
 		}
 		
@@ -169,6 +169,19 @@
 				success:function(responseData){
 					var data=JSON.parse(responseData);
 					//var filename=data.partner_pic_name
+					var getRgdate = new Date(data.partner_rgdate);	// 등록일 날짜 변환
+					var rgyear = getRgdate.getFullYear();
+					var rgmonth = getRgdate.getMonth() + 1;
+					var rgday = getRgdate.getDate();
+					var rgDate = rgyear + "년 " + rgmonth + "월 "	+ rgday + "일";
+					//alert(rgDate);
+					
+					var getYdate = new Date(data.partner_rgdate);	// 승인일 날짜 변환
+					var yyear = getYdate.getFullYear();
+					var ymonth = getYdate.getMonth() + 1;
+					var yday = getYdate.getDate();
+					var yDate = yyear + "년 " + ymonth + "월 "	+ yday + "일";
+					//alert(yDate);
 					
 					$("#partnerDetailResult").append($("#partnerDetailMain").clone().css("display","block"));
 					$("#partnerDetailMain:last-child #member_id").html(data.member_id);
@@ -176,8 +189,8 @@
 					$("#partnerDetailMain:last-child #partner_name").html(data.partner_name);
 					$("#partnerDetailMain:last-child #partner_phone").html(data.partner_phone);
 					$("#partnerDetailMain:last-child #partner_address").html(data.partner_addr);
-					$("#partnerDetailMain:last-child #partner_rgdate").html(data.partner_rgdate);					
-					$("#partnerDetailMain:last-child #partner_ydate").html(data.partner_ydate);
+					$("#partnerDetailMain:last-child #partner_rgdate").html(rgDate);					
+					$("#partnerDetailMain:last-child #partner_ydate").html(yDate);
 					
 					if(data.partner_yn == "Y"){
 						//$("#partner_submit").css("display", "none");
@@ -214,9 +227,9 @@
 			});
 		};	
 		
-	
-	
-	 $(function(){
+	 }
+	 
+	/*  $(function(){ */
 		/******************************************/ 
 		/*			          					  */
 		/*			검색버튼 클릭시 실행				  */
@@ -225,7 +238,13 @@
 		$("#searchPartner").click(function(){
 			//alert("검색버튼");
 			var searchTag=$("input[id='searchTag']").val();
-			alert(searchTag);
+			
+			if(searchTag == ""){
+				alert("검색할 업체를 입력하세요.");
+				$("#searchTag").focus();
+				return false;
+			}
+			//alert(searchTag);
 			/* searchPartnerList(searchTag); */
 		
 			$.ajax({
@@ -378,15 +397,30 @@
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
 						var data=JSON.parse(responseData);
-						var fileName = "${root }/css/manager/images/star0.jpg"
-						//var fileName = data.partner_pic_path + data.partner_pic_name;
-						//alert(fileName);
+						//var filename=data.partner_pic_name
+						var getRgdate = new Date(data.partner_rgdate);	// 등록일 날짜 변환
+						var rgyear = getRgdate.getFullYear();
+						var rgmonth = getRgdate.getMonth() + 1;
+						var rgday = getRgdate.getDate();
+						var rgDate = rgyear + "년 " + rgmonth + "월 "	+ rgday + "일";
+						//alert(rgDate);
+						
+						var getYdate = new Date(data.partner_rgdate);	// 승인일 날짜 변환
+						var yyear = getYdate.getFullYear();
+						var ymonth = getYdate.getMonth() + 1;
+						var yday = getYdate.getDate();
+						var yDate = yyear + "년 " + ymonth + "월 "	+ yday + "일";
+						//alert(yDate);
 						
 						$("#partnerDetailResult").append($("#partnerDetailMain").clone().css("display","block"));
-						$("#partnerDetailMain:last-child #partner_img").attr("src", fileName);
+						$("#partnerDetailMain:last-child #member_id").html(data.member_id);
+						$("#partnerDetailMain:last-child #partner_img").attr("src", "${root}/pds/partner/"+data.partner_pic_name);
 						$("#partnerDetailMain:last-child #partner_name").html(data.partner_name);
 						$("#partnerDetailMain:last-child #partner_phone").html(data.partner_phone);
 						$("#partnerDetailMain:last-child #partner_address").html(data.partner_addr);
+						$("#partnerDetailMain:last-child #partner_rgdate").html(rgDate);					
+						$("#partnerDetailMain:last-child #partner_ydate").html(yDate);
+						
 						if(data.partner_yn == "Y"){
 							//$("#partner_submit").css("display", "none");
 							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.partner_no, "value":"삭제"});
@@ -421,11 +455,7 @@
 	
 				});
 			};	
-			
-		}); 
-		
-		
-		
+		}); 		
 		
 		/******************************************/ 
 		/*			          					  */
@@ -574,9 +604,11 @@
 					}
 				});
 				
-			}
+			};
 			
 			function partnerDetail(partnerNo){
+				
+				
 				$("#partnerDetailResult").empty();
 				$.ajax({
 					type:'get',
@@ -584,20 +616,35 @@
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
 						var data=JSON.parse(responseData);
+						//var filename=data.partner_pic_name
+						var getRgdate = new Date(data.partner_rgdate);	// 등록일 날짜 변환
+						var rgyear = getRgdate.getFullYear();
+						var rgmonth = getRgdate.getMonth() + 1;
+						var rgday = getRgdate.getDate();
+						var rgDate = rgyear + "년 " + rgmonth + "월 "	+ rgday + "일";
+						//alert(rgDate);
 						
-						var fileName = data.partner_pic_path + data.partner_pic_name;
-						//alert(fileName);
+						var getYdate = new Date(data.partner_rgdate);	// 승인일 날짜 변환
+						var yyear = getYdate.getFullYear();
+						var ymonth = getYdate.getMonth() + 1;
+						var yday = getYdate.getDate();
+						var yDate = yyear + "년 " + ymonth + "월 "	+ yday + "일";
+						//alert(yDate);
 						
 						$("#partnerDetailResult").append($("#partnerDetailMain").clone().css("display","block"));
-						$("#partnerDetailMain:last-child #partner_img").attr("src", fileName);
+						$("#partnerDetailMain:last-child #member_id").html(data.member_id);
+						$("#partnerDetailMain:last-child #partner_img").attr("src", "${root}/pds/partner/"+data.partner_pic_name);
 						$("#partnerDetailMain:last-child #partner_name").html(data.partner_name);
 						$("#partnerDetailMain:last-child #partner_phone").html(data.partner_phone);
 						$("#partnerDetailMain:last-child #partner_address").html(data.partner_addr);
+						$("#partnerDetailMain:last-child #partner_rgdate").html(rgDate);					
+						$("#partnerDetailMain:last-child #partner_ydate").html(yDate);
+						
 						if(data.partner_yn == "Y"){
-							//$("#partner_submit").css("display", "none");
+							
 							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.partner_no, "value":"삭제"});
 						}else if(data.partner_yn == "N"){
-							//$("#partner_delete").css("display", "none");
+							
 							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.partner_no, "value":"승인"});
 						}
 						
@@ -620,8 +667,8 @@
 								alert("취소하셨습니다.");
 							}
 						});
-					},
-					error:function(data){
+					
+					},error:function(data){
 						alert("에러가 발생했습니다.");
 					}
 	
@@ -629,7 +676,8 @@
 			};	
 		});
 	
-	});
+/*  }); */
+	
 
 </script>
 </head>
