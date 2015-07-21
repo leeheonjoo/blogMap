@@ -170,6 +170,8 @@ v\:* {
                      var pAddr2=pAddrs[2];
                      var pAddr3=pAddrs[3]; 
                      
+					var search_value=$("#blogList_text").val();
+					alert(search_value);
                      $.ajax({
                            type : 'post',
                            url : '${root}/board/blogListResult.do',
@@ -178,7 +180,7 @@ v\:* {
                               sigugun : pAddr1,
                               dongri : pAddr2,
                               bunji : pAddr3,
-                              searchValue:search_value
+                              searchValue: search_value
                            },
                            contentType:'application/x-www-form-urlencoded;charset=UTF-8',
                            success : function(data) {

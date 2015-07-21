@@ -43,9 +43,9 @@
 </head>
 <body>
 	
-	<div class="container">
+	<div class="container" style="width:100%">
         <div class="row centered-form">
-	        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+	        <div>
 	        	<div class="panel panel-default">
 	        		<div class="panel-heading">
 				    	<h3 class="panel-title">중복된 아이디 입니다.</h3>
@@ -61,7 +61,7 @@
 		    					</div>
 		    				</div>
 		    				
-		    				<div class="col-xs-2 col-sm-2 col-md-2">
+		    				<div style="display:inline-block; min-width:100px;">
 			    					<div class="form-group">
 			    						<input type="button" id="registerCheckBtn" value="중복확인" class="btn btn-info btn-block"/>
 			    						<!-- <button id="member_id_confirm" class="btn btn-default">이메일인증</button> -->

@@ -14,26 +14,31 @@
     background-color: rgb(50, 118, 177);
     border-color: rgb(40, 94, 142);
 }
+
 .input-group-addon.success {
     color: rgb(255, 255, 255);
     background-color: rgb(92, 184, 92);
     border-color: rgb(76, 174, 76);
 }
+
 .input-group-addon.info {
     color: rgb(255, 255, 255);
     background-color: rgb(57, 179, 215);
     border-color: rgb(38, 154, 188);
 }
+
 .input-group-addon.warning {
     color: rgb(255, 255, 255);
     background-color: rgb(240, 173, 78);
     border-color: rgb(238, 162, 54);
 }
+
 .input-group-addon.danger {
     color: rgb(255, 255, 255);
     background-color: rgb(217, 83, 79);
     border-color: rgb(212, 63, 58);
 }
+
 .replyDiv{	
 	width:800px;height:30px; 
 	border:solid 0px red;
@@ -58,7 +63,6 @@
 	float:left;
 }
 </style>
-
 <script type="text/javascript" src="${root }/css/replyWrite.js"></script>
 <script type="text/javascript" src="${root }/css/replyDelete.js"></script>
 <script type="text/javascript" src="${root }/css/replyUpdate.js"></script>
@@ -70,21 +74,24 @@ $(function() {
 	$("span[class='glyphicon glyphicon-ok']").click(function() {
 		var replyConent = $("#replyInsert").val();
 		$("#replyInsert").val("");
+	
 		if(replyConent!=""){
 		var boardno=$("#blogRead_boardno > label:eq(0)").text();
+		
 		$.ajax({
 			type : 'post',
 			url : '${root}/board/blogWriteReply.do',
 			data : {
 				board_no : boardno,
 				reply_content: replyConent,
-				reply_member_id: email
-				
+				reply_member_id: email		
 			},
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(data) {
+				
 				if(data!="0"){
 					$("#listAllDiv").empty();
+					
 					$.ajax({
 						type : 'post',
 						url : '${root}/board/blogReadReply.do',
@@ -94,10 +101,12 @@ $(function() {
 						contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 						success : function(data) {
 							var data=JSON.parse(data);
+				
 							$.each(data,function(i){
 								var replyNo=data[i].reply_no;
 								var boardNo=data[i].board_no;
 								var memberId=data[i].member_id;
+								
 								var replyContent=data[i].reply_content;
 								var replyDate=new Date(data[i].reply_date);
 								var replyfullDate=replyDate.getFullYear()+"/"+(replyDate.getMonth()+1)+"/"+replyDate.getDate();
@@ -105,36 +114,37 @@ $(function() {
 								$("#listAllDiv").append($("#reply_content_insert").clone());
 								$("#listAllDiv > #reply_content_insert").css("display","block");
 								$("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
+					
 								$("#reply_content_insert"+i+" > span:eq(0)").text(replyNo);
 								$("#reply_content_insert"+i+" > span:eq(1)").text(memberId);
 								$("#reply_content_insert"+i+" > span:eq(2)").text(replyContent);
 								$("#reply_content_insert"+i+" > span:eq(3)").text(replyfullDate);
 								$("#reply_content_insert"+i+" > span:eq(4)").attr("id","reply_buttons"+i);
+								
 								$("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
 								$("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
 								
 								if(email!=memberId){
 									$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
 									$("#reply_buttons"+i+" > button:eq(1)").css("display","none");
-								}
-								
-												
+								}				
 							});
+							
 						},error: function(data) {
-							
-						}
-							
-					})
+// 							alert();
+						}	
+					});
 				}
 			},
 			error:function(data){
-				
+// 				alert();
 			}
-		})
+			
+		});
 		}else{
 			alert("NULL값으로 입력해주세요.");			
 		}
-})
+	});
 	/*추천 기능*/
 	$("#blog_reference").click(function() {
 		alert("추천 클릭하였습니다.");
@@ -305,8 +315,10 @@ $(function() {
 				success : function(data) {
 					var data=JSON.parse(data);
 					var file_no="";
+					var board_content="";
 					$.each(data,function(i){
 						file_no+=data[i].FILE_NO+",";
+						alert(file_no);
 						var file_size=data[i].FILE_SIZE;
 						var file_path=data[i].FILE_PATH;
 						var file_name=data[i].FILE_NAME;
@@ -323,7 +335,7 @@ $(function() {
 						
 						var board_no=data[i].BOARD_NO;
 						var board_grade=data[i].BOARD_GRADE;
-						var board_content=data[i].BOARD_CONTENT;
+						board_content=data[i].BOARD_CONTENT;
 						var board_title=data[i].BOARD_TITLE;
 						var board_rgdate=data[i].BOARD_RGDATE;
 						
@@ -334,7 +346,7 @@ $(function() {
 						$("#blogUpdateAddr > input[name='realAddr']").val(addr_sido+" "+addr_sigugn+" "+addr_dongri+" "+addr_bunji);
 						
 						$("#blogUpdateTitle > input[name='board_title']").val(board_title);
-						$("#blogUpdateContent > textarea[name='board_content']").html(board_content);
+						//$("#Upboard_content").html(board_content);
 						
 						if(board_grade=="0"){
 							$("#blogUpdateGrade > input:eq(0)").attr("checked","checked");
@@ -353,6 +365,7 @@ $(function() {
 						$("#blogUpdateattach >span:eq("+i+")").css("display","");
 						$("#blogUpdateattach >span:eq("+i+") > input[name='comment']" ).val(file_comment);
 						$("#blogUpdateBoard_no").val(board_no);
+						$("#blogUpdateFile_no").val(file_no);
 						
 						
 						
@@ -366,12 +379,44 @@ $(function() {
 						} */
 					});
 					$("#blogUpdateFile_no").val(file_no);
+					//전역변수
+					var obj=[];
+					//스마트에디터 프레임생성
+					nhn.husky.EZCreator.createInIFrame({
+						oAppRef:obj,
+						elPlaceHolder:"Upboard_content",
+						sSkinURI:"${root}/editor/SmartEditor2Skin.html",
+						htParams:{
+							//툴바 사용 여부(true:사용/false:사용하지 않음)
+							bUseToolbar:true,
+							//입력창 크기 조절바 사용 여부(true:사용/false:사용하지 않음)
+							bUseVerticalResizer:true,
+							//모드 탭(Editor|HTML|TEXT) 사용 여부 (true:사용/false:사용하지 않음)
+							bUseModeChanger:true
+						},
+						fOnAppLoad:function(){
+							var spa=board_content;
+							//id가 smarteditor인 textarea에 에디터에서 대입
+							obj.getById["Upboard_content"].exec("PASTE_HTML",[spa]);
+						},
+						fCreator:"createSEditor2"
+					});
+					
+					$("#blogUpdateButton").click(function() {
+						
+						obj.getById["Upboard_content"].exec("UPDATE_CONTENTS_FIELD",[]);
+						$("#up_frm").submit();
+					});	
 				},
 				error: function(data) {
 					
 				}
 			})
-	})
+	});
+	
+	$("#coupon_issue_btn").click(function(){
+		
+	});
 	
 });
 function reply_update(UThis) {
@@ -522,7 +567,8 @@ function reply_delete(DThis) {
 	<span id="blog_noreference_count"></span>
 	</span>
 	<span id="blogBookmark"><img src="${root}/images/blogMap/Bookmark1.png"/><b style="color: #03A9F4;">즐겨찾기</b></span>
-	<input type="button" class="btn btn-primary" value="쿠폰발급" />
+
+	<input type="button" class="btn btn-primary" id="coupon_issue_btn" value="쿠폰발급" />
 	</div>
 	<br/>
 	<div id="blogRead_reply">

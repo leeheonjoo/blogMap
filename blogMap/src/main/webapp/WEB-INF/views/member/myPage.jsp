@@ -55,7 +55,12 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_name").text(memberData.member_name);
 					//$("#myPage_member_name").attr("disabled","disabled");
 					
-					$("#myPage_member_joindate").text(memberData.member_joindate);
+					var dt;
+
+					dt = new Date(memberData.member_joindate);
+					dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
+
+					$("#myPage_member_joindate").text(dt);
 					//$("#myPage_member_joindate").attr("disabled","disabled");
 					
 					$("#myPage_member_point_total").text(data[1]+"points");
@@ -68,8 +73,17 @@ if(sessionStorage.getItem('email')!=null){
 						
 					});
 					
-					if(data[1]>20){
+					if(data[1]>=0&&data[1]<20){
 						$("#myPage_member_rate").text("새싹");
+					}
+					if(data[1]>=20&&data[1]<100){
+						$("#myPage_member_rate").text("중수");
+					}
+					if(data[1]>=100&&data[1]<500){
+						$("#myPage_member_rate").text("고수");
+					}
+					if(data[1]>=500){
+						$("#myPage_member_rate").text("매니아");
 					}
 					
 					$("#myPage_member_board_total").text(data[2]+" EA");
@@ -106,7 +120,7 @@ if(sessionStorage.getItem('email')!=null){
 		
 		var p_startPage=0; 
 		var p_endPage=0;
-		var pageBlock=2;
+		var pageBlock=10;
 		
 		var b_startPage=0;
 		var b_endPage=0;
@@ -1948,7 +1962,7 @@ if(sessionStorage.getItem('email')!=null){
 	
 	
 <div class="container">
-	<div class="col-sm-2">
+	<div class="col-md-2 col-xs-2 col-sm-2">
     <nav class="nav-sidebar">
 		<ul class="nav tabs">
 		  <li id="aaa" class="abc active"><a id="member_info_tabBtn" href="#tab1" data-toggle="tab">회원정보</a></li>
@@ -1963,7 +1977,7 @@ if(sessionStorage.getItem('email')!=null){
 <!-- tab content -->
 	<div class="tab-content">
 		<div class="tab-pane active text-style" id="tab1">
- 			 <div class=" col-md-7 col-lg-7 "> 
+ 			 <div class=" col-md-7 col-lg-7 col-xs-7 col-sm-7 "> 
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
@@ -1977,11 +1991,6 @@ if(sessionStorage.getItem('email')!=null){
                       <tr>
                         <td>회원등급:</td>
                         <td id="myPage_member_rate"></td>
-                      </tr>
-                 
-                      <tr>
-                        <td>가입일:</td>
-                        <td id="myPage_member_joindate"></td>
                       </tr>
                      
                       <tr>
@@ -2003,6 +2012,11 @@ if(sessionStorage.getItem('email')!=null){
                         <td>쿠폰:</td>
                         <td><a href="#tab5" data-toggle="tab" id="myPage_member_coupon_total"></a></td>
                       </tr>
+                      
+                      <tr>
+                        <td>가입일:</td>
+                        <td id="myPage_member_joindate"></td>
+                      </tr>
                     </tbody>
                   </table>
                   
@@ -2020,7 +2034,7 @@ if(sessionStorage.getItem('email')!=null){
       	 <hr>   -->
 		</div>
 		<div class="tab-pane text-style" id="tab2">
-			<div class="col-md-9 col-lg-9" id="myPage_member_point_list">
+			<div class="col-xs-9 col-md-9 col-sm-9 col-lg-9" id="myPage_member_point_list">
 				<h4>나의 포인트 정보</h4>
 			
 				<div class="method">
@@ -2037,7 +2051,7 @@ if(sessionStorage.getItem('email')!=null){
 					<span id='myPage_member_point_list_after' style="display:'none';"><a href="#" id="point_paging_after">다음</a></span>
 				</div> -->
 					
-					<div id="myPage_member_point_paging" class="container">
+					<div id="myPage_member_point_paging" class="container" style="width:100%;text-align:center;">
 						<ul class="pagination">
 			              <li id="myPage_member_point_list_before" style="display:'none';"><a href="#" id="point_paging_before">«</a></li>
 			              <li id="myPage_member_point_list_pageNum"></li>
@@ -2049,7 +2063,7 @@ if(sessionStorage.getItem('email')!=null){
 		</div>
 		
 		<div class="tab-pane text-style" id="tab3">
-  			<div class="col-md-9 col-lg-9" id="myPage_member_board_list">
+  			<div class="col-xs-9 col-md-9 col-sm-9 col-lg-9" id="myPage_member_board_list">
 				<h4>나의 게시글 정보</h4>
 			
 				<div class="method">
@@ -2066,7 +2080,7 @@ if(sessionStorage.getItem('email')!=null){
 					<span id='myPage_member_point_list_after' style="display:'none';"><a href="#" id="point_paging_after">다음</a></span>
 				</div> -->
 					
-					<div id="myPage_member_board_paging" class="container">
+					<div id="myPage_member_board_paging" class="container" style="width:100%;text-align:center;">
 						<ul class="pagination">
 			              <li id="myPage_member_board_list_before" style="display:'none';"><a href="#" id="board_paging_before">«</a></li>
 			              <li id="myPage_member_board_list_pageNum"></li>
@@ -2078,7 +2092,7 @@ if(sessionStorage.getItem('email')!=null){
 		</div>
 		
 		<div class="tab-pane text-style" id="tab4">
-  			<div class="col-md-9 col-lg-9" id="myPage_member_favorite_list">
+  			<div class="col-xs-9 col-md-9 col-sm-9 col-lg-9" id="myPage_member_favorite_list">
 				<h4>내 즐겨찾기 정보</h4>
 			
 				<div class="method">
@@ -2095,7 +2109,7 @@ if(sessionStorage.getItem('email')!=null){
 					<span id='myPage_member_point_list_after' style="display:'none';"><a href="#" id="point_paging_after">다음</a></span>
 				</div> -->
 					
-					<div id="myPage_member_favorite_paging" class="container">
+					<div id="myPage_member_favorite_paging" class="container" style="width:100%;text-align:center;">
 						<ul class="pagination">
 			              <li id="myPage_member_favorite_list_before" style="display:'none';"><a href="#" id="favorite_paging_before">«</a></li>
 			              <li id="myPage_member_favorite_list_pageNum"></li>
@@ -2133,8 +2147,8 @@ if(sessionStorage.getItem('email')!=null){
         
              
 	        <div class="row">
-		    	<div class="col-md-8">
-					<div class="col-sm-6 col-md-4">
+		    	<div class="col-sm-8 col-xs-8 col-md-8">
+					<div class="col-xs-6 col-sm-6 col-md-4">
 						<div class="thumbnail" id="myPage_member_coupon_list">
 							<div id="myPage_member_coupon_list_content">
 								<!-- <h4 class="text-center"><span class="label label-info">업체명</span></h4>
@@ -2166,7 +2180,7 @@ if(sessionStorage.getItem('email')!=null){
 	        
 	        <div class="row">
 	        	<center>
-	        	<div id="myPage_member_coupon_paging" class="container">
+	        	<div id="myPage_member_coupon_paging" class="container" style="width:100%;text-align:center;">
 						<ul class="pagination">
 			              <li id="myPage_member_coupon_list_before" style="display:'none';"><a href="#" id="coupon_paging_before">«</a></li>
 			              <li id="myPage_member_coupon_list_pageNum"></li>

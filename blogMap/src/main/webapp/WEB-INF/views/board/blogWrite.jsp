@@ -24,20 +24,22 @@ $(function(){
 		url:'${root}/board/getCategory.do',
 		contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 		success:function(responseData){
-				var data=JSON.parse(responseData);
-				
-				if(!data){
-					alert("존재하지 않는 ID입니다");
-					return false;
-				}
-				blogWrite_optionInsert("headCategory", data);
+			var data=JSON.parse(responseData);
+			
+			if(!data){
+				alert("존재하지 않는 ID입니다");
+				return false;
+			}
+			blogWrite_optionInsert("headCategory", data);
 		},
 		error:function(data){
 			alert("error : blogWrite getBeginCondition");
 		}
 	});
+	
 	var email=sessionStorage.getItem('email');
 	$("input[name='member_id']").attr("value",email);
+
 	
 });
 
@@ -113,58 +115,66 @@ function blogWrite_getCategorySelect(el, headData){
 			alert("error : blogWrite getBeginCondition");
 		}
 	});
-}
 
-//이미지 미리보기
-$(document).ready(function(){
-    function readURL(input,index) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
-            reader.onload = function (e) { 
-            //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-                $('#UploadedImg'+index).attr('src', e.target.result);
-                //이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
-                //(아래 코드에서 읽어들인 dataURL형식)
-            }                    
-            reader.readAsDataURL(input.files[0]);
-            //File내용을 읽어 dataURL형식의 문자열로 저장
-        }
-    }//readURL()--
-
-    //file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하 는 코드
-    $('input[type=file]').click(function() {
-    	var fileId=$(this).attr('id');
-    	var index=fileId.substring(6,7);
-    		$("#"+fileId).change(function(){
+	}
+	
+	//이미지 미리보기
+	$(document).ready(function(){
+	    function readURL(input,index) {
+	    	if (input.files && input.files[0]) {
+	        	var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+	            reader.onload = function (e) { 
+	            //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	                $('#UploadedImg'+index).attr('src', e.target.result);
+	                //이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
+	                //(아래 코드에서 읽어들인 dataURL형식)
+	            }                    
+	            reader.readAsDataURL(input.files[0]);
+	            //File내용을 읽어 dataURL형식의 문자열로 저장
+	        }
+	    }//readURL()--
+	
+	    //file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하 는 코드
+	    $('input[type=file]').click(function() {
+	    	var fileId=$(this).attr('id');
+	    	var index=fileId.substring(6,7);
+	    		
+	    	$("#"+fileId).change(function(){
     	        if(this.value==""||this.value==null){
-    	        	  $('#UploadedImg'+index).attr('src', e.target.result);
+    	        	$('#UploadedImg'+index).attr('src', e.target.result);
     	        }
     	        readURL(this,index);
     	    });
-    });
-    
-    //이미지 수에 따른 display 변화
-    $("#imageAttach").click(function() {
-		var imageSelect=$("#imageAttach option:selected").val();
-    	if(imageSelect=="1"){
-    		 imageInline(0);
-    		 imageNone(1);
-		}else if(imageSelect=="2"){
-			 imageInline(1);
-			 imageNone(2);
-		}else if(imageSelect=="3"){
-			 imageInline(2);
-			 imageNone(3);
-		 }else if(imageSelect=="4"){
-			 imageInline(3);
-			 imageNone(4);
-		 }else if(imageSelect=="5"){
-			 imageInline(4);
-			 imageNone(5);
-		 }
-    });
-   
- });
+	    });
+	    
+	    //이미지 수에 따른 display 변화
+	    $("#imageAttach").click(function() {
+			var imageSelect=$("#imageAttach option:selected").val();
+
+			if(imageSelect=="1"){
+	    		 imageInline(0);
+	    		 imageNone(1);
+			
+			}else if(imageSelect=="2"){
+				 imageInline(1);
+				 imageNone(2);
+	
+			}else if(imageSelect=="3"){
+				 imageInline(2);
+				 imageNone(3);
+			
+			}else if(imageSelect=="4"){
+				 imageInline(3);
+				 imageNone(4);
+			
+			}else if(imageSelect=="5"){
+				 imageInline(4);
+				 imageNone(5);
+			}else{
+				imageNone(0);
+			}
+	    });
+	 });
 
 	//맛집,주소 검색
 	function mapSearch() {
@@ -294,9 +304,40 @@ $(document).ready(function(){
 		$("#save_button").click(function() {
 			var content=$("#board_content").val();
 			var realAddr=$("input type[name='addr_sido']").val();
-		
-			//id가 smarteditor인 textarea에 에디터에서 대입
+			
+			/* 유효성 검사 */
+			if(!$("input[name='addrress']").val()){
+				alert("주소를 입력하세요.");
+				$("#addr").focus();
+				return false;
+			}
+			
+			if(!$("input[name='board_title']").val()){
+				alert("제목을 입력하세요.");
+				$("#board_title").focus();
+				return false;
+			}
+			
+			if($("#blogWriteSelect > #headCategory option:selected").val()=="%"){
+				alert("대분류 카테고리를 선택하세요. 참고)대분류전체는 선택불가");
+				return false;
+			}
+			
+			
 			obj.getById["board_content"].exec("UPDATE_CONTENTS_FIELD",[]);
+			
+			obj.getById["board_content"].exec("UPDATE_IR_FIELD", []); //내용 적용 
+
+		        var content = document.getElementById("board_content").value; 
+
+		        if (content == "" || content == null || content == '&nbsp;' || content == '<p>&nbsp;</p>') { 
+		                alert("내용을 입력하세요."); 
+		                oEditors.getById["board_content"].exec("FOCUS"); //포커싱 
+		                return false; 
+		        }else{ 
+		        } 
+			
+			
 			//폼 submit();
 			$("#frm").submit();
 		});
@@ -353,7 +394,7 @@ $(document).ready(function(){
 	</div>
 	<div>
 		<label>제목:</label>
-		<input type="text" name="board_title" size="70"/>
+		<input type="text" id="board_title" name="board_title" size="70"/>
 	</div>
 	<div>
 		<label>내용:</label>
@@ -370,7 +411,7 @@ $(document).ready(function(){
 			<option value="5">5</option>
 		</select>
 		<br/>
-		<span class="spanStyle" style="display:">
+		<span class="spanStyle" style="display:none;">
 		<input id="imgInp0" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
 		<img id="UploadedImg0" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>

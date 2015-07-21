@@ -287,6 +287,7 @@ public class BoardReadServiceImpl implements BoardReadService {
 		String dongri=request.getParameter("dongri");
 		String bunji=request.getParameter("bunji");
 		String searchValue=request.getParameter("searchValue");
+		logger.info("searchValue:"+searchValue);
 		
 		HashMap<String,Object> hashMap=new HashMap<String, Object>();
 		hashMap.put("sido", sido);
@@ -695,13 +696,14 @@ public class BoardReadServiceImpl implements BoardReadService {
 		List<MultipartFile> upFile=request.getFiles("file");
 		//이미지 코멘트
 		String[] comment=request.getParameterValues("comment");
+		System.out.println("comment:"+comment[0]);
 		String file_no=request.getParameter("file_nos");
+		System.out.println("받은파일번호:"+file_no);
 		String[] fileNo=file_no.split(",");
 		String timeName=null;
 		String[] originalNames = new String[5];
 		long[] fileSize = new long[5];
 		
-		ArrayList<Attach_fileDto> attachList=new ArrayList<Attach_fileDto>();
 		File file=null;
 		for (int j = 0; j < upFile.size(); j++) {
 			String originalName=upFile.get(j).getOriginalFilename();
@@ -721,29 +723,28 @@ public class BoardReadServiceImpl implements BoardReadService {
 					if (!file.isDirectory()) {			//파일이 존재하지 않을 때 
 						file.mkdirs();
 					}
+					
+					
 					upFile.get(j).transferTo(file); //입출력
-					if(fileNo[j].equals("")||fileNo[j]==null){
+					if(fileNo[j].equals("")||fileNo[j]==null||fileNo[j].equals("undefined")){
 						
 					}else{
+						
 					attach_fileDto.setFile_no(Integer.parseInt(fileNo[j]));
 					attach_fileDto.setFile_name(originalNames[j]);
 					attach_fileDto.setFile_size(fileSize[j]);
 					attach_fileDto.setFile_path(file.getAbsolutePath());
 					attach_fileDto.setFile_comment(comment[j]);
+					hashMap.put("attach_file",attach_fileDto);
+					System.out.println("파일번호:"+Integer.parseInt(fileNo[j]));
+					System.out.println("파일이름:"+originalNames[j]);
+					System.out.println("파일사이즈:"+fileSize[j]);
+					//System.out.println("파일경로:"+file.getAbsolutePath());
+					System.out.println("코맨트:"+comment[j]);
+					check=boardReadDao.blogUpdateOk_attach(hashMap);
 					
-//					System.out.println("파일이름:"+originalNames[j]);
-//					System.out.println("파일사이즈:"+fileSize[j]);
-//					System.out.println("파일경로:"+file.getAbsolutePath());
-//					System.out.println("코맨트:"+comment[j]);
 					}
-					if(check>0){
-						//첨푸파일 DB적용
-						attachList.add(j,attach_fileDto);
-						
-						
-//						System.out.println("!"+attachList.size());
-//						System.out.println(j+"!"+attachList.get(j).getFile_name());
-					}
+					
 					
 				}catch(Exception e){
 					logger.info("파일 입출력 에러" + e);
@@ -753,12 +754,15 @@ public class BoardReadServiceImpl implements BoardReadService {
 			}
 
 		}
-		hashMap.put("attachList", attachList);
-	/*	attachList=(ArrayList<Attach_fileDto>) hashMap.get("attachList");
-		for (int i = 0; i < attachList.size(); i++) {
-			System.out.println("j"+attachList.get(i).getFile_name());
-		}*/
-		check=boardReadDao.blogUpdateOk_attach(hashMap);
+		
+		try {
+			response.getWriter().print(check);
+			System.out.println("blogUpdateOk_AttachFile:"+check);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

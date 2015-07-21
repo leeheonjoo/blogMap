@@ -82,8 +82,7 @@
 		where board_no in(select board_no 
 		                  from board_addr_info 
 		                  where addr_sido=#{sido} and addr_sigugun=#{sigugun} and addr_dongri=#{dongri} and addr_bunji=#{bunji})
-		and board_title like '%'||#{searchValue}||'%'
-		and board_content like '%'||#{searchValue}||'%'
+		and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%')
 	</select>
 	
 	<select id="getreply" parameterType="int" resultType="int">
@@ -196,20 +195,11 @@
 	</update>
 	
 	<update id="blogUpdateOk_attach" parameterType="java.util.HashMap">
-		<foreach collection="attachList" item="item" separator=";">
 			update attach_file
-			<set>
-				file_name=#{item.file_name},
-				file_size=#{item.file_size},
-				file_path=#{item.file_path},
-				file_comment=#{item.file_comment}
-			</set>
-			<where>
-			 board_no=#{boardDto.board_no} and file_no=#{item.file_no}
-			</where>
-		</foreach>
+			set file_name=#{attach_file.file_name},
+				file_size=#{attach_file.file_size},
+				file_path=#{attach_file.file_path},
+				file_comment=#{attach_file.file_comment}
+			where board_no=#{boardDto.board_no} and file_no=#{attach_file.file_no}
 	</update> 
-</mapper>
-
- 
-
+</mapper> 

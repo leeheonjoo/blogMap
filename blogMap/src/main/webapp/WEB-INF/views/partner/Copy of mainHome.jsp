@@ -55,7 +55,7 @@ $(function() {
 					<div class="row" id="tour_item_list"></div>
 					<div id="partnerListResult"></div>  <!-- 자료를 붙일 바디 -->
 				
-					<div class="col-md-3 col-sm-4 col-xs-4 tour_items" id="tour_item" role="button" style="display:none;">
+					<div class="col-md-2 col-sm-3 col-xs-4 tour_items" id="tour_item" role="button" style="display:none;">
 						<div id="tour_info" class="thumbnail">	
 							<a data-toggle="modal" href="#modal_info" class="list_partner_no">
 								
@@ -348,7 +348,7 @@ $(function() {
 						
 						$(".tour_items .img-responsive").css({
 							'max-width':"100%",
-							'height': "150px"
+							'height': "90px"
 						});
 						
 					}	
