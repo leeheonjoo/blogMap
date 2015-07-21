@@ -82,8 +82,7 @@
 		where board_no in(select board_no 
 		                  from board_addr_info 
 		                  where addr_sido=#{sido} and addr_sigugun=#{sigugun} and addr_dongri=#{dongri} and addr_bunji=#{bunji})
-		and board_title like '%'||#{searchValue}||'%'
-		and board_content like '%'||#{searchValue}||'%'
+		and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%')
 	</select>
 	
 	<select id="getreply" parameterType="int" resultType="int">

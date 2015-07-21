@@ -42,14 +42,6 @@
    		max-height: 600px;
      	overflow-y:scroll;
  	}
- 	
- /* 	.modal-myPage-update{
- 		width: auto;
- 		margin: 2% 1% 0px 30%;
-  		height: 600px;
-   		max-height: 600px;
-     	overflow-y:scroll;
- 	} 	 */
 	
 /*  	.modal{  */
 /*      display: block !important;  */
@@ -673,25 +665,6 @@ $(function(){
 		    </div>
 		</div>
 	     
-	     
-	  <!--쿠폰발급클릭시 쿠폰발급창 -->   
-	    <div class="modal fade" id="blogRead_coupon" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h5 class="modal-title">조회 결과</h5>
-					</div><div class="container"></div>
-					<div class="modal-body">
-						<div id="mainResult">
- 							<jsp:include page="board/blogRead_coupon.jsp"/>
-						</div>
-						<br/>
-						<br/>
-					</div>
-			   </div>
-			</div>
-		</div> 
 	     		
 	<!-- **********************************
 	                        제휴업체 : 변태훈
@@ -706,24 +679,25 @@ $(function(){
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
-							<div class="row">
+<!-- 			<div class="thumbnail"> div tag 삭제-->
+							<div class="caption">	
+								<jsp:include page="partner/mainHome.jsp" />
+							</div>
+<!-- 			</div>  div tag 삭제-->
+<!--  삭제------------------------------------------------------------------- 여기부터  -->
+							<!--<div class="row">
 						  		<div class="col-lg-4">
-								    <div class="input-group">
+								     <div class="input-group">
 							      		<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
 							      		<span class="input-group-btn">
 							        		<button class="btn btn-default" type="button" id="search_Partner">검색</button>	
 							      		</span>
-								    </div>	<!-- /input-group -->
-						  		</div>	<!-- /.col-lg-6 -->
-							</div>		<!-- /.row -->
+								    </div>	/input-group 
+						  		</div>	
+							</div>	-->
+<!--  삭제------------------------------------------------------------------- 여기까지-->
 						</div>					
 					</div>
-					<div class="thumbnail">
-						<div class="caption">	
-							<jsp:include page="partner/mainHome.jsp" />
-						</div>
-					</div>
-					
 				</div>
 		    </div>
 		</div>
@@ -1051,7 +1025,7 @@ $(function(){
 		
 		<!-- 회원관리 - 수정 -->
 		<div class="modal fade" id="blogmap_myPageUpdate" data-backdrop="static">
-			<div class="modal-dialog modal-email-confrim">
+			<div class="modal-dialog modal-myPage">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

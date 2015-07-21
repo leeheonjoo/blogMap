@@ -150,7 +150,7 @@ if(sessionStorage.getItem('email')!=null){
 	</div><br/>
 	
 	<div>
-       	<button id="myPageUpdate_btn" class="btn btn-primary">Update</button>
+       	<button id="myPageUpdate_btn" class="btn btn-primary" style="min-width:110px">Update</button>
   	</div>
 	 
   <!-- <div class="well">
