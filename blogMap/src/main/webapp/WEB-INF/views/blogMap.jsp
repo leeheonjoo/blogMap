@@ -737,7 +737,8 @@ $(function(){
 								<div class="form-group">
 									<label class="col-xs-3 control-label">카테고리:</label>
 									<div class="col-xs-9">
- 										<p class="form-control-static name" name="p_category_code"></p> 
+ 										<div class="form-control-static name" name="p_category_MNAME" style="display:inline-block;"></div>
+ 										<div class="form-control-static name" name="p_category_SNAME"style="display:inline-block;"></div>
 									</div>
 								</div>
 							

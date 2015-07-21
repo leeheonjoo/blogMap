@@ -1220,7 +1220,8 @@ thead {
 				}
 			});
 		});
-
+	}
+	
 	function msgimportData(no) {
 		$.ajax({
 			type : 'get',
@@ -1248,7 +1249,7 @@ thead {
 			}
 		});
 	}
-}
+
 </script>
 </head>
 <body>
