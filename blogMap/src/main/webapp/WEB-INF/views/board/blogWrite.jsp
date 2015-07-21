@@ -178,6 +178,7 @@ function blogWrite_getCategorySelect(el, headData){
 
 	//맛집,주소 검색
 	function mapSearch() {
+		
 		$("#testMap").empty();
 		//지도 좌표 배열
 		var m = new Array();
@@ -308,7 +309,7 @@ function blogWrite_getCategorySelect(el, headData){
 			
 			/* 유효성 검사 */
 			if($("#blogWriteSelect > #headCategory option:selected").val()=="%"){
-				alert("대분류 카테고리를 선택하세요. 참고)대분류전체는 선택불가");
+				alert("대분류 카테고리를 여행,음식 중 선택해주세요.");
 				return false;
 			}
 			
@@ -323,14 +324,22 @@ function blogWrite_getCategorySelect(el, headData){
 				$("#board_title").focus();
 				return false;
 			}
-			
+			obj.getById["board_content"].exec("UPDATE_IR_FIELD", []); //내용 적용 
+
+	        var content = document.getElementById("board_content").value; 
+
+	        if (content == "" || content == null || content == '&nbsp;' || content == '<p>&nbsp;</p>') { 
+	                alert("내용을 입력하세요."); 
+	                obj.getById["board_content"].exec("FOCUS"); //포커싱 
+	                return false; 
+	        }else{ 
+	        } 
 			
 			
 			var select_value=$("#imageAttach option:selected").val();
 			if(select_value!="0"){
 			var int_select_value=parseInt(select_value);
-			alert(int_select_value);
-				/* if(select_value==i+1){ */
+			for (var i = 0; i < int_select_value; i++) {
 					if($("#attach > span:eq("+i+") > input:eq(1)").val()==""){
 						alert("첨부이미지에 대한 간단한 코멘트를 입력해주세요.");
 						return false;
@@ -340,7 +349,6 @@ function blogWrite_getCategorySelect(el, headData){
 						return false;
 					}
 				}
-			/* } */
 			}
 			
 			if(!($("input[type='radio']").is(":checked"))){
@@ -350,16 +358,7 @@ function blogWrite_getCategorySelect(el, headData){
 			
 			obj.getById["board_content"].exec("UPDATE_CONTENTS_FIELD",[]);
 			
-			obj.getById["board_content"].exec("UPDATE_IR_FIELD", []); //내용 적용 
-
-		        var content = document.getElementById("board_content").value; 
-
-		        if (content == "" || content == null || content == '&nbsp;' || content == '<p>&nbsp;</p>') { 
-		                alert("내용을 입력하세요."); 
-		                oEditors.getById["board_content"].exec("FOCUS"); //포커싱 
-		                return false; 
-		        }else{ 
-		        } 
+		
 			
 			
 			//폼 submit();
@@ -469,12 +468,12 @@ function blogWrite_getCategorySelect(el, headData){
 	
 	<div>
 		<label>평점</label><br/> 
-		<input type="radio" name="board_grade" value="0" /><img src="${root }/css/images/star0.jpg" width="150" height="30"/><br /> 
-		<input type="radio" name="board_grade" value="1"/><img src="${root }/css/images/star1.jpg" width="150" height="30"/><br /> 
-		<input type="radio" name="board_grade" value="2"/><img src="${root }/css/images/star2.jpg" width="150" height="30"/><br /> 
-		<input type="radio" name="board_grade" value="3"/><img src="${root }/css/images/star3.jpg" width="150" height="30"/><br /> 
-		<input type="radio" name="board_grade" value="4"/><img src="${root }/css/images/star4.jpg" width="150" height="30"/><br />
-		<input type="radio" name="board_grade" value="5"/><img src="${root }/css/images/star5.jpg" width="150" height="30"/><br />
+		<input type="radio" name="board_grade" value="0" /><img src="${root }/css/images/star0.jpg" width="100" height="20"/><br /> 
+		<input type="radio" name="board_grade" value="1"/><img src="${root }/css/images/star1.jpg" width="100" height="20"/><br /> 
+		<input type="radio" name="board_grade" value="2"/><img src="${root }/css/images/star2.jpg" width="100" height="20"/><br /> 
+		<input type="radio" name="board_grade" value="3"/><img src="${root }/css/images/star3.jpg" width="100" height="20"/><br /> 
+		<input type="radio" name="board_grade" value="4"/><img src="${root }/css/images/star4.jpg" width="100" height="20"/><br />
+		<input type="radio" name="board_grade" value="5"/><img src="${root }/css/images/star5.jpg" width="100" height="20"/><br />
 	</div>
 
 	 <!-- 하단 버튼 -->

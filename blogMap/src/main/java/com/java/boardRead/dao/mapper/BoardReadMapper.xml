@@ -81,8 +81,8 @@
 		from board
 		where board_no in(select board_no 
 		                  from board_addr_info 
-		                  where addr_sido=#{sido} and addr_sigugun=#{sigugun} and addr_dongri=#{dongri} and addr_bunji=#{bunji})
-		and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%')
+		                  where addr_sido=#{sido} and addr_sigugun=#{sigugun} and addr_dongri=#{dongri} and nvl(addr_bunji,'%') = case when #{bunji} is null then '%' else #{bunji} end)
+        and (board_title like '%'||''||'%' or board_content like '%'||''||'%')
 	</select>
 	
 	<select id="getreply" parameterType="int" resultType="int">
