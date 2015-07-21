@@ -287,6 +287,7 @@ public class BoardReadServiceImpl implements BoardReadService {
 		String dongri=request.getParameter("dongri");
 		String bunji=request.getParameter("bunji");
 		String searchValue=request.getParameter("searchValue");
+		logger.info("searchValue:"+searchValue);
 		
 		HashMap<String,Object> hashMap=new HashMap<String, Object>();
 		hashMap.put("sido", sido);

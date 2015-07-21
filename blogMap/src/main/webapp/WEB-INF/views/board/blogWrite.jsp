@@ -170,6 +170,8 @@ function blogWrite_getCategorySelect(el, headData){
 			}else if(imageSelect=="5"){
 				 imageInline(4);
 				 imageNone(5);
+			}else{
+				imageNone(0);
 			}
 	    });
 	 });
@@ -279,9 +281,8 @@ function blogWrite_getCategorySelect(el, headData){
 		
 		
 	}
+	/* 네이버 스마트 에디터(크기,색상,글꼴 등) */
 	$(function() {
-		/* 네이버 스마트 에디터(크기,색상,글꼴 등) */
-		
 		//전역변수
 		var obj=[];
 		//스마트에디터 프레임생성
@@ -299,9 +300,17 @@ function blogWrite_getCategorySelect(el, headData){
 			}
 			
 		});
+		
+		/* 전송 버튼 클릭시 */
 		$("#save_button").click(function() {
 			var content=$("#board_content").val();
 			var realAddr=$("input type[name='addr_sido']").val();
+			
+			/* 유효성 검사 */
+			if($("#blogWriteSelect > #headCategory option:selected").val()=="%"){
+				alert("대분류 카테고리를 선택하세요. 참고)대분류전체는 선택불가");
+				return false;
+			}
 			
 			if(!$("input[name='addrress']").val()){
 				alert("주소를 입력하세요.");
@@ -317,9 +326,42 @@ function blogWrite_getCategorySelect(el, headData){
 			
 			
 			
-		
-			//id가 smarteditor인 textarea에 에디터에서 대입
+			var select_value=$("#imageAttach option:selected").val();
+			if(select_value!="0"){
+			var int_select_value=parseInt(select_value);
+			alert(int_select_value);
+				/* if(select_value==i+1){ */
+					if($("#attach > span:eq("+i+") > input:eq(1)").val()==""){
+						alert("첨부이미지에 대한 간단한 코멘트를 입력해주세요.");
+						return false;
+					}
+					if($("#attach > span:eq("+i+") > input[type='file']").val()==""){
+						alert("첨부할 이미지를 추가해주세요.");
+						return false;
+					}
+				}
+			/* } */
+			}
+			
+			if(!($("input[type='radio']").is(":checked"))){
+				alert("평점을 선택해주세요.")
+				return false;
+			}
+			
 			obj.getById["board_content"].exec("UPDATE_CONTENTS_FIELD",[]);
+			
+			obj.getById["board_content"].exec("UPDATE_IR_FIELD", []); //내용 적용 
+
+		        var content = document.getElementById("board_content").value; 
+
+		        if (content == "" || content == null || content == '&nbsp;' || content == '<p>&nbsp;</p>') { 
+		                alert("내용을 입력하세요."); 
+		                oEditors.getById["board_content"].exec("FOCUS"); //포커싱 
+		                return false; 
+		        }else{ 
+		        } 
+			
+			
 			//폼 submit();
 			$("#frm").submit();
 		});
@@ -393,7 +435,7 @@ function blogWrite_getCategorySelect(el, headData){
 			<option value="5">5</option>
 		</select>
 		<br/>
-		<span class="spanStyle" style="display:">
+		<span class="spanStyle" style="display:none;">
 		<input id="imgInp0" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
 		<img id="UploadedImg0" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>
@@ -439,7 +481,6 @@ function blogWrite_getCategorySelect(el, headData){
 	<div align="right">
 		<input type="reset" value="취소" /> 
 		<input type="button" id="save_button" value="작성"/>
-		<input type="button" value="목록" />
 	</div>
 	
 </div>	
