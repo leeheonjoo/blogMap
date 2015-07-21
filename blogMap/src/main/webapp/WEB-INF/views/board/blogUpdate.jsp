@@ -66,6 +66,8 @@
 			 }else if(imageSelect=="5"){
 				 UpimageInline(4);
 				 UpimageNone(5);
+			 }else{
+				 UpimageNone(0);
 			 }
 	    });
 		
@@ -151,7 +153,7 @@
 			<option value="5">5</option>
 		</select>
 		<br/>
-		<span class="spanStyle" style="display:">
+		<span class="spanStyle" style="display:none;">
 		<input id="imgInp0" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
 		<img id="UpdateloadedImg0" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>
@@ -185,12 +187,12 @@
 	
 	<div id="blogUpdateGrade">
 		<label>평점</label><br/> 
-		<input type="radio" name="board_grade" value="0"/><img src="${root }/css/images/star0.jpg" width="150" height="30"/><br /> 
-		<input type="radio" name="board_grade" value="1"/><img src="${root }/css/images/star1.jpg" width="150" height="30"/><br /> 
-		<input type="radio" name="board_grade" value="2"/><img src="${root }/css/images/star2.jpg" width="150" height="30"/><br /> 
-		<input type="radio" name="board_grade" value="3"/><img src="${root }/css/images/star3.jpg" width="150" height="30"/><br /> 
-		<input type="radio" name="board_grade" value="4"/><img src="${root }/css/images/star4.jpg" width="150" height="30"/><br />
-		<input type="radio" name="board_grade" value="5"/><img src="${root }/css/images/star5.jpg" width="150" height="30"/><br />
+		<input type="radio" name="board_grade" value="0"/><img src="${root }/css/images/star0.jpg" width="100" height="20"/><br /> 
+		<input type="radio" name="board_grade" value="1"/><img src="${root }/css/images/star1.jpg" width="100" height="20"/><br /> 
+		<input type="radio" name="board_grade" value="2"/><img src="${root }/css/images/star2.jpg" width="100" height="20"/><br /> 
+		<input type="radio" name="board_grade" value="3"/><img src="${root }/css/images/star3.jpg" width="100" height="20"/><br /> 
+		<input type="radio" name="board_grade" value="4"/><img src="${root }/css/images/star4.jpg" width="100" height="20"/><br />
+		<input type="radio" name="board_grade" value="5"/><img src="${root }/css/images/star5.jpg" width="100" height="20"/><br />
 	</div>
 
 	 <!-- 하단 버튼 -->
