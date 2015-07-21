@@ -173,7 +173,7 @@ v\:* {
                     	 pAddr3="";
                      }
                      
-					var search_value=$("#blogList_text").val();
+					var search_value=$("#blogList_text").val().replace(" ","%");
                      $.ajax({
                            type : 'post',
                            url : '${root}/board/blogListResult.do',
@@ -183,6 +183,7 @@ v\:* {
                               dongri : pAddr2,
                               bunji : pAddr3,
                               searchValue: search_value
+                              
                            },
                            contentType:'application/x-www-form-urlencoded;charset=UTF-8',
                            success : function(data) {
@@ -376,6 +377,12 @@ function blogListDetails(blogRead_no) {
         $("#blogRead_boardno > label:eq(0)").text(boardno);
         $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
         $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
+        
+        alert(writer);
+        if(email!=writer){
+        	$("#Upbutton").css("display","none");
+        	$("#Debutton").css("display","none");
+        }
         
         //평점
         if(grade=="0"){

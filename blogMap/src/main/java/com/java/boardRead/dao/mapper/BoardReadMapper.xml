@@ -82,7 +82,7 @@
 		where board_no in(select board_no 
 		                  from board_addr_info 
 		                  where addr_sido=#{sido} and addr_sigugun=#{sigugun} and addr_dongri=#{dongri} and nvl(addr_bunji,'%') = case when #{bunji} is null then '%' else #{bunji} end)
-        and (board_title like '%'||''||'%' or board_content like '%'||''||'%')
+        and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%')
 	</select>
 	
 	<select id="getreply" parameterType="int" resultType="int">
@@ -202,4 +202,34 @@
 				file_comment=#{attach_file.file_comment}
 			where board_no=#{boardDto.board_no} and file_no=#{attach_file.file_no}
 	</update> 
+	
+	<!-- <select id="blogListResult_check" parameterType="java.util.HashMap" resultType="com.java.board.dto.BoardDto">
+		select board_no,member_id,category_code,board_rgdate,board_content,board_grade,board_count,board_title  
+		from board
+		where board_no in(select board_no 
+		                  from board_addr_info 
+		                  where addr_sido=#{sido} and addr_sigugun=#{sigugun} and addr_dongri=#{dongri} and nvl(addr_bunji,'%') = case when #{bunji} is null then '%' else #{bunji} end)
+        and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%')
+        and member_id = case when 'y' = #{check_value} then #{member_id} else member_id end
+	</select> -->
+	
+	<select id="getboardList_check" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	<![CDATA[
+		select a.*,count(*) over (partition by 1) tot_cnt from board a,board_addr_info b
+		where a.board_no=b.board_no
+		and a.board_no in(select board_no from 
+		board_addr_info 
+		where 
+		(('%'=#{board_addr_info.addr_sido} and addr_sido like '%') or ('%'<>#{board_addr_info.addr_sido} and addr_sido = #{board_addr_info.addr_sido}))
+		and (('%'=#{board_addr_info.addr_sigugun} and addr_sigugun like '%') or ('%'<>#{board_addr_info.addr_sigugun} and addr_sigugun = #{board_addr_info.addr_sigugun}))
+		and (('%'=#{board_addr_info.addr_dongri} and addr_dongri like '%') or ('%'<>#{board_addr_info.addr_dongri} and addr_dongri = #{board_addr_info.addr_dongri})))
+		and category_code in(select category_code 
+		from category 
+		where category_mname like '%'||#{category.category_mname}||'%'
+		and category_sname like '%'||#{category.category_sname}||'%')
+		and (board_title like '%'||#{search_value}||'%' or board_content like '%'||#{search_value}||'%')
+		and a.member_id = case when 'y' = #{check_value} then #{member_id} else a.member_id end
+		]]>
+	
+	</select>
 </mapper> 

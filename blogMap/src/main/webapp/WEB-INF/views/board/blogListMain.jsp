@@ -13,8 +13,19 @@
 <script type="text/javascript">
 	// 	20150626 이헌주 - blogListMain.jsp 호출시 검색조건(시도,대분류 카테고리) load를 위한 function
 	$(function(){
+		var email=sessionStorage.getItem('email');
+		if(email!=null){
+			$("#myId_blogList").css("display","");
+		}
+		var check_value="";
+	
+		
 		
 		$("#blogList_Search").click(function() {
+			if($("#myId_blogList > input:checked").is(":checked") == true) {
+				check_value=$("#myId_blogList > input").val();
+			}
+			
 			var sido=$("#si_select:first-child").text();
 			if(sido=="시도[전체]"){
 				sido="%";
@@ -26,7 +37,7 @@
 			var dongmyunri=$("#dong_select").attr("value");
 			var headCategory=$("#headCategory_select").attr("value");
 			var detailCategory=$("#detailCategory_select").attr("value");
-			var search_value=$("#blogList_text").val();
+			var search_value=$("#blogList_text").val().replace(" ","%");
 			
 			/* alert(sido);
 			alert(sigugun);
@@ -59,7 +70,9 @@
 					search_dongmyunri:dongmyunri,
 					search_headCategory:headCategory,
 					search_detailCategory:detailCategory,
-					search_search_value:search_value
+					search_search_value:search_value,
+					checkValue: check_value,
+                    member_id: email
 				},
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(data){
@@ -80,6 +93,8 @@
 							url:'${root}/board/blogListSearchSub1.do',
 							data:{
 								board_no: board_no
+								
+								
 								/* category_code: category_code,
 								key : "60e9ac7ab8734daca3d2053c1e713dbd",
 								encoding : "utf-8",
@@ -370,6 +385,10 @@
 					<div class="form-group">
 						<input type="text"  id="blogList_text" class="form-control" placeholder="Search"/>
 						<button type="button" id="blogList_Search" class="btn btn-default">검색</button>
+						<span id="myId_blogList" style="display:none;">
+						<label style="color: red;">유저 작성글만 검색시 체크</label>
+						<input type="checkbox" value="y"/>
+						</span>
 					</div>
 				</form>
 			</div><!-- /.navbar-collapse -->
@@ -390,6 +409,8 @@
 		<!-- <a data-toggle="modal" href="#blogListSub" class="btn btn-primary">Launch modal</a> -->
 <script type="text/javascript">
 $(function(){
+
+	
 	if (!navigator.geolocation) {
 		var latitude = 37.5675451; //위도
 		var longitude = 126.9773356; //경도

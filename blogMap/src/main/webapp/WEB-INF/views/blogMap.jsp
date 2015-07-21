@@ -586,7 +586,7 @@ $(function(){
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<button type="button" id="read_closeButton" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title">Blog Read</h4>
 					</div><div class="container"></div>
 					<div class="modal-body">
