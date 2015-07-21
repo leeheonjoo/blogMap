@@ -611,7 +611,8 @@ function reply_delete(DThis) {
 	</span>
 	<span id="blogBookmark"><img src="${root}/images/blogMap/Bookmark1.png"/><b style="color: #03A9F4;">즐겨찾기</b></span>
 
-	<input type="button" class="btn btn-primary" id="coupon_issue_btn" value="쿠폰발급" />
+	&nbsp;&nbsp;&nbsp;&nbsp;<span><img src="${root}/images/blogMap/coupon_img.png" id="coupon_issue_btn" style="width:80px;"/></span>
+	
 	
 	<br/>
 	<div id="blogRead_reply">
