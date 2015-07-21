@@ -201,6 +201,78 @@ li { list-style-type:none;}
 		});	
  	}
  	
+ 	function couponData(couponNo){
+		
+		if(sessionStorage.getItem('manager_yn')=="Y"){
+			$("#coupon_detail_button").css("display","inline-block");
+		}
+		
+		$("#couponDetailResult").empty();
+		$.ajax({
+			type:'get',
+			url:'${root}/manager/couponDetail.do?coupon_no='+couponNo,
+			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+			 success:function(responseData){
+				var data=JSON.parse(responseData);
+				//var filename=data.partner_pic_name
+				//alert(data[0].PARTNER_NAME);
+				var getbymd = new Date(data[0].COUPON_BYMD);	// 등록일 날짜 변환
+				var byear = getbymd.getFullYear();
+				var bmonth = getbymd.getMonth() + 1;
+				var bday = getbymd.getDate();
+				var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+				//alert(bymd);
+				
+				var geteymd = new Date(data[0].COUPON_EYMD);	// 승인일 날짜 변환
+				var eyear = geteymd.getFullYear();
+				var emonth = geteymd.getMonth() + 1;
+				var eday = geteymd.getDate();
+				var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+				//alert(eymd);
+				
+				$("#couponDetailResult").append($("#couponDetailMain").clone().css("display","block"));
+				$("#couponDetailMain:last-child #coupon_img").attr("src", "${root}/pds/coupon/"+data[0].COUPON_PIC_NAME);
+				$("#couponDetailMain:last-child #partner_no").html(data[0].PARTNER_NAME);
+				$("#couponDetailMain:last-child #coupon_item").html(data[0].COUPON_ITEM);
+				$("#couponDetailMain:last-child #coupon_discount").html(data[0].COUPON_DISCOUNT+"%");
+				$("#couponDetailMain:last-child #coupon_bymd").html(bymd);
+				$("#couponDetailMain:last-child #coupon_eymd").html(eymd);					
+				if(data[0].COUPON_YN == "Y"){
+					//$("#partner_submit").css("display", "none");
+					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"취소"});
+				}else if(data[0].COUPON_YN == "N"){
+					//$("#partner_delete").css("display", "none");
+					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"승인"});
+				} 
+				
+				$("#coupon_detail_button[value='취소']").click(function(){
+					var couponNo = $(this).attr('name');
+					//alert(couponNo);
+					var check = confirm("쿠폰 발행을 취소하시겠습니까?");
+					if(check == "1"){
+						couponCancle(couponNo);
+					}else{
+						alert("취소하셨습니다.")
+					}
+				});
+				
+				$("#coupon_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
+					var couponNo = $(this).attr('name');		
+					//alert(couponNo);
+					var check = confirm("쿠폰을 승인 하시겠습니까?");
+					if(check == "1"){
+						couponSubmit(couponNo);
+					}else{
+						alert("취소하셨습니다.")
+					}
+				});	
+			},error:function(data){
+				alert("에러가 발생했습니다.");
+			}
+
+		});
+	};
+ 	
 //  	function couponData(couponNo){
 // 		$("#couponDetailInfoResult").empty();
 // 		$.ajax({
