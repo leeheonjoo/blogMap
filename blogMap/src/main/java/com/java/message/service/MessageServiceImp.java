@@ -147,8 +147,6 @@ public class MessageServiceImp implements MessageService {
 			messageList=messageDao.getReceiveMessageList(startRow,endRow, member_id);
 		}
 		
-		logger.info("messageList:"+messageList);
-		
 		Gson gson=new Gson();
 		String json=gson.toJson(messageList);
 		
