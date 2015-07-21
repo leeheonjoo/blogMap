@@ -42,6 +42,8 @@ import com.java.board.dto.Board_addr_infoDto;
 import com.java.board.dto.PhotoDto;
 import com.java.board.dto.Point_info;
 import com.java.boardRead.dto.BoardReadDto;
+import com.java.coupon.dto.CouponDto;
+import com.java.partner.dto.PartnerDto;
 
 @Component
 public class BoardServiceImpl implements BoardService {
@@ -518,5 +520,70 @@ public class BoardServiceImpl implements BoardService {
 			logger.info("DB저장값 이미지파일:"+upFile.get(i).getOriginalFilename());
 		}*/
 		
+	}
+
+	@Override
+	public void coupon_issue(ModelAndView mav) {
+		Map<String, Object>map =mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		int board_no=Integer.parseInt(request.getParameter("board_no"));
+		logger.info("board_no:"+board_no);
+		
+		List<PartnerDto> partnerList=null;
+		List<CouponDto> couponList=null;
+		
+		HashMap<String,Object> hMap=new HashMap<String,Object>();
+		hMap.put("partnerList", partnerList);
+		hMap.put("couponList", couponList);
+		
+		List<HashMap<String,Object>> coupon_issue_list=new ArrayList<HashMap<String,Object>>();
+		coupon_issue_list.add(hMap);
+		
+		coupon_issue_list=boardDao.coupon_data_list(board_no);
+		logger.info("coupon_issue_list:"+coupon_issue_list);
+		
+		Gson gson=new Gson();
+		String coupon_data_json=gson.toJson(coupon_issue_list);
+		
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(coupon_data_json);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	@Override
+	public void getCoupon(ModelAndView mav) {
+		Map<String, Object>map =mav.getModel();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletResponse response=(HttpServletResponse) map.get("response");
+		
+		String member_id=request.getParameter("member_id");
+		String coupon_no=request.getParameter("coupon_no");
+		
+		logger.info("member_id:"+member_id);
+		logger.info("coupon_no:"+coupon_no);
+		
+		int check=0;
+		
+		check=boardDao.checkCoupon(member_id,coupon_no);
+		
+		if(check!=2){
+			check=boardDao.getCoupon(member_id,coupon_no);
+		}
+		
+		logger.info("check:"+check);
+		
+		try {
+			response.getWriter().print(check);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -462,7 +462,8 @@ $(function() {
 	});
 	
 	$("#coupon_issue_btn").click(function(){
-		
+		$("div[id='blogRead_coupon'].modal").modal();
+		//alert("보드넘버"+$("#blogRead_boardno label").text());
 	});
 	
 });
@@ -611,7 +612,7 @@ function reply_delete(DThis) {
 	<span id="blogBookmark"><img src="${root}/images/blogMap/Bookmark1.png"/><b style="color: #03A9F4;">즐겨찾기</b></span>
 
 	<input type="button" class="btn btn-primary" id="coupon_issue_btn" value="쿠폰발급" />
-	</div>
+	
 	<br/>
 	<div id="blogRead_reply">
 		<label>답글:</label>
