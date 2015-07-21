@@ -11,9 +11,9 @@
 	<input type="text" id="email_confirm_num" value="이거 뭐하는거있었는데.. 찾아보기"/><br/>
 	<input type="button" id="email_confirm_check_btn" value="확인"/> -->
 	
-	<div class="container">
+	<div class="container" style="width:100%;">
         <div class="row centered-form">
-	        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+	        <div>
 	        	<div class="panel panel-default">
 	        		<div class="panel-heading">
 				    	<h1 class="panel-title">입력된 이메일로 인증번호가 발송되었습니다.</h1>
@@ -29,7 +29,7 @@
 		    					</div>
 		    				</div>
 		    				
-		    				<div class="col-xs-2 col-sm-2 col-md-2">
+		    				<div style="min-width:100px">
 			    					<div class="form-group">
 			    						<input type="button" id="email_confirm_check_btn" value="확인" class="btn btn-info btn-block"/>
 			    					</div>

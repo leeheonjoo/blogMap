@@ -12,75 +12,73 @@
 
 </head>
 <body>
-<div id="partnerDetailMain" style="display: none;">
+<div id="couponDetailMain" style="display: none;">
 	<%--  <img src="${root }/css/manager/images/star0.jpg" width="300px" height="300px"/> --%>
 	
-	<div class="modal-dialog modal-lg" style="width:100%; margin:auto;">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">쿠폰 정보</h4>
+			</div>
+			
 			<div class="modal-body" id="partner_data-body">
 				<div class="row form-horizontal">
 					<div class="col-md-3">
-						<img class="img-responsive img" id="partner_img"/>
+						<img class="img-responsive img" id="coupon_img"/>
 						
 					</div>
 					<div class="col-md-9">
 					
 						<div class="form-group">
-							<label class="col-xs-3 control-label">아이디</label>
-							<div class="col-xs-9">
-								<p class="form-control-static address" id="member_id"></p>
-							</div>
-						</div>
-						
-						<div class="form-group">
 							<label class="col-xs-3 control-label">업체명</label>
 							<div class="col-xs-9">
-								<p class="form-control-static name" id="partner_name"></p>
+								<p class="form-control-static address" id="partner_no"></p>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-xs-3 control-label">전화번호</label>
+							<label class="col-xs-3 control-label">상품</label>
 							<div class="col-xs-9">
-								<p class="form-control-static phone" id="partner_phone"></p>
+								<p class="form-control-static name" id="coupon_item"></p>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-xs-3 control-label">주소</label>
+							<label class="col-xs-3 control-label">할인율</label>
 							<div class="col-xs-9">
-								<p class="form-control-static address" id="partner_address"></p>
-							</div>
-						</div>
-						
-						
-						
-						<div class="form-group">
-							<label class="col-xs-3 control-label">등록일</label>
-							<div class="col-xs-9">
-								<p class="form-control-static address" id="partner_rgdate"></p>
+								<p class="form-control-static phone" id="coupon_discount"></p>
 							</div>
 						</div>
 						
 						<div class="form-group">
-							<label class="col-xs-3 control-label">승인일</label>
+							<label class="col-xs-3 control-label">시작일</label>
 							<div class="col-xs-9">
-								<p class="form-control-static address" id="partner_ydate"></p>
+								<p class="form-control-static address" id="coupon_bymd"></p>
 							</div>
 						</div>
 						
+						<div class="form-group">
+							<label class="col-xs-3 control-label">종료일</label>
+							<div class="col-xs-9">
+								<p class="form-control-static address" id="coupon_eymd"></p>
+							</div>
+						</div>
+												
 					</div>
 				</div>						
 			</div>
 			
 			<div class="modal-footer">
-				<input type="button" class="btn btn-default" id="partner_detail_button"/>
-				<input type="button" class="btn btn-default" data-dismiss="modal" value="닫기"/>				
+				<input type="button" class="btn btn-default" id="coupon_detail_button"/>
+				<input type="button" class="btn btn-default" data-dismiss="modal" value="닫기" />	
 			</div>
 		</div>
 	</div>
 </div>
 
-<div id="partnerDetailResult"></div>
+<div id="couponDetailResult"></div>
 </body>
 </html>
