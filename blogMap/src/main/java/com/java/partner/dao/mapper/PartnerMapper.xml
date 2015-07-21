@@ -4,17 +4,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dao.PartnerMapper">
 	
-	<insert id="partnerRegister" parameterType="com.java.partner.dto.PartnerDto">
-	  	insert into partner(partner_no,member_id,category_code,partner_name,partner_phone,partner_addr,partner_rgdate,partner_yn,partner_ydate,partner_pic_name,partner_pic_path,partner_pic_size) values(partner_partner_no_seq.nextval,#{member_id},#{category_code},#{partner_name},#{partner_phone},#{partner_addr},sysdate,'N',null,#{partner_pic_name},#{partner_pic_path},#{partner_pic_size})
+	<insert id="partnerRegister" parameterType="java.util.HashMap">
+	  	insert into partner(partner_no,member_id,category_code,partner_name,partner_phone,partner_addr,partner_rgdate,partner_yn,partner_ydate,partner_pic_name,partner_pic_path,partner_pic_size) values(partner_partner_no_seq.nextval,#{partnerDto.member_id},(select category_code from category where category_mname=#{boardreadDto.category_mname} and category_sname like #{boardreadDto.category_sname}),#{partnerDto.partner_name},#{partnerDto.partner_phone},#{partnerDto.partner_addr},current_date,'N',null,#{partnerDto.partner_pic_name},#{partnerDto.partner_pic_path},#{partnerDto.partner_pic_size})
 	</insert>
+	
 	<select id="partnerCount" resultType="int">
 	select count(*) from partner
 	</select>
+	
 	<select id="getWriteList" resultType="com.java.partner.dto.PartnerDto">
 		select * from partner order by partner_no desc
 	</select>
-	<select id="getTourPartnerListDate" parameterType="Integer" resultType="com.java.partner.dto.PartnerDto">
-		select * from partner where partner_no=#{partnerNo}
+	
+	<select id="getTourPartnerListDate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select p.*,c.category_mname mname,c.category_sname sname
+		from partner p,category c
+		where p.category_code=c.category_code
+		and p.category_code=(select category_code from partner where partner_no=#{partnerNo})
+		and p.partner_no=#{partnerNo}
 	</select>
 	
 	<insert id="couponRegister" parameterType="com.java.coupon.dto.CouponDto">
@@ -28,5 +35,4 @@
 	<insert id="coupon_register" parameterType="com.java.coupon.dto.CouponDto">
 		insert into coupon(coupon_no,partner_no,coupon_item,coupon_discount,coupon_bymd,coupon_eymd,coupon_pic_name,coupon_pic_path,coupon_pic_size,coupon_yn) values(coupon_coupon_no_seq.nextval,#{partner_no},#{coupon_item},#{coupon_discount},#{coupon_bymd},#{coupon_eymd},#{coupon_pic_name},#{coupon_pic_path},#{coupon_pic_size},'N')
 	</insert>
-	
 </mapper>

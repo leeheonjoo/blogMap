@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.java.boardRead.dto.BoardReadDto;
 import com.java.coupon.dto.CouponDto;
 import com.java.partner.dto.PartnerDto;
 import com.java.partner.service.PartnerService;
@@ -31,13 +32,14 @@ public class PartnerController {
  * @description: 제휴업체 업체등록 컨트롤러
  */
 	@RequestMapping(value="/partner/write.do", method=RequestMethod.POST)
-	public void write(MultipartHttpServletRequest request, HttpServletResponse response,PartnerDto partnerDto){
+	public void write(MultipartHttpServletRequest request, HttpServletResponse response,PartnerDto partnerDto,BoardReadDto boardreadDto){
 		logger.info("Partner write 시작!!!--------------------------------------------");
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		mav.addObject("partnerDto",partnerDto);
+		mav.addObject("boardreadDto",boardreadDto);
 
 		partnerService.write(mav);
 		
@@ -49,12 +51,14 @@ public class PartnerController {
 	 * @description: 제휴업체 Tour리스트 컨트롤러
 	 */
 	@RequestMapping(value="/partner/writeList.do", method=RequestMethod.POST)
-	public void writeList(HttpServletRequest request, HttpServletResponse response){
+	public void writeList(HttpServletRequest request, HttpServletResponse response,PartnerDto partnerDto,BoardReadDto boardreadDto){
 		logger.info("Partner writeList 시작!!!--------------------------------------------");
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
+		mav.addObject("partnerDto",partnerDto);
+		mav.addObject("boardreadDto",boardreadDto);
 	
 		partnerService.writeList(mav);
 		

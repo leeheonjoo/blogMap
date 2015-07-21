@@ -14,49 +14,41 @@
     background-color: rgb(50, 118, 177);
     border-color: rgb(40, 94, 142);
 }
-
 .input-group-addon.success {
     color: rgb(255, 255, 255);
     background-color: rgb(92, 184, 92);
     border-color: rgb(76, 174, 76);
 }
-
 .input-group-addon.info {
     color: rgb(255, 255, 255);
     background-color: rgb(57, 179, 215);
     border-color: rgb(38, 154, 188);
 }
-
 .input-group-addon.warning {
     color: rgb(255, 255, 255);
     background-color: rgb(240, 173, 78);
     border-color: rgb(238, 162, 54);
 }
-
 .input-group-addon.danger {
     color: rgb(255, 255, 255);
     background-color: rgb(217, 83, 79);
     border-color: rgb(212, 63, 58);
 }
-
 .replyDiv{	
 	width:800px;height:30px; 
 	border:solid 0px red;
 	margin:4px 0px 0px 4px;
 }
-
 .cssBunho {
 	border:solid 0px blue;
 	display:block;
 	float:left;
 }
-
 .cssReply {
 	border:solid 0px blue;
 	display:block;
 	float:left;
 }
-
 .cssUpDel {
 	border:solid 0px blue;
 	display:block;
@@ -427,9 +419,7 @@ $(function() {
 							alert("제목을 입력하세요.");
 							$("#blogUpdateTitle > input[name='board_title']").focus();
 							return false;
-						}
-
-						
+						}	
 						
 						var select_value=$("#blogUpdateattach option:selected").val();
 						if(select_value!="0"){
@@ -509,7 +499,6 @@ function reply_update(UThis) {
 		$("#upBunho"+index).remove();
 	});
 	
-
 	// carousel 호출
 	$('.carousel').carousel({
 		interval : 3000
@@ -610,10 +599,7 @@ function reply_delete(DThis) {
 	<span id="blog_noreference_count"></span>
 	</span>
 	<span id="blogBookmark"><img src="${root}/images/blogMap/Bookmark1.png"/><b style="color: #03A9F4;">즐겨찾기</b></span>
-
 	&nbsp;&nbsp;&nbsp;&nbsp;<span><img src="${root}/images/blogMap/coupon_img.png" id="coupon_issue_btn" style="width:80px;"/></span>
-	
-	
 	<br/>
 	<div id="blogRead_reply">
 		<label>답글:</label>
