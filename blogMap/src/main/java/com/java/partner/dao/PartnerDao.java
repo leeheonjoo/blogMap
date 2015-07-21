@@ -1,7 +1,9 @@
 package com.java.partner.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
+import com.java.boardRead.dto.BoardReadDto;
 import com.java.coupon.dto.CouponDto;
 import com.java.partner.dto.PartnerDto;
 /**
@@ -12,13 +14,13 @@ import com.java.partner.dto.PartnerDto;
  */
 public interface PartnerDao {
 
-	public int partnerRegister(PartnerDto partnerDto);
+	public int partnerRegister(PartnerDto partnerDto, BoardReadDto boardreadDto);
 	
 	public int getPartnerCount();
 	
 	public List<PartnerDto> getwriteList();
 	
-	public PartnerDto getTourPartnerListDate(int partnerNo);
+	public List<HashMap<String, Object>> getTourPartnerListDate(HashMap<String, Object> hMap);
 	
 	public int couponRegister(CouponDto couponDto,int partner_no);
 
