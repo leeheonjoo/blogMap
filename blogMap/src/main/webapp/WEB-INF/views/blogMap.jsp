@@ -22,8 +22,8 @@
 		width: auto;
 		margin: 1% 1% 0px 1%;
 		height:auto;
-  		max-height: 90%; 
-	    overflow-y: initial !important;
+  		max-height: 90%;
+	    overflow-y: hidden;
      	overflow-x:hidden;
 	}
 
@@ -56,7 +56,7 @@
 /*  }  */
 
 	#mainResult{
-	  height: 80%;
+	  height: 95%;
 	  overflow-y: auto;
 	  overflow-x: hidden;
 	}
@@ -234,6 +234,7 @@ $(function(){
 	// 블로그 검색
 	$("#blogSearch").click(function(){
 		getBeginCondition();
+		getMap();
 		
    		$("div[id='blogListMain'].modal").modal();
 	});	
@@ -243,6 +244,7 @@ $(function(){
 		if (window.sessionStorage) {
 	    	var email = sessionStorage.getItem('email');
 	    	if(email!=null){
+	    		messageView();
 	    		$("div[id='mainMessage'].modal").modal();
 	    	}else{
 	    		alert("로그인 후 이용가능합니다.");
@@ -545,13 +547,13 @@ $(function(){
 	     ***********************************-->
 		<!-- 블로그 리스트 - 블로그 리스트 검색 -->
 		<div class="modal fade" id="blogListMain" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
+			<div class="modal-dialog" style="height:100%;">
+				<div class="modal-content" style="height:100%;">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title">Blog Search</h4>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" style="position:inherit; height:100%;">
 						<div id="mainResult">
 							<jsp:include page="board/blogListMain.jsp"/>
 						</div>
