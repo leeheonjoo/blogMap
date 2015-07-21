@@ -23,8 +23,8 @@
 		margin: 1% 1% 0px 1%;
 		height:auto;
   		max-height: 90%;
-	    overflow-y: hidden;
-     	overflow-x:hidden;
+ 	    overflow-y: hidden;
+     	overflow-x: hidden;
 	}
 
  	.modal-myPage{
@@ -56,7 +56,7 @@
 /*  }  */
 
 	#mainResult{
-	  height: 95%;
+	  height: 90%;
 	  overflow-y: auto;
 	  overflow-x: hidden;
 	}
@@ -553,8 +553,8 @@ $(function(){
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title">Blog Search</h4>
 					</div>
-					<div class="modal-body" style="position:inherit; height:100%;">
-						<div id="mainResult">
+					<div class="modal-body" style="display:block; position:absolute; height:90%;">
+						<div id="mainResult" style="position:absolute; height:95%;">
 							<jsp:include page="board/blogListMain.jsp"/>
 						</div>
 						<br/>

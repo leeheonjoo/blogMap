@@ -312,8 +312,38 @@
 </head>
 <body>
 	<!-- 검색조건 navbar : 20150706 이헌주 -->
+	<div style="display: none;" id="hidden_items" class="list-group" >
+         <a id="listItem" href="#" class="list-group-item">
+               <div class="media col-md-3">
+                   <figure class="pull-left">
+                       <img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >
+                   </figure>
+                   <span style="text-align: left;" id="result_no"></span>
+               </div>
+               <div class="col-md-6">
+                   <h4 id="result_title" class="list-group-item-heading"> </h4>
+                   <p id="result_content" class="list-group-item-text"> 
+                   </p>
+               </div>
+               <div class="col-md-3 text-center">
+               	<h2 id="result_rgdate"><small></small></h2>
+                   <h2 id="result_count"><small></small></h2>
+                   <button id="result_button" type="button" class="btn btn-default btn-lg btn-block" onmouseout="gray_button(this)" onmouseover="blue_button(this)"> 자세히 보기 </button>
+                   <div id="result_star" class="stars">
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                   </div>
+                   <p id="result_grade"><small></small></p>
+               </div> 
+         </a>
+     </div>
+     
+	<div class="container-fluid">
 	<nav id="blogListMain" class="navbar navbar-inverse ">
-		<div class="container-fluid">
+		
 		  	<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -375,49 +405,22 @@
 					</div>
 				</form>
 			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
 	</nav>
+			</div><!-- /.container-fluid -->
 	
-	<div class="row" style="height:auto;">
-		<div id="map_div" class="col-md-4" style="width:500px; height:400px;">
-			<div id="map" style="display:inline-block; border:1px solid #000; height:100%;"></div>
-		</div>
-		<div id="list_div" class="col-md-8">
-			<div class="well">
-		        <div id="list_items" class="list-group">
+	<div class="container" style="position:static; height:85%;">
+		<div class="row">
+			<div id="map_div" class="col-md-4">
+				<div id="map" style="display:inline-block; border:1px solid #000; height:100%;"></div>
+			</div>
+			<div id="list_div" class="col-md-8">
+				<div class="well">
+			        <div id="list_items" class="list-group">
+			        </div>
 		        </div>
-	        </div>
+			</div>
 		</div>
 	</div>
-		
-	<div style="display: none;" id="hidden_items" class="list-group" >
-         <a id="listItem" href="#" class="list-group-item">
-               <div class="media col-md-3">
-                   <figure class="pull-left">
-                       <img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >
-                   </figure>
-                   <span style="text-align: left;" id="result_no"></span>
-               </div>
-               <div class="col-md-6">
-                   <h4 id="result_title" class="list-group-item-heading"> </h4>
-                   <p id="result_content" class="list-group-item-text"> 
-                   </p>
-               </div>
-               <div class="col-md-3 text-center">
-               	<h2 id="result_rgdate"><small></small></h2>
-                   <h2 id="result_count"><small></small></h2>
-                   <button id="result_button" type="button" class="btn btn-default btn-lg btn-block" onmouseout="gray_button(this)" onmouseover="blue_button(this)"> 자세히 보기 </button>
-                   <div id="result_star" class="stars">
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                   </div>
-                   <p id="result_grade"><small></small></p>
-               </div> 
-         </a>
-     </div>
 <script type="text/javascript">
 	function getMap(){
 		if (!navigator.geolocation) {
