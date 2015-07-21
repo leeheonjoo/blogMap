@@ -9,7 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>PartnerDetail</title>
+<script>
 
+$("#partner_img").css({
+    'max-width':"100%",
+    'height': "300px"
+ });
+
+</script>
 </head>
 <body>
 <div id="partnerDetailMain" style="display: none;">
@@ -19,11 +26,11 @@
 		<div class="modal-content">
 			<div class="modal-body" id="partner_data-body">
 				<div class="row form-horizontal">
-					<div class="col-md-3">
+					<div class="col-md-5" style="text-align: center;">
 						<img class="img-responsive img" id="partner_img"/>
 						
 					</div>
-					<div class="col-md-9">
+					<div class="col-md-7" style="text-align: center;">
 					
 						<div class="form-group">
 							<label class="col-xs-3 control-label">아이디</label>

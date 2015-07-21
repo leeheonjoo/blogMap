@@ -9,7 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>CouponDetail</title>
+<script>
 
+$("#coupon_img").css({
+    'max-width':"100%",
+    'height': "300px"
+ });
+
+</script>
 </head>
 <body>
 <div id="couponDetailMain" style="display: none;">
@@ -19,11 +26,11 @@
 		<div class="modal-content">
 			<div class="modal-body" id="coupon_data-body">
 				<div class="row form-horizontal">
-					<div class="col-md-3">
+					<div class="col-md-5">
 						<img class="img-responsive img" id="coupon_img"/>
 						
 					</div>
-					<div class="col-md-9">
+					<div class="col-md-7">
 					
 						<div class="form-group">
 							<label class="col-xs-3 control-label">업체명</label>
