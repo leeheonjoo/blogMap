@@ -82,7 +82,8 @@ body{
 .nav-sidebar .active a { 
     cursor: default;
     background-color: #0b56a8; 
-    color: #fff; 
+    color: #0080c0; 
+    font-weight: bold;
 }
 .nav-sidebar .active a:hover {
     background-color: #E50000;   

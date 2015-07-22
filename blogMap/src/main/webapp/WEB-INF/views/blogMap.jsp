@@ -40,7 +40,7 @@
  		margin: 2% 20% 0px 20%;
   		height: 600px;
    		max-height: 600px;
-     	overflow-y:scroll;
+     	overflow-y:auto;
  	}
  	
  /* 	.modal-myPage-update{
