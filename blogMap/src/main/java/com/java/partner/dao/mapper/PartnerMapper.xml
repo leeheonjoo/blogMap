@@ -12,8 +12,8 @@
 	select count(*) from partner
 	</select>
 	
-	<select id="getWriteList" resultType="com.java.partner.dto.PartnerDto">
-		select * from partner order by partner_no desc
+	<select id="getWriteList" parameterType="String" resultType="com.java.partner.dto.PartnerDto">
+		select * from partner where member_id=#{member_id} order by partner_no desc
 	</select>
 	
 	<select id="getTourPartnerListDate" parameterType="java.util.HashMap" resultType="java.util.HashMap">

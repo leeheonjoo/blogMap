@@ -146,10 +146,10 @@ $(function() {
 										partnerData(data[i].partner_no);	
 									});
 									
-									$(".asdasd").click(function(){
-										var id = $(this).find('.list_partner_no').attr('id');
-										$("#modal_info").modal('show');
-									});
+// 									$(".asdasd").click(function(){
+// 										var id = $(this).find('.list_partner_no').attr('id');
+// 										$("#modal_info").modal('show');
+// 									});
 								});
 							}	
 						});	
@@ -257,7 +257,7 @@ $(function() {
 				/* contentType : 'application/x-www-form-urlencoded;charset=UTF-8', */
 				success:function(data)
 				{
-					alert("성공");
+					//alert("성공");
 // 					$("section[id=write_pop].modal").modal("hide");
 // 					$("#tour_item_list").empty();	//데이터를 가지고 오기전에 리셋(중복삽입을 방지하기 위해)
 					if(data=="1"){
@@ -283,15 +283,20 @@ $(function() {
 		
 		
 		 function getPartnerInfo(){	
-				/* 데이타를 채우기 위해 복사 */
-				
+			/* 데이타를 채우기 위해 복사 */
+			var manager = sessionStorage.getItem('email');
+			//alert(manager);		확인완료
 				$.ajax({
 					type:'post',
 					url:'${root}/partner/writeList.do',
+					data:{
+						member_id:manager
+					},
 					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 					success : function(responseData) {
 						var data = JSON.parse(responseData);
 						//alert(data);
+						//alert(manager);
 					
 						/* 데이타를 채우기 위해 복사 */
 						$("#tour_item_list").empty();
