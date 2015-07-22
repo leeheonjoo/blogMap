@@ -33,20 +33,6 @@
               		var geteymd = new Date(data[i].COUPON_EYMD);
               		var eymd = leadingZeros(geteymd.getFullYear(), 4) + '/' + leadingZeros(geteymd.getMonth() + 1, 2) + '/' + leadingZeros(geteymd.getDate(), 2);
 					
-					/* var getbymd = new Date(data[i].COUPON_BYMD);	// 등록일 날짜 변환
-					var byear = getbymd.getFullYear();
-					var bmonth = "0"+(getbymd.getMonth() + 1);
-					var bday = getbymd.getDate();
-					var bymd = byear + "/" + bmonth + "/"	+ bday;
-					//alert(bymd);
-					
-					var geteymd = new Date(data[i].COUPON_EYMD);	// 승인일 날짜 변환
-					var eyear = geteymd.getFullYear();
-					var emonth = "0" + (geteymd.getMonth() + 1);
-					var eday = geteymd.getDate();
-					var eymd = eyear + "/" + emonth + "/"	+ eday;
-					//alert(eymd); */
-					
 					
 					if(data[i].COUPON_YN == "N"){
 						$("#couponListResult").append("<tr style='text-align:center;'>"
@@ -165,8 +151,11 @@
 		};
 		
 		function couponDetail(couponNo){
-						
+			if(sessionStorage.getItem('email')!=null){
+				alert();
+			}
 			if(sessionStorage.getItem('manager_yn')=="Y"){
+				
 				$("#coupon_detail_button").css("display","inline-block");
 			}
 			
@@ -391,8 +380,11 @@
 			};
 			
 			function couponDetail(couponNo){
-				
+				if(sessionStorage.getItem('email')!=null){
+					alert();
+				}
 				if(sessionStorage.getItem('manager_yn')=="Y"){
+					
 					$("#coupon_detail_button").css("display","inline-block");
 				}
 				
@@ -612,8 +604,11 @@
 		};
 		
 		function couponDetail(couponNo){
-			
+			if(sessionStorage.getItem('email')!=null){
+				alert();
+			}
 			if(sessionStorage.getItem('manager_yn')=="Y"){
+				
 				$("#coupon_detail_button").css("display","inline-block");
 			}
 			
