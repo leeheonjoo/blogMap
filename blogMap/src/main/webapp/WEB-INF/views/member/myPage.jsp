@@ -8,6 +8,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+function leadingZeros(n, digits) {
+
+    var zero = '';
+
+    n = n.toString();
+
+ 
+
+    if (n.length < digits) {
+
+        for (i = 0; i < digits - n.length; i++)
+
+            zero += '0';
+
+    }
+
+    return zero + n;
+
+}
+
+
 if(sessionStorage.getItem('email')!=null){
 	
 	$(function(){
@@ -55,10 +76,13 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_name").text(memberData.member_name);
 					//$("#myPage_member_name").attr("disabled","disabled");
 					
-					var dt;
+					/* var dt;
 
 					dt = new Date(memberData.member_joindate);
-					dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
+					dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate(); */
+	
+				    var d = new Date(memberData.member_joindate);
+				    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2);
 
 					$("#myPage_member_joindate").text(dt);
 					//$("#myPage_member_joindate").attr("disabled","disabled");
@@ -234,11 +258,15 @@ if(sessionStorage.getItem('email')!=null){
 					
 					//alert(data[0]);
 					$.each(point_data,function(i){
-						var dt;
+// 						var dt;
 
-						dt = new Date(point_data[i].POINT_DATE);
-						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
-						
+// 						dt = new Date(point_data[i].POINT_DATE);
+// 						dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+						 
+						 
+					    var d = new Date(point_data[i].POINT_DATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+					    
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
@@ -314,11 +342,13 @@ if(sessionStorage.getItem('email')!=null){
 									var point_data=JSON.parse(data[0]);
 									
 									$.each(point_data,function(i){
-										var dt;
-
-										dt = new Date(point_data[i].POINT_DATE);
-										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+// 										var dt;
+// 										dt = new Date(point_data[i].POINT_DATE);
+// 										dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
 										
+										var d = new Date(point_data[i].POINT_DATE);
+					    				var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
@@ -406,11 +436,13 @@ if(sessionStorage.getItem('email')!=null){
 					var point_data=JSON.parse(data[0]);
 					
 					$.each(point_data,function(i){
-						var dt;
+// 						var dt;
 
-						dt = new Date(point_data[i].POINT_DATE);
-						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+// 						dt = new Date(point_data[i].POINT_DATE);
+// 						dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
 						
+						var d = new Date(point_data[i].POINT_DATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);;
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
@@ -485,11 +517,13 @@ if(sessionStorage.getItem('email')!=null){
 									$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 									var point_data=JSON.parse(data[0]);
 									$.each(point_data,function(i){
-										var dt;
+// 										var dt;
 
-										dt = new Date(point_data[i].POINT_DATE);
-										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+// 										dt = new Date(point_data[i].POINT_DATE);
+// 										dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
 										
+										var d = new Date(point_data[i].POINT_DATE);
+					    				var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
@@ -568,11 +602,13 @@ if(sessionStorage.getItem('email')!=null){
 					var point_data=JSON.parse(data[0]);
 					
 					$.each(point_data,function(i){
-						var dt;
+// 						var dt;
 
-						dt = new Date(point_data[i].POINT_DATE);
-						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+// 						dt = new Date(point_data[i].POINT_DATE);
+// 						dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
 						
+						var d = new Date(point_data[i].POINT_DATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);;
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
@@ -641,10 +677,8 @@ if(sessionStorage.getItem('email')!=null){
 									var point_data=JSON.parse(data[0]);
 									
 									$.each(point_data,function(i){
-										var dt;
-
-										dt = new Date(point_data[i].POINT_DATE);
-										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+										var d = new Date(point_data[i].POINT_DATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 										
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
@@ -735,17 +769,17 @@ if(sessionStorage.getItem('email')!=null){
 					
 					$.each(couponInfo,function(i){
 						var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
-						var byear = getbymd.getFullYear();
-						var bmonth = getbymd.getMonth() + 1;
-						var bday = getbymd.getDate();
-						var bymd = byear + "-" + bmonth + "-" + bday;
+						var byear = leadingZeros(getbymd.getFullYear(),4);
+						var bmonth = leadingZeros(getbymd.getMonth() + 1,2);
+						var bday = leadingZeros(getbymd.getDate(),2);
+						var bymd = byear + "/" + bmonth + "/" + bday;
 						//alert(bymd);
-						
+						 
 						var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
-						var eyear = geteymd.getFullYear();
-						var emonth = geteymd.getMonth() + 1;
-						var eday = geteymd.getDate();
-						var eymd = eyear + "-" + emonth + "-" + eday;
+						var eyear = leadingZeros(geteymd.getFullYear(),4);
+						var emonth = leadingZeros(geteymd.getMonth() + 1,2);
+						var eday = leadingZeros(geteymd.getDate(),2);
+						var eymd = eyear + "/" + emonth + "/" + eday;
 						//alert(eymd);
 						
 						
@@ -805,17 +839,17 @@ if(sessionStorage.getItem('email')!=null){
 									
 									$.each(couponInfo,function(i){
 										var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
-										var byear = getbymd.getFullYear();
-										var bmonth = getbymd.getMonth() + 1;
-										var bday = getbymd.getDate();
-										var bymd = byear + "-" + bmonth + "-"	+ bday;
+										var byear = leadingZeros(getbymd.getFullYear(),4);
+										var bmonth = leadingZeros(getbymd.getMonth() + 1,2);
+										var bday = leadingZeros(getbymd.getDate(),2);
+										var bymd = byear + "/" + bmonth + "/" + bday;
 										//alert(bymd);
-										
+										 
 										var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
-										var eyear = geteymd.getFullYear();
-										var emonth = geteymd.getMonth() + 1;
-										var eday = geteymd.getDate();
-										var eymd = eyear + "-" + emonth + "-"	+ eday;
+										var eyear = leadingZeros(geteymd.getFullYear(),4);
+										var emonth = leadingZeros(geteymd.getMonth() + 1,2);
+										var eday = leadingZeros(geteymd.getDate(),2);
+										var eymd = eyear + "/" + emonth + "/" + eday;
 										//alert(eymd);
 										
 										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
@@ -879,17 +913,17 @@ if(sessionStorage.getItem('email')!=null){
 					
 					$.each(couponInfo,function(i){
 						var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
-						var byear = getbymd.getFullYear();
-						var bmonth = getbymd.getMonth() + 1;
-						var bday = getbymd.getDate();
-						var bymd = byear + "-" + bmonth + "-"	+ bday;
+						var byear = leadingZeros(getbymd.getFullYear(),4);
+						var bmonth = leadingZeros(getbymd.getMonth() + 1,2);
+						var bday = leadingZeros(getbymd.getDate(),2);
+						var bymd = byear + "/" + bmonth + "/" + bday;
 						//alert(bymd);
-						
+						 
 						var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
-						var eyear = geteymd.getFullYear();
-						var emonth = geteymd.getMonth() + 1;
-						var eday = geteymd.getDate();
-						var eymd = eyear + "-" + emonth + "-"	+ eday;
+						var eyear = leadingZeros(geteymd.getFullYear(),4);
+						var emonth = leadingZeros(geteymd.getMonth() + 1,2);
+						var eday = leadingZeros(geteymd.getDate(),2);
+						var eymd = eyear + "/" + emonth + "/" + eday;
 						//alert(eymd);
 						
 						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
@@ -952,17 +986,17 @@ if(sessionStorage.getItem('email')!=null){
 									
 									$.each(couponInfo,function(i){
 										var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
-										var byear = getbymd.getFullYear();
-										var bmonth = getbymd.getMonth() + 1;
-										var bday = getbymd.getDate();
-										var bymd = byear + "-" + bmonth + "-"	+ bday ;
+										var byear = leadingZeros(getbymd.getFullYear(),4);
+										var bmonth = leadingZeros(getbymd.getMonth() + 1,2);
+										var bday = leadingZeros(getbymd.getDate(),2);
+										var bymd = byear + "/" + bmonth + "/" + bday;
 										//alert(bymd);
-										
+										 
 										var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
-										var eyear = geteymd.getFullYear();
-										var emonth = geteymd.getMonth() + 1;
-										var eday = geteymd.getDate();
-										var eymd = eyear + "-" + emonth + "-"	+ eday ;
+										var eyear = leadingZeros(geteymd.getFullYear(),4);
+										var emonth = leadingZeros(geteymd.getMonth() + 1,2);
+										var eday = leadingZeros(geteymd.getDate(),2);
+										var eymd = eyear + "/" + emonth + "/" + eday;
 										//alert(eymd);
 										
 										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
@@ -1028,17 +1062,17 @@ if(sessionStorage.getItem('email')!=null){
 					
 					$.each(couponInfo,function(i){
 						var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
-						var byear = getbymd.getFullYear();
-						var bmonth = getbymd.getMonth() + 1;
-						var bday = getbymd.getDate();
-						var bymd = byear + "-" + bmonth + "-"	+ bday ;
+						var byear = leadingZeros(getbymd.getFullYear(),4);
+						var bmonth = leadingZeros(getbymd.getMonth() + 1,2);
+						var bday = leadingZeros(getbymd.getDate(),2);
+						var bymd = byear + "/" + bmonth + "/" + bday;
 						//alert(bymd);
-						
+						 
 						var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
-						var eyear = geteymd.getFullYear();
-						var emonth = geteymd.getMonth() + 1;
-						var eday = geteymd.getDate();
-						var eymd = eyear + "-" + emonth + "-"	+ eday;
+						var eyear = leadingZeros(geteymd.getFullYear(),4);
+						var emonth = leadingZeros(geteymd.getMonth() + 1,2);
+						var eday = leadingZeros(geteymd.getDate(),2);
+						var eymd = eyear + "/" + emonth + "/" + eday;
 						//alert(eymd);
 						
 						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
@@ -1093,17 +1127,17 @@ if(sessionStorage.getItem('email')!=null){
 									
 									$.each(couponInfo,function(i){
 										var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
-										var byear = getbymd.getFullYear();
-										var bmonth = getbymd.getMonth() + 1;
-										var bday = getbymd.getDate();
-										var bymd = byear + "-" + bmonth + "-"	+ bday;
+										var byear = leadingZeros(getbymd.getFullYear(),4);
+										var bmonth = leadingZeros(getbymd.getMonth() + 1,2);
+										var bday = leadingZeros(getbymd.getDate(),2);
+										var bymd = byear + "/" + bmonth + "/" + bday;
 										//alert(bymd);
-										
+										 
 										var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
-										var eyear = geteymd.getFullYear();
-										var emonth = geteymd.getMonth() + 1;
-										var eday = geteymd.getDate();
-										var eymd = eyear + "-" + emonth + "-"	+ eday;
+										var eyear = leadingZeros(geteymd.getFullYear(),4);
+										var emonth = leadingZeros(geteymd.getMonth() + 1,2);
+										var eday = leadingZeros(geteymd.getDate(),2);
+										var eymd = eyear + "/" + emonth + "/" + eday;
 										//alert(eymd);
 										
 										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
@@ -1167,17 +1201,20 @@ if(sessionStorage.getItem('email')!=null){
 					var board_data=JSON.parse(data[0]);
 					
 					$.each(board_data,function(i){
-						var dt;
+						/* var dt;
 
 						dt = new Date(board_data[i].BOARD_RGDATE);
-						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
-					
+						dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+					 */
+					    var d = new Date(board_data[i].BOARD_RGDATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
 						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
-						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
 						+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="board_data_read'+i+'">'+board_data[i].BOARD_TITLE+'</a></div></div></div></div>');
 						
 						$("#board_data_read"+i).click(function(){
@@ -1235,17 +1272,15 @@ if(sessionStorage.getItem('email')!=null){
 									var board_data=JSON.parse(data[0]);
 									
 									$.each(board_data,function(i){
-										var dt;
-
-										dt = new Date(board_data[i].BOARD_RGDATE);
-										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+										var d = new Date(board_data[i].BOARD_RGDATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 									
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
 										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
-										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
 										+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="board_data_read'+i+'">'+board_data[i].BOARD_TITLE+'</a></div></div></div></div>');
 										
 										$("#board_data_read"+i).click(function(){
@@ -1321,17 +1356,15 @@ if(sessionStorage.getItem('email')!=null){
 					var board_data=JSON.parse(data[0]);
 					
 					$.each(board_data,function(i){
-						var dt;
-
-						dt = new Date(board_data[i].BOARD_RGDATE);
-						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+						var d = new Date(board_data[i].BOARD_RGDATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 					
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
 						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
-						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
 						+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="board_data_read'+i+'">'+board_data[i].BOARD_TITLE+'</a></div></div></div></div>');
 						
 						$("#board_data_read"+i).click(function(){
@@ -1398,17 +1431,15 @@ if(sessionStorage.getItem('email')!=null){
 									var board_data=JSON.parse(data[0]);
 									
 									$.each(board_data,function(i){
-										var dt;
-
-										dt = new Date(board_data[i].BOARD_RGDATE);
-										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+										var d = new Date(board_data[i].BOARD_RGDATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 									
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
 										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
-										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
 										+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="board_data_read'+i+'">'+board_data[i].BOARD_TITLE+'</a></div></div></div></div>');
 										
 										$("#board_data_read"+i).click(function(){
@@ -1477,17 +1508,15 @@ if(sessionStorage.getItem('email')!=null){
 					var board_data=JSON.parse(data[0]);
 					
 					$.each(board_data,function(i){
-						var dt;
-
-						dt = new Date(board_data[i].BOARD_RGDATE);
-						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+						var d = new Date(board_data[i].BOARD_RGDATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 					
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
 						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
-						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
 						+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="board_data_read'+i+'">'+board_data[i].BOARD_TITLE+'</a></div></div></div></div>');
 						
 						$("#board_data_read"+i).click(function(){
@@ -1547,17 +1576,15 @@ if(sessionStorage.getItem('email')!=null){
 									var board_data=JSON.parse(data[0]);
 									
 									$.each(board_data,function(i){
-										var dt;
-
-										dt = new Date(board_data[i].BOARD_RGDATE);
-										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+										var d = new Date(board_data[i].BOARD_RGDATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 									
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
 										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
-										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
 										+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="board_data_read'+i+'">'+board_data[i].BOARD_TITLE+'</a></div></div></div></div>');
 										
 										$("#board_data_read"+i).click(function(){
@@ -1657,14 +1684,17 @@ if(sessionStorage.getItem('email')!=null){
 					var favorite_data=JSON.parse(data[0]);
 					
 					$.each(favorite_data,function(i){
-						var dt;
+						var d = new Date(favorite_data[i].FAVORITE_RGDATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+						
+						/* var dt;
 
 						dt = new Date(favorite_data[i].FAVORITE_RGDATE);
-						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+						dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes(); */
 					
 						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
 						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
-						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 						+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="favorite_data_read'+i+'">'+favorite_data[i].BOARD_TITLE+'</a></div></div></div></div>');
 						
 						$("#favorite_data_read"+i).click(function(){
@@ -1722,14 +1752,12 @@ if(sessionStorage.getItem('email')!=null){
 									var favorite_data=JSON.parse(data[0]);
 									
 									$.each(favorite_data,function(i){
-										var dt;
-
-										dt = new Date(favorite_data[i].FAVORITE_RGDATE);
-										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+										var d = new Date(favorite_data[i].FAVORITE_RGDATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 									
 										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
 										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
-										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 										+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="favorite_data_read'+i+'">'+favorite_data[i].BOARD_TITLE+'</a></div></div></div></div>');
 										
 										$("#favorite_data_read"+i).click(function(){
@@ -1805,14 +1833,12 @@ if(sessionStorage.getItem('email')!=null){
 					var favorite_data=JSON.parse(data[0]);
 					
 					$.each(favorite_data,function(i){
-						var dt;
-
-						dt = new Date(favorite_data[i].FAVORITE_RGDATE);
-						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+						var d = new Date(favorite_data[i].FAVORITE_RGDATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 					
 						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
 						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
-						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 						+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="favorite_data_read'+i+'">'+favorite_data[i].BOARD_TITLE+'</a></div></div></div></div>');
 						
 						$("#favorite_data_read"+i).click(function(){
@@ -1879,14 +1905,12 @@ if(sessionStorage.getItem('email')!=null){
 									var favorite_data=JSON.parse(data[0]);
 									
 									$.each(favorite_data,function(i){
-										var dt;
-
-										dt = new Date(favorite_data[i].FAVORITE_RGDATE);
-										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+										var d = new Date(favorite_data[i].FAVORITE_RGDATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 									
 										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
 										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
-										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 										+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="favorite_data_read'+i+'">'+favorite_data[i].BOARD_TITLE+'</a></div></div></div></div>');
 										
 										$("#favorite_data_read"+i).click(function(){
@@ -1955,14 +1979,12 @@ if(sessionStorage.getItem('email')!=null){
 					var favorite_data=JSON.parse(data[0]);
 					
 					$.each(favorite_data,function(i){
-						var dt;
-
-						dt = new Date(favorite_data[i].FAVORITE_RGDATE);
-						dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+						var d = new Date(favorite_data[i].FAVORITE_RGDATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 					
 						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
 						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
-						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 						+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="favorite_data_read'+i+'">'+favorite_data[i].BOARD_TITLE+'</a></div></div></div></div>');
 						
 						$("#favorite_data_read"+i).click(function(){
@@ -2021,16 +2043,14 @@ if(sessionStorage.getItem('email')!=null){
 									var favorite_data=JSON.parse(data[0]);
 									
 									$.each(favorite_data,function(i){
-										var dt;
-
-										dt = new Date(favorite_data[i].FAVORITE_RGDATE);
-										dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+										var d = new Date(favorite_data[i].FAVORITE_RGDATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 									
 										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
 										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
-										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_NO+'</div></div></div>'
 										+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="favorite_data_read'+i+'">'+favorite_data[i].BOARD_TITLE+'</a></div></div></div></div>');
-										
+										/*isrequired*/
 										$("#favorite_data_read"+i).click(function(){
 											blogListDetails(favorite_data[i].BOARD_NO);
 					                        $("div[id='blogListDetail'].modal").modal();
@@ -2069,9 +2089,9 @@ if(sessionStorage.getItem('email')!=null){
 		temp.fadeIn();
 	}
 	// layer를 화면의 중앙에 위치시킨다.
-	if (temp.outerHeight() < $(document).height() ) temp.css('margin-top', '-'+temp.outerHeight()/2+'px');
+	if (temp.outerHeight() < $(document).height() ) temp.css('margin-top', '/'+temp.outerHeight()/2+'px');
 	else temp.css('top', '0px');
-	if (temp.outerWidth() < $(document).width() ) temp.css('margin-left', '-'+temp.outerWidth()/2+'px');
+	if (temp.outerWidth() < $(document).width() ) temp.css('margin-left', '/'+temp.outerWidth()/2+'px');
 	else temp.css('left', '0px');
 	// layer fadeOut : 종료버튼 클릭시
 	temp_btn.click(function(e){

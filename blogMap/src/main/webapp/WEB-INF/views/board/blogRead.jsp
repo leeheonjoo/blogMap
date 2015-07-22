@@ -345,6 +345,7 @@ $(function() {
 						var addr_sido=data[i].ADDR_SIDO;
 						var addr_sigugn=data[i].ADDR_SIGUGUN;
 						var addr_dongri=data[i].ADDR_DONGRI;
+						var addr_title=data[i].ADDR_TITLE;
 						
 						var board_no=data[i].BOARD_NO;
 						var board_grade=data[i].BOARD_GRADE;
@@ -356,6 +357,7 @@ $(function() {
 						$("#blogUpdateAddr > input[name='addr_sigugun']").val(addr_sigugn);
 						$("#blogUpdateAddr > input[name='addr_dongri']").val(addr_dongri);
 						$("#blogUpdateAddr > input[name='addr_bunji']").val(addr_bunji);
+						$("#blogUpdateAddr > input[name='addr_title']").val(addr_title);
 						$("#blogUpdateAddr > input[name='realAddr']").val(addr_sido+" "+addr_sigugn+" "+addr_dongri+" "+addr_bunji);
 						
 						$("#blogUpdateTitle > input[name='board_title']").val(board_title);
@@ -589,6 +591,10 @@ function reply_delete(DThis) {
 		</div>
 		<div id="blogRead_writer">
 			<span>작성자:</span> 
+			<label></label>
+		</div>
+		<div id="blogRead_addrtitle">
+			<span>여행,맛집명:</span>
 			<label></label>
 		</div>
 		<div id="blogRead_addr">

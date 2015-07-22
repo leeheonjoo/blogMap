@@ -7,6 +7,9 @@ public class Board_addr_infoDto {
 	private String addr_sigugun;//시구군
 	private String addr_dongri;//동면리
 	private String addr_bunji;//번지
+	private String addr_title;//업체,여행지명
+	
+	
 	
 	public int getBoard_no() {
 		return board_no;
@@ -38,6 +41,13 @@ public class Board_addr_infoDto {
 	public void setAddr_bunji(String addr_bunji) {
 		this.addr_bunji = addr_bunji;
 	}
+	public String getAddr_title() {
+		return addr_title;
+	}
+	public void setAddr_title(String addr_title) {
+		this.addr_title = addr_title;
+	}
+	
 	
 	
 }

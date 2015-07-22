@@ -165,15 +165,29 @@ v\:* {
                   // 마커 클릭하면
                   if (oTarget instanceof nhn.api.map.Marker) {
                      var pullAddr=oCustomEvent.target.getTitle();
-                     var pAddrs=pullAddr.split("/");
-                    
-                     var pAddr0=pAddrs[0];
-                     var pAddr1=pAddrs[1];
-                     var pAddr2=pAddrs[2];
-                     var pAddr3=pAddrs[3]; 
-                     if(pAddr3==""||pAddr3==null||pAddr3=="undefined"){
-                    	 pAddr3="";
+                     
+                     if(!pullAddr.includes('[')){
+                    	 var pAddrs=pullAddr.split("/");
+                         
+                         var pAddr0=pAddrs[0];
+                         var pAddr1=pAddrs[1];
+                         var pAddr2=pAddrs[2];
+                         var pAddr3=pAddrs[3]; 
+                         if(pAddr3==""||pAddr3==null||pAddr3=="undefined"){
+                        	 pAddr3="";
+                         }
+                     }else{
+                    	// var addr_title=pullAddr.substring(1,pullAddr.lastIndexOf("]"));
+                    	//alert("2"+addr_title);
+                         var pAddrs=pullAddr.split("]");
+                         
+                         var pAddr=pAddrs[1].split("/");
+                         var pAddr0=pAddr[0].trim();
+                         var pAddr1=pAddr[1];
+                         var pAddr2=pAddr[2];
+                         var pAddr3=pAddr[3];
                      }
+                     
                      
 					var search_value=$("#blogList_text").val().replace(" ","%");
                      $.ajax({
@@ -355,6 +369,7 @@ function blogListDetails(blogRead_no) {
         +data[0].ADDR_DONGRI+" "+data[0].ADDR_BUNJI;
         var content=data[0].BOARD_CONTENT;
         var writer=data[0].MEMBER_ID;
+        var addr_title=data[0].ADDR_TITLE;
         var title=data[0].BOARD_TITLE;
         var mcategory=data[0].CATEGORY_MNAME;               
         var scategory=data[0].CATEGORY_SNAME;
@@ -369,6 +384,7 @@ function blogListDetails(blogRead_no) {
         $("#blogRead_addr > label:eq(0)").text(pullAddr); 
         $("#blogRead_content > div").html(content);
         $("#blogRead_writer > label:eq(0)").text(writer);
+        $("#blogRead_addrtitle > label:eq(0)").html(addr_title);
         $("#blogRead_title > label:eq(0)").text(title);
         $("#blogRead_category > label:eq(0)").text(mcategory);
         $("#blogRead_category > label:eq(1)").text(scategory);
