@@ -135,7 +135,7 @@ function blogWrite_getCategorySelect(el, headData){
 	    }//readURL()--
 	
 	    //file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하 는 코드
-	    $('input[type=file]').click(function() {
+	    $("#attach input[type=file]").click(function() {
 	    	var fileId=$(this).attr('id');
 	    	var index=fileId.substring(6,7);
 	    		
