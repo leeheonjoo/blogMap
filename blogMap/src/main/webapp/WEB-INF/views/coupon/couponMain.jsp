@@ -162,7 +162,12 @@ li { list-style-type:none;}
 					item_var += "<div class='fff'>";
 					item_var += "<div class='thumbnail'>";
 					item_var += "<a data-toggle='modal' href='#couponDetail' class='coupon_list_no btn-example' id=coupon_no_" + coupon_no +">";
+					item_var += "<h5 style='text-align:center'>" + data[i].PARTNER_NAME + "</h5>";	
 					item_var += "<img src=" + "${root}/pds/coupon/" + pic + " class='img-responsive' id='coupon_L_images'>";
+					item_var += "<div class='caption'>";	
+					item_var += "<h5>" + data[i].COUPON_ITEM + " " + data[i].COUPON_DISCOUNT + "% 할인" + "</h5>";
+					item_var += "<h5>" + data[i].COUPON_EYMD + "</h5>";
+					item_var += "</div>";	
 					item_var += "</a>";
 					item_var += "</div>";
 					item_var += "</div>";
@@ -353,7 +358,13 @@ li { list-style-type:none;}
 									<div class="fff">
 										<div class="thumbnail">
 											<a href="#" class="coupon_list_no">
-											<img class="img-responsive" id="coupon_L_images">
+												<h5 style="text-align: center;"></h5>
+												<img class="img-responsive" id="coupon_L_images">
+												<div class="caption">
+													<h5></h5>
+													<h5></h5>
+													<a class="btn btn-mini" href="#">» Read More</a>
+												</div>
 											</a>
 										</div>
 									</div>

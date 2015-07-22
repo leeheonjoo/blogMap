@@ -163,10 +163,10 @@ thead {
 
 					var sdate = sy + "/" + sm + "/" + sd;
 
-					$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
-					$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
+					$("#sendMsgResult").append("<tr class='hidden-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
+					$("#sendMsgResult").append("<tr class='visible-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
 					
-					$("#" + send_data[i].message_no).click(function() {
+					$(".s" + send_data[i].message_no).click(function() {
 						msgSendimportData(send_data[i].message_no);
 					});
 				});
@@ -216,10 +216,10 @@ thead {
 
 									var sdate = sy + "/" + sm + "/" + sd;
 
-									$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
-									$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
+									$("#sendMsgResult").append("<tr class='hidden-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
+									$("#sendMsgResult").append("<tr class='visible-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
 									
-									$("#" + send_data[i].message_no).click(function() {
+									$(".s" + send_data[i].message_no).click(function() {
 										msgSendimportData(send_data[i].message_no);
 									});
 								});
@@ -274,10 +274,10 @@ thead {
 
 						var sdate = sy + "/" + sm + "/" + sd;
 
-						$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
-						$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
+						$("#sendMsgResult").append("<tr class='hidden-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
+						$("#sendMsgResult").append("<tr class='visible-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
 						
-						$("#" + send_data[i].message_no).click(function() {
+						$(".s" + send_data[i].message_no).click(function() {
 							msgSendimportData(send_data[i].message_no);
 						});
 					});
@@ -333,10 +333,10 @@ thead {
 
 										var sdate = sy + "/" + sm + "/" + sd;
 
-										$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
-										$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
+										$("#sendMsgResult").append("<tr class='hidden-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
+										$("#sendMsgResult").append("<tr class='visible-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
 										
-										$("#" + send_data[i].message_no).click(function() {
+										$(".s" + send_data[i].message_no).click(function() {
 											msgSendimportData(send_data[i].message_no);
 										});
 									});
@@ -394,10 +394,10 @@ thead {
 
 						var sdate = sy + "/" + sm + "/" + sd;
 
-						$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
-						$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
+						$("#sendMsgResult").append("<tr class='hidden-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
+						$("#sendMsgResult").append("<tr class='visible-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
 						
-						$("#" + send_data[i].message_no).click(function() {
+						$(".s" + send_data[i].message_no).click(function() {
 							msgSendimportData(send_data[i].message_no);
 						});
 					});
@@ -444,10 +444,10 @@ thead {
 
 										var sdate = sy + "/" + sm + "/" + sd;
 
-										$("#sendMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
-										$("#sendMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+send_data[i].message_no+"'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
+										$("#sendMsgResult").append("<tr class='hidden-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
+										$("#sendMsgResult").append("<tr class='visible-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
 										
-										$("#" + send_data[i].message_no).click(function() {
+										$(".s" + send_data[i].message_no).click(function() {
 											msgSendimportData(send_data[i].message_no);
 										});
 									});
@@ -541,10 +541,10 @@ thead {
 
 					var sdate = sy + "/" + sm + "/" + sd;
 
-					$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
-					$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+					$("#receiveMsgResult").append("<tr class='hidden-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+					$("#receiveMsgResult").append("<tr class='visible-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
 					
-					$("#" + receive_data[i].message_no).click(function() {
+					$(".r" + receive_data[i].message_no).click(function() {
 						msgReceiveimportData(receive_data[i].message_no);
 					});
 				});
@@ -592,10 +592,10 @@ thead {
 
 									var sdate = sy + "/" + sm + "/" + sd;
 
-									$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
-									$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+									$("#receiveMsgResult").append("<tr class='hidden-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+									$("#receiveMsgResult").append("<tr class='visible-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
 									
-									$("#" + receive_data[i].message_no).click(function() {
+									$(".r" + receive_data[i].message_no).click(function() {
 										msgReceiveimportData(receive_data[i].message_no);
 									});
 								});
@@ -651,10 +651,10 @@ thead {
 
 						var sdate = sy + "/" + sm + "/" + sd;
 
-						$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
-						$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+						$("#receiveMsgResult").append("<tr class='hidden-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+						$("#receiveMsgResult").append("<tr class='visible-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
 						
-						$("#" + receive_data[i].message_no).click(function() {
+						$(".r" + receive_data[i].message_no).click(function() {
 							msgReceiveimportData(receive_data[i].message_no);
 						});
 					});					
@@ -709,10 +709,10 @@ thead {
 
 										var sdate = sy + "/" + sm + "/" + sd;
 
-										$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
-										$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+										$("#receiveMsgResult").append("<tr class='hidden-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+										$("#receiveMsgResult").append("<tr class='visible-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
 										
-										$("#" + receive_data[i].message_no).click(function() {
+										$(".r" + receive_data[i].message_no).click(function() {
 											msgReceiveimportData(receive_data[i].message_no);
 										});
 									});
@@ -772,10 +772,10 @@ thead {
 
 						var sdate = sy + "/" + sm + "/" + sd;
 
-						$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
-						$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+						$("#receiveMsgResult").append("<tr class='hidden-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+						$("#receiveMsgResult").append("<tr class='visible-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
 						
-						$("#" + receive_data[i].message_no).click(function() {
+						$(".r" + receive_data[i].message_no).click(function() {
 							msgReceiveimportData(receive_data[i].message_no);
 						});
 					});
@@ -823,10 +823,10 @@ thead {
 
 										var sdate = sy + "/" + sm + "/" + sd;
 
-										$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
-										$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+										$("#receiveMsgResult").append("<tr class='hidden-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+										$("#receiveMsgResult").append("<tr class='visible-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
 										
-										$("#" + receive_data[i].message_no).click(function() {
+										$(".r" + receive_data[i].message_no).click(function() {
 											msgReceiveimportData(receive_data[i].message_no);
 										});
 									});
@@ -921,10 +921,10 @@ thead {
 
 					var sdate = sy + "/" + sm + "/" + sd;
 
-					$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
-					$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+					$("#receiveMsgResult").append("<tr class='hidden-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+					$("#receiveMsgResult").append("<tr class='visible-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
 					
-					$("#" + receive_data[i].message_no).click(function() {
+					$(".r" + receive_data[i].message_no).click(function() {
 						msgimportData(receive_data[i].message_no);
 					});
 				});
@@ -972,10 +972,10 @@ thead {
 
 									var sdate = sy + "/" + sm + "/" + sd;
 
-									$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
-									$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+									$("#receiveMsgResult").append("<tr class='hidden-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+									$("#receiveMsgResult").append("<tr class='visible-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
 									
-									$("#" + receive_data[i].message_no).click(function() {
+									$(".r" + receive_data[i].message_no).click(function() {
 										msgimportData(receive_data[i].message_no);
 									});
 								});
@@ -1030,10 +1030,10 @@ thead {
 
 						var sdate = sy + "/" + sm + "/" + sd;
 
-						$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
-						$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+						$("#receiveMsgResult").append("<tr class='hidden-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+						$("#receiveMsgResult").append("<tr class='visible-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
 						
-						$("#" + receive_data[i].message_no).click(function() {
+						$(".r" + receive_data[i].message_no).click(function() {
 							msgimportData(receive_data[i].message_no);
 						});
 					});
@@ -1088,10 +1088,10 @@ thead {
 
 										var sdate = sy + "/" + sm + "/" + sd;
 
-										$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
-										$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+										$("#receiveMsgResult").append("<tr class='hidden-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+										$("#receiveMsgResult").append("<tr class='visible-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
 										
-										$("#" + receive_data[i].message_no).click(function() {
+										$(".r" + receive_data[i].message_no).click(function() {
 											msgimportData(receive_data[i].message_no);
 										});
 									});
@@ -1147,10 +1147,10 @@ thead {
 
 						var sdate = sy + "/" + sm + "/" + sd;
 
-						$("#receiveMsgResult").append("<tr class='hidden-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
-						$("#receiveMsgResult").append("<tr class='visible-xs' style='text-align: center;' data-toggle='modal' href='#messageRead' class='btn-example' id='"+receive_data[i].message_no+"'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
+						$("#receiveMsgResult").append("<tr class='hidden-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].message_no + "</td><td>" + receive_data[i].message_content + "</td><td>" + receive_data[i].member_id + "</td><td>" + sdate + "</td><td>" + receive_data[i].message_yn + "</td></tr>");
+						$("#receiveMsgResult").append("<tr class='visible-xs " + "r" +receive_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + receive_data[i].member_id + "</td><td>" + receive_data[i].message_content + "</td></tr>");
 						
-						$("#" + receive_data[i].message_no).click(function() {
+						$(".r" + receive_data[i].message_no).click(function() {
 							msgimportData(receive_data[i].message_no);
 						});
 					});
@@ -1221,7 +1221,6 @@ thead {
 			});
 		});
 	}
-	
 	function msgimportData(no) {
 		$.ajax({
 			type : 'get',

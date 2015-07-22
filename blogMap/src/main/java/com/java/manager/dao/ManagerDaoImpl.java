@@ -26,12 +26,6 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public int memberDel(HashMap<String, Object> hMap) {
-		// TODO Auto-generated method stub
-		return session.update("dao.ManagerMapper.memberDelete", hMap);
-	}
-	
-	@Override
 	public List<MemberDto> getSearchMemberData(String member_name) {	// 수정해야함
 		// TODO Auto-generated method stub
 		return session.selectList("dao.ManagerMapper.getSearchMemberList", member_name);
@@ -44,21 +38,15 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
+	public int memberDel(HashMap<String, Object> hMap) {
+		// TODO Auto-generated method stub
+		return session.update("dao.ManagerMapper.memberDelete", hMap);
+	}
+	
+	@Override
 	public void delLog(HashMap<String, Object> hMap) {
 		// TODO Auto-generated method stub
 		session.insert("dao.ManagerMapper.delLog", hMap);
-	}
-	
-	@Override
-	public List<ManagerDto> getManagerDate() {
-		// TODO Auto-generated method stub
-		return session.selectList("dao.ManagerMapper.getManagerList");
-	}
-	
-	@Override
-	public List<ManagerLogDto> getManagerLog(String id) {
-		// TODO Auto-generated method stub
-		return session.selectList("dao.ManagerMapper.getManagerLog", id);
 	}
 	
 	@Override
@@ -104,9 +92,27 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
+	public PartnerDto partnerDetail(int partnerNo) {
+		// TODO Auto-generated method stub
+		return session.selectOne("dao.ManagerMapper.partnerDetail", partnerNo);
+	}
+	
+	@Override
 	public List<HashMap<String, Object>> getCouponData() {
 		// TODO Auto-generated method stub
 		return session.selectList("dao.ManagerMapper.getCouponData");
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> coupnSearch(String partner_name) {
+		// TODO Auto-generated method stub
+		return session.selectList("dao.ManagerMapper.couponSearch", partner_name);
+	}
+	
+	@Override
+	public List<HashMap<String, Object>> searchCouponYN(String coupon_yn) {
+		// TODO Auto-generated method stub
+		return session.selectList("dao.ManagerMapper.searchCouponYN", coupon_yn);
 	}
 	
 	@Override
@@ -140,24 +146,16 @@ public class ManagerDaoImpl implements ManagerDao {
 	}
 	
 	@Override
-	public PartnerDto partnerDetail(int partnerNo) {
+	public List<ManagerDto> getManagerDate() {
 		// TODO Auto-generated method stub
-		return session.selectOne("dao.ManagerMapper.partnerDetail", partnerNo);
+		return session.selectList("dao.ManagerMapper.getManagerList");
 	}
 	
 	@Override
-	public List<HashMap<String, Object>> coupnSearch(String partner_name) {
+	public List<ManagerLogDto> getManagerLog(String id) {
 		// TODO Auto-generated method stub
-		return session.selectList("dao.ManagerMapper.couponSearch", partner_name);
+		return session.selectList("dao.ManagerMapper.getManagerLog", id);
 	}
-	
-	@Override
-	public List<HashMap<String, Object>> searchCouponYN(String coupon_yn) {
-		// TODO Auto-generated method stub
-		return session.selectList("dao.ManagerMapper.searchCouponYN", coupon_yn);
-	}
-	
-	
 
 
 }
