@@ -43,29 +43,9 @@
 					
 					$("#coupon_issue"+i).click(function(){
 						alert(coupon_issue_data[i].COUPON_NO);
-						var result=confirm("쿠폰을 받으시겠습니까?");
-
-						if(result){
-							$.ajax({
-								type:'post',
-								url:'${root}/board/getCoupon.do',
-								data:{
-									coupon_no:coupon_issue_data[i].COUPON_NO,
-									member_id:sessionStorage.getItem('email')
-								},
-								contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-								success:function(responseData){
-									//alert(responseData);
-									if(responseData=="1"){
-										alert("쿠폰이 발급되었습니다.");
-									}else if(responseData=="2"){
-										alert("이미 발급받은 쿠폰입니다.");
-									}else{
-										alert("쿠폰이 발급 되지 않았습니다.");
-									}
-								}
-							});	
-						}
+						
+						blogmap_coupon_issue(coupon_issue_data[i].COUPON_NO);
+						
 						
 					});
 					
@@ -75,7 +55,31 @@
 		});
 	});
 	
-	
+	function blogmap_coupon_issue(coupon_no){
+		alert(coupon_no);
+		var result=confirm("쿠폰을 받으시겠습니까?");
+		if(result){
+			$.ajax({
+				type:'post',
+				url:'${root}/board/getCoupon.do',
+				data:{
+					coupon_no:coupon_no,
+					member_id:sessionStorage.getItem('email')
+				},
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+					//alert(responseData);
+					if(responseData=="1"){
+						alert("쿠폰이 발급되었습니다.");
+					}else if(responseData=="2"){
+						alert("이미 발급받은 쿠폰입니다.");
+					}else{
+						alert("쿠폰이 발급 되지 않았습니다.");
+					}
+				}
+			});	
+		}
+	}	
 </script>
 </head>
 <body>

@@ -119,8 +119,18 @@ vertical-align: middle;
 /*			          					  */
 /*			회원정보 탭 클릭시 실행			  */
 /*										  */
-/******************************************/ 
-
+/******************************************/
+	function leadingZeros(n, digits) {
+	    var zero = '';
+	    n = n.toString();
+	    if (n.length < digits) {
+	        for (i = 0; i < digits - n.length; i++)
+	            zero += '0';
+    	}
+    	return zero + n;
+	}
+	
+	
 	function getMemberList(){		
 		$.ajax({
 			type:'get',
@@ -137,21 +147,19 @@ vertical-align: middle;
 				}
 				var jointype=null;
 				$.each(data, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
-					var date = new Date(data[i].member_joindate);
-					var year = date.getFullYear();
-					var month = date.getMonth() + 1;
+					/*  */
+					var d = new Date(data[i].member_joindate);
+              		var rgDate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);					
+					/*  */							
+
+					/* var date = new Date(data[i].member_joindate);
+					var year = (date.getFullYear()).toString();
+					var month = "0"+(date.getMonth()+1);
+					//alert(month.length);
 					var day = date.getDate();
-					var rgDate = year + "년 " + month + "월 "	+ day + "일";
+					var rgDate = year + "/" + month + "/"+ day; */
 					
 					var jointype=data[i].member_jointype;
-					/* //alert(type);
-					if(type == "0001"){
-						jointype="BlogMap";
-					}else if(type =="0002"){
-						jointype="FaceBook";
-					}else if(type =="0003"){
-						jointype="탈퇴";
-					} */
 					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
 										+ "<td>" + data[i].member_id + "</td>"			// 아이디
@@ -229,23 +237,18 @@ vertical-align: middle;
 				}
 				
 				$.each(data, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
-					var date = new Date(data[i].member_joindate);
-					var year = date.getFullYear();
-					var month = date.getMonth() + 1;
-					var day = date.getDate();
+					var d = new Date(data[i].member_joindate);
+              		var rgDate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);
 					
-					var rgDate = year + "년 " + month + "월 "	+ day + "일";
+					/* var date = new Date(data[i].member_joindate);
+					var year = (date.getFullYear()).toString();
+					var month = "0"+(date.getMonth()+1);
+					//alert(month.length);
+					var day = date.getDate();
+					var rgDate = year + "/" + month + "/"+ day; */
 					
 					var jointype=data[i].member_jointype;
-					/* //alert(type);
-					if(type == "0001"){
-						jointype="BlogMap";
-					}else if(type =="0002"){
-						jointype="FaceBook";
-					}else if(type =="0003"){
-						jointype="탈퇴";
-					} */
-					
+										
 					$("#memberListResult").append("<tr style='text-align: center;'>"
 										+ "<td>" + data[i].member_id + "</td>"			// 아이디
 										+ "<td>" + data[i].member_name + "</td>"		// 이름
@@ -330,12 +333,15 @@ vertical-align: middle;
 				}
 				
 				$.each(data, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
-					var date = new Date(data[i].member_joindate);
-					var year = date.getFullYear();
-					var month = date.getMonth() + 1;
+					var d = new Date(data[i].member_joindate);
+              		var rgDate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);
+										
+					/* var date = new Date(data[i].member_joindate);
+					var year = (date.getFullYear()).toString();
+					var month = "0"+(date.getMonth()+1);
+					//alert(month.length);
 					var day = date.getDate();
-					
-					var rgDate = year + "년 " + month + "월 "	+ day + "일";
+					var rgDate = year + "/" + month + "/"+ day; */
 					
 					var jointype=data[i].member_jointype;
 					/* //alert(type);
@@ -422,12 +428,12 @@ vertical-align: middle;
 						<table class="table table-striped table-bordered" >
 							<thead>
 								<tr class="widget-header" >
-									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center;">아이디</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">이름</th>
-									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center;">가입일 </th>
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center;">유형</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">포인트</th>
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center;"></th>
+									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:150px; max-width:150px;">아이디</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:70px; max-width:70px;">이름</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">가입일 </th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">유형</th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">포인트</th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">구분</th>
 								</tr>
 							</thead>
 							<tbody id="memberListResult"></tbody>  <!-- 자료를 붙일 바디 -->

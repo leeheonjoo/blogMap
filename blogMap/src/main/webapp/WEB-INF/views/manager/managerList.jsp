@@ -32,20 +32,12 @@
 				}
 				
 				$.each(data, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
-					var getRgdate = new Date(data[i].manager_rgdate);	// 등록일 날짜 변환
-					var rgyear = getRgdate.getFullYear();
-					var rgmonth = getRgdate.getMonth() + 1;
-					var rgday = getRgdate.getDate();
-					var rgDate = rgyear + "년 " + rgmonth + "월 "	+ rgday + "일";
-					//alert(rgDate);
-					
-					var getYdate = new Date(data[i].manager_exdate);	// 승인일 날짜 변환
-					var exyear = getYdate.getFullYear();
-					var exmonth = getYdate.getMonth() + 1;
-					var exday = getYdate.getDate();
-					var exDate = exyear + "년 " + exmonth + "월 "	+ exday + "일";
-					//alert(yDate);
-					
+					var getRgdate = new Date(data[i].manager_rgdate);
+              		var rgDate = leadingZeros(getRgdate.getFullYear(), 4) + '/' + leadingZeros(getRgdate.getMonth() + 1, 2) + '/' + leadingZeros(getRgdate.getDate(), 2);
+              		
+              		var getExdate = new Date(data[i].manager_exdate);
+              		var exDate = leadingZeros(getExdate.getFullYear(), 4) + '/' + leadingZeros(getExdate.getMonth() + 1, 2) + '/' + leadingZeros(getExdate.getDate(), 2);
+									
 					$("#managerListResult").append("<tr style='text-align:center;'>"
 							+ "<td>" + data[i].manager_id + "</td>"			// 아이디
 							+ "<td>" + data[i].manager_name + "</td>"			// 이름	
@@ -78,12 +70,15 @@
 								}
 								
 								$.each(Logdata, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
-									var getLogDate = new Date(Logdata[i].log_date);	// 등록일 날짜 변환
+									var getLogDate = new Date(Logdata[i].log_date);
+				              		var logDate = leadingZeros(getLogDate.getFullYear(), 4) + '/' + leadingZeros(getLogDate.getMonth() + 1, 2) + '/' + leadingZeros(getLogDate.getDate(), 2) + " " + getLogDate.getHours() + ":" + getLogDate.getMinutes() + ":" + getLogDate.getSeconds() ;                               
+				              		
+									/* var getLogDate = new Date(Logdata[i].log_date);	// 등록일 날짜 변환
 									var logyear = getLogDate.getFullYear();
 									var logmonth = getLogDate.getMonth() + 1;
 									var logday = getLogDate.getDate();
 									var logDate = logyear + "년 " + logmonth + "월 "	+ logday + "일";
-									//alert(rgDate);
+									//alert(rgDate); */
 									
 									
 									$("#managerLogResult").append("<tr style='text-align:center;'>"
@@ -136,13 +131,13 @@
 						<table class="table table-striped table-bordered" >
 							<thead>
 								<tr class="widget-header" >
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">아이디</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">이름</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">이메일</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">등록일</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">종료일</th>
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center;">사용</th>
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center;">기록</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:150px; max-width:150px;">아이디</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">이름</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:150px; max-width:150px;">이메일</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:110px; max-width:110px;">등록일</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:110px; max-width:110px;">종료일</th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:50px; max-width:50px;">사용</th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">기록</th>
 								</tr>
 							</thead>
 							<tbody id="managerListResult"></tbody>  <!-- 자료를 붙일 바디 -->
@@ -154,37 +149,6 @@
 	    </div>
 	</div>
 </div>
-
-<!-- 	
-	<div>
-관리자정보 타이틀
-	<div class="row" id="managerTitle" align="center">
-        <div class="col-md-2 col-sm-2 col-xs-2">아이디</div>
-        <div class="col-md-2 col-sm-2 col-xs-2">이름</div>
-        <div class="col-md-2 col-sm-2 col-xs-2">이메일</div>
-        <div class="col-md-2 col-sm-2 col-xs-2">등록일</div>
-        <div class="col-md-2 col-sm-2 col-xs-2">종료일</div>
-        <div class="col-md-1 col-sm-1 col-xs-1">사용여부</div>
-        <div class="col-md-1 col-sm-1 col-xs-1">기록</div>
-    </div>
-	
-관리자 정보를 불러올 기본틀
-	<div class="row" id="managerList" style="display:none;" align="center">
-		<div class="col-md-2 col-sm-2 col-xs-2" id="managerId"></div>
-        <div class="col-md-2 col-sm-2 col-xs-2" id="managerName"></div>
-        <div class="col-md-2 col-sm-2 col-xs-2" id="managerEmail"></div>
-        <div class="col-md-2 col-sm-2 col-xs-2" id="managerRgDate"></div>
-        <div class="col-md-2 col-sm-2 col-xs-2" id="managerExDate"></div>
-        <div class="col-md-1 col-sm-1 col-xs-1" id="managerYN"></div>
-        <div class="col-md-1 col-sm-1 col-xs-1">
-        	<input id="log" type="button" value="로그"/>
-        </div>
-	</div>
-	
-관리자 정보를 삽입시킬 div테그	
-	<div class="row" id="managerListResult" align="center"></div>
-</div>
- -->
  
  <div class="caption" id="managerLogList" >
 	
@@ -199,11 +163,11 @@
 						<table class="table table-striped table-bordered" >
 							<thead>
 								<tr class="widget-header">
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">순번</th>
-									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center;">관리자</th>
-									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center;">로그데이트</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">로그코드</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">내용</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:50px; max-width:50px;">순번</th>
+									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:150px; max-width:150px;">관리자</th>
+									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:110px; max-width:110px;">로그데이트</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">로그코드</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">내용</th>
 								</tr>
 							</thead>
 							<tbody id="managerLogResult"></tbody>  <!-- 자료를 붙일 바디 -->
