@@ -474,6 +474,11 @@ $(function() {
 	/*닫기버튼 클릭시*/
 	$("#read_closeButton").click(function () {
 		$("#listAllDiv").empty();
+		
+		$("#read_div label").text("");
+		$("#blogRead_content div").html("");
+        $("#carousel_page").empty();
+        $("#carousel_image").empty();
 	/* 	var image_child=$("#carousel_image").children();
 		
 		for(var i=1; i<image_child; i++){
@@ -569,34 +574,37 @@ function reply_delete(DThis) {
 </script>
 </head>
 <body>
-	<div id="blogRead_boardno" style="display: none;">
-		<label></label>
-	</div>		
-	<div id="blogRead_rgdate">
-		<label>작성일:</label>
-		<label></label>
-	</div>
-	<div id="blogRead_category">
-		<label>카테고리:</label> 
-		<label></label> |
-		<label></label>
-	</div>
-	<div id="blogRead_writer">
-		<label>작성자:</label> 
-		<label></label>
-	</div>
-	<div id="blogRead_addr">
-		<label>주소:</label>
-		<label></label>
-	</div>
-	<div id="blogRead_title">
-		<label>제목:</label>
-		<label></label>
-	</div>
+	<div id="read_div">
+		<div id="blogRead_boardno" style="display: none;">
+			<label></label>
+		</div>		
+		<div id="blogRead_rgdate">
+			<span>작성일:</span>
+			<label></label>
+		</div>
+		<div id="blogRead_category">
+			<span>카테고리:</span> 
+			<label></label> |
+			<label></label>
+		</div>
+		<div id="blogRead_writer">
+			<span>작성자:</span> 
+			<label></label>
+		</div>
+		<div id="blogRead_addr">
+			<span>주소:</span>
+			<label></label>
+		</div>
+		<div id="blogRead_title">
+			<span>제목:</span>
+			<label></label>
+		</div>
+	
 
-	<div id="blogRead_content">
-		<label>내용:</label>
-		<div></div>
+		<div id="blogRead_content">
+			<span>내용:</span>
+			<div></div>
+		</div>
 	</div>
 	
 	<!-- 이미지 슬라이드 -->
@@ -617,7 +625,7 @@ function reply_delete(DThis) {
 <br/><br/>
 
 	<div id="blogRead_grade">
-		<label>평점:</label>
+		<span>평점:</span>
 		<img src="" width="100" height="20"/><br /> 
 	</div>
 	<br/>
@@ -634,7 +642,7 @@ function reply_delete(DThis) {
 	&nbsp;&nbsp;&nbsp;&nbsp;<span><img src="${root}/images/blogMap/coupon_img.png" id="coupon_issue_btn" style="width:80px;"/></span>
 	<br/>
 	<div id="blogRead_reply">
-		<label>답글:</label>
+		<span>답글:</span>
 	   <div class="row form-group">
         <div class="input-group">
             <input id="replyInsert" type="text" class="form-control">

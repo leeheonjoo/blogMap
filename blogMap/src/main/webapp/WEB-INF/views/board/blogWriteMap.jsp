@@ -365,13 +365,13 @@ function blogListDetails(blogRead_no) {
         var recommand_y=data[0].YES;
         var recommand_n=data[0].NO;
         //데이터 입력
-        $("#blogRead_rgdate > label:eq(1)").text(fullDate); 
-        $("#blogRead_addr > label:eq(1)").text(pullAddr); 
+        $("#blogRead_rgdate > label:eq(0)").text(fullDate); 
+        $("#blogRead_addr > label:eq(0)").text(pullAddr); 
         $("#blogRead_content > div").html(content);
-        $("#blogRead_writer > label:eq(1)").text(writer);
-        $("#blogRead_title > label:eq(1)").text(title);
-        $("#blogRead_category > label:eq(1)").text(mcategory);
-        $("#blogRead_category > label:eq(2)").text(scategory);
+        $("#blogRead_writer > label:eq(0)").text(writer);
+        $("#blogRead_title > label:eq(0)").text(title);
+        $("#blogRead_category > label:eq(0)").text(mcategory);
+        $("#blogRead_category > label:eq(1)").text(scategory);
         $("#blogRead_boardno > label:eq(0)").text(boardno);
         $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
         $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
