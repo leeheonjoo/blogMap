@@ -156,10 +156,7 @@
 			});
 		};
 		
-		function couponDetail(couponNo){
-			if(sessionStorage.getItem('email')!=null){
-				alert();
-			}
+		function couponDetail(couponNo){			
 			if(sessionStorage.getItem('manager_yn')=="Y"){
 				
 				$("#coupon_detail_button").css("display","inline-block");
@@ -386,9 +383,6 @@
 			};
 			
 			function couponDetail(couponNo){
-				if(sessionStorage.getItem('email')!=null){
-					alert();
-				}
 				if(sessionStorage.getItem('manager_yn')=="Y"){
 					
 					$("#coupon_detail_button").css("display","inline-block");
@@ -609,12 +603,8 @@
 			});
 		};
 		
-		function couponDetail(couponNo){
-			if(sessionStorage.getItem('email')!=null){
-				alert();
-			}
-			if(sessionStorage.getItem('manager_yn')=="Y"){
-				
+		function couponDetail(couponNo){			
+			if(sessionStorage.getItem('manager_yn')=="Y"){				
 				$("#coupon_detail_button").css("display","inline-block");
 			}
 			
