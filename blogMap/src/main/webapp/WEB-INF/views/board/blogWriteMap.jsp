@@ -248,7 +248,7 @@ v\:* {
                                  $("#blogList_result_content").append("<br/>");       */
                                  
                                  //자세히 버튼 클릭시
-                                 this_item.click(function(){
+                                 $("#result_button"+i).click(function(){
                                 	 $("div[id='blogListDetail'].modal").modal(); 
                                      blogListDetails(board_no);
                                  });
@@ -374,7 +374,7 @@ function blogListDetails(blogRead_no) {
         $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
         $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
         
-        alert(writer);
+        
         if(email!=writer){
         	$("#Upbutton").css("display","none");
         	$("#Debutton").css("display","none");
