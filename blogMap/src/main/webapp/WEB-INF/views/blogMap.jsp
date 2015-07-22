@@ -23,7 +23,7 @@
 		margin: 1% 1% 0px 1%;
 		height:auto;
   		max-height: 90%;
- 	    overflow-y: hidden;
+ 	    overflow-y: auto;
      	overflow-x: hidden;
 	}
 
