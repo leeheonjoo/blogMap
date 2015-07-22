@@ -27,7 +27,7 @@ public interface BoardReadDao {
 
 	public List<Board_addr_infoDto> blogSearchAddr(int board_no);
 
-	public List<BoardDto> blogListResult(HashMap<String, Object> hashMap);
+	public List<HashMap<String,Object>> blogListResult(HashMap<String, Object> hashMap);
 
 	public List<HashMap<String, Object>> getReadList1(int boardNo);
 

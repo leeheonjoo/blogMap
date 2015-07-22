@@ -76,13 +76,26 @@
 	 </foreach> -->
 	</select>
 	
-	<select id="blogListResult" parameterType="java.util.HashMap" resultType="com.java.board.dto.BoardDto">
-		select board_no,member_id,category_code,board_rgdate,board_content,board_grade,board_count,board_title  
+	<select id="blogListResult" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select *
+		from (select b.*, f.file_name,
+     		   row_number() over (partition by b.board_no order by f.file_no) f_num
+ 			   from board b,attach_file f
+ 			   where b.board_no=f.board_no(+)
+               and b.board_no in(select board_no 
+                     from board_addr_info 
+                    where addr_sido=#{sido}
+                      and addr_sigugun=#{sigugun}
+                      and addr_dongri=#{dongri}
+                      and nvl(addr_bunji,'%') = case when #{bunji} is null then '%' else #{bunji} end)
+  		       and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%'))
+		where f_num = 1 
+<!--    select board_no,member_id,category_code,board_rgdate,board_content,board_grade,board_count,board_title  
 		from board
 		where board_no in(select board_no 
 		                  from board_addr_info 
 		                  where addr_sido=#{sido} and addr_sigugun=#{sigugun} and addr_dongri=#{dongri} and nvl(addr_bunji,'%') = case when #{bunji} is null then '%' else #{bunji} end)
-        and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%')
+        and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%') -->
 	</select>
 	
 	<select id="getreply" parameterType="int" resultType="int">

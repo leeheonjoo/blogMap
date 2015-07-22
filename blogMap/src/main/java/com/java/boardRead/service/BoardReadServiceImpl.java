@@ -314,19 +314,25 @@ public class BoardReadServiceImpl implements BoardReadService {
 		hashMap.put("dongri", dongri);
 		hashMap.put("bunji", bunji);
 		hashMap.put("searchValue", searchValue);
+		
 		List<BoardDto> boardList=null;
+		List<Attach_fileDto> attach_fileList=null;
+		hashMap.put("boardList", boardList);
+		hashMap.put("attach_fileList", attach_fileList);
+		
+		List<HashMap<String,Object>> blogListResultList=new ArrayList<HashMap<String,Object>>();
 		
 		
-		boardList=boardReadDao.blogListResult(hashMap);
 		
-		List<Attach_fileDto> attachList=null;
-		if(boardList!=null){
-			logger.info("boardList_size:"+boardList.size());
+		blogListResultList=boardReadDao.blogListResult(hashMap);
+		
+		if(blogListResultList!=null){
+			logger.info("boardList_size:"+blogListResultList.size());
 		/*	attachList = boardReadDao.blogImage(boardList);
 			logger.info("boardList_size:"+boardList.size());*/
 		}
 		Gson gson=new Gson();
-		String result=gson.toJson(boardList);
+		String result=gson.toJson(blogListResultList);
 		try {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().println(result);

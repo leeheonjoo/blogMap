@@ -208,14 +208,15 @@ v\:* {
                               
                               $("#list_items").empty();
                               $.each(data,function(i){
-                                 var board_no=data[i].board_no;
-                                 var board_title=data[i].board_title;
-                                 var rgdate=new Date(data[i].board_rgdate);
+                                 var board_no=data[i].BOARD_NO;
+                                 var board_title=data[i].BOARD_TITLE;
+                                 var rgdate=new Date(data[i].BOARD_RGDATE);
                                  var fullDate=rgdate.getFullYear()+"/"+(rgdate.getMonth()+1)+"/"+rgdate.getDate();
-                                 var board_grade=data[i].board_grade;
-                                 var board_count=data[i].board_count;
-                                 var board_content=data[i].board_content;
-                              
+                                 var board_grade=data[i].BOARD_GRADE;
+                                 var board_count=data[i].BOARD_COUNT;
+                                 var board_content=data[i].BOARD_CONTENT;
+                              	 var file_name=data[i].FILE_NAME;
+                              	                    
                                  //검색 리스트개수에 따른 복사
                                  var this_item=$("#list_items").append($("#listItem").clone());
                                   $("#list_items > a:eq("+i+")").find('#result_title').attr("id","result_title"+i); 
@@ -226,6 +227,7 @@ v\:* {
                                   $("#list_items > a:eq("+i+")").find('#result_star').attr("id","result_star"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_no').attr("id","result_no"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_button').attr("id","result_button"+i); 
+                                  $("#list_items > a:eq("+i+")").find('#result_attchimg').attr("id","result_attchimg"+i); 
                                  
                                   //데이터 입력
                                  $("#result_no"+i).text("글번호: "+board_no);
@@ -234,7 +236,11 @@ v\:* {
                                  $("#result_grade"+i+" > small").text("평점: "+board_grade+" / 5");
                                  $("#result_title"+i).text(board_title);
                                  $("#result_content"+i).html(board_content);
-                                 
+                                 if(file_name!=null||file_name!=undefined||file_name!=""){
+                                   $("#result_attchimg"+i).attr("src","${root}/pds/board/"+file_name);
+                                 }else{
+                                   $("#result_attchimg"+i).attr("src","http://placehold.it/350x250");
+                                 }
                                  //평점 조건에 따른 별 색칠
                                  if(board_grade=="1"){
                                     $("#result_star"+i+"> span:eq(0)").attr("class","glyphicon glyphicon-star");
