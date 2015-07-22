@@ -250,7 +250,7 @@ v\:* {
                                  $("#blogList_result_content").append("<br/>");       */
                                  
                                  //자세히 버튼 클릭시
-                                 $("#result_button"+i).click(function(){
+                                 $("#list_items > a:eq("+i+")").click(function(){
                                 	 $("div[id='blogListDetail'].modal").modal(); 
                                      blogListDetails(board_no);
                                  });
