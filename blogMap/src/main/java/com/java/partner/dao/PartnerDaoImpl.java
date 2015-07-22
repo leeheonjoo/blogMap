@@ -42,9 +42,9 @@ public class PartnerDaoImpl implements PartnerDao {
  * @description: 제휴업체 리스트 (getPartnerList)
  */
 @Override
-	public List<PartnerDto> getwriteList() {
+	public List<PartnerDto> getwriteList(String member_id) {
 		logger.info("PartnerMapper.getTourPartnerList----------------------------------");
-		List<PartnerDto> list=session.selectList("dao.PartnerMapper.getWriteList");
+		List<PartnerDto> list=session.selectList("dao.PartnerMapper.getWriteList",member_id);
 		logger.info(String.valueOf("getWriteList_Size:"+list.size()) );
 		
 		return list;

@@ -15,14 +15,7 @@
 </style>
 <script type="text/javascript">
 	//이미지 미리보기
-	$(function(){
-		
-/* 네이버 스마트 에디터(크기,색상,글꼴 등) */
-		
-	
-		
-		
-	    function readURLS(input,index) {
+	  function readURLS(input,index) {
 	        if (input.files && input.files[0]) {
 	            var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
 	            reader.onload = function (e) { 
@@ -35,14 +28,16 @@
 	            //File내용을 읽어 dataURL형식의 문자열로 저장
 	        }
 	    }//readURL()--
-
+	    
+	$(function(){
 	    //file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하 는 코드
-	    $('input[type=file]').click(function() {
+	    $('#blogUpdateattach input[type=file]').click(function() {
 	    	var fileId=$(this).attr('id');
-	    	var index=fileId.substring(6,7);
+	    	var index=fileId.substring(8,9);
 	    		$("#"+fileId).change(function(){
 	    	        if(this.value==""||this.value==null){
-	    	        	  $('#UpdateloadedImg'+index).attr('src', e.target.result);
+						
+	    	        	$('#UpdateloadedImg'+index).attr('src', e.target.result);
 	    	        }
 	    	        readURLS(this,index);
 	    	    });
@@ -158,35 +153,43 @@
 		</select>
 		<br/>
 		<span class="spanStyle" style="display:none;">
-		<input id="imgInp0" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<input id="UpimgInp0" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
 		<img id="UpdateloadedImg0" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>
 		<input type="text" name="comment" style="width:100px;" placeholder="예)최고에요"/>
 		</span>
 		<span class="spanStyle" style="display: none;">
-		<input id="imgInp1" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<input id="UpimgInp1" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
 		<img id="UpdateloadedImg1" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>
 		<input type="text" name="comment" style="width:100px;" placeholder="예)최고에요"/>
 		</span>
 		<span class="spanStyle" style="display: none;">
-		<input id="imgInp2" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<input id="UpimgInp2" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
 		<img id="UpdateloadedImg2" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>
 		<input type="text" name="comment" style="width:100px;"placeholder="예)최고에요"/>
 		</span>
 		<span class="spanStyle" style="display: none;">
-		<input id="imgInp3" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<input id="UpimgInp3" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
 		<img id="UpdateloadedImg3" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>
 		<input type="text" name="comment" style="width:100px;" placeholder="예)최고에요"/>
 		</span>
 		<span class="spanStyle" style="display: none;">
-		<input id="imgInp4" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<input id="UpimgInp4" type="file" name="file" onchange="readURLS(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
 		<img id="UpdateloadedImg4" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
 		<br/>
 		<input type="text" name="comment" style="width:100px;" placeholder="예)최고에요"/>
 		</span>
+	</div>
+	<!-- DB로 보낼 이미지 명칭 -->
+	<div id="UPloadImg_hidden">
+		<input type="hidden" name="UphiddenImg"/>
+		<input type="hidden" name="UphiddenImg"/>
+		<input type="hidden" name="UphiddenImg"/>
+		<input type="hidden" name="UphiddenImg"/>
+		<input type="hidden" name="UphiddenImg"/>
 	</div>
 	
 	<div id="blogUpdateGrade">

@@ -150,6 +150,7 @@
 										if(total_cnt==m.length){
 											$("#map").empty();
 											mapLoad(m,addrArray,sidoArray,sigugunArray,dongmyunArray,restArray,titleArray,mapDiv,search_value);
+											
 										}
 									},
 									error:function(data){
@@ -355,88 +356,88 @@
                </div> 
          </a>
      </div>
-     
-	<div class="container-fluid" style="height:15%;">
-	<nav id="blogListMain" class="navbar navbar-inverse ">
+    <div class="row" style="height:100%;">
+		<div class="container-fluid" style="height:18%;">
+		<nav id="blogListMain" class="navbar navbar-inverse ">
+			
+			  	<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+				  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+				    <span class="sr-only">Toggle navigation</span>
+				    <span class="icon-bar"></span>
+				    <span class="icon-bar"></span>
+				    <span class="icon-bar"></span>
+				  </button>
+				</div>
+			
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+					<ul class="nav navbar-nav">
+						<!-- 검색조건(시도) -->
+						<li id="dropdown" class="dropdown">
+							<a id="si_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">시도[전체]<span class="caret"></span></a>
+							<ul id="si" class="dropdown-menu" role="menu" style="overflow-y: scroll; overflow-hidden; height: 400px;" >
+								<li><a><option id="item" value="%">시도[전체]</option></a></li>
+							</ul>
+						</li>
+						
+						<!-- 검색조건(시구군) -->
+						<li class="dropdown">
+							<a id="gun_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">시구군[전체]<span class="caret"></span></a>
+							<ul id="gun" class="dropdown-menu" role="menu" style="overflow-y: scroll; overflow-hidden; height: 400px;">
+								<li><a><option id="item" value="%">시구군[전체]</option></a></li>
+							</ul>
+						</li>
+						
+						<!-- 검색조건(동면) -->
+						<li class="dropdown">
+							<a id="dong_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">동면[전체]<span class="caret"></span></a>
+							<ul id="dong" class="dropdown-menu" role="menu" style="overflow-y: scroll; overflow-hidden; height: 400px;">
+								<li><a><option id="item" value="%">동면[전체]</option></a></li>
+							</ul>
+						</li>
+						
+						<!-- 검색조건(대분류) -->
+						<li class="dropdown">
+							<a id="headCategory_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">대분류[전체]<span class="caret"></span></a>
+							<ul id="headCategory" class="dropdown-menu" role="menu" style="overflow-y: hidden; overflow-x:scroll; height: 400px;">
+								<li><a value="%">대분류[전체]</a></li>
+							</ul>
+						</li>
+						
+						<!-- 검색조건(소분류) -->
+						<li class="dropdown">
+							<a id="detailCategory_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">소분류[전체]<span class="caret"></span></a>
+							<ul id="detailCategory" class="dropdown-menu" role="menu" style="overflow-y: scroll; overflow-hidden; height: 400px;">
+								<li><a value="%">소분류[전체]</a></li>
+							</ul>
+						</li>
+					</ul>
+					<form class="navbar-form navbar-left" role="search">
+						<!-- 검색조건(문장) -->
+						<div class="form-group">
+							<input type="text"  id="blogList_text" class="form-control" placeholder="Search"/>
+							<button type="button" id="blogList_Search" class="btn btn-default">검색</button>
+							<span id="myId_blogList" style="display:none;">
+							<label style="color: red;">유저 작성글만 검색시 체크</label>
+							<input type="checkbox" value="y"/>
+							</span>
+						</div>
+					</form>
+				</div><!-- /.navbar-collapse -->
+		</nav>
+				</div><!-- /.container-fluid -->
 		
-		  	<!-- Brand and toggle get grouped for better mobile display -->
-			<div class="navbar-header">
-			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-			    <span class="sr-only">Toggle navigation</span>
-			    <span class="icon-bar"></span>
-			    <span class="icon-bar"></span>
-			    <span class="icon-bar"></span>
-			  </button>
-			  <a class="navbar-brand">검색조건</a>
-			</div>
-		
-			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-				<ul class="nav navbar-nav">
-					<!-- 검색조건(시도) -->
-					<li id="dropdown" class="dropdown">
-						<a id="si_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">시도[전체]<span class="caret"></span></a>
-						<ul id="si" class="dropdown-menu" role="menu" style="overflow: scroll; height: 400px;" >
-							<li><a><option id="item" value="%">시도[전체]</option></a></li>
-						</ul>
-					</li>
-					
-					<!-- 검색조건(시구군) -->
-					<li class="dropdown">
-						<a id="gun_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">시구군[전체]<span class="caret"></span></a>
-						<ul id="gun" class="dropdown-menu" role="menu" style="overflow: scroll; height: 400px;">
-							<li><a><option id="item" value="%">시구군[전체]</option></a></li>
-						</ul>
-					</li>
-					
-					<!-- 검색조건(동면) -->
-					<li class="dropdown">
-						<a id="dong_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">동면[전체]<span class="caret"></span></a>
-						<ul id="dong" class="dropdown-menu" role="menu" style="overflow: scroll; height: 400px;">
-							<li><a><option id="item" value="%">동면[전체]</option></a></li>
-						</ul>
-					</li>
-					
-					<!-- 검색조건(대분류) -->
-					<li class="dropdown">
-						<a id="headCategory_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">대분류[전체]<span class="caret"></span></a>
-						<ul id="headCategory" class="dropdown-menu" role="menu" style="overflow: scroll; height: 400px;">
-							<li><a value="%">대분류[전체]</a></li>
-						</ul>
-					</li>
-					
-					<!-- 검색조건(소분류) -->
-					<li class="dropdown">
-						<a id="detailCategory_select" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" value="%">소분류[전체]<span class="caret"></span></a>
-						<ul id="detailCategory" class="dropdown-menu" role="menu" style="overflow: scroll; height: 400px;">
-							<li><a value="%">소분류[전체]</a></li>
-						</ul>
-					</li>
-				</ul>
-				<form class="navbar-form navbar-left" role="search">
-					<!-- 검색조건(문장) -->
-					<div class="form-group">
-						<input type="text"  id="blogList_text" class="form-control" placeholder="Search"/>
-						<button type="button" id="blogList_Search" class="btn btn-default">검색</button>
-						<span id="myId_blogList" style="display:none;">
-						<label style="color: red;">유저 작성글만 검색시 체크</label>
-						<input type="checkbox" value="y"/>
-						</span>
-					</div>
-				</form>
-			</div><!-- /.navbar-collapse -->
-	</nav>
-			</div><!-- /.container-fluid -->
-	
-	<div class="container-fluid" style="height:85%; margin-left:14px; margin-right:14px;">
-		<div class="row" style="height:100%;">
-			<div id="map_div">
-				<div id="map"></div>
-			</div>
-			<div id="list_div" style="height:85%;">
-				<div class="well">
-			        <div id="list_items" class="list-group">
+		<div class="container-fluid" style="height:82%; width:100%;">
+			<div class="row" style="height:100%; width:auto;">
+				<div id="map_div" class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="height:100%;">
+					<div id="map"></div>
+				</div>
+				<div id="list_div" class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="height:100%;">
+					<div class="well">
+				        <div id="list_items" class="list-group">
+				        </div>
 			        </div>
-		        </div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -470,11 +471,13 @@
 		
 		//좌표 전달받아 지도 생성
 		function blogListMapCreate(latitude, longitude){
-// 			alert($("#map_div").css("width") + " " + $("#map_div").css("height"));
+			
 			var map_width=$("#map_div").css("width");
 			map_width=map_width.replace("px","");
 			var map_height=$("#map_div").css("height");
 			map_height=map_height.replace("px","");
+			
+// 			alert(map_width + " " + map_height);
 		//	$("map").emty();
 		// 	alert(latitude + " " + longitude);
 		// 	var oDefaultPoint = new nhn.api.map.LatLng(37.5675451, 126.9773356);	// 기본위치
@@ -493,7 +496,7 @@
 			                                activateBicycleMap : false,
 			                                minMaxLevel : [ 1, 14 ],
 			                                size : new nhn.api.map.Size(map_width, map_height)});
-		                
+
 					// zoomSlider
 					var oSlider = new nhn.api.map.ZoomControl();
 					oSlider.setPosition({
@@ -501,6 +504,15 @@
 					        left : 10
 					});
 					oMap.addControl(oSlider);
+					
+// 					var map_width=$("#map_div").css("width");
+// 					map_width=map_width.replace("px","");
+// 					var map_height=$("#map_div").css("height");
+// 					map_height=map_height.replace("px","");
+// //						alert(map_width.replace("px",""));
+// 				    window.resizeEvt = setTimeout(function() {
+// 				        oMap.setSize(new nhn.api.map.Size(map_width, map_height));                
+// 				    }, 250);
 					
 					
 					var oSize = new nhn.api.map.Size(28, 37);
@@ -602,11 +614,6 @@
 					    window.resizeEvt = setTimeout(function() {
 					        oMap.setSize(new nhn.api.map.Size(map_width, map_height));                
 					    }, 250);
-					    
-//	 				    window.resizeEvt = setTimeout(function() {
-//	 				        oMap.setSize(new nhn.api.map.Size(document.documentElement.clientWidth, 
-//	 				                                        document.documentElement.clientHeight));                
-//	 				    }, 250);
 					});	
 		};		
 	};

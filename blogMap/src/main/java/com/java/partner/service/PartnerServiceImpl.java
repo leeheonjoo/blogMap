@@ -126,12 +126,15 @@ public class PartnerServiceImpl implements PartnerService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 
+		String member_id=request.getParameter("member_id");
+		logger.info("PartnerService writeList member_id:"+member_id);
+		
 		int count=partnerDao.getPartnerCount();
 		logger.info("count:" + count);
 		
 		List<PartnerDto> writeList=null;
 		if(count>0){
-			writeList=partnerDao.getwriteList();
+			writeList=partnerDao.getwriteList(member_id);
 			logger.info("partnerWriteListSize:"+writeList.size());
 		}
 //		메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
