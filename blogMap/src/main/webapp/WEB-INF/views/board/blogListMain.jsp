@@ -110,6 +110,7 @@
 								var addr_sigugun=data[0].addr_sigugun;
 								var addr_dongri=data[0].addr_dongri
 								var addr_bunji=data[0].addr_bunji;
+								var addr_title=data[0].addr_title;
 								if(addr_bunji==""||addr_bunji==undefined||addr_bunji==null){
 									pullAddr=addr_sido+" "+addr_sigugun+" "+addr_dongri;
 								}else if(addr_sigugun==null||addr_sigugun==undefined){
@@ -145,7 +146,7 @@
 										sigugunArray.push(sigugun);
 										dongmyunArray.push(dongmyun);
 										restArray.push(rest);
-										
+										titleArray.push(addr_title);
 										if(total_cnt==m.length){
 											$("#map").empty();
 											mapLoad(m,addrArray,sidoArray,sigugunArray,dongmyunArray,restArray,titleArray,mapDiv,search_value);
