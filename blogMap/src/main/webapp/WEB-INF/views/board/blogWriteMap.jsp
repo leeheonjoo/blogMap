@@ -123,8 +123,9 @@ v\:* {
                         // 마커 클릭하면
                         if (oTarget instanceof nhn.api.map.Marker) {
                            var pullAddr=oCustomEvent.target.getTitle();
+                          
+                           var addr_title=pullAddr.substring(1,pullAddr.lastIndexOf("]"));
                            var pAddrs=pullAddr.split("]");
-                           //alert(pAddrs);
                            
                            var pAddr=pAddrs[1].split("/");
                            var pAddr0=pAddr[0];
@@ -137,6 +138,7 @@ v\:* {
                            $("input[name=addr_sigugun]").val(pAddr[1]);
                            $("input[name=addr_dongri]").val(pAddr[2]);
                            $("input[name=addr_bunji]").val(pAddr[3]);
+                           $("input[name=addr_title]").val(addr_title);
                            $("div[id=blogWriteSub].modal").modal("hide");
                            
                            // 겹침 마커 클릭한거면

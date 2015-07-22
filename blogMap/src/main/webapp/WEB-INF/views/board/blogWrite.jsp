@@ -304,9 +304,10 @@ function blogWrite_getCategorySelect(el, headData){
 		
 		/* 전송 버튼 클릭시 */
 		$("#save_button").click(function() {
-			var content=$("#board_content").val();
 			var realAddr=$("input type[name='addr_sido']").val();
-			
+			obj.getById["board_content"].exec("UPDATE_IR_FIELD", []); //내용 적용 
+
+	        var content = document.getElementById("board_content").value; 
 			/* 유효성 검사 */
 			if($("#blogWriteSelect > #headCategory option:selected").val()=="%"){
 				alert("대분류 카테고리를 여행,음식 중 선택해주세요.");
@@ -324,16 +325,7 @@ function blogWrite_getCategorySelect(el, headData){
 				$("#board_title").focus();
 				return false;
 			}
-			obj.getById["board_content"].exec("UPDATE_IR_FIELD", []); //내용 적용 
-
-	        var content = document.getElementById("board_content").value; 
-
-	        if (content == "" || content == null || content == '&nbsp;' || content == '<p>&nbsp;</p>') { 
-	                alert("내용을 입력하세요."); 
-	                obj.getById["board_content"].exec("FOCUS"); //포커싱 
-	                return false; 
-	        }else{ 
-	        } 
+			
 			
 			
 			var select_value=$("#imageAttach option:selected").val();
@@ -356,10 +348,15 @@ function blogWrite_getCategorySelect(el, headData){
 				return false;
 			}
 			
+
+	        if (content == "" || content == null || content == '&nbsp;' || content == '<p>&nbsp;</p>') { 
+	                alert("내용을 입력하세요."); 
+	                obj.getById["board_content"].exec("FOCUS"); //포커싱 
+	                return false; 
+	        }else{ 
+	        } 
+			
 			obj.getById["board_content"].exec("UPDATE_CONTENTS_FIELD",[]);
-			
-		
-			
 			
 			//폼 submit();
 			$("#frm").submit();
@@ -411,6 +408,10 @@ function blogWrite_getCategorySelect(el, headData){
 		<input type="hidden" name="addr_sigugun"/>
 		<input type="hidden" name="addr_dongri"/>
 		<input type="hidden" name="addr_bunji"/>
+		<br/>
+		<label>업체,여행지명:</label>
+		<input type="text" name="addr_title" size="40" disabled="disabled"/>
+		<input type="hidden" name="addr_title"/>
 		<br/>
 		<label>주소:</label>
 		<input type="text" name="realAddr" size="40" disabled="disabled"/>
