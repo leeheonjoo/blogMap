@@ -67,7 +67,6 @@ $(function() {
 	var email=sessionStorage.getItem('email');
 	
 	$("#ggd").click(function() {
-		alert("하하");
 		$('[data-toggle="confirmation"]').confirmation(title);
 	})
 	
@@ -76,8 +75,6 @@ $(function() {
 		var replyConent = $("#replyInsert").val();
 		$("#replyInsert").val("");
 		if(replyConent!=""){
-		alert(replyConent);
-		alert(email);
 		var boardno=$("#blogRead_boardno > label:eq(0)").text();
 		$.ajax({
 			type : 'post',

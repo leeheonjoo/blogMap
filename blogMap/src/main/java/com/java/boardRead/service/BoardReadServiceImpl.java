@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+import java.util.zip.Checksum;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -210,14 +211,18 @@ public class BoardReadServiceImpl implements BoardReadService {
 		String headCategor=request.getParameter("search_headCategory");
 		String detailCategory=request.getParameter("search_detailCategory");
 		String search_value=request.getParameter("search_search_value");
-		
-		/*System.out.println("sido:"+sido);
+		String check_value=request.getParameter("checkValue");
+        String member_id=request.getParameter("member_id");
+          
+		System.out.println("sido:"+sido);
 		System.out.println("sigugun:"+sigugun);
 		System.out.println("dongmyunri:"+dongmyunri);
 		System.out.println("headCategor:"+headCategor);
 		System.out.println("detailCategory:"+detailCategory);
-		System.out.println("search_value:"+search_value);*/
-	
+		System.out.println("search_value:"+search_value);
+		System.out.println("blogListSearchSub1_check_value:"+check_value);
+		System.out.println("blogListSearchSub1_member_id:"+member_id);
+         
 		Board_addr_infoDto board_addr_infoDto=new Board_addr_infoDto();
 		board_addr_infoDto.setAddr_sido(sido);
 		board_addr_infoDto.setAddr_sigugun(sigugun);
@@ -238,8 +243,15 @@ public class BoardReadServiceImpl implements BoardReadService {
 		hashMap.put("boar_addr_infoList", boar_addr_infoList);
 		List<HashMap<String, Object>> boardLists=new ArrayList<HashMap<String, Object>>();
 		
-		boardLists=boardReadDao.getboardList(hashMap);
+		if(check_value.equals("y")){
+			hashMap.put("check_value", check_value);
+			hashMap.put("member_id", member_id);
+            //boardList=boardReadDao.blogListResult_check(hashMap);
+			boardLists=boardReadDao.getboardList_check(hashMap);
+        }else{
 		
+        	boardLists=boardReadDao.getboardList(hashMap);
+        }
 		
 		
 		if(boardLists!=null){
@@ -287,7 +299,14 @@ public class BoardReadServiceImpl implements BoardReadService {
 		String dongri=request.getParameter("dongri");
 		String bunji=request.getParameter("bunji");
 		String searchValue=request.getParameter("searchValue");
+		
+		
 		logger.info("searchValue:"+searchValue);
+		logger.info("sido:"+sido);
+		logger.info("sigugun:"+sigugun);
+		logger.info("dongri:"+dongri);
+		logger.info("bunji:"+bunji);
+		
 		
 		HashMap<String,Object> hashMap=new HashMap<String, Object>();
 		hashMap.put("sido", sido);
@@ -296,7 +315,10 @@ public class BoardReadServiceImpl implements BoardReadService {
 		hashMap.put("bunji", bunji);
 		hashMap.put("searchValue", searchValue);
 		List<BoardDto> boardList=null;
+		
+		
 		boardList=boardReadDao.blogListResult(hashMap);
+		
 		List<Attach_fileDto> attachList=null;
 		if(boardList!=null){
 			logger.info("boardList_size:"+boardList.size());
@@ -398,6 +420,8 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		int board_no=Integer.parseInt(request.getParameter("board_no"));
 		
+	
+		
 		List<Board_addr_infoDto> board_Addr_infoDto=null;
 		board_Addr_infoDto=boardReadDao.blogSearchAddr(board_no);
 		if(board_Addr_infoDto!=null){
@@ -410,7 +434,6 @@ public class BoardReadServiceImpl implements BoardReadService {
 			response.getWriter().print(board_Addr_infoDto_json);
 			System.out.println(board_Addr_infoDto_json);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

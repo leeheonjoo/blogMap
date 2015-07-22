@@ -56,6 +56,11 @@ public interface BoardReadDao {
 
 	public int blogUpdateOk_attach(HashMap<String, Object> hashMap);
 
+	public List<HashMap<String, Object>> getboardList_check(
+			HashMap<String, Object> hashMap);
+
+	/*public List<BoardDto> blogListResult_check(HashMap<String, Object> hashMap);*/
+
 
 
 }

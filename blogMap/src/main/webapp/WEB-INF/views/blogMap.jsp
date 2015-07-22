@@ -23,8 +23,8 @@
 		margin: 1% 1% 0px 1%;
 		height:auto;
   		max-height: 90%;
-	    overflow-y: hidden;
-     	overflow-x:hidden;
+ 	    overflow-y: auto;
+     	overflow-x: hidden;
 	}
 
  	.modal-myPage{
@@ -56,7 +56,7 @@
 /*  }  */
 
 	#mainResult{
-	  height: 95%;
+	  height: 90%;
 	  overflow-y: auto;
 	  overflow-x: hidden;
 	}
@@ -547,22 +547,39 @@ $(function(){
 	     ***********************************-->
 		<!-- 블로그 리스트 - 블로그 리스트 검색 -->
 		<div class="modal fade" id="blogListMain" data-backdrop="static">
-			<div class="modal-dialog" style="height:100%;">
-				<div class="modal-content" style="height:100%;">
+			<div class="modal-dialog">
+				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title">Blog Search</h4>
 					</div>
-					<div class="modal-body" style="position:inherit; height:100%;">
+					<div class="modal-body">
 						<div id="mainResult">
 							<jsp:include page="board/blogListMain.jsp"/>
 						</div>
-						<br/>
-						<br/>
 					</div>
 				</div>
 		    </div>
 		</div>
+		
+		
+<!-- 		<div class="modal fade" id="blogListMain" data-backdrop="static"> -->
+<!-- 			<div class="modal-dialog" style="height:100%;"> -->
+<!-- 				<div class="modal-content" style="height:100%;"> -->
+<!-- 					<div class="modal-header"> -->
+<!-- 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+<!-- 						<h4 class="modal-title">Blog Search</h4> -->
+<!-- 					</div> -->
+<!-- 					<div class="modal-body" style="display:block; position:absolute; height:90%;"> -->
+<!-- 						<div id="mainResult" style="position:absolute; height:95%;"> -->
+<%-- 							<jsp:include page="board/blogListMain.jsp"/> --%>
+<!-- 						</div> -->
+<!-- 						<br/> -->
+<!-- 						<br/> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 		    </div> -->
+<!-- 		</div> -->
 		
 		<!-- 블로그 리스트 : 황준-->
 		<div class="modal fade" id="blogListSub" data-backdrop="static">
@@ -588,7 +605,7 @@ $(function(){
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<button type="button" id="read_closeButton" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title">Blog Read</h4>
 					</div><div class="container"></div>
 					<div class="modal-body">

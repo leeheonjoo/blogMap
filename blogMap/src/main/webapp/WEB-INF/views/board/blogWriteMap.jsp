@@ -123,8 +123,9 @@ v\:* {
                         // 마커 클릭하면
                         if (oTarget instanceof nhn.api.map.Marker) {
                            var pullAddr=oCustomEvent.target.getTitle();
+                          
+                           var addr_title=pullAddr.substring(1,pullAddr.lastIndexOf("]"));
                            var pAddrs=pullAddr.split("]");
-                           //alert(pAddrs);
                            
                            var pAddr=pAddrs[1].split("/");
                            var pAddr0=pAddr[0];
@@ -137,6 +138,7 @@ v\:* {
                            $("input[name=addr_sigugun]").val(pAddr[1]);
                            $("input[name=addr_dongri]").val(pAddr[2]);
                            $("input[name=addr_bunji]").val(pAddr[3]);
+                           $("input[name=addr_title]").val(addr_title);
                            $("div[id=blogWriteSub].modal").modal("hide");
                            
                            // 겹침 마커 클릭한거면
@@ -173,7 +175,7 @@ v\:* {
                     	 pAddr3="";
                      }
                      
-					var search_value=$("#blogList_text").val();
+					var search_value=$("#blogList_text").val().replace(" ","%");
                      $.ajax({
                            type : 'post',
                            url : '${root}/board/blogListResult.do',
@@ -183,6 +185,7 @@ v\:* {
                               dongri : pAddr2,
                               bunji : pAddr3,
                               searchValue: search_value
+                              
                            },
                            contentType:'application/x-www-form-urlencoded;charset=UTF-8',
                            success : function(data) {
@@ -247,7 +250,7 @@ v\:* {
                                  $("#blogList_result_content").append("<br/>");       */
                                  
                                  //자세히 버튼 클릭시
-                                 this_item.click(function(){
+                                 $("#list_items > a:eq("+i+")").click(function(){
                                 	 $("div[id='blogListDetail'].modal").modal(); 
                                      blogListDetails(board_no);
                                  });
@@ -362,16 +365,22 @@ function blogListDetails(blogRead_no) {
         var recommand_y=data[0].YES;
         var recommand_n=data[0].NO;
         //데이터 입력
-        $("#blogRead_rgdate > label:eq(1)").text(fullDate); 
-        $("#blogRead_addr > label:eq(1)").text(pullAddr); 
+        $("#blogRead_rgdate > label:eq(0)").text(fullDate); 
+        $("#blogRead_addr > label:eq(0)").text(pullAddr); 
         $("#blogRead_content > div").html(content);
-        $("#blogRead_writer > label:eq(1)").text(writer);
-        $("#blogRead_title > label:eq(1)").text(title);
-        $("#blogRead_category > label:eq(1)").text(mcategory);
-        $("#blogRead_category > label:eq(2)").text(scategory);
+        $("#blogRead_writer > label:eq(0)").text(writer);
+        $("#blogRead_title > label:eq(0)").text(title);
+        $("#blogRead_category > label:eq(0)").text(mcategory);
+        $("#blogRead_category > label:eq(1)").text(scategory);
         $("#blogRead_boardno > label:eq(0)").text(boardno);
         $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
         $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
+        
+        
+        if(email!=writer){
+        	$("#Upbutton").css("display","none");
+        	$("#Debutton").css("display","none");
+        }
         
         //평점
         if(grade=="0"){

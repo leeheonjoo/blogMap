@@ -13,8 +13,19 @@
 <script type="text/javascript">
 	// 	20150626 이헌주 - blogListMain.jsp 호출시 검색조건(시도,대분류 카테고리) load를 위한 function
 	$(function(){
+		var email=sessionStorage.getItem('email');
+		if(email!=null){
+			$("#myId_blogList").css("display","");
+		}
+		var check_value="";
+	
+		
 		
 		$("#blogList_Search").click(function() {
+			if($("#myId_blogList > input:checked").is(":checked") == true) {
+				check_value=$("#myId_blogList > input").val();
+			}
+			
 			var sido=$("#si_select:first-child").text();
 			if(sido=="시도[전체]"){
 				sido="%";
@@ -26,7 +37,7 @@
 			var dongmyunri=$("#dong_select").attr("value");
 			var headCategory=$("#headCategory_select").attr("value");
 			var detailCategory=$("#detailCategory_select").attr("value");
-			var search_value=$("#blogList_text").val();
+			var search_value=$("#blogList_text").val().replace(" ","%");
 			
 			/* alert(sido);
 			alert(sigugun);
@@ -59,7 +70,9 @@
 					search_dongmyunri:dongmyunri,
 					search_headCategory:headCategory,
 					search_detailCategory:detailCategory,
-					search_search_value:search_value
+					search_search_value:search_value,
+					checkValue: check_value,
+                    member_id: email
 				},
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(data){
@@ -80,6 +93,8 @@
 							url:'${root}/board/blogListSearchSub1.do',
 							data:{
 								board_no: board_no
+								
+								
 								/* category_code: category_code,
 								key : "60e9ac7ab8734daca3d2053c1e713dbd",
 								encoding : "utf-8",
@@ -312,8 +327,38 @@
 </head>
 <body>
 	<!-- 검색조건 navbar : 20150706 이헌주 -->
+	<div style="display: none;" id="hidden_items" class="list-group" >
+         <a id="listItem" href="#" class="list-group-item">
+               <div class="media col-md-3">
+                   <figure class="pull-left">
+                       <img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >
+                   </figure>
+                   <span style="text-align: left;" id="result_no"></span>
+               </div>
+               <div class="col-md-6">
+                   <h4 id="result_title" class="list-group-item-heading"> </h4>
+                   <p id="result_content" class="list-group-item-text"> 
+                   </p>
+               </div>
+               <div class="col-md-3 text-center">
+               	<h2 id="result_rgdate"><small></small></h2>
+                   <h2 id="result_count"><small></small></h2>
+                   <button id="result_button" type="button" class="btn btn-default btn-lg btn-block" onmouseout="gray_button(this)" onmouseover="blue_button(this)"> 자세히 보기 </button>
+                   <div id="result_star" class="stars">
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                   </div>
+                   <p id="result_grade"><small></small></p>
+               </div> 
+         </a>
+     </div>
+     
+	<div class="container-fluid">
 	<nav id="blogListMain" class="navbar navbar-inverse ">
-		<div class="container-fluid">
+		
 		  	<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -372,59 +417,38 @@
 					<div class="form-group">
 						<input type="text"  id="blogList_text" class="form-control" placeholder="Search"/>
 						<button type="button" id="blogList_Search" class="btn btn-default">검색</button>
+						<span id="myId_blogList" style="display:none;">
+						<label style="color: red;">유저 작성글만 검색시 체크</label>
+						<input type="checkbox" value="y"/>
+						</span>
 					</div>
 				</form>
 			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
 	</nav>
+			</div><!-- /.container-fluid -->
 	
-	<div class="row" style="height:auto;">
-		<div id="map_div" class="col-md-4" style="width:500px; height:400px;">
-			<div id="map" style="display:inline-block; border:1px solid #000; height:100%;"></div>
-		</div>
-		<div id="list_div" class="col-md-8">
-			<div class="well">
-		        <div id="list_items" class="list-group">
+	<div class="container" style="position:static; height:85%;">
+		<div class="row">
+			<div id="map_div" class="col-md-4">
+				<div id="map" style="display:inline-block; border:1px solid #000; height:100%;"></div>
+			</div>
+			<div id="list_div" class="col-md-8">
+				<div class="well">
+			        <div id="list_items" class="list-group">
+			        </div>
 		        </div>
-	        </div>
+			</div>
 		</div>
 	</div>
-		
-	<div style="display: none;" id="hidden_items" class="list-group" >
-         <a id="listItem" href="#" class="list-group-item">
-               <div class="media col-md-3">
-                   <figure class="pull-left">
-                       <img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >
-                   </figure>
-                   <span style="text-align: left;" id="result_no"></span>
-               </div>
-               <div class="col-md-6">
-                   <h4 id="result_title" class="list-group-item-heading"> </h4>
-                   <p id="result_content" class="list-group-item-text"> 
-                   </p>
-               </div>
-               <div class="col-md-3 text-center">
-               	<h2 id="result_rgdate"><small></small></h2>
-                   <h2 id="result_count"><small></small></h2>
-                   <button id="result_button" type="button" class="btn btn-default btn-lg btn-block" onmouseout="gray_button(this)" onmouseover="blue_button(this)"> 자세히 보기 </button>
-                   <div id="result_star" class="stars">
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                   </div>
-                   <p id="result_grade"><small></small></p>
-               </div> 
-         </a>
-     </div>
 <script type="text/javascript">
+
 	function getMap(){
 		if (!navigator.geolocation) {
 			var latitude = 37.5675451; //위도
 			var longitude = 126.9773356; //경도
 			blogListMapCreate(latitude, longitude);
 		}
+
 
 		function success(position) {
 			var latitude = position.coords.latitude; //위도
