@@ -48,7 +48,7 @@
 	</select>
 	
 	<select id="point_info" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		<![CDATA[select * from (select rownum as rnum, x.* from (select p.*,b.board_title from point_info p, board b where p.board_no=b.board_no and p.member_id=#{member_id})x)y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]>
+		<![CDATA[select * from (select rownum as rnum, x.* from (select p.*,b.board_title from point_info p, board b where p.board_no=b.board_no and p.member_id=#{member_id} order by p.point_date desc)x)y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]>
 	</select>
 	
 	<select id="totalBoard" parameterType="String" resultType="Integer">
@@ -56,7 +56,7 @@
 	</select>
 	
 	<select id="board_info" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		<![CDATA[select * from (select rownum as rnum, x.* from (select b.*,category_mname from category c,board b where b.category_code=c.category_code and member_id=#{member_id})x)y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]>
+		<![CDATA[select * from (select rownum as rnum, x.* from (select b.*,category_mname from category c,board b where b.category_code=c.category_code and member_id=#{member_id} order by b.board_rgdate desc)x)y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]>
 	</select>
 	
 	<select id="totalFavorite" parameterType="String" resultType="Integer">
@@ -64,7 +64,7 @@
 	</select>
 	
 	<select id="favorite_info" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		<![CDATA[select * from (select rownum as rnum, x.* from (select f.*,b.board_title from board b, favorite f where b.board_no=f.board_no and f.member_id=#{member_id})x)y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]>
+		<![CDATA[select * from (select rownum as rnum, x.* from (select f.*,b.board_title from board b, favorite f where b.board_no=f.board_no and f.member_id=#{member_id} order by f.favorite_rgdate desc)x)y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]>
 	</select>
 	
 	<select id="point_info_count" parameterType="String" resultType="Integer">
@@ -76,7 +76,7 @@
 	</select>
 	
 	<select id="coupon_info" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		<![CDATA[select * from (select rownum rnum,x.* from (select a.coupon_discount, a.coupon_no, a.coupon_item, a.coupon_bymd, a.coupon_eymd, a.coupon_pic_name, a.coupon_pic_path, p.partner_name,p.partner_phone,p.partner_addr from coupon a, partner p where p.partner_no=a.partner_no and a.coupon_no IN(select coupon_no from coupon_issue c,member m where c.member_id=m.member_id and m.member_id=#{member_id})) x) y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]> 
+		<![CDATA[select * from (select rownum rnum,x.* from (select a.coupon_discount, a.coupon_no, a.coupon_item, a.coupon_bymd, a.coupon_eymd, a.coupon_pic_name, a.coupon_pic_path, p.partner_name,p.partner_phone,p.partner_addr from coupon a, partner p where p.partner_no=a.partner_no and a.coupon_no IN(select coupon_no from coupon_issue c,member m where c.member_id=m.member_id and m.member_id=#{member_id}) order by a.coupon_eymd) x) y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]> 
 	</select>
 	
 	<select id="managerRgCheck" parameterType="String" resultType="String">
