@@ -704,6 +704,10 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		//회원 ID만(작성자) 받아옴
 		String member_id=request.getParameter("member_id");
+		String[] hidden_img=request.getParameterValues("UphiddenImg");
+		for (int i = 0; i < hidden_img.length; i++) {
+			System.out.println(hidden_img[i]);
+		}
 				
 		HashMap<String, Object> hashMap=new HashMap<String, Object>();
 		hashMap.put("boardDto", boardDto);
@@ -781,6 +785,13 @@ public class BoardReadServiceImpl implements BoardReadService {
 				}
 				
 			}
+			/*if(attachList.size()==0){
+				logger.info("블로그작성_파일 추가안함:"+attachList.size());
+			}else{
+				check=boardDao.blogWrite_attach(hashMap);
+				logger.info("첨부파일 DB추가완료:"+check);
+			}*/
+			
 
 		}
 		
