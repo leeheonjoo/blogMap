@@ -49,7 +49,7 @@
 	
 	<select id="getboardList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		<![CDATA[
-		select a.*,count(*) over (partition by 1) tot_cnt from board a,board_addr_info b
+		select a.*,b.addr_title,count(*) over (partition by 1) tot_cnt from board a,board_addr_info b
 		where a.board_no=b.board_no
 		and a.board_no in(select board_no from 
 		board_addr_info 
@@ -76,13 +76,26 @@
 	 </foreach> -->
 	</select>
 	
-	<select id="blogListResult" parameterType="java.util.HashMap" resultType="com.java.board.dto.BoardDto">
-		select board_no,member_id,category_code,board_rgdate,board_content,board_grade,board_count,board_title  
+	<select id="blogListResult" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select *
+		from (select b.*, f.file_name,
+     		   row_number() over (partition by b.board_no order by f.file_no) f_num
+ 			   from board b,attach_file f
+ 			   where b.board_no=f.board_no(+)
+               and b.board_no in(select board_no 
+                     from board_addr_info 
+                    where addr_sido=#{sido}
+                      and addr_sigugun=#{sigugun}
+                      and addr_dongri=#{dongri}
+                      and nvl(addr_bunji,'%') = case when #{bunji} is null then '%' else #{bunji} end)
+  		       and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%'))
+		where f_num = 1 
+<!--    select board_no,member_id,category_code,board_rgdate,board_content,board_grade,board_count,board_title  
 		from board
 		where board_no in(select board_no 
 		                  from board_addr_info 
 		                  where addr_sido=#{sido} and addr_sigugun=#{sigugun} and addr_dongri=#{dongri} and nvl(addr_bunji,'%') = case when #{bunji} is null then '%' else #{bunji} end)
-        and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%')
+        and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%') -->
 	</select>
 	
 	<select id="getreply" parameterType="int" resultType="int">
@@ -94,7 +107,7 @@
 	</update>
 	
 	<select id="getReadList1" parameterType="int" resultType="java.util.HashMap">
-	  select b.*,a.addr_sido,a.addr_sigugun,a.addr_dongri,a.addr_bunji,c.category_mname,c.category_sname,
+	  select b.*,a.addr_sido,a.addr_sigugun,a.addr_dongri,a.addr_bunji,a.addr_title,c.category_mname,c.category_sname,
        nvl(r.yes,0) yes, nvl(r.no,0) no
       from board b,board_addr_info a,category c,
            (select board_no, sum(decode(recommand_yn, 'Y', 1)) yes, sum(decode(recommand_yn, 'N', 1)) no
@@ -176,7 +189,7 @@
     </delete>
     
     <select id="blogUpdate" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-    	select b.*,a.addr_sido,a.addr_sigugun,a.addr_dongri,a.addr_bunji,c.category_mname,c.category_sname,f.file_no,f.file_name,f.file_size,f.file_path,f.file_comment
+    	select b.*,a.addr_sido,a.addr_sigugun,a.addr_dongri,a.addr_bunji,a.addr_title,c.category_mname,c.category_sname,f.file_no,f.file_name,f.file_size,f.file_path,f.file_comment
     	from board b,board_addr_info a,category c,attach_file f
     	 where b.board_no=a.board_no
      	 and b.category_code=c.category_code
@@ -190,7 +203,7 @@
     </update>
     
     <update id="blogUpdateOk_addr" parameterType="java.util.HashMap">
-		update board_addr_info set addr_sido=#{board_addr_infoDto.addr_sido}, addr_sigugun=#{board_addr_infoDto.addr_sigugun},addr_dongri=#{board_addr_infoDto.addr_dongri},addr_bunji=#{board_addr_infoDto.addr_bunji}
+		update board_addr_info set addr_sido=#{board_addr_infoDto.addr_sido}, addr_sigugun=#{board_addr_infoDto.addr_sigugun},addr_dongri=#{board_addr_infoDto.addr_dongri},addr_bunji=#{board_addr_infoDto.addr_bunji},addr_title=#{board_addr_infoDto.addr_title}
 		where board_no=#{boardDto.board_no}
 	</update>
 	
@@ -215,7 +228,7 @@
 	
 	<select id="getboardList_check" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	<![CDATA[
-		select a.*,count(*) over (partition by 1) tot_cnt from board a,board_addr_info b
+		select a.*,b.addr_title,count(*) over (partition by 1) tot_cnt from board a,board_addr_info b
 		where a.board_no=b.board_no
 		and a.board_no in(select board_no from 
 		board_addr_info 

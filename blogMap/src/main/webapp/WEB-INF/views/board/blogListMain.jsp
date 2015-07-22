@@ -110,6 +110,7 @@
 								var addr_sigugun=data[0].addr_sigugun;
 								var addr_dongri=data[0].addr_dongri
 								var addr_bunji=data[0].addr_bunji;
+								var addr_title=data[0].addr_title;
 								if(addr_bunji==""||addr_bunji==undefined||addr_bunji==null){
 									pullAddr=addr_sido+" "+addr_sigugun+" "+addr_dongri;
 								}else if(addr_sigugun==null||addr_sigugun==undefined){
@@ -145,7 +146,7 @@
 										sigugunArray.push(sigugun);
 										dongmyunArray.push(dongmyun);
 										restArray.push(rest);
-										
+										titleArray.push(addr_title);
 										if(total_cnt==m.length){
 											$("#map").empty();
 											mapLoad(m,addrArray,sidoArray,sigugunArray,dongmyunArray,restArray,titleArray,mapDiv,search_value);
@@ -331,7 +332,7 @@
          <a id="listItem" href="#" class="list-group-item">
                <div class="media col-md-3">
                    <figure class="pull-left">
-                       <img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >
+                       <img id="result_attchimg" class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" >
                    </figure>
                    <span style="text-align: left;" id="result_no"></span>
                </div>
@@ -343,7 +344,6 @@
                <div class="col-md-3 text-center">
                	<h2 id="result_rgdate"><small></small></h2>
                    <h2 id="result_count"><small></small></h2>
-                   <button id="result_button" type="button" class="btn btn-default btn-lg btn-block" onmouseout="gray_button(this)" onmouseover="blue_button(this)"> 자세히 보기 </button>
                    <div id="result_star" class="stars">
                        <span class="glyphicon glyphicon-star-empty"></span>
                        <span class="glyphicon glyphicon-star-empty"></span>
@@ -356,7 +356,7 @@
          </a>
      </div>
      
-	<div class="container-fluid">
+	<div class="container-fluid" style="height:15%;">
 	<nav id="blogListMain" class="navbar navbar-inverse ">
 		
 		  	<!-- Brand and toggle get grouped for better mobile display -->
@@ -427,12 +427,12 @@
 	</nav>
 			</div><!-- /.container-fluid -->
 	
-	<div class="container" style="position:static; height:85%;">
-		<div class="row">
-			<div id="map_div" class="col-md-4">
-				<div id="map" style="display:inline-block; border:1px solid #000; height:100%;"></div>
+	<div class="container-fluid" style="height:85%; margin-left:14px; margin-right:14px;">
+		<div class="row" style="height:100%;">
+			<div id="map_div">
+				<div id="map"></div>
 			</div>
-			<div id="list_div" class="col-md-8">
+			<div id="list_div" style="height:85%;">
 				<div class="well">
 			        <div id="list_items" class="list-group">
 			        </div>

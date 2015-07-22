@@ -154,10 +154,9 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	}
 
 	@Override
-	public List<BoardDto> blogListResult(HashMap<String, Object> hashMap) {
-		logger.info("BoardReadDao blogSearchAddr-------------------------");
-		List<BoardDto> boardList=sqlSession.selectList("dao.BoardReadMapper.blogListResult",hashMap);
-		return boardList;
+	public List<HashMap<String,Object>> blogListResult(HashMap<String, Object> hashMap) {
+		logger.info("BoardReadDao blogListResult-------------------------");
+		return sqlSession.selectList("dao.BoardReadMapper.blogListResult",hashMap);
 	}
 
 	@Override
