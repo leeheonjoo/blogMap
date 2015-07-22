@@ -680,7 +680,16 @@ public class MemberServiceImpl implements MemberService {
 		hMap.put("couponList", couponList);
 		
 		List<HashMap<String,Object>> coupon_info_list=new ArrayList<HashMap<String,Object>>();
-		coupon_info_list=memberDao.coupon_info(member_id,startRow,endRow);
+		
+		String coupon_use=request.getParameter("coupon_use");
+		logger.info("coupon_use:"+coupon_use);
+		
+		if(coupon_use.equals("usable")){
+			coupon_info_list=memberDao.coupon_info(member_id,startRow,endRow);
+		}else if(coupon_use.equals("unusable")){
+			coupon_info_list=memberDao.coupon_unusable_info(member_id, startRow, endRow);
+		}
+		
 		
 		
 		//logger.info("coupon_info_list:"+coupon_info_list.size());

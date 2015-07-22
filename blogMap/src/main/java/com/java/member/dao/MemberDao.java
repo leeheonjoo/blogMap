@@ -59,5 +59,8 @@ public interface MemberDao {
 
 	public int fbReRegister(MemberDto memberDto);
 
+	public List<HashMap<String, Object>> coupon_unusable_info(String member_id,
+			int startRow, int endRow);
+
 	
 }

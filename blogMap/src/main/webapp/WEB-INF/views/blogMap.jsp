@@ -40,7 +40,7 @@
  		margin: 2% 20% 0px 20%;
   		height: 600px;
    		max-height: 600px;
-     	overflow-y:scroll;
+     	overflow-y:auto;
  	}
  	
  /* 	.modal-myPage-update{
@@ -582,23 +582,23 @@ $(function(){
 <!-- 		</div> -->
 		
 		<!-- 블로그 리스트 : 황준-->
-		<div class="modal fade" id="blogListSub" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Blog List</h4>
-					</div><div class="container"></div>
-					<div class="modal-body">
-						<div id="mainResult">
- 							<jsp:include page="board/list_backup.jsp"/>
-						</div>
-						<br/>
-						<br/>
-					</div>
-			   </div>
-			</div>
-		</div>
+<!-- 		<div class="modal fade" id="blogListSub" data-backdrop="static"> -->
+<!-- 			<div class="modal-dialog modal-lg"> -->
+<!-- 				<div class="modal-content"> -->
+<!-- 					<div class="modal-header"> -->
+<!-- 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+<!-- 						<h4 class="modal-title">Blog List</h4> -->
+<!-- 					</div><div class="container"></div> -->
+<!-- 					<div class="modal-body"> -->
+<!-- 						<div id="mainResult"> -->
+<%--  							<jsp:include page="board/list_backup.jsp"/> --%>
+<!-- 						</div> -->
+<!-- 						<br/> -->
+<!-- 						<br/> -->
+<!-- 					</div> -->
+<!-- 			   </div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		
 		<!-- 블로그 리스트 자세히 보기 : 황준 -->
 		<div class="modal fade" id="blogListDetail" data-backdrop="static">

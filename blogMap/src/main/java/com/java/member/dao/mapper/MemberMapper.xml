@@ -76,7 +76,7 @@
 	</select>
 	
 	<select id="coupon_info" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		<![CDATA[select * from (select rownum rnum,x.* from (select a.coupon_discount, a.coupon_no, a.coupon_item, a.coupon_bymd, a.coupon_eymd, a.coupon_pic_name, a.coupon_pic_path, p.partner_name,p.partner_phone,p.partner_addr from coupon a, partner p where p.partner_no=a.partner_no and a.coupon_no IN(select coupon_no from coupon_issue c,member m where c.member_id=m.member_id and m.member_id=#{member_id}) order by a.coupon_eymd) x) y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]> 
+		<![CDATA[select * from (select rownum rnum,x.* from (select a.coupon_discount, a.coupon_no, a.coupon_item, a.coupon_bymd, a.coupon_eymd, a.coupon_pic_name, a.coupon_pic_path, p.partner_name,p.partner_phone,p.partner_addr from coupon a, partner p where p.partner_no=a.partner_no and current_date between a.coupon_bymd and a.coupon_eymd and a.coupon_no IN(select coupon_no from coupon_issue c,member m where c.member_id=m.member_id and m.member_id=#{member_id}) order by a.coupon_eymd) x) y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]> 
 	</select>
 	
 	<select id="managerRgCheck" parameterType="String" resultType="String">
@@ -98,4 +98,8 @@
 	<update id="fbReRegister" parameterType="com.java.member.dto.MemberDto">
 		update member set member_name=#{member_name}, member_joindate=current_date, member_jointype=#{member_jointype} where member_id=#{member_id}
 	</update>
+	
+	<select id="coupon_unusable_info" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		<![CDATA[select * from (select rownum rnum,x.* from (select a.coupon_discount, a.coupon_no, a.coupon_item, a.coupon_bymd, a.coupon_eymd, a.coupon_pic_name, a.coupon_pic_path, p.partner_name,p.partner_phone,p.partner_addr from coupon a, partner p where p.partner_no=a.partner_no and current_date not between a.coupon_bymd and a.coupon_eymd and a.coupon_no IN(select coupon_no from coupon_issue c,member m where c.member_id=m.member_id and m.member_id=#{member_id}) order by a.coupon_eymd) x) y where y.rnum>=#{startRow} and y.rnum<=#{endRow}]]> 
+	</select>
 </mapper>
