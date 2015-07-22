@@ -140,7 +140,7 @@
 	</div>
 	<div id="blogUpdateContent">
 		<label>내용:</label>
-		<textarea name="board_content" id="Upboard_content"  rows="10" cols="100" style="width:766px; height:200px;"></textarea>
+		<textarea name="Upboard_content" id="Upboard_content"  rows="10" cols="100" style="width:766px; height:200px;"></textarea>
 	</div>
 	<div id="blogUpdateattach">
 		<label>첨부파일|코멘트:</label>

@@ -61,6 +61,8 @@
 <script type="text/javascript">
 $(function() {
 	var email=sessionStorage.getItem('email');
+	//전역변수
+	var obj=[];
 	
 	//댓글입력 버튼 클릭시 
 	$("span[class='glyphicon glyphicon-ok']").click(function() {
@@ -273,7 +275,7 @@ $(function() {
 	
 	/*삭제 기능*/
 	$("#Debutton").click(function() {
-		alert("삭제클릭");
+		if(confirm("정말 삭제하시겠습니까??") == true){
 		var boardNo=$("#blogRead_boardno > label:eq(0)").text();
 		$.ajax({
 			type:'post',
@@ -291,6 +293,9 @@ $(function() {
 				
 			}
 		})
+		}else{
+			return;
+		}
 	});
 	/* 수정 기능 */
 	$("#Upbutton").click(function() {
@@ -316,7 +321,12 @@ $(function() {
 						
 						if(data[i].FILE_NO==undefined){
 							$("#blogUpdateattach option:eq(0)").attr("selected","selected");
-							$("#blogUpdateattach >span").css("display","");
+					 		$("#blogUpdateattach >span:eq(0)").css("display","none");
+							$("#blogUpdateattach >span:eq(1)").css("display","none");
+							$("#blogUpdateattach >span:eq(2)").css("display","none");
+							$("#blogUpdateattach >span:eq(3)").css("display","none");
+							$("#blogUpdateattach >span:eq(4)").css("display","none");
+							$("#blogUpdateattach >span:eq(5)").css("display","none"); 
 						}else{
 							$("#blogUpdateattach option:eq("+(i+1)+")").attr("selected","selected");
 							$("#blogUpdateattach >span:eq("+i+")").css("display","");
@@ -383,8 +393,7 @@ $(function() {
 					});
 					$("#blogUpdateFile_no").val(file_no);
 					$("#blogUpdateContent > iframe").remove();
-					//전역변수
-					var obj=[];
+					
 					//스마트에디터 프레임생성
 					nhn.husky.EZCreator.createInIFrame({
 						oAppRef:obj,
@@ -406,58 +415,86 @@ $(function() {
 						fCreator:"createSEditor2"
 					});
 					
-					$("#blogUpdateButton").click(function() {
-						
-						/* 유효성 검사 */
-						if($("#blogUpdateSelect > #headCategory option:selected").val()=="%"){
-							alert("대분류 카테고리를 여행,음식 중 선택해주세요.");
-							return false;
-						}
-						
-						
-						if(!$("#blogUpdateTitle > input[name='board_title']").val()){
-							alert("제목을 입력하세요.");
-							$("#blogUpdateTitle > input[name='board_title']").focus();
-							return false;
-						}	
-						
-						var select_value=$("#blogUpdateattach option:selected").val();
-						if(select_value!="0"){
-						var int_select_value=parseInt(select_value);
-						for (var i = 0; i < int_select_value; i++) {
-								if($("#blogUpdateattach > span:eq("+i+") > input:eq(1)").val()==""){
-									alert("첨부이미지에 대한 간단한 코멘트를 입력해주세요.");
-									return false;
-								}
-								if($("#blogUpdateattach > span:eq("+i+") > input[type='file']").val()==""){
-									alert("첨부할 이미지를 추가해주세요.");
-									return false;
-								}
-							}
-						}
-						
-						if(!($("input[type='radio']").is(":checked"))){
-							alert("평점을 선택해주세요.")
-							return false;
-						}
-						
-						obj.getById["Upboard_content"].exec("UPDATE_CONTENTS_FIELD",[]);
-						$("#up_frm").submit();
-					});	
+
 				},
 				error: function(data) {
 					
 				}
 			})
+			
+			
 	});
+	$("#blogUpdateButton").click(function() {
+		
+		/* 유효성 검사 */
+		if($("#blogUpdateSelect > #headCategory option:selected").val()=="%"){
+			alert("대분류 카테고리를 여행,음식 중 선택해주세요.");
+			return false;
+		}
+		
+		
+		if(!$("#blogUpdateTitle > input[name='board_title']").val()){
+			alert("제목을 입력하세요.");
+			$("#blogUpdateTitle > input[name='board_title']").focus();
+			return false;
+		}
+
+		
+		
+		var select_value=$("#blogUpdateattach option:selected").val();
+		if(select_value!="0"){
+		var int_select_value=parseInt(select_value);
+		for (var i = 0; i < int_select_value; i++) {
+				if($("#blogUpdateattach > span:eq("+i+") > input:eq(1)").val()==""){
+					alert("첨부이미지에 대한 간단한 코멘트를 입력해주세요.");
+					return false;
+				}
+				if($("#blogUpdateattach > span:eq("+i+") > input[type='file']").val()==""){
+					alert("첨부할 이미지를 추가해주세요.");
+					return false;
+				}
+			}
+		}
+		
+		if(!($("input[type='radio']").is(":checked"))){
+			alert("평점을 선택해주세요.")
+			return false;
+		}
+		
+		obj.getById["Upboard_content"].exec("UPDATE_CONTENTS_FIELD",[]);
+		$("#up_frm").submit();
+	});	
+	
 	
 	$("#coupon_issue_btn").click(function(){
 		$("div[id='blogRead_coupon'].modal").modal();
 		//alert("보드넘버"+$("#blogRead_boardno label").text());
 	});
 	
+	/*닫기버튼 클릭시*/
+	$("#read_closeButton").click(function () {
+		$("#listAllDiv").empty();
+		
+		$("#read_div label").text("");
+		$("#blogRead_content div").html("");
+        $("#carousel_page").empty();
+        $("#carousel_image").empty();
+	/* 	var image_child=$("#carousel_image").children();
+		
+		for(var i=1; i<image_child; i++){
+			$("#carousel_page > li:eq("+i+")").remove();
+			$("#carousel_image > div:eq("+i+")").remove();
+		}
+		$("#carousel_page > li:eq(0)").attr("class","active");
+		$("#carousel_image > div:eq(0)").attr("class","item active");
+		$("#carousel_image > div:eq(0)").find('img').attr("src","");
+		$("#carousel_image > div:eq(0)").find('div').empty(); */
+		
+		
+	})
+	
 });
-function reply_update(UThis) {
+function reply_update(UThis) { 
 	var updateId=$(UThis).attr("id");
 	var index=updateId.substring(20,21);
 	var replyNo=$("#reply_content_insert"+index+" > span:eq(0)").text();
@@ -537,34 +574,37 @@ function reply_delete(DThis) {
 </script>
 </head>
 <body>
-	<div id="blogRead_boardno" style="display: none;">
-		<label></label>
-	</div>		
-	<div id="blogRead_rgdate">
-		<label>작성일:</label>
-		<label></label>
-	</div>
-	<div id="blogRead_category">
-		<label>카테고리:</label> 
-		<label></label> |
-		<label></label>
-	</div>
-	<div id="blogRead_writer">
-		<label>작성자:</label> 
-		<label></label>
-	</div>
-	<div id="blogRead_addr">
-		<label>주소:</label>
-		<label></label>
-	</div>
-	<div id="blogRead_title">
-		<label>제목:</label>
-		<label></label>
-	</div>
+	<div id="read_div">
+		<div id="blogRead_boardno" style="display: none;">
+			<label></label>
+		</div>		
+		<div id="blogRead_rgdate">
+			<span>작성일:</span>
+			<label></label>
+		</div>
+		<div id="blogRead_category">
+			<span>카테고리:</span> 
+			<label></label> |
+			<label></label>
+		</div>
+		<div id="blogRead_writer">
+			<span>작성자:</span> 
+			<label></label>
+		</div>
+		<div id="blogRead_addr">
+			<span>주소:</span>
+			<label></label>
+		</div>
+		<div id="blogRead_title">
+			<span>제목:</span>
+			<label></label>
+		</div>
+	
 
-	<div id="blogRead_content">
-		<label>내용:</label>
-		<div></div>
+		<div id="blogRead_content">
+			<span>내용:</span>
+			<div></div>
+		</div>
 	</div>
 	
 	<!-- 이미지 슬라이드 -->
@@ -585,7 +625,7 @@ function reply_delete(DThis) {
 <br/><br/>
 
 	<div id="blogRead_grade">
-		<label>평점:</label>
+		<span>평점:</span>
 		<img src="" width="100" height="20"/><br /> 
 	</div>
 	<br/>
@@ -602,7 +642,7 @@ function reply_delete(DThis) {
 	&nbsp;&nbsp;&nbsp;&nbsp;<span><img src="${root}/images/blogMap/coupon_img.png" id="coupon_issue_btn" style="width:80px;"/></span>
 	<br/>
 	<div id="blogRead_reply">
-		<label>답글:</label>
+		<span>답글:</span>
 	   <div class="row form-group">
         <div class="input-group">
             <input id="replyInsert" type="text" class="form-control">
