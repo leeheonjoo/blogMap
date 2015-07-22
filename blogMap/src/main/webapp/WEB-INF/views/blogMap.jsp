@@ -547,14 +547,14 @@ $(function(){
 	     ***********************************-->
 		<!-- 블로그 리스트 - 블로그 리스트 검색 -->
 		<div class="modal fade" id="blogListMain" data-backdrop="static">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
+			<div class="modal-dialog" style="height:100%; margin:1% 1% 1% 1%; overflow-y:hidden;">
+				<div class="modal-content" style="height:100%;">
+					<div class="modal-header" style="height:7%;">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title">Blog Search</h4>
 					</div>
-					<div class="modal-body">
-						<div id="mainResult">
+					<div class="modal-body" style="height:93%;">
+						<div id="mainResult" style="height:100%;">
 							<jsp:include page="board/blogListMain.jsp"/>
 						</div>
 					</div>
