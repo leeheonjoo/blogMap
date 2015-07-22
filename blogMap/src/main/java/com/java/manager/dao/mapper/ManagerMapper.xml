@@ -12,6 +12,7 @@
                   NVL(SUM(p.point_value),0) member_point 
          from MEMBER m, POINT_INFO p where m.member_id = p.member_id(+) 
          group by m.member_id, m.member_pwd, m.member_name,  m.member_joindate, member_jointype
+         order by m.member_joindate desc
 	</select>
 	
 	<update id="memberDelete" parameterType="java.util.HashMap">	
@@ -53,7 +54,7 @@
         where m.member_id = p.member_id(+)
           and m.member_jointype=#{member_jointype}
          group by m.member_id, m.member_pwd, m.member_name, m.member_joindate, member_jointype
-         order by m.member_name asc
+         order by m.member_joindate desc
          
 		<!-- select * from member where member_jointype=#{member_jointype} order by member_name asc -->
 	</select>
@@ -108,7 +109,7 @@
 	</select>
 	
 	<select id="getCouponData" resultType="java.util.HashMap">
-		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no
+		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no order by c.coupon_yn desc, c.coupon_eymd asc 
 	</select>
 	
 	<update id="couponSubmit" parameterType="Integer">
@@ -132,11 +133,11 @@
 	</select>
 	
 	<select id="couponSearch" parameterType="String" resultType="java.util.HashMap">
-		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no and p.partner_name like '%'||#{partner_name}||'%'		
+		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no and p.partner_name like '%'||#{partner_name}||'%' order by c.coupon_yn desc, c.coupon_eymd asc	
 	</select>
 	
 	<select id="searchCouponYN" parameterType="String" resultType="java.util.HashMap">
-		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no and c.coupon_yn=#{coupon_yn}		
+		select * from COUPON c, PARTNER p where c.partner_no = p.partner_no and c.coupon_yn=#{coupon_yn} order by c.coupon_yn desc, c.coupon_eymd asc		
 	</select>
 	
 </mapper> 
