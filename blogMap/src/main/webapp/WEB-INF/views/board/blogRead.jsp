@@ -331,6 +331,13 @@ $(function() {
 							$("#blogUpdateattach option:eq("+(i+1)+")").attr("selected","selected");
 							$("#blogUpdateattach >span:eq("+i+")").css("display","");
 							$("#blogUpdateattach >span:eq("+i+") > input[name='comment']" ).val(file_comment);
+							if(file_name==undefined||file_name==null||file_name==""){
+								$("#UpdateloadedImg"+i).attr("src","${root }/images/blogWrite/noImage.gif");
+								$("#UPloadImg_hidden >input:eq("+i+")").val("");
+							}else{
+								$("#UpdateloadedImg"+i).attr("src","${root}/pds/board/"+file_name);
+								$("#UPloadImg_hidden >input:eq("+i+")").val(file_name);
+							}
 						}
 						
 						file_no+=data[i].FILE_NO+",";
@@ -476,11 +483,18 @@ $(function() {
 	/*닫기버튼 클릭시*/
 	$("#read_closeButton").click(function () {
 		$("#listAllDiv").empty();
-		
 		$("#read_div label").text("");
 		$("#blogRead_content div").html("");
         $("#carousel_page").empty();
         $("#carousel_image").empty();
+        $("#blogUpdateattach > span").each(function(i) {
+        	 alert(i);
+        	 $("#UpdateloadedImg"+i).attr("src","${root }/images/blogWrite/noImage.gif");
+        	 $("#UPloadImg_hidden >input:eq("+i+")").val("");
+        	 $("#blogUpdateattach > span:eq("+i+")").css("display","none");
+        	 
+		})
+        
 	/* 	var image_child=$("#carousel_image").children();
 		
 		for(var i=1; i<image_child; i++){
