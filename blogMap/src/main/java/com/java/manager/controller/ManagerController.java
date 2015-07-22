@@ -274,22 +274,22 @@ public class ManagerController {
 	}
 	
 	/**
-	 * @name:managerList
-	 * @date:2015. 7. 3.
+	 * @name:partnerDetail
+	 * @date:2015. 7. 9.
 	 * @author:이동희
-	 * @description: 관리자 정보를 가져오는 메소드
+	 * @description: 제휴업체의 상세 정보를 가지고 오는 메소드
 	 */
-	@RequestMapping(value="/manager/managerInfo.do", method=RequestMethod.GET)
-	public void managerList(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Manager ManagerList start");
+	@RequestMapping("/manager/partnerDetail.do")
+	public void partnerDetail(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager PartnerDetail Start");
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		
-		managerService.getManagerDate(mav);
-		Map<String, Object> map=mav.getModel();
+		managerService.partnerDetail(mav);
 		
+		Map<String, Object> map=mav.getModel();
 		String json=(String)map.get("json");
 		
 		try{
@@ -299,36 +299,6 @@ public class ManagerController {
 			e.printStackTrace();
 		}
 	}
-	
-	/**
-	 * @name:managerLog
-	 * @date:2015. 7. 3.
-	 * @author:이동희
-	 * @description: 관리자 행위로그를 가지고 오는 메소드
-	 */
-	@RequestMapping("/manager/managerLog.do")
-	public void managerLog(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Manager ManagerLog start");
-		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("response", response);
-		
-		managerService.getManagerLog(mav);
-		
-		Map<String, Object> map=mav.getModel();
-		String json=(String)map.get("json");
-		logger.info("managerLog:" + json);
-		
-		
-		try{
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(json);
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-	}
-	
 	
 	/**
 	 * @name:couponList
@@ -439,32 +409,7 @@ public class ManagerController {
 		}
 	}
 	
-	/**
-	 * @name:partnerDetail
-	 * @date:2015. 7. 9.
-	 * @author:이동희
-	 * @description: 제휴업체의 상세 정보를 가지고 오는 메소드
-	 */
-	@RequestMapping("/manager/partnerDetail.do")
-	public void partnerDetail(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Manager PartnerDetail Start");
-		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("response", response);
-		
-		managerService.partnerDetail(mav);
-		
-		Map<String, Object> map=mav.getModel();
-		String json=(String)map.get("json");
-		
-		try{
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(json);
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-	}
+	
 	
 	/**
 	 * @name:searchCouponList
@@ -493,6 +438,12 @@ public class ManagerController {
 		}
 	}
 	
+	/**
+	 * @name:searchCouponYN
+	 * @date:2015. 7. 21.
+	 * @author:이동희
+	 * @description: 쿠폰의 승인여부로 쿠폰을 조회하는 메소드
+	 */
 	@RequestMapping("/manager/searchCouponYN.do")
 	public void searchCouponYN(HttpServletRequest request, HttpServletResponse response){
 		logger.info("Manager searchCouponYN Start");		
@@ -513,6 +464,62 @@ public class ManagerController {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	/**
+	 * @name:managerList
+	 * @date:2015. 7. 3.
+	 * @author:이동희
+	 * @description: 관리자 정보를 가져오는 메소드
+	 */
+	@RequestMapping(value="/manager/managerInfo.do", method=RequestMethod.GET)
+	public void managerList(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager ManagerList start");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.getManagerDate(mav);
+		Map<String, Object> map=mav.getModel();
+		
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * @name:managerLog
+	 * @date:2015. 7. 3.
+	 * @author:이동희
+	 * @description: 관리자 행위로그를 가지고 오는 메소드
+	 */
+	@RequestMapping("/manager/managerLog.do")
+	public void managerLog(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager ManagerLog start");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.getManagerLog(mav);
+		
+		Map<String, Object> map=mav.getModel();
+		String json=(String)map.get("json");
+		logger.info("managerLog:" + json);
+		
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 	
 	

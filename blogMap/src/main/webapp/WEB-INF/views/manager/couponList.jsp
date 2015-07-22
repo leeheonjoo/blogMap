@@ -27,42 +27,40 @@
 				}
 				
 				$.each(data, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
-					var getbymd = new Date(data[i].COUPON_BYMD);	// 등록일 날짜 변환
-					var byear = getbymd.getFullYear();
-					var bmonth = getbymd.getMonth() + 1;
-					var bday = getbymd.getDate();
-					var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
-					//alert(bymd);
+					var getbymd = new Date(data[i].COUPON_BYMD);
+              		var bymd = leadingZeros(getbymd.getFullYear(), 4) + '/' + leadingZeros(getbymd.getMonth() + 1, 2) + '/' + leadingZeros(getbymd.getDate(), 2);
+              		
+              		var geteymd = new Date(data[i].COUPON_EYMD);
+              		var eymd = leadingZeros(geteymd.getFullYear(), 4) + '/' + leadingZeros(geteymd.getMonth() + 1, 2) + '/' + leadingZeros(geteymd.getDate(), 2);
 					
-					var geteymd = new Date(data[i].COUPON_EYMD);	// 승인일 날짜 변환
-					var eyear = geteymd.getFullYear();
-					var emonth = geteymd.getMonth() + 1;
-					var eday = geteymd.getDate();
-					var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
-					//alert(eymd);
-					
+              		var getCoupoYN=data[i].COUPON_YN
+              		//alert(getCoupoYN);
+              		if(getCoupoYN=="Y"){
+              			getCoupoYN = "O";
+              		}else{
+              			getCoupoYN = "X";
+              		}
+              		
 					
 					if(data[i].COUPON_YN == "N"){
 						$("#couponListResult").append("<tr style='text-align:center;'>"
-								+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 								+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 								+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
 								+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 								+ "<td>" + bymd + "</td>"						// 등록일
 								+ "<td>" + eymd + "</td>"		//
-								+ "<td>"
-								+"<input type='button' id='coupon' value = '승인' name='"+data[i].COUPON_NO+"'/></td>"
+								+ "<td>" + getCoupoYN + "</td>"			
+								+ "<td><input type='button' id='coupon' value = '승인' name='"+data[i].COUPON_NO+"'/></td>"
 								+ "</tr>");
 					}else if(data[i].COUPON_YN =="Y"){
 						$("#couponListResult").append("<tr style='text-align:center;'>"
-								+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 								+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 								+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
 								+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 								+ "<td>" + bymd + "</td>"						// 등록일
 								+ "<td>" + eymd + "</td>"		//
-								+ "<td>"
-								+"<input type='button' id='coupon' value = '취소' name='"+data[i].COUPON_NO+"'/></td>"
+								+ "<td>" + getCoupoYN + "</td>"			// 아이디
+								+ "<td><input type='button' id='coupon' value = '취소' name='"+data[i].COUPON_NO+"'/></td>"
 								+ "</tr>");
 					}
 					
@@ -159,8 +157,11 @@
 		};
 		
 		function couponDetail(couponNo){
-						
+			if(sessionStorage.getItem('email')!=null){
+				alert();
+			}
 			if(sessionStorage.getItem('manager_yn')=="Y"){
+				
 				$("#coupon_detail_button").css("display","inline-block");
 			}
 			
@@ -196,13 +197,13 @@
 					$("#couponDetailMain:last-child #coupon_eymd").html(eymd);					
 					if(data[0].COUPON_YN == "Y"){
 						//$("#partner_submit").css("display", "none");
-						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"취소"});
+						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰취소"});
 					}else if(data[0].COUPON_YN == "N"){
 						//$("#partner_delete").css("display", "none");
-						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"승인"});
+						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰승인"});
 					} 
 					
-					$("#coupon_detail_button[value='취소']").click(function(){
+					$("#coupon_detail_button[value='쿠폰취소']").click(function(){
 						var couponNo = $(this).attr('name');
 						//alert(couponNo);
 						var check = confirm("쿠폰 발행을 취소하시겠습니까?");
@@ -213,7 +214,7 @@
 						}
 					});
 					
-					$("#coupon_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
+					$("#coupon_detail_button[value='쿠폰승인']").click(function(){			// 승인버튼을 클릭시 실행
 						var couponNo = $(this).attr('name');		
 						//alert(couponNo);
 						var check = confirm("쿠폰을 승인 하시겠습니까?");
@@ -264,19 +265,11 @@
 					}
 					
 					$.each(data, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
-						var getbymd = new Date(data[i].COUPON_BYMD);	// 등록일 날짜 변환
-						var byear = getbymd.getFullYear();
-						var bmonth = getbymd.getMonth() + 1;
-						var bday = getbymd.getDate();
-						var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
-						//alert(bymd);
-						
-						var geteymd = new Date(data[i].COUPON_EYMD);	// 승인일 날짜 변환
-						var eyear = geteymd.getFullYear();
-						var emonth = geteymd.getMonth() + 1;
-						var eday = geteymd.getDate();
-						var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
-						//alert(eymd);
+						var getbymd = new Date(data[i].COUPON_BYMD);
+	              		var bymd = leadingZeros(getbymd.getFullYear(), 4) + '/' + leadingZeros(getbymd.getMonth() + 1, 2) + '/' + leadingZeros(getbymd.getDate(), 2);
+	              		
+	              		var geteymd = new Date(data[i].COUPON_EYMD);
+	              		var eymd = leadingZeros(geteymd.getFullYear(), 4) + '/' + leadingZeros(geteymd.getMonth() + 1, 2) + '/' + leadingZeros(geteymd.getDate(), 2);
 						
 						if(data[i].COUPON_YN == "N"){
 							$("#couponListResult").append("<tr style='text-align:center;'>"
@@ -393,8 +386,11 @@
 			};
 			
 			function couponDetail(couponNo){
-				
+				if(sessionStorage.getItem('email')!=null){
+					alert();
+				}
 				if(sessionStorage.getItem('manager_yn')=="Y"){
+					
 					$("#coupon_detail_button").css("display","inline-block");
 				}
 				
@@ -431,13 +427,13 @@
 						
 						if(data[0].COUPON_YN == "Y"){
 							//$("#partner_submit").css("display", "none");
-							$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"취소"});
+							$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰취소"});
 						}else if(data[0].COUPON_YN == "N"){
 							//$("#partner_delete").css("display", "none");
-							$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"승인"});
+							$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰승인"});
 						} 
 						
-						$("#coupon_detail_button[value='취소']").click(function(){
+						$("#coupon_detail_button[value='쿠폰취소']").click(function(){
 							var couponNo = $(this).attr('name');
 							//alert(couponNo);
 							var check = confirm("쿠폰 발행을 취소하시겠습니까?");
@@ -448,7 +444,7 @@
 							}
 						});
 						
-						$("#coupon_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
+						$("#coupon_detail_button[value='쿠폰승인']").click(function(){			// 승인버튼을 클릭시 실행
 							var couponNo = $(this).attr('name');		
 							//alert(couponNo);
 							var check = confirm("쿠폰을 승인 하시겠습니까?");
@@ -490,19 +486,11 @@
 					}
 					
 					$.each(data, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
-						var getbymd = new Date(data[i].COUPON_BYMD);	// 등록일 날짜 변환
-						var byear = getbymd.getFullYear();
-						var bmonth = getbymd.getMonth() + 1;
-						var bday = getbymd.getDate();
-						var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
-						//alert(bymd);
-						
-						var geteymd = new Date(data[i].COUPON_EYMD);	// 승인일 날짜 변환
-						var eyear = geteymd.getFullYear();
-						var emonth = geteymd.getMonth() + 1;
-						var eday = geteymd.getDate();
-						var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
-						//alert(eymd);
+						var getbymd = new Date(data[i].COUPON_BYMD);
+	              		var bymd = leadingZeros(getbymd.getFullYear(), 4) + '/' + leadingZeros(getbymd.getMonth() + 1, 2) + '/' + leadingZeros(getbymd.getDate(), 2);
+	              		
+	              		var geteymd = new Date(data[i].COUPON_EYMD);
+	              		var eymd = leadingZeros(geteymd.getFullYear(), 4) + '/' + leadingZeros(geteymd.getMonth() + 1, 2) + '/' + leadingZeros(geteymd.getDate(), 2);
 						
 						if(data[i].COUPON_YN == "N"){
 							$("#couponListResult").append("<tr style='text-align:center;'>"
@@ -622,8 +610,11 @@
 		};
 		
 		function couponDetail(couponNo){
-			
+			if(sessionStorage.getItem('email')!=null){
+				alert();
+			}
 			if(sessionStorage.getItem('manager_yn')=="Y"){
+				
 				$("#coupon_detail_button").css("display","inline-block");
 			}
 			
@@ -659,13 +650,13 @@
 					$("#couponDetailMain:last-child #coupon_eymd").html(eymd);					
 					if(data[0].COUPON_YN == "Y"){
 						
-						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"취소"});
+						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰취소"});
 					}else if(data[0].COUPON_YN == "N"){
 						
-						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"승인"});
+						$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰승인"});
 					} 
 					
-					$("#coupon_detail_button[value='취소']").click(function(){
+					$("#coupon_detail_button[value='쿠폰취소']").click(function(){
 						var couponNo = $(this).attr('name');
 						//alert(couponNo);
 						var check = confirm("쿠폰 발행을 취소하시겠습니까?");
@@ -676,7 +667,7 @@
 						}
 					});
 					
-					$("#coupon_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
+					$("#coupon_detail_button[value='쿠폰승인']").click(function(){			// 승인버튼을 클릭시 실행
 						var couponNo = $(this).attr('name');		
 						//alert(couponNo);
 						var check = confirm("쿠폰을 승인 하시겠습니까?");
@@ -721,13 +712,14 @@
 						<table class="table table-striped table-bordered" >
 							<thead>
 								<tr class="widget-header" >
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center;">순번</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">업체명</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">품목</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">할인율</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">시작일</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">종료일</th>
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center;">구분</th>
+									
+									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:150px; max-width:200px;">업체명</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">품목</th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">할인율</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">시작일</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">종료일</th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:50px; max-width:50px;">승인</th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;"></th>
 								</tr>
 							</thead>
 							<tbody id="couponListResult"></tbody>  <!-- 자료를 붙일 바디 -->

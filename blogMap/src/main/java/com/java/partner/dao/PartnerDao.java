@@ -18,7 +18,7 @@ public interface PartnerDao {
 	
 	public int getPartnerCount();
 	
-	public List<PartnerDto> getwriteList();
+	public List<PartnerDto> getwriteList(String member_id);
 	
 	public List<HashMap<String, Object>> getTourPartnerListDate(HashMap<String, Object> hMap);
 	

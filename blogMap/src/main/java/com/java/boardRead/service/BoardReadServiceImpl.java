@@ -314,19 +314,25 @@ public class BoardReadServiceImpl implements BoardReadService {
 		hashMap.put("dongri", dongri);
 		hashMap.put("bunji", bunji);
 		hashMap.put("searchValue", searchValue);
+		
 		List<BoardDto> boardList=null;
+		List<Attach_fileDto> attach_fileList=null;
+		hashMap.put("boardList", boardList);
+		hashMap.put("attach_fileList", attach_fileList);
+		
+		List<HashMap<String,Object>> blogListResultList=new ArrayList<HashMap<String,Object>>();
 		
 		
-		boardList=boardReadDao.blogListResult(hashMap);
 		
-		List<Attach_fileDto> attachList=null;
-		if(boardList!=null){
-			logger.info("boardList_size:"+boardList.size());
+		blogListResultList=boardReadDao.blogListResult(hashMap);
+		
+		if(blogListResultList!=null){
+			logger.info("boardList_size:"+blogListResultList.size());
 		/*	attachList = boardReadDao.blogImage(boardList);
 			logger.info("boardList_size:"+boardList.size());*/
 		}
 		Gson gson=new Gson();
-		String result=gson.toJson(boardList);
+		String result=gson.toJson(blogListResultList);
 		try {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().println(result);
@@ -698,6 +704,10 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		//회원 ID만(작성자) 받아옴
 		String member_id=request.getParameter("member_id");
+		String[] hidden_img=request.getParameterValues("UphiddenImg");
+		for (int i = 0; i < hidden_img.length; i++) {
+			System.out.println(hidden_img[i]);
+		}
 				
 		HashMap<String, Object> hashMap=new HashMap<String, Object>();
 		hashMap.put("boardDto", boardDto);
@@ -775,6 +785,13 @@ public class BoardReadServiceImpl implements BoardReadService {
 				}
 				
 			}
+			/*if(attachList.size()==0){
+				logger.info("블로그작성_파일 추가안함:"+attachList.size());
+			}else{
+				check=boardDao.blogWrite_attach(hashMap);
+				logger.info("첨부파일 DB추가완료:"+check);
+			}*/
+			
 
 		}
 		

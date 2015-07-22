@@ -33,20 +33,19 @@
 					return false;
 				}
 				
-				$.each(data, function(i){					
-					var getRgdate = new Date(data[i].partner_rgdate);	// 등록일 날짜 변환
-					var rgyear = getRgdate.getFullYear();
-					var rgmonth = getRgdate.getMonth() + 1;
-					var rgday = getRgdate.getDate();
-					var rgDate = rgyear + "년 " + rgmonth + "월 "	+ rgday + "일";
-					//alert(rgDate);
+				$.each(data, function(i){		
 					
-					var getYdate = new Date(data[i].partner_rgdate);	// 승인일 날짜 변환
-					var yyear = getYdate.getFullYear();
-					var ymonth = getYdate.getMonth() + 1;
-					var yday = getYdate.getDate();
-					var yDate = yyear + "년 " + ymonth + "월 "	+ yday + "일";
-					//alert(yDate);
+					var rgyear = new Date(data[i].partner_rgdate);
+              		var rgDate = leadingZeros(rgyear.getFullYear(), 4) + '/' + leadingZeros(rgyear.getMonth() + 1, 2) + '/' + leadingZeros(rgyear.getDate(), 2);
+              		
+              		var getYdate = new Date(data[i].partner_ydate);
+              		var yDate = null;
+              		if(getYdate.getFullYear() == '9999'){
+              			yDate = "미승인";
+              		}else{
+              			yDate = leadingZeros(getYdate.getFullYear(), 4) + '/' + leadingZeros(getYdate.getMonth() + 1, 2) + '/' + leadingZeros(getYdate.getDate(), 2);
+              		}
+              		
 					 if(data[i].partner_yn == "Y"){ 
 							$("#partnerListResult1").append("<tr style='text-align:center;'>"
 									+ "<td>" + data[i].partner_no + "</td>"			// 아이디
@@ -264,19 +263,12 @@
 					}
 					
 					$.each(data, function(i){
-						var getRgdate = new Date(data[i].partner_rgdate);	// 등록일 날짜 변환
-						var rgyear = getRgdate.getFullYear();
-						var rgmonth = getRgdate.getMonth() + 1;
-						var rgday = getRgdate.getDate();
-						var rgDate = rgyear + "년 " + rgmonth + "월 "	+ rgday + "일";
-						//alert(rgDate);
+						var rgyear = new Date(data[i].partner_rgdate);
+	              		var rgDate = leadingZeros(rgyear.getFullYear(), 4) + '/' + leadingZeros(rgyear.getMonth() + 1, 2) + '/' + leadingZeros(rgyear.getDate(), 2);
+	              		
+	              		var getYdate = new Date(data[i].partner_ydate);
+	              		var yDate = leadingZeros(getYdate.getFullYear(), 4) + '/' + leadingZeros(getYdate.getMonth() + 1, 2) + '/' + leadingZeros(getYdate.getDate(), 2);
 						
-						var getYdate = new Date(data[i].partner_rgdate);	// 승인일 날짜 변환
-						var yyear = getYdate.getFullYear();
-						var ymonth = getYdate.getMonth() + 1;
-						var yday = getYdate.getDate();
-						var yDate = yyear + "년 " + ymonth + "월 "	+ yday + "일";
-						//alert(yDate);
 						if(data[i].partner_yn == "Y"){ 
 							$("#partnerListResult1").append("<tr style='text-align:center;'>"
 									+ "<td>" + data[i].partner_no + "</td>"			// 아이디
@@ -482,19 +474,12 @@
 					}
 					
 					$.each(data, function(i){
-						var getRgdate = new Date(data[i].partner_rgdate);	// 등록일 날짜 변환
-						var rgyear = getRgdate.getFullYear();
-						var rgmonth = getRgdate.getMonth() + 1;
-						var rgday = getRgdate.getDate();
-						var rgDate = rgyear + "년 " + rgmonth + "월 "	+ rgday + "일";
-						//alert(rgDate);
+						var rgyear = new Date(data[i].partner_rgdate);
+	              		var rgDate = leadingZeros(rgyear.getFullYear(), 4) + '/' + leadingZeros(rgyear.getMonth() + 1, 2) + '/' + leadingZeros(rgyear.getDate(), 2);
+	              		
+	              		var getYdate = new Date(data[i].partner_ydate);
+	              		var yDate = leadingZeros(getYdate.getFullYear(), 4) + '/' + leadingZeros(getYdate.getMonth() + 1, 2) + '/' + leadingZeros(getYdate.getDate(), 2);
 						
-						var getYdate = new Date(data[i].partner_rgdate);	// 승인일 날짜 변환
-						var yyear = getYdate.getFullYear();
-						var ymonth = getYdate.getMonth() + 1;
-						var yday = getYdate.getDate();
-						var yDate = yyear + "년 " + ymonth + "월 "	+ yday + "일";
-						//alert(yDate);
 						if(data[i].partner_yn == "Y"){ 
 								$("#partnerListResult1").append("<tr style='text-align:center;'>"
 									+ "<td>" + data[i].partner_no + "</td>"			// 아이디
@@ -702,14 +687,13 @@
 						<table class="table table-striped table-bordered" >
 							<thead>
 								<tr class="widget-header" >
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center;">순번</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">아이디</th>
-									<!-- <th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center;">유형 </th> -->
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">업체명</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">전화번호</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">등록</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center;">승인</th>
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center;">구분</th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:50px; max-width:50px;">순번</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:150px; max-width:150px;">아이디</th>
+									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:150px; max-width:200px;">업체명</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">전화번호</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">등록일</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">승인일</th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">구분</th>
 								</tr>
 							</thead>
 							<tbody id="partnerListResult1"></tbody>  <!-- 자료를 붙일 바디 -->

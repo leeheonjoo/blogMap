@@ -333,7 +333,7 @@
          <a id="listItem" href="#" class="list-group-item">
                <div class="media col-md-3">
                    <figure class="pull-left">
-                       <img class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" alt="placehold.it/350x250" >
+                       <img id="result_attchimg" class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" >
                    </figure>
                    <span style="text-align: left;" id="result_no"></span>
                </div>
