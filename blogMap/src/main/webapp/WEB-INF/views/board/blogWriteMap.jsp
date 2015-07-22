@@ -236,9 +236,7 @@ v\:* {
                                   $("#list_items > a:eq("+i+")").find('#result_count').attr("id","result_count"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_grade').attr("id","result_grade"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_rgdate').attr("id","result_rgdate"+i); 
-                                  $("#list_items > a:eq("+i+")").find('#result_star').attr("id","result_star"+i); 
-                                  $("#list_items > a:eq("+i+")").find('#result_no').attr("id","result_no"+i); 
-                                  $("#list_items > a:eq("+i+")").find('#result_button').attr("id","result_button"+i); 
+                                  $("#list_items > a:eq("+i+")").find('#result_star').attr("id","result_star"+i);
                                   $("#list_items > a:eq("+i+")").find('#result_attchimg').attr("id","result_attchimg"+i); 
                                  
                                   //데이터 입력

@@ -7,9 +7,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<style>
+	a.list-group-item {
+	    height:auto;
+	    min-height:130px;
+	}
+	a.list-group-item.active small {
+	    color:#fff;
+	}
 
+</style>
 <!-- [검색조건 관련 스크립트] -->
 <!-- 적용 페이지 : blogListMain.jsp | blogWrite.jsp-->
+<script type="text/javascript">
+function blue_button(btn) {
+	$(btn).attr("class","btn btn-primary btn-lg btn-block");
+}
+function gray_button(btn) {
+	$(btn).attr("class","btn btn-default btn-lg btn-block");
+}
+function blue_a(a) {
+	$(a).attr("class","list-group-item active");
+}
+function gray_a(a) {
+	$(a).attr("class","list-group-item");
+}
+
+</script>
 <script type="text/javascript">
 	// 	20150626 이헌주 - blogListMain.jsp 호출시 검색조건(시도,대분류 카테고리) load를 위한 function
 	$(function(){
@@ -335,7 +359,6 @@
                    <figure class="pull-left">
                        <img id="result_attchimg" class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" >
                    </figure>
-                   <span style="text-align: left;" id="result_no"></span>
                </div>
                <div class="col-md-6">
                    <h4 id="result_title" class="list-group-item-heading"> </h4>
@@ -357,7 +380,7 @@
          </a>
      </div>
     <div class="row" style="height:100%;">
-		<div class="container-fluid" style="height:18%;">
+		<div class="container-fluid" style="height:17%;">
 		<nav id="blogListMain" class="navbar navbar-inverse ">
 			
 			  	<!-- Brand and toggle get grouped for better mobile display -->
@@ -427,14 +450,14 @@
 		</nav>
 				</div><!-- /.container-fluid -->
 		
-		<div class="container-fluid" style="height:82%; width:100%;">
+		<div class="container-fluid" style="height:79%; width:100%;">
 			<div class="row" style="height:100%; width:auto;">
 				<div id="map_div" class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="height:100%;">
 					<div id="map"></div>
 				</div>
 				<div id="list_div" class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="height:100%;">
-					<div class="well">
-				        <div id="list_items" class="list-group">
+					<div class="well" style="height:100%;">
+				        <div id="list_items" class="list-group" style="height:100%;">
 				        </div>
 			        </div>
 				</div>
