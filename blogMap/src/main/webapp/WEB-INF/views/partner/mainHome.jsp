@@ -115,7 +115,6 @@ $(function() {
 					type: 'POST',
 					url : '${root}/partner/write.do',
 					data :data,
-
  					processData:false,
  					contentType:false,
 					/* contentType : 'application/x-www-form-urlencoded;charset=UTF-8', */
@@ -189,7 +188,7 @@ $(function() {
 		$("#search_Partner").click(function(){
 			//alert("제휴업체");
 			var searchTag=$("input[id='partnerSearchTag']").val();
-			alert("찾으려는 검색어"+searchTag);
+			//alert("찾으려는 검색어"+searchTag);
 		
 			$.ajax({
 				type:'get',
@@ -225,7 +224,7 @@ $(function() {
 			});
 		});
 		 function partnerData(no){
-			 alert(no);
+			 //alert(no);
 				$.ajax({
 					type:'get',
 					url:'${root}/partner/getTourPartnerListDate.do?partnerNo=' + no,
@@ -306,7 +305,7 @@ $(function() {
 							
 							// 각 업체를 클릭했을때 이벤트
 							$("#partner_no" + data[i].partner_no).click(function(){
-								alert("업체클릭번호" + data[i].partner_no)
+								//alert("업체클릭번호" + data[i].partner_no)
 								$("#partner_no").val(data[i].partner_no);
 										
 								//alert($("#partner_no").val());
