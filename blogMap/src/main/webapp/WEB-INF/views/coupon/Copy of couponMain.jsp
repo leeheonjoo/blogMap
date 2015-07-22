@@ -202,10 +202,7 @@ li { list-style-type:none;}
  	}
  	
  	function couponData(couponNo){
- 		if(sessionStorage.getItem('email')!=null && sessionStorage.getItem('manager_yn')== null){
-			//alert();
-			$("#coupon_detail_issue").css("display","inline-block");
-		}
+		
 		if(sessionStorage.getItem('manager_yn')=="Y"){
 			$("#coupon_detail_button").css("display","inline-block");
 		}
@@ -240,7 +237,6 @@ li { list-style-type:none;}
 				$("#couponDetailMain:last-child #coupon_discount").html(data[0].COUPON_DISCOUNT+"%");
 				$("#couponDetailMain:last-child #coupon_bymd").html(bymd);
 				$("#couponDetailMain:last-child #coupon_eymd").html(eymd);					
-				$("#couponDetailMain:last-child #coupon_detail_issue").attr("name",data[0].COUPON_NO);
 				if(data[0].COUPON_YN == "Y"){
 					//$("#partner_submit").css("display", "none");
 					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"취소"});
@@ -269,13 +265,7 @@ li { list-style-type:none;}
 					}else{
 						alert("취소하셨습니다.")
 					}
-				});
-				
-				$("#coupon_detail_issue[value='발급']").click(function(){
-					var couponNo = $(this).attr('name');
-					//alert(couponNo);
-					blogmap_coupon_issue(couponNo);
-				});
+				});	
 			},error:function(data){
 				alert("에러가 발생했습니다.");
 			}
@@ -348,7 +338,6 @@ li { list-style-type:none;}
 			}	
 		});		
 	};
-	
 </script>
 </head>
 <body>
