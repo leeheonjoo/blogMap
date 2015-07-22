@@ -79,7 +79,7 @@ $("#partner_img").css({
 			</div>
 			
 			<div class="modal-footer">
-				<input type="button" class="btn btn-default" id="partner_detail_button" style="display:none;"/>
+				<input type="button" class="btn btn-default" id="partner_detail_button"/>
 				<input type="button" class="btn btn-default" data-dismiss="modal" value="닫기" onclick="close()"/>				
 			</div>
 		</div>

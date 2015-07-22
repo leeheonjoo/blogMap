@@ -248,13 +248,13 @@ li { list-style-type:none;}
 				$("#couponDetailMain:last-child #coupon_detail_issue").attr("name",data[0].COUPON_NO);
 				if(data[0].COUPON_YN == "Y"){
 					//$("#partner_submit").css("display", "none");
-					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"취소"});
+					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰취소"});
 				}else if(data[0].COUPON_YN == "N"){
 					//$("#partner_delete").css("display", "none");
-					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"승인"});
+					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰승인"});
 				} 
 				
-				$("#coupon_detail_button[value='취소']").click(function(){
+				$("#coupon_detail_button[value='쿠폰취소']").click(function(){
 					var couponNo = $(this).attr('name');
 					//alert(couponNo);
 					var check = confirm("쿠폰 발행을 취소하시겠습니까?");
@@ -265,7 +265,7 @@ li { list-style-type:none;}
 					}
 				});
 				
-				$("#coupon_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
+				$("#coupon_detail_button[value='쿠폰승인']").click(function(){			// 승인버튼을 클릭시 실행
 					var couponNo = $(this).attr('name');		
 					//alert(couponNo);
 					var check = confirm("쿠폰을 승인 하시겠습니까?");
