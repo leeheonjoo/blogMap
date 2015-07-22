@@ -8,6 +8,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+function leadingZeros(n, digits) {
+
+    var zero = '';
+
+    n = n.toString();
+
+ 
+
+    if (n.length < digits) {
+
+        for (i = 0; i < digits - n.length; i++)
+
+            zero += '0';
+
+    }
+
+    return zero + n;
+
+}
+
+
 if(sessionStorage.getItem('email')!=null){
 	
 	$(function(){
@@ -55,10 +76,13 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_name").text(memberData.member_name);
 					//$("#myPage_member_name").attr("disabled","disabled");
 					
-					var dt;
+					/* var dt;
 
 					dt = new Date(memberData.member_joindate);
-					dt = dt.getFullYear() + "-" + (dt.getMonth() + 1) + "-" + dt.getDate();
+					dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate(); */
+	
+				    var d = new Date(memberData.member_joindate);
+				    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2);
 
 					$("#myPage_member_joindate").text(dt);
 					//$("#myPage_member_joindate").attr("disabled","disabled");
@@ -192,6 +216,7 @@ if(sessionStorage.getItem('email')!=null){
 			
 		//});
 		
+		//포인트정보
 		function myPagePointInfo(){
 			$("#myPage_member_point_list_title").empty();
 			$("#myPage_member_point_list_content").empty();
@@ -228,18 +253,36 @@ if(sessionStorage.getItem('email')!=null){
 					//$("#myPage_member_point_list").empty();
 					//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
 					//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
-					$("#myPage_member_point_list_title").append("<div class='col-xs-1 col-sm-1 col-md-1'><div class='header'>번호</div></div><div class='col-xs-3 col-sm-3 col-md-3'><div class='header'>발생일</div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='header'>내용</div></div><div class='col-xs-2 col-sm-2 col-md-2'><div class='header'>포인트</div></div>");
+					$("#myPage_member_point_list_title").append("<div class='col-xs-1 col-sm-1 col-md-1'><div class='header'>번호</div></div><div class='col-xs-3 col-sm-3 col-md-3'><div class='header'>발생일</div></div><div class='col-xs-6 col-sm-6 col-md-6'><div class='header'>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</div></div><div class='col-xs-2 col-sm-2 col-md-2'><div class='header'>포인트</div></div>");
 					var point_data=JSON.parse(data[0]);
 					
-					
+					//alert(data[0]);
 					$.each(point_data,function(i){
+// 						var dt;
+
+// 						dt = new Date(point_data[i].POINT_DATE);
+// 						dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+						 
+						 
+					    var d = new Date(point_data[i].POINT_DATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+					    
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
 						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-						+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+point_data[i].POINT_DATE+'</div></div></div>'
-						+'<div class="col-xs-6 col-sm-6 col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
+						+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+						+'<div class="col-xs-6 col-sm-6 col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a id="point_data_read'+i+'" href="#">'+point_data[i].BOARD_TITLE+'</a></div></div></div>'
 						+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+						
+						$("#point_data_read"+i).click(function(){
+							//alert(point_data[i].BOARD_NO);
+							blogListDetails(point_data[i].BOARD_NO);
+							$("div[id='blogListDetail'].modal").modal();
+						});
+						
+						
+						
 					});
 					
 					if(p_endPage>pageCount){
@@ -295,17 +338,30 @@ if(sessionStorage.getItem('email')!=null){
 									$("#myPage_member_point_list_content").empty();
 									//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
 									//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
-									$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
+									$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 									var point_data=JSON.parse(data[0]);
 									
 									$.each(point_data,function(i){
+// 										var dt;
+// 										dt = new Date(point_data[i].POINT_DATE);
+// 										dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+										
+										var d = new Date(point_data[i].POINT_DATE);
+					    				var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-												+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
-												+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
-												+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+										+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+										+'<div class="col-xs-6 col-sm-6 col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a id="point_data_read'+i+'" href="#">'+point_data[i].BOARD_TITLE+'</a></div></div></div>'
+										+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+										
+										$("#point_data_read"+i).click(function(){
+											//alert(point_data[i].BOARD_NO);
+											blogListDetails(point_data[i].BOARD_NO);
+											$("div[id='blogListDetail'].modal").modal();
+										});
 									});
 								}
 							});
@@ -376,17 +432,30 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_point_list_content").empty();
 					//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
 					//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
-					$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
+					$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 					var point_data=JSON.parse(data[0]);
 					
 					$.each(point_data,function(i){
+// 						var dt;
+
+// 						dt = new Date(point_data[i].POINT_DATE);
+// 						dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+						
+						var d = new Date(point_data[i].POINT_DATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);;
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-								+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
-								+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
-								+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+						+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+						+'<div class="col-xs-6 col-sm-6 col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a id="point_data_read'+i+'" href="#">'+point_data[i].BOARD_TITLE+'</a></div></div></div>'
+						+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+						
+						$("#point_data_read"+i).click(function(){
+							//alert(point_data[i].BOARD_NO);
+							blogListDetails(point_data[i].BOARD_NO);
+							$("div[id='blogListDetail'].modal").modal();
+						});
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -445,16 +514,29 @@ if(sessionStorage.getItem('email')!=null){
 									$("#myPage_member_point_list_content").empty();
 									//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
 									//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
-									$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
+									$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 									var point_data=JSON.parse(data[0]);
 									$.each(point_data,function(i){
+// 										var dt;
+
+// 										dt = new Date(point_data[i].POINT_DATE);
+// 										dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+										
+										var d = new Date(point_data[i].POINT_DATE);
+					    				var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-												+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
-												+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
-												+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+										+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+										+'<div class="col-xs-6 col-sm-6 col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a id="point_data_read'+i+'" href="#">'+point_data[i].BOARD_TITLE+'</a></div></div></div>'
+										+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+										
+										$("#point_data_read"+i).click(function(){
+											//alert(point_data[i].BOARD_NO);
+											blogListDetails(point_data[i].BOARD_NO);
+											$("div[id='blogListDetail'].modal").modal();
+										});
 									});
 								}
 							});
@@ -516,17 +598,30 @@ if(sessionStorage.getItem('email')!=null){
 					$("#myPage_member_point_list_content").empty();
 					//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
 					//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
-					$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
+					$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 					var point_data=JSON.parse(data[0]);
 					
 					$.each(point_data,function(i){
+// 						var dt;
+
+// 						dt = new Date(point_data[i].POINT_DATE);
+// 						dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+						
+						var d = new Date(point_data[i].POINT_DATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);;
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-								+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
-								+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
-								+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+						+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+						+'<div class="col-xs-6 col-sm-6 col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a id="point_data_read'+i+'" href="#">'+point_data[i].BOARD_TITLE+'</a></div></div></div>'
+						+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+						
+						$("#point_data_read"+i).click(function(){
+							//alert(point_data[i].BOARD_NO);
+							blogListDetails(point_data[i].BOARD_NO);
+							$("div[id='blogListDetail'].modal").modal();
+						});
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -578,17 +673,26 @@ if(sessionStorage.getItem('email')!=null){
 									$("#myPage_member_point_list_content").empty();
 									//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
 									//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
-									$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
+									$("#myPage_member_point_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>발생일</div></div><div class='col-md-6'><div class='header'>내&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;용</div></div><div class='col-md-2'><div class='header'>포인트</div></div>");
 									var point_data=JSON.parse(data[0]);
 									
 									$.each(point_data,function(i){
+										var d = new Date(point_data[i].POINT_DATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+										
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
-												+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+point_data[i].POINT_DATE+'</code></div></div></div>'
-												+'<div class="col-md-6"><div class="cell"><div class="isrequired">'+point_data[i].BOARD_TITLE+'</div></div></div>'
-												+'<div class="col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
+										+'<div class="col-xs-3 col-sm-3 col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+										+'<div class="col-xs-6 col-sm-6 col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a id="point_data_read'+i+'" href="#">'+point_data[i].BOARD_TITLE+'</a></div></div></div>'
+										+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="description">'+point_data[i].POINT_VALUE+'</div></div></div></div>');
+										
+										$("#point_data_read"+i).click(function(){
+											//alert(point_data[i].BOARD_NO);
+											blogListDetails(point_data[i].BOARD_NO);
+											$("div[id='blogListDetail'].modal").modal();
+										});
 									});
 								}
 							});
@@ -620,7 +724,7 @@ if(sessionStorage.getItem('email')!=null){
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					$("#myPage_member_board_list").empty();
-					$("#myPage_member_board_list").append("<div><span>게시글번호</span><span>작성일</span><span>카테고리</span><span>제목</span></div>")
+					$("#myPage_member_board_list").append("<div><span>글번호</span><span>작성일</span><span>카테고리</span><span>제목</span></div>")
 					
 					var data=JSON.parse(responseData);
 					$.each(data,function(i){
@@ -665,22 +769,22 @@ if(sessionStorage.getItem('email')!=null){
 					
 					$.each(couponInfo,function(i){
 						var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
-						var byear = getbymd.getFullYear();
-						var bmonth = getbymd.getMonth() + 1;
-						var bday = getbymd.getDate();
-						var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+						var byear = leadingZeros(getbymd.getFullYear(),4);
+						var bmonth = leadingZeros(getbymd.getMonth() + 1,2);
+						var bday = leadingZeros(getbymd.getDate(),2);
+						var bymd = byear + "/" + bmonth + "/" + bday;
 						//alert(bymd);
-						
+						 
 						var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
-						var eyear = geteymd.getFullYear();
-						var emonth = geteymd.getMonth() + 1;
-						var eday = geteymd.getDate();
-						var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+						var eyear = leadingZeros(geteymd.getFullYear(),4);
+						var emonth = leadingZeros(geteymd.getMonth() + 1,2);
+						var eday = leadingZeros(geteymd.getDate(),2);
+						var eymd = eyear + "/" + emonth + "/" + eday;
 						//alert(eymd);
 						
 						
 						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-						$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" ><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
+						$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-7 col-xs-7"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-5 col-xs-5 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
 					});
 					
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
@@ -735,21 +839,21 @@ if(sessionStorage.getItem('email')!=null){
 									
 									$.each(couponInfo,function(i){
 										var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
-										var byear = getbymd.getFullYear();
-										var bmonth = getbymd.getMonth() + 1;
-										var bday = getbymd.getDate();
-										var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+										var byear = leadingZeros(getbymd.getFullYear(),4);
+										var bmonth = leadingZeros(getbymd.getMonth() + 1,2);
+										var bday = leadingZeros(getbymd.getDate(),2);
+										var bymd = byear + "/" + bmonth + "/" + bday;
 										//alert(bymd);
-										
+										 
 										var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
-										var eyear = geteymd.getFullYear();
-										var emonth = geteymd.getMonth() + 1;
-										var eday = geteymd.getDate();
-										var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+										var eyear = leadingZeros(geteymd.getFullYear(),4);
+										var emonth = leadingZeros(geteymd.getMonth() + 1,2);
+										var eday = leadingZeros(geteymd.getDate(),2);
+										var eymd = eyear + "/" + emonth + "/" + eday;
 										//alert(eymd);
 										
 										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-										$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" ><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
+										$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-7 col-xs-7"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-5 col-xs-5 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
 									});
 								}
 							});
@@ -809,21 +913,21 @@ if(sessionStorage.getItem('email')!=null){
 					
 					$.each(couponInfo,function(i){
 						var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
-						var byear = getbymd.getFullYear();
-						var bmonth = getbymd.getMonth() + 1;
-						var bday = getbymd.getDate();
-						var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+						var byear = leadingZeros(getbymd.getFullYear(),4);
+						var bmonth = leadingZeros(getbymd.getMonth() + 1,2);
+						var bday = leadingZeros(getbymd.getDate(),2);
+						var bymd = byear + "/" + bmonth + "/" + bday;
 						//alert(bymd);
-						
+						 
 						var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
-						var eyear = geteymd.getFullYear();
-						var emonth = geteymd.getMonth() + 1;
-						var eday = geteymd.getDate();
-						var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+						var eyear = leadingZeros(geteymd.getFullYear(),4);
+						var emonth = leadingZeros(geteymd.getMonth() + 1,2);
+						var eday = leadingZeros(geteymd.getDate(),2);
+						var eymd = eyear + "/" + emonth + "/" + eday;
 						//alert(eymd);
 						
 						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-						$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" ><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
+						$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-7 col-xs-7"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-5 col-xs-5 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -882,21 +986,21 @@ if(sessionStorage.getItem('email')!=null){
 									
 									$.each(couponInfo,function(i){
 										var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
-										var byear = getbymd.getFullYear();
-										var bmonth = getbymd.getMonth() + 1;
-										var bday = getbymd.getDate();
-										var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+										var byear = leadingZeros(getbymd.getFullYear(),4);
+										var bmonth = leadingZeros(getbymd.getMonth() + 1,2);
+										var bday = leadingZeros(getbymd.getDate(),2);
+										var bymd = byear + "/" + bmonth + "/" + bday;
 										//alert(bymd);
-										
+										 
 										var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
-										var eyear = geteymd.getFullYear();
-										var emonth = geteymd.getMonth() + 1;
-										var eday = geteymd.getDate();
-										var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+										var eyear = leadingZeros(geteymd.getFullYear(),4);
+										var emonth = leadingZeros(geteymd.getMonth() + 1,2);
+										var eday = leadingZeros(geteymd.getDate(),2);
+										var eymd = eyear + "/" + emonth + "/" + eday;
 										//alert(eymd);
 										
 										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-										$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" ><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
+										$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-7 col-xs-7"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-5 col-xs-5 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
 									});
 								}
 							});
@@ -958,21 +1062,21 @@ if(sessionStorage.getItem('email')!=null){
 					
 					$.each(couponInfo,function(i){
 						var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
-						var byear = getbymd.getFullYear();
-						var bmonth = getbymd.getMonth() + 1;
-						var bday = getbymd.getDate();
-						var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+						var byear = leadingZeros(getbymd.getFullYear(),4);
+						var bmonth = leadingZeros(getbymd.getMonth() + 1,2);
+						var bday = leadingZeros(getbymd.getDate(),2);
+						var bymd = byear + "/" + bmonth + "/" + bday;
 						//alert(bymd);
-						
+						 
 						var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
-						var eyear = geteymd.getFullYear();
-						var emonth = geteymd.getMonth() + 1;
-						var eday = geteymd.getDate();
-						var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+						var eyear = leadingZeros(geteymd.getFullYear(),4);
+						var emonth = leadingZeros(geteymd.getMonth() + 1,2);
+						var eday = leadingZeros(geteymd.getDate(),2);
+						var eymd = eyear + "/" + emonth + "/" + eday;
 						//alert(eymd);
 						
 						//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-						$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" ><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
+						$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-7 col-xs-7"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-5 col-xs-5 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -1023,21 +1127,21 @@ if(sessionStorage.getItem('email')!=null){
 									
 									$.each(couponInfo,function(i){
 										var getbymd = new Date(couponInfo[i].COUPON_BYMD);	// 등록일 날짜 변환
-										var byear = getbymd.getFullYear();
-										var bmonth = getbymd.getMonth() + 1;
-										var bday = getbymd.getDate();
-										var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
+										var byear = leadingZeros(getbymd.getFullYear(),4);
+										var bmonth = leadingZeros(getbymd.getMonth() + 1,2);
+										var bday = leadingZeros(getbymd.getDate(),2);
+										var bymd = byear + "/" + bmonth + "/" + bday;
 										//alert(bymd);
-										
+										 
 										var geteymd = new Date(couponInfo[i].COUPON_EYMD);	// 승인일 날짜 변환
-										var eyear = geteymd.getFullYear();
-										var emonth = geteymd.getMonth() + 1;
-										var eday = geteymd.getDate();
-										var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
+										var eyear = leadingZeros(geteymd.getFullYear(),4);
+										var emonth = leadingZeros(geteymd.getMonth() + 1,2);
+										var eday = leadingZeros(geteymd.getDate(),2);
+										var eymd = eyear + "/" + emonth + "/" + eday;
 										//alert(eymd);
 										
 										//$("#myPage_member_coupon_list_content").append('<li class="col-sm-3"><div class="fff"><div class="thumbnail"><img src="${root}/css/coupon/images/'+couponInfo[i].COUPON_PIC_NAME+'" alt=""><div class="caption"><h4>'+couponInfo[i].PARTNER_NAME+'</h4><div>할인상품:'+couponInfo[i].COUPON_ITEM+'</div><div>유효기간:'+couponInfo[i].COUPON_EYMD+'</div></div></div></div></li>');
-										$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" ><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive"><div class="caption"><div class="row"><div class="col-md-6 col-xs-6"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-6 col-xs-6 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
+										$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-7 col-xs-7"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-5 col-xs-5 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
 									});
 								}
 							});
@@ -1093,18 +1197,30 @@ if(sessionStorage.getItem('email')!=null){
 					//$("#myPage_member_point_list").empty();
 					//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
 					//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
-					$("#myPage_member_board_list_title").append("<div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+					$("#myPage_member_board_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-6'><div class='header'>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div></div>");
 					var board_data=JSON.parse(data[0]);
 					
-					
 					$.each(board_data,function(i){
+						/* var dt;
+
+						dt = new Date(board_data[i].BOARD_RGDATE);
+						dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes();
+					 */
+					    var d = new Date(board_data[i].BOARD_RGDATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
-						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
-						+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+						+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="board_data_read'+i+'">'+board_data[i].BOARD_TITLE+'</a></div></div></div></div>');
+						
+						$("#board_data_read"+i).click(function(){
+							blogListDetails(board_data[i].BOARD_NO);
+	                        $("div[id='blogListDetail'].modal").modal();
+						});
 					});
 					
 					if(b_endPage>pageCount){
@@ -1152,18 +1268,25 @@ if(sessionStorage.getItem('email')!=null){
 									
 									$("#myPage_member_board_list_title").empty();
 									$("#myPage_member_board_list_content").empty();
-									$("#myPage_member_board_list_title").append("<div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+									$("#myPage_member_board_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-6'><div class='header'>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div></div>");
 									var board_data=JSON.parse(data[0]);
 									
-									
 									$.each(board_data,function(i){
+										var d = new Date(board_data[i].BOARD_RGDATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+									
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
-										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
-										+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+										+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="board_data_read'+i+'">'+board_data[i].BOARD_TITLE+'</a></div></div></div></div>');
+										
+										$("#board_data_read"+i).click(function(){
+											blogListDetails(board_data[i].BOARD_NO);
+					                        $("div[id='blogListDetail'].modal").modal();
+										});
 									});
 								}
 							});
@@ -1229,18 +1352,25 @@ if(sessionStorage.getItem('email')!=null){
 					
 					$("#myPage_member_board_list_title").empty();
 					$("#myPage_member_board_list_content").empty();
-					$("#myPage_member_board_list_title").append("<div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+					$("#myPage_member_board_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-6'><div class='header'>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div></div>");
 					var board_data=JSON.parse(data[0]);
 					
-					
 					$.each(board_data,function(i){
+						var d = new Date(board_data[i].BOARD_RGDATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+					
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
-						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
-						+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+						+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="board_data_read'+i+'">'+board_data[i].BOARD_TITLE+'</a></div></div></div></div>');
+						
+						$("#board_data_read"+i).click(function(){
+							blogListDetails(board_data[i].BOARD_NO);
+	                        $("div[id='blogListDetail'].modal").modal();
+						});
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -1297,18 +1427,25 @@ if(sessionStorage.getItem('email')!=null){
 									
 									$("#myPage_member_board_list_title").empty();
 									$("#myPage_member_board_list_content").empty();
-									$("#myPage_member_board_list_title").append("<div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+									$("#myPage_member_board_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-6'><div class='header'>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div></div>");
 									var board_data=JSON.parse(data[0]);
 									
-									
 									$.each(board_data,function(i){
+										var d = new Date(board_data[i].BOARD_RGDATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+									
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
-										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
-										+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+										+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="board_data_read'+i+'">'+board_data[i].BOARD_TITLE+'</a></div></div></div></div>');
+										
+										$("#board_data_read"+i).click(function(){
+											blogListDetails(board_data[i].BOARD_NO);
+					                        $("div[id='blogListDetail'].modal").modal();
+										});
 									});
 								}
 							});
@@ -1367,18 +1504,25 @@ if(sessionStorage.getItem('email')!=null){
 					
 					$("#myPage_member_board_list_title").empty();
 					$("#myPage_member_board_list_content").empty();
-					$("#myPage_member_board_list_title").append("<div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+					$("#myPage_member_board_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-6'><div class='header'>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div></div>");
 					var board_data=JSON.parse(data[0]);
 					
-					
 					$.each(board_data,function(i){
+						var d = new Date(board_data[i].BOARD_RGDATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+					
 						//alert(data[i].BOARD_TITLE);
 						//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 						//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
-						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
-						+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+						$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+						+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="board_data_read'+i+'">'+board_data[i].BOARD_TITLE+'</a></div></div></div></div>');
+						
+						$("#board_data_read"+i).click(function(){
+							blogListDetails(board_data[i].BOARD_NO);
+	                        $("div[id='blogListDetail'].modal").modal();
+						});
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -1428,18 +1572,25 @@ if(sessionStorage.getItem('email')!=null){
 									
 									$("#myPage_member_board_list_title").empty();
 									$("#myPage_member_board_list_content").empty();
-									$("#myPage_member_board_list_title").append("<div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+									$("#myPage_member_board_list_title").append("<div class='col-md-1'><div class='header'>번호</div></div><div class='col-md-3'><div class='header'>작성일</div></div><div class='col-md-2'><div class='header'>카테고리</div></div><div class='col-md-6'><div class='header'>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div></div>");
 									var board_data=JSON.parse(data[0]);
 									
-									
 									$.each(board_data,function(i){
+										var d = new Date(board_data[i].BOARD_RGDATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+									
 										//alert(data[i].BOARD_TITLE);
 										//$("#myPage_member_point_list_content").append("<div><span>"+point_data[i].POINT_NO+"</span><span>"+point_data[i].POINT_DATE+"</span><span>"+point_data[i].BOARD_TITLE+"</span><span>"+point_data[i].POINT_VALUE+"</span></div>");
 										//$("#myPage_member_point_list_content").append("<tr><td>"+point_data[i].POINT_NO+"</td><td>"+point_data[i].POINT_DATE+"</td><td>"+point_data[i].BOARD_TITLE+"</td><td>"+point_data[i].POINT_VALUE+"</td></tr>");
-										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
-										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+board_data[i].BOARD_RGDATE+'</code></div></div></div>'
-										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
-										+'<div class="col-md-5"><div class="cell"><div class="description">'+board_data[i].BOARD_TITLE+'</div></div></div></div>');
+										$("#myPage_member_board_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+board_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+board_data[i].CATEGORY_MNAME+'</div></div></div>'
+										+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="board_data_read'+i+'">'+board_data[i].BOARD_TITLE+'</a></div></div></div></div>');
+										
+										$("#board_data_read"+i).click(function(){
+											blogListDetails(board_data[i].BOARD_NO);
+					                        $("div[id='blogListDetail'].modal").modal();
+										});
 									});
 								}
 							});
@@ -1470,7 +1621,7 @@ if(sessionStorage.getItem('email')!=null){
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					$("#myPage_member_favorite_list").empty();
-					$("#myPage_member_favorite_list").append("<div><span>순번</span><span>등록일</span><span>게시글번호</span><span>제목</span></div>")
+					$("#myPage_member_favorite_list").append("<div><span>순번</span><span>등록일</span><span>글번호</span><span>제목</span></div>")
 					var data=JSON.parse(responseData);
 					$.each(data,function(i){
 						//alert(data[i].BOARD_TITLE);
@@ -1529,13 +1680,27 @@ if(sessionStorage.getItem('email')!=null){
 					//$("#myPage_member_point_list").empty();
 					//$("#myPage_member_point_list_title").append("<div><span>번호</span><span>발생일</span><span>내용</span><span>포인트</span></div>");
 					//$("#myPage_member_point_list_title").append("<tr><td>번호</td><td>발생일</td><td>내용</td><td>포인트</td></tr>");
-					$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+					$("#myPage_member_favorite_list_title").append("<div class='col-md-1'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>글번호</div></div><div class='col-md-6'><div class='header'>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div></div>");
 					var favorite_data=JSON.parse(data[0]);
+					
 					$.each(favorite_data,function(i){
-						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
-						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
-						+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
+						var d = new Date(favorite_data[i].FAVORITE_RGDATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+						
+						/* var dt;
+
+						dt = new Date(favorite_data[i].FAVORITE_RGDATE);
+						dt = dt.getFullYear() + "/" + (dt.getMonth() + 1) + "/" + dt.getDate()+" "+ dt.getHours() +":"+ dt.getMinutes(); */
+					
+						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="favorite_data_read'+i+'">'+favorite_data[i].BOARD_TITLE+'</a></div></div></div></div>');
+						
+						$("#favorite_data_read"+i).click(function(){
+							blogListDetails(favorite_data[i].BOARD_NO);
+	                        $("div[id='blogListDetail'].modal").modal();
+						});
 					});
 					//alert(f_endPage+","+pageCount);
 					if(f_endPage>pageCount){
@@ -1583,13 +1748,22 @@ if(sessionStorage.getItem('email')!=null){
 									
 									$("#myPage_member_favorite_list_title").empty();
 									$("#myPage_member_favorite_list_content").empty();
-									$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+									$("#myPage_member_favorite_list_title").append("<div class='col-md-1'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>글번호</div></div><div class='col-md-6'><div class='header'>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div></div>");
 									var favorite_data=JSON.parse(data[0]);
+									
 									$.each(favorite_data,function(i){
-										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
-										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
-										+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
+										var d = new Date(favorite_data[i].FAVORITE_RGDATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+									
+										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="favorite_data_read'+i+'">'+favorite_data[i].BOARD_TITLE+'</a></div></div></div></div>');
+										
+										$("#favorite_data_read"+i).click(function(){
+											blogListDetails(favorite_data[i].BOARD_NO);
+					                        $("div[id='blogListDetail'].modal").modal();
+										});
 									});
 								}
 							});
@@ -1655,13 +1829,22 @@ if(sessionStorage.getItem('email')!=null){
 					
 					$("#myPage_member_favorite_list_title").empty();
 					$("#myPage_member_favorite_list_content").empty();
-					$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+					$("#myPage_member_favorite_list_title").append("<div class='col-md-1'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>글번호</div></div><div class='col-md-6'><div class='header'>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div></div>");
 					var favorite_data=JSON.parse(data[0]);
+					
 					$.each(favorite_data,function(i){
-						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
-						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
-						+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
+						var d = new Date(favorite_data[i].FAVORITE_RGDATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+					
+						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="favorite_data_read'+i+'">'+favorite_data[i].BOARD_TITLE+'</a></div></div></div></div>');
+						
+						$("#favorite_data_read"+i).click(function(){
+							blogListDetails(favorite_data[i].BOARD_NO);
+	                        $("div[id='blogListDetail'].modal").modal();
+						});
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -1718,13 +1901,22 @@ if(sessionStorage.getItem('email')!=null){
 									
 									$("#myPage_member_favorite_list_title").empty();
 									$("#myPage_member_favorite_list_content").empty();
-									$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+									$("#myPage_member_favorite_list_title").append("<div class='col-md-1'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>글번호</div></div><div class='col-md-6'><div class='header'>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div></div>");
 									var favorite_data=JSON.parse(data[0]);
+									
 									$.each(favorite_data,function(i){
-										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
-										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
-										+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
+										var d = new Date(favorite_data[i].FAVORITE_RGDATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+									
+										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="favorite_data_read'+i+'">'+favorite_data[i].BOARD_TITLE+'</a></div></div></div></div>');
+										
+										$("#favorite_data_read"+i).click(function(){
+											blogListDetails(favorite_data[i].BOARD_NO);
+					                        $("div[id='blogListDetail'].modal").modal();
+										});
 									});
 								}
 							});
@@ -1783,13 +1975,22 @@ if(sessionStorage.getItem('email')!=null){
 					
 					$("#myPage_member_favorite_list_title").empty();
 					$("#myPage_member_favorite_list_content").empty();
-					$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+					$("#myPage_member_favorite_list_title").append("<div class='col-md-1'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>글번호</div></div><div class='col-md-6'><div class='header'>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div></div>");
 					var favorite_data=JSON.parse(data[0]);
+					
 					$.each(favorite_data,function(i){
-						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-						+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
-						+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
-						+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
+						var d = new Date(favorite_data[i].FAVORITE_RGDATE);
+					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+					
+						$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
+						+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+						+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+						+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="favorite_data_read'+i+'">'+favorite_data[i].BOARD_TITLE+'</a></div></div></div></div>');
+						
+						$("#favorite_data_read"+i).click(function(){
+							blogListDetails(favorite_data[i].BOARD_NO);
+	                        $("div[id='blogListDetail'].modal").modal();
+						});
 					});
 					
 				/* 	$("#myPage_member_point_list_pageNum").remove();
@@ -1838,13 +2039,22 @@ if(sessionStorage.getItem('email')!=null){
 									
 									$("#myPage_member_favorite_list_title").empty();
 									$("#myPage_member_favorite_list_content").empty();
-									$("#myPage_member_favorite_list_title").append("<div class='col-md-2'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>게시글번호</div></div><div class='col-md-5'><div class='header'>제목</div></div>");
+									$("#myPage_member_favorite_list_title").append("<div class='col-md-1'><div class='header'>순번</div></div><div class='col-md-3'><div class='header'>등록일</div></div><div class='col-md-2'><div class='header'>글번호</div></div><div class='col-md-6'><div class='header'>제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;목</div></div>");
 									var favorite_data=JSON.parse(data[0]);
+									
 									$.each(favorite_data,function(i){
-										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-2"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
-										+'<div class="col-md-3"><div class="cell"><div class="type"><code>'+favorite_data[i].FAVORITE_RGDATE+'</code></div></div></div>'
-										+'<div class="col-md-2"><div class="cell"><div class="isrequired">'+favorite_data[i].BOARD_NO+'</div></div></div>'
-										+'<div class="col-md-5"><div class="cell"><div class="description">'+favorite_data[i].BOARD_TITLE+'</div></div></div></div>');
+										var d = new Date(favorite_data[i].FAVORITE_RGDATE);
+									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2) + " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
+									
+										$("#myPage_member_favorite_list_content").append('<div class="row margin-0"><div class="col-md-1"><div class="cell"><div class="propertyname">'+favorite_data[i].FAVORITE_NO+'</div></div></div>'
+										+'<div class="col-md-3"><div class="cell"><div class="type">'+dt+'</div></div></div>'
+										+'<div class="col-md-2"><div class="cell"><div class="description">'+favorite_data[i].BOARD_NO+'</div></div></div>'
+										+'<div class="col-md-6" style="text-align:left;"><div class="cell"><div class="description"><a href="#" id="favorite_data_read'+i+'">'+favorite_data[i].BOARD_TITLE+'</a></div></div></div></div>');
+										/*isrequired*/
+										$("#favorite_data_read"+i).click(function(){
+											blogListDetails(favorite_data[i].BOARD_NO);
+					                        $("div[id='blogListDetail'].modal").modal();
+										});
 									});
 									
 								}
@@ -1879,9 +2089,9 @@ if(sessionStorage.getItem('email')!=null){
 		temp.fadeIn();
 	}
 	// layer를 화면의 중앙에 위치시킨다.
-	if (temp.outerHeight() < $(document).height() ) temp.css('margin-top', '-'+temp.outerHeight()/2+'px');
+	if (temp.outerHeight() < $(document).height() ) temp.css('margin-top', '/'+temp.outerHeight()/2+'px');
 	else temp.css('top', '0px');
-	if (temp.outerWidth() < $(document).width() ) temp.css('margin-left', '-'+temp.outerWidth()/2+'px');
+	if (temp.outerWidth() < $(document).width() ) temp.css('margin-left', '/'+temp.outerWidth()/2+'px');
 	else temp.css('left', '0px');
 	// layer fadeOut : 종료버튼 클릭시
 	temp_btn.click(function(e){
@@ -2038,8 +2248,8 @@ if(sessionStorage.getItem('email')!=null){
 			<div class="col-xs-9 col-md-9 col-sm-9 col-lg-9" id="myPage_member_point_list">
 				<h4>나의 포인트 정보</h4>
 			
-				<div class="method">
-			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_point_list_title">
+				<div class="method" style="text-align:center;">
+			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_point_list_title" style="text-align:center;">
 			        </div>
 			
 					<div id="myPage_member_point_list_content">
@@ -2067,8 +2277,8 @@ if(sessionStorage.getItem('email')!=null){
   			<div class="col-xs-9 col-md-9 col-sm-9 col-lg-9" id="myPage_member_board_list">
 				<h4>나의 게시글 정보</h4>
 			
-				<div class="method">
-			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_board_list_title">
+				<div class="method" style="text-align:center;">
+			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_board_list_title" style="text-align:center;">
 			        </div>
 			
 					<div id="myPage_member_board_list_content">
@@ -2096,8 +2306,8 @@ if(sessionStorage.getItem('email')!=null){
   			<div class="col-xs-9 col-md-9 col-sm-9 col-lg-9" id="myPage_member_favorite_list">
 				<h4>내 즐겨찾기 정보</h4>
 			
-				<div class="method">
-			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_favorite_list_title">
+				<div class="method" style="text-align:center;">
+			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_favorite_list_title" style="text-align:center;">
 			        </div>
 			
 					<div id="myPage_member_favorite_list_content">

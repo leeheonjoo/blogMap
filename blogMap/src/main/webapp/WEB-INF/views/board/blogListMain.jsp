@@ -13,8 +13,19 @@
 <script type="text/javascript">
 	// 	20150626 이헌주 - blogListMain.jsp 호출시 검색조건(시도,대분류 카테고리) load를 위한 function
 	$(function(){
+		var email=sessionStorage.getItem('email');
+		if(email!=null){
+			$("#myId_blogList").css("display","");
+		}
+		var check_value="";
+	
+		
 		
 		$("#blogList_Search").click(function() {
+			if($("#myId_blogList > input:checked").is(":checked") == true) {
+				check_value=$("#myId_blogList > input").val();
+			}
+			
 			var sido=$("#si_select:first-child").text();
 			if(sido=="시도[전체]"){
 				sido="%";
@@ -26,7 +37,7 @@
 			var dongmyunri=$("#dong_select").attr("value");
 			var headCategory=$("#headCategory_select").attr("value");
 			var detailCategory=$("#detailCategory_select").attr("value");
-			var search_value=$("#blogList_text").val();
+			var search_value=$("#blogList_text").val().replace(" ","%");
 			
 			/* alert(sido);
 			alert(sigugun);
@@ -59,7 +70,9 @@
 					search_dongmyunri:dongmyunri,
 					search_headCategory:headCategory,
 					search_detailCategory:detailCategory,
-					search_search_value:search_value
+					search_search_value:search_value,
+					checkValue: check_value,
+                    member_id: email
 				},
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(data){
@@ -80,6 +93,8 @@
 							url:'${root}/board/blogListSearchSub1.do',
 							data:{
 								board_no: board_no
+								
+								
 								/* category_code: category_code,
 								key : "60e9ac7ab8734daca3d2053c1e713dbd",
 								encoding : "utf-8",
@@ -95,6 +110,7 @@
 								var addr_sigugun=data[0].addr_sigugun;
 								var addr_dongri=data[0].addr_dongri
 								var addr_bunji=data[0].addr_bunji;
+								var addr_title=data[0].addr_title;
 								if(addr_bunji==""||addr_bunji==undefined||addr_bunji==null){
 									pullAddr=addr_sido+" "+addr_sigugun+" "+addr_dongri;
 								}else if(addr_sigugun==null||addr_sigugun==undefined){
@@ -130,7 +146,7 @@
 										sigugunArray.push(sigugun);
 										dongmyunArray.push(dongmyun);
 										restArray.push(rest);
-										
+										titleArray.push(addr_title);
 										if(total_cnt==m.length){
 											$("#map").empty();
 											mapLoad(m,addrArray,sidoArray,sigugunArray,dongmyunArray,restArray,titleArray,mapDiv,search_value);
@@ -194,8 +210,9 @@
 					return false;	
 			}else{
 				var vaTrim=va[i];
+				vaTrim=vaTrim.replace(" ", "&nbsp;");
 				
-				$("#blogListMain #" + el).append("<li><a><option id='item' value=" + va[i] + ">" + va[i] + "</option></a></li>");
+				$("#blogListMain #" + el).append("<li><a><option id='item' value=" + vaTrim + " >" + vaTrim + "</option></a></li>");
 			}
 		});
 		
@@ -232,6 +249,7 @@
 				blogList_loc_getCondition(el, siData, gunData);
 			}
 		}else if(el=="gun"){
+// 			alert(siData+ " " + gunData);
 			$("#blogListMain #dong").empty();
 			$("#blogListMain #dong").append("<li><a><option id='item' value='%'>동면[전체]</option></a></li>");
 			$("#blogListMain #dong_select").attr("value",'%').html("동면[전체]<span class='caret'></span>");
@@ -310,8 +328,37 @@
 </head>
 <body>
 	<!-- 검색조건 navbar : 20150706 이헌주 -->
+	<div style="display: none;" id="hidden_items" class="list-group" >
+         <a id="listItem" href="#" class="list-group-item">
+               <div class="media col-md-3">
+                   <figure class="pull-left">
+                       <img id="result_attchimg" class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" >
+                   </figure>
+                   <span style="text-align: left;" id="result_no"></span>
+               </div>
+               <div class="col-md-6">
+                   <h4 id="result_title" class="list-group-item-heading"> </h4>
+                   <p id="result_content" class="list-group-item-text"> 
+                   </p>
+               </div>
+               <div class="col-md-3 text-center">
+               	<h2 id="result_rgdate"><small></small></h2>
+                   <h2 id="result_count"><small></small></h2>
+                   <div id="result_star" class="stars">
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                       <span class="glyphicon glyphicon-star-empty"></span>
+                   </div>
+                   <p id="result_grade"><small></small></p>
+               </div> 
+         </a>
+     </div>
+     
+	<div class="container-fluid" style="height:15%;">
 	<nav id="blogListMain" class="navbar navbar-inverse ">
-		<div class="container-fluid">
+		
 		  	<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
 			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -370,170 +417,199 @@
 					<div class="form-group">
 						<input type="text"  id="blogList_text" class="form-control" placeholder="Search"/>
 						<button type="button" id="blogList_Search" class="btn btn-default">검색</button>
+						<span id="myId_blogList" style="display:none;">
+						<label style="color: red;">유저 작성글만 검색시 체크</label>
+						<input type="checkbox" value="y"/>
+						</span>
 					</div>
 				</form>
 			</div><!-- /.navbar-collapse -->
-		</div><!-- /.container-fluid -->
 	</nav>
-	<br/>
-		
-		<div>
-			<div id="map" style="display:inline-block; border:1px solid #000;"></div>
-			<div style="display:inline-block">
-				<div>
-					
-				</div>
+			</div><!-- /.container-fluid -->
+	
+	<div class="container-fluid" style="height:85%; margin-left:14px; margin-right:14px;">
+		<div class="row" style="height:100%;">
+			<div id="map_div">
+				<div id="map"></div>
+			</div>
+			<div id="list_div" style="height:85%;">
+				<div class="well">
+			        <div id="list_items" class="list-group">
+			        </div>
+		        </div>
 			</div>
 		</div>
-
-		<br/><br/>
-		<!-- <a data-toggle="modal" href="#blogListSub" class="btn btn-primary">Launch modal</a> -->
+	</div>
 <script type="text/javascript">
-$(function(){
-	if (!navigator.geolocation) {
-		var latitude = 37.5675451; //위도
-		var longitude = 126.9773356; //경도
-		blogListMapCreate(latitude, longitude);
-	}
 
-	function success(position) {
-		var latitude = position.coords.latitude; //위도
-		var longitude = position.coords.longitude; //경도
+	function getMap(){
+		if (!navigator.geolocation) {
+			var latitude = 37.5675451; //위도
+			var longitude = 126.9773356; //경도
+			blogListMapCreate(latitude, longitude);
+		}
+
+
+		function success(position) {
+			var latitude = position.coords.latitude; //위도
+			var longitude = position.coords.longitude; //경도
+			
+			latitude = latitude.toFixed(7);
+			longitude = longitude.toFixed(7);
+			blogListMapCreate(latitude, longitude);
+		}
+
+		function error() {
+			var latitude = 37.5675451; //위도
+			var longitude = 126.9773356; //경도
+			
+			blogListMapCreate(latitude, longitude);
+		}
+
+		navigator.geolocation.getCurrentPosition(success, error);
 		
-		latitude = latitude.toFixed(7);
-		longitude = longitude.toFixed(7);
-		blogListMapCreate(latitude, longitude);
-	}
+		//좌표 전달받아 지도 생성
+		function blogListMapCreate(latitude, longitude){
+// 			alert($("#map_div").css("width") + " " + $("#map_div").css("height"));
+			var map_width=$("#map_div").css("width");
+			map_width=map_width.replace("px","");
+			var map_height=$("#map_div").css("height");
+			map_height=map_height.replace("px","");
+		//	$("map").emty();
+		// 	alert(latitude + " " + longitude);
+		// 	var oDefaultPoint = new nhn.api.map.LatLng(37.5675451, 126.9773356);	// 기본위치
+			var oPoint = new nhn.api.map.LatLng(latitude, longitude);
+			nhn.api.map.setDefaultPoint('LatLng');
+			
+			var defaultLevel = 11;	// 기본지도레벨
+			var oMap = new nhn.api.map.Map(document.getElementById('map'), { 
+			                                point : oPoint,
+			                                zoom : defaultLevel,
+			                                enableWheelZoom : true,
+			                                enableDragPan : true,
+			                                enableDblClickZoom : false,
+			                                mapMode : 0,
+			                                activateTrafficMap : false,
+			                                activateBicycleMap : false,
+			                                minMaxLevel : [ 1, 14 ],
+			                                size : new nhn.api.map.Size(map_width, map_height)});
+		                
+					// zoomSlider
+					var oSlider = new nhn.api.map.ZoomControl();
+					oSlider.setPosition({
+					        top : 10,
+					        left : 10
+					});
+					oMap.addControl(oSlider);
+					
+					
+					var oSize = new nhn.api.map.Size(28, 37);
+					var oOffset = new nhn.api.map.Size(14, 37);
+					var oIcon = new nhn.api.map.Icon('http://static.naver.com/maps2/icons/pin_spot2.png', oSize, oOffset);
+					
+					var oInfoWnd = new nhn.api.map.InfoWindow();
+					oInfoWnd.setVisible(false);
+					oMap.addOverlay(oInfoWnd);
+					
+					oInfoWnd.setPosition({
+					        top : 20,
+					        left :20
+					});
+					
+					
+					var oLabel = new nhn.api.map.MarkerLabel(); // - 마커 라벨 선언.
+					oMap.addOverlay(oLabel); // - 마커 라벨 지도에 추가. 기본은 라벨이 보이지 않는 상태로 추가됨.
+					
+					oInfoWnd.attach('changeVisible', function(oCustomEvent) {
+					        if (oCustomEvent.visible) {
+					                oLabel.setVisible(false);
+					        }
+					});
+					
+					oMap.attach('mouseenter', function(oCustomEvent) {
+					
+					        var oTarget = oCustomEvent.target;
+					        // 마커위에 마우스 올라간거면
+					        if (oTarget instanceof nhn.api.map.Marker) {
+					                var oMarker = oTarget;
+					                oLabel.setVisible(true, oMarker); // - 특정 마커를 지정하여 해당 마커의 title을 보여준다.
+					        }
+					});
+					
+					oMap.attach('mouseleave', function(oCustomEvent) {
+					
+					        var oTarget = oCustomEvent.target;
+					        // 마커위에서 마우스 나간거면
+					        if (oTarget instanceof nhn.api.map.Marker) {
+					                oLabel.setVisible(false);
+					        }
+					});
+					
+					oMap.attach('click', function(oCustomEvent) {
+					        var oPoint = oCustomEvent.point;
+					        var oTarget = oCustomEvent.target;
+					        oInfoWnd.setVisible(false);
+					        // 마커 클릭하면
+					        if (oTarget instanceof nhn.api.map.Marker) {
+					                // 겹침 마커 클릭한거면
+					                if (oCustomEvent.clickCoveredMarker) {
+					                        return;
+					                }
+					                // - InfoWindow 에 들어갈 내용은 setContent 로 자유롭게 넣을 수 있습니다. 외부 css를 이용할 수 있으며, 
+					                // - 외부 css에 선언된 class를 이용하면 해당 class의 스타일을 바로 적용할 수 있습니다.
+					                // - 단, DIV 의 position style 은 absolute 가 되면 안되며, 
+					                // - absolute 의 경우 autoPosition 이 동작하지 않습니다. 
+					                /* oInfoWnd.setContent('<DIV style="border-top:1px solid; border-bottom:2px groove black; border-left:1px solid; border-right:2px groove black;margin-bottom:1px;color:black;background-color:white; width:auto; height:auto;">'+
+					                        '<span style="color: #000000 !important;display: inline-block;font-size: 12px !important;font-weight: bold !important;letter-spacing: -1px !important;white-space: nowrap !important; padding: 2px 5px 2px 2px !important">' + 
+					                        'Hello World <br /> ' + oTarget.getPoint()
+					                        +'<span></div>');
+					                oInfoWnd.setPoint(oTarget.getPoint());
+					                oInfoWnd.setPosition({right : 15, top : 30});
+					                oInfoWnd.setVisible(true);
+					                oInfoWnd.autoPosition(); */
+					                return;
+					        }
+					        var oMarker = new nhn.api.map.Marker(oIcon, { title : '마커 : ' + oPoint.toString() });
+					        oMarker.setPoint(oPoint);
+					        oMap.addOverlay(oMarker);
+					});
+					//마커 띄우기(현재 접속된 위치)
+					
+//	 				$("#map nmap").css("border","1px solid black");
 
-	function error() {
-		var latitude = 37.5675451; //위도
-		var longitude = 126.9773356; //경도
-		
-		blogListMapCreate(latitude, longitude);
-	}
+				/*	 for(var i=0;i<m.length;i++){ //마커생성 
+			                 var oPoint = m[i]; 
+			                 var oMarker = new nhn.api.map.Marker(oIcon, { title :"["+titleArray[i]+"]"+" "+sidoArray[i]+"/"+sigugunArray[i]+"/"+dongmyunArray[i]+"/"+restArray[i]});
+			                 oMarker.setPoint(oPoint); 
+			                 oMap.addOverlay(oMarker); 
+			                  mapInfoTestWindow
+								.setContent('<DIV style="border-top:1px solid; border-bottom:2px groove black; border-left:1px solid; border-right:2px groove black;margin-bottom:1px;color:black;background-color:white; width:auto; height:auto;">'
+										+ '<button data-dismiss="modal" style="color: #000000 !important;display: inline-block;font-size: 12px !important;font-weight: bold !important;letter-spacing: -1px !important;white-space: nowrap !important; padding: 2px 2px 2px 2px !important">'
+										+ title :titleArray[i]
+										+ '</buton></div>'); 
 
-	navigator.geolocation.getCurrentPosition(success, error);
-	
-	//좌표 전달받아 지도 생성
-	function blogListMapCreate(latitude, longitude){
-		
-	//	$("map").emty();
-	// 	alert(latitude + " " + longitude);
-	// 	var oDefaultPoint = new nhn.api.map.LatLng(37.5675451, 126.9773356);	// 기본위치
-		var oPoint = new nhn.api.map.LatLng(latitude, longitude);
-		nhn.api.map.setDefaultPoint('LatLng');
-		
-		var defaultLevel = 11;	// 기본지도레벨
-		var oMap = new nhn.api.map.Map(document.getElementById('map'), { 
-		                                point : oPoint,
-		                                zoom : defaultLevel,
-		                                enableWheelZoom : true,
-		                                enableDragPan : true,
-		                                enableDblClickZoom : false,
-		                                mapMode : 0,
-		                                activateTrafficMap : false,
-		                                activateBicycleMap : false,
-		                                minMaxLevel : [ 1, 14 ],
-		                                size : new nhn.api.map.Size(500, 400)});
-	                
-				// zoomSlider
-				var oSlider = new nhn.api.map.ZoomControl();
-				oSlider.setPosition({
-				        top : 10,
-				        left : 10
-				});
-				oMap.addControl(oSlider);
-				
-				
-				var oSize = new nhn.api.map.Size(28, 37);
-				var oOffset = new nhn.api.map.Size(14, 37);
-				var oIcon = new nhn.api.map.Icon('http://static.naver.com/maps2/icons/pin_spot2.png', oSize, oOffset);
-				
-				var oInfoWnd = new nhn.api.map.InfoWindow();
-				oInfoWnd.setVisible(false);
-				oMap.addOverlay(oInfoWnd);
-				
-				oInfoWnd.setPosition({
-				        top : 20,
-				        left :20
-				});
-				
-				
-				var oLabel = new nhn.api.map.MarkerLabel(); // - 마커 라벨 선언.
-				oMap.addOverlay(oLabel); // - 마커 라벨 지도에 추가. 기본은 라벨이 보이지 않는 상태로 추가됨.
-				
-				oInfoWnd.attach('changeVisible', function(oCustomEvent) {
-				        if (oCustomEvent.visible) {
-				                oLabel.setVisible(false);
-				        }
-				});
-				
-				oMap.attach('mouseenter', function(oCustomEvent) {
-				
-				        var oTarget = oCustomEvent.target;
-				        // 마커위에 마우스 올라간거면
-				        if (oTarget instanceof nhn.api.map.Marker) {
-				                var oMarker = oTarget;
-				                oLabel.setVisible(true, oMarker); // - 특정 마커를 지정하여 해당 마커의 title을 보여준다.
-				        }
-				});
-				
-				oMap.attach('mouseleave', function(oCustomEvent) {
-				
-				        var oTarget = oCustomEvent.target;
-				        // 마커위에서 마우스 나간거면
-				        if (oTarget instanceof nhn.api.map.Marker) {
-				                oLabel.setVisible(false);
-				        }
-				});
-				
-				oMap.attach('click', function(oCustomEvent) {
-				        var oPoint = oCustomEvent.point;
-				        var oTarget = oCustomEvent.target;
-				        oInfoWnd.setVisible(false);
-				        // 마커 클릭하면
-				        if (oTarget instanceof nhn.api.map.Marker) {
-				                // 겹침 마커 클릭한거면
-				                if (oCustomEvent.clickCoveredMarker) {
-				                        return;
-				                }
-				                // - InfoWindow 에 들어갈 내용은 setContent 로 자유롭게 넣을 수 있습니다. 외부 css를 이용할 수 있으며, 
-				                // - 외부 css에 선언된 class를 이용하면 해당 class의 스타일을 바로 적용할 수 있습니다.
-				                // - 단, DIV 의 position style 은 absolute 가 되면 안되며, 
-				                // - absolute 의 경우 autoPosition 이 동작하지 않습니다. 
-				                /* oInfoWnd.setContent('<DIV style="border-top:1px solid; border-bottom:2px groove black; border-left:1px solid; border-right:2px groove black;margin-bottom:1px;color:black;background-color:white; width:auto; height:auto;">'+
-				                        '<span style="color: #000000 !important;display: inline-block;font-size: 12px !important;font-weight: bold !important;letter-spacing: -1px !important;white-space: nowrap !important; padding: 2px 5px 2px 2px !important">' + 
-				                        'Hello World <br /> ' + oTarget.getPoint()
-				                        +'<span></div>');
-				                oInfoWnd.setPoint(oTarget.getPoint());
-				                oInfoWnd.setPosition({right : 15, top : 30});
-				                oInfoWnd.setVisible(true);
-				                oInfoWnd.autoPosition(); */
-				                return;
-				        }
-				        var oMarker = new nhn.api.map.Marker(oIcon, { title : '마커 : ' + oPoint.toString() });
-				        oMarker.setPoint(oPoint);
-				        oMap.addOverlay(oMarker);
-				});
-				//마커 띄우기(현재 접속된 위치)
-				
-
-			/*	 for(var i=0;i<m.length;i++){ //마커생성 
-		                 var oPoint = m[i]; 
-		                 var oMarker = new nhn.api.map.Marker(oIcon, { title :"["+titleArray[i]+"]"+" "+sidoArray[i]+"/"+sigugunArray[i]+"/"+dongmyunArray[i]+"/"+restArray[i]});
-		                 oMarker.setPoint(oPoint); 
-		                 oMap.addOverlay(oMarker); 
-		                  mapInfoTestWindow
-							.setContent('<DIV style="border-top:1px solid; border-bottom:2px groove black; border-left:1px solid; border-right:2px groove black;margin-bottom:1px;color:black;background-color:white; width:auto; height:auto;">'
-									+ '<button data-dismiss="modal" style="color: #000000 !important;display: inline-block;font-size: 12px !important;font-weight: bold !important;letter-spacing: -1px !important;white-space: nowrap !important; padding: 2px 2px 2px 2px !important">'
-									+ title :titleArray[i]
-									+ '</buton></div>'); 
-
-		 				oLabel.setVisible(true, oMarker);
-		 				oLabel.setPosition(true);
-		             } */
+			 				oLabel.setVisible(true, oMarker);
+			 				oLabel.setPosition(true);
+			             } */
+			             
+					$(window).resize(function() {
+						
+						var map_width=$("#map_div").css("width");
+						map_width=map_width.replace("px","");
+						var map_height=$("#map_div").css("height");
+						map_height=map_height.replace("px","");
+//	 					alert(map_width.replace("px",""));
+					    window.resizeEvt = setTimeout(function() {
+					        oMap.setSize(new nhn.api.map.Size(map_width, map_height));                
+					    }, 250);
+					    
+//	 				    window.resizeEvt = setTimeout(function() {
+//	 				        oMap.setSize(new nhn.api.map.Size(document.documentElement.clientWidth, 
+//	 				                                        document.documentElement.clientHeight));                
+//	 				    }, 250);
+					});	
+		};		
 	};
-});
 </script>
 </body>
 </html>

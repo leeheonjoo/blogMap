@@ -22,9 +22,9 @@
 		width: auto;
 		margin: 1% 1% 0px 1%;
 		height:auto;
-  		max-height: 90%; 
-	    overflow-y: initial !important;
-     	overflow-x:hidden;
+  		max-height: 90%;
+ 	    overflow-y: auto;
+     	overflow-x: hidden;
 	}
 
  	.modal-myPage{
@@ -56,7 +56,7 @@
 /*  }  */
 
 	#mainResult{
-	  height: 80%;
+	  height: 90%;
 	  overflow-y: auto;
 	  overflow-x: hidden;
 	}
@@ -234,6 +234,7 @@ $(function(){
 	// 블로그 검색
 	$("#blogSearch").click(function(){
 		getBeginCondition();
+		getMap();
 		
    		$("div[id='blogListMain'].modal").modal();
 	});	
@@ -243,6 +244,7 @@ $(function(){
 		if (window.sessionStorage) {
 	    	var email = sessionStorage.getItem('email');
 	    	if(email!=null){
+	    		messageView();
 	    		$("div[id='mainMessage'].modal").modal();
 	    	}else{
 	    		alert("로그인 후 이용가능합니다.");
@@ -545,22 +547,39 @@ $(function(){
 	     ***********************************-->
 		<!-- 블로그 리스트 - 블로그 리스트 검색 -->
 		<div class="modal fade" id="blogListMain" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
+			<div class="modal-dialog" style="height:100%; margin:1% 1% 1% 1%; overflow-y:hidden;">
+				<div class="modal-content" style="height:100%;">
+					<div class="modal-header" style="height:7%;">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title">Blog Search</h4>
 					</div>
-					<div class="modal-body">
-						<div id="mainResult">
+					<div class="modal-body" style="height:93%;">
+						<div id="mainResult" style="height:100%;">
 							<jsp:include page="board/blogListMain.jsp"/>
 						</div>
-						<br/>
-						<br/>
 					</div>
 				</div>
 		    </div>
 		</div>
+		
+		
+<!-- 		<div class="modal fade" id="blogListMain" data-backdrop="static"> -->
+<!-- 			<div class="modal-dialog" style="height:100%;"> -->
+<!-- 				<div class="modal-content" style="height:100%;"> -->
+<!-- 					<div class="modal-header"> -->
+<!-- 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+<!-- 						<h4 class="modal-title">Blog Search</h4> -->
+<!-- 					</div> -->
+<!-- 					<div class="modal-body" style="display:block; position:absolute; height:90%;"> -->
+<!-- 						<div id="mainResult" style="position:absolute; height:95%;"> -->
+<%-- 							<jsp:include page="board/blogListMain.jsp"/> --%>
+<!-- 						</div> -->
+<!-- 						<br/> -->
+<!-- 						<br/> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 		    </div> -->
+<!-- 		</div> -->
 		
 		<!-- 블로그 리스트 : 황준-->
 		<div class="modal fade" id="blogListSub" data-backdrop="static">
@@ -586,7 +605,7 @@ $(function(){
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<button type="button" id="read_closeButton" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title">Blog Read</h4>
 					</div><div class="container"></div>
 					<div class="modal-body">
@@ -735,7 +754,8 @@ $(function(){
 								<div class="form-group">
 									<label class="col-xs-3 control-label">카테고리:</label>
 									<div class="col-xs-9">
- 										<p class="form-control-static name" name="p_category_code"></p> 
+ 										<div class="form-control-static name" name="p_category_MNAME" style="display:inline-block;"></div>
+ 										<div class="form-control-static name" name="p_category_SNAME"style="display:inline-block;"></div>
 									</div>
 								</div>
 							

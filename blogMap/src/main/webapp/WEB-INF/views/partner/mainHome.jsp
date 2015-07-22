@@ -10,12 +10,6 @@
 <script type="text/javascript">
 $(function() {
 	$("input[name='member_id']").val(sessionStorage.getItem('email'));
-	$("#partner_tour_button").click(function() {
-		$("#category_code").val("100000");
-	})
-	$("#partner_restaurant_button").click(function() {
-		$("#category_code").val("200000");
-	})
 })
 </script>
 </head>
@@ -105,22 +99,11 @@ $(function() {
 				}
 				
 				// 사용자 확인창
-// 				if(! confirm("신청하시겠습니까?")) return null;		
+ 				if(! confirm("신청하시겠습니까?")) return null;		
 				
 // 					id가 smarteditor인 textarea에 에디터에서 대입
 // 					obj.getById["board_content"].exec("UPDATE_CONTENTS_FIELD",[]);
 // 					폼 submit();
-
-					var partnerName=$("input type[name='partner_name']").val();
-					var partnerPhone=$("input type[name='partner_phone']").val();
-					var partnerAddr=$("input type[name='partner_addr']").val();
-					var partnerImage=$("#partner_imagers").val();
-					
-			/* 		alert(partnerName);
-					alert(partnerPhone);
-					alert(partnerAddr);
-					alert(partnerImage);
-					$("#write_form").submit(); */
 				
 				var data = new FormData($('#write_form')[0]);
 				
@@ -128,7 +111,6 @@ $(function() {
  					data[i].append('file',file);
 				});  */
 				
- 				alert("넘어오나마지막");
 				 $.ajax({
 					type: 'POST',
 					url : '${root}/partner/write.do',
@@ -138,7 +120,7 @@ $(function() {
 					/* contentType : 'application/x-www-form-urlencoded;charset=UTF-8', */
 					success:function(data)
 					{
-						alert("성공");
+						alert("등록 성공");
 						$("section[id=write_pop].modal").modal("hide");
 						$("#tour_item_list").empty();	//데이터를 가지고 오기전에 리셋(중복삽입을 방지하기 위해)
 						
@@ -204,9 +186,9 @@ $(function() {
 // $("#search_Partner").click(get_list);
 
 		$("#search_Partner").click(function(){
-			alert("제휴업체");
+			//alert("제휴업체");
 			var searchTag=$("input[id='partnerSearchTag']").val();
-			alert(searchTag);
+			//alert("찾으려는 검색어"+searchTag);
 		
 			$.ajax({
 				type:'get',
@@ -226,6 +208,7 @@ $(function() {
 						$("#tour_item_list").append($("#tour_item").clone().css("display", "block"));
 						$("#tour_item:last-child #list_partner_name").html(data[i].partner_name);
 						$("#tour_item:last-child a[class='list_partner_no']").attr("id", "partner_no"+data[i].partner_no);
+						
 						$("input[name='partner_no']").html(data[i].partner_no);
 						$("#tour_item:last-child #partner_imagers").attr("src","${root}/pds/partner/"+data[i].partner_pic_name);
 						
@@ -241,27 +224,25 @@ $(function() {
 			});
 		});
 		 function partnerData(no){
+			 //alert(no);
 				$.ajax({
 					type:'get',
 					url:'${root}/partner/getTourPartnerListDate.do?partnerNo=' + no,
 					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 					success : function(responseData) {
 						var data = JSON.parse(responseData);
-//		 				alert("업체이름" + data.partner_name);
+		 				//alert("업체이름" + data[0].PARTNER_YN);
 						
-  						//$("p[name='p_category_code']").html(data.category_code);
-						$("p[name='p_name']").html(data.partner_name);
-						$("p[name='p_phone']").html(data.partner_phone);
-						$("p[name='p_addr']").html(data.partner_addr);
-// 						$("img[id='partnerDetail_imagers']").attr("src","${root}/css/images/partner/"+data.partner_pic_name);
-						$("img[id='partnerDetail_imagers']").attr("src","${root}/pds/partner/"+data.partner_pic_name);
+  						$("div[name='p_category_MNAME']").html(data[0].MNAME);
+  						$("div[name='p_category_SNAME']").html(data[0].SNAME);
+						$("p[name='p_name']").html(data[0].PARTNER_NAME);
+						$("p[name='p_phone']").html(data[0].PARTNER_PHONE);
+						$("p[name='p_addr']").html(data[0].PARTNER_ADDR);
+
+						$("img[id='partnerDetail_imagers']").attr("src","${root}/pds/partner/"+data[0].PARTNER_PIC_NAME);
 					}
 				});
 			};
-		/*888888888888888888888888888888888888888888888  */
-		/* 여기에 복사하기 */ 
-		/*888888888888888888888888888888888888888888888  */
-		
 		
 		function form_couponWrite(){
 			
@@ -324,7 +305,7 @@ $(function() {
 							
 							// 각 업체를 클릭했을때 이벤트
 							$("#partner_no" + data[i].partner_no).click(function(){
-								alert("업체클릭" + data[i].partner_no)
+								//alert("업체클릭번호" + data[i].partner_no)
 								$("#partner_no").val(data[i].partner_no);
 										
 								//alert($("#partner_no").val());

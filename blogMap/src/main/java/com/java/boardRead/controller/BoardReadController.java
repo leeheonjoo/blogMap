@@ -315,7 +315,7 @@ public class BoardReadController {
 			
 		boardReadService.blogUpdateOk(mav);
 		
-		mav.setViewName("blogMap");
+		mav.setViewName("redirect:/");
 		return mav;
 	}	
 }

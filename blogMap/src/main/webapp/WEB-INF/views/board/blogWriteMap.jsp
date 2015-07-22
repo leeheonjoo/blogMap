@@ -123,8 +123,9 @@ v\:* {
                         // 마커 클릭하면
                         if (oTarget instanceof nhn.api.map.Marker) {
                            var pullAddr=oCustomEvent.target.getTitle();
+                          
+                           var addr_title=pullAddr.substring(1,pullAddr.lastIndexOf("]"));
                            var pAddrs=pullAddr.split("]");
-                           //alert(pAddrs);
                            
                            var pAddr=pAddrs[1].split("/");
                            var pAddr0=pAddr[0];
@@ -137,6 +138,7 @@ v\:* {
                            $("input[name=addr_sigugun]").val(pAddr[1]);
                            $("input[name=addr_dongri]").val(pAddr[2]);
                            $("input[name=addr_bunji]").val(pAddr[3]);
+                           $("input[name=addr_title]").val(addr_title);
                            $("div[id=blogWriteSub].modal").modal("hide");
                            
                            // 겹침 마커 클릭한거면
@@ -163,17 +165,31 @@ v\:* {
                   // 마커 클릭하면
                   if (oTarget instanceof nhn.api.map.Marker) {
                      var pullAddr=oCustomEvent.target.getTitle();
-                     var pAddrs=pullAddr.split("/");
-                    
-                     var pAddr0=pAddrs[0];
-                     var pAddr1=pAddrs[1];
-                     var pAddr2=pAddrs[2];
-                     var pAddr3=pAddrs[3]; 
-                     if(pAddr3==""||pAddr3==null||pAddr3=="undefined"){
-                    	 pAddr3="";
+                     
+                     if(!pullAddr.includes('[')){
+                    	 var pAddrs=pullAddr.split("/");
+                         
+                         var pAddr0=pAddrs[0];
+                         var pAddr1=pAddrs[1];
+                         var pAddr2=pAddrs[2];
+                         var pAddr3=pAddrs[3]; 
+                         if(pAddr3==""||pAddr3==null||pAddr3=="undefined"){
+                        	 pAddr3="";
+                         }
+                     }else{
+                    	// var addr_title=pullAddr.substring(1,pullAddr.lastIndexOf("]"));
+                    	//alert("2"+addr_title);
+                         var pAddrs=pullAddr.split("]");
+                         
+                         var pAddr=pAddrs[1].split("/");
+                         var pAddr0=pAddr[0].trim();
+                         var pAddr1=pAddr[1];
+                         var pAddr2=pAddr[2];
+                         var pAddr3=pAddr[3];
                      }
                      
-					var search_value=$("#blogList_text").val();
+                     
+					var search_value=$("#blogList_text").val().replace(" ","%");
                      $.ajax({
                            type : 'post',
                            url : '${root}/board/blogListResult.do',
@@ -183,25 +199,26 @@ v\:* {
                               dongri : pAddr2,
                               bunji : pAddr3,
                               searchValue: search_value
+                              
                            },
                            contentType:'application/x-www-form-urlencoded;charset=UTF-8',
                            success : function(data) {
                               //alert(data); 전체값 갖고오는지 확인
                               var data=JSON.parse(data);
                               
-                              $("div[id='blogListSub'].modal").modal();
                               $("#list_items").empty();
                               $.each(data,function(i){
-                                 var board_no=data[i].board_no;
-                                 var board_title=data[i].board_title;
-                                 var rgdate=new Date(data[i].board_rgdate);
+                                 var board_no=data[i].BOARD_NO;
+                                 var board_title=data[i].BOARD_TITLE;
+                                 var rgdate=new Date(data[i].BOARD_RGDATE);
                                  var fullDate=rgdate.getFullYear()+"/"+(rgdate.getMonth()+1)+"/"+rgdate.getDate();
-                                 var board_grade=data[i].board_grade;
-                                 var board_count=data[i].board_count;
-                                 var board_content=data[i].board_content;
-                              
+                                 var board_grade=data[i].BOARD_GRADE;
+                                 var board_count=data[i].BOARD_COUNT;
+                                 var board_content=data[i].BOARD_CONTENT;
+                              	 var file_name=data[i].FILE_NAME;
+                              	                    
                                  //검색 리스트개수에 따른 복사
-                                 $("#list_items").append($("#listItem").clone());
+                                 var this_item=$("#list_items").append($("#listItem").clone());
                                   $("#list_items > a:eq("+i+")").find('#result_title').attr("id","result_title"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_content').attr("id","result_content"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_count').attr("id","result_count"+i); 
@@ -210,6 +227,7 @@ v\:* {
                                   $("#list_items > a:eq("+i+")").find('#result_star').attr("id","result_star"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_no').attr("id","result_no"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_button').attr("id","result_button"+i); 
+                                  $("#list_items > a:eq("+i+")").find('#result_attchimg').attr("id","result_attchimg"+i); 
                                  
                                   //데이터 입력
                                  $("#result_no"+i).text("글번호: "+board_no);
@@ -218,7 +236,11 @@ v\:* {
                                  $("#result_grade"+i+" > small").text("평점: "+board_grade+" / 5");
                                  $("#result_title"+i).text(board_title);
                                  $("#result_content"+i).html(board_content);
-                                 
+                                 if(file_name!=null||file_name!=undefined||file_name!=""){
+                                   $("#result_attchimg"+i).attr("src","${root}/pds/board/"+file_name);
+                                 }else{
+                                   $("#result_attchimg"+i).attr("src","http://placehold.it/350x250");
+                                 }
                                  //평점 조건에 따른 별 색칠
                                  if(board_grade=="1"){
                                     $("#result_star"+i+"> span:eq(0)").attr("class","glyphicon glyphicon-star");
@@ -248,12 +270,9 @@ v\:* {
                                  $("#blogList_result_content").append("<br/>");       */
                                  
                                  //자세히 버튼 클릭시
-                                 $("#result_button"+i).click(function(){
+                                 $("#list_items > a:eq("+i+")").click(function(){
                                 	 $("div[id='blogListDetail'].modal").modal(); 
-                                     var Readno=$("#result_no"+i).text();
-                                     var blogRead_no=Readno.split(":");
-                                     blogRead_no=blogRead_no[1].trim();
-                                     blogListDetails(blogRead_no);
+                                     blogListDetails(board_no);
                                  });
                               });
                               
@@ -356,6 +375,7 @@ function blogListDetails(blogRead_no) {
         +data[0].ADDR_DONGRI+" "+data[0].ADDR_BUNJI;
         var content=data[0].BOARD_CONTENT;
         var writer=data[0].MEMBER_ID;
+        var addr_title=data[0].ADDR_TITLE;
         var title=data[0].BOARD_TITLE;
         var mcategory=data[0].CATEGORY_MNAME;               
         var scategory=data[0].CATEGORY_SNAME;
@@ -366,16 +386,23 @@ function blogListDetails(blogRead_no) {
         var recommand_y=data[0].YES;
         var recommand_n=data[0].NO;
         //데이터 입력
-        $("#blogRead_rgdate > label:eq(1)").text(fullDate); 
-        $("#blogRead_addr > label:eq(1)").text(pullAddr); 
+        $("#blogRead_rgdate > label:eq(0)").text(fullDate); 
+        $("#blogRead_addr > label:eq(0)").text(pullAddr); 
         $("#blogRead_content > div").html(content);
-        $("#blogRead_writer > label:eq(1)").text(writer);
-        $("#blogRead_title > label:eq(1)").text(title);
-        $("#blogRead_category > label:eq(1)").text(mcategory);
-        $("#blogRead_category > label:eq(2)").text(scategory);
+        $("#blogRead_writer > label:eq(0)").text(writer);
+        $("#blogRead_addrtitle > label:eq(0)").html(addr_title);
+        $("#blogRead_title > label:eq(0)").text(title);
+        $("#blogRead_category > label:eq(0)").text(mcategory);
+        $("#blogRead_category > label:eq(1)").text(scategory);
         $("#blogRead_boardno > label:eq(0)").text(boardno);
         $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
         $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
+        
+        
+        if(email!=writer){
+        	$("#Upbutton").css("display","none");
+        	$("#Debutton").css("display","none");
+        }
         
         //평점
         if(grade=="0"){

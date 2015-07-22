@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.java.boardRead.dto.BoardReadDto;
 import com.java.coupon.dto.CouponDto;
 import com.java.partner.dao.PartnerDao;
 import com.java.partner.dto.PartnerDto;
@@ -49,9 +52,11 @@ public class PartnerServiceImpl implements PartnerService {
 		MultipartHttpServletRequest request=(MultipartHttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		PartnerDto partnerDto=(PartnerDto)map.get("partnerDto");
+		BoardReadDto boardreadDto=(BoardReadDto)map.get("boardreadDto");
 		
 		logger.info(partnerDto.getMember_id());
-		logger.info(partnerDto.getCategory_code());
+		logger.info(boardreadDto.getCategory_mname());
+		logger.info(boardreadDto.getCategory_sname());
 		logger.info(partnerDto.getPartner_name());
 		logger.info(partnerDto.getPartner_phone());
 		logger.info(partnerDto.getPartner_addr());
@@ -61,6 +66,8 @@ public class PartnerServiceImpl implements PartnerService {
 //		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
 //			dir.mkdirs();
 //		}
+		
+		
 		Iterator<String> iter=request.getFileNames();
 		while(iter.hasNext()){
 			String uploadFileName=iter.next();
@@ -86,11 +93,12 @@ public class PartnerServiceImpl implements PartnerService {
 					long fileImgSize=mFile.getSize();
 					partnerDto.setPartner_pic_size(fileImgSize);
 					
-					logger.info("파일이름이 뭐냐!!!!:"+partnerDto.getPartner_pic_name());
-					logger.info("파일경로가 뭐냐!!!!:"+partnerDto.getPartner_pic_path());
+					logger.info("파일이름:"+partnerDto.getPartner_pic_name());
+					logger.info("파일경로:"+partnerDto.getPartner_pic_path());
 					long lo=partnerDto.getPartner_pic_size();
-					logger.info(String.valueOf(lo));
-					int check=partnerDao.partnerRegister(partnerDto);
+					logger.info("파일사이즈:"+String.valueOf(lo));
+				
+					int check=partnerDao.partnerRegister(partnerDto,boardreadDto);
 					logger.info("partner_check:"+check);
 					
 					response.getWriter().print(check);
@@ -150,15 +158,33 @@ public class PartnerServiceImpl implements PartnerService {
 		int partnerNo=Integer.parseInt(request.getParameter("partnerNo"));
 		logger.info("partnerNo : " + partnerNo);
 	
-		PartnerDto getTourPartnerListDate=partnerDao.getTourPartnerListDate(partnerNo);
-		logger.info("맵퍼 갔다와서:"+getTourPartnerListDate);
+		List<BoardReadDto> boardReadList=null;
+		List<PartnerDto> partnerList=null;
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("boardReadList", boardReadList);
+		hMap.put("partnerList", partnerList);
+		hMap.put("partnerNo", partnerNo);
+		
+		List<HashMap<String, Object>> partner_List=new ArrayList<HashMap<String,Object>>();
+		
+		
+		
+		partner_List=partnerDao.getTourPartnerListDate(hMap);
+		logger.info("맵퍼 갔다와서:"+partner_List);
 		
 		Gson gson=new Gson();
-		String json=gson.toJson(getTourPartnerListDate);
+		String json=gson.toJson(partner_List);
 		logger.info("json으로 담은후에" + json);
-			
-		//mav.addObject("getPartnerListDate",getPartnerListDate);
+//			
+//		//mav.addObject("getPartnerListDate",getPartnerListDate);
 		mav.addObject("json",json);
+		
+//		try {
+//			response.setCharacterEncoding("utf-8");
+//			response.getWriter().print(json);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
 /**

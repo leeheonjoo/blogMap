@@ -131,6 +131,10 @@
 		<input type="hidden" name="addr_dongri"/>
 		<input type="hidden" name="addr_bunji"/>
 		<br/>
+		<label>업체,여행지명:</label>
+		<input type="text" name="addr_title" size="40" disabled="disabled"/>
+		<input type="hidden" name="addr_title"/>
+		<br/>
 		<label>주소:</label>
 		<input type="text" name="realAddr" size="40" disabled="disabled"/>
 	</div>
