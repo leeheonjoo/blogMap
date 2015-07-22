@@ -23,7 +23,7 @@
 	</insert>
 		
 	<insert id="blogWrite_addr" parameterType="java.util.HashMap">
-		insert into board_addr_info values(#{board_no},#{board_addr_infoDto.addr_sido},#{board_addr_infoDto.addr_sigugun},#{board_addr_infoDto.addr_dongri},#{board_addr_infoDto.addr_bunji})
+		insert into board_addr_info values(#{board_no},#{board_addr_infoDto.addr_sido},#{board_addr_infoDto.addr_sigugun},#{board_addr_infoDto.addr_dongri},#{board_addr_infoDto.addr_bunji},#{board_addr_infoDto.addr_title})
 	</insert>
 	
 	<insert id="blogWrite_point" parameterType="java.util.HashMap">
