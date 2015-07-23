@@ -131,7 +131,7 @@ public class MemberController {
 	 * @name:myPage
 	 * @date:2015. 6. 30.
 	 * @author:김정훈
-	 * @description:
+	 * @description:myPage의 회원정보를 가져오기 위한 메소드
 	 */
 	@RequestMapping(value="/member/myPage.do", method=RequestMethod.POST)
 	public void myPage(HttpServletRequest request,HttpServletResponse response){
@@ -148,7 +148,7 @@ public class MemberController {
 	 * @name:myPageUpdate_pwdCheck
 	 * @date:2015. 6. 30.
 	 * @author:김정훈
-	 * @description:
+	 * @description:myPage 수정을 위한 암호 확인하는 메소드
 	 */
 	@RequestMapping(value="/member/myPageUpdate_pwdCheck.do", method=RequestMethod.POST)
 	public void myPageUpdate_pwdCheck(HttpServletRequest request,HttpServletResponse response){
@@ -165,7 +165,7 @@ public class MemberController {
 	 * @name:myPageUpdate
 	 * @date:2015. 6. 30.
 	 * @author:김정훈
-	 * @description:
+	 * @description:myPage의 회원정보를 수정하는 메소드
 	 */
 	@RequestMapping(value="/member/myPageUpdate.do", method=RequestMethod.POST)
 	public void myPageUpdate(HttpServletResponse response,MemberDto memberDto){
@@ -182,7 +182,7 @@ public class MemberController {
 	 * @name:myPageDelete
 	 * @date:2015. 6. 30.
 	 * @author:김정훈
-	 * @description:
+	 * @description:myPage의 회원탈퇴 메소드
 	 */
 	@RequestMapping(value="/member/myPageDelete.do",method=RequestMethod.POST)
 	public void myPageDelete(MemberDto memberDto,HttpServletResponse response){
@@ -199,7 +199,7 @@ public class MemberController {
 	 * @name:point_info
 	 * @date:2015. 7. 2.
 	 * @author:김정훈
-	 * @description:
+	 * @description:myPage의 포인트에 관한 정보를 가져오는 메소드
 	 */
 	@RequestMapping(value="/member/point_info.do",method=RequestMethod.POST)
 	public void point_info(HttpServletRequest request,HttpServletResponse response){
@@ -212,6 +212,12 @@ public class MemberController {
 		memberService.point_info(mav);
 	}
 	
+	/**
+	 * @name:board_info
+	 * @date:2015. 7. 3.
+	 * @author:김정훈
+	 * @description:myPage의 게시글에 관한 정보를 가져오는 메소드
+	 */
 	@RequestMapping(value="/member/board_info.do",method=RequestMethod.POST)
 	public void board_info(HttpServletRequest request,HttpServletResponse response){
 		logger.info("board_info-------------------------");
@@ -223,6 +229,12 @@ public class MemberController {
 		memberService.board_info(mav);
 	}
 	
+	/**
+	 * @name:favorite_info
+	 * @date:2015. 7. 3.
+	 * @author:김정훈
+	 * @description:myPage의 즐겨찾기에 관한 정보를 가져오는 메소드
+	 */
 	@RequestMapping(value="/member/favorite_info.do",method=RequestMethod.POST)
 	public void favorite_info(HttpServletRequest request,HttpServletResponse response){
 		logger.info("favorite_info-------------------------");
@@ -237,9 +249,9 @@ public class MemberController {
 	
 	/**
 	 * @name:coupon_info
-	 * @date:2015. 7. 14.
+	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:myPage의 쿠폰에 관한 정보를 가져오는 메소드
 	 */
 	@RequestMapping(value="/member/coupon_info.do",method=RequestMethod.POST)
 	public void coupon_info(HttpServletRequest request,HttpServletResponse response){
@@ -253,6 +265,12 @@ public class MemberController {
 		
 	}
 	
+	/**
+	 * @name:fb_myPage_delete
+	 * @date:2015. 7. 18.
+	 * @author:김정훈
+	 * @description:페이스북으로 로그인하여 회원등록된 회원 탈퇴하는 메소드
+	 */
 	@RequestMapping(value="/member/myPage_fb_delete.do",method=RequestMethod.POST)
 	public void fb_myPage_delete(HttpServletRequest request,HttpServletResponse response){
 		logger.info("fb_myPage_delete------------------------");
