@@ -687,10 +687,10 @@
 						<table class="table table-striped table-bordered" >
 							<thead>
 								<tr class="widget-header" >
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:50px; max-width:50px;">순번</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:150px; max-width:150px;">아이디</th>
-									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:150px; max-width:200px;">업체명</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">전화번호</th>
+									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:45px; max-width:45px;">순번</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:120px; max-width:150px;">아이디</th>
+									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:120px; max-width:200px;">업체명</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:125px; max-width:125px;">전화번호</th>
 									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">등록일</th>
 									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">승인일</th>
 									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">구분</th>
