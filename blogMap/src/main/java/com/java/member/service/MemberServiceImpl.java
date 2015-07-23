@@ -112,9 +112,12 @@ public class MemberServiceImpl implements MemberService {
 		int check=0;
 		if(managerCheck==0){
 			MemberDto deleteMemberDto=memberDao.fbRegisterSelect(member_id);
+			
 			if(deleteMemberDto!=null){
-				if(deleteMemberDto.getMember_jointype()=="0003"){
+				if(deleteMemberDto.getMember_jointype().equals("0003")){
 					check=0;
+				}else{
+					check=1;
 				}
 			}else{
 				check = memberDao.registerCheck(member_id);
@@ -225,7 +228,7 @@ public class MemberServiceImpl implements MemberService {
 		
 		MemberDto memberDto=memberDao.fbRegisterSelect(member_id);
 		
-		if(memberDto!=null){	
+		if(memberDto!=null&&!memberDto.getMember_jointype().equals("0003")){	
 			String email=memberDto.getMember_id();
 			logger.info("email:"+email);
 			  // 메일 관련 정보

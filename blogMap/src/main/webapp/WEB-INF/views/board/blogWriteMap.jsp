@@ -420,6 +420,9 @@ function blogListDetails(blogRead_no) {
         
         
         
+
+        //alert(email);
+        //alert(writer);
         if(email!=writer){
         	$("#Upbutton").css("display","none");
         	$("#Debutton").css("display","none");
