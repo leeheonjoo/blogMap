@@ -485,7 +485,7 @@ $(function() {
 		$("#read_div label").text("");
 		$("#blogRead_content div").html("");
         $("#carousel_page").empty();
-        $("#carousel_image").empty();
+        $("#carousel_image .active").empty();
 	/* 	var image_child=$("#carousel_image").children();
 		
 		for(var i=1; i<image_child; i++){
