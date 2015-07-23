@@ -9,9 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <style>
 	a.list-group-item {
-	    height:auto;
-	    min-height:125px;
+	    height:110px;
 	}
+	
 	a.list-group-item.active small {
 	    color:#fff;
 	}
@@ -20,6 +20,7 @@
 <!-- [검색조건 관련 스크립트] -->
 <!-- 적용 페이지 : blogListMain.jsp | blogWrite.jsp-->
 <script type="text/javascript">
+
 function blue_button(btn) {
 	$(btn).attr("class","btn btn-primary btn-lg btn-block");
 }
@@ -46,6 +47,9 @@ function gray_a(a) {
 		
 		
 		$("#blogList_Search").click(function() {
+			$("#map_div").addClass("col-lg-5 col-md-5");
+			$("#list_div").addClass("col-lg-7 col-md-7");
+			
 			if($("#myId_blogList > input:checked").is(":checked") == true) {
 				check_value=$("#myId_blogList > input").val();
 			}
@@ -222,7 +226,9 @@ function gray_a(a) {
 			error:function(data){
 				alert("error : blogListMain getBeginCondition");
 			}
-		});		
+		});
+		
+		getMap();
 	}
 	
 
@@ -355,33 +361,34 @@ function gray_a(a) {
 	<!-- 검색조건 navbar : 20150706 이헌주 -->
 	<div style="display: none;" id="hidden_items" class="list-group" >
          <a id="listItem" href="#" class="list-group-item">
-         	<div class="row">
-               <div class="media col-md-3">
-                   <figure class="pull-left">
-                       <img id="result_attchimg" class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" >
+         	<div class="row" style="height:100%;">
+               <div class="media col-md-4 col-sm-5 col-xs-5" style="height:100%;">
+                   <figure class="pull-left" style="height:100%; width:100%;">
+                       <img id="result_attchimg" class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" style="width:100%; height:100%;" >
                    </figure>
                </div>
-               <div class="col-md-6">
-                   <h4 id="result_title" class="list-group-item-heading"> </h4>
-                   <p id="result_content" class="list-group-item-text"> 
-                   </p>
-               </div>
-               <div class="col-md-3 text-center">
-               	<h2 id="result_rgdate"><small></small></h2>
-                   <h2 id="result_count"><small></small></h2>
-                   <div id="result_star" class="stars">
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
+               <div class="col-md-8 col-sm-7 col-xs-7" style="height:100%;">
+					<div>
+	                   <div><b><h4 id="result_title" class="list-group-item-heading" style="display:inline-block;"></h4></b></div>
+	                   <div><p id="result_content" class="list-group-item-text"></p></div>
+	                   <div style="vertical-align:bottom;">
+		                   <h4 id="result_rgdate" style="display:inline-block;"><small></small></h4>
+		                   <h4 id="result_count" style="display:inline-block;"><small></small></h4>
+		                   <div id="result_star" class="stars" style="display:inline-block;">
+		                       <span class="glyphicon glyphicon-star-empty"></span>
+		                       <span class="glyphicon glyphicon-star-empty"></span>
+		                       <span class="glyphicon glyphicon-star-empty"></span>
+		                       <span class="glyphicon glyphicon-star-empty"></span>
+		                       <span class="glyphicon glyphicon-star-empty"></span>
+		                   </div>
+	                   </div>
                    </div>
-               </div> 
+               </div>
 			</div>
          </a>
      </div>
     <div class="row" style="height:100%;">
-		<div class="container-fluid" style="height:17%;">
+		<div class="container-fluid" style="height:22%;">
 		<nav id="blogListMain" class="navbar navbar-inverse ">
 			
 			  	<!-- Brand and toggle get grouped for better mobile display -->
@@ -439,7 +446,7 @@ function gray_a(a) {
 					<form class="navbar-form navbar-left" role="search">
 						<!-- 검색조건(문장) -->
 						<div class="form-group">
-							<input type="text"  id="blogList_text" class="form-control" placeholder="Search"/>
+							<input type="text"  id="blogList_text" class="form-control" placeholder="Search" style="width:272px;"/>
 							<button type="button" id="blogList_Search" class="btn btn-default">검색</button>
 							<span id="myId_blogList" style="display:none;">
 							<label style="color: red;">유저 작성글만 검색시 체크</label>
@@ -451,12 +458,12 @@ function gray_a(a) {
 		</nav>
 				</div><!-- /.container-fluid -->
 		
-		<div class="container-fluid" style="height:79%; width:100%;">
+		<div class="container-fluid" style="height:75%; width:100%;">
 			<div class="row" style="height:100%; width:auto;">
-				<div id="map_div" class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="height:100%;">
+				<div id="map_div" class="col-sm-12 col-xs-12" style="height:100%;">
 					<div id="map"></div>
 				</div>
-				<div id="list_div" class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="height:100%;">
+				<div id="list_div" class="col-sm-12 col-xs-12" style="height:100%;">
 					<div class="well" style="height:100%;">
 				        <div id="list_items" class="list-group" style="height:100%;">
 				        </div>

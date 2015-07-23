@@ -141,18 +141,36 @@ public class MemberDaoImpl implements MemberDao {
 		return check;
 	}
 
+	/**
+	 * @name:myPageUpdate
+	 * @date:2015. 6. 30.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public int myPageUpdate(MemberDto memberDto) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("dao.MemberMapper.myPageUpdate",memberDto);
 	}
 
+	/**
+	 * @name:myPageDelete
+	 * @date:2015. 6. 30.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public int myPageDelete(MemberDto memberDto) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("dao.MemberMapper.myPageDelete",memberDto);
 	}
 
+	/**
+	 * @name:totalPoint
+	 * @date:2015. 7. 2.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public int totalPoint(String member_id) {
 		// TODO Auto-generated method stub
@@ -160,6 +178,12 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("dao.MemberMapper.totalPoint",member_id);
 	}
 
+	/**
+	 * @name:point_info
+	 * @date:2015. 7. 2.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public List<HashMap<String,Object>> point_info(String member_id,int startRow,int endRow) {
 		HashMap<String,Object> hMap=new HashMap<String,Object>();
@@ -170,12 +194,24 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectList("dao.MemberMapper.point_info",hMap);
 	}
 
+	/**
+	 * @name:totalBoard
+	 * @date:2015. 7. 3.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public int totalBoard(String member_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("dao.MemberMapper.totalBoard",member_id);
 	}
 
+	/**
+	 * @name:board_info
+	 * @date:2015. 7. 3.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public List<HashMap<String, Object>> board_info(String member_id,int startRow,int endRow) {
 		HashMap<String,Object> hMap=new HashMap<String,Object>();
@@ -185,12 +221,24 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectList("dao.MemberMapper.board_info",hMap);
 	}
 	
+	/**
+	 * @name:totalFavorite
+	 * @date:2015. 7. 3.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public int totalFavorite(String member_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("dao.MemberMapper.totalFavorite",member_id);
 	}
 	
+	/**
+	 * @name:favorite_info
+	 * @date:2015. 7. 3.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public List<HashMap<String, Object>> favorite_info(String member_id,int startRow,int endRow) {
 		HashMap<String,Object> hMap=new HashMap<String,Object>();
@@ -200,18 +248,36 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectList("dao.MemberMapper.favorite_info",hMap);
 	}
 
+	/**
+	 * @name:point_info_count
+	 * @date:2015. 7. 3.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public int point_info_count(String member_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("dao.MemberMapper.point_info_count",member_id);
 	}
 
+	/**
+	 * @name:totalCoupon
+	 * @date:2015. 7. 3.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public int totalCoupon(String member_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("dao.MemberMapper.totalCoupon",member_id);
 	}
 
+	/**
+	 * @name:coupon_info
+	 * @date:2015. 7. 3.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public List<HashMap<String, Object>> coupon_info(String member_id, int startRow,
 			int endRow) {
@@ -222,6 +288,12 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectList("dao.MemberMapper.coupon_info",hMap);
 	}
 
+	/**
+	 * @name:managerRgCheck
+	 * @date:2015. 7. 18.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public int managerRgCheck(String member_id) {
 		int value=0;
@@ -235,6 +307,12 @@ public class MemberDaoImpl implements MemberDao {
 		return value;
 	}
 
+	/**
+	 * @name:managerLogin
+	 * @date:2015. 7. 18.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public ManagerDto managerLogin(String id, String password) {
 		HashMap<String, String> hMap = new HashMap<String, String>();
@@ -243,24 +321,48 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.selectOne("dao.MemberMapper.managerLogin",hMap);
 	}
 
+	/**
+	 * @name:fbMemberDelete
+	 * @date:2015. 7. 18.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public int fbMemberDelete(String member_id) {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("dao.MemberMapper.fbMemberDelete",member_id);
 	}
 
+	/**
+	 * @name:reRegister
+	 * @date:2015. 7. 18.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public int reRegister(MemberDto memberDto) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("dao.MemberMapper.reRegister",memberDto);
 	}
 
+	/**
+	 * @name:fbReRegister
+	 * @date:2015. 7. 18.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public int fbReRegister(MemberDto memberDto) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("dao.MemberMapper.fbReRegister",memberDto);
 	}
 
+	/**
+	 * @name:coupon_unusable_info
+	 * @date:2015. 7. 22.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public List<HashMap<String, Object>> coupon_unusable_info(String member_id, int startRow, int endRow) {
 		HashMap<String,Object> hMap=new HashMap<String,Object>();
