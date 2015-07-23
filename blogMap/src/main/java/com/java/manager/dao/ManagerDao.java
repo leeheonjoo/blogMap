@@ -11,7 +11,7 @@ import com.java.partner.dto.PartnerDto;
 
 public interface ManagerDao {
 	
-		public List<MemberDto> getData();
+		public List<MemberDto> memberList();
 		
 		public int memberDel(HashMap<String, Object> hMap);
 		
