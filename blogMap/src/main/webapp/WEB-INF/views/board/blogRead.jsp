@@ -110,10 +110,10 @@ $(function() {
 								$("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
 					
 								$("#reply_content_insert"+i+" > span:eq(0)").text(replyNo);
-								$("#reply_content_insert"+i+" > span:eq(1)").text(memberId);
-								$("#reply_content_insert"+i+" > span:eq(2)").text(replyContent);
-								$("#reply_content_insert"+i+" > span:eq(3)").text(replyfullDate);
-								$("#reply_content_insert"+i+" > span:eq(4)").attr("id","reply_buttons"+i);
+								$("#reply_content_insert"+i+" > input:eq(0)").val(memberId);
+								$("#reply_content_insert"+i+" > input:eq(1)").val(replyContent);
+								$("#reply_content_insert"+i+" > input:eq(2)").val(replyfullDate);
+								$("#reply_content_insert"+i+" > span:eq(1)").attr("id","reply_buttons"+i);
 								
 								$("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
 								$("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
@@ -125,7 +125,9 @@ $(function() {
 									$("#reply_buttons"+i+" > button:eq(0)").css("display","");
 									$("#reply_buttons"+i+" > button:eq(1)").css("display","");
 									
-								}				
+								}	
+			                    
+								 
 							});
 							
 						},error: function(data) {
@@ -480,11 +482,10 @@ $(function() {
 	/*닫기버튼 클릭시*/
 	$("#read_closeButton").click(function () {
 		$("#listAllDiv").empty();
-		
 		$("#read_div label").text("");
 		$("#blogRead_content div").html("");
         $("#carousel_page").empty();
-        $("#carousel_image").empty();
+        $("#carousel_image .active").empty();
 	/* 	var image_child=$("#carousel_image").children();
 		
 		for(var i=1; i<image_child; i++){
@@ -497,50 +498,61 @@ $(function() {
 		$("#carousel_image > div:eq(0)").find('div').empty(); */
 		
 		
-	})
+	});
 	
 });
 function reply_update(UThis) { 
 	var updateId=$(UThis).attr("id");
 	var index=updateId.substring(20,21);
 	var replyNo=$("#reply_content_insert"+index+" > span:eq(0)").text();
-	var memberId=$("#reply_content_insert"+index+" > span:eq(1)").text();
-	var reply=$("#reply_content_insert"+index+" > span:eq(2)").text();
-	$("#reply_content_insert"+index).append("<span id='upBunho"+index+"'></span>");
+	
+	
+	var member_id=$("#reply_content_insert"+index+" > input:eq(0)").val();
+	var reply_Upcontent=$("#reply_content_insert"+index+" > input:eq(1)").val();
+	
+	
+	/* $("#reply_content_insert"+index).append("<span id='upBunho"+index+"'></span>");
 	$("#upBunho"+index).append("<input id='newText' type='text' value='" + reply + "'/>");
 	$("#upBunho"+index).append("<input type='button' value='수정' id='up"+index+"'/>");
-	$("#upBunho"+index).append("<input type='button' value='취소' id='cancel"+index+"'/>");
+	$("#upBunho"+index).append("<input type='button' value='취소' id='cancel"+index+"'/>"); */
 	
-	$("#up"+index).click(function(){
-		var replyContent=$("#newText").val();
-		
-		
-		 $.ajax({
+	
+		if($("#reply_content_update"+index).text()=='수정'){
+			$("#reply_content_insert"+index+" > input:eq(1)").removeAttr("disabled");
+			$("#reply_content_insert"+index+" > input:eq(1)").css("background-color","white");
+			$("#reply_content_update"+index).text("수정완료");
+		}else if($("#reply_content_update"+index).text()=='수정완료'){
+			$.ajax({
 				type : 'post',
 				url : '${root}/board/blogReadReplyUpdate.do',
 				data : {
 					reply_no : replyNo,
-					reply_content: replyContent,
-					member_id: memberId
+					reply_content: reply_Upcontent,
+					member_id: member_id
 				},
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success : function(data) {
 					
 					if(data!="0"){
 						alert("댓글 수정완료");
-						$("#reply_content_insert"+index+" > span:eq(2)").text(replyContent);
-						$("#upBunho"+index).remove();
+						$("#reply_content_insert"+index+" > input:eq(1)").attr("disabled","disabled");
+						$("#reply_content_insert"+index+" > input:eq(1)").css("background-color","#eee");
+						$("#reply_content_update"+index).text("수정");
 						
 					}
+					
 				},
 				error: function(data) {
 					
 				}
-			})  
-	});
-	$("#cancel"+index).click(function(){
-		$("#upBunho"+index).remove();
-	});
+			})   
+		}
+		
+		
+		
+		 
+	
+	
 	
 	// carousel 호출
 	$('.carousel').carousel({
@@ -548,18 +560,21 @@ function reply_update(UThis) {
 	})
 }
 function reply_delete(DThis) {
+	
 	var deleteId=$(DThis).attr('id');
 	var index=deleteId.substring(20,21);
-	var replyNo=$("#reply_content_insert"+index+" > span:eq(0)").text();
-	var memberId=$("#reply_content_insert"+index+" > span:eq(1)").text(); 
+	if($("#reply_content_update"+index).text()=='수정'){
+		var replyNo=$("#reply_content_insert"+index+" > span:eq(0)").text();
+		
+		var member_id=$("#reply_content_insert"+index+" > input:eq(0)").val();
 	
-	if (confirm("정말 삭제하시겠습니까??") == true){ //확인
+	if (confirm("정말 삭제하시	겠습니까??") == true){ //확인
 		$.ajax({
 			type : 'post',
 			url : '${root}/board/blogReadReplyDelete.do',
 			data : {
 				reply_no : replyNo,
-				member_id: memberId
+				member_id: member_id
 			},
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 			success : function(data) {
@@ -576,43 +591,37 @@ function reply_delete(DThis) {
 		return;
 	}
 	
+	}
+	
 }
 </script>
 </head>
 <body>
+	<div class="col-md-1 col-sm-1 col-xs-1"></div>
+	<div class="col-md-10 col-sm-10 col-xs-10">
 	<div id="read_div">
 		<div id="blogRead_boardno" style="display: none;">
 			<label></label>
 		</div>		
-		<div id="blogRead_rgdate">
-			<span>작성일:</span>
-			<label></label>
+		<div id="blogRead_rgdate" class="form-group form-group-sm">
+		  <input type="text" class="form-control" name="readRgdate" size="40" disabled="disabled"/>
 		</div>
-		<div id="blogRead_category">
-			<span>카테고리:</span> 
-			<label></label> |
-			<label></label>
+		<div id="blogRead_category" class="form-group form-group-sm">
+			<input type="text" class="form-control" name="readCategory" size="40" disabled="disabled"/>
 		</div>
-		<div id="blogRead_writer">
-			<span>작성자:</span> 
-			<label></label>
+		<div id="blogRead_writer" class="form-group form-group-sm">
+			<input type="text" class="form-control" name="readWriter" size="40" disabled="disabled"/>
 		</div>
-		<div id="blogRead_addrtitle">
-			<span>여행,맛집명:</span>
-			<label></label>
+		<div id="blogRead_addrtitle" class="form-group form-group-sm">
+			<input type="text" class="form-control" name="readAddrtitle" size="40" disabled="disabled"/>
 		</div>
-		<div id="blogRead_addr">
-			<span>주소:</span>
-			<label></label>
+		<div id="blogRead_addr" class="form-group form-group-sm">
+			<input type="text" class="form-control" name="readAddr" size="40" disabled="disabled"/>
 		</div>
-		<div id="blogRead_title">
-			<span>제목:</span>
-			<label></label>
+		<div id="blogRead_title" class="form-group form-group-sm">
+			<input type="text" class="form-control" name="readtitle" size="40" disabled="disabled"/>
 		</div>
-	
-
-		<div id="blogRead_content">
-			<span>내용:</span>
+		<div id="blogRead_content" class="form-group form-group-sm">
 			<div></div>
 		</div>
 	</div>
@@ -635,8 +644,8 @@ function reply_delete(DThis) {
 <br/><br/>
 
 	<div id="blogRead_grade">
-		<span>평점:</span>
-		<img src="" width="100" height="20"/><br /> 
+		<div style="font-weight: bold;">평점</div>
+		<img src="" width="100" height="20"/>
 	</div>
 	<br/>
 	<!-- 추천 /비추천 -->
@@ -652,19 +661,18 @@ function reply_delete(DThis) {
 	&nbsp;&nbsp;&nbsp;&nbsp;<span><img src="${root}/images/blogMap/coupon_img.png" id="coupon_issue_btn" style="width:80px;"/></span>
 	<br/>
 	<div id="blogRead_reply">
-		<span>답글:</span>
-	   <div class="row form-group">
+	    <div class="row form-group">
         <div class="input-group" style="margin: auto; width: 95%;">
-            <input id="replyInsert" type="text" class="form-control">
+            <input id="replyInsert" type="text" class="form-control" placeholder="답글 입력란">
             <span class="input-group-addon success"><span class="glyphicon glyphicon-ok"></span></span>
         </div>
         </div>
         <div id="blogRead_reply_content" style="border: 1px; border-color: black;">
-		<div id="reply_content_insert" class="replyDiv" style="display:none;">   <!-- div를 통해 한번에 삭제하기위함,, 자식들도 삭제되므로! -->
+		<div id="reply_content_insert" class="replyDiv" style="display:none; width: 100%;">   <!-- div를 통해 한번에 삭제하기위함,, 자식들도 삭제되므로! -->
 			<span style="display: none;"></span>
-			<span></span>
-			<span></span>
-			<span></span>
+			<input type="text" name="readReplyInsertId" disabled="disabled" style="width: 28%; height:30px;padding: 5px 10px;font-size: 12px;line-height: 1.5;border-radius: 3px;  background-color: #eee;opacity: 1;">
+			<input type="text" name="readReplyInsertContent" disabled="disabled" style="width: 40%; height:30px;padding: 5px 10px;font-size: 12px;line-height: 1.5;border-radius: 3px;  background-color: #eee;opacity: 1;">
+			<input type="text" name="readReplyInsertDate" disabled="disabled" style="width: 18%; height:30px;padding: 5px 10px;font-size: 12px;line-height: 1.5;border-radius: 3px;  background-color: #eee;opacity: 1;">
 			<span>
 				<button onclick="reply_update(this)">수정</button>
 				<button onclick="reply_delete(this)">삭제</button>
@@ -678,11 +686,12 @@ function reply_delete(DThis) {
 	
 	
 	 <!-- 하단 버튼 -->
-	<div align="right">
+	<div class="form-group form-group-sm" style="text-align: right;">
 		<a data-toggle="modal" href="#blogMapUpdate" class="btn btn-primary" id="Upbutton">수정</a>
 		<input type="button" class="btn btn-primary" id="Debutton" value="삭제" /> 
 	</div>
-	
+	</div>
+	<div class="col-md-1 col-sm-1 col-xs-1"></div>
 
 </body>
 </html>
