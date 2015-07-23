@@ -187,7 +187,7 @@
                         	},
                         	contentType:'application/x-www-form-urlencoded;charset=UTF-8',
                         	success:function(responseData){
-                        		
+
                         		if(sessionStorage.getItem('email') == null){
                         			alert("로그인 성공");
                                     document.location.reload();
@@ -213,7 +213,6 @@
 	               	 		                //alert(jointype);
 	               	 		                //$("input[name='member_id']").attr("value",sessionStorage.getItem('email'));
 	               	 		                $("#loginCheck").text(email);
-	               	 		               
 	               	 		            }
 	               	 					 
 	               	 					
