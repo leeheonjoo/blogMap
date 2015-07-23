@@ -449,7 +449,7 @@ function gray_a(a) {
 							<input type="text"  id="blogList_text" class="form-control" placeholder="Search" style="width:272px;"/>
 							<button type="button" id="blogList_Search" class="btn btn-default">검색</button>
 							<span id="myId_blogList" style="display:none;">
-							<label style="color: red;">유저 작성글만 검색시 체크</label>
+							<label style="color: red;">유저 작성글만 검색</label>
 							<input type="checkbox" value="y"/>
 							</span>
 						</div>
