@@ -9,9 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <style>
 	a.list-group-item {
-	    height:auto;
-	    min-height:125px;
+	    height:150px;
 	}
+	
 	a.list-group-item.active small {
 	    color:#fff;
 	}
@@ -20,6 +20,7 @@
 <!-- [검색조건 관련 스크립트] -->
 <!-- 적용 페이지 : blogListMain.jsp | blogWrite.jsp-->
 <script type="text/javascript">
+
 function blue_button(btn) {
 	$(btn).attr("class","btn btn-primary btn-lg btn-block");
 }
@@ -355,28 +356,29 @@ function gray_a(a) {
 	<!-- 검색조건 navbar : 20150706 이헌주 -->
 	<div style="display: none;" id="hidden_items" class="list-group" >
          <a id="listItem" href="#" class="list-group-item">
-         	<div class="row">
-               <div class="media col-md-3">
-                   <figure class="pull-left">
-                       <img id="result_attchimg" class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" >
+         	<div class="row" style="height:100%;">
+               <div class="media col-md-4 col-sm-5 col-xs-5" style="height:100%;">
+                   <figure class="pull-left" style="height:100%; width:100%;">
+                       <img id="result_attchimg" class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" style="width:100%; height:100%;" >
                    </figure>
                </div>
-               <div class="col-md-6">
-                   <h4 id="result_title" class="list-group-item-heading"> </h4>
-                   <p id="result_content" class="list-group-item-text"> 
-                   </p>
-               </div>
-               <div class="col-md-3 text-center">
-               	<h2 id="result_rgdate"><small></small></h2>
-                   <h2 id="result_count"><small></small></h2>
-                   <div id="result_star" class="stars">
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
-                       <span class="glyphicon glyphicon-star-empty"></span>
+               <div class="col-md-8 col-sm-7 col-xs-7" style="height:100%;">
+					<div>
+	                   <div><b><h4 id="result_title" class="list-group-item-heading" style="display:inline-block;"></h4></b></div>
+	                   <div><p id="result_content" class="list-group-item-text"></p></div>
+	                   <div style="vertical-align:bottom;">
+		                   <h4 id="result_rgdate" style="display:inline-block;"><small></small></h4>
+		                   <h4 id="result_count" style="display:inline-block;"><small></small></h4>
+		                   <div id="result_star" class="stars" style="display:inline-block;">
+		                       <span class="glyphicon glyphicon-star-empty"></span>
+		                       <span class="glyphicon glyphicon-star-empty"></span>
+		                       <span class="glyphicon glyphicon-star-empty"></span>
+		                       <span class="glyphicon glyphicon-star-empty"></span>
+		                       <span class="glyphicon glyphicon-star-empty"></span>
+		                   </div>
+	                   </div>
                    </div>
-               </div> 
+               </div>
 			</div>
          </a>
      </div>
@@ -439,7 +441,7 @@ function gray_a(a) {
 					<form class="navbar-form navbar-left" role="search">
 						<!-- 검색조건(문장) -->
 						<div class="form-group">
-							<input type="text"  id="blogList_text" class="form-control" placeholder="Search"/>
+							<input type="text"  id="blogList_text" class="form-control" placeholder="Search" style="width:272px;"/>
 							<button type="button" id="blogList_Search" class="btn btn-default">검색</button>
 							<span id="myId_blogList" style="display:none;">
 							<label style="color: red;">유저 작성글만 검색시 체크</label>

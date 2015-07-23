@@ -72,12 +72,8 @@
 							
 							
 							$.each(send_data,function(i){
-								var date = new Date(send_data[i].message_sDate);
-								var sy = date.getFullYear();
-								var sm = date.getMonth() + 1;
-								var sd = date.getDate();
-
-								var sdate = sy + "/" + sm + "/" + sd;				
+								var d = new Date(send_data[i].message_sDate);
+				          		var sdate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);				
 								
 								$("#sendMsgResult").append("<tr class='hidden-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
 								$("#sendMsgResult").append("<tr class='visible-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
@@ -125,12 +121,8 @@
 											var send_data=JSON.parse(data[0]);
 											
 											$.each(send_data,function(i){
-												var date = new Date(send_data[i].message_sDate);
-												var sy = date.getFullYear();
-												var sm = date.getMonth() + 1;
-												var sd = date.getDate();
-
-												var sdate = sy + "/" + sm + "/" + sd;
+												var d = new Date(send_data[i].message_sDate);
+								          		var sdate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);				
 
 												$("#sendMsgResult").append("<tr class='hidden-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
 												$("#sendMsgResult").append("<tr class='visible-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
@@ -187,12 +179,8 @@
 								var send_data=JSON.parse(data[0]);
 								
 								$.each(send_data,function(i){
-									var date = new Date(send_data[i].message_sDate);
-									var sy = date.getFullYear();
-									var sm = date.getMonth() + 1;
-									var sd = date.getDate();
-
-									var sdate = sy + "/" + sm + "/" + sd;
+									var d = new Date(send_data[i].message_sDate);
+					          		var sdate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);				
 
 									$("#sendMsgResult").append("<tr class='hidden-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
 									$("#sendMsgResult").append("<tr class='visible-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
@@ -249,12 +237,8 @@
 												var send_data=JSON.parse(data[0]);
 												
 												$.each(send_data,function(i){
-													var date = new Date(send_data[i].message_sDate);
-													var sy = date.getFullYear();
-													var sm = date.getMonth() + 1;
-													var sd = date.getDate();
-
-													var sdate = sy + "/" + sm + "/" + sd;
+													var d = new Date(send_data[i].message_sDate);
+									          		var sdate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);				
 
 													$("#sendMsgResult").append("<tr class='hidden-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
 													$("#sendMsgResult").append("<tr class='visible-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
@@ -321,12 +305,8 @@
 								var send_data=JSON.parse(data[0]);
 								
 								$.each(send_data,function(i){
-									var date = new Date(send_data[i].message_sDate);
-									var sy = date.getFullYear();
-									var sm = date.getMonth() + 1;
-									var sd = date.getDate();
-
-									var sdate = sy + "/" + sm + "/" + sd;
+									var d = new Date(send_data[i].message_sDate);
+					          		var sdate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);				
 
 									$("#sendMsgResult").append("<tr class='hidden-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
 									$("#sendMsgResult").append("<tr class='visible-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
@@ -380,12 +360,8 @@
 												var send_data=JSON.parse(data[0]);
 												
 												$.each(send_data,function(i){
-													var date = new Date(send_data[i].message_sDate);
-													var sy = date.getFullYear();
-													var sm = date.getMonth() + 1;
-													var sd = date.getDate();
-
-													var sdate = sy + "/" + sm + "/" + sd;
+													var d = new Date(send_data[i].message_sDate);
+									          		var sdate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);				
 
 													$("#sendMsgResult").append("<tr class='hidden-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].message_no + "</td><td>" + send_data[i].message_content + "</td><td>" + send_data[i].member_id + "</td><td>" + sdate + "</td><td>" + send_data[i].message_yn + "</td></tr>");
 													$("#sendMsgResult").append("<tr class='visible-xs " + "s" +send_data[i].message_no+"' style='text-align: center;' data-toggle='modal' href='#messageRead'><td>" + send_data[i].member_id + "</td><td>" + send_data[i].message_content + "</td></tr>");
@@ -421,12 +397,9 @@
 							//	alert(responseData);
 							var data = JSON.parse(responseData);
 
-							var date = new Date(data.message_sDate);
-							var sy = date.getFullYear();
-							var sm = date.getMonth() + 1;
-							var sd = date.getDate();
+							var d = new Date(data.message_sDate);
+			          		var sdate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);				
 
-							var sdate = sy + "/" + sm + "/" + sd;
 							//	alert(data.message_no);
 							$("input[name='message_no']").val(data.message_no);
 							$("input[name='message_receiver']").val(data.message_receiver);

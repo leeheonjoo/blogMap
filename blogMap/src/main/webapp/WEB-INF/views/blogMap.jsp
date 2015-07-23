@@ -294,7 +294,8 @@ $(function(){
 </script>
 
 </head>
-<body>
+<body style="padding:10px; padding-top:40px;">
+<div>
 	<div class="container" style="max-width:1170px; padding:0 0 0 0;">
 		<nav class="navbar navbar-inverse" role="navigation" style="width:inherit;">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -539,7 +540,7 @@ $(function(){
 						</p>
 					</div>
 	</div>
-
+</div>
 <div class="container-fluid">
 
 	<!-- **********************************
