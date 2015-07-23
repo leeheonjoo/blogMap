@@ -112,9 +112,13 @@ public class MemberServiceImpl implements MemberService {
 		int check=0;
 		if(managerCheck==0){
 			MemberDto deleteMemberDto=memberDao.fbRegisterSelect(member_id);
+			
 			if(deleteMemberDto!=null){
+				
 				if(deleteMemberDto.getMember_jointype()=="0003"){
 					check=0;
+				}else{
+					check=1;
 				}
 			}else{
 				check = memberDao.registerCheck(member_id);

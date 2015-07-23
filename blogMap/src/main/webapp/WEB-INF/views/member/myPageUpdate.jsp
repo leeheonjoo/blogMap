@@ -104,7 +104,7 @@ if(sessionStorage.getItem('email')!=null){
 		<input id="myPageUpdate_btn" type="button" value="수정"/> 
 	</div> -->
 	
-	<label>계좌정보</label><br/>
+	<label>계정정보</label><br/>
 	<div class="row">
 		<div class="col-xs-8 col-sm-8 col-md-8">
 			<div class="form-group">
