@@ -309,4 +309,107 @@ public class PartnerServiceImpl implements PartnerService {
 		
 		mav.addObject("searchjson", searchjson);
 	}
+	/**
+	 * @name: writeCouponList
+	 * @date:2015. 7. 22.
+	 * @author: 변태훈
+	 * @description:  제휴업체 writeCouponList 리스트
+	 */
+		@Override
+		public void writeCouponList(ModelAndView mav) {
+			logger.info("PartnerServiceImp writeCouponList----------------");
+		
+			Map<String, Object> map=mav.getModelMap();
+			HttpServletRequest request=(HttpServletRequest)map.get("request");
+			HttpServletResponse response=(HttpServletResponse)map.get("response");
+
+			String member_id=request.getParameter("member_id");
+			logger.info("PartnerService writeCouponList member_id:"+member_id);
+
+			CouponDto couponDto=null;
+			PartnerDto partnerDto=null;
+			
+			HashMap<String,Object> hMap=new  HashMap<String,Object>();
+			hMap.put("couponDto",couponDto);
+			hMap.put("partnreDto", partnerDto);
+			
+			List<HashMap<String, Object>> writeCouponList=partnerDao.getwriteCouponList(member_id);
+			logger.info("partnerWriteListSize:"+writeCouponList.size());
+			
+//			메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
+			Gson gson=new Gson();
+			String json=gson.toJson(writeCouponList);
+			logger.info("writeCouponList:"+writeCouponList);
+			logger.info("json:"+json);
+			
+//			JSON 에 저장된 정보를 조회
+			//System.out.println("json: " + json);
+		
+			//mav.addObject("writeCouponList",writeCouponList);
+			mav.addObject("json", json);
+		}
+	@Override
+	public void search_partnerCouponinfo(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		
+		String coupon_item=request.getParameter("coupon_item");
+		logger.info("coupon_item:" + coupon_item);
+		
+		CouponDto couponDto=null;
+		PartnerDto partnerDto=null;
+		
+		HashMap<String,Object> hMap=new  HashMap<String,Object>();
+		hMap.put("couponDto",couponDto);
+		hMap.put("partnreDto", partnerDto);
+		
+		List<HashMap<String, Object>> search_partnerCouponinfo=partnerDao.search_partnerCouponinfo(coupon_item);
+		logger.info("search_partnerCouponinfo : " + search_partnerCouponinfo);
+		
+		Gson gson=new Gson();								//Gson의 객체를 생성
+		String searchCouponJson=gson.toJson(search_partnerCouponinfo);	//Log를 json으로 변환
+		
+		logger.info("searchCouponJson: " + searchCouponJson);
+		
+		mav.addObject("searchCouponJson", searchCouponJson);
+		
+	}
+	@Override
+	public void getPartnerCouponData(ModelAndView mav) {
+		logger.info("Partner getPartnerCouponData start----------------");
+		
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		HttpServletResponse response=(HttpServletResponse)map.get("response");
+		
+		int coupon_no=Integer.parseInt(request.getParameter("coupon_no"));
+		logger.info("coupon_no : " + coupon_no);
+	
+		List<CouponDto> couponList=null;
+		List<PartnerDto> partnerList=null;
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
+		hMap.put("couponList", couponList);
+		hMap.put("partnerList", partnerList);
+		hMap.put("coupon_no", coupon_no);
+		
+		List<HashMap<String, Object>> coupon_List=new ArrayList<HashMap<String,Object>>();
+		
+		coupon_List=partnerDao.getPartnerCouponData(hMap);
+		logger.info("맵퍼 갔다와서:"+coupon_List);
+		
+		Gson gson=new Gson();
+		String json=gson.toJson(coupon_List);
+		logger.info("json으로 담은후에" + json);
+//			
+//		//mav.addObject("getPartnerListDate",getPartnerListDate);
+		mav.addObject("json",json);
+		
+//		try {
+//			response.setCharacterEncoding("utf-8");
+//			response.getWriter().print(json);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+	}	
 }

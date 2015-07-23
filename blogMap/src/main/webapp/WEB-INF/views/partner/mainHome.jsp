@@ -10,6 +10,7 @@
 <script type="text/javascript">
 $(function() {
 	$("input[name='member_id']").val(sessionStorage.getItem('email'));
+	
 })
 </script>
 </head>
@@ -17,6 +18,9 @@ $(function() {
 <style>
 .img-responsive {height:}
 #list_partner_name {width:100%;text-overflow:ellipsis;white-space:inherit;overflow:initial;}
+#list_partnerCoupon_name {width:100%;text-overflow:ellipsis;white-space:inherit;overflow:initial;}
+#tour_item_list {font-size:13px;}
+#coupon_item_list {font-size:13px;}
 </style>
 
 <body>
@@ -26,7 +30,10 @@ $(function() {
 			<!-- 큰 사이즈 화면에서 탭 목록-->					
 			<ul class="nav nav-pills nav-stacked col-md-2 hidden-xs hidden-sm" role="tablist">
 				<li role="presentation" class="active">
-					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
+					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>	
+				</li>
+				<li role="presentation">
+					<a href="#partner_coupon" aria-controls="partner_coupon" role="tab" data-toggle="tab" onclick="partner_getCouponList()">Coupon</a>
 				</li>
 			</ul>
 		
@@ -35,17 +42,20 @@ $(function() {
 				<li role="presentation" class="active">
 					<a href="#tab_tour" aria-controls="tab_tour" role="tab" data-toggle="tab">Tour & Restaurant</a>
 				</li>
+				<li role="presentation">
+					<a href="#partner_coupon" aria-controls="partner_coupon" role="tab" data-toggle="tab" onclick="partner_getCouponList()">Coupon</a>
+				</li>
 			</ul>
 
 			<!-- tour 탭 내용 -->
-			<div class="tab-content col-md-10 thumbnail">
-				<div class="col-md-5 input-group">
-					<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
-		     		<span class="input-group-btn">
-		     			<input type="button" class="btn btn-default" id="search_Partner" value="검색"/>
-		     		</span>
-       			</div><br/>
+			<div class="tab-content col-md-10 thumbnail" style="padding-bottom: 80px;">
 				<section role="tabpanel" class="tab-pane active" id="tab_tour">
+					<div class="col-md-5 input-group">
+						<input type="text" class="form-control" placeholder="제휴업체 검색" id="partnerSearchTag"/> 
+			     		<span class="input-group-btn">
+			     			<input type="button" class="btn btn-default" id="search_Partner" value="검색"/>
+			     		</span>
+	       			</div><br/>
 					<div class="row" id="tour_item_list"></div>
 					<div id="partnerListResult"></div>  <!-- 자료를 붙일 바디 -->
 				
@@ -57,6 +67,31 @@ $(function() {
 								
 								<div class="caption">
 									<p id="list_partner_name"></p>
+								</div>								
+							</a>
+						</div>
+					</div>
+				</section>
+				
+				<!-- coupon 탭 내용 -->
+				<section role="tabpanel" class="tab-pane" id="partner_coupon">
+					<div class="col-md-5 input-group">
+						<input type="text" class="form-control" placeholder="쿠폰 검색" id="partnercouponSearchTag"/> 
+			     		<span class="input-group-btn">
+			     			<input type="button" class="btn btn-default" id="search_partnerCoupon" value="검색"/>
+			     		</span>
+	       			</div><br/>
+					 <div class="row" id="coupon_item_list"></div>
+					<div id="partnerCouponListResult"></div>  <!--자료를 붙일 바디-->
+				
+					<div class="col-md-3 col-sm-4 col-xs-4 coupon_items" id="coupon_item" role="button" style="display:none;">
+						<div id="tour_info" class="thumbnail">	
+							<a data-toggle="modal" href="#modalCoupon_info" class="list_coupon_no">
+								
+								<img class="img-responsive" id="partnerCoupon_imagers"/> 
+								
+								<div class="caption">
+									<p id="list_partnerCoupon_name"></p>
 								</div>								
 							</a>
 						</div>
@@ -120,7 +155,7 @@ $(function() {
 					/* contentType : 'application/x-www-form-urlencoded;charset=UTF-8', */
 					success:function(data)
 					{
-						alert("등록 성공");
+						alert("등록이 완료되었습니다.");
 						$("section[id=write_pop].modal").modal("hide");
 						$("#tour_item_list").empty();	//데이터를 가지고 오기전에 리셋(중복삽입을 방지하기 위해)
 						
@@ -145,11 +180,6 @@ $(function() {
 										
 										partnerData(data[i].partner_no);	
 									});
-									
-// 									$(".asdasd").click(function(){
-// 										var id = $(this).find('.list_partner_no').attr('id');
-// 										$("#modal_info").modal('show');
-// 									});
 								});
 							}	
 						});	
@@ -167,6 +197,45 @@ $(function() {
 			 * 해당 엘리먼트의 값이 비어있는지 확인하고,
 			 * 비어있을시 경고창을 띄운후 False 반환
 			 */
+			 
+			function partner_getCouponList(){
+				//alert("쿠폰이다");
+				var partner = sessionStorage.getItem('email');
+				$.ajax({
+					type:'post',
+					url:'${root}/partner/writeCouponList.do',
+					data:{
+						member_id:partner
+					},
+					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+					success : function(responseData) {
+						//alert("gjhgkkg");
+						var data = JSON.parse(responseData);
+						/* 데이타를 채우기 위해 복사 */
+						$("#coupon_item_list").empty();
+						$.each(data, function(i){
+							
+							//alert(data[i].coupon_item);		
+							$("#coupon_item_list").append($("#coupon_item").clone().css("display", "block"));
+							$("#coupon_item:last-child #list_partnerCoupon_name").html(data[i].PARTNER_NAME);
+							$("#coupon_item:last-child a[class='list_coupon_no']").attr("id", "coupon_no"+data[i].COUPON_NO);
+							$("input[name='coupon_no']").html(data[i].CONPON_NO);
+							$("#coupon_item:last-child #partnerCoupon_imagers").attr("src","${root}/pds/coupon/"+data[i].COUPON_PIC_NAME);
+							
+							// 각 업체를 클릭했을때 이벤트
+							$("#coupon_no" + data[i].COUPON_NO).click(function(){
+								//alert("coupon_no 업체클릭:" + data[i].COUPON_NO)
+								partnerCouponData(data[i].COUPON_NO);	
+							}); 
+							$(".coupon_items .img-responsive").css({
+								'max-width':"100%",
+								'height': "100px"
+							});
+						});
+					}	
+				});
+				
+			}
 			function check_empty(el, title)
 			{
 				if($(el) == 'undefined' || $(el).val() == '')
@@ -223,6 +292,48 @@ $(function() {
 				}
 			});
 		});
+		
+		$("#search_partnerCoupon").click(function(){
+			//alert("제휴업체");
+			var searchTag=$("input[id='partnercouponSearchTag']").val();
+			//alert("찾으려는 검색어"+searchTag);
+		
+			$.ajax({
+				type:'get',
+				url:'${root}/partner/search_partnerCouponinfo.do?coupon_item='+searchTag,
+				cache:false,
+				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+				success:function(responseData){
+			
+					$("#coupon_item_list").empty();	//데이터를 가지고 오기전에 리셋(중복삽입을 방지하기 위해)
+					var data=JSON.parse(responseData);	//가지고 온 데이터를 data 변수에 저장
+
+					if(!data){
+						alert("데이터가 없습니다.");
+						return false;
+					}
+					$.each(data, function(i){
+						//alert(data[i].COUPON_ITEM);		
+						$("#coupon_item_list").append($("#coupon_item").clone().css("display", "block"));
+						$("#coupon_item:last-child #list_partnerCoupon_name").html(data[i].PARTNER_NAME);
+						$("#coupon_item:last-child a[class='list_coupon_no']").attr("id", "coupon_no"+data[i].COUPON_NO);
+						$("input[name='coupon_no']").html(data[i].CONPON_NO);
+						$("#coupon_item:last-child #partnerCoupon_imagers").attr("src","${root}/pds/coupon/"+data[i].COUPON_PIC_NAME);
+						
+						// 각 업체를 클릭했을때 이벤트
+						$("#coupon_no" + data[i].COUPON_NO).click(function(){
+							//alert("coupon업체클릭" + data[i].COUPON_NO)
+							
+							partnerCouponData(data[i].COUPON_NO);	
+						});
+						$(".coupon_items .img-responsive").css({
+							'max-width':"100%",
+							'height': "100px"
+						});
+					});
+				}
+			});
+		});
 		 function partnerData(no){
 			 //alert(no);
 				$.ajax({
@@ -243,8 +354,53 @@ $(function() {
 					}
 				});
 			};
+			
+			function partnerCouponData(no){
+				 //alert(no);
+					$.ajax({
+						type:'get',
+						url:'${root}/partner/getPartnerCouponData.do?coupon_no=' + no,
+						contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
+						success : function(responseData) {
+							var data = JSON.parse(responseData);
+			 				
+							var b_d = new Date(data[0].COUPON_BYMD);
+						    var b_dt =leadingZeros(b_d.getFullYear(), 4) + '/' +leadingZeros(b_d.getMonth() + 1, 2) + '/' +leadingZeros(b_d.getDate(), 2);
+							
+						    var e_d=new Date(data[0].COUPON_EYMD);
+						    var e_dt =leadingZeros(e_d.getFullYear(), 4) + '/' +leadingZeros(e_d.getMonth() + 1, 2) + '/' +leadingZeros(e_d.getDate(), 2);
+							
+							$("p[name='p_name']").html(data[0].PARTNER_NAME);
+							$("p[name='p_phone']").html(data[0].PARTNER_PHONE);
+							$("p[name='p_addr']").html(data[0].PARTNER_ADDR);
+							$("p[name='coupon_item']").html(data[0].COUPON_ITEM);
+							$("p[name='coupon_discount']").html(data[0].COUPON_DISCOUNT);
+							$("p[name='coupon_bymd']").html(b_dt);
+							$("p[name='coupon_eymd']").html(e_dt);
+			
+							$("img[id='partnerCouponDetail_imagers']").attr("src","${root}/pds/coupon/"+data[0].COUPON_PIC_NAME);
+						}
+					});
+				};
 		
 		function form_couponWrite(){
+			var returnVal = false;
+			// 빈값이 있는지 확인
+			if(! check_empty("#coupon_items",'할인상품'))return false;
+			if(! check_empty("#coupon_discount",'할인율')) return false;
+			if(! check_empty("#coupon_bymd",'쿠폰적용 시작일'))return false;
+			if(! check_empty("#coupon_eymd",'쿠폰적용 종료일'))return false;
+			
+			// 글자수 체크
+			if( $("#coupon_item").val().length < 1 || $("#coupon_item").val().length > 50 )
+			{
+				alert("할인상품 이름은 최소 1글자 이상 50글자 미만이어야 합니다.");
+				$("#coupon_item").focus();
+				return false;
+			}
+			
+			// 사용자 확인창
+			if(! confirm("신청하시겠습니까?")) return null;	
 			
 			var data = new FormData($('#couponWrite_form')[0]);
 			
@@ -284,13 +440,13 @@ $(function() {
 		
 		 function getPartnerInfo(){	
 			/* 데이타를 채우기 위해 복사 */
-			var manager = sessionStorage.getItem('email');
+			var partner = sessionStorage.getItem('email');
 			//alert(manager);		확인완료
 				$.ajax({
 					type:'post',
 					url:'${root}/partner/writeList.do',
 					data:{
-						member_id:manager
+						member_id:partner
 					},
 					contentType : 'application/x-www-form-urlencoded;charset=UTF-8',
 					success : function(responseData) {
@@ -334,7 +490,7 @@ $(function() {
 						
 						$(".tour_items .img-responsive").css({
 							'max-width':"100%",
-							'height': "150px"
+							'height': "100px"
 						});
 						
 					}	

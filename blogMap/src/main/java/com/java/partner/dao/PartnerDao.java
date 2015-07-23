@@ -27,5 +27,11 @@ public interface PartnerDao {
 	public List<PartnerDto> getSearchParnterData(String partner_name);
 
 	public int coupon_Register(CouponDto couponDto);
+	
+	public List<HashMap<String, Object>> getwriteCouponList(String member_id);
+	
+	public List<HashMap<String, Object>> search_partnerCouponinfo(String coupon_item);
+	
+	public List<HashMap<String,Object>> getPartnerCouponData(HashMap<String,Object> hMap);
 
 }
