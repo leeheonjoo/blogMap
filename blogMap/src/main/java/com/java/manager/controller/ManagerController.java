@@ -24,7 +24,7 @@ public class ManagerController {
 	
 	/**
 	 * @name:memberList
-	 * @date:2015. 7. 3.
+	 * @date:2015. 6. 26.
 	 * @author:이동희
 	 * @description: member의 정보를 불러오는 메소드
 	 */
@@ -36,7 +36,7 @@ public class ManagerController {
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		
-		managerService.getData(mav);
+		managerService.memberList(mav);
 		Map<String, Object> map=mav.getModel();
 		
 		String json=(String)map.get("json");
@@ -48,34 +48,7 @@ public class ManagerController {
 			e.printStackTrace();
 		}
 	}
-	
-	/**
-	 * @name:memberDelete
-	 * @date:2015. 7. 3.
-	 * @author:이동희
-	 * @description: 회원삭제를 위한 메소드
-	 */
-	@RequestMapping("/manager/delete.do")
-	public void memberDelete(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Manager MemberDelete");
 		
-		ModelAndView mav= new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("response", response);
-		
-		managerService.memberDel(mav);
-		Map<String, Object> map=mav.getModel();
-		
-		String json=(String)map.get("json");
-		
-		try{
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(json);
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-	}
-	
 	/**
 	 * @name:searchMemberList
 	 * @date:2015. 7. 14.
@@ -131,8 +104,35 @@ public class ManagerController {
 	}
 	
 	/**
+	 * @name:memberDelete
+	 * @date:2015. 6. 29.
+	 * @author:이동희
+	 * @description: 회원삭제를 위한 메소드
+	 */
+	@RequestMapping("/manager/delete.do")
+	public void memberDelete(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager MemberDelete");
+		
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.memberDel(mav);
+		Map<String, Object> map=mav.getModel();
+		
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	 * @name:partnerList
-	 * @date:2015. 7. 3.
+	 * @date:2015. 7. 1.
 	 * @author:이동희
 	 * @description: 제휴업체 정보를 불러오는 메소드
 	 */
@@ -159,8 +159,8 @@ public class ManagerController {
 	}
 	
 	/**
-	 * @name:partnerList
-	 * @date:2015. 7. 3.
+	 * @name:searchPartnerList
+	 * @date:2015. 7. 8.
 	 * @author:이동희
 	 * @description: 검색시 제휴업체 정보를 불러오는 메소드
 	 */
@@ -188,7 +188,7 @@ public class ManagerController {
 	
 	/**
 	 * @name:searchPartnerYN
-	 * @date:2015. 7. 15.
+	 * @date:2015. 7. 10.
 	 * @author:이동희
 	 * @description: 제휴업체 승인/미승인 여부로 제휴업체의 정보를 가지고 오는 메소드
 	 */
@@ -217,7 +217,7 @@ public class ManagerController {
 	
 	/**
 	 * @name:partnerSubmit
-	 * @date:2015. 7. 3.
+	 * @date:2015. 7. 7.
 	 * @author:이동희
 	 * @description: 제휴업체 신청을 승인하는 메소드
 	 */
@@ -247,7 +247,7 @@ public class ManagerController {
 	
 	/**
 	 * @name:partnerDelete
-	 * @date:2015. 7. 3.
+	 * @date:2015. 7. 7.
 	 * @author:이동희
 	 * @description: 제휴업체의 정보를 삭제하는 메소드
 	 */
@@ -325,6 +325,61 @@ public class ManagerController {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+	}
+		
+	/**
+	 * @name:searchCouponList
+	 * @date:2015. 7. 15.
+	 * @author:이동희
+	 * @description: 제휴업체 이름검색으로 발급된 쿠폰 정보를 가지고오는 메소드
+	 */
+	@RequestMapping("/manager/searchCouponInfo.do")
+	public void searchCouponList(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager searchCouponList Start");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.searchCouponList(mav);
+		
+		Map<String, Object> map=mav.getModel();
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * @name:searchCouponYN
+	 * @date:2015. 7. 21.
+	 * @author:이동희
+	 * @description: 쿠폰의 승인여부로 쿠폰을 조회하는 메소드
+	 */
+	@RequestMapping("/manager/searchCouponYN.do")
+	public void searchCouponYN(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Manager searchCouponYN Start");		
+
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		managerService.searchCouponYN(mav);
+		
+		Map<String, Object> map=mav.getModel();
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
 	}
 	
 	/**
@@ -410,62 +465,6 @@ public class ManagerController {
 	}
 	
 	
-	
-	/**
-	 * @name:searchCouponList
-	 * @date:2015. 7. 15.
-	 * @author:이동희
-	 * @description: 제휴업체 이름검색으로 발급된 쿠폰 정보를 가지고오는 메소드
-	 */
-	@RequestMapping("/manager/searchCouponInfo.do")
-	public void searchCouponList(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Manager searchCouponList Start");
-		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("response", response);
-		
-		managerService.searchCouponList(mav);
-		
-		Map<String, Object> map=mav.getModel();
-		String json=(String)map.get("json");
-		
-		try{
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(json);
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-	}
-	
-	/**
-	 * @name:searchCouponYN
-	 * @date:2015. 7. 21.
-	 * @author:이동희
-	 * @description: 쿠폰의 승인여부로 쿠폰을 조회하는 메소드
-	 */
-	@RequestMapping("/manager/searchCouponYN.do")
-	public void searchCouponYN(HttpServletRequest request, HttpServletResponse response){
-		logger.info("Manager searchCouponYN Start");		
-
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("response", response);
-		
-		managerService.searchCouponYN(mav);
-		
-		Map<String, Object> map=mav.getModel();
-		String json=(String)map.get("json");
-		
-		try{
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(json);
-		}catch(IOException e){
-			e.printStackTrace();
-		}
-		
-	}
-	
 	/**
 	 * @name:managerList
 	 * @date:2015. 7. 3.
@@ -495,7 +494,7 @@ public class ManagerController {
 	
 	/**
 	 * @name:managerLog
-	 * @date:2015. 7. 3.
+	 * @date:2015. 7. 7.
 	 * @author:이동희
 	 * @description: 관리자 행위로그를 가지고 오는 메소드
 	 */

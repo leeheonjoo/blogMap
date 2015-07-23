@@ -16,8 +16,7 @@
 		
 		// partnerList
 		$("input#getPartnerList").click(function(){		// 제휴업체 정보버튼 클릭시 실행
-			getPartnerList();		// 제휴업체 정보를 불러오는 함수 호출
-			
+			getPartnerList();		// 제휴업체 정보를 불러오는 함수 호출			
 		});
 		
 		 // couponList
@@ -69,7 +68,7 @@
 					
 					<!-- 작은 사이즈 화면에서 탭 목록-->
 					<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist">
-						<li role="presentation" class="active">
+						<li role="presentation">
 							<a href="#tab_member" aria-controls="tab_member" role="tab" data-toggle="tab" onclick="getMemberList()">회원정보</a>
 						</li>
 						

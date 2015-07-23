@@ -147,17 +147,10 @@ vertical-align: middle;
 				}
 				var jointype=null;
 				$.each(data, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
-					/*  */
+					
 					var d = new Date(data[i].member_joindate);
               		var rgDate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);					
-					/*  */							
-
-					/* var date = new Date(data[i].member_joindate);
-					var year = (date.getFullYear()).toString();
-					var month = "0"+(date.getMonth()+1);
-					//alert(month.length);
-					var day = date.getDate();
-					var rgDate = year + "/" + month + "/"+ day; */
+					
 					
 					var jointype=data[i].member_jointype;
 					
@@ -220,6 +213,12 @@ vertical-align: middle;
 		//alert("회원검색");
 		var searchTag=$("input[id='memberSearchTag']").val();
 		//alert(searchTag);
+		
+		if(searchTag == ""){
+			alert("검색할 회원 이름을 입력하세요.");
+			$("#memberSearchTag").focus();
+			return false;
+		}		
 		
 		$.ajax({
 			type:'get',
@@ -335,23 +334,8 @@ vertical-align: middle;
 				$.each(data, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
 					var d = new Date(data[i].member_joindate);
               		var rgDate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);
-										
-					/* var date = new Date(data[i].member_joindate);
-					var year = (date.getFullYear()).toString();
-					var month = "0"+(date.getMonth()+1);
-					//alert(month.length);
-					var day = date.getDate();
-					var rgDate = year + "/" + month + "/"+ day; */
 					
-					var jointype=data[i].member_jointype;
-					/* //alert(type);
-					if(type == "0001"){
-						jointype="BlogMap";
-					}else if(type =="0002"){
-						jointype="FaceBook";
-					}else if(type =="0003"){
-						jointype="탈퇴";
-					} */
+              		var jointype=data[i].member_jointype;					
 					
 					$("#memberListResult").append("<tr style='text-align: center;'>"
 										+ "<td>" + data[i].member_id + "</td>"			// 아이디
@@ -405,7 +389,7 @@ vertical-align: middle;
 	
 </script>
 </head>
-<body onload="getMemberList()">
+<body>
 
 <div class="caption">
 

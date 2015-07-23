@@ -255,6 +255,14 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		List<HashMap<String, Object>> boardList=sqlSession.selectList("dao.BoardReadMapper.getboardList_check",hashMap);
 		return boardList;
 	}
+
+	@Override
+	public int blogUpdate_insert(HashMap<String, Object> hashMap) {
+		logger.info("BoardReadDao blogUpdate_insert-------------------------");
+		
+		
+		return sqlSession.insert("dao.BoardReadMapper.blogUpdate_insert",hashMap);
+	}
 	
 	
 

@@ -9,7 +9,7 @@
 <style>
 	a.list-group-item {
 	    height:auto;
-	    min-height:220px;
+	    min-height:170px;
 	}
 	a.list-group-item.active small {
 	    color:#fff;
