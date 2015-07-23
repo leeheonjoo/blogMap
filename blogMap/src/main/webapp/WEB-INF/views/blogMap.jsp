@@ -233,6 +233,7 @@
 $(function(){
 	// 블로그 검색
 	$("#blogSearch").click(function(){
+		$("map").empty();
 		$("#map_div").addClass("col-lg-12 col-md-12");
 		$("#list_div").addClass("col-lg-12 col-md-12");
 		
@@ -435,7 +436,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile5" class="tile">
+				<div id="tile5" class="tile" style="cursor:Pointer">
 			  	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -453,7 +454,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile6" class="tile">
+				<div id="tile6" class="tile" style="cursor:Pointer">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -473,7 +474,7 @@ $(function(){
 
 		<div class="row">
 			<div class="col-sm-4 col-xs-8">
-				<div id="tile7" class="tile">
+				<div id="tile7" class="tile" style="cursor:Pointer">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -487,7 +488,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile8" class="tile">
+				<div id="tile8" class="tile" style="cursor:Pointer">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -501,7 +502,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile9" class="tile">
+				<div id="tile9" class="tile" style="cursor:Pointer">
 				  	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -515,7 +516,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-4 col-xs-8">
-				<div id="tile10" class="tile">
+				<div id="tile10" class="tile" style="cursor:Pointer">
 				  	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -749,13 +750,13 @@ $(function(){
 					
 					<div class="modal-body" id="data-body">
 						<div class="row form-horizontal">
-							<div class="col-md-3">
-								<img class="img-responsive img" id="partnerDetail_imagers"/>
-							</div>
-							<div class="col-md-9">
+								<div class="col-md-3">
+									<img class="img-responsive img" id="partnerDetail_imagers"/>
+								</div>
+								<div class="col-md-9">
 								<div class="form-group">
 									<label class="col-xs-3 control-label">카테고리:</label>
-									<div class="col-xs-9">
+									<div class="col-xs-6">
  										<div class="form-control-static name" name="p_category_MNAME" style="display:inline-block;"></div>
  										<div class="form-control-static name" name="p_category_SNAME"style="display:inline-block;"></div>
 									</div>
@@ -763,21 +764,21 @@ $(function(){
 							
 								<div class="form-group">
 									<label class="col-xs-3 control-label">업체명:</label>
-									<div class="col-xs-9">
+									<div class="col-xs-6">
  										<p class="form-control-static name" name="p_name"></p> 
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<label class="col-xs-3 control-label">전화번호:</label>
-									<div class="col-xs-9">
+									<div class="col-xs-6">
  										<p class="form-control-static phone" name="p_phone"></p>  
 									</div>
 								</div>
 								
 								<div class="form-group">
 									<label class="col-xs-3 control-label">주소:</label>
-									<div class="col-xs-9">
+									<div class="col-xs-6">
 										<p class="form-control-static address" name="p_addr"></p> 
 									</div>
 								</div>
@@ -786,6 +787,84 @@ $(function(){
 						<div class="row">
 							<div class="col-xs-12 text-right">
 								<input type="button" class="btn btn-primary" data-toggle="modal" data-backdrop="static" data-target="#mainCoupon_Registration" value="쿠폰등록"/>								
+								<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<!-- 제휴쿠폰 업체 - 제휴쿠폰 업체 정보 팝업 레이어 -->
+		<section class="modal fade" id="modalCoupon_info">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">PartnerCoupon Info</h4>
+					</div>
+					
+					<div class="modal-body" id="data-body">
+						<div class="row form-horizontal">
+							<div class="col-md-3">
+								<img class="img-responsive img" id="partnerCouponDetail_imagers"/>
+							</div>
+							<div class="col-md-9">
+							
+								<div class="form-group">
+									<label class="col-xs-3 control-label">업체명:</label>
+									<div class="col-xs-6">
+ 										<p class="form-control-static name" name="p_name"></p> 
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-xs-3 control-label">전화번호:</label>
+									<div class="col-xs-6">
+ 										<p class="form-control-static phone" name="p_phone"></p>  
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-xs-3 control-label">주소:</label>
+									<div class="col-xs-6">
+										<p class="form-control-static address" name="p_addr"></p> 
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-xs-3 control-label">할인상품:</label>
+									<div class="col-xs-6">
+										<p class="form-control-static coupon_item" name="coupon_item"></p> 
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-xs-3 control-label">할인율:</label>
+									<div class="col-xs-6">
+										<p class="form-control-static coupon_discount" name="coupon_discount"></p> 
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-xs-3 control-label">쿠폰적용시작일:</label>
+									<div class="col-xs-6">
+										<p class="form-control-static coupon_bymd" name="coupon_bymd"></p> 
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="col-xs-3 control-label">쿠폰적용종료일:</label>
+									<div class="col-xs-6">
+										<p class="form-control-static coupon_eymd" name="coupon_eymd"></p> 
+									</div>
+								</div>
+							</div>
+						</div>						
+						<div class="row">
+							<div class="col-xs-12 text-right">						
 								<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 							</div>
 						</div>
@@ -823,28 +902,28 @@ $(function(){
 							
 							<div class="form-group">
 								<label class="col-xs-4 control-label">업체명:</label>
-								<div class="col-xs-8">
+								<div class="col-xs-6">
 									<input type="text" class="form-control" name="partner_name" id="name" value="" required="required" placeholder="업체명"/>
 								</div>
 							</div>
 	
 							<div class="form-group">
 								<label class="col-xs-4 control-label">전화번호:</label>
-								<div class="col-xs-8">
+								<div class="col-xs-6">
 									<input type="text" class="form-control" name="partner_phone" id="phone" value="" required="required" placeholder="전화번호"/>
 								</div>
 							</div>
 	
 							<div class="form-group">
 								<label class="col-xs-4 control-label">주소:</label>
-								<div class="col-xs-8">
+								<div class="col-xs-6">
 									<input type="text" class="form-control" name="partner_addr" id="address" value="" required="required" placeholder="주소를 입력하세요"/>
 								</div>											
 							</div>
 	
 							<div class="form-group">
 								<label class="col-xs-4 control-label">업체사진:</label>
-								<div class="col-xs-8">
+								<div class="col-xs-6">
 									<input type="file" class="form-control" name="img_src" id="partner_imagers"/>
 								</div>
 							</div>
@@ -876,35 +955,35 @@ $(function(){
 				<input type="hidden" id="partner_no" name="partner_no"/>
                   <div class="form-group">
                      <label class="col-xs-4 control-label">할인상품</label>
-                     <div class="col-xs-8">
-                        <input type="text" class="form-control" name="coupon_item" id="coupon_item" required="required" placeholder="할인상품명을 입력하세요"/>
+                     <div class="col-xs-6">
+                        <input type="text" class="form-control" name="coupon_item" id="coupon_items" required="required" placeholder="할인상품명을 입력하세요"/>
                      </div>
                   </div>
 
                   <div class="form-group">
                      <label class="col-xs-4 control-label">할인율</label>
-                     <div class="col-xs-8">
+                     <div class="col-xs-6">
                         <input type="text" class="form-control" name="coupon_discount" id="coupon_discount" required="required" placeholder="할인율 적어주세요"/>
                      </div>
                   </div>
 
                   <div class="form-group">
                      <label class="col-xs-4 control-label">쿠폰적용시작일</label>
-                     <div class="col-xs-8">
+                     <div class="col-xs-6">
                         <input type="date" class="form-control" name="coupon_bymd" id="coupon_bymd" required="required" placeholder="쿠폰 시작일"/>
                      </div>                                 
                   </div>
                   
                   <div class="form-group">
                      <label class="col-xs-4 control-label">쿠폰적용종료일</label>
-                     <div class="col-xs-8">
+                     <div class="col-xs-6">
                         <input type="date" class="form-control" name="coupon_eymd" id="coupon_eymd" required="required" placeholder="쿠폰 종료일"/>
                      </div>                                 
                   </div>
 
                   <div class="form-group">
                      <label class="col-xs-4 control-label">쿠폰사진</label>
-                     <div class="col-xs-8">
+                     <div class="col-xs-6">
                         <input type="file" class="form-control" name="img_src" id="coupon_imagers"/>
                      </div>
                   </div>

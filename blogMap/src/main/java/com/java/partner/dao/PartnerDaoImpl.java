@@ -85,5 +85,26 @@ public class PartnerDaoImpl implements PartnerDao {
 		// TODO Auto-generated method stub
 		return session.insert("dao.PartnerMapper.coupon_register",couponDto);
 	}
-
+	@Override
+	public List<HashMap<String, Object>> getwriteCouponList(String member_id) {
+		logger.info("PartnerMapper.getWriteCouponList----------------------------------");
+		List<HashMap<String, Object>> list=session.selectList("dao.PartnerMapper.getWriteCouponList",member_id);
+		logger.info(String.valueOf("getWriteCouponList_Size:"+list.size()) );
+		
+		return list;
+	}
+	@Override
+	public List<HashMap<String, Object>> search_partnerCouponinfo(String coupon_item) {
+		logger.info("PartnerMapper.search_partnerCouponinfo-------------------------------------");
+		logger.info("coupon_item 맴퍼가기전 : "+ coupon_item);
+		
+		return session.selectList("dao.PartnerMapper.search_partnerCouponinfo",coupon_item);
+	}
+	@Override
+	public List<HashMap<String, Object>> getPartnerCouponData(HashMap<String, Object> hMap) {
+		logger.info("PartnerMapper.getPartnerCouponData----------------------");
+		//logger.info("coupon_no 맴퍼가기전 : "+ hMap.get("coupon_no"));
+		
+		return session.selectList("dao.PartnerMapper.getPartnerCouponData", hMap);
+	}
 }
