@@ -121,10 +121,6 @@ $(function() {
 								if(email!=memberId){
 									$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
 									$("#reply_buttons"+i+" > button:eq(1)").css("display","none");
-								}else{
-									$("#reply_buttons"+i+" > button:eq(0)").css("display","");
-									$("#reply_buttons"+i+" > button:eq(1)").css("display","");
-									
 								}				
 							});
 							
@@ -303,6 +299,8 @@ $(function() {
 	});
 	/* 수정 기능 */
 	$("#Upbutton").click(function() {
+		
+		 $("div[id='blogMapUpdate'].modal").modal();
 		 var boardNo=$("#blogRead_boardno > label:eq(0)").text();
 			$.ajax({
 				type:'post',
@@ -323,15 +321,16 @@ $(function() {
 						
 						if(data[i].FILE_NO==undefined){
 							$("#blogUpdateattach option:eq(0)").attr("selected","selected");
-					 		$("#blogUpdateattach #blogUp0").css("display","none");
-							$("#blogUpdateattach #blogUp1").css("display","none");
-							$("#blogUpdateattach #blogUp2").css("display","none");
-							$("#blogUpdateattach #blogUp3").css("display","none");
-							$("#blogUpdateattach #blogUp4").css("display","none");
+					 		$("#blogUpdateattach >span:eq(0)").css("display","none");
+							$("#blogUpdateattach >span:eq(1)").css("display","none");
+							$("#blogUpdateattach >span:eq(2)").css("display","none");
+							$("#blogUpdateattach >span:eq(3)").css("display","none");
+							$("#blogUpdateattach >span:eq(4)").css("display","none");
+							$("#blogUpdateattach >span:eq(5)").css("display","none"); 
 						}else{
 							$("#blogUpdateattach option:eq("+(i+1)+")").attr("selected","selected");
-							$("#blogUpdateattach #blogUp"+i).css("display","");
-							$("#blogUpdateattach #blogUp"+i+" input[name='comment']" ).val(file_comment);
+							$("#blogUpdateattach >span:eq("+i+")").css("display","");
+							$("#blogUpdateattach >span:eq("+i+") > input[name='comment']" ).val(file_comment);
 							if(file_name==undefined||file_name==null||file_name==""){
 								$("#UpdateloadedImg"+i).attr("src","${root }/images/blogWrite/noImage.gif");
 								$("#UPloadImg_hidden >input:eq("+i+")").val("");
@@ -361,33 +360,37 @@ $(function() {
 						var board_title=data[i].BOARD_TITLE;
 						var board_rgdate=data[i].BOARD_RGDATE;
 						
-						$("#blogUpdateAddr input[name='addr_sido']").val(addr_sido);
-						$("#blogUpdateAddr input[name='addr_sigugun']").val(addr_sigugn);
-						$("#blogUpdateAddr input[name='addr_dongri']").val(addr_dongri);
-						$("#blogUpdateAddr input[name='addr_bunji']").val(addr_bunji);
-						$("#blogUpdateAddr input[name='addr_title']").val(addr_title);
-						$("#blogUpdateAddr input[name='realAddr']").val(addr_sido+" "+addr_sigugn+" "+addr_dongri+" "+addr_bunji);
+						$("#blogUpdateAddr > input[name='addr_sido']").val(addr_sido);
+						$("#blogUpdateAddr > input[name='addr_sigugun']").val(addr_sigugn);
+						$("#blogUpdateAddr > input[name='addr_dongri']").val(addr_dongri);
+						$("#blogUpdateAddr > input[name='addr_bunji']").val(addr_bunji);
+						$("#blogUpdateAddr > input[name='addr_title']").val(addr_title);
+						$("#blogUpdateAddr > input[name='realAddr']").val(addr_sido+" "+addr_sigugn+" "+addr_dongri+" "+addr_bunji);
 						
-						$("#blogUpdateTitle input[name='board_title']").val(board_title);
+						$("#blogUpdateTitle > input[name='board_title']").val(board_title);
 						//$("#Upboard_content").html(board_content);
 						
 						if(board_grade=="0"){
-							$("#blogUpdateGrade input:eq(0)").attr("checked","checked");
+							$("#blogUpdateGrade > input:eq(0)").attr("checked","checked");
 						}else if(board_grade=="1"){
-							$("#blogUpdateGrade input:eq(1)").attr("checked","checked");
+							$("#blogUpdateGrade > input:eq(1)").attr("checked","checked");
 						}else if(board_grade=="2"){
-							$("#blogUpdateGrade input:eq(2)").attr("checked","checked");
+							$("#blogUpdateGrade > input:eq(2)").attr("checked","checked");
 						}else if(board_grade=="3"){
-							$("#blogUpdateGrade input:eq(3)").attr("checked","checked");
+							$("#blogUpdateGrade > input:eq(3)").attr("checked","checked");
 						}else if(board_grade=="4"){
-							$("#blogUpdateGrade input:eq(4)").attr("checked","checked");
+							$("#blogUpdateGrade > input:eq(4)").attr("checked","checked");
 						}else{
-							$("#blogUpdateGrade input:eq(5)").attr("checked","checked");
+							$("#blogUpdateGrade > input:eq(5)").attr("checked","checked");
 						}
+							
+						
 						
 						$("#blogUpdateBoard_no").val(board_no);
 						$("#blogUpdateFile_no").val(file_no);
-								
+						
+						
+						
 						/* var option_length=$("#blogUpdateSelect > #headCategory option").length;
 						
 						for (var j = 0; j < option_length; j++) {
@@ -398,7 +401,7 @@ $(function() {
 						} */
 					});
 					$("#blogUpdateFile_no").val(file_no);
-					$("#blogUpdateContent iframe").remove();
+					$("#blogUpdateContent > iframe").remove();
 					
 					//스마트에디터 프레임생성
 					nhn.husky.EZCreator.createInIFrame({
@@ -439,15 +442,15 @@ $(function() {
 		}
 		
 		
-		if(!$("#blogUpdateTitle input[name='board_title']").val()){
+		if(!$("#blogUpdateTitle > input[name='board_title']").val()){
 			alert("제목을 입력하세요.");
-			$("#blogUpdateTitle input[name='board_title']").focus();
+			$("#blogUpdateTitle > input[name='board_title']").focus();
 			return false;
 		}
 
 		
 		
-		var select_value=$("#blogUpdateattach option:selected").val();
+		/* var select_value=$("#blogUpdateattach option:selected").val();
 		if(select_value!="0"){
 		var int_select_value=parseInt(select_value);
 		for (var i = 0; i < int_select_value; i++) {
@@ -460,7 +463,7 @@ $(function() {
 					return false;
 				}
 			}
-		}
+		} */
 		
 		if(!($("input[type='radio']").is(":checked"))){
 			alert("평점을 선택해주세요.")
@@ -480,11 +483,18 @@ $(function() {
 	/*닫기버튼 클릭시*/
 	$("#read_closeButton").click(function () {
 		$("#listAllDiv").empty();
-		
 		$("#read_div label").text("");
 		$("#blogRead_content div").html("");
         $("#carousel_page").empty();
         $("#carousel_image").empty();
+        $("#blogUpdateattach > span").each(function(i) {
+        	 alert(i);
+        	 $("#UpdateloadedImg"+i).attr("src","${root }/images/blogWrite/noImage.gif");
+        	 $("#UPloadImg_hidden >input:eq("+i+")").val("");
+        	 $("#blogUpdateattach > span:eq("+i+")").css("display","none");
+        	 
+		})
+        
 	/* 	var image_child=$("#carousel_image").children();
 		
 		for(var i=1; i<image_child; i++){
@@ -654,7 +664,7 @@ function reply_delete(DThis) {
 	<div id="blogRead_reply">
 		<span>답글:</span>
 	   <div class="row form-group">
-        <div class="input-group" style="margin: auto; width: 95%;">
+        <div class="input-group">
             <input id="replyInsert" type="text" class="form-control">
             <span class="input-group-addon success"><span class="glyphicon glyphicon-ok"></span></span>
         </div>
@@ -679,8 +689,9 @@ function reply_delete(DThis) {
 	
 	 <!-- 하단 버튼 -->
 	<div align="right">
-		<a data-toggle="modal" href="#blogMapUpdate" class="btn btn-primary" id="Upbutton">수정</a>
+		<input type="button" class="btn btn-primary" id="Upbutton" value="수정" /> 
 		<input type="button" class="btn btn-primary" id="Debutton" value="삭제" /> 
+		<input type="button" class="btn btn-primary" id="Listbutton" value="목록" />
 	</div>
 	
 
