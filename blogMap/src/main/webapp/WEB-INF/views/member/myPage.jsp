@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+
 <script type="text/javascript">
 function leadingZeros(n, digits) {
     var zero = '';
@@ -1533,45 +1534,45 @@ if(sessionStorage.getItem('email')!=null){
 <!-- tab content -->
 	<div class="tab-content">
 		<div class="tab-pane active text-style" id="tab1">
- 			 <div class=" col-md-7 col-lg-7 col-xs-7 col-sm-7 "> 
-                  <table class="table table-user-information">
+ 			 <div class=" col-md-7 col-lg-7 col-xs-7 col-sm-7 " style="font-size:14px;"> 
+                  <table class="table table-user-information" style="">
                     <tbody>
                       <tr>
-                        <td>계정정보:</td>
-                        <td id="myPage_member_id"></td>
+                        <td class="tableFontSize">계정정보:</td>
+                        <td class="tableFontSize" id="myPage_member_id"></td>
                       </tr>
                       <tr>
-                        <td>이름:</td>
-                        <td id="myPage_member_name"></td>
+                        <td class="tableFontSize">이름:</td>
+                        <td class="tableFontSize" id="myPage_member_name"></td>
                       </tr>
                       <tr>
-                        <td>회원등급:</td>
-                        <td id="myPage_member_rate"></td>
+                        <td class="tableFontSize">회원등급:</td>
+                        <td class="tableFontSize" id="myPage_member_rate"></td>
                       </tr>
                      
                       <tr>
-                        <td>포인트:</td>
-                        <td><a href="#tab2" data-toggle="tab" id="myPage_member_point_total"></a></td>
+                        <td class="tableFontSize">포인트:</td>
+                        <td class="tableFontSize"><a href="#tab2" data-toggle="tab" id="myPage_member_point_total"></a></td>
                       </tr>
                       
                       <tr>
-                        <td>게시글:</td>
-                        <td><a href="#tab3" data-toggle="tab" id="myPage_member_board_total"></a></td>
+                        <td class="tableFontSize">게시글:</td>
+                        <td class="tableFontSize"><a href="#tab3" data-toggle="tab" id="myPage_member_board_total"></a></td>
                       </tr>
                       
                       <tr>
-                        <td>즐겨찾기:</td>
-                        <td><a href="#tab4" data-toggle="tab" id="myPage_member_favorite_total"></a></td>
+                        <td class="tableFontSize">즐겨찾기:</td>
+                        <td class="tableFontSize"><a href="#tab4" data-toggle="tab" id="myPage_member_favorite_total"></a></td>
                       </tr>
                       
                       <tr>
-                        <td>쿠폰:</td>
-                        <td><a href="#tab5" data-toggle="tab" id="myPage_member_coupon_total"></a></td>
+                        <td class="tableFontSize">쿠폰:</td>
+                        <td class="tableFontSize"><a href="#tab5" data-toggle="tab" id="myPage_member_coupon_total"></a></td>
                       </tr>
                       
                       <tr>
-                        <td>가입일:</td>
-                        <td id="myPage_member_joindate"></td>
+                        <td class="tableFontSize">가입일:</td>
+                        <td class="tableFontSize" id="myPage_member_joindate"></td>
                       </tr>
                     </tbody>
                   </table>
@@ -1584,9 +1585,9 @@ if(sessionStorage.getItem('email')!=null){
 		</div>
 		<div class="tab-pane text-style" id="tab2">
 			<div class="col-xs-9 col-md-9 col-sm-9 col-lg-9" id="myPage_member_point_list">
-				<h4>포인트 정보</h4>
+				<h4 style="font-size:16px;">포인트 정보</h4>
 			
-				<div class="method" style="text-align:center;">
+				<div class="method" style="text-align:center;font-size:15px;" >
 			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_point_list_title" style="text-align:center;">
 			        </div>
 			
@@ -1607,9 +1608,9 @@ if(sessionStorage.getItem('email')!=null){
 		
 		<div class="tab-pane text-style" id="tab3">
   			<div class="col-xs-9 col-md-9 col-sm-9 col-lg-9" id="myPage_member_board_list">
-				<h4>게시글 정보</h4>
+				<h4 style="font-size:16px;">게시글 정보</h4>
 			
-				<div class="method" style="text-align:center;">
+				<div class="method" style="text-align:center;font-size:15px;">
 			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_board_list_title" style="text-align:center;">
 			        </div>
 			
@@ -1630,9 +1631,9 @@ if(sessionStorage.getItem('email')!=null){
 		
 		<div class="tab-pane text-style" id="tab4">
   			<div class="col-xs-9 col-md-9 col-sm-9 col-lg-9" id="myPage_member_favorite_list">
-				<h4>즐겨찾기 정보</h4>
+				<h4 style="font-size:16px;">즐겨찾기 정보</h4>
 			
-				<div class="method" style="text-align:center;">
+				<div class="method" style="text-align:center;font-size:15px;">
 			        <div class="row margin-0 list-header hidden-sm hidden-xs" id="myPage_member_favorite_list_title" style="text-align:center;">
 			        </div>
 			

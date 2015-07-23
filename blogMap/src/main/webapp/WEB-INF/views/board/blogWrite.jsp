@@ -389,9 +389,6 @@ function blogWrite_getCategorySelect(el, headData){
 <form class="form-horizontal" name="blogWriteForm" action="${root }/board/blogWrite" method="POST" id="frm" enctype="multipart/form-data">		<!-- 전체적인 폼 내에서 Label / Text 창의 크기를 조절하기 위해 필요한 폼 -->
 		<!-- <input type="hidden" name="member_id"/> -->
 		
-		
-		
-			
 			<div class="col-md-1 col-sm-1 col-xs-1"></div>
 			<div class="col-md-10 col-sm-10 col-xs-10">
 			<div id="blogWriteSelect" class="form-group form-group-sm">
