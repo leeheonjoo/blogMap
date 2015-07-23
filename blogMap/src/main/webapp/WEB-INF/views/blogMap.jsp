@@ -233,10 +233,11 @@
 $(function(){
 	// 블로그 검색
 	$("#blogSearch").click(function(){
-		getBeginCondition();
-		getMap();
+		$("#map_div").addClass("col-lg-12 col-md-12");
+		$("#list_div").addClass("col-lg-12 col-md-12");
 		
-   		$("div[id='blogListMain'].modal").modal();
+		$("div[id='blogListMain'].modal").modal();
+		getBeginCondition();
 	});	
 	
 	// 메세지 메인
@@ -434,7 +435,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile5" class="tile">
+				<div id="tile5" class="tile" style="cursor:Pointer">
 			  	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -452,7 +453,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile6" class="tile">
+				<div id="tile6" class="tile" style="cursor:Pointer">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -472,7 +473,7 @@ $(function(){
 
 		<div class="row">
 			<div class="col-sm-4 col-xs-8">
-				<div id="tile7" class="tile">
+				<div id="tile7" class="tile" style="cursor:Pointer">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -486,7 +487,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile8" class="tile">
+				<div id="tile8" class="tile" style="cursor:Pointer">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -500,7 +501,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile9" class="tile">
+				<div id="tile9" class="tile" style="cursor:Pointer">
 				  	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -514,7 +515,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-4 col-xs-8">
-				<div id="tile10" class="tile">
+				<div id="tile10" class="tile" style="cursor:Pointer">
 				  	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
