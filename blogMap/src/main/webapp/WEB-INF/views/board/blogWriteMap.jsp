@@ -420,8 +420,6 @@ function blogListDetails(blogRead_no) {
         
         
         
-        alert(email);
-        alert(writer);
         if(email!=writer){
         	$("#Upbutton").css("display","none");
         	$("#Debutton").css("display","none");
@@ -512,12 +510,14 @@ function blogListDetails(blogRead_no) {
                     $("#listAllDiv > #reply_content_insert").css("display","block");
                     $("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
                     $("#reply_content_insert"+i+" > span:eq(0)").text(replyNo);
-                    $("#reply_content_insert"+i+" > input:eq(0)").val(memberId);
-                	$("#reply_content_insert"+i+" > input:eq(1)").val(replyContent);
-                    $("#reply_content_insert"+i+" > input:eq(2)").val(replyfullDate); 
-                    $("#reply_content_insert"+i+" > span:eq(1)").attr("id","reply_buttons"+i);
-					 $("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
-					 $("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
+                    $("#reply_content_insert"+i+" > span:eq(1)").css("font-weight","bold").text(memberId);
+                    $("#reply_content_insert"+i+" > span:eq(2)").text(replyfullDate); 
+                	$("#reply_content_insert"+i+" > input:eq(0)").val(replyContent);
+                    $("#reply_content_insert"+i+" > span:eq(3)").attr("id","reply_buttons"+i);
+					$("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
+					$("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
+					$("listAllDiv:last-child").append("<hr style='width: 95%;'>"); 
+					
                     
 					 if(email!=memberId){
 							$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
