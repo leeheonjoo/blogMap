@@ -48,21 +48,21 @@
 
 				<div>
 					<!-- 큰 사이즈 화면에서 탭 목록-->					
-					<ul class="nav nav-pills nav-stacked col-md-2 hidden-xs hidden-sm" role="tablist">
+					<ul class="nav nav-pills nav-stacked col-md-2 hidden-xs hidden-sm" role="tablist" style="max-width:120px; min-width: 120px; ">
 						<li role="presentation" class="active">
-							<a href="#tab_member" aria-controls="tab_member" role="tab" data-toggle="tab" onclick="getMemberList()">회원정보</a>
+							<a href="#tab_member" aria-controls="tab_member" role="tab" data-toggle="tab" onclick="getMemberList()" style="text-align:center;">회 원 정 보</a>
 						</li>
 						
 						<li role="presentation">
-							<a href="#tab_partner" aria-controls="tab_partner" role="tab" data-toggle="tab" onclick="getPartnerList()">제휴업체</a>
+							<a href="#tab_partner" aria-controls="tab_partner" role="tab" data-toggle="tab" onclick="getPartnerList()" style="text-align:center;">제 휴 업 체</a>
 						</li>
 						
 						<li role="presentation">
-							<a href="#tab_coupon" aria-controls="tab_coupon" role="tab" data-toggle="tab" onclick="getCouponlist()">쿠폰정보</a>
+							<a href="#tab_coupon" aria-controls="tab_coupon" role="tab" data-toggle="tab" onclick="getCouponlist()" style="text-align:center;">쿠 폰 정 보</a>
 						</li>
 						
 						<li role="presentation">
-							<a href="#tab_manager" aria-controls="tab_manager" role="tab" data-toggle="tab" onclick="getManagerList()">관리자정보</a>
+							<a href="#tab_manager" aria-controls="tab_manager" role="tab" data-toggle="tab" onclick="getManagerList()" style="text-align:center;">관리자정보</a>
 						</li>
 					</ul>
 					

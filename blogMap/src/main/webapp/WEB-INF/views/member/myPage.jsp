@@ -527,7 +527,7 @@ if(sessionStorage.getItem('email')!=null){
 						var emonth = leadingZeros(geteymd.getMonth() + 1,2);
 						var eday = leadingZeros(geteymd.getDate(),2);
 						var eymd = eyear + "/" + emonth + "/" + eday;
-						$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-7 col-xs-7"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-5 col-xs-5 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
+						$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-8 col-xs-8"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-4 col-xs-4 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:13px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:13px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
 					});
 					
 					var pageCount=parseInt(count/boardSize)+(count%boardSize==0 ? 0:1);
@@ -584,7 +584,7 @@ if(sessionStorage.getItem('email')!=null){
 										var eday = leadingZeros(geteymd.getDate(),2);
 										var eymd = eyear + "/" + emonth + "/" + eday;
 										
-										$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-7 col-xs-7"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-5 col-xs-5 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
+										$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-8 col-xs-8"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-4 col-xs-4 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:13px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:13px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
 									});
 								}
 							});
@@ -640,7 +640,7 @@ if(sessionStorage.getItem('email')!=null){
 						var eday = leadingZeros(geteymd.getDate(),2);
 						var eymd = eyear + "/" + emonth + "/" + eday;
 						
-						$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-7 col-xs-7"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-5 col-xs-5 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
+						$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-8 col-xs-8"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-4 col-xs-4 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:13px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:13px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
 					});
 										
 					if(c_endPage>pageCount){
@@ -695,7 +695,7 @@ if(sessionStorage.getItem('email')!=null){
 										var eday = leadingZeros(geteymd.getDate(),2);
 										var eymd = eyear + "/" + emonth + "/" + eday;
 										
-										$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-7 col-xs-7"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-5 col-xs-5 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
+										$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-8 col-xs-8"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-4 col-xs-4 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:13px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:13px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
 									});
 								}
 							});
@@ -753,7 +753,7 @@ if(sessionStorage.getItem('email')!=null){
 						var eday = leadingZeros(geteymd.getDate(),2);
 						var eymd = eyear + "/" + emonth + "/" + eday;
 						
-						$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-7 col-xs-7"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-5 col-xs-5 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
+						$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-8 col-xs-8"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-4 col-xs-4 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:13px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:13px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
 					});
 					
 					//이전
@@ -802,7 +802,7 @@ if(sessionStorage.getItem('email')!=null){
 										var eday = leadingZeros(geteymd.getDate(),2);
 										var eymd = eyear + "/" + emonth + "/" + eday;
 										
-										$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-7 col-xs-7"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-5 col-xs-5 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:14px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:14px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
+										$("#myPage_member_coupon_list_content").append('<div class="col-xs-6 col-sm-6 col-md-4"><h4 class="text-center"><div class="thumbnail" style="margin-bottom:0px;"><span class="label label-info">'+couponInfo[i].PARTNER_NAME+'</span></h4><img src="${root}/pds/coupon/'+couponInfo[i].COUPON_PIC_NAME+'" class="img-responsive" style="margin:0 auto;width:200px;height:150px;"><div class="caption" style="margin:10px;"><div class="row"><div class="col-md-8 col-xs-8"><h4>'+couponInfo[i].COUPON_ITEM+'</h4></div><div class="col-md-4 col-xs-4 price"><h4><label>'+couponInfo[i].COUPON_DISCOUNT+'%</label></h4></div></div><p style="font-size:13px;">'+ bymd +' ~ '+ eymd +'</p><p style="font-size:13px;">'+couponInfo[i].PARTNER_PHONE+'</p></div></div></div>');
 									});
 								}
 							});

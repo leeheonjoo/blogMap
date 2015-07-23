@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <style>
 	a.list-group-item {
-	    height:110px;
+	    height:140px;
 	}
 	
 	a.list-group-item.active small {
@@ -47,8 +47,8 @@ function gray_a(a) {
 		
 		
 		$("#blogList_Search").click(function() {
-			$("#map_div").addClass("col-lg-5 col-md-5");
-			$("#list_div").addClass("col-lg-7 col-md-7");
+// 			$("#map_div").addClass("col-lg-5 col-md-5");
+// 			$("#list_div").addClass("col-lg-7 col-md-7");
 			
 			if($("#myId_blogList > input:checked").is(":checked") == true) {
 				check_value=$("#myId_blogList > input").val();
