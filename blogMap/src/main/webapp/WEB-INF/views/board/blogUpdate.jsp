@@ -217,7 +217,7 @@ function readURLS(input,index) {
 				<input type="text" class="form-control" name="comment" style="width:100px;" placeholder="예)최고에요"/>
 				</span>
 			</div>
-			`1
+			
 			<!-- DB로 보낼 이미지 명칭 -->
 			<div id="UPloadImg_hidden">
 				<input type="hidden" name="UphiddenImg"/>
