@@ -535,7 +535,7 @@ $(function(){
 						<p style="width:100%; line-height:46px;">
 							<a id="partner_Registration" style="cursor:Pointer"><img src="${root}/images/blogMap/Partnership_32.png"></a>
 							&nbsp;&nbsp;
-							<a data-toggle="modal" href="#ManagerMain" id="manager_page_icon" style="display:none; "><img src="${root}/images/blogMap/gear_24.png"></img></a>
+							<a data-toggle="modal" href="#ManagerMain" id="manager_page_icon" style="display:none; "><img src="${root}/images/blogMap/gear_24.png" onclick="getMemberList()"></img></a>
 						</p>
 					</div>
 	</div>
