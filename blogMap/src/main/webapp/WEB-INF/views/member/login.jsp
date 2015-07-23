@@ -189,18 +189,69 @@
                         	success:function(responseData){
 
                         		if(sessionStorage.getItem('email') == null){
+                        			var data=JSON.parse(responseData);
+                        			
+                        			if(data.member_jointype=="0001"&&data.member_pwd!="undefined"){
+                            			alert("기존에 등록한 아이디가 있습니다.");
+                            			FB.logout();
+                            			return false;
+                            			
+                            		}else{
+                            			if(data!=null){
+    	               	 					if (window.sessionStorage) {
+    	               	 		                sessionStorage.setItem('email', data.member_id);
+    	               	 		                email = sessionStorage.getItem('email');
+    	               	 		                
+    	               	 		                sessionStorage.setItem('jointype', data.member_jointype);
+    	              	 		                	jointype = sessionStorage.getItem('jointype');
+    	               	 		                //alert(email);
+    	               	 		                //alert(jointype);
+    	               	 		                //$("input[name='member_id']").attr("value",sessionStorage.getItem('email'));
+    	               	 		                $("#loginCheck").text(email);
+    	               	 		            }
+    	               	 					 
+    	               	 					
+    	               	 					
+    	               	 					/* $("#blogmap_before_login span").remove();
+    	               	 					$("#blogmap_main_myPage").css("display","inline-block");
+    	               	 					$("#blogmap_before_login").attr("data-toggle","");
+    	               	 					$("#login_text").text("Logout");
+    	               	 					
+    	               	 					if(sessionStorage.getItem('jointype')!=null){
+    	               	 						$("#myPage_update_btn").css("display","none");
+    	               	 						$("#myPage_delete_btn").css("display","none");
+    	               	 						$("#myPage_fb_delete_btn").show();
+    	               	 					}
+    	               	 					
+    	               	 					
+    	               	 					
+    	               	 					if($("#login_text").text()=="Logout"){
+    	               	 						$("#blogmap_before_login").click(function(){
+    	                   	 						if(sessionStorage.getItem('jointype')=="0002"){
+    	                   	 							FB.logout();
+    	                   	 						}
+    	                   	 						sessionStorage.clear();
+    	                   	 						//$("#blogmap_after_login").css("display","none");
+    	                   	 						//$("#blogmap_login_bar").fadeIn();
+    	                   	 						//location.href="${root}/";
+    	               	 						});
+    	               	 					} */
+    	               	 					
+    	                           		}
+                            		}
                         			alert("로그인 성공");
                                     document.location.reload();
                                  }
                         		
                         		
                         		//alert(responseData);
-                        		var data=JSON.parse(responseData);
+                        		//var data=JSON.parse(responseData);		-- 여기부터
                         		//alert("jointype:"+data.member_jointype);
                         		//alert("member_pwd:"+data.member_pwd);
-                        		if(data.member_jointype=="0001"&&data.member_pwd!="undefined"){
+                        		/* if(data.member_jointype=="0001"&&data.member_pwd!="undefined"){
                         			alert("기존에 등록한 아이디가 있습니다.");
                         			FB.logout();
+                        			
                         		}else{
                         			if(data!=null){
 	               	 					if (window.sessionStorage) {
@@ -240,10 +291,10 @@
 	                   	 						//$("#blogmap_login_bar").fadeIn();
 	                   	 						//location.href="${root}/";
 	               	 						});
-	               	 					} */
+	               	 					} //////////// 			-- 여기까지
 	               	 					
 	                           		}
-                        		}
+                        		} */
                         		
                         		
                         	}
