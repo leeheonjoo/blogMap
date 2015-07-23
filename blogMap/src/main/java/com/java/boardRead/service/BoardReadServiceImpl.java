@@ -704,6 +704,10 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		//회원 ID만(작성자) 받아옴
 		String member_id=request.getParameter("member_id");
+		String[] hidden_img=request.getParameterValues("UphiddenImg");
+		for (int i = 0; i < hidden_img.length; i++) {
+			System.out.println("hidden_img:"+hidden_img[i]);
+		}
 				
 		HashMap<String, Object> hashMap=new HashMap<String, Object>();
 		hashMap.put("boardDto", boardDto);
@@ -711,23 +715,23 @@ public class BoardReadServiceImpl implements BoardReadService {
 		hashMap.put("boardreadDto", boardreadDto);
 		hashMap.put("member_id", member_id);
 	
-		System.out.println(boardDto.getBoard_title());
+		/*System.out.println(boardDto.getBoard_title());
 		System.out.println(boardDto.getBoard_grade());
 		System.out.println(boardreadDto.getCategory_mname());
-		System.out.println(boardreadDto.getCategory_sname());
+		System.out.println(boardreadDto.getCategory_sname());*/
 		
 		//게시판 글작성
 		int check=boardReadDao.blogUpdateOk(hashMap);
 		
 		System.out.println("check1: " + check);
 		
+		//파일이미지 체크 값
+		int file_check=0;
 		//이미지
 		List<MultipartFile> upFile=request.getFiles("file");
 		//이미지 코멘트
 		String[] comment=request.getParameterValues("comment");
-		System.out.println("comment:"+comment[0]);
 		String file_no=request.getParameter("file_nos");
-		System.out.println("받은파일번호:"+file_no);
 		String[] fileNo=file_no.split(",");
 		String timeName=null;
 		String[] originalNames = new String[5];
@@ -741,7 +745,7 @@ public class BoardReadServiceImpl implements BoardReadService {
 			originalNames[j]=timeName;
 			}
 			fileSize[j]=upFile.get(j).getSize();
-			
+			System.out.println("3번째파일사이즈:"+fileSize[2]);
 			if(fileSize[j]!=0){
 				attach_fileDto=new Attach_fileDto();
 				try{
@@ -752,11 +756,22 @@ public class BoardReadServiceImpl implements BoardReadService {
 					if (!file.isDirectory()) {			//파일이 존재하지 않을 때 
 						file.mkdirs();
 					}
-					
+					System.out.println("전체파일번호:"+fileNo[j]);
 					
 					upFile.get(j).transferTo(file); //입출력
-					if(fileNo[j].equals("")||fileNo[j]==null||fileNo[j].equals("undefined")){
-						
+					if(hidden_img[j]==null||hidden_img[j].equals("")){
+						System.out.println("없는경우_파일이름:"+originalNames[j]);
+						System.out.println("없는경우_파일사이즈:"+fileSize[j]);
+						//System.out.println("파일경로:"+file.getAbsolutePath());
+						System.out.println("없는경우_코맨트:"+comment[j]);
+						if(originalNames[j]!=null){
+							attach_fileDto.setFile_name(originalNames[j]);
+							attach_fileDto.setFile_size(fileSize[j]);
+							attach_fileDto.setFile_path(file.getAbsolutePath());
+							attach_fileDto.setFile_comment(comment[j]);
+							hashMap.put("attach_file",attach_fileDto);
+							file_check=boardReadDao.blogUpdate_insert(hashMap);
+						}
 					}else{
 						
 					attach_fileDto.setFile_no(Integer.parseInt(fileNo[j]));
@@ -781,12 +796,21 @@ public class BoardReadServiceImpl implements BoardReadService {
 				}
 				
 			}
+			/*if(attachList.size()==0){
+				logger.info("블로그작성_파일 추가안함:"+attachList.size());
+			}else{
+				check=boardDao.blogWrite_attach(hashMap);
+				logger.info("첨부파일 DB추가완료:"+check);
+			}*/
+			
 
 		}
 		
 		try {
 			response.getWriter().print(check);
 			System.out.println("blogUpdateOk_AttachFile:"+check);
+			System.out.println("blogUpdate_insert:"+file_check);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

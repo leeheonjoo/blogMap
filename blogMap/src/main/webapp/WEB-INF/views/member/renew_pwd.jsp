@@ -19,7 +19,7 @@
 				},
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
-					alert(responseData);
+					//alert(responseData);
 					if(responseData=="1"){
 						alert("임시 비밀번호가 전송되었습니다.");
 						$("input[name='member_id_renew']").val("");
@@ -44,9 +44,9 @@
 		<input type="button" name="submit" value="발송"/>
 	</div> -->
 	
-	<div class="container">
+	<div class="container" style="width:100%;">
         <div class="row centered-form">
-	        <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-1 col-md-offset-1">
+	        <div>
 	        	<div class="panel panel-default">
 	        		<div class="panel-heading">
 				    	<h1 class="panel-title">비밀번호 찾기</h1>

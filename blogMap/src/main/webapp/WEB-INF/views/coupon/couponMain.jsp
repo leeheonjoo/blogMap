@@ -151,6 +151,11 @@ li { list-style-type:none;}
 				$("#coupon_List").empty();
 				
 				$.each(data, function(i){
+					var getbymd = new Date(data[i].COUPON_BYMD);
+              		var bymd = leadingZeros(getbymd.getFullYear(), 4) + '/' + leadingZeros(getbymd.getMonth() + 1, 2) + '/' + leadingZeros(getbymd.getDate(), 2);
+              		
+              		var geteymd = new Date(data[i].COUPON_EYMD);
+              		var eymd = leadingZeros(geteymd.getFullYear(), 4) + '/' + leadingZeros(geteymd.getMonth() + 1, 2) + '/' + leadingZeros(geteymd.getDate(), 2);
 					
 					var pic=data[i].COUPON_PIC_NAME;
 // 					alert("PIC NAME : " + pic);
@@ -166,7 +171,7 @@ li { list-style-type:none;}
 					item_var += "<img src=" + "${root}/pds/coupon/" + pic + " class='img-responsive' id='coupon_L_images'>";
 					item_var += "<div class='caption'>";	
 					item_var += "<h5>" + data[i].COUPON_ITEM + " " + data[i].COUPON_DISCOUNT + "% 할인" + "</h5>";
-					item_var += "<h5>" + data[i].COUPON_EYMD + "</h5>";
+					item_var += "<h5> 종료일 : " + eymd + "</h5>";
 					item_var += "</div>";	
 					item_var += "</a>";
 					item_var += "</div>";
@@ -222,9 +227,18 @@ li { list-style-type:none;}
 			contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 			 success:function(responseData){
 				var data=JSON.parse(responseData);
+				
+				var getbymd = new Date(data[0].COUPON_BYMD);
+          		var bymd = leadingZeros(getbymd.getFullYear(), 4) + '년' + leadingZeros(getbymd.getMonth() + 1, 2) + '월' + leadingZeros(getbymd.getDate(), 2) +'일';
+          		
+          		var geteymd = new Date(data[0].COUPON_EYMD);
+          		var eymd = leadingZeros(geteymd.getFullYear(), 4) + '년' + leadingZeros(geteymd.getMonth() + 1, 2) + '월' + leadingZeros(geteymd.getDate(), 2) +'일';
+				
 				//var filename=data.partner_pic_name
 				//alert(data[0].PARTNER_NAME);
-				var getbymd = new Date(data[0].COUPON_BYMD);	// 등록일 날짜 변환
+				
+				
+				/* var getbymd = new Date(data[0].COUPON_BYMD);	// 등록일 날짜 변환
 				var byear = getbymd.getFullYear();
 				var bmonth = getbymd.getMonth() + 1;
 				var bday = getbymd.getDate();
@@ -236,7 +250,7 @@ li { list-style-type:none;}
 				var emonth = geteymd.getMonth() + 1;
 				var eday = geteymd.getDate();
 				var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
-				//alert(eymd);
+				//alert(eymd); */
 				
 				$("#couponDetailResult").append($("#couponDetailMain").clone().css("display","block"));
 				$("#couponDetailMain:last-child #coupon_img").attr("src", "${root}/pds/coupon/"+data[0].COUPON_PIC_NAME);
@@ -248,13 +262,13 @@ li { list-style-type:none;}
 				$("#couponDetailMain:last-child #coupon_detail_issue").attr("name",data[0].COUPON_NO);
 				if(data[0].COUPON_YN == "Y"){
 					//$("#partner_submit").css("display", "none");
-					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"취소"});
+					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰취소"});
 				}else if(data[0].COUPON_YN == "N"){
 					//$("#partner_delete").css("display", "none");
-					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"승인"});
+					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰승인"});
 				} 
 				
-				$("#coupon_detail_button[value='취소']").click(function(){
+				$("#coupon_detail_button[value='쿠폰취소']").click(function(){
 					var couponNo = $(this).attr('name');
 					//alert(couponNo);
 					var check = confirm("쿠폰 발행을 취소하시겠습니까?");
@@ -265,7 +279,7 @@ li { list-style-type:none;}
 					}
 				});
 				
-				$("#coupon_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
+				$("#coupon_detail_button[value='쿠폰승인']").click(function(){			// 승인버튼을 클릭시 실행
 					var couponNo = $(this).attr('name');		
 					//alert(couponNo);
 					var check = confirm("쿠폰을 승인 하시겠습니까?");
@@ -315,7 +329,12 @@ li { list-style-type:none;}
 					item_var += "<div class='fff'>";
 					item_var += "<div class='thumbnail'>";
 					item_var += "<a data-toggle='modal' href='#couponDetail' class='coupon_list_no btn-example' id=coupon_no_" + coupon_no +">";
+					item_var += "<h5 style='text-align:center'>" + data[i].PARTNER_NAME + "</h5>";	
 					item_var += "<img src=" + "${root}/pds/coupon/" + pic + " class='img-responsive' id='coupon_L_images'>";
+					item_var += "<div class='caption'>";	
+					item_var += "<h5>" + data[i].COUPON_ITEM + " " + data[i].COUPON_DISCOUNT + "% 할인" + "</h5>";
+					item_var += "<h5>" + data[i].COUPON_EYMD + "</h5>";
+					item_var += "</div>";	
 					item_var += "</a>";
 					item_var += "</div>";
 					item_var += "</div>";

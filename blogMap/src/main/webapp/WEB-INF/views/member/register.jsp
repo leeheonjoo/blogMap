@@ -29,7 +29,7 @@ $(document).ready(function(){
 				},
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseCheckData){
-					alert(responseCheckData);
+					//alert(responseCheckData);
 					
 					if(responseCheckData=="0"){    //아이디 중복 안됨
  						$("div[id='blogmap_registerCheckOk'].modal").modal();
@@ -95,7 +95,7 @@ $(document).ready(function(){
 						},
 						contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 						success:function(responseData){
-							alert(responseData);
+							//alert(responseData);
 								
 							if(responseData=="1"){
 								alert("회원가입완료");
@@ -201,9 +201,9 @@ $(document).ready(function(){
 
 
 function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
-	alert(confirm_num);
+	//alert(confirm_num);
 	$("#email_confirm_check_btn").click(function(){
-		alert("aa");
+		//alert("aa");
 		if($('#email_confirm_num').val()==confirm_num){
 			$("div[id='blogmap_email_confirm'].modal").modal('hide');
 			alert("인증완료!");
@@ -225,7 +225,7 @@ function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
 					},
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
-						alert(responseData);
+						//alert(responseData);
 						if(responseData=="1"){
 							alert("삭제되었습니다.");
 							sessionStorage.clear();
@@ -276,14 +276,14 @@ function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
 			    		<!-- <form role="form"> -->
 			  	
 							<div class="row">
-			    				<div class="col-xs-8 col-sm-8 col-md-8">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
 			               				<input type="email" id="member_register_id" class="form-control input-sm" placeholder="Email Address" required autofocus/>
 			    					</div>
 			    				</div>
 			    				
 			    				&nbsp;&nbsp;
-			    				<div style="display:inline-block; min-width:80px;">
+			    				<div style="display:inline-block; min-width:80px; margin-left:3px;">
 			    					<div class="form-group">
 			    						<input type="button" id="member_id_check" value="중복확인" class="btn btn-info btn-block"/>
 			    						<!-- <button id="member_id_check" class="btn btn-default">중복확인</button> -->
@@ -319,7 +319,7 @@ function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
 			    			</div>
 			    			
 			    			<div class="row">
-			    				<div class="col-xs-8 col-sm-8 col-md-8">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">
 			                			<input type="text" name="member_name" class="form-control input-sm" placeholder="Name"/>
 			    					</div>

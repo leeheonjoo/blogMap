@@ -31,7 +31,7 @@
 		    				
 		    				<div style="min-width:100px">
 			    					<div class="form-group">
-			    						<input type="button" id="fb_delete_email_confirm_check_btn" value="확인" class="btn btn-info btn-block"/>
+			    						<input type="button" id="fb_delete_email_confirm_check_btn" style="width:100px;" value="확인" class="btn btn-info btn-block"/>
 			    					</div>
 			    			</div>
 		    			</div>

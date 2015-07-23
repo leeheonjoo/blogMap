@@ -135,7 +135,7 @@ function blogWrite_getCategorySelect(el, headData){
 	    }//readURL()--
 	
 	    //file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하 는 코드
-	    $('input[type=file]').click(function() {
+	    $("#attach input[type=file]").click(function() {
 	    	var fileId=$(this).attr('id');
 	    	var index=fileId.substring(6,7);
 	    		
@@ -384,162 +384,107 @@ function blogWrite_getCategorySelect(el, headData){
 </head>
 <body>
 
-<form class="form-horizontal" name="blogWriteForm" action="${root }/board/blogWrite" method="POST" id="frm" enctype="multipart/form-data">		<!-- 전체적인 폼 내에서 Label / Text 창의 크기를 조절하기 위해 필요한 폼 -->
-		<!-- <input type="hidden" name="member_id"/> -->
-		
-		<div class="thumbnail">	
-		<div class="caption">
-		<div class="col-md-12 col-sm-12 col-xs-12">		<!-- Div 를 3화면에서 12 칸 모두 사용 -->
-			<br/>
-		</div>
-			
-			<div id="blogWriteSelect" class="form-group form-group-sm">
-				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputSmall">카테고리:</label></div>
-				
-				<div class="col-md-7 col-sm-7 col-xs-7">
-				<select id="headCategory" name="category_mname" class="selectpicker" data-width="140px" style="display: none" onchange="blogWrite_ChangeCategory(this.id)">
-					<option value="%">대분류[전체]</option>
-				</select> 
-				<select id="detailCategory" name="category_sname"  class="selectpicker" data-width="140px" style="display: none">
-					<option value="%">소분류[전체]</option>
-				</select>
-				</div>
-			</div>
-	
-			<div class="form-group form-group-sm">
-				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputSmall">작성자:</label></div>
-				
-				<div class="col-md-7 col-sm-7 col-xs-7">
-					<input type="text"  class="form-control" name="member_id"  disabled="disabled"/>
-					<input type="hidden" class="form-control" name="member_id" />
-				</div>
-			</div>
-
-			<div class="form-group form-group-sm">
-				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputSmall">위치검색:</label></div>
-				 
-				<div class="col-md-6 col-sm-6 col-xs-6">
-					<input type="text" class="form-control" id="addr" name="addrress" value="" placeholder="예)미정국수" /> 
-				</div>
-				
-				<div class="col-md-2 col-sm-2 col-xs-2">
-					<a data-toggle="modal" href="#blogWriteSub" class="btn btn-primary" onclick="mapSearch();">위치검색</a>
-					<input type="hidden" class="form-control" name="addr_sido"/>
-					<input type="hidden" class="form-control" name="addr_sigugun"/>
-					<input type="hidden" class="form-control" name="addr_dongri"/>
-					<input type="hidden" class="form-control" name="addr_bunji"/>
-				</div>
-			</div>
-			
-			<div class="form-group form-group-sm">	
-				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputSmall"><label>업체,여행지명:</label></div>
-				
-				<div class="col-md-7 col-sm-7 col-xs-7">
-					<input type="text" class="form-control" name="addr_title" size="40" disabled="disabled" placeholder="업체/여행지를 입력하세요."/>
-					<input type="hidden" class="form-control" name="addr_title"/>
-				</div>
-			</div>
-			
-			<div class="form-group form-group-sm">	
-				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputSmall"><label>주소:</label></div>
-				<div class="col-md-7 col-sm-7 col-xs-7"><input type="text" class="form-control" name="realAddr" size="40" disabled="disabled" placeholder="주소를 입력하세요."/></div>
-			</div>	
-			
-			
-				
-			<div class="form-group form-group-sm">				
-				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputSmall">제목:</label></div>
-				<div class="col-md-7 col-sm-7 col-xs-7"><input type="text" class="form-control" id="board_title" name="board_title" size="70" placeholder="게시글의 제목을 입력하세요."/></div>
-			</div>	
-				
-			
-			<div class="form-group form-group-sm">
-				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputSmall"><label>내용:</label></div>
-				<div class="col-md-7 col-sm-7 col-xs-7"><textarea name="board_content" id="board_content" class="form-control" style="width:710px; height:200px;" rows="10" cols="100" placeholder="내용을 입력하세요"></textarea></div>
-			</div>
-
-
-			<div id="attach" class="form-group form-group-sm">		<!-- 크기 조절을 하기 위한 기본 틀 -->
-				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputSmall">첨부파일|코멘트:</label>
-					<select id="imageAttach">
-						<option value="0">이미지 첨부 갯수</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-					</select>
-				</div>
-				
-				<div class="col-md-2 col-sm-2 col-xs-2">
-					<span class="spanStyle" style="display:none;">
-					<input id="imgInp0" class="form-control" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
-					<img id="UploadedImg0" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
-					<br/>
-					<input type="text" class="form-control" name="comment" style="width:100px;" placeholder="예)최고에요"/>
-					</span>
-				</div>
-				
-				<div class="col-md-2 col-sm-2 col-xs-2">
-					<span class="spanStyle" style="display: none;">
-					<input id="imgInp1" class="form-control" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
-					<img id="UploadedImg1" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
-					<br/>
-					<input type="text" class="form-control" name="comment" style="width:100px;" placeholder="예)최고에요"/>
-					</span>
-				</div>	
-					
-				<div class="col-md-2 col-sm-2 col-xs-2">	
-					<span class="spanStyle" style="display: none;">
-					<input id="imgInp2" class="form-control" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
-					<img id="UploadedImg2" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
-					<br/>
-					<input type="text" class="form-control" name="comment" style="width:100px;"placeholder="예)최고에요"/>
-					</span>
-				</div>	
-					
-				<div class="col-md-2 col-sm-2 col-xs-2">	
-					<span class="spanStyle" style="display: none;">
-					<input id="imgInp3" class="form-control" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
-					<img id="UploadedImg3" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
-					<br/>
-					<input type="text" class="form-control" name="comment" style="width:100px;" placeholder="예)최고에요"/>
-					</span>
-				</div>	
-					
-				<div class="col-md-2 col-sm-2 col-xs-2">	
-					<span class="spanStyle" style="display: none;">
-					<input id="imgInp4" class="form-control" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
-					<img id="UploadedImg4" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
-					<br/>
-					<input type="text" class="form-control" name="comment" style="width:100px;" placeholder="예)최고에요"/>
-					</span>
-				</div>
-			</div>
-
-			<div class="form-group form-group-sm">		<!-- 크기 조절을 하기 위한 기본 틀 -->
-				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputSmall">평점</label></div> 
-				
-				<div class="col-md-8 col-sm-8 col-xs-8">
-					<input type="radio" name="board_grade" value="0" /><img src="${root }/css/images/star0.jpg" width="100" height="20"/><br /> 
-					<input type="radio" name="board_grade" value="1"/><img src="${root }/css/images/star1.jpg" width="100" height="20"/><br /> 
-					<input type="radio" name="board_grade" value="2"/><img src="${root }/css/images/star2.jpg" width="100" height="20"/><br /> 
-					<input type="radio" name="board_grade" value="3"/><img src="${root }/css/images/star3.jpg" width="100" height="20"/><br /> 
-					<input type="radio" name="board_grade" value="4"/><img src="${root }/css/images/star4.jpg" width="100" height="20"/><br />
-					<input type="radio" name="board_grade" value="5"/><img src="${root }/css/images/star5.jpg" width="100" height="20"/><br />
-				</div>
-			</div>
-
-			<div class="form-group form-group-sm" style="text-align: right;">
-				<div class="col-md-10 col-sm-10 col-xs-10">	
-					<div style="display: inline-block; margin-right: 15px;">
-						<input type="reset" class="btn btn-primary" value="취소" />
-						<input type="button" class="btn btn-primary" id="save_button" value="작성"/>			
-					</div>
-				</div>
-			</div>		
-		</div>		
+<form name="blogWriteForm" action="${root }/board/blogWrite" method="POST" id="frm" enctype="multipart/form-data">
+<div >
+	<div id="blogWriteSelect">
+		<label>카테고리:</label> 
+		<select id="headCategory" name="category_mname" class="selectpicker" data-width="140px" style="display: none" onchange="blogWrite_ChangeCategory(this.id)">
+			<option value="%">대분류[전체]</option>
+		</select> 
+		<select id="detailCategory" name="category_sname"  class="selectpicker" data-width="140px" style="display: none">
+			<option value="%">소분류[전체]</option>
+		</select>
 	</div>
+	<div>
+		<label>작성자:</label> 
+		<%-- <input type="text" name="writer" value="${member.id }"/> --%>
+		<input type="text" name="member_id"  disabled="disabled"/>
+		<input type="hidden" name="member_id" />
+	</div>
+	<div>
+		<label>위치검색:</label> 
+		<input type="text" id="addr" name="addrress" value="" placeholder="예)미정국수" /> 
+		<a data-toggle="modal" href="#blogWriteSub" class="btn btn-primary" onclick="mapSearch();">위치검색</a>
+		<input type="hidden" name="addr_sido"/>
+		<input type="hidden" name="addr_sigugun"/>
+		<input type="hidden" name="addr_dongri"/>
+		<input type="hidden" name="addr_bunji"/>
+		<br/>
+		<label>업체,여행지명:</label>
+		<input type="text" name="addr_title" size="40" disabled="disabled"/>
+		<input type="hidden" name="addr_title"/>
+		<br/>
+		<label>주소:</label>
+		<input type="text" name="realAddr" size="40" disabled="disabled"/>
+	</div>
+	<div>
+		<label>제목:</label>
+		<input type="text" id="board_title" name="board_title" size="70"/>
+	</div>
+	<div>
+		<label>내용:</label>
+		<textarea name="board_content" id="board_content" rows="10" cols="100" style="width:766px; height:200px;"></textarea>
+	</div>
+	<div id="attach">
+		<label>첨부파일|코멘트:</label>
+		<select id="imageAttach">
+			<option value="0">이미지 첨부 갯수</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+		</select>
+		<br/>
+		<span class="spanStyle" style="display:none;">
+		<input id="imgInp0" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<img id="UploadedImg0" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
+		<br/>
+		<input type="text" name="comment" style="width:100px;" placeholder="예)최고에요"/>
+		</span>
+		<span class="spanStyle" style="display: none;">
+		<input id="imgInp1" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<img id="UploadedImg1" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
+		<br/>
+		<input type="text" name="comment" style="width:100px;" placeholder="예)최고에요"/>
+		</span>
+		<span class="spanStyle" style="display: none;">
+		<input id="imgInp2" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<img id="UploadedImg2" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
+		<br/>
+		<input type="text" name="comment" style="width:100px;"placeholder="예)최고에요"/>
+		</span>
+		<span class="spanStyle" style="display: none;">
+		<input id="imgInp3" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<img id="UploadedImg3" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
+		<br/>
+		<input type="text" name="comment" style="width:100px;" placeholder="예)최고에요"/>
+		</span>
+		<span class="spanStyle" style="display: none;">
+		<input id="imgInp4" type="file" name="file" onchange="readURL(this);" style="position: absolute; margin-left: 10px; width: 62px;height: 120px;filter:alpha(opacity=0); opacity:0; -moz-opacity:0; cursor: pointer;"/>
+		<img id="UploadedImg4" src="${root }/images/blogWrite/noImage.gif" width="100" height="111" alt="your image"/> 
+		<br/>
+		<input type="text" name="comment" style="width:100px;" placeholder="예)최고에요"/>
+		</span>
+	</div>
+	
+	<div>
+		<label>평점</label><br/> 
+		<input type="radio" name="board_grade" value="0" /><img src="${root }/css/images/star0.jpg" width="100" height="20"/><br /> 
+		<input type="radio" name="board_grade" value="1"/><img src="${root }/css/images/star1.jpg" width="100" height="20"/><br /> 
+		<input type="radio" name="board_grade" value="2"/><img src="${root }/css/images/star2.jpg" width="100" height="20"/><br /> 
+		<input type="radio" name="board_grade" value="3"/><img src="${root }/css/images/star3.jpg" width="100" height="20"/><br /> 
+		<input type="radio" name="board_grade" value="4"/><img src="${root }/css/images/star4.jpg" width="100" height="20"/><br />
+		<input type="radio" name="board_grade" value="5"/><img src="${root }/css/images/star5.jpg" width="100" height="20"/><br />
+	</div>
+
+	 <!-- 하단 버튼 -->
+	<div align="right">
+		<input type="reset" value="취소" /> 
+		<input type="button" id="save_button" value="작성"/>
+	</div>
+	
+</div>	
 </form>
 </body>
 </html>

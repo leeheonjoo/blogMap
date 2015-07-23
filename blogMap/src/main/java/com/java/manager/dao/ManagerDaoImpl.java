@@ -20,7 +20,7 @@ public class ManagerDaoImpl implements ManagerDao {
 	public SqlSessionTemplate session;
 	
 	@Override
-	public List<MemberDto> getData() {
+	public List<MemberDto> memberList() {
 		// TODO Auto-generated method stub
 		return session.selectList("dao.ManagerMapper.getmemberList"); 
 	}

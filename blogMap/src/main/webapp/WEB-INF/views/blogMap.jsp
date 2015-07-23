@@ -28,8 +28,8 @@
 	}
 
  	.modal-myPage{
- 		width: auto; 
- 		margin: 2% 10% 0px 10%;
+ 		width: 900px; 
+ 		margin: auto;
 /*   	height: 600px;  */
 /*   	max-height: 600px; */
 /*     	overflow-y:scroll; */ 
@@ -40,7 +40,7 @@
  		margin: 2% 20% 0px 20%;
   		height: 600px;
    		max-height: 600px;
-     	overflow-y:scroll;
+     	overflow-y:auto;
  	}
  	
  /* 	.modal-myPage-update{
@@ -233,10 +233,11 @@
 $(function(){
 	// 블로그 검색
 	$("#blogSearch").click(function(){
-		getBeginCondition();
-		getMap();
+		$("#map_div").addClass("col-lg-12 col-md-12");
+		$("#list_div").addClass("col-lg-12 col-md-12");
 		
-   		$("div[id='blogListMain'].modal").modal();
+		$("div[id='blogListMain'].modal").modal();
+		getBeginCondition();
 	});	
 	
 	// 메세지 메인
@@ -294,7 +295,8 @@ $(function(){
 </script>
 
 </head>
-<body>
+<body style="padding:10px; padding-top:40px;">
+<div>
 	<div class="container" style="max-width:1170px; padding:0 0 0 0;">
 		<nav class="navbar navbar-inverse" role="navigation" style="width:inherit;">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -433,7 +435,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile5" class="tile">
+				<div id="tile5" class="tile" style="cursor:Pointer">
 			  	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -451,7 +453,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile6" class="tile">
+				<div id="tile6" class="tile" style="cursor:Pointer">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -471,7 +473,7 @@ $(function(){
 
 		<div class="row">
 			<div class="col-sm-4 col-xs-8">
-				<div id="tile7" class="tile">
+				<div id="tile7" class="tile" style="cursor:Pointer">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -485,7 +487,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile8" class="tile">
+				<div id="tile8" class="tile" style="cursor:Pointer">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -499,7 +501,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile9" class="tile">
+				<div id="tile9" class="tile" style="cursor:Pointer">
 				  	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -513,7 +515,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-4 col-xs-8">
-				<div id="tile10" class="tile">
+				<div id="tile10" class="tile" style="cursor:Pointer">
 				  	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -535,11 +537,11 @@ $(function(){
 						<p style="width:100%; line-height:46px;">
 							<a id="partner_Registration" style="cursor:Pointer"><img src="${root}/images/blogMap/Partnership_32.png"></a>
 							&nbsp;&nbsp;
-							<a data-toggle="modal" href="#ManagerMain" id="manager_page_icon" style="display:none; "><img src="${root}/images/blogMap/gear_24.png"></img></a>
+							<a data-toggle="modal" href="#ManagerMain" id="manager_page_icon" style="display:none; "><img src="${root}/images/blogMap/gear_24.png" onclick="getMemberList()"></img></a>
 						</p>
 					</div>
 	</div>
-
+</div>
 <div class="container-fluid">
 
 	<!-- **********************************
@@ -582,23 +584,23 @@ $(function(){
 <!-- 		</div> -->
 		
 		<!-- 블로그 리스트 : 황준-->
-		<div class="modal fade" id="blogListSub" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Blog List</h4>
-					</div><div class="container"></div>
-					<div class="modal-body">
-						<div id="mainResult">
- 							<jsp:include page="board/list_backup.jsp"/>
-						</div>
-						<br/>
-						<br/>
-					</div>
-			   </div>
-			</div>
-		</div>
+<!-- 		<div class="modal fade" id="blogListSub" data-backdrop="static"> -->
+<!-- 			<div class="modal-dialog modal-lg"> -->
+<!-- 				<div class="modal-content"> -->
+<!-- 					<div class="modal-header"> -->
+<!-- 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+<!-- 						<h4 class="modal-title">Blog List</h4> -->
+<!-- 					</div><div class="container"></div> -->
+<!-- 					<div class="modal-body"> -->
+<!-- 						<div id="mainResult"> -->
+<%--  							<jsp:include page="board/list_backup.jsp"/> --%>
+<!-- 						</div> -->
+<!-- 						<br/> -->
+<!-- 						<br/> -->
+<!-- 					</div> -->
+<!-- 			   </div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		
 		<!-- 블로그 리스트 자세히 보기 : 황준 -->
 		<div class="modal fade" id="blogListDetail" data-backdrop="static">

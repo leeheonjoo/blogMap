@@ -171,7 +171,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @name:fbLogin
 	 * @date:2015. 6. 25.
 	 * @author:김정훈
-	 * @description:페이스북 계정으로 로그인한 회원등록 및 로그인
+	 * @description:페이스북 계정으로 로그인한 회원등록과 회원탈퇴했던 아이디로 다시 회원등록 및 로그인
 	 */
 	@Override
 	public void fbLogin(ModelAndView mav) {
@@ -211,7 +211,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @name:renew_pwd
 	 * @date:2015. 6. 29.
 	 * @author:김정훈
-	 * @description:
+	 * @description:기존 아이디의 비밀번호 재발급을 위한 메소드
 	 */
 	@Override
 	public void renew_pwd(ModelAndView mav) {
@@ -315,7 +315,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @name:email_confirm
 	 * @date:2015. 6. 30.
 	 * @author:김정훈
-	 * @description:
+	 * @description:해당 아이디(이메일)로 인증문자를 보내는 메소드
 	 */
 	@Override
 	public void email_confirm(ModelAndView mav) {
@@ -402,7 +402,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @name:myPage
 	 * @date:2015. 6. 30.
 	 * @author:김정훈
-	 * @description:
+	 * @description:회원정보를 불러오는 메소드
 	 */
 	@Override
 	public void myPage(ModelAndView mav) {
@@ -442,7 +442,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @name:myPageUpdate_pwdCheck
 	 * @date:2015. 6. 30.
 	 * @author:김정훈
-	 * @description:
+	 * @description:myPage의 회원정보 수정을위해 해당아이디의 암호 확인하는 메소드
 	 */
 	@Override
 	public void myPageUpdate_pwdCheck(ModelAndView mav) {
@@ -468,6 +468,12 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	/**
+	 * @name:myPageUpdate
+	 * @date:2015. 6. 30.
+	 * @author:김정훈
+	 * @description:myPage의 회원정보 수정
+	 */
 	@Override
 	public void myPageUpdate(ModelAndView mav) {
 		Map<String,Object> map=mav.getModelMap();
@@ -487,6 +493,12 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	/**
+	 * @name:myPageDelete
+	 * @date:2015. 6. 30.
+	 * @author:김정훈
+	 * @description:해당 아이디의 회원탈퇴
+	 */
 	@Override
 	public void myPageDelete(ModelAndView mav) {
 		Map<String,Object> map=mav.getModelMap();
@@ -506,6 +518,12 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	/**
+	 * @name:point_info
+	 * @date:2015. 7. 2.
+	 * @author:김정훈
+	 * @description:해당 아이디의 포인트 정보를 호출하기위한 메소드
+	 */
 	@Override
 	public void point_info(ModelAndView mav) {
 		Map<String,Object> map=mav.getModelMap();
@@ -556,6 +574,12 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	/**
+	 * @name:board_info
+	 * @date:2015. 7. 3.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public void board_info(ModelAndView mav) {
 		Map<String,Object> map=mav.getModelMap();
@@ -601,6 +625,12 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	/**
+	 * @name:favorite_info
+	 * @date:2015. 7. 3.
+	 * @author:김정훈
+	 * @description:
+	 */
 	@Override
 	public void favorite_info(ModelAndView mav) {
 		Map<String,Object> map=mav.getModelMap();
@@ -649,7 +679,7 @@ public class MemberServiceImpl implements MemberService {
 
 	/**
 	 * @name:coupon_info
-	 * @date:2015. 7. 14.
+	 * @date:2015. 7. 3.
 	 * @author:김정훈
 	 * @description:
 	 */
@@ -680,7 +710,16 @@ public class MemberServiceImpl implements MemberService {
 		hMap.put("couponList", couponList);
 		
 		List<HashMap<String,Object>> coupon_info_list=new ArrayList<HashMap<String,Object>>();
-		coupon_info_list=memberDao.coupon_info(member_id,startRow,endRow);
+		
+		String coupon_use=request.getParameter("coupon_use");
+		logger.info("coupon_use:"+coupon_use);
+		
+		if(coupon_use.equals("usable")){
+			coupon_info_list=memberDao.coupon_info(member_id,startRow,endRow);
+		}else if(coupon_use.equals("unusable")){
+			coupon_info_list=memberDao.coupon_unusable_info(member_id, startRow, endRow);
+		}
+		
 		
 		
 		//logger.info("coupon_info_list:"+coupon_info_list.size());
@@ -700,6 +739,12 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	/**
+	 * @name:fb_myPage_delete
+	 * @date:2015. 7. 18.
+	 * @author:김정훈
+	 * @description:페이스북으로 등록한 회원의 탈퇴
+	 */
 	@Override
 	public void fb_myPage_delete(ModelAndView mav) {
 		Map<String,Object> map=mav.getModelMap();

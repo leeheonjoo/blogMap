@@ -245,4 +245,9 @@
 		]]>
 	
 	</select>
+	
+	<insert id="blogUpdate_insert" parameterType="java.util.HashMap">
+		insert into attac_file(file_no,board_no_file_type,file_name,file_size,file_path,file_comment)
+		values(ATTACH_FILE_FILE_NO_SEQ.nextval,#{boardDto.board_no},0,#{attach_file.file_name},#{attach_file.file_size},#{attach_file.file_path},#{attach_file.file_comment})
+	</insert>
 </mapper> 
