@@ -450,7 +450,7 @@ $(function() {
 
 		
 		
-		var select_value=$("#blogUpdateattach option:selected").val();
+		/* var select_value=$("#blogUpdateattach option:selected").val();
 		if(select_value!="0"){
 		var int_select_value=parseInt(select_value);
 		for (var i = 0; i < int_select_value; i++) {
@@ -463,7 +463,7 @@ $(function() {
 					return false;
 				}
 			}
-		}
+		} */
 		
 		if(!($("input[type='radio']").is(":checked"))){
 			alert("평점을 선택해주세요.")
