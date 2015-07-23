@@ -28,8 +28,8 @@
 	}
 
  	.modal-myPage{
- 		width: auto; 
- 		margin: 2% 10% 0px 10%;
+ 		width: 900px; 
+ 		margin: auto;
 /*   	height: 600px;  */
 /*   	max-height: 600px; */
 /*     	overflow-y:scroll; */ 
