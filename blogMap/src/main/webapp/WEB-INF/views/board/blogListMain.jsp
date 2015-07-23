@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <style>
 	a.list-group-item {
-	    height:150px;
+	    height:110px;
 	}
 	
 	a.list-group-item.active small {
@@ -47,6 +47,9 @@ function gray_a(a) {
 		
 		
 		$("#blogList_Search").click(function() {
+			$("#map_div").addClass("col-lg-5 col-md-5");
+			$("#list_div").addClass("col-lg-7 col-md-7");
+			
 			if($("#myId_blogList > input:checked").is(":checked") == true) {
 				check_value=$("#myId_blogList > input").val();
 			}
@@ -223,7 +226,9 @@ function gray_a(a) {
 			error:function(data){
 				alert("error : blogListMain getBeginCondition");
 			}
-		});		
+		});
+		
+		getMap();
 	}
 	
 
@@ -383,7 +388,7 @@ function gray_a(a) {
          </a>
      </div>
     <div class="row" style="height:100%;">
-		<div class="container-fluid" style="height:17%;">
+		<div class="container-fluid" style="height:22%;">
 		<nav id="blogListMain" class="navbar navbar-inverse ">
 			
 			  	<!-- Brand and toggle get grouped for better mobile display -->
@@ -453,12 +458,12 @@ function gray_a(a) {
 		</nav>
 				</div><!-- /.container-fluid -->
 		
-		<div class="container-fluid" style="height:79%; width:100%;">
+		<div class="container-fluid" style="height:75%; width:100%;">
 			<div class="row" style="height:100%; width:auto;">
-				<div id="map_div" class="col-lg-5 col-md-5 col-sm-12 col-xs-12" style="height:100%;">
+				<div id="map_div" class="col-sm-12 col-xs-12" style="height:100%;">
 					<div id="map"></div>
 				</div>
-				<div id="list_div" class="col-lg-7 col-md-7 col-sm-12 col-xs-12" style="height:100%;">
+				<div id="list_div" class="col-sm-12 col-xs-12" style="height:100%;">
 					<div class="well" style="height:100%;">
 				        <div id="list_items" class="list-group" style="height:100%;">
 				        </div>
