@@ -234,18 +234,14 @@ v\:* {
                                   $("#list_items > a:eq("+i+")").find('#result_title').attr("id","result_title"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_content').attr("id","result_content"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_count').attr("id","result_count"+i); 
-                                  $("#list_items > a:eq("+i+")").find('#result_grade').attr("id","result_grade"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_rgdate').attr("id","result_rgdate"+i); 
-                                  $("#list_items > a:eq("+i+")").find('#result_star').attr("id","result_star"+i); 
-                                  $("#list_items > a:eq("+i+")").find('#result_no').attr("id","result_no"+i); 
-                                  $("#list_items > a:eq("+i+")").find('#result_button').attr("id","result_button"+i); 
+                                  $("#list_items > a:eq("+i+")").find('#result_star').attr("id","result_star"+i);
                                   $("#list_items > a:eq("+i+")").find('#result_attchimg').attr("id","result_attchimg"+i); 
                                  
                                   //데이터 입력
                                  $("#result_no"+i).text("글번호: "+board_no);
                                  $("#result_rgdate"+i+" > small").text("작성일: "+fullDate);
                                  $("#result_count"+i+" > small").text("조회수: "+board_count);
-                                 $("#result_grade"+i+" > small").text("평점: "+board_grade+" / 5");
                                  $("#result_title"+i).text(board_title);
                                  $("#result_content"+i).html(board_content);
                                  if(file_name!=null||file_name!=undefined||file_name!=""){

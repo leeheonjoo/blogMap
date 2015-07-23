@@ -139,7 +139,8 @@ if(sessionStorage.getItem('email')!=null){
 			myPagePointInfo();
 			myPageBoardInfo();
 			myPageFavoriteInfo();
-			myPageCouponInfo();
+			$("input[name='mycoupon_use']:eq(0)").attr("checked",true);
+			myPageCouponInfo('usable');
 		});
 		
 		var p_startPage=0; 
@@ -746,16 +747,24 @@ if(sessionStorage.getItem('email')!=null){
 			});
 		}); */
 		
-		//쿠폰정보클릭시
+		//쿠폰정보 사용가능/불가능 라디오버튼 클릭시
+		$("input[name='mycoupon_use']").click(function(){
+			var coupon_use=$(this).attr('id');
+			alert(coupon_use);
+			myPageCouponInfo(coupon_use);
+		});
+		
+		//쿠폰정보
 		//$("#myPage_coupon_info_tabBtn").click(function(){
-		function myPageCouponInfo(){	
+		function myPageCouponInfo(coupon_use){	
 			$("#myPage_member_coupon_list_content").empty();
 			$("#myPage_member_coupon_list_pageNum").empty();
 			$.ajax({
 				type:'post',
 				url:'${root}/member/coupon_info.do',
 				data:{
-					member_id:sessionStorage.getItem("email")
+					member_id:sessionStorage.getItem("email"),
+					coupon_use:coupon_use
 				},
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
@@ -1159,6 +1168,8 @@ if(sessionStorage.getItem('email')!=null){
 				}
 			});
 		});
+		
+		
 		
 		//게시글 정보
 		//$("#myPage_board_info_tabBtn").click(function(){
@@ -2334,6 +2345,10 @@ if(sessionStorage.getItem('email')!=null){
 		
 		<!-- 쿠폰정보 -->
 		<div class="tab-pane text-style" id="tab5">
+		<div style="font-size: 14px;">
+			<input type="radio" name="mycoupon_use" id="usable"/><span>사용가능쿠폰</span> &nbsp;&nbsp;
+			<input type="radio" name="mycoupon_use" id="unusable"/><span>사용불가능쿠폰</span>&nbsp;&nbsp;
+		</div><br/>
 			<!-- <div class="col-md-9 col-lg-9">
 			<h4>내 쿠폰 정보</h4>
           		 <div class="item active" id="myPage_member_coupon_list">

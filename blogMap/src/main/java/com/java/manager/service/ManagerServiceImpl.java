@@ -37,18 +37,18 @@ public class ManagerServiceImpl implements ManagerService {
 	private ManagerDao managerDao;
 
 	/**
-	 * @name:getData
+	 * @name:memberList
 	 * @date:2015. 6. 26.
 	 * @author:이동희
 	 * @description: memberList 조회시 DB에서 데이타를 가지고 옴
 	 */
 	@Override
-	public void getData(ModelAndView mav){
+	public void memberList(ModelAndView mav){
 		Map<String, Object> map=mav.getModelMap();
 //		HttpServletRequest request=(HttpServletRequest)map.get("request");
 //		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
-		List<MemberDto> memberlist=managerDao.getData();	// member의 정보를 List로 가져옴
+		List<MemberDto> memberlist=managerDao.memberList();	// member의 정보를 List로 가져옴
 		logger.info("memberlistSize:" + memberlist.size());
 		
 		Gson gson=new Gson();					//Gson의 객체를 생성
@@ -89,7 +89,7 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	/**
 	 * @name:getSearchMemberType
-	 * @date:2015. 7. 21.
+	 * @date:2015. 7. 14.
 	 * @author:이동희
 	 * @description: 회원가입타입으로 검색 결과를 반환하는 메소드
 	 */
@@ -205,7 +205,7 @@ public class ManagerServiceImpl implements ManagerService {
 	 * @name:getSearchPartnerYN
 	 * @date:2015. 7. 10.
 	 * @author:이동희
-	 * @description: Partner정보를 조회시 DB에서 데이타를 가지고온다.
+	 * @description: Partner 승인/미승인 여부로 Partner정보를 조회시 DB에서 데이타를 가지고온다.
 	 */
 	@Override
 	public void getSearchPartnerYN(ModelAndView mav) {
@@ -304,6 +304,12 @@ public class ManagerServiceImpl implements ManagerService {
 		
 	}
 	
+	/**
+	 * @name:partnerDetail
+	 * @date:2015. 7. 9.
+	 * @author:이동희
+	 * @description: 선택한 제휴업체의 정보를 DB에서 가져와 반환
+	 */
 	@Override
 	public void partnerDetail(ModelAndView mav) {
 		// TODO Auto-generated method stub
@@ -354,6 +360,12 @@ public class ManagerServiceImpl implements ManagerService {
 		mav.addObject("json", json);
 	}
 	
+	/**
+	 * @name:searchCouponList
+	 * @date:2015. 7. 15.
+	 * @author:이동희
+	 * @description:
+	 */
 	@Override
 	public void searchCouponList(ModelAndView mav) {
 		// TODO Auto-generated method stub
@@ -381,6 +393,12 @@ public class ManagerServiceImpl implements ManagerService {
 		mav.addObject("json", json);
 	}
 	
+	/**
+	 * @name:searchCouponYN
+	 * @date:2015. 7. 21.
+	 * @author:이동희
+	 * @description:
+	 */
 	@Override
 	public void searchCouponYN(ModelAndView mav) {
 		// TODO Auto-generated method stub
@@ -445,6 +463,12 @@ public class ManagerServiceImpl implements ManagerService {
 		
 	}
 	
+	/**
+	 * @name:couponCancle
+	 * @date:2015. 7. 14.
+	 * @author:이동희
+	 * @description: 쿠폰을 취소하는 메소드(취소 성공시 관리자 로그에 저장)
+	 */
 	@Override
 	public void couponCancle(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
@@ -477,6 +501,12 @@ public class ManagerServiceImpl implements ManagerService {
 		
 	}
 	
+	/**
+	 * @name:couponDetail
+	 * @date:2015. 7. 15.
+	 * @author:이동희
+	 * @description: 선택한 쿠폰의 정보를 DB에서 가져와 반환
+	 */
 	@Override
 	public void couponDetail(ModelAndView mav){
 		Map<String, Object> map=mav.getModelMap();
@@ -505,7 +535,7 @@ public class ManagerServiceImpl implements ManagerService {
 	
 	/**
 	 * @name:getManagerDate
-	 * @date:2015. 6. 30.
+	 * @date:2015. 7. 3.
 	 * @author:이동희
 	 * @description: ManagerList 조회시 DB에서 데이타를 가지고옴
 	 */
