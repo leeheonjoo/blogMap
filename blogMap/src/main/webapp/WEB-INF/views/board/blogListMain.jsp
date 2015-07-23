@@ -10,7 +10,7 @@
 <style>
 	a.list-group-item {
 	    height:auto;
-	    min-height:130px;
+	    min-height:125px;
 	}
 	a.list-group-item.active small {
 	    color:#fff;
@@ -355,6 +355,7 @@ function gray_a(a) {
 	<!-- 검색조건 navbar : 20150706 이헌주 -->
 	<div style="display: none;" id="hidden_items" class="list-group" >
          <a id="listItem" href="#" class="list-group-item">
+         	<div class="row">
                <div class="media col-md-3">
                    <figure class="pull-left">
                        <img id="result_attchimg" class="media-object img-rounded img-responsive"  src="http://placehold.it/350x250" >
@@ -375,8 +376,8 @@ function gray_a(a) {
                        <span class="glyphicon glyphicon-star-empty"></span>
                        <span class="glyphicon glyphicon-star-empty"></span>
                    </div>
-                   <p id="result_grade"><small></small></p>
                </div> 
+			</div>
          </a>
      </div>
     <div class="row" style="height:100%;">
