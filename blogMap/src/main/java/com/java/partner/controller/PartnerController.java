@@ -153,7 +153,7 @@ public class PartnerController {
 	 */
 	@RequestMapping("/partner/search_Partnerinfo.do")
 	public void search_PartnerList(HttpServletRequest request, HttpServletResponse response){
-		logger.info("partner search_PartnerList Start");
+		logger.info("partner search_PartnerList Start-----------------------------------");
 		
 		ModelAndView mav= new ModelAndView();
 		mav.addObject("request", request);
@@ -171,4 +171,80 @@ public class PartnerController {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * @name: list
+	 * @date:2015. 7. 22.
+	 * @author: 변태훈
+	 * @description: 제휴업체 Coupon리스트 컨트롤러
+	 */
+	@RequestMapping(value="/partner/writeCouponList.do", method=RequestMethod.POST)
+	public void writeCouponList(HttpServletRequest request, HttpServletResponse response,PartnerDto partnerDto,BoardReadDto boardreadDto){
+		logger.info("Partner writeCouponList 시작!!!--------------------------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+	
+		partnerService.writeCouponList(mav);
+		
+		Map<String, Object> map=mav.getModel();
+		
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * @name:search_partnerCouponinfo
+	 * @date:2015. 7. 23.
+	 * @author:변태훈
+	 * @description: 쿠폰업체이름으로 리스트 검색하는 메소드
+	 */
+	@RequestMapping("/partner/search_partnerCouponinfo.do")
+	public void search_partnerCouponinfo(HttpServletRequest request, HttpServletResponse response){
+		logger.info("partner search_partnerCouponinfo Start");
+		
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		partnerService.search_partnerCouponinfo(mav);
+		Map<String, Object> map=mav.getModel();
+		
+		String json=(String)map.get("searchCouponJson");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	@RequestMapping(value="/partner/getPartnerCouponData.do", method=RequestMethod.GET)
+	public void getPartnerCouponData(HttpServletRequest request, HttpServletResponse response){
+		logger.info("Partner getPartnerCouponData 시작!!!--------------------------------------------");
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		
+		partnerService.getPartnerCouponData(mav);
+		
+		Map<String, Object> map=mav.getModel();
+		
+		String json=(String)map.get("json");
+		
+		try{
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(json);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
 }

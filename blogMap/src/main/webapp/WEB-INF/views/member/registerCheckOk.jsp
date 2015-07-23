@@ -36,7 +36,7 @@
 	<div class="container" style="width:100%">
         <div class="row centered-form">
 	        <div>
-	        	<div class="panel panel-default">
+	        	<div class="panel panel-default" style="text-align:center;">
 	        		<div class="panel-heading">
 				    	<h1 class="panel-title">사용가능한 아이디입니다.</h1>
 				 	</div>

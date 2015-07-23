@@ -3,6 +3,9 @@ body{
     padding:50px;
 }
 
+.tableFontSize{
+	font-size:15px;
+}
 #login-dp{
     min-width: 250px;
     padding: 14px 14px 0;

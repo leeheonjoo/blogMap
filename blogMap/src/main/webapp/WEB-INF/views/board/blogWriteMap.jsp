@@ -407,19 +407,22 @@ function blogListDetails(blogRead_no) {
         var recommand_y=data[0].YES;
         var recommand_n=data[0].NO;
         //데이터 입력
-        $("#blogRead_rgdate > label:eq(0)").text(fullDate); 
-        $("#blogRead_addr > label:eq(0)").text(pullAddr); 
-        $("#blogRead_content > div").html(content);
-        $("#blogRead_writer > label:eq(0)").text(writer);
-        $("#blogRead_addrtitle > label:eq(0)").html(addr_title);
-        $("#blogRead_title > label:eq(0)").text(title);
-        $("#blogRead_category > label:eq(0)").text(mcategory);
-        $("#blogRead_category > label:eq(1)").text(scategory);
+        $("#blogRead_rgdate > input:eq(0)").val("작성일: "+fullDate); 
+        $("#blogRead_addr >  input:eq(0)").val("주소: "+pullAddr); 
+        $("#blogRead_content > div:eq(0)").html(content);
+        $("#blogRead_writer > input:eq(0)").val("작성자: "+writer);
+        $("#blogRead_addrtitle > input:eq(0)").val("여행,맛집명 :"+addr_title);
+        $("#blogRead_title > input:eq(0)").val("제목: "+title);
+        $("#blogRead_category > input:eq(0)").val("카테고리: "+mcategory+" | "+scategory);
         $("#blogRead_boardno > label:eq(0)").text(boardno);
         $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
         $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
         
         
+        
+
+        //alert(email);
+        //alert(writer);
         if(email!=writer){
         	$("#Upbutton").css("display","none");
         	$("#Debutton").css("display","none");
@@ -510,17 +513,24 @@ function blogListDetails(blogRead_no) {
                     $("#listAllDiv > #reply_content_insert").css("display","block");
                     $("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
                     $("#reply_content_insert"+i+" > span:eq(0)").text(replyNo);
-                    $("#reply_content_insert"+i+" > span:eq(1)").text(memberId);
-                    $("#reply_content_insert"+i+" > span:eq(2)").text(replyContent);
-                    $("#reply_content_insert"+i+" > span:eq(3)").text(replyfullDate);
-                    $("#reply_content_insert"+i+" > span:eq(4)").attr("id","reply_buttons"+i);
-					 $("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
-					 $("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
+                    $("#reply_content_insert"+i+" > span:eq(1)").css("font-weight","bold").text(memberId);
+                    $("#reply_content_insert"+i+" > span:eq(2)").text(replyfullDate); 
+                	$("#reply_content_insert"+i+" > input:eq(0)").val(replyContent);
+                    $("#reply_content_insert"+i+" > span:eq(3)").attr("id","reply_buttons"+i);
+					$("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
+					$("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
+					$("listAllDiv:last-child").append("<hr style='width: 95%;'>"); 
+					
                     
 					 if(email!=memberId){
 							$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
 							$("#reply_buttons"+i+" > button:eq(1)").css("display","none");
-						}
+					 }else{
+							$("#reply_buttons"+i+" > button:eq(0)").css("display","");
+							$("#reply_buttons"+i+" > button:eq(1)").css("display","");
+							
+					 }
+					 
                  });
               }
            },
