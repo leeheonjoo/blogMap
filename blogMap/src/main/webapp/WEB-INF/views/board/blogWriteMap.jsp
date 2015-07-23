@@ -420,6 +420,9 @@ function blogListDetails(blogRead_no) {
         $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
         
         
+        
+        alert(email);
+        alert(writer);
         if(email!=writer){
         	$("#Upbutton").css("display","none");
         	$("#Debutton").css("display","none");
