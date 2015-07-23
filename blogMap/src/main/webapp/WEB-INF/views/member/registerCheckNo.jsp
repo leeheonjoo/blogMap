@@ -22,7 +22,7 @@
 					},
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseCheckData){
-						alert(responseCheckData);
+						//alert(responseCheckData);
 						
 						if(responseCheckData=="0"){    //아이디 중복 안됨
 							 //$('#registerCheckNo_div').fadeOut();
