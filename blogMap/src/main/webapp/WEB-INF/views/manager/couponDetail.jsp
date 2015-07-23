@@ -72,7 +72,7 @@ $("#coupon_img").css({
 			</div>
 			
 			<div class="modal-footer">
-				<input type="button" class="btn btn-default" id="coupon_detail_issue" value="발급" style="display: none;"/>
+				<input type="button" class="btn btn-default" id="coupon_detail_issue" value="발&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;급" style="display: none;"/>
 				<input type="button" class="btn btn-default" id="coupon_detail_button" style="display: none;"/>
 				<input type="button" class="btn btn-default" data-dismiss="modal" value="닫&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;기"/>	
 			</div>
