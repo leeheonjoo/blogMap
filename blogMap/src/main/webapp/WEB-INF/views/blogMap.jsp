@@ -28,8 +28,8 @@
 	}
 
  	.modal-myPage{
- 		width: auto; 
- 		margin: 2% 10% 0px 10%;
+ 		width: 900px; 
+ 		margin: auto;
 /*   	height: 600px;  */
 /*   	max-height: 600px; */
 /*     	overflow-y:scroll; */ 
@@ -294,7 +294,8 @@ $(function(){
 </script>
 
 </head>
-<body>
+<body style="padding:10px; padding-top:40px;">
+<div>
 	<div class="container" style="max-width:1170px; padding:0 0 0 0;">
 		<nav class="navbar navbar-inverse" role="navigation" style="width:inherit;">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -539,7 +540,7 @@ $(function(){
 						</p>
 					</div>
 	</div>
-
+</div>
 <div class="container-fluid">
 
 	<!-- **********************************
