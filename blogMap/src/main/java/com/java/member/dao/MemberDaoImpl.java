@@ -261,6 +261,15 @@ public class MemberDaoImpl implements MemberDao {
 		return sqlSession.update("dao.MemberMapper.fbReRegister",memberDto);
 	}
 
+	@Override
+	public List<HashMap<String, Object>> coupon_unusable_info(String member_id, int startRow, int endRow) {
+		HashMap<String,Object> hMap=new HashMap<String,Object>();
+		hMap.put("member_id", member_id);
+		hMap.put("startRow", startRow);
+		hMap.put("endRow", endRow);
+		return sqlSession.selectList("dao.MemberMapper.coupon_unusable_info",hMap);
+	}
+
 	
 
 }

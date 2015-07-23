@@ -39,8 +39,12 @@
               		var rgDate = leadingZeros(rgyear.getFullYear(), 4) + '/' + leadingZeros(rgyear.getMonth() + 1, 2) + '/' + leadingZeros(rgyear.getDate(), 2);
               		
               		var getYdate = new Date(data[i].partner_ydate);
-              		var yDate = leadingZeros(getYdate.getFullYear(), 4) + '/' + leadingZeros(getYdate.getMonth() + 1, 2) + '/' + leadingZeros(getYdate.getDate(), 2);
-					
+              		var yDate = null;
+              		if(getYdate.getFullYear() == '9999'){
+              			yDate = "미승인";
+              		}else{
+              			yDate = leadingZeros(getYdate.getFullYear(), 4) + '/' + leadingZeros(getYdate.getMonth() + 1, 2) + '/' + leadingZeros(getYdate.getDate(), 2);
+              		}
               		
 					 if(data[i].partner_yn == "Y"){ 
 							$("#partnerListResult1").append("<tr style='text-align:center;'>"
@@ -687,8 +691,8 @@
 									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:150px; max-width:150px;">아이디</th>
 									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:150px; max-width:200px;">업체명</th>
 									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">전화번호</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">등록</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">승인</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">등록일</th>
+									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">승인일</th>
 									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">구분</th>
 								</tr>
 							</thead>

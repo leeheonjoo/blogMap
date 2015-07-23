@@ -26,6 +26,7 @@ v\:* {
    //현재 위치를 좌표값으로 받아오기 위한 스크립트
    function mapLoad(m,addrArray,sidoArray,sigugunArray,dongmyunArray,restArray,titleArray,mapDiv,search_value) {
          var output = document.getElementById("out");
+         var oMap="";
          if (!navigator.geolocation) {
             output.innerHTML = "<p>사용자의 브라우저는 지오로케이션을 지원하지 않습니다.</p>";
             return;
@@ -54,7 +55,18 @@ v\:* {
          //좌표 전달받아 지도 생성
          var oPoint = new nhn.api.map.LatLng(latitude, longitude);
          nhn.api.map.setDefaultPoint('LatLng');
-         var oMap = new nhn.api.map.Map(mapDiv, {
+         
+         var newMap_width=500;
+         var newMap_height=400;
+         
+         if(mapDiv=="map"){
+				var map_width=$("#map_div").css("width");
+				newMap_width=map_width.replace("px","");
+				var map_height=$("#map_div").css("height");
+				newMap_height=map_height.replace("px","");
+         }
+         
+         oMap = new nhn.api.map.Map(mapDiv, {
             point : oPoint,
             zoom : 12,
             boundary:m,
@@ -65,7 +77,7 @@ v\:* {
             activateTrafficMap : false,
             activateBicycleMap : false,
             minMaxLevel : [ 1, 14 ],
-            size : new nhn.api.map.Size(500, 400),
+            size : new nhn.api.map.Size(newMap_width, newMap_height),
             detectCoveredMarker : true 
          });
          
@@ -222,18 +234,14 @@ v\:* {
                                   $("#list_items > a:eq("+i+")").find('#result_title').attr("id","result_title"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_content').attr("id","result_content"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_count').attr("id","result_count"+i); 
-                                  $("#list_items > a:eq("+i+")").find('#result_grade').attr("id","result_grade"+i); 
                                   $("#list_items > a:eq("+i+")").find('#result_rgdate').attr("id","result_rgdate"+i); 
-                                  $("#list_items > a:eq("+i+")").find('#result_star').attr("id","result_star"+i); 
-                                  $("#list_items > a:eq("+i+")").find('#result_no').attr("id","result_no"+i); 
-                                  $("#list_items > a:eq("+i+")").find('#result_button').attr("id","result_button"+i); 
+                                  $("#list_items > a:eq("+i+")").find('#result_star').attr("id","result_star"+i);
                                   $("#list_items > a:eq("+i+")").find('#result_attchimg').attr("id","result_attchimg"+i); 
                                  
                                   //데이터 입력
                                  $("#result_no"+i).text("글번호: "+board_no);
                                  $("#result_rgdate"+i+" > small").text("작성일: "+fullDate);
                                  $("#result_count"+i+" > small").text("조회수: "+board_count);
-                                 $("#result_grade"+i+" > small").text("평점: "+board_grade+" / 5");
                                  $("#result_title"+i).text(board_title);
                                  $("#result_content"+i).html(board_content);
                                  if(file_name!=null||file_name!=undefined||file_name!=""){
@@ -354,7 +362,20 @@ v\:* {
                         + title :titleArray[i]
                         + '</buton></div>'); */
                 } 
-         
+         if(mapDiv=="map"){
+			    
+				$(window).resize(function() {
+					
+					var map_width=$("#map_div").css("width");
+					map_width=map_width.replace("px","");
+					var map_height=$("#map_div").css("height");
+					map_height=map_height.replace("px","");
+// 					alert(map_width.replace("px",""));
+				    window.resizeEvt = setTimeout(function() {
+				        oMap.setSize(new nhn.api.map.Size(map_width, map_height));                
+				    }, 250);
+				});	
+         }
       };
    };
 

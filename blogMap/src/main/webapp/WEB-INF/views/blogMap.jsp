@@ -40,7 +40,7 @@
  		margin: 2% 20% 0px 20%;
   		height: 600px;
    		max-height: 600px;
-     	overflow-y:scroll;
+     	overflow-y:auto;
  	}
  	
  /* 	.modal-myPage-update{
@@ -535,7 +535,7 @@ $(function(){
 						<p style="width:100%; line-height:46px;">
 							<a id="partner_Registration" style="cursor:Pointer"><img src="${root}/images/blogMap/Partnership_32.png"></a>
 							&nbsp;&nbsp;
-							<a data-toggle="modal" href="#ManagerMain" id="manager_page_icon" style="display:none; "><img src="${root}/images/blogMap/gear_24.png"></img></a>
+							<a data-toggle="modal" href="#ManagerMain" id="manager_page_icon" style="display:none; "><img src="${root}/images/blogMap/gear_24.png" onclick="getMemberList()"></img></a>
 						</p>
 					</div>
 	</div>
@@ -582,23 +582,23 @@ $(function(){
 <!-- 		</div> -->
 		
 		<!-- 블로그 리스트 : 황준-->
-		<div class="modal fade" id="blogListSub" data-backdrop="static">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title">Blog List</h4>
-					</div><div class="container"></div>
-					<div class="modal-body">
-						<div id="mainResult">
- 							<jsp:include page="board/list_backup.jsp"/>
-						</div>
-						<br/>
-						<br/>
-					</div>
-			   </div>
-			</div>
-		</div>
+<!-- 		<div class="modal fade" id="blogListSub" data-backdrop="static"> -->
+<!-- 			<div class="modal-dialog modal-lg"> -->
+<!-- 				<div class="modal-content"> -->
+<!-- 					<div class="modal-header"> -->
+<!-- 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
+<!-- 						<h4 class="modal-title">Blog List</h4> -->
+<!-- 					</div><div class="container"></div> -->
+<!-- 					<div class="modal-body"> -->
+<!-- 						<div id="mainResult"> -->
+<%--  							<jsp:include page="board/list_backup.jsp"/> --%>
+<!-- 						</div> -->
+<!-- 						<br/> -->
+<!-- 						<br/> -->
+<!-- 					</div> -->
+<!-- 			   </div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 		
 		<!-- 블로그 리스트 자세히 보기 : 황준 -->
 		<div class="modal fade" id="blogListDetail" data-backdrop="static">

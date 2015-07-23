@@ -248,13 +248,13 @@ li { list-style-type:none;}
 				$("#couponDetailMain:last-child #coupon_detail_issue").attr("name",data[0].COUPON_NO);
 				if(data[0].COUPON_YN == "Y"){
 					//$("#partner_submit").css("display", "none");
-					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"취소"});
+					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰취소"});
 				}else if(data[0].COUPON_YN == "N"){
 					//$("#partner_delete").css("display", "none");
-					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"승인"});
+					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰승인"});
 				} 
 				
-				$("#coupon_detail_button[value='취소']").click(function(){
+				$("#coupon_detail_button[value='쿠폰취소']").click(function(){
 					var couponNo = $(this).attr('name');
 					//alert(couponNo);
 					var check = confirm("쿠폰 발행을 취소하시겠습니까?");
@@ -265,7 +265,7 @@ li { list-style-type:none;}
 					}
 				});
 				
-				$("#coupon_detail_button[value='승인']").click(function(){			// 승인버튼을 클릭시 실행
+				$("#coupon_detail_button[value='쿠폰승인']").click(function(){			// 승인버튼을 클릭시 실행
 					var couponNo = $(this).attr('name');		
 					//alert(couponNo);
 					var check = confirm("쿠폰을 승인 하시겠습니까?");
@@ -315,7 +315,12 @@ li { list-style-type:none;}
 					item_var += "<div class='fff'>";
 					item_var += "<div class='thumbnail'>";
 					item_var += "<a data-toggle='modal' href='#couponDetail' class='coupon_list_no btn-example' id=coupon_no_" + coupon_no +">";
+					item_var += "<h5 style='text-align:center'>" + data[i].PARTNER_NAME + "</h5>";	
 					item_var += "<img src=" + "${root}/pds/coupon/" + pic + " class='img-responsive' id='coupon_L_images'>";
+					item_var += "<div class='caption'>";	
+					item_var += "<h5>" + data[i].COUPON_ITEM + " " + data[i].COUPON_DISCOUNT + "% 할인" + "</h5>";
+					item_var += "<h5>" + data[i].COUPON_EYMD + "</h5>";
+					item_var += "</div>";	
 					item_var += "</a>";
 					item_var += "</div>";
 					item_var += "</div>";

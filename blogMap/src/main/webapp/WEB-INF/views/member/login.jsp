@@ -218,7 +218,7 @@
 	               	 					 
 	               	 					
 	               	 					
-	               	 					$("#blogmap_before_login span").remove();
+	               	 					/* $("#blogmap_before_login span").remove();
 	               	 					$("#blogmap_main_myPage").css("display","inline-block");
 	               	 					$("#blogmap_before_login").attr("data-toggle","");
 	               	 					$("#login_text").text("Logout");
@@ -229,70 +229,7 @@
 	               	 						$("#myPage_fb_delete_btn").show();
 	               	 					}
 	               	 					
-	               	 					$("#blogmap_main_myPage").click(function(){
-	               	 						$.ajax({
-	               	 							type:'POST',
-	               	 							url:"${root}/member/myPage.do",
-	               	 							data:{
-	               	 								member_id:sessionStorage.getItem("email")
-	               	 								//member_id:"kimjh112339@naver.com"
-	               	 							},
-	               	 							contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-	               	 							success:function(responseData){
-	               	 								//alert(responseData);
-	               	 							 	var data=responseData.split("|");
-	               	 								
-	               	 							 	memberData=JSON.parse(data[0])
-	               	 								
-	               	 								$("#myPage_member_id").text(memberData.member_id);
-	               	 								//$("#myPage_member_id").attr("disabled","disabled");
-	               	 								
-	               	 								$("#myPage_member_name").text(memberData.member_name);
-	               	 								//$("#myPage_member_name").attr("disabled","disabled");
-	               	 								
-	               	 								$("#myPage_member_joindate").text(memberData.member_joindate);
-	               	 								//$("#myPage_member_joindate").attr("disabled","disabled");
-	               	 								
-	               	 								$("#myPage_member_point_total").text(data[1]+"points");
-	               	 								/* $("#myPage_member_point").val(data[1]);
-	               	 								$("#myPage_member_point").attr("disabled","disabled"); */
-	               	 								
-	               	 								$("#myPage_member_point_total").click(function(){
-	               	 									$(".abc").attr("class","abc");
-	               	 									$("#bbb").attr("class","active");
-	               	 									
-	               	 								});
-	               	 								
-	               	 								if(data[1]>20){
-	               	 									$("#myPage_member_rate").text("새싹");
-	               	 								}
-	               	 								
-	               	 								$("#myPage_member_board_total").text(data[2]+" EA");
-	               	 								//$("#myPage_member_boardCount").attr("disabled","disabled");
-	               	 								$("#myPage_member_board_total").click(function(){
-	               	 									$(".abc").attr("class","abc");
-	               	 									$("#ccc").attr("class","active");
-	               	 									
-	               	 								});
-	               	 								
-	               	 								$("#myPage_member_favorite_total").text(data[3]+ " EA");
-	               	 								//$("#myPage_member_favoriteCount").attr("disabled","disabled");
-	               	 								$("#myPage_member_favorite_total").click(function(){
-	               	 									$(".abc").attr("class","abc");
-	               	 									$("#ddd").attr("class","active");
-	               	 									
-	               	 								});
-	               	 								
-	               	 								$("#myPage_member_coupon_total").text(data[4]+ " EA");
-	               	 								//$("#myPage_member_couponCount").attr("disabled","disabled");
-	               	 								$("#myPage_member_coupon_total").click(function(){
-	               	 									$(".abc").attr("class","abc");
-	               	 									$("#eee").attr("class","active");
-	               	 									
-	               	 								});
-	               	 							}
-	               	 						});
-	               	 					});
+	               	 					
 	               	 					
 	               	 					if($("#login_text").text()=="Logout"){
 	               	 						$("#blogmap_before_login").click(function(){
@@ -302,9 +239,9 @@
 	                   	 						sessionStorage.clear();
 	                   	 						//$("#blogmap_after_login").css("display","none");
 	                   	 						//$("#blogmap_login_bar").fadeIn();
-	                   	 						location.href="${root}/";
+	                   	 						//location.href="${root}/";
 	               	 						});
-	               	 					}
+	               	 					} */
 	               	 					
 	                           		}
                         		}
