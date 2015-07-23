@@ -233,6 +233,7 @@
 $(function(){
 	// 블로그 검색
 	$("#blogSearch").click(function(){
+		$("map").empty();
 		$("#map_div").addClass("col-lg-12 col-md-12");
 		$("#list_div").addClass("col-lg-12 col-md-12");
 		
