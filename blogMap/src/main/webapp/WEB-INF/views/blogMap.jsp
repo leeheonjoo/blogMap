@@ -435,7 +435,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile5" class="tile">
+				<div id="tile5" class="tile" style="cursor:Pointer">
 			  	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -453,7 +453,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile6" class="tile">
+				<div id="tile6" class="tile" style="cursor:Pointer">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -473,7 +473,7 @@ $(function(){
 
 		<div class="row">
 			<div class="col-sm-4 col-xs-8">
-				<div id="tile7" class="tile">
+				<div id="tile7" class="tile" style="cursor:Pointer">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -487,7 +487,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile8" class="tile">
+				<div id="tile8" class="tile" style="cursor:Pointer">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -501,7 +501,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-2 col-xs-4">
-				<div id="tile9" class="tile">
+				<div id="tile9" class="tile" style="cursor:Pointer">
 				  	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
@@ -515,7 +515,7 @@ $(function(){
 			</div>
 			
 			<div class="col-sm-4 col-xs-8">
-				<div id="tile10" class="tile">
+				<div id="tile10" class="tile" style="cursor:Pointer">
 				  	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
