@@ -482,7 +482,6 @@ $(function() {
 	/*닫기버튼 클릭시*/
 	$("#read_closeButton").click(function () {
 		$("#listAllDiv").empty();
-		
 		$("#read_div label").text("");
 		$("#blogRead_content div").html("");
         $("#carousel_page").empty();
@@ -499,7 +498,7 @@ $(function() {
 		$("#carousel_image > div:eq(0)").find('div').empty(); */
 		
 		
-	})
+	});
 	
 });
 function reply_update(UThis) { 
