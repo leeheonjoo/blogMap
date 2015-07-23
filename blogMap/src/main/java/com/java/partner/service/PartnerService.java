@@ -21,4 +21,9 @@ public interface PartnerService {
 	
 	public void getSearchPartnerDate(ModelAndView mav);
 	
+	public void writeCouponList(ModelAndView mav);
+	
+	public void search_partnerCouponinfo(ModelAndView mav);
+	
+	public void getPartnerCouponData(ModelAndView mav);
 }
