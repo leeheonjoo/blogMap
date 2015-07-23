@@ -28,8 +28,8 @@
 	}
 
  	.modal-myPage{
- 		width: auto; 
- 		margin: 2% 10% 0px 10%;
+ 		width: 900px; 
+ 		margin: auto;
 /*   	height: 600px;  */
 /*   	max-height: 600px; */
 /*     	overflow-y:scroll; */ 
@@ -233,10 +233,11 @@
 $(function(){
 	// 블로그 검색
 	$("#blogSearch").click(function(){
-		getBeginCondition();
-		getMap();
+		$("#map_div").addClass("col-lg-12 col-md-12");
+		$("#list_div").addClass("col-lg-12 col-md-12");
 		
-   		$("div[id='blogListMain'].modal").modal();
+		$("div[id='blogListMain'].modal").modal();
+		getBeginCondition();
 	});	
 	
 	// 메세지 메인

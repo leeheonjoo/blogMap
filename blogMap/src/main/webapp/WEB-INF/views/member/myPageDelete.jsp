@@ -29,7 +29,7 @@ if(sessionStorage.getItem('email')!=null){
 					},
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
-						alert(responseData);
+						//alert(responseData);
 						
 						if(responseData=="1"){
 							alert("삭제 되었습니다.");

@@ -1258,7 +1258,7 @@ thead {
 											</tbody>
 										</table>
 										
-										<div id="receive_paging" class="container" style="text-align: center;">
+										<div id="receive_paging" class="container" style="width: 100%; text-align: center;">
 											<ul class="pagination">
 								              <li id="receive_list_before" style="display:'none';"><a href="#" id="receive_paging_before">«</a></li>
 								              <li id="receive_list_pageNum"></li>
@@ -1308,7 +1308,7 @@ thead {
 												</tbody>
 											</table>
 											
-											<div id="send_paging" class="container" style="text-align: center;">
+											<div id="send_paging" class="container" style="width: 100%; text-align: center;">
 												<ul class="pagination">
 									              <li id="send_list_before" style="display:'none';"><a href="#" id="send_paging_before">«</a></li>
 									              <li id="send_list_pageNum"></li>
