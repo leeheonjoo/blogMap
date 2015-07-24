@@ -167,6 +167,11 @@ $(function() {
 	});
 	/*추천 기능*/
 	$("#blog_reference").click(function() {
+		if(email==""||email==null||email==undifend){
+			alert("로그인후 이용해주세요.");
+			return false;
+		}
+		
 		alert("추천 클릭하였습니다.");
 		var boardNo=$("#blogRead_boardno > label:eq(0)").text()
 		$.ajax({
@@ -208,6 +213,11 @@ $(function() {
 	})
 	/*비추천 기능 */
 	$("#blog_noreference").click(function() {
+		if(email==""||email==null||email==undifend){
+			alert("로그인후 이용해주세요.");
+			return false;
+		}
+		
 		alert("비추천 클릭하였습니다.");
 		var boardNo=$("#blogRead_boardno > label:eq(0)").text()
 		$.ajax({
@@ -251,6 +261,11 @@ $(function() {
 	})
 	/* 즐겨찾기 기능 */
 	$("#blogBookmark").click(function() {
+		if(email==""||email==null||email==undifend){
+			alert("로그인후 이용해주세요.");
+			return false;
+		}
+		
 		var transImage=$("#blogBookmark > img").attr("src");
 		if(transImage=="${root}/images/blogMap/Bookmark1.png"){
 			alert("즐겨찾기 추가 되었습니다.");

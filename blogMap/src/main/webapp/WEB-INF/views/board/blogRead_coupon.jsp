@@ -10,6 +10,13 @@
 <script type="text/javascript">
 
 	$("#coupon_issue_btn").click(function(){
+		var email=sessionStorage.getItem('email');
+		
+		if(email==""||email==null||email==undifend){
+			alert("로그인후 쿠폰 발급 가능능합니다.");
+			return false;
+		}
+		
 		var board_no=$("#blogRead_boardno label").text();
 		$.ajax({
 			type:'POST',
