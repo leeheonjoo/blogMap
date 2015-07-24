@@ -34,7 +34,6 @@ function readURLS(input,index) {
 	  	//file 양식으로 이미지를 선택(값이 변경) 되었을때 처리하 는 코드
 	    $('#blogUpdateattach input[type=file]').click(function() {
 	    	var fileId=$(this).attr('id');
-	    	alert(fileId);
 	    	
 	    	var index=fileId.substring(8,9);
 	    		$("#"+fileId).change(function(){
