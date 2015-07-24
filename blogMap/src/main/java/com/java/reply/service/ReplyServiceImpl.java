@@ -92,6 +92,10 @@ public class ReplyServiceImpl implements ReplyService{
 		String reply_content=request.getParameter("reply_content");
 		String member_id=request.getParameter("member_id");
 		
+		System.out.println(reply_no);
+		System.out.println(reply_content);
+		System.out.println(member_id);
+		
 		HashMap<String , Object> hMap=new HashMap<String, Object>();
 		hMap.put("reply_no", reply_no);
 		hMap.put("member_id", member_id);
