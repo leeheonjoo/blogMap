@@ -151,15 +151,25 @@ public class MemberServiceImpl implements MemberService {
 		memberDto.setMember_jointype("0001");		
 		int check=0;
 		
+		MemberDto deleteMemberDto=null;
 		//삭제했다가 다시 가입했을때
-		MemberDto deleteMemberDto=memberDao.fbRegisterCheck(memberDto.getMember_id());
-		
+		deleteMemberDto=memberDao.fbRegisterCheck(memberDto.getMember_id());
+		//System.out.println("qqqqqq");
 		//System.out.println(deleteMemberDto.getMember_jointype());
-		if(deleteMemberDto.getMember_jointype().equals("0003")){
-			check=memberDao.reRegister(memberDto);
+		if(deleteMemberDto!=null){
+			//System.out.println("aaaa");
+			if(deleteMemberDto.getMember_jointype().equals("0003")){
+				System.out.println("bbbbbbb");
+				check=memberDao.reRegister(memberDto);
+			}
 		}else{
+			//System.out.println("zzzzzz");
 			check=memberDao.register(memberDto);
 		}
+		
+
+		
+		
 		
 		logger.info("check:" + check);
 
