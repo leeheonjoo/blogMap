@@ -151,7 +151,7 @@
 		            where c.partner_no = p.partner_no
 		              and c.coupon_yn = 'Y'
 		              and current_date between c.coupon_bymd and c.coupon_eymd)
-		    where rnum <= 5;
+		     where rnum <= 5
 		]]>
 	</select>
 
