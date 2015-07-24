@@ -198,7 +198,7 @@
     </select>
     
     <update id="blogUpdateOk" parameterType="java.util.HashMap">
-    update board set category_code=(select category_code from category where category_mname=#{boardreadDto.category_mname} and category_sname=#{boardreadDto.category_sname}),board_title=#{boardDto.board_title},board_rgdate=current_date,board_content=#{boardDto.board_content},board_grade=#{boardDto.board_grade}
+    update board set category_code=(select category_code from category where category_mname=#{boardreadDto.category_mname} and category_sname like '%'||#{boardreadDto.category_sname}||'%'),board_title=#{boardDto.board_title},board_rgdate=current_date,board_content=#{boardDto.board_content},board_grade=#{boardDto.board_grade}
     where board_no=#{boardDto.board_no}
     </update>
     

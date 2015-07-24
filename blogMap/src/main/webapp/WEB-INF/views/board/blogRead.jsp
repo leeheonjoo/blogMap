@@ -66,6 +66,11 @@ $(function() {
 	
 	//댓글입력 버튼 클릭시 
 	$("span[class='glyphicon glyphicon-ok']").click(function() {
+		if(email==""||email==null||email==undifend){
+			alert("로그인후 댓글이용 해주세요.");
+			$("#replyInsert").val("");
+			return false;
+		}
 		var replyConent = $("#replyInsert").val();
 		$("#replyInsert").val("");
 	
@@ -449,7 +454,7 @@ $(function() {
 	$("#blogUpdateButton").click(function() {
 		
 		/* 유효성 검사 */
-		if($("#blogUpdateSelect > #headCategory option:selected").val()=="%"){
+		if($("#blogUpdateSelect  #headCategory option:selected").val()=="%"){
 			alert("대분류 카테고리를 여행,음식 중 선택해주세요.");
 			return false;
 		}
