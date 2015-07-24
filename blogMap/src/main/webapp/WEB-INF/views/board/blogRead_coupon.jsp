@@ -56,7 +56,7 @@
 	});
 	
 	function blogmap_coupon_issue(coupon_no){
-		alert(coupon_no);
+		//alert(coupon_no);
 		var result=confirm("쿠폰을 받으시겠습니까?");
 		if(result){
 			$.ajax({
