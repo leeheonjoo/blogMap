@@ -66,11 +66,6 @@ $(function() {
 	
 	//댓글입력 버튼 클릭시 
 	$("span[class='glyphicon glyphicon-ok']").click(function() {
-		if(email==""||email==null||email==undifend){
-			alert("로그인후 댓글이용 해주세요.");
-			$("#replyInsert").val("");
-			return false;
-		}
 		var replyConent = $("#replyInsert").val();
 		$("#replyInsert").val("");
 	
@@ -167,11 +162,6 @@ $(function() {
 	});
 	/*추천 기능*/
 	$("#blog_reference").click(function() {
-		if(email==""||email==null||email==undifend){
-			alert("로그인후 이용해주세요.");
-			return false;
-		}
-		
 		alert("추천 클릭하였습니다.");
 		var boardNo=$("#blogRead_boardno > label:eq(0)").text()
 		$.ajax({
@@ -213,11 +203,6 @@ $(function() {
 	})
 	/*비추천 기능 */
 	$("#blog_noreference").click(function() {
-		if(email==""||email==null||email==undifend){
-			alert("로그인후 이용해주세요.");
-			return false;
-		}
-		
 		alert("비추천 클릭하였습니다.");
 		var boardNo=$("#blogRead_boardno > label:eq(0)").text()
 		$.ajax({
@@ -261,11 +246,6 @@ $(function() {
 	})
 	/* 즐겨찾기 기능 */
 	$("#blogBookmark").click(function() {
-		if(email==""||email==null||email==undifend){
-			alert("로그인후 이용해주세요.");
-			return false;
-		}
-		
 		var transImage=$("#blogBookmark > img").attr("src");
 		if(transImage=="${root}/images/blogMap/Bookmark1.png"){
 			alert("즐겨찾기 추가 되었습니다.");
@@ -469,7 +449,7 @@ $(function() {
 	$("#blogUpdateButton").click(function() {
 		
 		/* 유효성 검사 */
-		if($("#blogUpdateSelect  #headCategory option:selected").val()=="%"){
+		if($("#blogUpdateSelect > #headCategory option:selected").val()=="%"){
 			alert("대분류 카테고리를 여행,음식 중 선택해주세요.");
 			return false;
 		}
@@ -508,10 +488,10 @@ $(function() {
 	});	
 	
 	
-	/* $("#coupon_issue_btn").click(function(){
-		
+	$("#coupon_issue_btn").click(function(){
+		$("div[id='blogRead_coupon'].modal").modal();
 		//alert("보드넘버"+$("#blogRead_boardno label").text());
-	}); */
+	});
 	
 	/*닫기버튼 클릭시*/
 	$("#read_closeButton").click(function () {
@@ -633,65 +613,47 @@ function reply_delete(DThis) {
 <body>
 	<div class="col-md-1 col-sm-1 col-xs-1"></div>
 	<div class="col-md-10 col-sm-10 col-xs-10">
-		<div id="read_div">
-			<div class="row" style="height:35px; border-bottom:1px solid #e5e5e5;">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:100%;">
-					<!-- 업체명 -->
-					<div id="blogRead_addrtitle" class="form-group form-group-sm" style="display:inline-block; float:left; height:100%;"></div>
-					<!-- 카테고리 -->
-					<div id="blogRead_category" class="form-group form-group-sm" style="display:inline-block; float:left; height:100%;"></div>
-					<!-- 제목 -->
-					<div id="blogRead_title" class="form-group form-group-sm" style="display:inline-block; float:left; height:100%;"></div>
-			
-					<!-- 작성일 -->
-					<div id="blogRead_rgdate" class="form-group form-group-sm" style="display:inline-block; float:right; height:100%;"></div>
-					<!-- 작성자 -->
-					<div id="blogRead_writer" class="form-group form-group-sm" style="display:inline-block; float:right; height:100%;"></div>
-				</div>
-			</div>
-			
-			<div class="row" style="height:25px;">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:100%;">
-					<!-- 주소 -->
-					<div id="blogRead_addr" class="form-group form-group-sm" style="float:left; height:100%;"></div>
-				</div>
-			</div>
-			<br/>
-			
-			<div id="blogRead_boardno" style="display: none;">
-					<label></label>
-			</div>
+	<div id="read_div">
+		<div id="blogRead_boardno" style="display: none;">
+			<label></label>
+		</div>		
+		<div id="blogRead_rgdate" class="form-group form-group-sm">
+		  <input type="text" class="form-control" name="readRgdate" size="40" disabled="disabled"/>
 		</div>
-		<br/>
-		
-		<div class="row">
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:100%;">
-				<div id="blogRead_content" class="form-group form-group-sm" style="float:left;" style="float:left;">
-					<div></div>
-				</div>
-			</div>
+		<div id="blogRead_category" class="form-group form-group-sm">
+			<input type="text" class="form-control" name="readCategory" size="40" disabled="disabled"/>
 		</div>
-		<br/>
+		<div id="blogRead_writer" class="form-group form-group-sm">
+			<input type="text" class="form-control" name="readWriter" size="40" disabled="disabled"/>
+		</div>
+		<div id="blogRead_addrtitle" class="form-group form-group-sm">
+			<input type="text" class="form-control" name="readAddrtitle" size="40" disabled="disabled"/>
+		</div>
+		<div id="blogRead_addr" class="form-group form-group-sm">
+			<input type="text" class="form-control" name="readAddr" size="40" disabled="disabled"/>
+		</div>
+		<div id="blogRead_title" class="form-group form-group-sm">
+			<input type="text" class="form-control" name="readtitle" size="40" disabled="disabled"/>
+		</div>
+		<div id="blogRead_content" class="form-group form-group-sm">
+			<div></div>
+		</div>
 	</div>
 	
 	<!-- 이미지 슬라이드 -->
-	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:100%;">
-			<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-			  <!-- Indicators -->
-			  <ol id="carousel_page" class="carousel-indicators">
-			    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-			  </ol>
-			
-			  <!-- Wrapper for slides -->
-			  <div id="carousel_image" class="carousel-inner" role="listbox">
-			    <div class="item active">
-			      <img src="" alt="...">
-			      <div class="carousel-caption"></div>
-			    </div>
-			  </div>
-			</div>
-		</div>
+	<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+	  <!-- Indicators -->
+	  <ol id="carousel_page" class="carousel-indicators">
+	    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+	  </ol>
+	
+	  <!-- Wrapper for slides -->
+	  <div id="carousel_image" class="carousel-inner" role="listbox">
+	    <div class="item active">
+	      <img src="" alt="...">
+	      <div class="carousel-caption"></div>
+	    </div>
+	  </div>
 	</div>
 <br/><br/>
 

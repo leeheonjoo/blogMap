@@ -152,7 +152,7 @@ function gray_a(a) {
 									url:'${root}/board/blogListSearchSub2.do',
 									data:{
 										query: pullAddr, 
-										key : "60e9ac7ab8734daca3d2053c1e713dbd",
+										key : "3933720084832bd83c88c654d3c6b08a",
 										encoding : "utf-8",
 										output : "json",
 										coord : "latlng",
@@ -360,7 +360,7 @@ function gray_a(a) {
 <body>
 	<!-- 검색조건 navbar : 20150706 이헌주 -->
 	<div style="display: none;" id="hidden_items" class="list-group" >
-         <a id="listItem" href="#" class="list-group-item">
+         <a id="listItem" class="list-group-item">
          	<div class="row" style="height:100%;">
                <div class="media col-md-4 col-sm-5 col-xs-5" style="height:100%;">
                    <figure class="pull-left" style="height:100%; width:100%;">
