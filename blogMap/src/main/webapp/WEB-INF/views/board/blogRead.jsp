@@ -508,10 +508,10 @@ $(function() {
 	});	
 	
 	
-	$("#coupon_issue_btn").click(function(){
-		$("div[id='blogRead_coupon'].modal").modal();
+	/* $("#coupon_issue_btn").click(function(){
+		
 		//alert("보드넘버"+$("#blogRead_boardno label").text());
-	});
+	}); */
 	
 	/*닫기버튼 클릭시*/
 	$("#read_closeButton").click(function () {

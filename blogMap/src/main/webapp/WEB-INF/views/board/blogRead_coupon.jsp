@@ -11,12 +11,12 @@
 
 	$("#coupon_issue_btn").click(function(){
 		var email=sessionStorage.getItem('email');
-		
-		if(email==""||email==null||email==undifend){
-			alert("로그인후 쿠폰 발급 가능능합니다.");
+		$("#blogRead_coupon_list_content").empty();
+		if(email==""||email==null){
+			alert("로그인후 쿠폰 발급 가능합니다.");
 			return false;
-		}
-		
+		}else{
+		$("div[id='blogRead_coupon'].modal").modal();
 		var board_no=$("#blogRead_boardno label").text();
 		$.ajax({
 			type:'POST',
@@ -28,8 +28,9 @@
 			success:function(responseData){
 				//alert(responseData);
 				var coupon_issue_data=JSON.parse(responseData);
-				
-				$("#blogRead_coupon_list_content").empty();
+				if(coupon_issue_data==""||coupon_issue_data==null){
+					$("#blogRead_coupon_list_content").append("<h2>해당업체의 등록된 쿠폰이 없습니다.</h2>");
+				}
 				$.each(coupon_issue_data,function(i){
 					var getbymd = new Date(coupon_issue_data[i].COUPON_BYMD);	// 등록일 날짜 변환
 					var byear = getbymd.getFullYear();
@@ -60,6 +61,7 @@
 			}
 			
 		});
+		}
 	});
 	
 	function blogmap_coupon_issue(coupon_no){
@@ -157,7 +159,6 @@
 <div class="container">
     <div class="row">
     	<div class="col-md-12" id="blogRead_coupon_list_content">
-			
         </div> 
 	</div>
 </div>
