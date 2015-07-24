@@ -105,7 +105,7 @@ $(function() {
 								var replyDate=new Date(data[i].reply_date);
 								var replyfullDate=replyDate.getFullYear()+"/"+(replyDate.getMonth()+1)+"/"+replyDate.getDate();
 								
-								/* $("#listAllDiv").append($("#reply_content_insert").clone());
+								$("#listAllDiv").append($("#reply_content_insert").clone());
 								$("#listAllDiv > #reply_content_insert").css("display","block");
 								$("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
 					
@@ -116,22 +116,7 @@ $(function() {
 								$("#reply_content_insert"+i+" > span:eq(3)").attr("id","reply_buttons"+i);
 								
 								$("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
-								$("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i); */
-								
-								
-								var asdf098="<br/><hr style='width: 95%;'>";
-			                    
-			                    $("#listAllDiv").append($("#reply_content_insert").clone());
-			                    $("#listAllDiv > #reply_content_insert").css("display","block");
-			                    $("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
-			                    $("#reply_content_insert"+i+" > span:eq(0)").text(replyNo);
-			                    $("#reply_content_insert"+i+" > span:eq(1)").css("font-weight","bold").text(memberId);
-			                    $("#reply_content_insert"+i+" > span:eq(2)").text(replyfullDate); 
-			                	$("#reply_content_insert"+i+" > input:eq(0)").val(replyContent);
-			                    $("#reply_content_insert"+i+" > span:eq(3)").attr("id","reply_buttons"+i);
-								$("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
 								$("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
-								$("#listAllDiv:last-child").append(asdf098); 
 								
 								if(email!=memberId){
 									$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
@@ -521,7 +506,7 @@ function reply_update(UThis) {
 	var replyNo=$("#reply_content_insert"+index+" > span:eq(0)").text();
 	
 	
-	var member_id=$("#reply_content_insert"+index+" > span:eq(1)").text();
+	var member_id=$("#reply_content_insert"+index+" > span:eq(1)").val();
 	var reply_Upcontent=$("#reply_content_insert"+index+" > input:eq(0)").val();
 	
 	
@@ -534,7 +519,6 @@ function reply_update(UThis) {
 		if($("#reply_content_update"+index).text()=='수정'){
 			$("#reply_content_insert"+index+" > input:eq(0)").removeAttr("disabled");
 			$("#reply_content_insert"+index+" > input:eq(0)").css("background-color","white");
-			$("#reply_content_insert"+index+" > input:eq(0)").focus();
 			$("#reply_content_update"+index).text("수정완료");
 		}else if($("#reply_content_update"+index).text()=='수정완료'){
 			$.ajax({
@@ -547,10 +531,11 @@ function reply_update(UThis) {
 				},
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success : function(data) {
+					
 					if(data!="0"){
 						alert("댓글 수정완료");
 						$("#reply_content_insert"+index+" > input:eq(0)").attr("disabled","disabled");
-						$("#reply_content_insert"+index+" > input:eq(0)").css("background-color","#eee");
+						$("#reply_content_insert"+index+" > input:eq(0)").css("border","0px");
 						$("#reply_content_update"+index).text("수정");
 						
 					}
@@ -679,25 +664,28 @@ function reply_delete(DThis) {
             <input id="replyInsert" type="text" class="form-control" placeholder="답글 입력란">
             <span class="input-group-addon success"><span class="glyphicon glyphicon-ok"></span></span>
         </div>
-        <div id="blogRead_reply_content" class="form-group form-group-sm" style="border: 1bpx; border-color: black;">
-		<div id="reply_content_insert" class="replyDiv" style="display:none; width: 95%;">   <!-- div를 통해 한번에 삭제하기위함,, 자식들도 삭제되므로! -->
-			<span style="display: none;  margin-left: 15px"></span>
-			<span style="text-align: left;  margin-left: 15px"></span>
-		    <span style="float: right;  margin-left: 15px" ></span>
-			<input type="text" name="readReplyInsertContent" disabled="disabled" style="width: 80%; height:30px;padding: 5px 10px;font-size: 12px;line-height: 1.5;border-radius: 3px;  background-color: #eee;opacity: 1; border: 0px;  margin-left: 15px">
+        <div id="blogRead_reply_content" style="border: 1bpx; border-color: black;">
+		<div id="reply_content_insert" class="replyDiv form-group form-group-sm" style="display:none; width: 95%;">   <!-- div를 통해 한번에 삭제하기위함,, 자식들도 삭제되므로! -->
+			<span style="display: none;"></span>
+			<div>
+			<span style="text-align: left"></span>
+		    <span style="text-align: right;" ></span>
+		    </div>
+		    
+		    <div>
+			<input type="text" name="readReplyInsertContent" disabled="disabled" style="width: 90%; height:30px;padding: 5px 10px;font-size: 12px;line-height: 1.5;border-radius: 3px;  background-color: #eee;opacity: 1; border: 0px;">
 			<span>
 				<button onclick="reply_update(this)">수정</button>
 				<button onclick="reply_delete(this)">삭제</button>
 			</span>
+			</div>
 		</div>
 		
-		<hr style="width: 95%"/>
-		
-		<div id="listAllDiv">
+	<hr style="width: 95%;">	
+	<div id="listAllDiv">
 			
 	</div>
         </div>
-        
     </div>
 	
 	

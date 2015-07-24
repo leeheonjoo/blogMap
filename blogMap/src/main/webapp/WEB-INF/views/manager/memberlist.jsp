@@ -169,6 +169,10 @@ vertical-align: middle;
 						//alert(member);
 						var manager = sessionStorage.getItem('email');
 						//alert(manager);
+						
+						var check=confirm("정말로 삭제 하시겠습니까?");
+						if(check == "1"){
+							//alert();
 						$.ajax({
 							type:'get',
 							url:'${root}/manager/delete.do?member_id='+member + '&manager_id='+ manager,
@@ -190,7 +194,10 @@ vertical-align: middle;
 							}
 						});
 						 //$(this).parent().parent().remove();;
-
+						}else{
+							alert("취소되었습니다.");
+							return false;
+						}
 					});
 					
 				});
@@ -263,6 +270,9 @@ vertical-align: middle;
 						//alert(member);
 						var manager = sessionStorage.getItem('email');
 						//alert(manager);
+						var check=confirm("정말로 삭제 하시겠습니까?");
+						if(check == "1"){
+							//alert();
 						$.ajax({
 							type:'get',
 							url:'${root}/manager/delete.do?member_id='+member + '&manager_id='+ manager,
@@ -284,6 +294,10 @@ vertical-align: middle;
 							}
 						});
 						 //$(this).parent().parent().remove();;
+						}else{
+							alert("취소되었습니다.");
+							return false;
+						}
 
 					});
 					
@@ -352,6 +366,9 @@ vertical-align: middle;
 						//alert(member);
 						var manager = sessionStorage.getItem('email');
 						//alert(manager);
+						var check=confirm("정말로 삭제 하시겠습니까?");
+						if(check == "1"){
+							//alert();
 						$.ajax({
 							type:'get',
 							url:'${root}/manager/delete.do?member_id='+member + '&manager_id='+ manager,
@@ -372,7 +389,11 @@ vertical-align: middle;
 								alert("에러가 발생하였습니다.");
 							}
 						});
-						// $(this).parent().parent().remove();;
+						 //$(this).parent().parent().remove();;
+						}else{
+							alert("취소되었습니다.");
+							return false;
+						}
 
 					});
 					

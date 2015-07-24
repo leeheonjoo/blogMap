@@ -338,7 +338,7 @@ $(function(){
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">BlogMap</a>
+					<a class="navbar-brand" href="http://localhost:8088/blogMap/">BlogMap</a>
 				</div>
 			
 				<!-- Collect the nav links, forms, and other content for toggling -->
