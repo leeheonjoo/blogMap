@@ -235,7 +235,7 @@ function blogWrite_getCategorySelect(el, headData){
 												type : 'get',
 												url : '${root}/board/search.do',
 												data : {
-													key : "60e9ac7ab8734daca3d2053c1e713dbd",
+													key : "3933720084832bd83c88c654d3c6b08a",
 													query : address,
 													encoding : "utf-8",
 													output : "json",

@@ -413,17 +413,32 @@ function blogListDetails(blogRead_no) {
         var recommand_y=data[0].YES;
         var recommand_n=data[0].NO;
         //데이터 입력
-        $("#blogRead_rgdate > input:eq(0)").val("작성일: "+fullDate); 
-        $("#blogRead_addr >  input:eq(0)").val("주소: "+pullAddr); 
+//         $("#blogRead_rgdate > input:eq(0)").val("작성일: "+fullDate); 
+//         $("#blogRead_addr >  input:eq(0)").val("주소: "+pullAddr); 
+//         $("#blogRead_content > div:eq(0)").html(content);
+//         $("#blogRead_writer > input:eq(0)").val("작성자: "+writer);						// 작성자
+//         $("#blogRead_addrtitle > input:eq(0)").val(addr_title);							// 업체명
+//         $("#blogRead_title > input:eq(0)").val(title);									// 제목
+//         $("#blogRead_category > input:eq(0)").val("("+mcategory+" | "+scategory+")"); // 카테고리
+//         $("#blogRead_boardno > label:eq(0)").text(boardno);
+//         $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
+//         $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
+
+		$("#blogRead_addrtitle").append("<h5>"+addr_title+"</h5>");							// 업체명
+		$("#blogRead_category").append("<h5>"+"("+mcategory+" | "+scategory+") : "+"</h5>");  // 카테고리
+		$("#blogRead_title").append("<h5>"+title+"</h5>");									// 제목
+		
+        $("#blogRead_writer").append("<h6>"+writer+"&nbsp;&nbsp;</h6>");								// 작성자
+        $("#blogRead_rgdate").append("<h6>"+fullDate+"</h6>");								// 작성일 
+        $("#blogRead_addr").append("<h5>"+pullAddr+"</h5>"); 								// 주소
         $("#blogRead_content > div:eq(0)").html(content);
-        $("#blogRead_writer > input:eq(0)").val("작성자: "+writer);
-        $("#blogRead_addrtitle > input:eq(0)").val("여행,맛집명 :"+addr_title);
-        $("#blogRead_title > input:eq(0)").val("제목: "+title);
-        $("#blogRead_category > input:eq(0)").val("카테고리: "+mcategory+" | "+scategory);
+
+        
+        
+        
         $("#blogRead_boardno > label:eq(0)").text(boardno);
         $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
         $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
-        
         
         
 
