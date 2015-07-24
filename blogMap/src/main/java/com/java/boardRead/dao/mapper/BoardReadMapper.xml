@@ -143,6 +143,15 @@
 		                attach_file b
 		          where a.board_no=b.board_no)
 		   where file_seq = 1
+		   union all
+		   select category, board_no, board_title, yes, no, file_name
+		     from (select '' category, c.coupon_no board_no, p.partner_name||' '||c.coupon_item||' '||c.coupon_discount||'%' board_title, 0 yes, 0 no, c.coupon_pic_name file_name,
+		                  row_number() over (order by c.coupon_discount desc, coupon_eymd asc) rnum
+		             from coupon c, partner p
+		            where c.partner_no = p.partner_no
+		              and c.coupon_yn = 'Y'
+		              and current_date between c.coupon_bymd and c.coupon_eymd)
+		    where rnum <= 5;
 		]]>
 	</select>
 
