@@ -42,18 +42,6 @@
    		max-height: 600px;
      	overflow-y:auto;
  	}
- 	
- /* 	.modal-myPage-update{
- 		width: auto;
- 		margin: 2% 1% 0px 30%;
-  		height: 600px;
-   		max-height: 600px;
-     	overflow-y:scroll;
- 	} 	 */
-	
-/*  	.modal{  */
-/*      display: block !important;  */
-/*  }  */
 
 	#mainResult{
 	  height: 90%;
@@ -83,18 +71,9 @@
 
 //			<session check -> button change>
 			if(sessionStorage.getItem('email')!=null){
-				//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
-				//$("#blogmap_login_bar").fadeOut();
 				$("#blogmap_before_login span").remove();
 				$("#myPage_fb_delete_btn").css("display","none");
-				/* if($("#blogmap_main_myPage b").text()=="MyPage"){
-					$("#blogmap_main_myPage").parent().remove();
-				} */
-				/* if(sessionStorage.getItem('jointype')=="0002"){
-					$("#blogmap_main_myPage").empty();
-				}
-				
-				$("#blogmap_main_myPage").append('<a id="blogmap_main_myPage" data-toggle="modal" href="#blogmap_myPage" class="btn" style="text-align:left;"><b>MyPage</b></a>'); */
+
 				
 				$("#blogmap_main_myPage").css("display","inline-block");
 				$("#blogmap_before_login").attr("data-toggle","");
@@ -112,8 +91,6 @@
 							FB.logout();
 						}
 						sessionStorage.clear();
-						//$("#blogmap_after_login").css("display","none");
-						//$("#blogmap_login_bar").fadeIn();
 						location.href="${root}/";
 					});
 				}
@@ -136,16 +113,19 @@
 
 					var travel_count=0;
                     var food_count=0;
+                    var coupon_count=0;
                     $.each(data,function(i){
                     	var category=data[i].CATEGORY;
                     	var boardNo=data[i].BOARD_NO;
                     	var boardTitle=data[i].BOARD_TITLE;
-                    	var yes=data[i].YES;
-                    	var no=data[i].NO;
                     	var fileName=data[i].FILE_NAME;
 
                      	var carousel_image = "<div class='item'>";
-                       	carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + " name="+ boardNo + " />";
+                     	if(category=='100' || category=='200'){
+                     		carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + " name="+ "P" + boardNo + " />";	
+                     	}else{
+                     		carousel_image += "<img src=" + "${root}/pds/coupon/"+ fileName + " name="+ "C" + boardNo + " />";
+                     	}
                        	carousel_image += "<div class='carousel-caption'>";
                        	carousel_image += "<h6>"+ boardTitle +"</h6>";
                        	carousel_image += "</div>";
@@ -194,13 +174,63 @@
                             }           
                             
                             food_count++;
+                    	}else{
+                            if(coupon_count==0){
+                                $("#tile5 .carousel-inner").empty();                                          	  
+                            }else if(coupon_count==2){
+                            	$("#tile6 .carousel-inner").empty();
+                            }
+                            
+                            if(coupon_count<2){
+                            	 $("#tile5 .carousel-inner").append(carousel_image);
+                            }else{
+                            	 $("#tile6 .carousel-inner").append(carousel_image);
+                            }
+                           
+                       	    
+                            if(coupon_count==0){
+                             	$("#tile5 .item").addClass("active");
+                            }else if(coupon_count==2){
+                            	$("#tile6 .item").addClass("active");
+                            }           
+                            
+                            coupon_count++;
                     	}
                         
-                        $("#metro img[name="+ boardNo +"]").click(function(){
-                            blogListDetails(boardNo);
-                        	$("div[id='blogListDetail'].modal").modal();
+                       	// 추천블로그 클릭
+                       	if(category=='100' || category=='200'){
+                       		$("#metro img[name=" + "P" + boardNo +"]").click(function(){
+                       			blogListDetails(boardNo);
+                            	$("div[id='blogListDetail'].modal").modal();
+                       		});
+                       	}else{
+                       		$("#metro img[name=" + "C" + boardNo +"]").click(function(){
+                        		couponData(boardNo);
+                        		$("div[id='couponDetail'].modal").modal();
+                       		});
+                       	}
+                       	
+                       	// 추천쿠폰 클릭
+                        $("#metro img[name=" + boardNo +"]").click(function(){
+                        	if(category=='100' || category=='200'){
+                                blogListDetails(boardNo);
+                            	$("div[id='blogListDetail'].modal").modal();		
+                        	}else{
+                        		couponData(boardNo);
+                        		$("div[id='couponDetail'].modal").modal();
+                        	}
                         });
                     });
+                    
+                    $("#tile5 .item").height($("#tile1").width());
+                    $("#tile5 img").css("height","60%");
+                    $("#tile5 img").css("width","100%");
+                    $("#tile5 .carousel-caption").css("top","50%");
+                    
+                    $("#tile6 .item").height($("#tile1").width());
+                    $("#tile6 img").css("height","60%");
+                    $("#tile6 img").css("width","100%");
+                    $("#tile6 .carousel-caption").css("top","50%");
                     
                     $("#tile7 .item").height($("#tile1").width());
                     $("#tile7 img").css("height","100%");
@@ -442,10 +472,6 @@ $(function(){
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<img src="http://handsontek.net/demoimages/tiles/neews.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/neews2.png" class="img-responsive"/>
 							</div>
 						</div>
 					</div>
@@ -460,10 +486,6 @@ $(function(){
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<img src="http://handsontek.net/demoimages/tiles/skype.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/skype2.png" class="img-responsive"/>
 							</div>
 						</div>
 					</div>

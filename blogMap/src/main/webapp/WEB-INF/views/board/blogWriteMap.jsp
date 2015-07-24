@@ -60,7 +60,7 @@ v\:* {
          var newMap_height=400;
          
          if(mapDiv=="map"){
-				var map_width=$("#map_div").css("width");
+				var map_width=$("#bs-example-navbar-collapse-2").css("width");
 				newMap_width=map_width.replace("px","");
 				var map_height=$("#map_div").css("height");
 				newMap_height=map_height.replace("px","");
@@ -366,7 +366,7 @@ v\:* {
 			    
 				$(window).resize(function() {
 					
-					var map_width=$("#map_div").css("width");
+					var map_width=$("#bs-example-navbar-collapse-2").css("width");
 					map_width=map_width.replace("px","");
 					var map_height=$("#map_div").css("height");
 					map_height=map_height.replace("px","");
