@@ -379,6 +379,7 @@ v\:* {
       };
    };
 
+   /*블로그 read*/
 function blogListDetails(blogRead_no) {
 
    $.ajax({
@@ -397,6 +398,11 @@ function blogListDetails(blogRead_no) {
         var content=data[0].BOARD_CONTENT;
         var writer=data[0].MEMBER_ID;
         var addr_title=data[0].ADDR_TITLE;
+        if(addr_title.match("<b>")!=null){
+        	addr_title=addr_title.replace("<b>","");
+        	addr_title=addr_title.replace("</b>","");
+        }
+        
         var title=data[0].BOARD_TITLE;
         var mcategory=data[0].CATEGORY_MNAME;               
         var scategory=data[0].CATEGORY_SNAME;

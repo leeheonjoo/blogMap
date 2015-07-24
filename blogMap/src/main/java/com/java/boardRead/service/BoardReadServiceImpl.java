@@ -702,6 +702,8 @@ public class BoardReadServiceImpl implements BoardReadService {
 		Board_addr_infoDto board_addr_infoDto=(Board_addr_infoDto) map.get("Board_addr_infoDto");
 		BoardReadDto boardreadDto=(BoardReadDto) map.get("BoardReadDto");
 		
+		System.out.println("카테고리"+boardreadDto.getCategory_mname()+"|"+boardreadDto.getCategory_sname());
+		
 		//회원 ID만(작성자) 받아옴
 		String member_id=request.getParameter("member_id");
 		String[] hidden_img=request.getParameterValues("UphiddenImg");

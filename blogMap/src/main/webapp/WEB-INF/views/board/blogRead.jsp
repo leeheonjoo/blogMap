@@ -66,6 +66,11 @@ $(function() {
 	
 	//댓글입력 버튼 클릭시 
 	$("span[class='glyphicon glyphicon-ok']").click(function() {
+		if(email==""||email==null||email==undifend){
+			alert("로그인후 댓글이용 해주세요.");
+			$("#replyInsert").val("");
+			return false;
+		}
 		var replyConent = $("#replyInsert").val();
 		$("#replyInsert").val("");
 	
@@ -162,6 +167,11 @@ $(function() {
 	});
 	/*추천 기능*/
 	$("#blog_reference").click(function() {
+		if(email==""||email==null||email==undifend){
+			alert("로그인후 이용해주세요.");
+			return false;
+		}
+		
 		alert("추천 클릭하였습니다.");
 		var boardNo=$("#blogRead_boardno > label:eq(0)").text()
 		$.ajax({
@@ -203,6 +213,11 @@ $(function() {
 	})
 	/*비추천 기능 */
 	$("#blog_noreference").click(function() {
+		if(email==""||email==null||email==undifend){
+			alert("로그인후 이용해주세요.");
+			return false;
+		}
+		
 		alert("비추천 클릭하였습니다.");
 		var boardNo=$("#blogRead_boardno > label:eq(0)").text()
 		$.ajax({
@@ -246,6 +261,11 @@ $(function() {
 	})
 	/* 즐겨찾기 기능 */
 	$("#blogBookmark").click(function() {
+		if(email==""||email==null||email==undifend){
+			alert("로그인후 이용해주세요.");
+			return false;
+		}
+		
 		var transImage=$("#blogBookmark > img").attr("src");
 		if(transImage=="${root}/images/blogMap/Bookmark1.png"){
 			alert("즐겨찾기 추가 되었습니다.");
@@ -449,7 +469,7 @@ $(function() {
 	$("#blogUpdateButton").click(function() {
 		
 		/* 유효성 검사 */
-		if($("#blogUpdateSelect > #headCategory option:selected").val()=="%"){
+		if($("#blogUpdateSelect  #headCategory option:selected").val()=="%"){
 			alert("대분류 카테고리를 여행,음식 중 선택해주세요.");
 			return false;
 		}
