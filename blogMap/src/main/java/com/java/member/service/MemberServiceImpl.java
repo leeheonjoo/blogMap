@@ -154,7 +154,7 @@ public class MemberServiceImpl implements MemberService {
 		//삭제했다가 다시 가입했을때
 		MemberDto deleteMemberDto=memberDao.fbRegisterCheck(memberDto.getMember_id());
 		
-		System.out.println(deleteMemberDto.getMember_jointype());
+		//System.out.println(deleteMemberDto.getMember_jointype());
 		if(deleteMemberDto.getMember_jointype().equals("0003")){
 			check=memberDao.reRegister(memberDto);
 		}else{
