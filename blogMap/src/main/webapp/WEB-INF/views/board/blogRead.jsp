@@ -635,7 +635,7 @@ function reply_delete(DThis) {
 	<div class="col-md-10 col-sm-10 col-xs-10">
 		<div id="read_div">
 			<div class="row" style="height:35px; border-bottom:1px solid #e5e5e5;">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:100%;">
+				<div id="blogReadBox" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:100%;">
 					<!-- 업체명 -->
 					<div id="blogRead_addrtitle" class="form-group form-group-sm" style="display:inline-block; float:left; height:100%;"></div>
 					<!-- 카테고리 -->
