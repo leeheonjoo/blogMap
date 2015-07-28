@@ -66,7 +66,7 @@ $(function() {
 	
 	//댓글입력 버튼 클릭시 
 	$("span[class='glyphicon glyphicon-ok']").click(function() {
-		if(email==""||email==null||email==undifend){
+		if(email==""||email==null){
 			alert("로그인후 댓글이용 해주세요.");
 			$("#replyInsert").val("");
 			return false;
