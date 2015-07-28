@@ -167,7 +167,7 @@ $(function() {
 	});
 	/*추천 기능*/
 	$("#blog_reference").click(function() {
-		if(email==""||email==null||email==undifend){
+		if(email==""||email==null){
 			alert("로그인후 이용해주세요.");
 			return false;
 		}
