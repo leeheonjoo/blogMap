@@ -213,7 +213,7 @@ $(function() {
 	})
 	/*비추천 기능 */
 	$("#blog_noreference").click(function() {
-		if(email==""||email==null||email==undifend){
+		if(email==""||email==null){
 			alert("로그인후 이용해주세요.");
 			return false;
 		}
@@ -261,7 +261,7 @@ $(function() {
 	})
 	/* 즐겨찾기 기능 */
 	$("#blogBookmark").click(function() {
-		if(email==""||email==null||email==undifend){
+		if(email==""||email==null){
 			alert("로그인후 이용해주세요.");
 			return false;
 		}
