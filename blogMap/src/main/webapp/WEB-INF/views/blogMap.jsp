@@ -30,9 +30,6 @@
  	.modal-myPage{
  		width: 900px; 
  		margin: auto;
-/*   	height: 600px;  */
-/*   	max-height: 600px; */
-/*     	overflow-y:scroll; */ 
  	}
 	
  	.modal-email-confrim{
@@ -58,43 +55,42 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>						<!-- bootstrap javascript를 로드 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.js"></script>	<!-- bootstrap-select javascript를 로드 -->
 <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-dropdown.js"></script>		<!-- bootstrap-dropdown javascript를 로드 -->
-<!-- Modal, Metro style javascript를 로드 -->
-<script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
 <script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=3933720084832bd83c88c654d3c6b08a"></script>
 <!-- 네이버 스마트에디터 -->
 <script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- 컨폼 확인창 -->	
 <script type="text/javascript" src="${root }/css/board/jquery.popconfirm.js"></script>
 <!-- modal, session check -->
-<script type="text/javascript">
-	$(document).ready(function() {
+<!-- Modal, Metro style javascript를 로드 -->
+<script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
+<script>
+//<session check -> button change>
+	$(function(){
+		if(sessionStorage.getItem("email")!=null){
+			$("#blogmap_before_login span").remove();
+			$("#myPage_fb_delete_btn").css("display","none");
 
-//			<session check -> button change>
-			if(sessionStorage.getItem('email')!=null){
-				$("#blogmap_before_login span").remove();
-				$("#myPage_fb_delete_btn").css("display","none");
-
-				
-				$("#blogmap_main_myPage").css("display","inline-block");
-				$("#blogmap_before_login").attr("data-toggle","");
-				
-				if(sessionStorage.getItem('manager_yn')=="Y"){
-					$("#manager_page_icon").css("display","inline-block");
-					$("#blogmap_main_myPage").css("display","none");
-				}
-				
-				$("#login_text").text("Logout");
-				
-				if($("#login_text").text()=="Logout"){
-					$("#blogmap_before_login").click(function(){
-						if(sessionStorage.getItem('jointype')=="0002"){
-							FB.logout();
-						}
-						sessionStorage.clear();
-						location.href="${root}/";
-					});
-				}
+			
+			$("#blogmap_main_myPage").css("display","inline-block");
+			$("#blogmap_before_login").attr("data-toggle","");
+			
+			if(sessionStorage.getItem("manager_yn")=="Y"){
+				$("#manager_page_icon").css("display","inline-block");
+				$("#blogmap_main_myPage").css("display","none");
 			}
+			
+			$("#login_text").text("Logout");
+			
+			if($("#login_text").text()=="Logout"){
+				$("#blogmap_before_login").click(function(){
+					if(sessionStorage.getItem('jointype')=="0002"){
+						FB.logout();
+					}
+					sessionStorage.clear();
+					location.href="${root}/";
+				});
+			}
+		}
 	});
 </script>
 <script>
@@ -328,6 +324,7 @@ $(function(){
 </head>
 <body style="padding:10px; padding-top:40px;">
 <div>
+	<!-- 회원관련 -->
 	<div class="container" style="max-width:1170px; padding:0 0 0 0;">
 		<nav class="navbar navbar-inverse" role="navigation" style="width:inherit;">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -401,6 +398,7 @@ $(function(){
 	<!-- Metro style dynamic Tiles -->
 	<div id="metro" class="container dynamicTile">
 		<div class="row ">
+			<!-- 블로그 검색 -->
 	    	<div class="col-sm-2 col-xs-4">
 	    		<div id="tile1" class="tile">
 		        
@@ -416,13 +414,14 @@ $(function(){
 		   		</div>
 			</div>
 			
+			<!-- 블로그맵 로고 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile2" class="tile">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-							<div class="item active">
+							<div class="item active" style="m">
 								<img src="http://handsontek.net/demoimages/tiles/hot.png" class="img-responsive"/>
 							</div>
 						</div>
@@ -431,6 +430,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 블로그 작성 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile3" class="tile">
 			   	 
@@ -448,6 +448,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 쿠폰정보 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile4" class="tile">
 			   	 
@@ -465,6 +466,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 쿠폰추천1 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile5" class="tile" style="cursor:Pointer">
 			  	 
@@ -479,6 +481,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 쿠폰추천2 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile6" class="tile" style="cursor:Pointer">
 			   	 
@@ -495,6 +498,7 @@ $(function(){
 		</div>
 
 		<div class="row">
+			<!-- 여행추천1 -->
 			<div class="col-sm-4 col-xs-8">
 				<div id="tile7" class="tile" style="cursor:Pointer">
 			   	 
@@ -509,6 +513,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 여행추천2 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile8" class="tile" style="cursor:Pointer">
 			   	 
@@ -523,6 +528,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 음식추천1 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile9" class="tile" style="cursor:Pointer">
 				  	 
@@ -537,6 +543,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 음식추천2 -->
 			<div class="col-sm-4 col-xs-8">
 				<div id="tile10" class="tile" style="cursor:Pointer">
 				  	 
@@ -550,12 +557,12 @@ $(function(){
 				    
 				</div>
 			</div>
-			
+		
 		</div>
 	</div>
-	<br/>
+<br/>
 
-	<div class="container" style="max-width:1170px; height:50px; padding:0 0 0 0;">
+	<div class="container" style="max-width:1170px; height:50px;">
 					<div style="width:100%; height:50px; text-align:right;">
 						<p style="width:100%; line-height:46px;">
 							<a id="partner_Registration" style="cursor:Pointer"><img src="${root}/images/blogMap/Partnership_32.png"></a>
@@ -566,8 +573,7 @@ $(function(){
 	</div>
 </div>
 <div class="container-fluid">
-
-	<!-- **********************************
+		<!-- **********************************
 	                        블로그 리스트 : 이헌주
 	     ***********************************-->
 		<!-- 블로그 리스트 - 블로그 리스트 검색 -->
@@ -586,44 +592,6 @@ $(function(){
 				</div>
 		    </div>
 		</div>
-		
-		
-<!-- 		<div class="modal fade" id="blogListMain" data-backdrop="static"> -->
-<!-- 			<div class="modal-dialog" style="height:100%;"> -->
-<!-- 				<div class="modal-content" style="height:100%;"> -->
-<!-- 					<div class="modal-header"> -->
-<!-- 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
-<!-- 						<h4 class="modal-title">Blog Search</h4> -->
-<!-- 					</div> -->
-<!-- 					<div class="modal-body" style="display:block; position:absolute; height:90%;"> -->
-<!-- 						<div id="mainResult" style="position:absolute; height:95%;"> -->
-<%-- 							<jsp:include page="board/blogListMain.jsp"/> --%>
-<!-- 						</div> -->
-<!-- 						<br/> -->
-<!-- 						<br/> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 		    </div> -->
-<!-- 		</div> -->
-		
-		<!-- 블로그 리스트 : 황준-->
-<!-- 		<div class="modal fade" id="blogListSub" data-backdrop="static"> -->
-<!-- 			<div class="modal-dialog modal-lg"> -->
-<!-- 				<div class="modal-content"> -->
-<!-- 					<div class="modal-header"> -->
-<!-- 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
-<!-- 						<h4 class="modal-title">Blog List</h4> -->
-<!-- 					</div><div class="container"></div> -->
-<!-- 					<div class="modal-body"> -->
-<!-- 						<div id="mainResult"> -->
-<%--  							<jsp:include page="board/list_backup.jsp"/> --%>
-<!-- 						</div> -->
-<!-- 						<br/> -->
-<!-- 						<br/> -->
-<!-- 					</div> -->
-<!-- 			   </div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
 		
 		<!-- 블로그 리스트 자세히 보기 : 황준 -->
 		<div class="modal fade" id="blogListDetail" data-backdrop="static">
@@ -644,7 +612,7 @@ $(function(){
 			</div>
 		</div>
 		
-	<!-- **********************************
+		<!-- **********************************
 	                             블로그 작성 : 황준
 	     ***********************************-->
 		<!-- 블로그 작성 - blogMapWrite -->	
@@ -691,6 +659,7 @@ $(function(){
 			   </div>
 			</div>
 		</div>
+		
 		<!-- **********************************
 	                        블로그 수정 : 황준
 	     ***********************************-->
@@ -737,7 +706,7 @@ $(function(){
 			</div>
 		</div> 
 	     		
-	<!-- **********************************
+		<!-- **********************************
 	                        제휴업체 : 변태훈
 	     ***********************************-->
 		<!-- 제휴업체 - 제휴업체등록 main -->
@@ -959,8 +928,8 @@ $(function(){
 			</div>
 		</section>
 	
-	<!-- 제휴업체 - 쿠폰정보등록 팝업 레이어 -->	
-	<!-- 쿠폰 등록 작성 - 쿠폰정보등록 -->
+	  <!-- 제휴업체 - 쿠폰정보등록 팝업 레이어 -->	
+	  <!-- 쿠폰 등록 작성 - 쿠폰정보등록 -->
       <section class="modal fade" id="mainCoupon_Registration">
       <div class="modal-dialog modal-lg">
          <form id="couponWrite_form" class="col-xs-12 form-horizontal" method="post" action="${root}/partner/couponWrite.do" autocomplete="off" enctype="multipart/form-data">
@@ -1019,7 +988,7 @@ $(function(){
    </section>
    
 		
-	<!-- **********************************
+		<!-- **********************************
 	                           회원관리 : 김정훈
 	     ***********************************-->
 		<!-- 회원관리 - 로그인 -->
@@ -1219,7 +1188,7 @@ $(function(){
 		    </div>
 		</div>
 		
-	<!-- **********************************
+		<!-- **********************************
 				관리자페이지 : 이동희
 	     ***********************************-->
 		
@@ -1322,7 +1291,7 @@ $(function(){
 
 
 
-	<!-- **********************************
+		<!-- **********************************
 				메시지박스 : 정기창
 	     ***********************************-->
 		<!-- 메시지박스 - 메시지 메인 -->

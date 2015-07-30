@@ -1,7 +1,28 @@
-/**
- * blogMap.jsp Modal javascript
- */
 $( document ).ready(function(){
+	/**
+	 * blogMap.jsp Metro style dynamic Tiles javascript
+	 */
+    $("#metro .tile").height($("#tile1").width());
+    $("#metro .carousel").height($("#tile1").width());
+    $("#metro .item").height($("#tile1").width());
+     
+    $(window).resize(function() {
+    if(this.resizeTO) clearTimeout(this.resizeTO);
+	this.resizeTO = setTimeout(function() {
+		$(this).trigger('resizeEnd');
+	}, 10);
+    });
+    
+    $(window).bind('resizeEnd', function() {
+    	$("#metro .tile").height($("#tile1").width());
+        $("#metro .carousel").height($("#tile1").width());
+        $("#metro .item").height($("#tile1").width());
+    });
+	
+	
+	/**
+	 * blogMap.jsp Modal javascript
+	 */
 	$('.modal').on('hidden.bs.modal', function( event ) {
 		$(this).removeClass( 'fv-modal-stack' );
 		$('body').data( 'fv_open_modals', $('body').data( 'fv_open_modals' ) - 1 );
@@ -29,28 +50,4 @@ $( document ).ready(function(){
 		
 		$( '.modal-backdrop' ).not( 'fv-modal-stack' ).addClass( 'fv-modal-stack' );
 	});
-});
-
-
-/**
- * blogMap.jsp Metro style dynamic Tiles javascript
- */
-$( document ).ready(function() {
-    $("#metro .tile").height($("#tile1").width());
-    $("#metro .carousel").height($("#tile1").width());
-     $("#metro .item").height($("#tile1").width());
-     
-    $(window).resize(function() {
-    if(this.resizeTO) clearTimeout(this.resizeTO);
-	this.resizeTO = setTimeout(function() {
-		$(this).trigger('resizeEnd');
-	}, 10);
-    });
-    
-    $(window).bind('resizeEnd', function() {
-    	$("#metro .tile").height($("#tile1").width());
-        $("#metro .carousel").height($("#tile1").width());
-        $("#metro .item").height($("#tile1").width());
-    });
-    
 });

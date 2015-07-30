@@ -150,14 +150,12 @@ $(function() {
 								 
 							});
 							
-						},error: function(data) {
-// 							alert();
+						},error: function(data){
 						}	
 					});
 				}
 			},
 			error:function(data){
-// 				alert();
 			}
 			
 		});
@@ -165,6 +163,7 @@ $(function() {
 			alert("NULL값으로 입력해주세요.");			
 		}
 	});
+	
 	/*추천 기능*/
 	$("#blog_reference").click(function() {
 		if(email==""||email==null){
@@ -211,6 +210,7 @@ $(function() {
 					}
 				});
 	})
+	
 	/*비추천 기능 */
 	$("#blog_noreference").click(function() {
 		if(email==""||email==null){
@@ -259,6 +259,7 @@ $(function() {
 					}
 				});
 	})
+	
 	/* 즐겨찾기 기능 */
 	$("#blogBookmark").click(function() {
 		if(email==""||email==null){
@@ -600,7 +601,7 @@ function reply_delete(DThis) {
 	if($("#reply_content_update"+index).text()=='수정'){
 		var replyNo=$("#reply_content_insert"+index+" > span:eq(0)").text();
 		
-		var member_id=$("#reply_content_insert"+index+" > span:eq(1)").val();
+		var member_id=$("#reply_content_insert"+index+" > span:eq(1)").text();
 	
 	if (confirm("정말 삭제하시	겠습니까??") == true){ //확인
 		$.ajax({
