@@ -25,7 +25,7 @@
 						<div class="row">
 		    				<div class="col-xs-6 col-sm-6 col-md-6">
 		    					<div class="form-group">
-		               				<input type="text" id="email_confirm_num" class="form-control input-sm" placeholder="Email Address"/>
+		               				<input type="text" id="email_confirm_num" class="form-control input-sm" placeholder="인증번호를 입력해주세요."/>
 		    					</div>
 		    				</div>
 		    				

@@ -151,15 +151,25 @@ public class MemberServiceImpl implements MemberService {
 		memberDto.setMember_jointype("0001");		
 		int check=0;
 		
+		MemberDto deleteMemberDto=null;
 		//삭제했다가 다시 가입했을때
-		MemberDto deleteMemberDto=memberDao.fbRegisterCheck(memberDto.getMember_id());
-		
-		System.out.println(deleteMemberDto.getMember_jointype());
-		if(deleteMemberDto.getMember_jointype().equals("0003")){
-			check=memberDao.reRegister(memberDto);
+		deleteMemberDto=memberDao.fbRegisterCheck(memberDto.getMember_id());
+		//System.out.println("qqqqqq");
+		//System.out.println(deleteMemberDto.getMember_jointype());
+		if(deleteMemberDto!=null){
+			//System.out.println("aaaa");
+			if(deleteMemberDto.getMember_jointype().equals("0003")){
+				System.out.println("bbbbbbb");
+				check=memberDao.reRegister(memberDto);
+			}
 		}else{
+			//System.out.println("zzzzzz");
 			check=memberDao.register(memberDto);
 		}
+		
+
+		
+		
 		
 		logger.info("check:" + check);
 
@@ -581,7 +591,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @name:board_info
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:해당 아이디의 게시글 정보를 호출하기위한 메소드
 	 */
 	@Override
 	public void board_info(ModelAndView mav) {
@@ -632,7 +642,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @name:favorite_info
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:해당 아이디의 즐겨찾기 정보를 호출하기위한 메소드
 	 */
 	@Override
 	public void favorite_info(ModelAndView mav) {
@@ -684,7 +694,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @name:coupon_info
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:해당 아이디의 쿠폰 정보를 호출하기위한 메소드
 	 */
 	@Override
 	public void coupon_info(ModelAndView mav) {

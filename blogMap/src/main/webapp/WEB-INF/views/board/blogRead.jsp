@@ -66,7 +66,7 @@ $(function() {
 	
 	//댓글입력 버튼 클릭시 
 	$("span[class='glyphicon glyphicon-ok']").click(function() {
-		if(email==""||email==null||email==undifend){
+		if(email==""||email==null){
 			alert("로그인후 댓글이용 해주세요.");
 			$("#replyInsert").val("");
 			return false;
@@ -150,14 +150,12 @@ $(function() {
 								 
 							});
 							
-						},error: function(data) {
-// 							alert();
+						},error: function(data){
 						}	
 					});
 				}
 			},
 			error:function(data){
-// 				alert();
 			}
 			
 		});
@@ -165,9 +163,10 @@ $(function() {
 			alert("NULL값으로 입력해주세요.");			
 		}
 	});
+	
 	/*추천 기능*/
 	$("#blog_reference").click(function() {
-		if(email==""||email==null||email==undifend){
+		if(email==""||email==null){
 			alert("로그인후 이용해주세요.");
 			return false;
 		}
@@ -211,9 +210,10 @@ $(function() {
 					}
 				});
 	})
+	
 	/*비추천 기능 */
 	$("#blog_noreference").click(function() {
-		if(email==""||email==null||email==undifend){
+		if(email==""||email==null){
 			alert("로그인후 이용해주세요.");
 			return false;
 		}
@@ -259,9 +259,10 @@ $(function() {
 					}
 				});
 	})
+	
 	/* 즐겨찾기 기능 */
 	$("#blogBookmark").click(function() {
-		if(email==""||email==null||email==undifend){
+		if(email==""||email==null){
 			alert("로그인후 이용해주세요.");
 			return false;
 		}
@@ -600,7 +601,7 @@ function reply_delete(DThis) {
 	if($("#reply_content_update"+index).text()=='수정'){
 		var replyNo=$("#reply_content_insert"+index+" > span:eq(0)").text();
 		
-		var member_id=$("#reply_content_insert"+index+" > span:eq(1)").val();
+		var member_id=$("#reply_content_insert"+index+" > span:eq(1)").text();
 	
 	if (confirm("정말 삭제하시	겠습니까??") == true){ //확인
 		$.ajax({
@@ -635,7 +636,7 @@ function reply_delete(DThis) {
 	<div class="col-md-10 col-sm-10 col-xs-10">
 		<div id="read_div">
 			<div class="row" style="height:35px; border-bottom:1px solid #e5e5e5;">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:100%;">
+				<div id="blogReadBox" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:100%;">
 					<!-- 업체명 -->
 					<div id="blogRead_addrtitle" class="form-group form-group-sm" style="display:inline-block; float:left; height:100%;"></div>
 					<!-- 카테고리 -->
