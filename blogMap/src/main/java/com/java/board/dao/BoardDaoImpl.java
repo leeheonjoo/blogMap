@@ -20,17 +20,6 @@ public class BoardDaoImpl implements BoardDao {
 	private SqlSessionTemplate sqlSession;
 	
 	/**
-	 * @name : getData
-	 * @date : 2015. 6. 23.
-	 * @author : 황준
-	 * @description : 데이터 테스트
-	 */
-	@Override
-	public String getData() {
-		return sqlSession.selectOne("dao.BoardReadMapper.getData");
-	}
-	
-	/**
 	 * @name : getHeaderCondition
 	 * @date : 2015. 7. 02.
 	 * @author : 황준
@@ -49,7 +38,6 @@ public class BoardDaoImpl implements BoardDao {
 	 * @author : 황준
 	 * @description : 블로그 작성
 	 */
-
 	@Override
 	public HashMap<String, Object> blogWrite(HashMap<String, Object> hashMap) {
 		logger.info("BoardDao blogWrite  DAO-------------------------");
@@ -65,15 +53,6 @@ public class BoardDaoImpl implements BoardDao {
 		hashMap.put("check", check);
 		return hashMap;
 	}
-
-	/*@Override
-	public int blogWrite_attach(HashMap<String, Object> hashMap) {
-		// TODO Auto-generated method stub
-		logger.info("BoardDao blogWrite_attach  DAO-------------------------");
-		int check=sqlSession.insert("dao.BoardMapper.blogWrite_attach",hashMap);
-		
-		return check;
-	}*/
 
 	/**
 	 * @name : blogWrite_attach
@@ -94,6 +73,7 @@ public class BoardDaoImpl implements BoardDao {
 		int check=sqlSession.insert("dao.BoardMapper.blogWrite_attach",hashMap);
 		return check;
 	}
+	
 	/**
 	 * @name : coupon_data_list
 	 * @date : 2015. 7. 15.
@@ -119,6 +99,7 @@ public class BoardDaoImpl implements BoardDao {
 		hMap.put("coupon_no", coupon_no);
 		return sqlSession.insert("dao.BoardMapper.insertCouponIssue",hMap);
 	}
+	
 	/**
 	 * @name : checkCoupon
 	 * @date : 2015. 7. 15.

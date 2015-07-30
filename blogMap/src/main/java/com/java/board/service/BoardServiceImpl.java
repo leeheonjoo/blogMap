@@ -54,25 +54,6 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	private BoardDao boardDao;
-	
-	/**
-	 * @name : getData
-	 * @date : 2015. 6. 23.
-	 * @author : 황준
-	 * @description : 데이터 테스트
-	 */
-	@Override
-	public void getData(ModelAndView mav) {
-		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
-
-		String content = boardDao.getData();
-
-		logger.info("content : " + content);
-
-		request.setAttribute("content", content);
-		mav.addObject("content", content);
-	}
 
 	/**
 	 * @name : searchMap
@@ -80,14 +61,14 @@ public class BoardServiceImpl implements BoardService {
 	 * @author : 황준
 	 * @description : 지도 검색을 위한 함수 (크롬상의 rss_xml로 인한 보안문제로 proxy로 해결)
 	 */
-	
 	@Override
 	public void searchMap(ModelAndView mav) {
-		logger.info("searchMap!!!!!!!!!!");
+		logger.info("BoardServiceImpl searchMap");
+		
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		HttpServletResponse response = (HttpServletResponse) map.get("response");
-			
+
 		int statusCode=0;
 		GetMethod method=null;
 		try {
@@ -95,6 +76,7 @@ public class BoardServiceImpl implements BoardService {
 		} catch (UnsupportedEncodingException e2) {
 			e2.printStackTrace();
 		}
+		
 		num = Integer.parseInt(request.getParameter("num"));
 		//지도API일 경우(xml)
 		if (num == 1) {
@@ -158,84 +140,10 @@ public class BoardServiceImpl implements BoardService {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
-				
-				
-				
 			} catch (UnsupportedEncodingException e1) {
 				e1.printStackTrace();
 			}
 		}
-		
-		
-		/*
-		 * xml에서 json 파싱으로 변경 밑에는 xml파싱시 CDATA부분의 파싱을 위한 부분
-		 */
-	/*	try {
-			
-			//성공시
-			if (statusCode == HttpStatus.SC_OK) {
-				
-				
-				if (num == 1) {// 검색api일 경우
-					
-				} else if (num == 2) { // 지도api일 경우
-					response.setContentType("text/xml;charset=utf-8");
-					System.out.println("1-------------------");
-					//System.out.println(result);
-					
-					DocumentBuilderFactory documentBuilderFactory=DocumentBuilderFactory.newInstance();
-					DocumentBuilder documentBuilder=documentBuilderFactory.newDocumentBuilder();
-					Document xml=null;
-					xml=documentBuilder.parse(urls);
-					Element element=xml.getDocumentElement();
-					
-					//xml=><result>태그
-					Node channelNode=(Node) element.getElementsByTagName("result").item(0);
-					NodeList list=channelNode.getChildNodes();
-					
-						
-					//items tag
-					NodeList itemsList=list.item(5).getChildNodes();
-					//item tag
-					NodeList itemList=itemsList.item(1).getChildNodes();
-					//adrdetail tag
-					NodeList adrdetailList=itemList.item(3).getChildNodes();
-					
-					NodeList sidoList=adrdetailList.item(3).getChildNodes();
-					NodeList sigugunList=adrdetailList.item(5).getChildNodes();
-					NodeList dongmyunList=adrdetailList.item(7).getChildNodes();
-					NodeList restList=adrdetailList.item(9).getChildNodes();
-					
-					System.out.println("2-------------------");
-					System.out.println("시도:"+sidoList.item(0).getNodeValue());
-					System.out.println("시구군:"+sigugunList.item(0).getNodeValue());
-					System.out.println("동면:"+dongmyunList.item(0).getNodeValue());
-					System.out.println("번지:"+restList.item(0).getNodeValue());
-				
-					String addr=list.item(1).getChildNodes().item(0).getNodeValue();
-					
-					map.put(addr+k, addr);
-						
-					k++;
-					mav.addObject("map",map);
-					
-					
-					//response.getWriter().print(result);
-				}
-				
-			
-			
-			}
-			
-		} catch (Exception e) {
-			try {
-				response.getWriter().print(e.toString());
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			e.printStackTrace();
-		}*/
 	}
 
 	/**
@@ -244,16 +152,15 @@ public class BoardServiceImpl implements BoardService {
 	 * @author : 황준
 	 * @description : 네이버 스마트에디터 api 사용시 사진 단일 업로드시
 	 */
-	//단일파일 업로드
 	@Override
 	public String onePhotoUpload(ModelAndView mav) {
-		
 		Map<String,Object> map=mav.getModel();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		PhotoDto photoDto=(PhotoDto) map.get("photoDto");
 		String callback=photoDto.getCallback();
 		String callback_func=photoDto.getCallback_func();
 		String file_result="";
+		
 		try {
 			if(photoDto.getFileDate()!=null&&photoDto.getFileDate().getOriginalFilename()!=null&&!photoDto.getFileDate().getOriginalFilename().equals("")){
 				//파일이 존재하면
@@ -261,13 +168,16 @@ public class BoardServiceImpl implements BoardService {
 				System.out.println("original_name:"+original_name);
 				String ext=original_name.substring(original_name.lastIndexOf(".")+1);
 				System.out.println("ext:"+ext);
+				
 				//파일 기본 경로
 				String defaultPath=request.getSession().getServletContext().getRealPath("/");
 				System.out.println("defaultPath:"+defaultPath);
+				
 				//파일 기본경로_상세경로
 				String path=defaultPath+"editor"+File.separator+"photo_upload"+File.separator;
 				System.out.println("path:"+path);
 				File file=new File(path);
+				
 				//디렉토리 존재하지 않을경우 디렉토리 생성
 				if(!file.exists()){
 					file.mkdir();
@@ -275,6 +185,7 @@ public class BoardServiceImpl implements BoardService {
 				
 				//서버에 업로드 할 파일명(한글문제로 인해 원본파일은 올리지 않는것이 좋음)
 				String realname=UUID.randomUUID().toString()+"."+ext;
+				
 				//서버에 파일쓰기
 				photoDto.getFileDate().transferTo(new File(path+realname));
 				file_result+="&bNewLine=true&sFileName="+original_name+"&sFileURL=/editor/photo_upload/"+realname;
@@ -294,10 +205,8 @@ public class BoardServiceImpl implements BoardService {
 	 * @author : 황준
 	 * @description : 네이버 스마트에디터 api 사용시 사진 다중 업로드시
 	 */
-	//다중파일 업로드
 	@Override
 	public void multiPhotoUpload(ModelAndView mav) {
-		// TODO Auto-generated method stub
 		Map<String, Object> map=mav.getModel();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		HttpServletResponse response = (HttpServletResponse) map.get("response");
@@ -305,14 +214,19 @@ public class BoardServiceImpl implements BoardService {
 		try {
 			//파일정보
 			String sFileInfo="";
+			
 			//파일명을 받는다 - 일반 원본파일명
 			String filename=request.getHeader("file-name");
+			
 			//파일 확장자
 			String filename_ext=filename.substring(filename.lastIndexOf(".")+1);
+			
 			//확장자를 소문자로 변경
 			filename_ext=filename_ext.toLowerCase();
+			
 			//파일 기본경로
 			String dftFilePath=request.getSession().getServletContext().getRealPath("/");
+			
 			//파일 기본경로_상세경로
 			String filePath=dftFilePath+"editor"+File.separator+"photo_upload"+File.separator;
 			File file=new File(filePath);
@@ -320,13 +234,16 @@ public class BoardServiceImpl implements BoardService {
 				file.mkdir();
 			}
 			String realFileNm="";
+			
 			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
 			String today=sdf.format(new Date());
 			realFileNm=today+UUID.randomUUID().toString()+filename.substring(filename.lastIndexOf("."));
 			String rlFileNm=filePath+realFileNm;
+			
 			//서버에 파일 쓰기
 			InputStream is=request.getInputStream();
 			OutputStream os=new FileOutputStream(rlFileNm);
+			
 			int numRead;
 			byte b[]=new byte[Integer.parseInt(request.getHeader("file-size"))];
 			while ((numRead=is.read(b,0,b.length))!=-1) {
@@ -337,6 +254,7 @@ public class BoardServiceImpl implements BoardService {
 			}
 			os.flush();
 			os.close();
+			
 			//서버에 파일쓰기
 			sFileInfo+="&bNewLine=true";
 			sFileInfo+="&sFileName="+filename;
@@ -367,7 +285,6 @@ public class BoardServiceImpl implements BoardService {
 		
 		List<String> headerList=boardDao.getHeaderCondition();
 		
-		
 		Gson gson=new Gson();
 		String json=gson.toJson(headerList);
 		
@@ -397,6 +314,7 @@ public class BoardServiceImpl implements BoardService {
 		Board_addr_infoDto board_addr_infoDto=(Board_addr_infoDto) map.get("Board_addr_infoDto");
 		BoardReadDto boardreadDto=(BoardReadDto) map.get("BoardReadDto");
 		Point_info point_infoDto=new Point_info();
+		
 		//회원 ID만(작성자) 받아옴
 		String member_id=request.getParameter("member_id");
 		
@@ -409,8 +327,10 @@ public class BoardServiceImpl implements BoardService {
 		
 		String content=request.getParameter("board_content");
 		logger.info("DB저장값 내용:"+content);
+		
 		//게시판 글작성
 		hashMap=boardDao.blogWrite(hashMap);
+		
 		//결과값
 		int check=(Integer) hashMap.get("check"); //성공 1
 		System.out.println("check1: " + check);
@@ -438,7 +358,6 @@ public class BoardServiceImpl implements BoardService {
 			if(fileSize[j]!=0){
 				attach_fileDto=new Attach_fileDto();
 				try{
-					
 					//20150715_1243 이헌주 : 파일업로드 절대경로 수정
 					String dir = "C:/workspace/blogMap/src/main/webapp/pds/board";
 					
@@ -483,44 +402,8 @@ public class BoardServiceImpl implements BoardService {
 			logger.info("첨부파일 DB추가완료:"+check);
 		}
 		
-		
-		
-		
-		
-		/*//카테고리
-		String category_mname=request.getParameter("category_mname");
-		String category_sname=request.getParameter("category_sname");
-		System.out.println("카테고리1:"+category_mname);
-		System.out.println("카테고리2:"+category_sname);
-		//작성사
-		
-		//주소
-		String sido=request.getParameter("addr_sido");
-		String sigugun=request.getParameter("addr_sigugun");
-		String dongmyun=request.getParameter("addr_dongri");
-		String rest=request.getParameter("addr_bunji");
-		
-		
-		
-			
-		//평점
-		String grade=request.getParameter("board_grade");		
-		
-		//데이터 확인
-		logger.info("DB저장값 작성자:"+member_id);
-		logger.info("DB저장값 시도:"+sido);
-		logger.info("DB저장값 시구군:"+sigugun);
-		logger.info("DB저장값 동면:"+dongmyun);
-		logger.info("DB저장값 번지:"+rest);
-		logger.info("DB저장값 내용:"+content);
-		logger.info("DB저장값 코멘트:"+comment);
-		logger.info("DB저장값 평점:"+grade);
-		
-		for (int i = 0; i < upFile.size(); i++) {
-			logger.info("DB저장값 이미지파일:"+upFile.get(i).getOriginalFilename());
-		}*/
-		
 	}
+	
 	/**
 	 * @name : coupon_issue
 	 * @date : 2015. 7. 15.
@@ -555,12 +438,12 @@ public class BoardServiceImpl implements BoardService {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(coupon_data_json);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
 	}
+	
 	/**
 	 * @name : getCoupon
 	 * @date : 2015. 7. 15.
@@ -592,7 +475,6 @@ public class BoardServiceImpl implements BoardService {
 		try {
 			response.getWriter().print(check);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
