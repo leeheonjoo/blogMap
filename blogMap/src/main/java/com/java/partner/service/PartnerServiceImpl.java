@@ -149,8 +149,13 @@ public class PartnerServiceImpl implements PartnerService {
 		mav.addObject("writeList",writeList);
 		mav.addObject("json", json);
 	}
-	
-	@Override
+	/**
+	 * @name: getTourPartnerListDate
+	 * @date:2015. 7. 5.
+	 * @author: 변태훈
+	 * @description:  제휴업체 Tour&Restaurant 업체정보 데이터 등록
+	 */	
+@Override
 	public void getTourPartnerListDate(ModelAndView mav) {
 		logger.info("Partner getTourPartnerListDate start----------------");
 		
@@ -277,7 +282,13 @@ public class PartnerServiceImpl implements PartnerService {
 			} // if end
 		} // while end
 	}
-	@Override
+	/**
+	 * @name:couponWriteList
+	 * @date:2015. 7. 16.
+	 * @author:변태훈
+	 * @description: 쿠폰등록 업체 리스트
+	 */
+@Override
 	public void couponWriteList(ModelAndView mav) {
 		// TODO Auto-generated method stub
 		
@@ -289,7 +300,7 @@ public class PartnerServiceImpl implements PartnerService {
 	 * @author:변태훈
 	 * @description: partnerList 조회시 조회한 이름으로 DB에서 데이타를 가지고 온다.
 	 */
-	@Override
+@Override
 	public void getSearchPartnerDate(ModelAndView mav) {
 		
 		Map<String, Object> map=mav.getModelMap();
@@ -309,13 +320,13 @@ public class PartnerServiceImpl implements PartnerService {
 		
 		mav.addObject("searchjson", searchjson);
 	}
-	/**
-	 * @name: writeCouponList
-	 * @date:2015. 7. 22.
-	 * @author: 변태훈
-	 * @description:  제휴업체 writeCouponList 리스트
-	 */
-		@Override
+/**
+ * @name: writeCouponList
+ * @date:2015. 7. 22.
+ * @author: 변태훈
+ * @description:  제휴업체 writeCouponList 리스트
+ */
+@Override
 		public void writeCouponList(ModelAndView mav) {
 			logger.info("PartnerServiceImp writeCouponList----------------");
 		
@@ -348,7 +359,14 @@ public class PartnerServiceImpl implements PartnerService {
 			//mav.addObject("writeCouponList",writeCouponList);
 			mav.addObject("json", json);
 		}
-	@Override
+/**
+ * @name: search_partnerCouponinfo
+ * @date:2015. 7. 22.
+ * @author: 변태훈
+ * @description:  제휴업체 검색 리스트
+ */		
+		
+@Override
 	public void search_partnerCouponinfo(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
@@ -375,7 +393,14 @@ public class PartnerServiceImpl implements PartnerService {
 		mav.addObject("searchCouponJson", searchCouponJson);
 		
 	}
-	@Override
+	
+/**
+ * @name: getPartnerCouponData
+ * @date:2015. 7. 22.
+ * @author: 변태훈
+ * @description:  제휴업체 쿠폰 데이터 등록
+ */		
+@Override
 	public void getPartnerCouponData(ModelAndView mav) {
 		logger.info("Partner getPartnerCouponData start----------------");
 		

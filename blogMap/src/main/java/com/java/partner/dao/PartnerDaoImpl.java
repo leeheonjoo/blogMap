@@ -11,12 +11,7 @@ import org.springframework.stereotype.Component;
 import com.java.boardRead.dto.BoardReadDto;
 import com.java.coupon.dto.CouponDto;
 import com.java.partner.dto.PartnerDto;
-/**
- * @name:partnerRegister
- * @date:2015. 7. 5.
- * @author: 변태훈
- * @description: 제휴업체 등록 (partnerRegister)
- */
+
 @Component
 public class PartnerDaoImpl implements PartnerDao {
 	private final Logger logger=Logger.getLogger(this.getClass().getName());
@@ -24,6 +19,12 @@ public class PartnerDaoImpl implements PartnerDao {
 @Autowired
 	public SqlSessionTemplate session;
 	
+/**
+ * @name:partnerRegister
+ * @date:2015. 7. 5.
+ * @author: 변태훈
+ * @description: 제휴업체 등록 (partnerRegister)
+ */
 @Override
 	public int partnerRegister(PartnerDto partnerDto, BoardReadDto boardreadDto) {
 		logger.info("PartnerMapper.partnerRegister-------------------------------------");
@@ -36,7 +37,7 @@ public class PartnerDaoImpl implements PartnerDao {
 		return check;
 	}
 /**
- * @name:getPartnerList
+ * @name:getwriteList
  * @date:2015. 7. 7.
  * @author: 변태훈
  * @description: 제휴업체 리스트 (getPartnerList)
@@ -49,11 +50,23 @@ public class PartnerDaoImpl implements PartnerDao {
 		
 		return list;
 	}
-	
+/**
+ * @name:getPartnerCount
+ * @date:2015. 7. 10.
+ * @author: 변태훈
+ * @description: 제휴업체등록을 위한 count 반환
+ */
 @Override
 	public int getPartnerCount() {
 		return session.selectOne("dao.PartnerMapper.partnerCount");
 	}
+/**
+ * @name:getTourPartnerListDate
+ * @date:2015. 7. 11.
+ * @author: 변태훈
+ * @description: 제휴업체 업체 정보 데이터 등록
+ */
+
 @Override
 	public List<HashMap<String, Object>> getTourPartnerListDate(HashMap<String, Object> hMap) {
 		logger.info("PartnerMapper.getTourPartnerListDate----------------------");
@@ -62,6 +75,12 @@ public class PartnerDaoImpl implements PartnerDao {
 		
 		return session.selectList("dao.PartnerMapper.getTourPartnerListDate", hMap);
 	}
+/**
+ * @name:couponRegister
+ * @date:2015. 7. 14.
+ * @author: 변태훈
+ * @description: 제휴업체 쿠폰등록
+ */
 @Override
 	public int couponRegister(CouponDto couponDto,int partner_no) {
 		logger.info("CouponMapper.couponRegister-------------------------------------");
@@ -74,18 +93,36 @@ public class PartnerDaoImpl implements PartnerDao {
 		
 		return check;
 	}
+/**
+ * @name:ggetSearchParnterData
+ * @date:2015. 7. 10.
+ * @author: 변태훈
+ * @description: 제휴업체 이름으로 리스트 검색하는 데이터
+ */
 @Override
 	public List<PartnerDto> getSearchParnterData(String partner_name) {
 		logger.info("PartnerMapper.getSearchParnterData-------------------------------------");
 		logger.info("partner_name 맴퍼가기전 : "+ partner_name);
 		return session.selectList("dao.PartnerMapper.getSearchPartnerList",partner_name);
 	}
+/**
+ * @name:coupon_Register
+ * @date:2015. 7. 10.
+ * @author: 변태훈
+ * @description: 제휴업체 쿠폰등록
+ */
 @Override
 	public int coupon_Register(CouponDto couponDto) {
 		// TODO Auto-generated method stub
 		return session.insert("dao.PartnerMapper.coupon_register",couponDto);
 	}
-	@Override
+/**
+ * @name:getwriteCouponList
+ * @date:2015. 7. 10.
+ * @author: 변태훈
+ * @description: 제휴업체 쿠폰등록을후 리스트
+ */
+@Override
 	public List<HashMap<String, Object>> getwriteCouponList(String member_id) {
 		logger.info("PartnerMapper.getWriteCouponList----------------------------------");
 		List<HashMap<String, Object>> list=session.selectList("dao.PartnerMapper.getWriteCouponList",member_id);
@@ -93,14 +130,27 @@ public class PartnerDaoImpl implements PartnerDao {
 		
 		return list;
 	}
-	@Override
+/**
+ * @name:search_partnerCouponinfo
+ * @date:2015. 7. 10.
+ * @author: 변태훈
+ * @description: 제휴업체 이름으로 리스트 검색하는
+ */
+@Override
 	public List<HashMap<String, Object>> search_partnerCouponinfo(String coupon_item) {
 		logger.info("PartnerMapper.search_partnerCouponinfo-------------------------------------");
 		logger.info("coupon_item 맴퍼가기전 : "+ coupon_item);
 		
 		return session.selectList("dao.PartnerMapper.search_partnerCouponinfo",coupon_item);
 	}
-	@Override
+
+/**
+ * @name:getPartnerCouponData
+ * @date:2015. 7. 10.
+ * @author: 변태훈
+ * @description: 쿠폰업체 쿠폰정보 데이터 등록
+ */
+@Override
 	public List<HashMap<String, Object>> getPartnerCouponData(HashMap<String, Object> hMap) {
 		logger.info("PartnerMapper.getPartnerCouponData----------------------");
 		//logger.info("coupon_no 맴퍼가기전 : "+ hMap.get("coupon_no"));
