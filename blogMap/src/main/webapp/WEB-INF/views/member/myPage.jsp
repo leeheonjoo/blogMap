@@ -77,16 +77,16 @@ if(sessionStorage.getItem('email')!=null){
 					});
 					
 					if(data[1]>=0&&data[1]<20){
-						$("#myPage_member_rate").text("새싹");
+						$("#myPage_member_rate").text("신입");
 					}
 					if(data[1]>=20&&data[1]<100){
-						$("#myPage_member_rate").text("중수");
+						$("#myPage_member_rate").text("주임");
 					}
 					if(data[1]>=100&&data[1]<500){
-						$("#myPage_member_rate").text("고수");
+						$("#myPage_member_rate").text("대리");
 					}
 					if(data[1]>=500){
-						$("#myPage_member_rate").text("매니아");
+						$("#myPage_member_rate").text("과장");
 					}
 					
 					$("#myPage_member_board_total").text(data[2]+" EA");
