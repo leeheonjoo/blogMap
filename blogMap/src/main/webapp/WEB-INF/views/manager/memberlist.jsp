@@ -9,8 +9,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Member Page</title>
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script> -->
-<%-- <script type="text/javascript" src="${root }/css/manager/script.js"></script> --%>
 <style>
 	.table-bordered {
 		border: 1px solid #dddddd;

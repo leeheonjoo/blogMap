@@ -38,8 +38,6 @@
 		 		            }
 	 						
 	 					}	 
-	 					 //$("#blogmap_login_bar").fadeOut();
-	 				   	 //$("#blogmap_after_login").css("display","block");
 	 					 alert("로그인 성공");
 	 					 location.href="${root}/";
 	 				}
@@ -56,21 +54,7 @@
 </script>
 </head>
 <body>
-	
-	<!-- <span>
-	<input type="text" name="id"/><br/>
-	<input type="password" name="password"/>
-	</span>
-	
-	<span>
-	<input type="button" id="login" value="로그인"/>
-	</span>
-	
-	<div id="loginCheck"></div> -->
-	
-	
     <script>
-
       window.fbAsyncInit = function() {
     	var email = null;  
    		var jointype = null;
@@ -89,8 +73,6 @@
                 
                 FB.api('/me', function(user) {
                     if (user) {
-                     /*   var image = document.getElementById('image');
-                        image.src = 'http://graph.facebook.com/' + user.id + '/picture';*/
                         
                         var name = document.getElementById('name');
                         name.innerHTML = user.name
@@ -142,9 +124,7 @@
                 });    
                  
             } else if (response.status === 'not_authorized') {
-				//alert("aa");
             } else {
-                //alert("bb");
             }
             
             

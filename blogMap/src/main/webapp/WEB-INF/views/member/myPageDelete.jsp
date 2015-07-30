@@ -12,9 +12,6 @@
 if(sessionStorage.getItem('email')!=null){
 	$(function(){
 		var email=sessionStorage.getItem('email');
-		//$("#myPageUpdate_member_id").val(email);
-		
-		//var email="kimjh112339@naver.com";
 		
 		$("#myPageDelete_OkayBtn").click(function(){
 			//유효성검사
@@ -46,7 +43,6 @@ if(sessionStorage.getItem('email')!=null){
 		});
 		
 		$("#myPageDelete_CancelBtn").click(function(){
-			//$("#myPageDelete_layer_div").fadeOut();
 			$("div[id='blogmap_myPageDelete'].modal").modal('hide');
 		});
 		

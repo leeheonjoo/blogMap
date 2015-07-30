@@ -116,7 +116,6 @@ $(document).ready(function(){
 function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
 	//alert(confirm_num);
 	$("#email_confirm_check_btn").click(function(){
-		//alert("aa");
 		if($('#email_confirm_num').val()==confirm_num){
 			$("div[id='blogmap_email_confirm'].modal").modal('hide');
 			alert("인증완료!");
@@ -192,11 +191,6 @@ function email_confirm_check(confirm_num){  //이메일 인증 확인버튼
 			    				<input type="hidden" id="member_register_id_hidden"/>
 			    			</div>
 			    			
-			    			
-			    			<!-- <div class="form-group">
-			    				<input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
-			    			</div> -->
-
 			    			<div class="row">
 			    				<div class="col-xs-6 col-sm-6 col-md-6">
 			    					<div class="form-group">

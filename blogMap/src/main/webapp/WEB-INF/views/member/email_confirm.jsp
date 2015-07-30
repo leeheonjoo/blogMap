@@ -6,11 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-	<!-- <h3>입력된 이메일로 인증번호가 발송되었습니다.</h3>
-	<input type="text" id="email_confirm_num" value="이거 뭐하는거있었는데.. 찾아보기"/><br/>
-	<input type="button" id="email_confirm_check_btn" value="확인"/> -->
-	
+<body>	
 	<div class="container" style="width:100%;">
         <div class="row centered-form">
 	        <div>
@@ -19,9 +15,7 @@
 				    	<h1 class="panel-title">입력된 이메일로 인증번호가 발송되었습니다.</h1>
 				 	</div>
 				 	
-		 			<div class="panel-body"> 
-		    		<!-- <form role="form"> -->
-		  	
+		 			<div class="panel-body"> 		  	
 						<div class="row">
 		    				<div class="col-xs-6 col-sm-6 col-md-6">
 		    					<div class="form-group">
