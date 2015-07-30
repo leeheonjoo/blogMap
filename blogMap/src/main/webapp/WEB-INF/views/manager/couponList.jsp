@@ -268,27 +268,34 @@
 	              		var geteymd = new Date(data[i].COUPON_EYMD);
 	              		var eymd = leadingZeros(geteymd.getFullYear(), 4) + '/' + leadingZeros(geteymd.getMonth() + 1, 2) + '/' + leadingZeros(geteymd.getDate(), 2);
 						
+	              		var getCoupoYN=data[i].COUPON_YN
+	              		//alert(getCoupoYN);
+	              		if(getCoupoYN=="Y"){
+	              			getCoupoYN = "O";
+	              		}else{
+	              			getCoupoYN = "X";
+	              		}
+	              		
+						
 						if(data[i].COUPON_YN == "N"){
 							$("#couponListResult").append("<tr style='text-align:center;'>"
-									+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 									+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
 									+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 									+ "<td>" + bymd + "</td>"						// 등록일
 									+ "<td>" + eymd + "</td>"		//
-									+ "<td>"
-									+"<input type='button' id='coupon' value = '승인' name='"+data[i].COUPON_NO+"'/></td>"
+									+ "<td>" + getCoupoYN + "</td>"			
+									+ "<td><input type='button' id='coupon' value = '승인' name='"+data[i].COUPON_NO+"'/></td>"
 									+ "</tr>");
 						}else if(data[i].COUPON_YN =="Y"){
 							$("#couponListResult").append("<tr style='text-align:center;'>"
-									+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 									+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
 									+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 									+ "<td>" + bymd + "</td>"						// 등록일
 									+ "<td>" + eymd + "</td>"		//
-									+ "<td>"
-									+"<input type='button' id='coupon' value = '취소' name='"+data[i].COUPON_NO+"'/></td>"
+									+ "<td>" + getCoupoYN + "</td>"			// 아이디
+									+ "<td><input type='button' id='coupon' value = '취소' name='"+data[i].COUPON_NO+"'/></td>"
 									+ "</tr>");
 						}
 						
@@ -483,27 +490,34 @@
 	              		var geteymd = new Date(data[i].COUPON_EYMD);
 	              		var eymd = leadingZeros(geteymd.getFullYear(), 4) + '/' + leadingZeros(geteymd.getMonth() + 1, 2) + '/' + leadingZeros(geteymd.getDate(), 2);
 						
+	              		var getCoupoYN=data[i].COUPON_YN
+	              		//alert(getCoupoYN);
+	              		if(getCoupoYN=="Y"){
+	              			getCoupoYN = "O";
+	              		}else{
+	              			getCoupoYN = "X";
+	              		}
+	              		
+						
 						if(data[i].COUPON_YN == "N"){
 							$("#couponListResult").append("<tr style='text-align:center;'>"
-									+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 									+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
 									+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 									+ "<td>" + bymd + "</td>"						// 등록일
 									+ "<td>" + eymd + "</td>"		//
-									+ "<td>"
-									+"<input type='button' id='coupon' value = '승인' name='"+data[i].COUPON_NO+"'/></td>"
+									+ "<td>" + getCoupoYN + "</td>"			
+									+ "<td><input type='button' id='coupon' value = '승인' name='"+data[i].COUPON_NO+"'/></td>"
 									+ "</tr>");
 						}else if(data[i].COUPON_YN =="Y"){
 							$("#couponListResult").append("<tr style='text-align:center;'>"
-									+ "<td>" + data[i].COUPON_NO + "</td>"			// 아이디
 									+ "<td>" + data[i].PARTNER_NAME + "</td>"			// 이름	
 									+ "<td><a data-toggle='modal' href='#couponDetail' class='btn-example' id='coupon"+data[i].COUPON_NO+"'>" + data[i].COUPON_ITEM + "</a></td>"		//
 									+ "<td>" + data[i].COUPON_DISCOUNT + "%"+"</td>"		//							
 									+ "<td>" + bymd + "</td>"						// 등록일
 									+ "<td>" + eymd + "</td>"		//
-									+ "<td>"
-									+"<input type='button' id='coupon' value = '취소' name='"+data[i].COUPON_NO+"'/></td>"
+									+ "<td>" + getCoupoYN + "</td>"			// 아이디
+									+ "<td><input type='button' id='coupon' value = '취소' name='"+data[i].COUPON_NO+"'/></td>"
 									+ "</tr>");
 						}
 						
