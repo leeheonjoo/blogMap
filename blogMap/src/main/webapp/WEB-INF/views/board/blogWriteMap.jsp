@@ -9,9 +9,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
 <title>Insert title here</title>
 <style>
-v\:* {
-   behavior: url(#default#VML);
-}
+	v\:* {
+	   behavior: url(#default#VML);
+	}
 </style>
 <!-- 네이버 지도 -->
 
@@ -19,8 +19,7 @@ v\:* {
 <script type="text/javascript">
    try {
       document.execCommand('BackgroundImageCache', false, true);
-   } catch (e) {
-   }
+   } catch (e) {}
 </script>
 <script type="text/javascript">
    //현재 위치를 좌표값으로 받아오기 위한 스크립트
@@ -127,44 +126,44 @@ v\:* {
 
          oMap.attach('click',function(oCustomEvent) {
                if(mapDiv=='testMap'){
-                        var oPoint = oCustomEvent.point;
-                        var oTarget = oCustomEvent.target;
-                        mapInfoTestWindow.setVisible(false);
-                        // 마커 클릭하면
-                        if (oTarget instanceof nhn.api.map.Marker) {
-                           var pullAddr=oCustomEvent.target.getTitle();
-                          
-                           var addr_title=pullAddr.substring(1,pullAddr.lastIndexOf("]"));
-                           var pAddrs=pullAddr.split("]");
-                           
-                           var pAddr=pAddrs[1].split("/");
-                           var pAddr0=pAddr[0];
-                           
-                           $("input[name=realAddr]").val(pAddr[0]+" "+pAddr[1]+" "+pAddr[2]+" "+pAddr[3]);
-                           $("input[name=addr_sido]").val(pAddr0.trim());
-                           $("input[name=addr_sigugun]").val(pAddr[1]);
-                           $("input[name=addr_dongri]").val(pAddr[2]);
-                           $("input[name=addr_bunji]").val(pAddr[3]);
-                           $("input[name=addr_title]").val(addr_title);
-                           $("div[id=blogWriteSub].modal").modal("hide");
-                           
-                           // 겹침 마커 클릭한거면
-                           if (oCustomEvent.clickCoveredMarker) {
-                              return;
-                           }
-                           // - InfoWindow 에 들어갈 내용은 setContent 로 자유롭게 넣을 수 있습니다. 외부 css를 이용할 수 있으며, 
-                           // - 외부 css에 선언된 class를 이용하면 해당 class의 스타일을 바로 적용할 수 있습니다.
-                           // - 단, DIV 의 position style 은 absolute 가 되면 안되며, 
-                           // - absolute 의 경우 autoPosition 이 동작하지 않습니다. 
-                           mapInfoTestWindow.setPoint(oTarget.getPoint());
-                           mapInfoTestWindow.setVisible(true);
-                           mapInfoTestWindow.setPosition({
-                              right : 15,
-                              top : 30
-                           });
-                           mapInfoTestWindow.autoPosition(); 
-                           return;
-                        }
+	               var oPoint = oCustomEvent.point;
+	               var oTarget = oCustomEvent.target;
+	               mapInfoTestWindow.setVisible(false);
+	               // 마커 클릭하면
+	               if (oTarget instanceof nhn.api.map.Marker) {
+	                  var pullAddr=oCustomEvent.target.getTitle();
+	                 
+	                  var addr_title=pullAddr.substring(1,pullAddr.lastIndexOf("]"));
+	                  var pAddrs=pullAddr.split("]");
+	                  
+	                  var pAddr=pAddrs[1].split("/");
+	                  var pAddr0=pAddr[0];
+	                  
+	                  $("input[name=realAddr]").val(pAddr[0]+" "+pAddr[1]+" "+pAddr[2]+" "+pAddr[3]);
+	                  $("input[name=addr_sido]").val(pAddr0.trim());
+	                  $("input[name=addr_sigugun]").val(pAddr[1]);
+	                  $("input[name=addr_dongri]").val(pAddr[2]);
+	                  $("input[name=addr_bunji]").val(pAddr[3]);
+	                  $("input[name=addr_title]").val(addr_title);
+	                  $("div[id=blogWriteSub].modal").modal("hide");
+	                  
+	                  // 겹침 마커 클릭한거면
+	                  if (oCustomEvent.clickCoveredMarker) {
+	                     return;
+	                  }
+	                  // - InfoWindow 에 들어갈 내용은 setContent 로 자유롭게 넣을 수 있습니다. 외부 css를 이용할 수 있으며, 
+	                  // - 외부 css에 선언된 class를 이용하면 해당 class의 스타일을 바로 적용할 수 있습니다.
+	                  // - 단, DIV 의 position style 은 absolute 가 되면 안되며, 
+	                  // - absolute 의 경우 autoPosition 이 동작하지 않습니다. 
+	                  mapInfoTestWindow.setPoint(oTarget.getPoint());
+	                  mapInfoTestWindow.setVisible(true);
+	                  mapInfoTestWindow.setPosition({
+	                     right : 15,
+	                     top : 30
+	                  });
+	                  mapInfoTestWindow.autoPosition(); 
+	                  return;
+	               }
                }else if(mapDiv=='map'){
                   var oPoint = oCustomEvent.point;
                   var oTarget = oCustomEvent.target;
@@ -341,176 +340,176 @@ v\:* {
    };
 
    /*블로그 read*/
-function blogListDetails(blogRead_no) {
-
-   $.ajax({
-     type : 'post',
-     url : '${root}/board/blogReadDetail.do',
-     data : {
-        board_no : blogRead_no
-     },
-     contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-     success : function(data) {
-        var data=JSON.parse(data);
-        
-        //데이터 추출
-        var pullAddr=data[0].ADDR_SIDO+" "+data[0].ADDR_SIGUGUN+" "
-        +data[0].ADDR_DONGRI+" "+data[0].ADDR_BUNJI;
-        var content=data[0].BOARD_CONTENT;
-        var writer=data[0].MEMBER_ID;
-        var addr_title=data[0].ADDR_TITLE;
-        if(addr_title.match("<b>")!=null){
-        	addr_title=addr_title.replace("<b>","");
-        	addr_title=addr_title.replace("</b>","");
-        }
-        
-        var title=data[0].BOARD_TITLE;
-        var mcategory=data[0].CATEGORY_MNAME;               
-        var scategory=data[0].CATEGORY_SNAME;
-        var rgdate=new Date(data[0].BOARD_RGDATE);
-        var fullDate=rgdate.getFullYear()+"/"+(rgdate.getMonth()+1)+"/"+rgdate.getDate();
-        var grade=data[0].BOARD_GRADE;
-        var boardno=data[0].BOARD_NO;
-        var recommand_y=data[0].YES;
-        var recommand_n=data[0].NO;
-        
-        //데이터 입력
-		$("#blogRead_addrtitle").html("<h5>"+addr_title+"</h5>");							// 업체명
-		$("#blogRead_category").html("<h5>"+"("+mcategory+" | "+scategory+") : "+"</h5>");  // 카테고리
-		$("#blogRead_title").html("<h5>"+title+"</h5>");									// 제목
-		
-        $("#blogRead_writer").html("<h6>"+writer+"&nbsp;&nbsp;</h6>");						// 작성자
-        $("#blogRead_rgdate").html("<h6>"+fullDate+"</h6>");								// 작성일 
-        $("#blogRead_addr").html("<h5>"+pullAddr+"</h5>"); 									// 주소
-        $("#blogRead_content > div:eq(0)").html(content);
-
-        $("#blogRead_boardno > label:eq(0)").text(boardno);
-        $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
-        $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
-        
-        if(email!=writer){
-        	$("#Upbutton").css("display","none");
-        	$("#Debutton").css("display","none");
-        }
-        
-        //평점
-        if(grade=="0"){
-           $("#blogRead_grade > img").attr("src","${root}/css/images/star0.jpg");
-        }else if(grade=="1"){
-           $("#blogRead_grade > img").attr("src","${root}/css/images/star1.jpg");
-        }else if(grade=="2"){
-           $("#blogRead_grade > img").attr("src","${root}/css/images/star2.jpg");
-        }else if(grade=="3"){
-           $("#blogRead_grade > img").attr("src","${root}/css/images/star3.jpg");
-        }else if(grade=="4"){
-           $("#blogRead_grade > img").attr("src","${root}/css/images/star4.jpg");
-        }else{
-           $("#blogRead_grade > img").attr("src","${root}/css/images/star5.jpg");
-        }
-        //첨부파일(이미지)
-        $.ajax({
-           type : 'post',
-           url : '${root}/board/blogReadDetailImg.do',
-           data : {
-              board_no : boardno
-           },
-           contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-           success : function(data) {
-              var data=JSON.parse(data);
-              var i=0;
-              $.each(data,function(i){
-                 var fileNo=data[i].file_no;
-                 var filePath=data[i].file_path;
-                 var fileName=data[i].file_name;
-                 var fileComment=data[i].file_comment;
-             	  
-                 if(i==0){
-                     $("#carousel_page").empty();
-                     $("#carousel_image").empty();                                                    	  
-                 }
-                 
-                 $("#carousel_page").append("<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>");
-             	  
-             	  var carousel_image = "<div class='item'>";
-             	  carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + ">";
-             	  carousel_image += "<div class='carousel-caption'>";
-             	  carousel_image += "<h4>"+ fileComment +"</h4>";
-             	  carousel_image += "</div>";
-             	  carousel_image += "</div>";
-             	  $("#carousel_image").append(carousel_image);
-             	  
-             	  if(i==0){
-               	$("#carousel_page li").addClass("active");
-               	$("#carousel_image .item").addClass("active");
-              	  }
-                 
-                 i++;
-              });
-           },
-           error:function(data){
-              
-           }
-        });
-        
-        //댓글
-        $.ajax({
-           type : 'post',
-           url : '${root}/board/blogReadReply.do',
-           data : {
-              board_no : boardno
-           },
-           contentType:'application/x-www-form-urlencoded;charset=UTF-8',
-           success : function(data) {
-              if(data=="[]"){
-           	   
-              }else{
-              var data=JSON.parse(data);
-              $("#listAllDiv").empty();
-              $.each(data,function(i){
-                    var replyNo=data[i].reply_no;
-                    var boardNo=data[i].board_no;
-                    var memberId=data[i].member_id;
-                    var replyContent=data[i].reply_content;
-                    var replyDate=new Date(data[i].reply_date);
-                    var replyfullDate=replyDate.getFullYear()+"/"+(replyDate.getMonth()+1)+"/"+replyDate.getDate();
-                    
-                    var asdf098="<br/><hr style='width: 95%;'>";
-                    
-                    $("#listAllDiv").append($("#reply_content_insert").clone());
-                    $("#listAllDiv > #reply_content_insert").css("display","block");
-                    $("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
-                    $("#reply_content_insert"+i+" > span:eq(0)").text(replyNo);
-                    $("#reply_content_insert"+i+" > span:eq(1)").css("font-weight","bold").text(memberId);
-                    $("#reply_content_insert"+i+" > span:eq(2)").text(replyfullDate); 
-                	$("#reply_content_insert"+i+" > input:eq(0)").val(replyContent);
-                    $("#reply_content_insert"+i+" > span:eq(3)").attr("id","reply_buttons"+i);
-					$("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
-					$("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
-					$("#listAllDiv:last-child").append(asdf098); 
-					
-					 if(email!=memberId){
-							$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
-							$("#reply_buttons"+i+" > button:eq(1)").css("display","none");
-					 }else{
-							$("#reply_buttons"+i+" > button:eq(0)").css("display","");
-							$("#reply_buttons"+i+" > button:eq(1)").css("display","");
-							
-					 }
-					 
-                 });
-              }
-           },
-           error:function(data){
-              
-           }
-        });
-        
-     },
-     error:function(data){
-        
-     }
-  }); 
-}
+	function blogListDetails(blogRead_no) {
+	
+	   $.ajax({
+	     type : 'post',
+	     url : '${root}/board/blogReadDetail.do',
+	     data : {
+	        board_no : blogRead_no
+	     },
+	     contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+	     success : function(data) {
+	        var data=JSON.parse(data);
+	        
+	        //데이터 추출
+	        var pullAddr=data[0].ADDR_SIDO+" "+data[0].ADDR_SIGUGUN+" "
+	        +data[0].ADDR_DONGRI+" "+data[0].ADDR_BUNJI;
+	        var content=data[0].BOARD_CONTENT;
+	        var writer=data[0].MEMBER_ID;
+	        var addr_title=data[0].ADDR_TITLE;
+	        if(addr_title.match("<b>")!=null){
+	        	addr_title=addr_title.replace("<b>","");
+	        	addr_title=addr_title.replace("</b>","");
+	        }
+	        
+	        var title=data[0].BOARD_TITLE;
+	        var mcategory=data[0].CATEGORY_MNAME;               
+	        var scategory=data[0].CATEGORY_SNAME;
+	        var rgdate=new Date(data[0].BOARD_RGDATE);
+	        var fullDate=rgdate.getFullYear()+"/"+(rgdate.getMonth()+1)+"/"+rgdate.getDate();
+	        var grade=data[0].BOARD_GRADE;
+	        var boardno=data[0].BOARD_NO;
+	        var recommand_y=data[0].YES;
+	        var recommand_n=data[0].NO;
+	        
+	        //데이터 입력
+			$("#blogRead_addrtitle").html("<h5>"+addr_title+"</h5>");							// 업체명
+			$("#blogRead_category").html("<h5>"+"("+mcategory+" | "+scategory+") : "+"</h5>");  // 카테고리
+			$("#blogRead_title").html("<h5>"+title+"</h5>");									// 제목
+			
+	        $("#blogRead_writer").html("<h6>"+writer+"&nbsp;&nbsp;</h6>");						// 작성자
+	        $("#blogRead_rgdate").html("<h6>"+fullDate+"</h6>");								// 작성일 
+	        $("#blogRead_addr").html("<h5>"+pullAddr+"</h5>"); 									// 주소
+	        $("#blogRead_content > div:eq(0)").html(content);
+	
+	        $("#blogRead_boardno > label:eq(0)").text(boardno);
+	        $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
+	        $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
+	        
+	        if(email!=writer){
+	        	$("#Upbutton").css("display","none");
+	        	$("#Debutton").css("display","none");
+	        }
+	        
+	        //평점
+	        if(grade=="0"){
+	           $("#blogRead_grade > img").attr("src","${root}/css/images/star0.jpg");
+	        }else if(grade=="1"){
+	           $("#blogRead_grade > img").attr("src","${root}/css/images/star1.jpg");
+	        }else if(grade=="2"){
+	           $("#blogRead_grade > img").attr("src","${root}/css/images/star2.jpg");
+	        }else if(grade=="3"){
+	           $("#blogRead_grade > img").attr("src","${root}/css/images/star3.jpg");
+	        }else if(grade=="4"){
+	           $("#blogRead_grade > img").attr("src","${root}/css/images/star4.jpg");
+	        }else{
+	           $("#blogRead_grade > img").attr("src","${root}/css/images/star5.jpg");
+	        }
+	        //첨부파일(이미지)
+	        $.ajax({
+	           type : 'post',
+	           url : '${root}/board/blogReadDetailImg.do',
+	           data : {
+	              board_no : boardno
+	           },
+	           contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+	           success : function(data) {
+	              var data=JSON.parse(data);
+	              var i=0;
+	              $.each(data,function(i){
+	                 var fileNo=data[i].file_no;
+	                 var filePath=data[i].file_path;
+	                 var fileName=data[i].file_name;
+	                 var fileComment=data[i].file_comment;
+	             	  
+	                 if(i==0){
+	                     $("#carousel_page").empty();
+	                     $("#carousel_image").empty();                                                    	  
+	                 }
+	                 
+	                 $("#carousel_page").append("<li data-target='#carousel-example-generic' data-slide-to="+i+"></li>");
+	             	  
+	             	  var carousel_image = "<div class='item'>";
+	             	  carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + ">";
+	             	  carousel_image += "<div class='carousel-caption'>";
+	             	  carousel_image += "<h4>"+ fileComment +"</h4>";
+	             	  carousel_image += "</div>";
+	             	  carousel_image += "</div>";
+	             	  $("#carousel_image").append(carousel_image);
+	             	  
+	             	  if(i==0){
+	               	$("#carousel_page li").addClass("active");
+	               	$("#carousel_image .item").addClass("active");
+	              	  }
+	                 
+	                 i++;
+	              });
+	           },
+	           error:function(data){
+	              
+	           }
+	        });
+	        
+	        //댓글
+	        $.ajax({
+	           type : 'post',
+	           url : '${root}/board/blogReadReply.do',
+	           data : {
+	              board_no : boardno
+	           },
+	           contentType:'application/x-www-form-urlencoded;charset=UTF-8',
+	           success : function(data) {
+	              if(data=="[]"){
+	           	   
+	              }else{
+	              var data=JSON.parse(data);
+	              $("#listAllDiv").empty();
+	              $.each(data,function(i){
+	                    var replyNo=data[i].reply_no;
+	                    var boardNo=data[i].board_no;
+	                    var memberId=data[i].member_id;
+	                    var replyContent=data[i].reply_content;
+	                    var replyDate=new Date(data[i].reply_date);
+	                    var replyfullDate=replyDate.getFullYear()+"/"+(replyDate.getMonth()+1)+"/"+replyDate.getDate();
+	                    
+	                    var asdf098="<br/><hr style='width: 95%;'>";
+	                    
+	                    $("#listAllDiv").append($("#reply_content_insert").clone());
+	                    $("#listAllDiv > #reply_content_insert").css("display","block");
+	                    $("#listAllDiv > #reply_content_insert").attr("id","reply_content_insert"+i);
+	                    $("#reply_content_insert"+i+" > span:eq(0)").text(replyNo);
+	                    $("#reply_content_insert"+i+" > span:eq(1)").css("font-weight","bold").text(memberId);
+	                    $("#reply_content_insert"+i+" > span:eq(2)").text(replyfullDate); 
+	                	$("#reply_content_insert"+i+" > input:eq(0)").val(replyContent);
+	                    $("#reply_content_insert"+i+" > span:eq(3)").attr("id","reply_buttons"+i);
+						$("#reply_buttons"+i+" > button:eq(0)").attr("id","reply_content_update"+i);
+						$("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
+						$("#listAllDiv:last-child").append(asdf098); 
+						
+						 if(email!=memberId){
+								$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
+								$("#reply_buttons"+i+" > button:eq(1)").css("display","none");
+						 }else{
+								$("#reply_buttons"+i+" > button:eq(0)").css("display","");
+								$("#reply_buttons"+i+" > button:eq(1)").css("display","");
+								
+						 }
+						 
+	                 });
+	              }
+	           },
+	           error:function(data){
+	              
+	           }
+	        });
+	        
+	     },
+	     error:function(data){
+	        
+	     }
+	  }); 
+	}
 </script>
 </head>
 <body>
