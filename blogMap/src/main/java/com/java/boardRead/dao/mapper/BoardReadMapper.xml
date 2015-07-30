@@ -4,14 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="dao.BoardReadMapper">
-		
-
-	<select id="getData" resultType="com.java.boardRead.dto.BoardReadDto">
-		select *
-		  from category
-		 where category_code='200300'
-	</select>
-	
 	<select id="getSidoCondition" resultType="String">
 		select distinct loc_sido
 		  from location_info
@@ -66,14 +58,7 @@
 	</select>
 	
 	<select id="blogSearchAddr" parameterType="int" resultType="com.java.board.dto.Board_addr_infoDto">
-	
 		select * from board_addr_info where board_no=#{board_no}
-	 	<!-- select distinct addr_sido,addr_sigugun,addr_dongri,addr_bunji 
-	 	from board_addr_info 
-	 	where board_no in
-	  <foreach collection="boardList" item="item" index="index" open="(" separator="," close=")">
-	  	  #{item.board_no}
-	 </foreach> -->
 	</select>
 	
 	<select id="blogListResult" parameterType="java.util.HashMap" resultType="java.util.HashMap">
@@ -90,12 +75,6 @@
                       and nvl(addr_bunji,'%') = case when #{bunji} is null then '%' else #{bunji} end)
   		       and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%'))
 		where f_num = 1 
-<!--    select board_no,member_id,category_code,board_rgdate,board_content,board_grade,board_count,board_title  
-		from board
-		where board_no in(select board_no 
-		                  from board_addr_info 
-		                  where addr_sido=#{sido} and addr_sigugun=#{sigugun} and addr_dongri=#{dongri} and nvl(addr_bunji,'%') = case when #{bunji} is null then '%' else #{bunji} end)
-        and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%') -->
 	</select>
 	
 	<select id="getreply" parameterType="int" resultType="int">
@@ -224,16 +203,6 @@
 				file_comment=#{attach_file.file_comment}
 			where board_no=#{boardDto.board_no} and file_no=#{attach_file.file_no}
 	</update> 
-	
-	<!-- <select id="blogListResult_check" parameterType="java.util.HashMap" resultType="com.java.board.dto.BoardDto">
-		select board_no,member_id,category_code,board_rgdate,board_content,board_grade,board_count,board_title  
-		from board
-		where board_no in(select board_no 
-		                  from board_addr_info 
-		                  where addr_sido=#{sido} and addr_sigugun=#{sigugun} and addr_dongri=#{dongri} and nvl(addr_bunji,'%') = case when #{bunji} is null then '%' else #{bunji} end)
-        and (board_title like '%'||#{searchValue}||'%' or board_content like '%'||#{searchValue}||'%')
-        and member_id = case when 'y' = #{check_value} then #{member_id} else member_id end
-	</select> -->
 	
 	<select id="getboardList_check" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	<![CDATA[

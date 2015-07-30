@@ -33,27 +33,6 @@ public class BoardReadController {
 	@Autowired
 	private BoardReadService boardReadService;
 	
-	@RequestMapping(value="/board/test.do", method=RequestMethod.GET)
-	public void test(HttpServletRequest request, HttpServletResponse response){
-		logger.info("BoardReadController test");
-		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("response", response);
-		
-		boardReadService.getData(mav);
-		Map<String, Object> map=mav.getModel();
-		
-		String json=(String)map.get("json");
-		
-		try {
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().print("test");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	/**
 	 * @name : getRecommandBlog
 	 * @date : 2015. 7. 19.
@@ -116,6 +95,7 @@ public class BoardReadController {
 			e.printStackTrace();
 		}
 	}
+	
 	/**
 	 * @name : getCategoryCondition
 	 * @date : 2015. 7. 01.
@@ -135,6 +115,7 @@ public class BoardReadController {
 			e.printStackTrace();
 		}
 	}
+	
 	/**
 	 * @name : getget
 	 * @date : 2015. 7. 01.
@@ -151,13 +132,13 @@ public class BoardReadController {
 		
 		return mav;
 	}
+	
 	/**
 	 * @name : blogListSearch
 	 * @date : 2015. 7. 03.
 	 * @author : 황준
 	 * @description : 블로그 조회 
 	 */
-
 	@RequestMapping(value="/board/blogListSearch.do",method=RequestMethod.POST)
 	public void blogListSearch(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogListSearch-------------------------");
@@ -169,6 +150,7 @@ public class BoardReadController {
 		
 		boardReadService.blogListSearch(mav);
 	}
+	
 	/**
 	 * @name : blogListResult
 	 * @date : 2015. 7. 03.
@@ -186,6 +168,7 @@ public class BoardReadController {
 		
 		boardReadService.blogListResult(mav);	
 	}
+	
 	/**
 	 * @name : blogReadDetail
 	 * @date : 2015. 7. 03.
@@ -203,6 +186,7 @@ public class BoardReadController {
 		
 		boardReadService.blogReadDetail(mav);	
 	}
+	
 	/**
 	 * @name : blogReadDetailImg
 	 * @date : 2015. 7. 03.
@@ -220,6 +204,7 @@ public class BoardReadController {
 		
 		boardReadService.blogReadDetailImg(mav); 	
 	}
+	
 	/**
 	 * @name : blogListSearchSub1
 	 * @date : 2015. 7. 10
@@ -237,6 +222,7 @@ public class BoardReadController {
 		
 		boardReadService.blogListSearchSub1(mav);
 	}
+	
 	/**
 	 * @name : blogListSearchSub2
 	 * @date : 2015. 7. 10
@@ -254,6 +240,7 @@ public class BoardReadController {
 		
 		boardReadService.blogListSearchSub2(mav);
 	}
+	
 	/**
 	 * @name : blogReadReference
 	 * @date : 2015. 7. 08.
@@ -271,6 +258,7 @@ public class BoardReadController {
 		
 		boardReadService.blogReadReference(mav);	
 	}
+	
 	/**
 	 * @name : blogReadNoreference
 	 * @date : 2015. 7. 08.
@@ -288,6 +276,7 @@ public class BoardReadController {
 		
 		boardReadService.blogReadNoReference(mav);	
 	}
+	
 	/**
 	 * @name : referenceRefresh
 	 * @date : 2015. 7. 08.
@@ -305,6 +294,7 @@ public class BoardReadController {
 		
 		boardReadService.referenceRefresh(mav);	
 	}
+	
 	/**
 	 * @name : bookMark
 	 * @date : 2015. 7. 08.
@@ -322,6 +312,7 @@ public class BoardReadController {
 		
 		boardReadService.bookMark(mav);		
 	}
+	
 	/**
 	 * @name : NobookMark
 	 * @date : 2015. 7. 08.
@@ -339,6 +330,7 @@ public class BoardReadController {
 		
 		boardReadService.NobookMark(mav);
 	}
+	
 	/**
 	 * @name : blogDelete
 	 * @date : 2015. 7. 08.
@@ -356,6 +348,7 @@ public class BoardReadController {
 		
 		boardReadService.blogDelete(mav);
 	}
+	
 	/**
 	 * @name : blogUpdate
 	 * @date : 2015. 7. 08.
@@ -373,6 +366,7 @@ public class BoardReadController {
 		
 		boardReadService.blogUpdate(mav);
 	}
+	
 	/**
 	 * @name : blogUpdateOk
 	 * @date : 2015. 7. 08.

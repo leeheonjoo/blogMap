@@ -30,7 +30,6 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	
 	/**
 	 * @name : getRecommandBlog
 	 * @date : 2015. 7. 19.
@@ -43,11 +42,6 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		List<Object> resultList=sqlSession.selectList("dao.BoardReadMapper.getRecommandBlog");
 		
 		return resultList;
-	}
-	
-	@Override
-	public BoardReadDto getData() {
-		return sqlSession.selectOne("dao.BoardReadMapper.getData");
 	}
 	
 	/**
@@ -111,6 +105,12 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		return dongList;
 	}
 	
+	/**
+	 * @name : getDetailCategoryCondition
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 세부카테고리 조회조건 리스트 get
+	 */
 	@Override
 	public List<String> getDetailCategoryCondition(String headData) {
 		logger.info("BoardReadDao getDetailCategoryCondition-------------------------");
@@ -123,26 +123,22 @@ public class BoardReadDaoImpl implements BoardReadDao {
 	 * @name : getboardList
 	 * @date : 2015. 7. 09.
 	 * @author : 황준
-	 * @description : 블로그 리스트 카테고리 검색 조건에 따른 검색결과 반환
+	 * @description : 검색조건에 따른 블로그리스트를 반환
 	 */
 	@Override
 	public List<HashMap<String, Object>> getboardList(HashMap<String, Object> hashMap) {
 		logger.info("BoardReadDao getboardList-------------------------");
-		
-		/*Board_addr_infoDto board_addr_info=(Board_addr_infoDto) hashMap.get("board_addr_info");
-		CategoryDto category=(CategoryDto) hashMap.get("category"); 
-		String search_value=(String) hashMap.get("search_value"); 
-		System.out.println(board_addr_info.getAddr_sido());
-		System.out.println(board_addr_info.getAddr_sigugun());
-		System.out.println(board_addr_info.getAddr_dongri());
-		System.out.println(category.getCategory_mname());
-		System.out.println(category.getCategory_sname());
-		System.out.println(search_value);*/
-		
+
 		List<HashMap<String, Object>> boardList=sqlSession.selectList("dao.BoardReadMapper.getboardList",hashMap);
 		return boardList;
 	}
 
+	/**
+	 * @name : blogSearchAddr
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 해당 게시물의 주소정보를 반환
+	 */
 	@Override
 	public List<Board_addr_infoDto> blogSearchAddr(int board_no) {
 		logger.info("BoardReadDao blogSearchAddr-------------------------");
@@ -153,12 +149,25 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		return board_addr_infoList;
 	}
 
+	/**
+	 * @name : blogListResult
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 네이버 api의 주소정보에 해당하는 블로그 리스트를 반환 
+	 */
 	@Override
 	public List<HashMap<String,Object>> blogListResult(HashMap<String, Object> hashMap) {
 		logger.info("BoardReadDao blogListResult-------------------------");
+		
 		return sqlSession.selectList("dao.BoardReadMapper.blogListResult",hashMap);
 	}
 
+	/**
+	 * @name : getReadList1
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그번호에 해당하는 블로그 DTO를 반환
+	 */
 	@Override
 	public List<HashMap<String, Object>> getReadList1(int boardNo) {
 		logger.info("BoardReadDao getReadList1-------------------------");
@@ -171,6 +180,12 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		return list;
 	}
 
+	/**
+	 * @name : getreply
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 게시글의 댓글정보를 반환
+	 */
 	@Override
 	public int getreply(int boardNo) {
 		logger.info("BoardReadDao getreply-------------------------");
@@ -178,56 +193,108 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		return sqlSession.selectOne("dao.BoardReadMapper.getreply",boardNo);
 	}
 
-	
-
+	/**
+	 * @name : getblogImg
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그의 이미지 정보 리스트를 반환
+	 */
 	@Override
 	public List<Attach_fileDto> getblogImg(int boardNo) {
 		logger.info("BoardReadDao getblogImg-------------------------");
 		return sqlSession.selectList("dao.BoardReadMapper.getblogImg",boardNo);
 	}
 
+	/**
+	 * @name : blogReadReference
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그의 추천정보를 반환
+	 */
 	@Override
 	public int blogReadReference(HashMap<String, Object> hMap) {
 		logger.info("BoardReadDao blogReadReference-------------------------");
 		return sqlSession.update("dao.BoardReadMapper.blogReadReference",hMap);
 	}
 
+	/**
+	 * @name : blogReadNoReference
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그의 비추천정보를 반환
+	 */
 	@Override
 	public int blogReadNoReference(HashMap<String, Object> hMap) {
 		logger.info("BoardReadDao blogReadNoReference-------------------------");
 		return sqlSession.update("dao.BoardReadMapper.blogReadNoReference",hMap);
 	}
 
+	/**
+	 * @name : referenceRefresh
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그의 추천/비추천 수를 반환
+	 */
 	@Override
 	public List<RecommandDto> referenceRefresh(int board_no) {
 		logger.info("BoardReadDao referenceRefresh-------------------------");
 		return sqlSession.selectList("dao.BoardReadMapper.referenceRefresh",board_no);
 	}
 
+	/**
+	 * @name : bookMark
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그를 즐겨찾기 추가
+	 */
 	@Override
 	public int bookMark(HashMap<String, Object> hMap) {
 		logger.info("BoardReadDao bookMark-------------------------");
 		return sqlSession.insert("dao.BoardReadMapper.bookMark",hMap);
 	}
 
+	/**
+	 * @name : NobookMark
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 즐겨찾기를 삭제
+	 */
 	@Override
 	public int NobookMark(HashMap<String, Object> hMap) {
 		logger.info("BoardReadDao NobookMark-------------------------");
 		return sqlSession.insert("dao.BoardReadMapper.NobookMark",hMap);
 	}
 
+	/**
+	 * @name : blogDelete
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그를 삭제
+	 */
 	@Override
 	public int blogDelete(HashMap<String, Object> hMap) {
 		logger.info("BoardReadDao blogDelete-------------------------");
 		return sqlSession.delete("dao.BoardReadMapper.blogDelete",hMap);
 	}
 
+	/**
+	 * @name : blogUpdate
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 수정을 위한 원본 데이터를 반환
+	 */
 	@Override
 	public List<HashMap<String, Object>> blogUpdate(HashMap<String, Object> hMap) {
 		logger.info("BoardReadDao blogUpdate-------------------------");
 		return sqlSession.selectList("dao.BoardReadMapper.blogUpdate",hMap);
 	}
 
+	/**
+	 * @name : blogUpdateOk
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 수정정보를 update
+	 */
 	@Override
 	public int blogUpdateOk(HashMap<String, Object> hashMap) {
 		logger.info("BoardReadDao blogUpdateOk-------------------------");
@@ -240,6 +307,12 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		 
 	}
 
+	/**
+	 * @name : blogUpdateOk_attach
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 첨부파일 수정정보를 update
+	 */
 	@Override
 	public int blogUpdateOk_attach(HashMap<String, Object> hashMap) {
 		logger.info("BoardReadDao blogUpdateOk_attach-------------------------");
@@ -247,6 +320,12 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		return check;
 	}
 
+	/**
+	 * @name : getboardList_check
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 검색 리스트 반환
+	 */
 	@Override
 	public List<HashMap<String, Object>> getboardList_check(
 			HashMap<String, Object> hashMap) {
@@ -256,22 +335,16 @@ public class BoardReadDaoImpl implements BoardReadDao {
 		return boardList;
 	}
 
+	/**
+	 * @name : blogUpdate_insert
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 수정시 신규 첨부파일 데이터 insert
+	 */
 	@Override
 	public int blogUpdate_insert(HashMap<String, Object> hashMap) {
 		logger.info("BoardReadDao blogUpdate_insert-------------------------");
 		
-		
 		return sqlSession.insert("dao.BoardReadMapper.blogUpdate_insert",hashMap);
-	}
-	
-	
-
-	/*@Override
-	public List<BoardDto> blogListResult_check(HashMap<String, Object> hashMap) {
-		logger.info("BoardReadDao blogListResult_check-------------------------");
-		List<BoardDto> boardList=sqlSession.selectList("dao.BoardReadMapper.blogListResult_check",hashMap);
-		return boardList;
-	}*/
-
-	
+	}	
 }
