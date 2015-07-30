@@ -64,7 +64,7 @@
 <!-- Modal, Metro style javascript를 로드 -->
 <script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
 <script>
-//<session check -> button change>
+	//<session check -> button change>
 	$(function(){
 		if(sessionStorage.getItem("email")!=null){
 			$("#blogmap_before_login span").remove();
@@ -318,7 +318,6 @@ $(function(){
 	    }
 	});
 });
-
 </script>
 
 </head>
@@ -350,33 +349,33 @@ $(function(){
 								 <div class="row">
 										<div class="col-md-12">
 										<br/>
-											 <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
-													<div class="form-group">
-														 <label class="sr-only" for="member_login_id">Email address</label>
-														 <input type="email" class="form-control" id="member_login_id" placeholder="Email address" required>
-													</div>
-													
-													<div class="form-group">
-														 <label class="sr-only" for="member_login_password">Password</label>
-														 <input type="password" class="form-control" id="member_login_password" placeholder="Password" required>
-													</div>
-													
-													<div class="form-group">
-														 <button type="button" id="login_btn" class="btn btn-primary btn-block">Sign in</button>
-													</div>
-													
-											  </form> 
-											  <div class="help-block text-right"><a data-toggle="modal" href="#blogmap_renew_pwd">Forget the password ?</a></div>
-											  	
-
-												<div class="social-buttons" style="text-align:center;">
-													<!-- <a href="#" class="btn btn-fb" onclick="FB.login();"><i class="fa fa-facebook"></i> Facebook</a> -->
-													<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size="large">Facebook 
-													</fb:login-button>
-													<!-- <br/><br/>
-													<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false" style="width:200px;">Facebook</div> -->
-													
+										 <form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+												<div class="form-group">
+													 <label class="sr-only" for="member_login_id">Email address</label>
+													 <input type="email" class="form-control" id="member_login_id" placeholder="Email address" required>
 												</div>
+												
+												<div class="form-group">
+													 <label class="sr-only" for="member_login_password">Password</label>
+													 <input type="password" class="form-control" id="member_login_password" placeholder="Password" required>
+												</div>
+												
+												<div class="form-group">
+													 <button type="button" id="login_btn" class="btn btn-primary btn-block">Sign in</button>
+												</div>
+												
+										  </form> 
+										  <div class="help-block text-right"><a data-toggle="modal" href="#blogmap_renew_pwd">Forget the password ?</a></div>
+										  	
+
+											<div class="social-buttons" style="text-align:center;">
+												<!-- <a href="#" class="btn btn-fb" onclick="FB.login();"><i class="fa fa-facebook"></i> Facebook</a> -->
+												<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" size="large">Facebook 
+												</fb:login-button>
+												<!-- <br/><br/>
+												<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false" style="width:200px;">Facebook</div> -->
+												
+											</div>
 										</div>
 										
 										<div class="bottom text-center">
@@ -406,7 +405,7 @@ $(function(){
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-									<img id="blogSearch" src="${root}/images/blogMap/search.png" class="img-responsive" style="cursor:Pointer"/>
+								<img id="blogSearch" src="${root}/images/blogMap/search.png" class="img-responsive" style="cursor:Pointer"/>
 							</div>
 						</div>
 					</div>
@@ -488,8 +487,7 @@ $(function(){
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-							<div class="item active">
-							</div>
+							<div class="item active"></div>
 						</div>
 					</div>
 			        
@@ -505,8 +503,7 @@ $(function(){
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-					    	<div class="item active">
-						    </div>
+					    	<div class="item active"></div>
 						</div>
 					</div>
 			        
@@ -520,8 +517,7 @@ $(function(){
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-							<div class="item active">
-							</div>
+							<div class="item active"></div>
 						</div>
 					</div>
 			        
@@ -535,8 +531,7 @@ $(function(){
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-							<div class="item active">
-							</div>
+							<div class="item active"></div>
 						</div>
 					</div>
 				       
@@ -550,8 +545,7 @@ $(function(){
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-							<div class="item active">
-							</div>
+							<div class="item active"></div>
 						</div>
 					</div>
 				    
@@ -560,18 +554,19 @@ $(function(){
 		
 		</div>
 	</div>
-<br/>
+	<br/>
 
 	<div class="container" style="max-width:1170px; height:50px;">
-					<div style="width:100%; height:50px; text-align:right;">
-						<p style="width:100%; line-height:46px;">
-							<a id="partner_Registration" style="cursor:Pointer"><img src="${root}/images/blogMap/Partnership_32.png"></a>
-							&nbsp;&nbsp;
-							<a data-toggle="modal" href="#ManagerMain" id="manager_page_icon" style="display:none; "><img src="${root}/images/blogMap/gear_24.png" onclick="getMemberList()"></img></a>
-						</p>
-					</div>
+		<div style="width:100%; height:50px; text-align:right;">
+			<p style="width:100%; line-height:46px;">
+				<a id="partner_Registration" style="cursor:Pointer"><img src="${root}/images/blogMap/Partnership_32.png"></a>
+				&nbsp;&nbsp;
+				<a data-toggle="modal" href="#ManagerMain" id="manager_page_icon" style="display:none; "><img src="${root}/images/blogMap/gear_24.png" onclick="getMemberList()"></img></a>
+			</p>
+		</div>
 	</div>
 </div>
+
 <div class="container-fluid">
 		<!-- **********************************
 	                        블로그 리스트 : 이헌주
@@ -686,7 +681,6 @@ $(function(){
 		    </div>
 		</div>
 	     
-	     
 	  <!--쿠폰발급클릭시 쿠폰발급창 -->   
 	    <div class="modal fade" id="blogRead_coupon" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -707,7 +701,7 @@ $(function(){
 		</div> 
 	     		
 		<!-- **********************************
-	                        제휴업체 : 변태훈
+	                              제휴업체 : 변태훈
 	     ***********************************-->
 		<!-- 제휴업체 - 제휴업체등록 main -->
 		<div class="modal fade" id="partnerMain" data-backdrop="static">
@@ -1168,7 +1162,7 @@ $(function(){
 		    </div>
 		</div>
 		
-		<!-- fb회원탈퇴시 이메일 인증 -->
+		<!-- FaceBook 회원탈퇴시 이메일 인증 -->
 		<div class="modal fade" id="blogmap_fb_myPageDelete" data-backdrop="static">
 			<div class="modal-dialog modal-email-confrim">
 				<div class="modal-content">
@@ -1191,7 +1185,6 @@ $(function(){
 		<!-- **********************************
 				관리자페이지 : 이동희
 	     ***********************************-->
-		
 		<!-- 관리자페이지 - ManagerMain -->
 		<div class="modal fade" id="ManagerMain" data-backdrop="static">
 			<div class="modal-dialog modal-lg">
@@ -1202,7 +1195,7 @@ $(function(){
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
-							<jsp:include page="manager/managerMain_test.jsp"/>
+							<jsp:include page="manager/managerMain.jsp"/>
 						</div>
 						<br/>
 						<br/>
@@ -1251,7 +1244,6 @@ $(function(){
 		</div>
 
 		<!-- 관리자페이지 - 제휴업체 상세조회 (관리자페이지 - 제휴업체 페이지 제휴업체 상세 페이지)-->
-		
 		<div class="modal fade" id="partnerDetail" data-backdrop="static">
 			<div class="modal-dialog" style="max-width:800px; margin:auto;">
 				<div class="modal-content">
@@ -1387,6 +1379,7 @@ $(function(){
 			   </div>
 			</div>
 		</div>
+		
 	</div>
 </body>
 </html>

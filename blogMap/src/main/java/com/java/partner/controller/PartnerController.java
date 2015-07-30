@@ -225,6 +225,12 @@ public class PartnerController {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * @name:getPartnerCouponData
+	 * @date:2015. 7. 23.
+	 * @author:변태훈
+	 * @description: 쿠폰업체 쿠폰정보 데이터 등록
+	 */
 	@RequestMapping(value="/partner/getPartnerCouponData.do", method=RequestMethod.GET)
 	public void getPartnerCouponData(HttpServletRequest request, HttpServletResponse response){
 		logger.info("Partner getPartnerCouponData 시작!!!--------------------------------------------");

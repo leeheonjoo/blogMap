@@ -13,21 +13,20 @@
 	text-align: left; 	
 }
 </style>
-<script type="text/javascript">
-	
-function readURLS(input,index) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
-        reader.onload = function (e) { 
-        //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-            $('#UpdateloadedImg'+index).attr('src', e.target.result);
-            //이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
-            //(아래 코드에서 읽어들인 dataURL형식)
-        }                    
-        reader.readAsDataURL(input.files[0]);
-        //File내용을 읽어 dataURL형식의 문자열로 저장
-    }
-}//readURL()--	
+<script type="text/javascript">	
+	function readURLS(input,index) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+	        reader.onload = function (e) { 
+	        //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	            $('#UpdateloadedImg'+index).attr('src', e.target.result);
+	            //이미지 Tag의 SRC속성에 읽어들인 File내용을 지정
+	            //(아래 코드에서 읽어들인 dataURL형식)
+	        }                    
+	        reader.readAsDataURL(input.files[0]);
+	        //File내용을 읽어 dataURL형식의 문자열로 저장
+	    }
+	}//readURL()--	
 	
 	//이미지 미리보기
 	$(function(){
@@ -44,33 +43,9 @@ function readURLS(input,index) {
 	    	        readURLS(this,index);
 	    	    });
 	    });
-	    
-	    //이미지 수에 따른 display 변화
-// 	    $("#blogUpdateattach  #imageAttach").click(function() {
-// 			var imageSelect=$("#blogUpdateattach  #imageAttach option:selected").val();
-// 	    	if(imageSelect=="1"){
-// 	    		 UpimageInline(0);
-// 	    		 UpimageNone(1);
-// 			}else if(imageSelect=="2"){
-// 				 UpimageInline(1);
-// 				 UpimageNone(2);
-// 			}else if(imageSelect=="3"){
-// 				 UpimageInline(2);
-// 				 UpimageNone(3);
-// 			 }else if(imageSelect=="4"){
-// 				 UpimageInline(3);
-// 				 UpimageNone(4);
-// 			 }else if(imageSelect=="5"){
-// 				 UpimageInline(4);
-// 				 UpimageNone(5);
-// 			 }else{
-// 				 UpimageNone(0);
-// 			 }
-// 	    });
 	 });
 	 
 	function attact_comment_select1() {
-		
 		var imageSelect=$("#imageAttach1 option:selected").val();
 		if(imageSelect=="1"){
 			UpimageInline(0);
@@ -113,10 +88,8 @@ function readURLS(input,index) {
 </script>
 </head>
 <body>
-<!-- 전체적인 폼 내에서 Label / Text 창의 크기를 조절하기 위해 필요한 폼 -->
-<form class="form-horizontal" name="blogUpdateForm" action="${root }/board/blogUpdateOk" method="POST" id="up_frm" enctype="multipart/form-data">		
-<!-- <input type="hidden" name="member_id"/> -->
-		
+	<!-- 전체적인 폼 내에서 Label / Text 창의 크기를 조절하기 위해 필요한 폼 -->
+	<form class="form-horizontal" name="blogUpdateForm" action="${root }/board/blogUpdateOk" method="POST" id="up_frm" enctype="multipart/form-data">		
 		<div class="col-md-1 col-sm-1 col-xs-1"></div>
 		<div class="col-md-10 col-sm-10 col-xs-10">
 			
@@ -241,7 +214,7 @@ function readURLS(input,index) {
 				</div>
 			</div>		
 		</div>		
-	<div class="col-md-1 col-sm-1 col-xs-1"></div>
-</form>
+		<div class="col-md-1 col-sm-1 col-xs-1"></div>
+	</form>
 </body>
 </html>
