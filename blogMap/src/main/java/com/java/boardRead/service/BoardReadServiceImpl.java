@@ -522,7 +522,7 @@ public class BoardReadServiceImpl implements BoardReadService {
 
 	@Override
 	public void blogReadNoReference(ModelAndView mav) {
-		logger.info("BoardReadService blogReadReference------------------------");
+		logger.info("BoardReadService blogReadNoReference------------------------");
 		Map<String, Object> map=mav.getModel();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		HttpServletResponse response=(HttpServletResponse) map.get("response");

@@ -383,10 +383,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	/**
-	 * @name : blogTest
+	 * @name : blogWrite
 	 * @date : 2015. 7. 02.
 	 * @author : 황준
-	 * @description : 블로그 작성시 데이터 잘갖고오는 테스트
+	 * @description : 블로그 작성
 	 */
 	@Override
 	public void blogWrite(ModelAndView mav) {
@@ -521,7 +521,12 @@ public class BoardServiceImpl implements BoardService {
 		}*/
 		
 	}
-
+	/**
+	 * @name : coupon_issue
+	 * @date : 2015. 7. 15.
+	 * @author : 황준
+	 * @description : 쿠폰 발행리스트
+	 */
 	@Override
 	public void coupon_issue(ModelAndView mav) {
 		Map<String, Object>map =mav.getModel();
@@ -556,7 +561,12 @@ public class BoardServiceImpl implements BoardService {
 		
 		
 	}
-
+	/**
+	 * @name : getCoupon
+	 * @date : 2015. 7. 15.
+	 * @author : 황준
+	 * @description : 쿠폰 조회
+	 */
 	@Override
 	public void getCoupon(ModelAndView mav) {
 		Map<String, Object>map =mav.getModel();

@@ -119,7 +119,12 @@ public class BoardController {
 			return mav;
 			
 		}
-		
+		/**
+		 * @name : coupon_issue
+		 * @date : 2015. 7. 15.
+		 * @author : 황준
+		 * @description : 쿠폰 발행리스트
+		 */
 		@RequestMapping(value="/board/coupon_issue.do", method=RequestMethod.POST)
 		public void coupon_issue(HttpServletRequest request,HttpServletResponse response){
 			logger.info("coupon_issue--------------------------------");
@@ -130,7 +135,12 @@ public class BoardController {
 			
 			boardService.coupon_issue(mav);
 		}
-		
+		/**
+		 * @name : coupon_issue
+		 * @date : 2015. 7. 15.
+		 * @author : 황준
+		 * @description : 쿠폰 조회
+		 */
 		@RequestMapping(value="/board/getCoupon.do", method=RequestMethod.POST)
 		public void getCoupon(HttpServletRequest request,HttpServletResponse response){
 			logger.info("getCoupon--------------------------------");

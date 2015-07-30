@@ -1,4 +1,4 @@
-package com.java.board.dao;
+	package com.java.board.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class BoardDaoImpl implements BoardDao {
 	private SqlSessionTemplate sqlSession;
 	
 	/**
-	 * @name : getHeaderCondition
+	 * @name : getData
 	 * @date : 2015. 6. 23.
 	 * @author : 황준
 	 * @description : 데이터 테스트
@@ -42,7 +42,13 @@ public class BoardDaoImpl implements BoardDao {
 		List<String> headerList=sqlSession.selectList("dao.BoardMapper.getHeaderCondition");
 		return headerList;
 	}
-
+	
+	/**
+	 * @name : blogWrite
+	 * @date : 2015. 7. 02.
+	 * @author : 황준
+	 * @description : 블로그 작성
+	 */
 
 	@Override
 	public HashMap<String, Object> blogWrite(HashMap<String, Object> hashMap) {
@@ -69,6 +75,12 @@ public class BoardDaoImpl implements BoardDao {
 		return check;
 	}*/
 
+	/**
+	 * @name : blogWrite_attach
+	 * @date : 2015. 7. 02.
+	 * @author : 황준
+	 * @description : 블로그 작성(첨부이미지)
+	 */
 	@Override
 	public int blogWrite_attach(HashMap<String, Object> hashMap) {
 		logger.info("BoardDao blogWrite_attach  DAO-------------------------");
@@ -82,13 +94,24 @@ public class BoardDaoImpl implements BoardDao {
 		int check=sqlSession.insert("dao.BoardMapper.blogWrite_attach",hashMap);
 		return check;
 	}
-
+	/**
+	 * @name : coupon_data_list
+	 * @date : 2015. 7. 15.
+	 * @author : 황준
+	 * @description :쿠폰 리스트 조회
+	 */
 	@Override
 	public List<HashMap<String, Object>> coupon_data_list(int board_no) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("dao.BoardMapper.coupon_data_list",board_no);
 	}
-
+	
+	/**
+	 * @name : getCoupon
+	 * @date : 2015. 7. 15.
+	 * @author : 황준
+	 * @description :쿠폰 조회
+	 */
 	@Override
 	public int getCoupon(String member_id, String coupon_no) {
 		HashMap<String,Object> hMap=new HashMap<String,Object>();
@@ -96,7 +119,12 @@ public class BoardDaoImpl implements BoardDao {
 		hMap.put("coupon_no", coupon_no);
 		return sqlSession.insert("dao.BoardMapper.insertCouponIssue",hMap);
 	}
-
+	/**
+	 * @name : checkCoupon
+	 * @date : 2015. 7. 15.
+	 * @author : 황준
+	 * @description :쿠폰 등록한 업체 체크 
+	 */
 	@Override
 	public int checkCoupon(String member_id, String coupon_no) {
 		HashMap<String,Object> hMap=new HashMap<String,Object>();
