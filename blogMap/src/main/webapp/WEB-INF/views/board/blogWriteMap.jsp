@@ -80,7 +80,6 @@ v\:* {
             size : new nhn.api.map.Size(newMap_width, newMap_height),
             detectCoveredMarker : true 
          });
-         
 
          var eventFlag = false; // - 동일한 이벤트가 무한정 추가되는 것을 막기 위한 flag.
 
@@ -88,7 +87,6 @@ v\:* {
             alert(pos.point.getX() + " , " + pos.point.getY()); // - 마우스를 클릭했을때의 좌표를 alert 창으로 알려줌.
          };
 
-         
          //마커 아이콘 사이즈 및 이미지 
          var oSize = new nhn.api.map.Size(28, 37);
          var oOffset = new nhn.api.map.Size(14, 37);
@@ -142,9 +140,6 @@ v\:* {
                            var pAddr=pAddrs[1].split("/");
                            var pAddr0=pAddr[0];
                            
-                           
-                           //var pAddr4=pAddr[4];
-                           
                            $("input[name=realAddr]").val(pAddr[0]+" "+pAddr[1]+" "+pAddr[2]+" "+pAddr[3]);
                            $("input[name=addr_sido]").val(pAddr0.trim());
                            $("input[name=addr_sigugun]").val(pAddr[1]);
@@ -189,8 +184,6 @@ v\:* {
                         	 pAddr3="";
                          }
                      }else{
-                    	// var addr_title=pullAddr.substring(1,pullAddr.lastIndexOf("]"));
-                    	//alert("2"+addr_title);
                          var pAddrs=pullAddr.split("]");
                          
                          var pAddr=pAddrs[1].split("/");
@@ -199,8 +192,7 @@ v\:* {
                          var pAddr2=pAddr[2];
                          var pAddr3=pAddr[3];
                      }
-                     
-                     
+                           
 					var search_value=$("#blogList_text").val().replace(" ","%");
                      $.ajax({
                            type : 'post',
@@ -211,7 +203,6 @@ v\:* {
                               dongri : pAddr2,
                               bunji : pAddr3,
                               searchValue: search_value
-                              
                            },
                            contentType:'application/x-www-form-urlencoded;charset=UTF-8',
                            success : function(data) {
@@ -266,17 +257,6 @@ v\:* {
                                     $("#result_star"+i+" > span").attr("class","glyphicon glyphicon-star");
                                  }
                                  
-                                 /*$("#blogList_result_content").append("<span>"+board_no+"</span>");
-                                 $("#blogList_result_content").append("<span>카테고리 넣어야함 </span>");
-                                 $("#blogList_result_content").append("<span>주소 넣어야함</span>");
-                                 $("#blogList_result_content").append("<a><span>"+board_title+"</span></a>");
-                                 $("#blogList_result_content").append("<span>"+fullDate+"</span>");
-                                 $("#blogList_result_content").append("<span>"+board_grade+"</span>");
-                                 $("#blogList_result_content").append("<span>"+board_count+"</span>");
-                                 $("#blogList_result_content").append("<br/>");
-                                 $("#blogList_result_content").append("<p>");
-                                 $("#blogList_result_content").append("<br/>");       */
-                                 
                                  //자세히 버튼 클릭시
                                  $("#list_items > a:eq("+i+")").click(function(){
                                 	 $("div[id='blogListDetail'].modal").modal(); 
@@ -289,16 +269,7 @@ v\:* {
                               
                            }
                      });
-                     
-                     //var pAddr4=pAddr[4];
-                     
-                     /* $("input[name=realAddr]").val(pAddr[0]+" "+pAddr[1]+" "+pAddr[2]+" "+pAddr[3]);
-                     $("input[name=addr_sido]").val(pAddr0.trim());
-                     $("input[name=addr_sigugun]").val(pAddr[1]);
-                     $("input[name=addr_dongri]").val(pAddr[2]);
-                     $("input[name=addr_bunji]").val(pAddr[3]);
-                     $("div[id=blogWriteSub].modal").modal("hide"); */
-                     
+
                      // 겹침 마커 클릭한거면
                      if (oCustomEvent.clickCoveredMarker) {
                         return;
@@ -306,12 +277,7 @@ v\:* {
                      // - InfoWindow 에 들어갈 내용은 setContent 로 자유롭게 넣을 수 있습니다. 외부 css를 이용할 수 있으며, 
                      // - 외부 css에 선언된 class를 이용하면 해당 class의 스타일을 바로 적용할 수 있습니다.
                      // - 단, DIV 의 position style 은 absolute 가 되면 안되며, 
-                     // - absolute 의 경우 autoPosition 이 동작하지 않습니다. 
-                     
-                        
-                        
-                     
-                     
+                     // - absolute 의 경우 autoPosition 이 동작하지 않습니다.  
                      mapInfoTestWindow.setPoint(oTarget.getPoint());
                      mapInfoTestWindow.setVisible(true);
                      mapInfoTestWindow.setPosition({
@@ -355,12 +321,7 @@ v\:* {
                     var oMarker = new nhn.api.map.Marker(oIcon, { title :"["+titleArray[i]+"]"+" "+sidoArray[i]+"/"+sigugunArray[i]+"/"+dongmyunArray[i]+"/"+restArray[i]});
                     }
                     oMarker.setPoint(oPoint); 
-                    oMap.addOverlay(oMarker); 
-                   /*  mapInfoTestWindow
-                  .setContent('<DIV style="border-top:1px solid; border-bottom:2px groove black; border-left:1px solid; border-right:2px groove black;margin-bottom:1px;color:black;background-color:white; width:auto; height:auto;">'
-                        + '<button data-dismiss="modal" style="color: #000000 !important;display: inline-block;font-size: 12px !important;font-weight: bold !important;letter-spacing: -1px !important;white-space: nowrap !important; padding: 2px 2px 2px 2px !important">'
-                        + title :titleArray[i]
-                        + '</buton></div>'); */
+                    oMap.addOverlay(oMarker);
                 } 
          if(mapDiv=="map"){
 			    
@@ -412,38 +373,21 @@ function blogListDetails(blogRead_no) {
         var boardno=data[0].BOARD_NO;
         var recommand_y=data[0].YES;
         var recommand_n=data[0].NO;
+        
         //데이터 입력
-//         $("#blogRead_rgdate > input:eq(0)").val("작성일: "+fullDate); 
-//         $("#blogRead_addr >  input:eq(0)").val("주소: "+pullAddr); 
-//         $("#blogRead_content > div:eq(0)").html(content);
-//         $("#blogRead_writer > input:eq(0)").val("작성자: "+writer);						// 작성자
-//         $("#blogRead_addrtitle > input:eq(0)").val(addr_title);							// 업체명
-//         $("#blogRead_title > input:eq(0)").val(title);									// 제목
-//         $("#blogRead_category > input:eq(0)").val("("+mcategory+" | "+scategory+")"); // 카테고리
-//         $("#blogRead_boardno > label:eq(0)").text(boardno);
-//         $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
-//         $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
-
-		$("#blogRead_addrtitle").append("<h5>"+addr_title+"</h5>");							// 업체명
-		$("#blogRead_category").append("<h5>"+"("+mcategory+" | "+scategory+") : "+"</h5>");  // 카테고리
-		$("#blogRead_title").append("<h5>"+title+"</h5>");									// 제목
+		$("#blogRead_addrtitle").html("<h5>"+addr_title+"</h5>");							// 업체명
+		$("#blogRead_category").html("<h5>"+"("+mcategory+" | "+scategory+") : "+"</h5>");  // 카테고리
+		$("#blogRead_title").html("<h5>"+title+"</h5>");									// 제목
 		
-        $("#blogRead_writer").append("<h6>"+writer+"&nbsp;&nbsp;</h6>");								// 작성자
-        $("#blogRead_rgdate").append("<h6>"+fullDate+"</h6>");								// 작성일 
-        $("#blogRead_addr").append("<h5>"+pullAddr+"</h5>"); 								// 주소
+        $("#blogRead_writer").html("<h6>"+writer+"&nbsp;&nbsp;</h6>");						// 작성자
+        $("#blogRead_rgdate").html("<h6>"+fullDate+"</h6>");								// 작성일 
+        $("#blogRead_addr").html("<h5>"+pullAddr+"</h5>"); 									// 주소
         $("#blogRead_content > div:eq(0)").html(content);
 
-        
-        
-        
         $("#blogRead_boardno > label:eq(0)").text(boardno);
         $("#blog_reference_count").html("<b style='color:blue;'>"+recommand_y+"</b>");
         $("#blog_noreference_count").html("<b style='color:red;'>"+recommand_n+"</b>");
         
-        
-
-        //alert(email);
-        //alert(writer);
         if(email!=writer){
         	$("#Upbutton").css("display","none");
         	$("#Debutton").css("display","none");
@@ -544,7 +488,6 @@ function blogListDetails(blogRead_no) {
 					$("#reply_buttons"+i+" > button:eq(1)").attr("id","reply_content_delete"+i);
 					$("#listAllDiv:last-child").append(asdf098); 
 					
-                    
 					 if(email!=memberId){
 							$("#reply_buttons"+i+" > button:eq(0)").css("display","none");
 							$("#reply_buttons"+i+" > button:eq(1)").css("display","none");

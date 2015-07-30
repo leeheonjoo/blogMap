@@ -23,7 +23,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:login
 	 * @date:2015. 6. 23.
 	 * @author:김정훈
-	 * @description:id와 password가 일치하는 member_id를 DB에서 가져옴
+	 * @description:id와 password가 일치하는 모든 정보를 DB에서 가져와 MemberDto로 반환
 	 */
 	@Override
 	public MemberDto login(String id, String password) {
@@ -112,7 +112,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:updatePassword
 	 * @date:2015. 6. 30.
 	 * @author:김정훈
-	 * @description:
+	 * @description:임시 비밀번호로 보내준 password를 해당email(id)의 password로 update해줌에 따라 숫자 반환  
 	 */
 	@Override
 	public int updatePassword(String email,String password) {
@@ -126,7 +126,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:myPageUpdate_pwdCheck
 	 * @date:2015. 6. 30.
 	 * @author:김정훈
-	 * @description:
+	 * @description:회원 수정을 위해 DB에서 id와 password가 일치하는지 select문을 통해서 확인하여 값의 유무에따라 숫자반환
 	 */
 	@Override
 	public int myPageUpdate_pwdCheck(String member_id, String member_pwd) {
@@ -145,7 +145,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:myPageUpdate
 	 * @date:2015. 6. 30.
 	 * @author:김정훈
-	 * @description:
+	 * @description:memberDto에 담은 정보들을 update문을 통해 수정하고 결과에 따라 숫자반환
 	 */
 	@Override
 	public int myPageUpdate(MemberDto memberDto) {
@@ -157,7 +157,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:myPageDelete
 	 * @date:2015. 6. 30.
 	 * @author:김정훈
-	 * @description:
+	 * @description:memberDto를 통해 해당 아이디의 member_jointype을 0003으로 바꾸며 나머지 정보들을 null로 update함에 따라 숫자로반환 
 	 */
 	@Override
 	public int myPageDelete(MemberDto memberDto) {
@@ -169,7 +169,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:totalPoint
 	 * @date:2015. 7. 2.
 	 * @author:김정훈
-	 * @description:
+	 * @description:point_info테이블에 member_id와 일치하는 포인트 값을 합산하여 반환
 	 */
 	@Override
 	public int totalPoint(String member_id) {
@@ -182,7 +182,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:point_info
 	 * @date:2015. 7. 2.
 	 * @author:김정훈
-	 * @description:
+	 * @description:해당 아이디의 포인트 상세 정보들을 startRow와 endRow의 범위에 맞춰서 list를 가져옴
 	 */
 	@Override
 	public List<HashMap<String,Object>> point_info(String member_id,int startRow,int endRow) {
@@ -198,7 +198,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:totalBoard
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:board테이블에서 해당 아이디의 게시물 갯수를 count(*)하여 결과값 반환
 	 */
 	@Override
 	public int totalBoard(String member_id) {
@@ -210,7 +210,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:board_info
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:해당 아이디의 게시글 상세 정보들을 startRow와 endRow의 범위 맞춰서 list를 가져옴
 	 */
 	@Override
 	public List<HashMap<String, Object>> board_info(String member_id,int startRow,int endRow) {
@@ -225,7 +225,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:totalFavorite
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:favorite테이블에서 해당 아이디의 즐겨찾기한 갯수를 count(*)하여 결과값 반환
 	 */
 	@Override
 	public int totalFavorite(String member_id) {
@@ -237,7 +237,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:favorite_info
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:해당 아이디의 즐겨찾기 상세 정보들을 startRow와 endRow의 범위에 맞춰서 list를 가져옴
 	 */
 	@Override
 	public List<HashMap<String, Object>> favorite_info(String member_id,int startRow,int endRow) {
@@ -252,7 +252,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:point_info_count
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:point_info테이블에서 해당 아이디의 포인트 갯수를 count(*)하여 결과값 반환
 	 */
 	@Override
 	public int point_info_count(String member_id) {
@@ -264,7 +264,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:totalCoupon
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:coupon_issue테이블에서 해당 아이디의 쿠폰 갯수를 count(*)하여 결과값 반환
 	 */
 	@Override
 	public int totalCoupon(String member_id) {
@@ -276,7 +276,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:coupon_info
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:해당 아이디의 사용가능한 쿠폰들의 상세 정보들을 startRow와 endRow의 범위에 맞춰서 list를 가져옴
 	 */
 	@Override
 	public List<HashMap<String, Object>> coupon_info(String member_id, int startRow,
@@ -292,7 +292,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:managerRgCheck
 	 * @date:2015. 7. 18.
 	 * @author:김정훈
-	 * @description:
+	 * @description:중복체크를 위해 manager테이블에 select문을 수행하여 값의 유무에 따라 숫자반환 
 	 */
 	@Override
 	public int managerRgCheck(String member_id) {
@@ -311,7 +311,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:managerLogin
 	 * @date:2015. 7. 18.
 	 * @author:김정훈
-	 * @description:
+	 * @description:manager테이블에서 일치하는 id와 password의 managerDto를 반환
 	 */
 	@Override
 	public ManagerDto managerLogin(String id, String password) {
@@ -325,7 +325,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:fbMemberDelete
 	 * @date:2015. 7. 18.
 	 * @author:김정훈
-	 * @description:
+	 * @description:페이스북으로 가입한 member_id의 member_jointype을 0003으로 update하며 다른 정보들을 null로 update함에따라 숫자로반환
 	 */
 	@Override
 	public int fbMemberDelete(String member_id) {
@@ -337,7 +337,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:reRegister
 	 * @date:2015. 7. 18.
 	 * @author:김정훈
-	 * @description:
+	 * @description:탈퇴한 사용자 재가입할시 memberDto의 관련 정보를 해당아이디에 update함에 따라 숫자반환
 	 */
 	@Override
 	public int reRegister(MemberDto memberDto) {
@@ -349,7 +349,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:fbReRegister
 	 * @date:2015. 7. 18.
 	 * @author:김정훈
-	 * @description:
+	 * @description:탈퇴한 사용자 페이스북으로 재가입할시 memberDto의 관련 정보를 해당 아이디에 update함에 따라 숫자반환
 	 */
 	@Override
 	public int fbReRegister(MemberDto memberDto) {
@@ -361,7 +361,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @name:coupon_unusable_info
 	 * @date:2015. 7. 22.
 	 * @author:김정훈
-	 * @description:
+	 * @description:해당 아이디의 사용불가능한 쿠폰들의 상세 정보들을 startRow와 endRow의 범위에 맞춰서 list를 가져옴
 	 */
 	@Override
 	public List<HashMap<String, Object>> coupon_unusable_info(String member_id, int startRow, int endRow) {

@@ -10,7 +10,6 @@
 <script type="text/javascript">
 $(function() {
 	$("input[name='member_id']").val(sessionStorage.getItem('email'));
-	
 })
 </script>
 </head>

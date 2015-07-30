@@ -228,6 +228,7 @@ function gray_a(a) {
 			}
 		});
 		
+		$("#map").empty();
 		getMap();
 	}
 	
