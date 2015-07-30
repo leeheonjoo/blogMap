@@ -30,9 +30,6 @@
  	.modal-myPage{
  		width: 900px; 
  		margin: auto;
-/*   	height: 600px;  */
-/*   	max-height: 600px; */
-/*     	overflow-y:scroll; */ 
  	}
 	
  	.modal-email-confrim{
@@ -42,18 +39,6 @@
    		max-height: 600px;
      	overflow-y:auto;
  	}
- 	
- /* 	.modal-myPage-update{
- 		width: auto;
- 		margin: 2% 1% 0px 30%;
-  		height: 600px;
-   		max-height: 600px;
-     	overflow-y:scroll;
- 	} 	 */
-	
-/*  	.modal{  */
-/*      display: block !important;  */
-/*  }  */
 
 	#mainResult{
 	  height: 90%;
@@ -70,54 +55,42 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>						<!-- bootstrap javascript를 로드 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.3/js/bootstrap-select.js"></script>	<!-- bootstrap-select javascript를 로드 -->
 <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/js/bootstrap-dropdown.js"></script>		<!-- bootstrap-dropdown javascript를 로드 -->
-<!-- Modal, Metro style javascript를 로드 -->
-<script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
-<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=60e9ac7ab8734daca3d2053c1e713dbd"></script>
+<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=3933720084832bd83c88c654d3c6b08a"></script>
 <!-- 네이버 스마트에디터 -->
 <script type="text/javascript" src="${root }/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- 컨폼 확인창 -->	
 <script type="text/javascript" src="${root }/css/board/jquery.popconfirm.js"></script>
 <!-- modal, session check -->
-<script type="text/javascript">
-	$(document).ready(function() {
+<!-- Modal, Metro style javascript를 로드 -->
+<script type="text/javascript" src="${root}/css/blogMap/blogMap.js"></script>
+<script>
+//<session check -> button change>
+	$(function(){
+		if(sessionStorage.getItem("email")!=null){
+			$("#blogmap_before_login span").remove();
+			$("#myPage_fb_delete_btn").css("display","none");
 
-//			<session check -> button change>
-			if(sessionStorage.getItem('email')!=null){
-				//<li><a href="#" class="dropdown-toggle" id="blogmap_after_login" style="display:none;"><b>Logout</b></a></li>
-				//$("#blogmap_login_bar").fadeOut();
-				$("#blogmap_before_login span").remove();
-				$("#myPage_fb_delete_btn").css("display","none");
-				/* if($("#blogmap_main_myPage b").text()=="MyPage"){
-					$("#blogmap_main_myPage").parent().remove();
-				} */
-				/* if(sessionStorage.getItem('jointype')=="0002"){
-					$("#blogmap_main_myPage").empty();
-				}
-				
-				$("#blogmap_main_myPage").append('<a id="blogmap_main_myPage" data-toggle="modal" href="#blogmap_myPage" class="btn" style="text-align:left;"><b>MyPage</b></a>'); */
-				
-				$("#blogmap_main_myPage").css("display","inline-block");
-				$("#blogmap_before_login").attr("data-toggle","");
-				
-				if(sessionStorage.getItem('manager_yn')=="Y"){
-					$("#manager_page_icon").css("display","inline-block");
-					$("#blogmap_main_myPage").css("display","none");
-				}
-				
-				$("#login_text").text("Logout");
-				
-				if($("#login_text").text()=="Logout"){
-					$("#blogmap_before_login").click(function(){
-						if(sessionStorage.getItem('jointype')=="0002"){
-							FB.logout();
-						}
-						sessionStorage.clear();
-						//$("#blogmap_after_login").css("display","none");
-						//$("#blogmap_login_bar").fadeIn();
-						location.href="${root}/";
-					});
-				}
+			
+			$("#blogmap_main_myPage").css("display","inline-block");
+			$("#blogmap_before_login").attr("data-toggle","");
+			
+			if(sessionStorage.getItem("manager_yn")=="Y"){
+				$("#manager_page_icon").css("display","inline-block");
+				$("#blogmap_main_myPage").css("display","none");
 			}
+			
+			$("#login_text").text("Logout");
+			
+			if($("#login_text").text()=="Logout"){
+				$("#blogmap_before_login").click(function(){
+					if(sessionStorage.getItem('jointype')=="0002"){
+						FB.logout();
+					}
+					sessionStorage.clear();
+					location.href="${root}/";
+				});
+			}
+		}
 	});
 </script>
 <script>
@@ -136,16 +109,19 @@
 
 					var travel_count=0;
                     var food_count=0;
+                    var coupon_count=0;
                     $.each(data,function(i){
                     	var category=data[i].CATEGORY;
                     	var boardNo=data[i].BOARD_NO;
                     	var boardTitle=data[i].BOARD_TITLE;
-                    	var yes=data[i].YES;
-                    	var no=data[i].NO;
                     	var fileName=data[i].FILE_NAME;
 
                      	var carousel_image = "<div class='item'>";
-                       	carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + " name="+ boardNo + " />";
+                     	if(category=='100' || category=='200'){
+                     		carousel_image += "<img src=" + "${root}/pds/board/"+ fileName + " name="+ "P" + boardNo + " />";	
+                     	}else{
+                     		carousel_image += "<img src=" + "${root}/pds/coupon/"+ fileName + " name="+ "C" + boardNo + " />";
+                     	}
                        	carousel_image += "<div class='carousel-caption'>";
                        	carousel_image += "<h6>"+ boardTitle +"</h6>";
                        	carousel_image += "</div>";
@@ -194,13 +170,63 @@
                             }           
                             
                             food_count++;
+                    	}else{
+                            if(coupon_count==0){
+                                $("#tile5 .carousel-inner").empty();                                          	  
+                            }else if(coupon_count==2){
+                            	$("#tile6 .carousel-inner").empty();
+                            }
+                            
+                            if(coupon_count<2){
+                            	 $("#tile5 .carousel-inner").append(carousel_image);
+                            }else{
+                            	 $("#tile6 .carousel-inner").append(carousel_image);
+                            }
+                           
+                       	    
+                            if(coupon_count==0){
+                             	$("#tile5 .item").addClass("active");
+                            }else if(coupon_count==2){
+                            	$("#tile6 .item").addClass("active");
+                            }           
+                            
+                            coupon_count++;
                     	}
                         
-                        $("#metro img[name="+ boardNo +"]").click(function(){
-                            blogListDetails(boardNo);
-                        	$("div[id='blogListDetail'].modal").modal();
+                       	// 추천블로그 클릭
+                       	if(category=='100' || category=='200'){
+                       		$("#metro img[name=" + "P" + boardNo +"]").click(function(){
+                       			blogListDetails(boardNo);
+                            	$("div[id='blogListDetail'].modal").modal();
+                       		});
+                       	}else{
+                       		$("#metro img[name=" + "C" + boardNo +"]").click(function(){
+                        		couponData(boardNo);
+                        		$("div[id='couponDetail'].modal").modal();
+                       		});
+                       	}
+                       	
+                       	// 추천쿠폰 클릭
+                        $("#metro img[name=" + boardNo +"]").click(function(){
+                        	if(category=='100' || category=='200'){
+                                blogListDetails(boardNo);
+                            	$("div[id='blogListDetail'].modal").modal();		
+                        	}else{
+                        		couponData(boardNo);
+                        		$("div[id='couponDetail'].modal").modal();
+                        	}
                         });
                     });
+                    
+                    $("#tile5 .item").height($("#tile1").width());
+                    $("#tile5 img").css("height","60%");
+                    $("#tile5 img").css("width","100%");
+                    $("#tile5 .carousel-caption").css("top","50%");
+                    
+                    $("#tile6 .item").height($("#tile1").width());
+                    $("#tile6 img").css("height","60%");
+                    $("#tile6 img").css("width","100%");
+                    $("#tile6 .carousel-caption").css("top","50%");
                     
                     $("#tile7 .item").height($("#tile1").width());
                     $("#tile7 img").css("height","100%");
@@ -298,6 +324,7 @@ $(function(){
 </head>
 <body style="padding:10px; padding-top:40px;">
 <div>
+	<!-- 회원관련 -->
 	<div class="container" style="max-width:1170px; padding:0 0 0 0;">
 		<nav class="navbar navbar-inverse" role="navigation" style="width:inherit;">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -371,6 +398,7 @@ $(function(){
 	<!-- Metro style dynamic Tiles -->
 	<div id="metro" class="container dynamicTile">
 		<div class="row ">
+			<!-- 블로그 검색 -->
 	    	<div class="col-sm-2 col-xs-4">
 	    		<div id="tile1" class="tile">
 		        
@@ -386,13 +414,14 @@ $(function(){
 		   		</div>
 			</div>
 			
+			<!-- 블로그맵 로고 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile2" class="tile">
 			   	 
 					<div class="carousel slide" data-ride="carousel">
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
-							<div class="item active">
+							<div class="item active" style="m">
 								<img src="http://handsontek.net/demoimages/tiles/hot.png" class="img-responsive"/>
 							</div>
 						</div>
@@ -401,6 +430,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 블로그 작성 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile3" class="tile">
 			   	 
@@ -418,6 +448,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 쿠폰정보 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile4" class="tile">
 			   	 
@@ -435,6 +466,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 쿠폰추천1 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile5" class="tile" style="cursor:Pointer">
 			  	 
@@ -442,10 +474,6 @@ $(function(){
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<img src="http://handsontek.net/demoimages/tiles/neews.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/neews2.png" class="img-responsive"/>
 							</div>
 						</div>
 					</div>
@@ -453,6 +481,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 쿠폰추천2 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile6" class="tile" style="cursor:Pointer">
 			   	 
@@ -460,10 +489,6 @@ $(function(){
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active">
-								<img src="http://handsontek.net/demoimages/tiles/skype.png" class="img-responsive"/>
-							</div>
-							<div class="item">
-								<img src="http://handsontek.net/demoimages/tiles/skype2.png" class="img-responsive"/>
 							</div>
 						</div>
 					</div>
@@ -473,6 +498,7 @@ $(function(){
 		</div>
 
 		<div class="row">
+			<!-- 여행추천1 -->
 			<div class="col-sm-4 col-xs-8">
 				<div id="tile7" class="tile" style="cursor:Pointer">
 			   	 
@@ -487,6 +513,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 여행추천2 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile8" class="tile" style="cursor:Pointer">
 			   	 
@@ -501,6 +528,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 음식추천1 -->
 			<div class="col-sm-2 col-xs-4">
 				<div id="tile9" class="tile" style="cursor:Pointer">
 				  	 
@@ -515,6 +543,7 @@ $(function(){
 				</div>
 			</div>
 			
+			<!-- 음식추천2 -->
 			<div class="col-sm-4 col-xs-8">
 				<div id="tile10" class="tile" style="cursor:Pointer">
 				  	 
@@ -528,12 +557,12 @@ $(function(){
 				    
 				</div>
 			</div>
-			
+		
 		</div>
 	</div>
-	<br/>
+<br/>
 
-	<div class="container" style="max-width:1170px; height:50px; padding:0 0 0 0;">
+	<div class="container" style="max-width:1170px; height:50px;">
 					<div style="width:100%; height:50px; text-align:right;">
 						<p style="width:100%; line-height:46px;">
 							<a id="partner_Registration" style="cursor:Pointer"><img src="${root}/images/blogMap/Partnership_32.png"></a>
@@ -544,8 +573,7 @@ $(function(){
 	</div>
 </div>
 <div class="container-fluid">
-
-	<!-- **********************************
+		<!-- **********************************
 	                        블로그 리스트 : 이헌주
 	     ***********************************-->
 		<!-- 블로그 리스트 - 블로그 리스트 검색 -->
@@ -564,44 +592,6 @@ $(function(){
 				</div>
 		    </div>
 		</div>
-		
-		
-<!-- 		<div class="modal fade" id="blogListMain" data-backdrop="static"> -->
-<!-- 			<div class="modal-dialog" style="height:100%;"> -->
-<!-- 				<div class="modal-content" style="height:100%;"> -->
-<!-- 					<div class="modal-header"> -->
-<!-- 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
-<!-- 						<h4 class="modal-title">Blog Search</h4> -->
-<!-- 					</div> -->
-<!-- 					<div class="modal-body" style="display:block; position:absolute; height:90%;"> -->
-<!-- 						<div id="mainResult" style="position:absolute; height:95%;"> -->
-<%-- 							<jsp:include page="board/blogListMain.jsp"/> --%>
-<!-- 						</div> -->
-<!-- 						<br/> -->
-<!-- 						<br/> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 		    </div> -->
-<!-- 		</div> -->
-		
-		<!-- 블로그 리스트 : 황준-->
-<!-- 		<div class="modal fade" id="blogListSub" data-backdrop="static"> -->
-<!-- 			<div class="modal-dialog modal-lg"> -->
-<!-- 				<div class="modal-content"> -->
-<!-- 					<div class="modal-header"> -->
-<!-- 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> -->
-<!-- 						<h4 class="modal-title">Blog List</h4> -->
-<!-- 					</div><div class="container"></div> -->
-<!-- 					<div class="modal-body"> -->
-<!-- 						<div id="mainResult"> -->
-<%--  							<jsp:include page="board/list_backup.jsp"/> --%>
-<!-- 						</div> -->
-<!-- 						<br/> -->
-<!-- 						<br/> -->
-<!-- 					</div> -->
-<!-- 			   </div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
 		
 		<!-- 블로그 리스트 자세히 보기 : 황준 -->
 		<div class="modal fade" id="blogListDetail" data-backdrop="static">
@@ -622,7 +612,7 @@ $(function(){
 			</div>
 		</div>
 		
-	<!-- **********************************
+		<!-- **********************************
 	                             블로그 작성 : 황준
 	     ***********************************-->
 		<!-- 블로그 작성 - blogMapWrite -->	
@@ -669,6 +659,7 @@ $(function(){
 			   </div>
 			</div>
 		</div>
+		
 		<!-- **********************************
 	                        블로그 수정 : 황준
 	     ***********************************-->
@@ -715,7 +706,7 @@ $(function(){
 			</div>
 		</div> 
 	     		
-	<!-- **********************************
+		<!-- **********************************
 	                        제휴업체 : 변태훈
 	     ***********************************-->
 		<!-- 제휴업체 - 제휴업체등록 main -->
@@ -937,8 +928,8 @@ $(function(){
 			</div>
 		</section>
 	
-	<!-- 제휴업체 - 쿠폰정보등록 팝업 레이어 -->	
-	<!-- 쿠폰 등록 작성 - 쿠폰정보등록 -->
+	  <!-- 제휴업체 - 쿠폰정보등록 팝업 레이어 -->	
+	  <!-- 쿠폰 등록 작성 - 쿠폰정보등록 -->
       <section class="modal fade" id="mainCoupon_Registration">
       <div class="modal-dialog modal-lg">
          <form id="couponWrite_form" class="col-xs-12 form-horizontal" method="post" action="${root}/partner/couponWrite.do" autocomplete="off" enctype="multipart/form-data">
@@ -997,7 +988,7 @@ $(function(){
    </section>
    
 		
-	<!-- **********************************
+		<!-- **********************************
 	                           회원관리 : 김정훈
 	     ***********************************-->
 		<!-- 회원관리 - 로그인 -->
@@ -1197,7 +1188,7 @@ $(function(){
 		    </div>
 		</div>
 		
-	<!-- **********************************
+		<!-- **********************************
 				관리자페이지 : 이동희
 	     ***********************************-->
 		
@@ -1300,7 +1291,7 @@ $(function(){
 
 
 
-	<!-- **********************************
+		<!-- **********************************
 				메시지박스 : 정기창
 	     ***********************************-->
 		<!-- 메시지박스 - 메시지 메인 -->

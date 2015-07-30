@@ -40,7 +40,8 @@
               		
               		var getYdate = new Date(data[i].partner_ydate);
               		var yDate = null;
-              		if(getYdate.getFullYear() == '9999'){
+              		
+              		if(data[i].partner_ydate == null){
               			yDate = "미승인";
               		}else{
               			yDate = leadingZeros(getYdate.getFullYear(), 4) + '/' + leadingZeros(getYdate.getMonth() + 1, 2) + '/' + leadingZeros(getYdate.getDate(), 2);

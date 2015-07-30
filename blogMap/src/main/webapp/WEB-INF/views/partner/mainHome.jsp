@@ -392,10 +392,10 @@ $(function() {
 			if(! check_empty("#coupon_eymd",'쿠폰적용 종료일'))return false;
 			
 			// 글자수 체크
-			if( $("#coupon_item").val().length < 1 || $("#coupon_item").val().length > 50 )
+			if( $("#coupon_items").val().length < 1 || $("#coupon_items").val().length > 50 )
 			{
 				alert("할인상품 이름은 최소 1글자 이상 50글자 미만이어야 합니다.");
-				$("#coupon_item").focus();
+				$("#coupon_items").focus();
 				return false;
 			}
 			

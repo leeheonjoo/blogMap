@@ -152,7 +152,7 @@ function gray_a(a) {
 									url:'${root}/board/blogListSearchSub2.do',
 									data:{
 										query: pullAddr, 
-										key : "60e9ac7ab8734daca3d2053c1e713dbd",
+										key : "3933720084832bd83c88c654d3c6b08a",
 										encoding : "utf-8",
 										output : "json",
 										coord : "latlng",
@@ -228,6 +228,7 @@ function gray_a(a) {
 			}
 		});
 		
+		$("#map").empty();
 		getMap();
 	}
 	
@@ -360,7 +361,7 @@ function gray_a(a) {
 <body>
 	<!-- 검색조건 navbar : 20150706 이헌주 -->
 	<div style="display: none;" id="hidden_items" class="list-group" >
-         <a id="listItem" href="#" class="list-group-item">
+         <a id="listItem" class="list-group-item">
          	<div class="row" style="height:100%;">
                <div class="media col-md-4 col-sm-5 col-xs-5" style="height:100%;">
                    <figure class="pull-left" style="height:100%; width:100%;">
@@ -388,7 +389,7 @@ function gray_a(a) {
          </a>
      </div>
     <div class="row" style="height:100%;">
-		<div class="container-fluid" style="height:22%;">
+		<div class="container-fluid" style="height:auto;">
 		<nav id="blogListMain" class="navbar navbar-inverse ">
 			
 			  	<!-- Brand and toggle get grouped for better mobile display -->
@@ -458,15 +459,15 @@ function gray_a(a) {
 		</nav>
 				</div><!-- /.container-fluid -->
 		
-		<div class="container-fluid" style="height:75%; width:100%;">
+		<div class="container-fluid" style="position:relative; height:100%; width:100%;">
 			<div class="row" style="height:100%; width:auto;">
-				<div id="map_div" class="col-sm-12 col-xs-12" style="height:100%;">
+				<div id="map_div" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:100%;">
 					<div id="map"></div>
 				</div>
-				<div id="list_div" class="col-sm-12 col-xs-12" style="height:100%;">
-					<div class="well" style="height:100%;">
+				<div id="list_div" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height:100%;">
+<!-- 					<div class="well" style="height:100%;"> -->
 				        <div id="list_items" class="list-group" style="height:100%;">
-				        </div>
+<!-- 				        </div> -->
 			        </div>
 				</div>
 			</div>
@@ -503,7 +504,8 @@ function gray_a(a) {
 		//좌표 전달받아 지도 생성
 		function blogListMapCreate(latitude, longitude){
 			
-			var map_width=$("#map_div").css("width");
+			
+			var map_width=$("#bs-example-navbar-collapse-2").css("width");
 			map_width=map_width.replace("px","");
 			var map_height=$("#map_div").css("height");
 			map_height=map_height.replace("px","");
@@ -637,7 +639,7 @@ function gray_a(a) {
 			             
 					$(window).resize(function() {
 						
-						var map_width=$("#map_div").css("width");
+						var map_width=$("#bs-example-navbar-collapse-2").css("width");
 						map_width=map_width.replace("px","");
 						var map_height=$("#map_div").css("height");
 						map_height=map_height.replace("px","");
