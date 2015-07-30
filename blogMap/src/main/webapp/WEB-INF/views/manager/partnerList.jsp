@@ -10,12 +10,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Member Page</title>
 <script type="text/javascript">
-
-/******************************************/ 
-/*			          					  */
-/*			제휴업체 탭 클릭시 실행			  */
-/*										  */
-/******************************************/ 
+	/******************************************/ 
+	/*			          					  */
+	/*			제휴업체 탭 클릭시 실행			  */
+	/*										  */
+	/******************************************/ 
 	function getPartnerList(){
 		//alert("getPartnerList : "+ searchTag);
 		$("#partnerListResult1").empty();	// 제휴업체 정보를 불러오기전 리셋(중복 삽입을 방지하기 위해)
@@ -72,7 +71,6 @@
 					}
 					
 					$("#partner"+data[i].partner_no).click(function(){
-						/* $("#partner_data-body").empty(); */
 						partnerDetail(data[i].partner_no);
 					});
 				});
@@ -122,7 +120,6 @@
 					if(submitChcek = "1"){
 						alert("승인되었습니다.");
 						getPartnerList();
-						//$("#partnerDetail").modal().dismiss();
 					};
 					
 				},error:function(submitChcek){
@@ -168,7 +165,6 @@
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				success:function(responseData){
 					var data=JSON.parse(responseData);
-					//var filename=data.partner_pic_name
 					var getRgdate = new Date(data.partner_rgdate);	// 등록일 날짜 변환
 					var rgyear = getRgdate.getFullYear();
 					var rgmonth = getRgdate.getMonth() + 1;
@@ -245,7 +241,6 @@
 				return false;
 			}
 			//alert(searchTag);
-			/* searchPartnerList(searchTag); */
 		
 			$.ajax({
 				type:'get',
@@ -390,7 +385,6 @@
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
 						var data=JSON.parse(responseData);
-						//var filename=data.partner_pic_name
 						var getRgdate = new Date(data.partner_rgdate);	// 등록일 날짜 변환
 						var rgyear = getRgdate.getFullYear();
 						var rgmonth = getRgdate.getMonth() + 1;
@@ -415,10 +409,8 @@
 						$("#partnerDetailMain:last-child #partner_ydate").html(yDate);
 						
 						if(data.partner_yn == "Y"){
-							//$("#partner_submit").css("display", "none");
 							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.partner_no, "value":"삭제"});
 						}else if(data.partner_yn == "N"){
-							//$("#partner_delete").css("display", "none");
 							$("#partnerDetailMain:last-child #partner_detail_button").attr({"name":data.partner_no, "value":"승인"});
 						}
 						
@@ -506,7 +498,6 @@
 						}
 						
 						$("#partner"+data[i].partner_no).click(function(){
-							/* $("#partner_data-body").empty(); */
 							partnerDetail(data[i].partner_no);
 						});
 					});
@@ -602,7 +593,6 @@
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					success:function(responseData){
 						var data=JSON.parse(responseData);
-						//var filename=data.partner_pic_name
 						var getRgdate = new Date(data.partner_rgdate);	// 등록일 날짜 변환
 						var rgyear = getRgdate.getFullYear();
 						var rgmonth = getRgdate.getMonth() + 1;
@@ -661,30 +651,22 @@
 				});
 			};	
 		});
-	
-/*  }); */
-	
-
 </script>
 </head>
 <body>
-<div class="caption">
-
-	<div>
-			<input type="button" id="getPartnerList" value="Reset"/>&nbsp;&nbsp;
-			<input type="radio" name="partner_yn" id="Y"/><span>승인업체</span> &nbsp;&nbsp;
-			<input type="radio" name="partner_yn" id="N"/><span>미승인업체</span>&nbsp;&nbsp;
-			<input type="text" placeholder="Name Search" id="searchTag"/> 
-			<input type="submit" id="searchPartner" value="Search"/>	
-	</div><br/>
-	
-	<div>
-		<div class="span7">   
-			<div class="widget stacked widget-table action-table">
-	    				
-					
+	<div class="caption">
+		<div>
+				<input type="button" id="getPartnerList" value="Reset"/>&nbsp;&nbsp;
+				<input type="radio" name="partner_yn" id="Y"/><span>승인업체</span> &nbsp;&nbsp;
+				<input type="radio" name="partner_yn" id="N"/><span>미승인업체</span>&nbsp;&nbsp;
+				<input type="text" placeholder="Name Search" id="searchTag"/> 
+				<input type="submit" id="searchPartner" value="Search"/>	
+		</div><br/>
+		
+		<div>
+			<div class="span7">   
+				<div class="widget stacked widget-table action-table">
 					<div class="widget-content">
-						
 						<table class="table table-striped table-bordered" >
 							<thead>
 								<tr class="widget-header" >
@@ -698,14 +680,11 @@
 								</tr>
 							</thead>
 							<tbody id="partnerListResult1"></tbody>  <!-- 자료를 붙일 바디 -->
-							</table>
-						
+						</table>
 					</div> <!-- /widget-content -->
-				
-			</div> <!-- /widget -->
-	    </div>
+				</div> <!-- /widget -->
+		    </div>
+		</div>
 	</div>
-	</div>
-	
 </body>
 </html>

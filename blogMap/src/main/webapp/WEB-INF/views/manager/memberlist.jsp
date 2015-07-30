@@ -12,114 +12,114 @@
 <!-- <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script> -->
 <%-- <script type="text/javascript" src="${root }/css/manager/script.js"></script> --%>
 <style>
-.table-bordered {
-border: 1px solid #dddddd;
-border-collapse: separate;
-border-left: 0;
--webkit-border-radius: 4px;
--moz-border-radius: 4px;
-border-radius: 4px;
-}
+	.table-bordered {
+		border: 1px solid #dddddd;
+		border-collapse: separate;
+		border-left: 0;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+	}
 
-.table {
-width: 100%;
-margin-bottom: 20px;
-background-color: transparent;
-border-collapse: collapse;
-border-spacing: 0;
-display: table;
-}
+	.table {
+		width: 100%;
+		margin-bottom: 20px;
+		background-color: transparent;
+		border-collapse: collapse;
+		border-spacing: 0;
+		display: table;
+	}
 
-.widget.widget-table .table {
-margin-bottom: 0;
-border: none;
-}
+	.widget.widget-table .table {
+		margin-bottom: 0;
+		border: none;
+	}
+	
+	.widget.widget-table .widget-content {
+		padding: 0;
+	}
+	
+	.widget .widget-header + .widget-content {
+		border-top: none;
+		-webkit-border-top-left-radius: 0;
+		-webkit-border-top-right-radius: 0;
+		-moz-border-radius-topleft: 0;
+		-moz-border-radius-topright: 0;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+	
+	.widget .widget-content {
+		padding: 20px 15px 15px;
+		background: #FFF;
+		border: 1px solid #D5D5D5;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+	}
+	
+	.widget .widget-header {
+		position: relative;
+		height: 40px;
+		line-height: 40px;
+		background: #E9E9E9;
+		background: -moz-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa), color-stop(100%, #e9e9e9));
+		background: -webkit-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+		background: -o-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+		background: -ms-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+		background: linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+		text-shadow: 0 1px 0 #fff;
+		border-radius: 5px 5px 0 0;
+		box-shadow: 0 2px 5px rgba(0,0,0,0.1),inset 0 1px 0 white,inset 0 -1px 0 rgba(255,255,255,0.7);
+		border-bottom: 1px solid #bababa;
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9');
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9')";
+		border: 1px solid #D5D5D5;
+		-webkit-border-top-left-radius: 4px;
+		-webkit-border-top-right-radius: 4px;
+		-moz-border-radius-topleft: 4px;
+		-moz-border-radius-topright: 4px;
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+		-webkit-background-clip: padding-box;
+	}
 
-.widget.widget-table .widget-content {
-padding: 0;
-}
-
-.widget .widget-header + .widget-content {
-border-top: none;
--webkit-border-top-left-radius: 0;
--webkit-border-top-right-radius: 0;
--moz-border-radius-topleft: 0;
--moz-border-radius-topright: 0;
-border-top-left-radius: 0;
-border-top-right-radius: 0;
-}
-
-.widget .widget-content {
-padding: 20px 15px 15px;
-background: #FFF;
-border: 1px solid #D5D5D5;
--moz-border-radius: 5px;
--webkit-border-radius: 5px;
-border-radius: 5px;
-}
-
-.widget .widget-header {
-position: relative;
-height: 40px;
-line-height: 40px;
-background: #E9E9E9;
-background: -moz-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa), color-stop(100%, #e9e9e9));
-background: -webkit-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
-background: -o-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
-background: -ms-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
-background: linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
-text-shadow: 0 1px 0 #fff;
-border-radius: 5px 5px 0 0;
-box-shadow: 0 2px 5px rgba(0,0,0,0.1),inset 0 1px 0 white,inset 0 -1px 0 rgba(255,255,255,0.7);
-border-bottom: 1px solid #bababa;
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9');
--ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9')";
-border: 1px solid #D5D5D5;
--webkit-border-top-left-radius: 4px;
--webkit-border-top-right-radius: 4px;
--moz-border-radius-topleft: 4px;
--moz-border-radius-topright: 4px;
-border-top-left-radius: 4px;
-border-top-right-radius: 4px;
--webkit-background-clip: padding-box;
-}
-
-thead {
-display: table-header-group;
-vertical-align: middle;
-border-color: inherit;
-}
-
-.widget .widget-header h3 {
-top: 2px;
-position: relative;
-left: 10px;
-display: inline-block;
-margin-right: 3em;
-font-size: 14px;
-font-weight: 600;
-color: #555;
-line-height: 18px;
-text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-}
-
-.widget .widget-header [class^="icon-"], .widget .widget-header [class*=" icon-"] {
-display: inline-block;
-margin-left: 13px;
-margin-right: -2px;
-font-size: 16px;
-color: #555;
-vertical-align: middle;
-}
+	thead {
+		display: table-header-group;
+		vertical-align: middle;
+		border-color: inherit;
+	}
+	
+	.widget .widget-header h3 {
+		top: 2px;
+		position: relative;
+		left: 10px;
+		display: inline-block;
+		margin-right: 3em;
+		font-size: 14px;
+		font-weight: 600;
+		color: #555;
+		line-height: 18px;
+		text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+	}
+	
+	.widget .widget-header [class^="icon-"], .widget .widget-header [class*=" icon-"] {
+		display: inline-block;
+		margin-left: 13px;
+		margin-right: -2px;
+		font-size: 16px;
+		color: #555;
+		vertical-align: middle;
+	}
 </style>
 <script type="text/javascript">
 
-/******************************************/ 
-/*			          					  */
-/*			회원정보 탭 클릭시 실행			  */
-/*										  */
-/******************************************/
+	/******************************************/ 
+	/*			          					  */
+	/*			회원정보 탭 클릭시 실행			 	  */
+	/*										  */
+	/******************************************/
 	function leadingZeros(n, digits) {
 	    var zero = '';
 	    n = n.toString();
@@ -193,7 +193,6 @@ vertical-align: middle;
 								alert("에러가 발생하였습니다.");
 							}
 						});
-						 //$(this).parent().parent().remove();;
 						}else{
 							alert("취소되었습니다.");
 							return false;
@@ -246,13 +245,6 @@ vertical-align: middle;
 					var d = new Date(data[i].member_joindate);
               		var rgDate = leadingZeros(d.getFullYear(), 4) + '/' + leadingZeros(d.getMonth() + 1, 2) + '/' + leadingZeros(d.getDate(), 2);
 					
-					/* var date = new Date(data[i].member_joindate);
-					var year = (date.getFullYear()).toString();
-					var month = "0"+(date.getMonth()+1);
-					//alert(month.length);
-					var day = date.getDate();
-					var rgDate = year + "/" + month + "/"+ day; */
-					
 					var jointype=data[i].member_jointype;
 										
 					$("#memberListResult").append("<tr style='text-align: center;'>"
@@ -293,23 +285,17 @@ vertical-align: middle;
 								alert("에러가 발생하였습니다.");
 							}
 						});
-						 //$(this).parent().parent().remove();;
 						}else{
 							alert("취소되었습니다.");
 							return false;
 						}
-
 					});
-					
 				});
-				
 			},
 			error:function(data){
 				alert("에러가 발생하였습니다.");
 			}
-			
 		});
-
 	});
 	
 	/******************************************/ 
@@ -389,69 +375,52 @@ vertical-align: middle;
 								alert("에러가 발생하였습니다.");
 							}
 						});
-						 //$(this).parent().parent().remove();;
 						}else{
 							alert("취소되었습니다.");
 							return false;
 						}
-
 					});
-					
 				});
-				
 			},
 			error:function(data){
 				alert("에러가 발생하였습니다.");
 			}
 		})
 	});
-	
-	
-	
 </script>
 </head>
 <body>
-
-<div class="caption">
-
-	<div >
-		<input type="button" id="getMemberList" value="Reset"/>
-		<input type="radio" name="joinType" id="blogmap"/><span>BlogMap</span>&nbsp;&nbsp;
-		<input type="radio" name="joinType" id="faceBook"/><span>FaceBook</span> &nbsp;&nbsp;
-		<input type="radio" name="joinType" id="delMember"/><span>탈퇴</span> &nbsp;&nbsp;
-		<input type="text" placeholder="Name Search" id="memberSearchTag"/> 
-		<input type="submit" id="searchMember" value="Search"/>
-	</div><br/>
-	
-	<div>
-		<div class="span7">   
-			<div class="widget stacked widget-table action-table">
-	    				
-					
-					<div class="widget-content">
-						
-						<table class="table table-striped table-bordered" >
-							<thead>
-								<tr class="widget-header" >
-									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:150px; max-width:150px;">아이디</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:70px; max-width:70px;">이름</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">가입일 </th>
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">유형</th>
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">포인트</th>
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">구분</th>
-								</tr>
-							</thead>
-							<tbody id="memberListResult"></tbody>  <!-- 자료를 붙일 바디 -->
-							</table>
-						
-					</div> <!-- /widget-content -->
-				
-			</div> <!-- /widget -->
-	    </div>
+	<div class="caption">
+		<div >
+			<input type="button" id="getMemberList" value="Reset"/>
+			<input type="radio" name="joinType" id="blogmap"/><span>BlogMap</span>&nbsp;&nbsp;
+			<input type="radio" name="joinType" id="faceBook"/><span>FaceBook</span> &nbsp;&nbsp;
+			<input type="radio" name="joinType" id="delMember"/><span>탈퇴</span> &nbsp;&nbsp;
+			<input type="text" placeholder="Name Search" id="memberSearchTag"/> 
+			<input type="submit" id="searchMember" value="Search"/>
+		</div><br/>
+		
+		<div>
+			<div class="span7">   
+				<div class="widget stacked widget-table action-table">
+						<div class="widget-content">
+							<table class="table table-striped table-bordered" >
+								<thead>
+									<tr class="widget-header" >
+										<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:150px; max-width:150px;">아이디</th>
+										<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:70px; max-width:70px;">이름</th>
+										<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">가입일 </th>
+										<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">유형</th>
+										<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">포인트</th>
+										<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">구분</th>
+									</tr>
+								</thead>
+								<tbody id="memberListResult"></tbody>  <!-- 자료를 붙일 바디 -->
+								</table>
+						</div> <!-- /widget-content -->
+				</div> <!-- /widget -->
+		    </div>
+		</div>
 	</div>
-
-</div>
-
 </body>
 </html>
-
