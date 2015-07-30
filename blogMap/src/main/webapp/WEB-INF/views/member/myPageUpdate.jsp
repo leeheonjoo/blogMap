@@ -11,18 +11,10 @@
 if(sessionStorage.getItem('email')!=null){
 	$(function(){
 		var email=sessionStorage.getItem('email');
-		//$("#myPageUpdate_member_id").val(email);
-		
-		//var email="kimjh112339@naver.com";
 		$("#myPageUpdate_member_id").val(email);
 		$("#myPageUpdate_member_id").attr("disabled","disabled");
 		
 		$("#myPageUpdate_btn").click(function(){
-			
-			/* var check=confirm("정말로 수정하시겠습니까?");
-			if(check==true){
-				
-			} */
 			if($("#myPageUpdate_member_name").val()!=""){
 				
 				if($("#myPageUpdate_member_pwd").val()==$("#myPageUpdate_member_pwd_check").val()){
@@ -51,7 +43,6 @@ if(sessionStorage.getItem('email')!=null){
 										
 										if(responseUpData=="1"){
 											alert("수정완료!");
-											//$("#myPageUpdate_layer_div").fadeOut();
 											location.href="${root}/";
 										}else{
 											alert("수정실패");
@@ -80,30 +71,6 @@ if(sessionStorage.getItem('email')!=null){
 </script>
 </head>
 <body>
-	<!-- <div>
-		계정정보<input id="myPageUpdate_member_id" type="text"/> 
-	</div>
-	
-	<div>
-		이름<input id="myPageUpdate_member_name" type="text"/> 
-	</div>
-	
-	<div>
-		현재비밀번호<input id="myPage_member_pwd" type="password"/> 
-	</div>
-	
-	<div>
-		수정할 비밀번호<input id="myPageUpdate_member_pwd" type="password"/> 
-	</div>
-	
-	<div>
-		비밀번호 확인<input id="myPageUpdate_member_pwd_check" type="password"/> 
-	</div>
-	
-	<div>
-		<input id="myPageUpdate_btn" type="button" value="수정"/> 
-	</div> -->
-	
 	<label>계정정보</label><br/>
 	<div class="row">
 		<div class="col-xs-8 col-sm-8 col-md-8">
@@ -152,34 +119,5 @@ if(sessionStorage.getItem('email')!=null){
 	<div>
        	<button id="myPageUpdate_btn" class="btn btn-primary" style="min-width:110px">Update</button>
   	</div>
-	 
-  <!-- <div class="well">
-    <div id="myTabContent" class="tab-content">
-      <div class="tab-pane active in" id="home">
-       
-            
-            <input type="text" value="jsmith" class="input-xlarge"><br/>
-            
-            <input type="text" value="John" class="input-xlarge"><br/>
-            
-            <input type="text" value="Smith" class="input-xlarge"><br/>
-            
-            <input type="text" value="jsmith@yourcompany.com" class="input-xlarge"><br/>
-            
-            <input type="text" value="jsmith@yourcompany.com" class="input-xlarge"><br/><br/>
-          	
-        
-      </div>
-      <div class="tab-pane fade" id="profile">
-    	<form id="tab2">
-        	<label>New Password</label>
-        	<input type="password" class="input-xlarge">
-        	<div>
-        	    <button class="btn btn-primary">Update</button>
-        	</div>
-    	</form>
-      </div>
-  </div>
-  </div> -->
 </body>
 </html>

@@ -9,16 +9,16 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
-function leadingZeros(n, digits) {
-    var zero = '';
-    n = n.toString();
-
-    if (n.length < digits) {
-        for (i = 0; i < digits - n.length; i++)
-            zero += '0';
-    }
-    return zero + n;
-}
+	function leadingZeros(n, digits) {
+	    var zero = '';
+	    n = n.toString();
+	
+	    if (n.length < digits) {
+	        for (i = 0; i < digits - n.length; i++)
+	            zero += '0';
+	    }
+	    return zero + n;
+	}
 
 if(sessionStorage.getItem('email')!=null){
 	
@@ -1648,10 +1648,8 @@ if(sessionStorage.getItem('email')!=null){
 		              <li id="myPage_member_favorite_list_after" style="display:'none';"><a href="#" id="favorite_paging_after">»</a></li>
            			</ul>
 				</div> 
-				
             </div>
 		</div>
-		
 		
 		<!-- 쿠폰정보 -->
 		<div class="tab-pane text-style" id="tab5">
@@ -1677,10 +1675,6 @@ if(sessionStorage.getItem('email')!=null){
 				</center>
 	        </div>     
         </div>	
-        
-        
-	    
-
 	</div>
 </div>
 	

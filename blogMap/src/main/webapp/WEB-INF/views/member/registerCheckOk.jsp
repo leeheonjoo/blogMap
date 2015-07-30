@@ -22,7 +22,6 @@
 		});
 		
 		$("input[name='cancel']").click(function(){
-			/* $('#registerCheckOk_div').fadeOut(); */
 			$("div[id='blogmap_registerCheckOk'].modal").modal('hide');
 		});
 	});
