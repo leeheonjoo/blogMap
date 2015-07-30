@@ -15,15 +15,30 @@ $(function() {
 </head>
 
 <style>
-.img-responsive {height:}
-#list_partner_name {width:100%;text-overflow:ellipsis;white-space:inherit;overflow:initial;}
-#list_partnerCoupon_name {width:100%;text-overflow:ellipsis;white-space:inherit;overflow:initial;}
-#tour_item_list {font-size:13px;}
-#coupon_item_list {font-size:13px;}
+	#list_partner_name {
+		width:100%;
+		text-overflow:ellipsis;
+		white-space:inherit;
+		overflow:initial;
+	}
+	
+	#list_partnerCoupon_name {
+		width:100%;
+		text-overflow:ellipsis;
+		white-space:inherit;
+		overflow:initial;
+	}
+	
+	#tour_item_list {
+		font-size:13px;
+	}
+	
+	#coupon_item_list {
+		font-size:13px;
+	}
 </style>
 
 <body>
-
 	<article class="container">
 		<div class="row">
 			<!-- 큰 사이즈 화면에서 탭 목록-->					
@@ -141,10 +156,6 @@ $(function() {
 				
 				var data = new FormData($('#write_form')[0]);
 				
- 			 	/* $.each($('#write_form')[0].files,function(i,file){
- 					data[i].append('file',file);
-				});  */
-				
 				 $.ajax({
 					type: 'POST',
 					url : '${root}/partner/write.do',
@@ -245,13 +256,6 @@ $(function() {
 				}
 				return true;
 			}
-// function get_list(page){
-						
-// }
-// $(document).ready(function(){
-// 	});
-// }
-// $("#search_Partner").click(get_list);
 
 		$("#search_Partner").click(function(){
 			//alert("제휴업체");
@@ -413,8 +417,6 @@ $(function() {
 				success:function(data)
 				{
 					//alert("성공");
-// 					$("section[id=write_pop].modal").modal("hide");
-// 					$("#tour_item_list").empty();	//데이터를 가지고 오기전에 리셋(중복삽입을 방지하기 위해)
 					if(data=="1"){
 						alert("쿠폰이 등록되었습니다.");
 						$("section[id='mainCoupon_Registration'].modal").modal("hide");
@@ -472,20 +474,6 @@ $(function() {
 								partnerData(data[i].partner_no);	
 							});
 						});
-						
-//						var max_height = 0;
-						
-//						$(".tour_items").each(function(){
-							
-//							if(max_height < $(this).height())
-//							{
-//								max_height = $(this).height();
-//							}
-//						});
-						
-//						$(".tour_items").css({
-//							'height': max_height
-//						});
 						
 						$(".tour_items .img-responsive").css({
 							'max-width':"100%",

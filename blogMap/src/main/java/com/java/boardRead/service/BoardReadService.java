@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface BoardReadService {
-	public void getData(ModelAndView mav);
-	
 	public String getBeginCondition();
 	
 	public String getLocationCondition(HttpServletRequest request, HttpServletResponse response);

@@ -10,28 +10,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>CouponDetail</title>
 <script>
-
-$("#coupon_img").css({
-    'max-width':"100%",
-    'height': "300px"
- });
-
+	$("#coupon_img").css({
+	    'max-width':"100%",
+	    'height': "300px"
+	 });
 </script>
 </head>
 <body>
 <div id="couponDetailMain" style="display: none;">
-	<%--  <img src="${root }/css/manager/images/star0.jpg" width="300px" height="300px"/> --%>
-	
 	<div class="modal-dialog modal-lg" style="width:98%; margin:auto;">
 		<div class="modal-content">
 			<div class="modal-body" id="coupon_data-body">
 				<div class="row form-horizontal">
 					<div class="col-md-6">
 						<img class="img-responsive img" id="coupon_img"/>
-						
 					</div>
 					<div class="col-md-6">
-					
 						<div class="form-group">
 							<label class="col-xs-4 control-label">업체명</label>
 							<div class="col-xs-8">
@@ -79,7 +73,6 @@ $("#coupon_img").css({
 		</div>
 	</div>
 </div>
-
 <div id="couponDetailResult" style="width:99%; margin:auto;"></div>
 </body>
 </html>

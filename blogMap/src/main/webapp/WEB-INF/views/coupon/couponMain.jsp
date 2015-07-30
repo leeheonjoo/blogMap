@@ -8,20 +8,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>BLOG MAP</title>
 <style>
-/* Global */
-
-/* #coupon_L_images {  */
-/* 			max-width: 100%; */
-/* 			height: 150px; */
-/* } */
-
-a {
-    -webkit-transition: all 150ms ease;
-	-moz-transition: all 150ms ease;
-	-ms-transition: all 150ms ease;
-	-o-transition: all 150ms ease;
-	transition: all 150ms ease; 
+	a {
+	    -webkit-transition: all 150ms ease;
+		-moz-transition: all 150ms ease;
+		-ms-transition: all 150ms ease;
+		-o-transition: all 150ms ease;
+		transition: all 150ms ease; 
 	}
+	
     a:hover {
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; /* IE 8 */
         filter: alpha(opacity=50); /* IE7 */
@@ -29,41 +23,38 @@ a {
         text-decoration: none;
     }
 
-.thumbnails li> .fff .caption { background:#fff !important; padding:10px }
-/* Page Header */
-.page-header {
-    background: #f9f9f9;
-    margin: -30px -40px 40px;
-    padding: 20px 40px;
-    border-top: 4px solid #ccc;
-    color: #999;
-    text-transform: uppercase;
+	.thumbnails li> .fff .caption { background:#fff !important; padding:10px }
+	
+	/* Page Header */
+	.page-header {
+	    background: #f9f9f9;
+	    margin: -30px -40px 40px;
+	    padding: 20px 40px;
+	    border-top: 4px solid #ccc;
+	    color: #999;
+	    text-transform: uppercase;
     }
+    
     .page-header h3 {
         line-height: 0.88rem;
         color: #000;
-        }
-
-
-
-/* Thumbnail Box */
-.caption h4 {
-   
-    color: #444;
-    }
-    .caption p {
-       
-        color: #999;
-        }
-	.btn.btn-mini {
-            
 	}
 
-/* Carousel Control */
-.control-box {
-    text-align: center;
-    width: 100%;
+	/* Thumbnail Box */
+	.caption h4 {
+	    color: #444;
     }
+    
+    .caption p {
+        color: #999;
+    }
+
+	/* Carousel Control */
+	.control-box {
+	    text-align: center;
+	    width: 100%;
+    }
+    
     .carousel-control{
         background: #666;
         border: 0px;
@@ -79,66 +70,66 @@ a {
         width: 15px;
         }
 
-/* Mobile Only */
-@media (max-width: 767px) {
-    .page-header, .control-box {
-    text-align: center;
-    } 
-}
-@media (max-width: 479px) {
-    .caption {
-    word-break: break-all;
-    }
-}
+	/* Mobile Only */
+	@media (max-width: 767px) {
+	    .page-header, .control-box {
+	    	text-align: center;
+	    } 
+	}
+	
+	@media (max-width: 479px) {
+	    .caption {
+	    	word-break: break-all;
+	    }
+	}
 
-li { list-style-type:none;}
+	li { list-style-type:none;}
 
-::selection { background: #ff5e99; color: #FFFFFF; text-shadow: 0; }
-::-moz-selection { background: #ff5e99; color: #FFFFFF; }
+	::selection { background: #ff5e99; color: #FFFFFF; text-shadow: 0; }
+	::-moz-selection { background: #ff5e99; color: #FFFFFF; }
 </style>
 <style>
-#custom-search-input{
-    padding: 3px;
-    border: solid 1px #E4E4E4;
-    border-radius: 6px;
-    background-color: #fff;
-}
+	#custom-search-input{
+	    padding: 3px;
+	    border: solid 1px #E4E4E4;
+	    border-radius: 6px;
+	    background-color: #fff;
+	}
 
-#custom-search-input input{
-    border: 0;
-    box-shadow: none;
-}
-
-#custom-search-input button{
-    margin: 2px 0 0 0;
-    background: none;
-    box-shadow: none;
-    border: 0;
-    color: #666666;
-    padding: 0 8px 0 10px;
-    border-left: solid 1px #ccc;
-}
-
-#custom-search-input button:hover{
-    border: 0;
-    box-shadow: none;
-    border-left: solid 1px #ccc;
-}
-
-#custom-search-input .glyphicon-search{
-    font-size: 23px;
-}
-
+	#custom-search-input input{
+	    border: 0;
+	    box-shadow: none;
+	}
+	
+	#custom-search-input button{
+	    margin: 2px 0 0 0;
+	    background: none;
+	    box-shadow: none;
+	    border: 0;
+	    color: #666666;
+	    padding: 0 8px 0 10px;
+	    border-left: solid 1px #ccc;
+	}
+	
+	#custom-search-input button:hover{
+	    border: 0;
+	    box-shadow: none;
+	    border-left: solid 1px #ccc;
+	}
+	
+	#custom-search-input .glyphicon-search{
+	    font-size: 23px;
+	}
 </style>
 <script type="text/javascript">
- $(document).ready(function(){		 
-	$("#tile4").click(function(){		
-		couponListView();
+	$(document).ready(function(){		 
+		$("#tile4").click(function(){		
+			couponListView();
+		});
+		$("#coupon_search_btn").click(function(){
+			coupon_Search();
+		});
 	});
-	$("#coupon_search_btn").click(function(){
-		coupon_Search();
-	});
- });
 		
  	function couponListView(){
 		$.ajax({
@@ -234,24 +225,6 @@ li { list-style-type:none;}
           		var geteymd = new Date(data[0].COUPON_EYMD);
           		var eymd = leadingZeros(geteymd.getFullYear(), 4) + '년' + leadingZeros(geteymd.getMonth() + 1, 2) + '월' + leadingZeros(geteymd.getDate(), 2) +'일';
 				
-				//var filename=data.partner_pic_name
-				//alert(data[0].PARTNER_NAME);
-				
-				
-				/* var getbymd = new Date(data[0].COUPON_BYMD);	// 등록일 날짜 변환
-				var byear = getbymd.getFullYear();
-				var bmonth = getbymd.getMonth() + 1;
-				var bday = getbymd.getDate();
-				var bymd = byear + "년 " + bmonth + "월 "	+ bday + "일";
-				//alert(bymd);
-				
-				var geteymd = new Date(data[0].COUPON_EYMD);	// 승인일 날짜 변환
-				var eyear = geteymd.getFullYear();
-				var emonth = geteymd.getMonth() + 1;
-				var eday = geteymd.getDate();
-				var eymd = eyear + "년 " + emonth + "월 "	+ eday + "일";
-				//alert(eymd); */
-				
 				$("#couponDetailResult").append($("#couponDetailMain").clone().css("display","block"));
 				$("#couponDetailMain:last-child #coupon_img").attr("src", "${root}/pds/coupon/"+data[0].COUPON_PIC_NAME);
 				$("#couponDetailMain:last-child #partner_no").html(data[0].PARTNER_NAME);
@@ -260,11 +233,10 @@ li { list-style-type:none;}
 				$("#couponDetailMain:last-child #coupon_bymd").html(bymd);
 				$("#couponDetailMain:last-child #coupon_eymd").html(eymd);					
 				$("#couponDetailMain:last-child #coupon_detail_issue").attr("name",data[0].COUPON_NO);
+				
 				if(data[0].COUPON_YN == "Y"){
-					//$("#partner_submit").css("display", "none");
 					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰취소"});
 				}else if(data[0].COUPON_YN == "N"){
-					//$("#partner_delete").css("display", "none");
 					$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰승인"});
 				} 
 				
@@ -410,7 +382,6 @@ li { list-style-type:none;}
 					</ul>
 				</nav>
 			   <!-- /.control-box -->   
-		                              
 		    </div><!-- /#myCarousel -->
 		</div>
 	</div>

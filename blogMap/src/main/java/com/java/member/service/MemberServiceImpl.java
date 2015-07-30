@@ -80,10 +80,6 @@ public class MemberServiceImpl implements MemberService {
 		
 		logger.info("loginData:" + loginData);
 
-		// mav.addObject("email",email);
-		// mav.setViewName("member/loginOk");
-		// request.getSession().setAttribute("email", email);
-
 		try {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(loginData);
@@ -155,22 +151,14 @@ public class MemberServiceImpl implements MemberService {
 		MemberDto deleteMemberDto=null;
 		//삭제했다가 다시 가입했을때
 		deleteMemberDto=memberDao.fbRegisterCheck(memberDto.getMember_id());
-		//System.out.println("qqqqqq");
-		//System.out.println(deleteMemberDto.getMember_jointype());
 		if(deleteMemberDto!=null){
-			//System.out.println("aaaa");
 			if(deleteMemberDto.getMember_jointype().equals("0003")){
 				System.out.println("bbbbbbb");
 				check=memberDao.reRegister(memberDto);
 			}
 		}else{
-			//System.out.println("zzzzzz");
 			check=memberDao.register(memberDto);
 		}
-		
-
-		
-		
 		
 		logger.info("check:" + check);
 
@@ -198,8 +186,6 @@ public class MemberServiceImpl implements MemberService {
 		MemberDto selectMemberDtoCheck = memberDao.fbRegisterCheck(memberDto.getMember_id());
 		logger.info("selectMemberDto:" + selectMemberDtoCheck);
 		memberDto.setMember_jointype("0002");
-//		int check = memberDao.fbRegisterCheck(memberDto.getMember_id());
-//		logger.info("check:" + check);
 		
 		if (selectMemberDtoCheck==null) {
 			int fbRegisterCheck = memberDao.fbRegister(memberDto);
@@ -319,7 +305,6 @@ public class MemberServiceImpl implements MemberService {
 			try {
 				response.getWriter().print("0");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -341,7 +326,6 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("email:"+email);
 		  
 		// 메일 관련 정보
-
         Properties p = System.getProperties();
         p.put("mail.smtp.user", "blogmapmanager@gmail.com"); 
         p.put("mail.smtp.starttls.enable", "true");     // gmail은 무조건 true 고정
@@ -365,8 +349,7 @@ public class MemberServiceImpl implements MemberService {
             msg.setSentDate(new Date());
              
             InternetAddress from = new InternetAddress() ;
-             
-             
+                          
             from = new InternetAddress("blogmapmanger@gmail.com");
              
             // 이메일 발신자
@@ -384,14 +367,13 @@ public class MemberServiceImpl implements MemberService {
             String confirm_num="";
             
             for (int i = 1; i <= 8; i++) {
-    		      char ch = (char) ((Math.random() * 26) + 97);
-    		      confirm_num+=ch;
-    		    }
+		      char ch = (char) ((Math.random() * 26) + 97);
+		      confirm_num+=ch;
+    		}
             
             try {
 				response.getWriter().print(confirm_num);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
             
@@ -446,7 +428,6 @@ public class MemberServiceImpl implements MemberService {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(info);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -477,7 +458,6 @@ public class MemberServiceImpl implements MemberService {
 		try {
 			response.getWriter().print(check);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -502,7 +482,6 @@ public class MemberServiceImpl implements MemberService {
 		try {
 			response.getWriter().print(check);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -527,7 +506,6 @@ public class MemberServiceImpl implements MemberService {
 		try {
 			response.getWriter().print(check);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -573,17 +551,13 @@ public class MemberServiceImpl implements MemberService {
 		
 		Gson gson=new Gson();
 		String pointMap_json=gson.toJson(pointMap);
-		
-		
+				
 		String point_info_pack=pointMap_json+"|"+boardSize+"|"+count+"|"+currentPage;
-		
-		
 		
 		try {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(point_info_pack);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -634,7 +608,6 @@ public class MemberServiceImpl implements MemberService {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(board_info_pack);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -685,10 +658,8 @@ public class MemberServiceImpl implements MemberService {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(favorite_info_pack);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
 	/**
@@ -734,10 +705,6 @@ public class MemberServiceImpl implements MemberService {
 			coupon_info_list=memberDao.coupon_unusable_info(member_id, startRow, endRow);
 		}
 		
-		
-		
-		//logger.info("coupon_info_list:"+coupon_info_list.size());
-		
 		Gson gson=new Gson();
 		String couponInfo_json=gson.toJson(coupon_info_list);
 		System.out.println(couponInfo_json);
@@ -748,7 +715,6 @@ public class MemberServiceImpl implements MemberService {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(coupon_info_pack);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -774,9 +740,7 @@ public class MemberServiceImpl implements MemberService {
 		try {
 			response.getWriter().print(check);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
 }

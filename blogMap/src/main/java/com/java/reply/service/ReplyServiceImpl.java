@@ -24,6 +24,12 @@ public class ReplyServiceImpl implements ReplyService{
 	@Autowired
 	private ReplyDaoImpl replyDao;
 
+	/**
+	 * @name : blogReadReply
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 신규 댓글 정보 반환
+	 */
 	@Override
 	public void blogReadReply(ModelAndView mav) {
 		logger.info("BoardReadService blogReadReply------------------------");
@@ -45,12 +51,17 @@ public class ReplyServiceImpl implements ReplyService{
 			response.getWriter().print(replyList_json);
 			logger.info("replyList_json:"+replyList_json);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 	
+	/**
+	 * @name : blogWriteReply
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 댓글 정보 작성
+	 */
 	@Override
 	public void blogWriteReply(ModelAndView mav) {
 		logger.info("BoardReadService blogWriteReply------------------------");
@@ -74,13 +85,18 @@ public class ReplyServiceImpl implements ReplyService{
 				try {
 					response.getWriter().print(check);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		}
 		
 	}
 
+	/**
+	 * @name : blogReadReplyUpdate
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 댓글 정보 수정
+	 */
 	@Override
 	public void blogReadReplyUpdate(ModelAndView mav) {
 		logger.info("BoardReadService blogReadReplyUpdate------------------------");
@@ -108,7 +124,6 @@ public class ReplyServiceImpl implements ReplyService{
 				try {
 					response.getWriter().print(check);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		}
@@ -116,6 +131,12 @@ public class ReplyServiceImpl implements ReplyService{
 		
 	}
 
+	/**
+	 * @name : blogReadReplyDelete
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 댓글 정보 삭제
+	 */
 	@Override
 	public void blogReadReplyDelete(ModelAndView mav) {
 		logger.info("BoardReadService blogReadReplyDelete------------------------");
@@ -137,7 +158,6 @@ public class ReplyServiceImpl implements ReplyService{
 				try {
 					response.getWriter().print(check);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		}

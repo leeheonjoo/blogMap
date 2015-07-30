@@ -33,27 +33,6 @@ public class BoardReadController {
 	@Autowired
 	private BoardReadService boardReadService;
 	
-	@RequestMapping(value="/board/test.do", method=RequestMethod.GET)
-	public void test(HttpServletRequest request, HttpServletResponse response){
-		logger.info("BoardReadController test");
-		
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("response", response);
-		
-		boardReadService.getData(mav);
-		Map<String, Object> map=mav.getModel();
-		
-		String json=(String)map.get("json");
-		
-		try {
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().print("test");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	/**
 	 * @name : getRecommandBlog
 	 * @date : 2015. 7. 19.
@@ -117,6 +96,12 @@ public class BoardReadController {
 		}
 	}
 	
+	/**
+	 * @name : getCategoryCondition
+	 * @date : 2015. 7. 01.
+	 * @author : 황준
+	 * @description : 검색조건 선택에 따른 하위 검색조건 
+	 */
 	@RequestMapping(value="/board/getCategoryCondition.do", method=RequestMethod.GET)
 	public void getCategoryCondition(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController getCategoryCondition-------------------------");
@@ -131,6 +116,12 @@ public class BoardReadController {
 		}
 	}
 	
+	/**
+	 * @name : getget
+	 * @date : 2015. 7. 01.
+	 * @author : 황준
+	 * @description : 검색조건 선택에 따른 하위 검색조건 
+	 */
 	@RequestMapping(value="/board/blogListMain1.do", method=RequestMethod.GET)
 	public ModelAndView getget(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController getCategoryCondition-------------------------");
@@ -141,7 +132,13 @@ public class BoardReadController {
 		
 		return mav;
 	}
-
+	
+	/**
+	 * @name : blogListSearch
+	 * @date : 2015. 7. 03.
+	 * @author : 황준
+	 * @description : 블로그 조회 
+	 */
 	@RequestMapping(value="/board/blogListSearch.do",method=RequestMethod.POST)
 	public void blogListSearch(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogListSearch-------------------------");
@@ -154,6 +151,12 @@ public class BoardReadController {
 		boardReadService.blogListSearch(mav);
 	}
 	
+	/**
+	 * @name : blogListResult
+	 * @date : 2015. 7. 03.
+	 * @author : 황준
+	 * @description : 블로그 조회 결과
+	 */
 	@RequestMapping(value="/board/blogListResult.do",method=RequestMethod.POST)
 	public void blogListResult(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogListResult-------------------------");
@@ -166,6 +169,12 @@ public class BoardReadController {
 		boardReadService.blogListResult(mav);	
 	}
 	
+	/**
+	 * @name : blogReadDetail
+	 * @date : 2015. 7. 03.
+	 * @author : 황준
+	 * @description : 블로그 상세보기
+	 */
 	@RequestMapping(value="/board/blogReadDetail.do",method=RequestMethod.POST)
 	public void blogReadDetail(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogReadDetail-------------------------");
@@ -178,6 +187,12 @@ public class BoardReadController {
 		boardReadService.blogReadDetail(mav);	
 	}
 	
+	/**
+	 * @name : blogReadDetailImg
+	 * @date : 2015. 7. 03.
+	 * @author : 황준
+	 * @description : 블로그 상세보기 이미지
+	 */
 	@RequestMapping(value="/board/blogReadDetailImg",method=RequestMethod.POST)
 	public void blogReadDetailImg(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogReadDetailImg-------------------------");
@@ -190,6 +205,12 @@ public class BoardReadController {
 		boardReadService.blogReadDetailImg(mav); 	
 	}
 	
+	/**
+	 * @name : blogListSearchSub1
+	 * @date : 2015. 7. 10
+	 * @author : 황준
+	 * @description : 검색조건에 따른 블로그 리스트
+	 */
 	@RequestMapping(value="/board/blogListSearchSub1",method=RequestMethod.POST)
 	public void blogListSearchSub1(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogListSearchSub1-------------------------");
@@ -202,6 +223,12 @@ public class BoardReadController {
 		boardReadService.blogListSearchSub1(mav);
 	}
 	
+	/**
+	 * @name : blogListSearchSub2
+	 * @date : 2015. 7. 10
+	 * @author : 황준
+	 * @description : 검색조건에 따른 블로그 리스트
+	 */
 	@RequestMapping(value="/board/blogListSearchSub2",method=RequestMethod.POST)
 	public void blogListSearchSub2(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogListSearchSub2-------------------------");
@@ -214,6 +241,12 @@ public class BoardReadController {
 		boardReadService.blogListSearchSub2(mav);
 	}
 	
+	/**
+	 * @name : blogReadReference
+	 * @date : 2015. 7. 08.
+	 * @author : 황준
+	 * @description : 추천기능
+	 */
 	@RequestMapping(value="/board/blogReadReference",method=RequestMethod.POST)
 	public void blogReadReference(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogReadReference-------------------------");
@@ -226,6 +259,12 @@ public class BoardReadController {
 		boardReadService.blogReadReference(mav);	
 	}
 	
+	/**
+	 * @name : blogReadNoreference
+	 * @date : 2015. 7. 08.
+	 * @author : 황준
+	 * @description : 비추천기능
+	 */
 	@RequestMapping(value="/board/blogReadNoreference",method=RequestMethod.POST)
 	public void blogReadNoreference(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogReadNoreference-------------------------");
@@ -237,7 +276,13 @@ public class BoardReadController {
 		
 		boardReadService.blogReadNoReference(mav);	
 	}
-
+	
+	/**
+	 * @name : referenceRefresh
+	 * @date : 2015. 7. 08.
+	 * @author : 황준
+	 * @description : 추천 재조회
+	 */
 	@RequestMapping(value="/board/referenceRefresh.do",method=RequestMethod.POST)
 	public void referenceRefresh(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController referenceRefresh-------------------------");
@@ -250,6 +295,12 @@ public class BoardReadController {
 		boardReadService.referenceRefresh(mav);	
 	}
 	
+	/**
+	 * @name : bookMark
+	 * @date : 2015. 7. 08.
+	 * @author : 황준
+	 * @description : 즐겨찾기 추가 
+	 */
 	@RequestMapping(value="/board/bookMark.do",method=RequestMethod.POST)
 	public void bookMark(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController bookMark-------------------------");
@@ -261,7 +312,13 @@ public class BoardReadController {
 		
 		boardReadService.bookMark(mav);		
 	}
-
+	
+	/**
+	 * @name : NobookMark
+	 * @date : 2015. 7. 08.
+	 * @author : 황준
+	 * @description : 즐겨찾기 해제
+	 */
 	@RequestMapping(value="/board/NobookMark.do",method=RequestMethod.POST)
 	public void NobookMark(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController NobookMark-------------------------");
@@ -274,6 +331,12 @@ public class BoardReadController {
 		boardReadService.NobookMark(mav);
 	}
 	
+	/**
+	 * @name : blogDelete
+	 * @date : 2015. 7. 08.
+	 * @author : 황준
+	 * @description : 블로그 삭제 
+	 */
 	@RequestMapping(value="/board/blogDelete.do",method=RequestMethod.POST)
 	public void blogDelete(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogDelete-------------------------");
@@ -286,6 +349,12 @@ public class BoardReadController {
 		boardReadService.blogDelete(mav);
 	}
 	
+	/**
+	 * @name : blogUpdate
+	 * @date : 2015. 7. 08.
+	 * @author : 황준
+	 * @description : 블로그 수정 
+	 */
 	@RequestMapping(value="/board/blogUpdate.do",method=RequestMethod.POST)
 	public void blogUpdate(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogUpdate-------------------------");
@@ -298,6 +367,12 @@ public class BoardReadController {
 		boardReadService.blogUpdate(mav);
 	}
 	
+	/**
+	 * @name : blogUpdateOk
+	 * @date : 2015. 7. 08.
+	 * @author : 황준
+	 * @description : 블로그 수정 
+	 */
 	@RequestMapping(value="/board/blogUpdateOk",method=RequestMethod.POST)
 	public ModelAndView blogUpdateOk(MultipartHttpServletRequest request, HttpServletResponse response,
 			Attach_fileDto attach_fileDto,BoardDto boardDto,Board_addr_infoDto board_addr_infoDto,BoardReadDto boardreadDto){

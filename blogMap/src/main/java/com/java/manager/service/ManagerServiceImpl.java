@@ -45,8 +45,6 @@ public class ManagerServiceImpl implements ManagerService {
 	@Override
 	public void memberList(ModelAndView mav){
 		Map<String, Object> map=mav.getModelMap();
-//		HttpServletRequest request=(HttpServletRequest)map.get("request");
-//		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
 		List<MemberDto> memberlist=managerDao.memberList();	// member의 정보를 List로 가져옴
 		logger.info("memberlistSize:" + memberlist.size());
@@ -57,7 +55,6 @@ public class ManagerServiceImpl implements ManagerService {
 		logger.info("json: " + json);
 		
 		mav.addObject("json", json);
-		
 	}
 	
 	/**
@@ -74,7 +71,6 @@ public class ManagerServiceImpl implements ManagerService {
 		
 		String member_name=request.getParameter("name");
 		logger.info("member_name:" + member_name);
-		
 		
 		List<MemberDto> searchMemberList=managerDao.getSearchMemberData(member_name);
 		logger.info("searchMemberList : " + searchMemberList);
@@ -102,7 +98,6 @@ public class ManagerServiceImpl implements ManagerService {
 		String member_jointype=request.getParameter("member_jointype");
 		logger.info("member_jointype:" + member_jointype);
 		
-		
 		List<MemberDto> searchMemberList=managerDao.getSearchMemberType(member_jointype);
 		logger.info("searchPartnerList : " + searchMemberList);
 		
@@ -112,7 +107,6 @@ public class ManagerServiceImpl implements ManagerService {
 		logger.info("json: " + json);
 		
 		mav.addObject("json", json);
-		
 	}
 	
 	/**
@@ -160,7 +154,6 @@ public class ManagerServiceImpl implements ManagerService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
-				
 		List<PartnerDto> partnerList=managerDao.getPartnerData();
 		logger.info("partnerListSize : " + partnerList.size());
 		
@@ -170,7 +163,6 @@ public class ManagerServiceImpl implements ManagerService {
 		logger.info("json: " + json);
 		
 		mav.addObject("json", json);
-		
 	}
 	
 	/**
@@ -188,7 +180,6 @@ public class ManagerServiceImpl implements ManagerService {
 		String partner_name=request.getParameter("name");
 		logger.info("partner_name:" + partner_name);
 		
-		
 		List<PartnerDto> searchPartnerList=managerDao.getSearchPartnerData(partner_name);
 		logger.info("searchPartnerList : " + searchPartnerList);
 		
@@ -198,7 +189,6 @@ public class ManagerServiceImpl implements ManagerService {
 		logger.info("searchjson: " + searchjson);
 		
 		mav.addObject("searchjson", searchjson);
-		
 	}
 	
 	/**
@@ -226,7 +216,6 @@ public class ManagerServiceImpl implements ManagerService {
 		logger.info("searchjson: " + searchjson);
 		
 		mav.addObject("searchjson", searchjson);
-		
 	}
 	
 	/**
@@ -263,7 +252,6 @@ public class ManagerServiceImpl implements ManagerService {
 		logger.info("json: " + json);
 		
 		mav.addObject("json", json);
-		
 	}
 	
 	/**
@@ -301,7 +289,6 @@ public class ManagerServiceImpl implements ManagerService {
 		logger.info("json: " + json);
 		
 		mav.addObject("json", json);
-		
 	}
 	
 	/**
@@ -364,7 +351,7 @@ public class ManagerServiceImpl implements ManagerService {
 	 * @name:searchCouponList
 	 * @date:2015. 7. 15.
 	 * @author:이동희
-	 * @description:
+	 * @description: 쿠폰 리스트를 검색
 	 */
 	@Override
 	public void searchCouponList(ModelAndView mav) {
@@ -397,7 +384,7 @@ public class ManagerServiceImpl implements ManagerService {
 	 * @name:searchCouponYN
 	 * @date:2015. 7. 21.
 	 * @author:이동희
-	 * @description:
+	 * @description: 쿠폰 승인여부 Y/N 에 따른 쿠폰 리스트를 반환
 	 */
 	@Override
 	public void searchCouponYN(ModelAndView mav) {
@@ -460,7 +447,6 @@ public class ManagerServiceImpl implements ManagerService {
 		logger.info("json: " + json);
 		
 		mav.addObject("json", json);
-		
 	}
 	
 	/**
@@ -497,8 +483,6 @@ public class ManagerServiceImpl implements ManagerService {
 		logger.info("json: " + json);
 		
 		mav.addObject("json", json);
-		
-		
 	}
 	
 	/**
@@ -580,7 +564,5 @@ public class ManagerServiceImpl implements ManagerService {
 		logger.info("json: " + json);
 		
 		mav.addObject("json", json);
-		
 	}
-	
 }

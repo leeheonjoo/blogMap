@@ -395,7 +395,6 @@
 					contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 					 success:function(responseData){
 						var data=JSON.parse(responseData);
-						//var filename=data.partner_pic_name
 						//alert(data[0].PARTNER_NAME);
 						var getbymd = new Date(data[0].COUPON_BYMD);	// 등록일 날짜 변환
 						var byear = getbymd.getFullYear();
@@ -420,10 +419,8 @@
 						$("#couponDetailMain:last-child #coupon_eymd").html(eymd);					
 						
 						if(data[0].COUPON_YN == "Y"){
-							//$("#partner_submit").css("display", "none");
 							$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰취소"});
 						}else if(data[0].COUPON_YN == "N"){
-							//$("#partner_delete").css("display", "none");
 							$("#couponDetailMain:last-child #coupon_detail_button").attr({"name":data[0].COUPON_NO, "value":"쿠폰승인"});
 						} 
 						
@@ -511,7 +508,6 @@
 						}
 						
 						$("#coupon"+data[i].COUPON_NO).click(function(){
-							/* $("#partner_data-body").empty(); */
 							couponDetail(data[i].COUPON_NO);
 						});
 						
@@ -615,7 +611,6 @@
 				contentType:'application/x-www-form-urlencoded;charset=UTF-8',
 				 success:function(responseData){
 					var data=JSON.parse(responseData);
-					//var filename=data.partner_pic_name
 					//alert(data[0].PARTNER_NAME);
 					var getbymd = new Date(data[0].COUPON_BYMD);	// 등록일 날짜 변환
 					var byear = getbymd.getFullYear();
@@ -683,26 +678,22 @@
 <body>
 
 <div class="caption">
-
 	<div>
-			<input type="button" id="getCouponList" value="Reset"/>&nbsp;&nbsp;
-			<input type="radio" name="coupon_yn" id="Y"/><span>승인쿠폰</span> &nbsp;&nbsp;
-			<input type="radio" name="coupon_yn" id="N"/><span>미승인쿠폰</span>&nbsp;&nbsp;
-			<input type="text" placeholder="Name Search" id="CouponSearchTag"/> 
-			<input type="submit" id="searchCoupon" value="Search"/>	
+		<input type="button" id="getCouponList" value="Reset"/>&nbsp;&nbsp;
+		<input type="radio" name="coupon_yn" id="Y"/><span>승인쿠폰</span> &nbsp;&nbsp;
+		<input type="radio" name="coupon_yn" id="N"/><span>미승인쿠폰</span>&nbsp;&nbsp;
+		<input type="text" placeholder="Name Search" id="CouponSearchTag"/> 
+		<input type="submit" id="searchCoupon" value="Search"/>	
 	</div><br/>
 	
 	<div>
 		<div class="span7">   
 			<div class="widget stacked widget-table action-table">
-	    				
-					
 					<div class="widget-content">
 						
 						<table class="table table-striped table-bordered" >
 							<thead>
 								<tr class="widget-header" >
-									
 									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:150px; max-width:200px;">업체명</th>
 									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">품목</th>
 									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">할인율</th>
@@ -714,7 +705,6 @@
 							</thead>
 							<tbody id="couponListResult"></tbody>  <!-- 자료를 붙일 바디 -->
 							</table>
-						
 					</div> <!-- /widget-content -->
 				
 			</div> <!-- /widget -->

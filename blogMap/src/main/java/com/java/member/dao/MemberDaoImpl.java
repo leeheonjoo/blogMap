@@ -27,7 +27,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public MemberDto login(String id, String password) {
-		// TODO Auto-generated method stub
 		HashMap<String, String> hMap = new HashMap<String, String>();
 		hMap.put("id", id);
 		hMap.put("password", password);
@@ -43,7 +42,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public int register(MemberDto memberDto) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("dao.MemberMapper.register", memberDto);
 	}
 
@@ -71,16 +69,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @description:페이스북 계정으로 로그인한 클라이언트중 이전에 방문하여 등록이 되어있는지 확인
 	 */
 	@Override
-	public MemberDto fbRegisterCheck(String member_id) {
-//		int check = 0;
-//		String id = sqlSession.selectOne("dao.MemberMapper.fbRegisterCheck",member_id);
-
-//		if (id != null){
-//			check = 1;
-//		}else{
-//			check=0;
-//		}
-			
+	public MemberDto fbRegisterCheck(String member_id) {			
 		return sqlSession.selectOne("dao.MemberMapper.fbRegisterCheck",member_id);
 	}
 
@@ -92,7 +81,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public int fbRegister(MemberDto memberDto) {
-		// TODO Auto-generated method stub
 		return sqlSession.insert("dao.MemberMapper.fbRegister", memberDto);
 	}
 
@@ -104,7 +92,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public MemberDto fbRegisterSelect(String member_id) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("dao.MemberMapper.fbRegisterSelect",member_id);
 	}
 
@@ -149,7 +136,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public int myPageUpdate(MemberDto memberDto) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("dao.MemberMapper.myPageUpdate",memberDto);
 	}
 
@@ -161,7 +147,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public int myPageDelete(MemberDto memberDto) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("dao.MemberMapper.myPageDelete",memberDto);
 	}
 
@@ -173,8 +158,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public int totalPoint(String member_id) {
-		// TODO Auto-generated method stub
-		
 		return sqlSession.selectOne("dao.MemberMapper.totalPoint",member_id);
 	}
 
@@ -202,7 +185,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public int totalBoard(String member_id) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("dao.MemberMapper.totalBoard",member_id);
 	}
 
@@ -229,7 +211,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public int totalFavorite(String member_id) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("dao.MemberMapper.totalFavorite",member_id);
 	}
 	
@@ -256,7 +237,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public int point_info_count(String member_id) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("dao.MemberMapper.point_info_count",member_id);
 	}
 
@@ -268,7 +248,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public int totalCoupon(String member_id) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("dao.MemberMapper.totalCoupon",member_id);
 	}
 
@@ -279,8 +258,7 @@ public class MemberDaoImpl implements MemberDao {
 	 * @description:해당 아이디의 사용가능한 쿠폰들의 상세 정보들을 startRow와 endRow의 범위에 맞춰서 list를 가져옴
 	 */
 	@Override
-	public List<HashMap<String, Object>> coupon_info(String member_id, int startRow,
-			int endRow) {
+	public List<HashMap<String, Object>> coupon_info(String member_id, int startRow, int endRow) {
 		HashMap<String,Object> hMap=new HashMap<String,Object>();
 		hMap.put("member_id", member_id);
 		hMap.put("startRow", startRow);
@@ -329,7 +307,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public int fbMemberDelete(String member_id) {
-		// TODO Auto-generated method stub
 		return sqlSession.delete("dao.MemberMapper.fbMemberDelete",member_id);
 	}
 
@@ -341,7 +318,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public int reRegister(MemberDto memberDto) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("dao.MemberMapper.reRegister",memberDto);
 	}
 
@@ -353,7 +329,6 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public int fbReRegister(MemberDto memberDto) {
-		// TODO Auto-generated method stub
 		return sqlSession.update("dao.MemberMapper.fbReRegister",memberDto);
 	}
 
@@ -371,7 +346,4 @@ public class MemberDaoImpl implements MemberDao {
 		hMap.put("endRow", endRow);
 		return sqlSession.selectList("dao.MemberMapper.coupon_unusable_info",hMap);
 	}
-
-	
-
 }

@@ -41,7 +41,6 @@ public class MemberController {
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		memberService.login(mav);
-
 	}
 
 	/**
@@ -51,8 +50,7 @@ public class MemberController {
 	 * @description:회원등록전에 이전에 등록되어있는지 확인하는 메소드
 	 */
 	@RequestMapping(value = "/member/registerCheck.do", method = RequestMethod.POST)
-	public void registerCheck(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void registerCheck(HttpServletRequest request, HttpServletResponse response) {
 		logger.info("registerCheck-----------------------------");
 
 		ModelAndView mav = new ModelAndView();

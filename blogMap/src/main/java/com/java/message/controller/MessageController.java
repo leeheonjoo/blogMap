@@ -17,7 +17,7 @@ import com.java.message.service.MessageService;
 
 /**
  * @author GiChang
- *
+ * @description: 메시지 관련 Controller
  */
 @Controller
 public class MessageController {
@@ -32,10 +32,8 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 	 * @author:정기창
 	 * @description:메시지 전송시 필요한 Controller
 	 */
-	
 	@RequestMapping(value="/message/messageWrite.do", method=RequestMethod.POST)
 	public void sendMessageOk(HttpServletRequest request, HttpServletResponse response, MessageDto messageDto){
-		
 		logger.info("--------------- Message Write ---------------");
 		
 		ModelAndView mav=new ModelAndView();
@@ -55,7 +53,6 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 	 */
 	@RequestMapping(value="/message/mainMessage.do",method=RequestMethod.GET)
 	public void sendMessageListOk(HttpServletRequest request, HttpServletResponse response){
-		
 		logger.info("------------------- Send Message List ------------------");
 	
 		ModelAndView mav=new ModelAndView();
@@ -71,10 +68,8 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 	 * @author:정기창
 	 * @description:수신한 메시지 목록을 조회시 필요한 Controller
 	 */
-	/*@RequestMapping("/message/receiveMessageList.do")*/
 	@RequestMapping(value="/message/mainMessage.do",method=RequestMethod.POST)
 	public void receiveMessageListOk(HttpServletRequest request, HttpServletResponse response){
-		
 		logger.info("------------------- Receive Message List ------------------");
 		
 		ModelAndView mav=new ModelAndView();
@@ -92,7 +87,6 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 	 */
 	@RequestMapping("/message/messageRead.do")
 	public void messageReadOk(HttpServletRequest request, HttpServletResponse response){
-		
 		logger.info("------------------- Message Read ------------------");
 		
 		ModelAndView mav=new ModelAndView();
@@ -101,7 +95,6 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 		mav.addObject("response", response);
 		
 		messageService.messageRead(mav);	
-	
 	}
 	
 	/**
@@ -112,7 +105,6 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 	 */
 	@RequestMapping("/message/messageRead_S.do")
 	public void messageRead_S_Ok(HttpServletRequest request, HttpServletResponse response){
-		
 		logger.info("------------------- Message Read ------------------");
 		
 		ModelAndView mav=new ModelAndView();
@@ -121,7 +113,6 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 		mav.addObject("response", response);
 		
 		messageService.messageRead_S(mav);	
-	
 	}
 	
 	/**
@@ -132,7 +123,6 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 	 */
 	@RequestMapping(value="/message/messageDelete.do", method=RequestMethod.POST)
 	public void withDrawOk(HttpServletRequest request, HttpServletResponse response, MessageDto messageDto){
-		
 		logger.info("----------------------- Message Delete ---------------------");
 		
 		ModelAndView mav=new ModelAndView();

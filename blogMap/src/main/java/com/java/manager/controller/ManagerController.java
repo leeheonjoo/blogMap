@@ -512,7 +512,6 @@ public class ManagerController {
 		String json=(String)map.get("json");
 		logger.info("managerLog:" + json);
 		
-		
 		try{
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(json);
@@ -520,6 +519,4 @@ public class ManagerController {
 			e.printStackTrace();
 		}
 	}
-	
-	
 }

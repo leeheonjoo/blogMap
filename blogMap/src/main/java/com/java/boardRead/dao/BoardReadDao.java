@@ -11,8 +11,6 @@ import com.java.boardRead.dto.RecommandDto;
 import com.java.reply.dto.ReplyDto;
 
 public interface BoardReadDao {
-	public BoardReadDto getData();
-	
 	public List<String> getSidoCondition();
 	
 	public List<String> getHeaderCondition();

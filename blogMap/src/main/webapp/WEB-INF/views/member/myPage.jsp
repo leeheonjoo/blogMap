@@ -9,16 +9,16 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
-function leadingZeros(n, digits) {
-    var zero = '';
-    n = n.toString();
-
-    if (n.length < digits) {
-        for (i = 0; i < digits - n.length; i++)
-            zero += '0';
-    }
-    return zero + n;
-}
+	function leadingZeros(n, digits) {
+	    var zero = '';
+	    n = n.toString();
+	
+	    if (n.length < digits) {
+	        for (i = 0; i < digits - n.length; i++)
+	            zero += '0';
+	    }
+	    return zero + n;
+	}
 
 if(sessionStorage.getItem('email')!=null){
 	
@@ -163,7 +163,6 @@ if(sessionStorage.getItem('email')!=null){
 					$.each(point_data,function(i){						 
 					    var d = new Date(point_data[i].POINT_DATE);
 					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2);
-					    //+ " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 					    
 						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
 						+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="type">'+dt+'</div></div></div>'
@@ -222,7 +221,6 @@ if(sessionStorage.getItem('email')!=null){
 									$.each(point_data,function(i){						 
 									    var d = new Date(point_data[i].POINT_DATE);
 									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2);
-									    //+ " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 									    
 										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
 										+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="type">'+dt+'</div></div></div>'
@@ -341,7 +339,6 @@ if(sessionStorage.getItem('email')!=null){
 									$.each(point_data,function(i){						 
 									    var d = new Date(point_data[i].POINT_DATE);
 									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2);
-									    //+ " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 									    
 										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
 										+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="type">'+dt+'</div></div></div>'
@@ -371,7 +368,6 @@ if(sessionStorage.getItem('email')!=null){
 				}
 			});
 		});
-		
 		
 		//이전클릭시
 		$("#point_paging_before").click(function(){
@@ -403,7 +399,6 @@ if(sessionStorage.getItem('email')!=null){
 					$.each(point_data,function(i){						 
 					    var d = new Date(point_data[i].POINT_DATE);
 					    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2);
-					    //+ " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 					    
 						$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
 						+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="type">'+dt+'</div></div></div>'
@@ -458,7 +453,6 @@ if(sessionStorage.getItem('email')!=null){
 									$.each(point_data,function(i){						 
 									    var d = new Date(point_data[i].POINT_DATE);
 									    var dt =leadingZeros(d.getFullYear(), 4) + '/' +leadingZeros(d.getMonth() + 1, 2) + '/' +leadingZeros(d.getDate(), 2);
-									    //+ " "+ leadingZeros(d.getHours(),2) +":"+ leadingZeros(d.getMinutes(),2);
 									    
 										$("#myPage_member_point_list_content").append('<div class="row margin-0"><div class="col-xs-1 col-sm-1 col-md-1"><div class="cell"><div class="propertyname">'+point_data[i].POINT_NO+'</div></div></div>'
 										+'<div class="col-xs-2 col-sm-2 col-md-2"><div class="cell"><div class="type">'+dt+'</div></div></div>'
@@ -1648,10 +1642,8 @@ if(sessionStorage.getItem('email')!=null){
 		              <li id="myPage_member_favorite_list_after" style="display:'none';"><a href="#" id="favorite_paging_after">»</a></li>
            			</ul>
 				</div> 
-				
             </div>
 		</div>
-		
 		
 		<!-- 쿠폰정보 -->
 		<div class="tab-pane text-style" id="tab5">
@@ -1677,10 +1669,6 @@ if(sessionStorage.getItem('email')!=null){
 				</center>
 	        </div>     
         </div>	
-        
-        
-	    
-
 	</div>
 </div>
 	

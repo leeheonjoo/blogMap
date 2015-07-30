@@ -7,11 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script> -->
 <script type="text/javascript">
 	$(function(){
-		/* if($("#registerCheckzz").val()!=""){
-			alert("aa"); */
 		
 			$("#registerCheckBtn").click(function(){
 				$.ajax({
@@ -25,9 +22,7 @@
 						//alert(responseCheckData);
 						
 						if(responseCheckData=="0"){    //아이디 중복 안됨
-							 //$('#registerCheckNo_div').fadeOut();
 							 $("div[id='blogmap_registerCheckNo'].modal").modal('hide');
-							 //$('#registerCheckOk_div').fadeIn();
 							 $("div[id='blogmap_registerCheckOk'].modal").modal();
 						}
 						
@@ -35,9 +30,6 @@
 					}
 				});
 			});
-			/* 	}else{
-			alert("아이디를 입력해주세요");
-		} */
 	});
 </script>
 </head>
@@ -75,9 +67,5 @@
 			</div>
 		</div>
 	</div> 
-	
-<!-- 	아이디: <input type="text" id="registerCheck"/>
-	<input type="button" id="registerCheckBtn" value="중복체크"/><br/> -->
-	
 </body>
 </html>

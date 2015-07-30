@@ -36,14 +36,6 @@
 </script>
 </head>
 <body>
-	<!-- <div>
-		아이디(이메일)<input type="text" name="member_id_renew"/>   
-	</div>
-	
-	<div>
-		<input type="button" name="submit" value="발송"/>
-	</div> -->
-	
 	<div class="container" style="width:100%;">
         <div class="row centered-form">
 	        <div>
@@ -68,9 +60,7 @@
 			    					</div>
 			    			</div>
 		    			</div>
-		    			
 		    		</div>
-		    		
 				</div>
 			</div>
 		</div>

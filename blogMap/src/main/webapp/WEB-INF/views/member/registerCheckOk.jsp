@@ -22,17 +22,12 @@
 		});
 		
 		$("input[name='cancel']").click(function(){
-			/* $('#registerCheckOk_div').fadeOut(); */
 			$("div[id='blogmap_registerCheckOk'].modal").modal('hide');
 		});
 	});
 </script>
 </head>
-<body>
-	<!-- <h3>사용가능한 아이디 입니다.</h3>
-	<input type="button" name="okay" value="사용하기"/>
-	<input type="button" name="cancel" value="취소"/> -->
-	
+<body>	
 	<div class="container" style="width:100%">
         <div class="row centered-form">
 	        <div>

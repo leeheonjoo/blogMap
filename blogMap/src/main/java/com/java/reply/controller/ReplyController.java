@@ -20,7 +20,12 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 	@Autowired
 	private ReplyService replyService;
 	
-	
+	/**
+	 * @name : blogReadReply
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 신규 댓글 정보 반환
+	 */
 	@RequestMapping(value="/board/blogReadReply.do",method=RequestMethod.POST)
 	public void blogReadReply(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogReadReply-------------------------");
@@ -33,6 +38,12 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 		replyService.blogReadReply(mav);
 	}
 	
+	/**
+	 * @name : blogWriteReply
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 댓글 정보 등록
+	 */
 	@RequestMapping(value="/board/blogWriteReply.do",method=RequestMethod.POST)
 	public void blogWriteReply(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogWriteReply-------------------------");
@@ -45,6 +56,12 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 		replyService.blogWriteReply(mav);
 	}
 	
+	/**
+	 * @name : blogReadReplyUpdate
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 댓글 정보 수정
+	 */
 	@RequestMapping(value="/board/blogReadReplyUpdate.do",method=RequestMethod.POST)
 	public void blogReadReplyUpdate(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogReadReplyUpdate-------------------------");
@@ -56,6 +73,13 @@ private final Logger logger=Logger.getLogger(this.getClass().getName());
 		
 		replyService.blogReadReplyUpdate(mav);
 	}
+	
+	/**
+	 * @name : blogReadReplyDelete
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 댓글 정보 삭제
+	 */
 	@RequestMapping(value="/board/blogReadReplyDelete.do",method=RequestMethod.POST)
 	public void blogReadReplyDelete(HttpServletRequest request, HttpServletResponse response){
 		logger.info("BoardReadController blogReadReplyDelete-------------------------");

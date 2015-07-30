@@ -11,11 +11,7 @@
 <script type="text/javascript">
 if(sessionStorage.getItem('email')!=null){
 	$(function(){
-		
 		var email=sessionStorage.getItem('email');
-		//$("#myPageUpdate_member_id").val(email);
-		
-		//var email="kimjh112339@naver.com";
 		
 		$("#myPageDelete_OkayBtn").click(function(){
 			//유효성검사
@@ -47,7 +43,6 @@ if(sessionStorage.getItem('email')!=null){
 		});
 		
 		$("#myPageDelete_CancelBtn").click(function(){
-			//$("#myPageDelete_layer_div").fadeOut();
 			$("div[id='blogmap_myPageDelete'].modal").modal('hide');
 		});
 		
@@ -56,17 +51,6 @@ if(sessionStorage.getItem('email')!=null){
 </script>
 </head>
 <body>
-	<!-- <h3>비밀번호를 입력해주세요.</h3>
-	<div>
-		<input id="myPageDelete_pwd" type="password"/>
-	</div>
-	
-	<div>
-		<input id="myPageDelete_OkayBtn" type="button" value="탈퇴"/>
-		<input id="myPageDelete_CancelBtn" type="button" value="취소"/>
-	</div> -->
-	
-	
 	<label>비밀번호를 입력해주세요.</label>
    	<div class="row">
 		<div class="col-xs-8 col-sm-8 col-md-8">

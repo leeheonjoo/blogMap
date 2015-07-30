@@ -72,14 +72,6 @@
 								$.each(Logdata, function(i){		// 화면에 뿌려주기 위해 each문으로 루프돌림
 									var getLogDate = new Date(Logdata[i].log_date);
 				              		var logDate = leadingZeros(getLogDate.getFullYear(), 4) + '/' + leadingZeros(getLogDate.getMonth() + 1, 2) + '/' + leadingZeros(getLogDate.getDate(), 2) + " " + getLogDate.getHours() + ":" + getLogDate.getMinutes() + ":" + getLogDate.getSeconds() ;                               
-				              		
-									/* var getLogDate = new Date(Logdata[i].log_date);	// 등록일 날짜 변환
-									var logyear = getLogDate.getFullYear();
-									var logmonth = getLogDate.getMonth() + 1;
-									var logday = getLogDate.getDate();
-									var logDate = logyear + "년 " + logmonth + "월 "	+ logday + "일";
-									//alert(rgDate); */
-									
 									
 									$("#managerLogResult").append("<tr style='text-align:center;'>"
 											+ "<td>" + Logdata[i].log_no + "</td>"			// 아이디
@@ -117,69 +109,62 @@
 </script>
 </head>
 <body>
-
-
-<div class="caption">
-	
-	<div>
-		<div class="span7">   
-			<div class="widget stacked widget-table action-table">
-	    				
+	<div class="caption">
+		<div>
+			<div class="span7">   
+				<div class="widget stacked widget-table action-table">
+						<div class="widget-content">
+							
+							<table class="table table-striped table-bordered" >
+								<thead>
+									<tr class="widget-header" >
+										<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:150px; max-width:150px;">아이디</th>
+										<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">이름</th>
+										<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:150px; max-width:150px;">이메일</th>
+										<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:110px; max-width:110px;">등록일</th>
+										<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:110px; max-width:110px;">종료일</th>
+										<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:50px; max-width:50px;">사용</th>
+										<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">기록</th>
+									</tr>
+								</thead>
+								<tbody id="managerListResult"></tbody>  <!-- 자료를 붙일 바디 -->
+								</table>
+							
+						</div> <!-- /widget-content -->
 					
-					<div class="widget-content">
-						
-						<table class="table table-striped table-bordered" >
-							<thead>
-								<tr class="widget-header" >
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:150px; max-width:150px;">아이디</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">이름</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:150px; max-width:150px;">이메일</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:110px; max-width:110px;">등록일</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:110px; max-width:110px;">종료일</th>
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:50px; max-width:50px;">사용</th>
-									<th class="col-md-1 col-sm-1 col-xs-1" style="text-align: center; min-width:70px; max-width:70px;">기록</th>
-								</tr>
-							</thead>
-							<tbody id="managerListResult"></tbody>  <!-- 자료를 붙일 바디 -->
-							</table>
-						
-					</div> <!-- /widget-content -->
-				
-			</div> <!-- /widget -->
-	    </div>
+				</div> <!-- /widget -->
+		    </div>
+		</div>
 	</div>
-</div>
  
- <div class="caption" id="managerLogList" >
-	
-	<div>
-		<div class="span7">   
-			<div class="widget stacked widget-table action-table">
-	    				
-					
-					<div class="widget-content">
-					<div style="text-align:right;"><input type="button" id="logHide" value="Close"/>	</div>
-											
-						<table class="table table-striped table-bordered" >
-							<thead>
-								<tr class="widget-header">
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:50px; max-width:50px;">순번</th>
-									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:150px; max-width:150px;">관리자</th>
-									<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:110px; max-width:110px;">로그데이트</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">로그코드</th>
-									<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">내용</th>
-								</tr>
-							</thead>
-							<tbody id="managerLogResult"></tbody>  <!-- 자료를 붙일 바디 -->
-							</table>
+	<div class="caption" id="managerLogList" >
+		<div>
+			<div class="span7">   
+				<div class="widget stacked widget-table action-table">
+		    				
 						
-					</div> <!-- /widget-content -->
-				
-			</div> <!-- /widget -->
-	    </div>
+						<div class="widget-content">
+						<div style="text-align:right;"><input type="button" id="logHide" value="Close"/>	</div>
+												
+							<table class="table table-striped table-bordered" >
+								<thead>
+									<tr class="widget-header">
+										<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:50px; max-width:50px;">순번</th>
+										<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:150px; max-width:150px;">관리자</th>
+										<th class="col-md-3 col-sm-3 col-xs-3" style="text-align: center; min-width:110px; max-width:110px;">로그데이트</th>
+										<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">로그코드</th>
+										<th class="col-md-2 col-sm-2 col-xs-2" style="text-align: center; min-width:100px; max-width:100px;">내용</th>
+									</tr>
+								</thead>
+								<tbody id="managerLogResult"></tbody>  <!-- 자료를 붙일 바디 -->
+								</table>
+							
+						</div> <!-- /widget-content -->
+					
+				</div> <!-- /widget -->
+		    </div>
+		</div>
 	</div>
-</div>
 
 </body>
 </html>
-

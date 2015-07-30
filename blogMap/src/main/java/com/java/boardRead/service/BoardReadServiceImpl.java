@@ -66,21 +66,7 @@ public class BoardReadServiceImpl implements BoardReadService {
 
 		return json;
 	}
-	
-	@Override
-	public void getData(ModelAndView mav) {
-		Map<String, Object> map=mav.getModelMap();
-		
-		BoardReadDto boardReadDto=boardReadDao.getData();
-		logger.info("content : " + boardReadDto);
-		
-		Gson gson=new Gson();
-		String json=gson.toJson(boardReadDto);
-		
-		System.out.println("json: " + json);
-		
-		mav.addObject("json", json);
-	}
+
 	
 	/**
 	 * @name : getBeginCondition
@@ -104,12 +90,9 @@ public class BoardReadServiceImpl implements BoardReadService {
 		Gson gson=new Gson();
 		String json=gson.toJson(map);
 		
-
-		
 		System.out.println("json: " + json);
 
 		logger.info("getBeginCondition json: " + json);
-
 		
 		return json;
 	}
@@ -186,6 +169,7 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		return json;
 	}
+	
 	/**
 	 * @name : blogListSearch
 	 * @date : 2015. 7. 8.
@@ -232,7 +216,6 @@ public class BoardReadServiceImpl implements BoardReadService {
 		categoryDto.setCategory_mname(headCategor);
 		categoryDto.setCategory_sname(detailCategory);
 		
-		
 		List<BoardDto> boardList=null;
 		List<Board_addr_infoDto> boar_addr_infoList=null;
 		HashMap<String , Object> hashMap=new HashMap<String, Object>();
@@ -246,7 +229,6 @@ public class BoardReadServiceImpl implements BoardReadService {
 		if(check_value.equals("y")){
 			hashMap.put("check_value", check_value);
 			hashMap.put("member_id", member_id);
-            //boardList=boardReadDao.blogListResult_check(hashMap);
 			boardLists=boardReadDao.getboardList_check(hashMap);
         }else{
 		
@@ -256,11 +238,6 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		if(boardLists!=null){
 			
-			/*hashMap.put("boardList", boardList);
-			List<Board_addr_infoDto> board_Addr_infoDto=null;
-			board_Addr_infoDto=boardReadDao.blogSearchAddr(hashMap);
-			System.out.println("블로그조회에 검색값에 따른 주소 갯수:"+board_Addr_infoDto.size());
-			*/
 			Gson gson=new Gson();
 			String boardList_json=gson.toJson(boardLists);
 			try {
@@ -270,18 +247,15 @@ public class BoardReadServiceImpl implements BoardReadService {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-			/*for (int i = 0; i < board_Addr_infoDto.size(); i++) {
-				query=board_Addr_infoDto.get(i).getAddr_sido()+" "
-			+board_Addr_infoDto.get(i).getAddr_sigugun()+" "
-			+board_Addr_infoDto.get(i).getAddr_dongri()+" "
-			+board_Addr_infoDto.get(i).getAddr_bunji();
-				
-			
-			}*/
 		}
 	  }
 
+	/**
+	 * @name : blogListResult
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 네이버 api의 주소정보에 해당하는 블로그 리스트를 반환 
+	 */
 	@Override
 	public void blogListResult(ModelAndView mav) {
 		logger.info("BoardReadService blogListResult------------------------");
@@ -299,7 +273,6 @@ public class BoardReadServiceImpl implements BoardReadService {
 		String dongri=request.getParameter("dongri");
 		String bunji=request.getParameter("bunji");
 		String searchValue=request.getParameter("searchValue");
-		
 		
 		logger.info("searchValue:"+searchValue);
 		logger.info("sido:"+sido);
@@ -322,14 +295,10 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		List<HashMap<String,Object>> blogListResultList=new ArrayList<HashMap<String,Object>>();
 		
-		
-		
 		blogListResultList=boardReadDao.blogListResult(hashMap);
 		
 		if(blogListResultList!=null){
 			logger.info("boardList_size:"+blogListResultList.size());
-		/*	attachList = boardReadDao.blogImage(boardList);
-			logger.info("boardList_size:"+boardList.size());*/
 		}
 		Gson gson=new Gson();
 		String result=gson.toJson(blogListResultList);
@@ -343,6 +312,12 @@ public class BoardReadServiceImpl implements BoardReadService {
 		}
 	}
 
+	/**
+	 * @name : blogReadDetail
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 리스트 또는 메인페이지에서 선택한 블로그의 내용을 반환
+	 */
 	@Override
 	public void blogReadDetail(ModelAndView mav) {
 		logger.info("BoardReadService blogReadDetail------------------------");
@@ -370,13 +345,9 @@ public class BoardReadServiceImpl implements BoardReadService {
 		hMap.put("boardDtoList", boardDtoList);
 		hMap.put("board_addr_infoDtoList", board_addr_infoDtoList);
 		
-		
 		boardReadList=boardReadDao.getReadList1(boardNo);
 		
 		logger.info("boardReadList"+boardReadList);
-		/*hMap.put("category", category);*/
-		
-		/*boardReadList=board*/
 		
 		Gson gson=new Gson();
 		String boardReadList_json=gson.toJson(boardReadList);
@@ -386,11 +357,16 @@ public class BoardReadServiceImpl implements BoardReadService {
 			response.getWriter().print(boardReadList_json);
 			System.out.println(boardReadList_json);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * @name : blogReadDetailImg
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 게시물의 내용을 열람시 해당 게시물에 등록되어있는 이미지들의 주소를 반환
+	 */
 	@Override
 	public void blogReadDetailImg(ModelAndView mav) {
 		logger.info("BoardReadService blogReadDetailImg------------------------");
@@ -410,13 +386,18 @@ public class BoardReadServiceImpl implements BoardReadService {
 			response.getWriter().print(imgList_json);
 			System.out.println(imgList_json);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
 	}
 
+	/**
+	 * @name : blogListSearchSub1
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 조회 결과에 대한 주소값 리스트를 blogListSearchSub2에 전달
+	 */
 	@Override
 	public void blogListSearchSub1(ModelAndView mav) {
 		logger.info("BoardReadService blogListSearchSub1------------------------");
@@ -426,27 +407,30 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		int board_no=Integer.parseInt(request.getParameter("board_no"));
 		
-	
-		
 		List<Board_addr_infoDto> board_Addr_infoDto=null;
 		board_Addr_infoDto=boardReadDao.blogSearchAddr(board_no);
 		if(board_Addr_infoDto!=null){
-		System.out.println("블로그조회에 검색값에 따른 주소 갯수:"+board_Addr_infoDto.size());
-		Gson gson=new Gson();
-		String board_Addr_infoDto_json=gson.toJson(board_Addr_infoDto);
-		
-		try {
-			response.setCharacterEncoding("utf-8");
-			response.getWriter().print(board_Addr_infoDto_json);
-			System.out.println(board_Addr_infoDto_json);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+			System.out.println("블로그조회에 검색값에 따른 주소 갯수:"+board_Addr_infoDto.size());
+			Gson gson=new Gson();
+			String board_Addr_infoDto_json=gson.toJson(board_Addr_infoDto);
+			
+			try {
+				response.setCharacterEncoding("utf-8");
+				response.getWriter().print(board_Addr_infoDto_json);
+				System.out.println(board_Addr_infoDto_json);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 			
 	}
 
+	/**
+	 * @name : blogListSearchSub2
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 주소값 리스트의 공통주소값을 제거하고 jsp 페이지로 반환
+	 */
 	@Override
 	public void blogListSearchSub2(ModelAndView mav) {
 		logger.info("BoardReadService blogListSearchSub2------------------------");
@@ -481,17 +465,20 @@ public class BoardReadServiceImpl implements BoardReadService {
 					 response.getWriter().print(result);
 					 System.out.println(result);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} 
-					
-					
 					
 			} catch (UnsupportedEncodingException e1) {
 				e1.printStackTrace();
 			}
 	}
 
+	/**
+	 * @name : blogReadReference
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 게시물 추천 등록 메소드 
+	 */
 	@Override
 	public void blogReadReference(ModelAndView mav) {
 		logger.info("BoardReadService blogReadReference------------------------");
@@ -501,7 +488,6 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		int board_no=Integer.parseInt(request.getParameter("board_no"));
 		String member_id = request.getParameter("member_id");
-		
 		
 		HashMap<String, Object> hMap=new HashMap<String, Object>();
 		hMap.put("board_no", board_no);
@@ -514,22 +500,26 @@ public class BoardReadServiceImpl implements BoardReadService {
 			 try {
 				response.getWriter().print(check);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 
+	/**
+	 * @name : blogReadNoReference
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 게시물 비추천 등록 메소드 
+	 */
 	@Override
 	public void blogReadNoReference(ModelAndView mav) {
-		logger.info("BoardReadService blogReadReference------------------------");
+		logger.info("BoardReadService blogReadNoReference------------------------");
 		Map<String, Object> map=mav.getModel();
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		HttpServletResponse response=(HttpServletResponse) map.get("response");
 		
 		int board_no=Integer.parseInt(request.getParameter("board_no"));
 		String member_id = request.getParameter("member_id");
-		
 		
 		HashMap<String, Object> hMap=new HashMap<String, Object>();
 		hMap.put("board_no", board_no);
@@ -542,12 +532,17 @@ public class BoardReadServiceImpl implements BoardReadService {
 			 try {
 				response.getWriter().print(check);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 
+	/**
+	 * @name : referenceRefresh
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 읽기의 추천/비추천 횟수 refresh 메소드 
+	 */
 	@Override
 	public void referenceRefresh(ModelAndView mav) {
 		logger.info("BoardReadService blogReadReference------------------------");
@@ -559,6 +554,7 @@ public class BoardReadServiceImpl implements BoardReadService {
 		List<RecommandDto> recommandDto=null;
 	    recommandDto=boardReadDao.referenceRefresh(board_no);
 	    logger.info("referenceRefresh:"+recommandDto);
+	    
 	    Gson gson=new Gson();
 		String recommandDto_json=gson.toJson(recommandDto);
 		
@@ -567,13 +563,16 @@ public class BoardReadServiceImpl implements BoardReadService {
 			response.getWriter().print(recommandDto_json);
 			System.out.println(recommandDto_json);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 
+	/**
+	 * @name : bookMark
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 즐겨찾기 추가 메소드 
+	 */
 	@Override
 	public void bookMark(ModelAndView mav) {
 		logger.info("BoardReadService bookMark------------------------");
@@ -599,6 +598,12 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 	}
 
+	/**
+	 * @name : NobookMark
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 즐겨찾기 취소 메소드 
+	 */
 	@Override
 	public void NobookMark(ModelAndView mav) {
 		logger.info("BoardReadService NobookMark------------------------");
@@ -617,13 +622,18 @@ public class BoardReadServiceImpl implements BoardReadService {
 			 try {
 					response.getWriter().print(check);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		}
 		
 	}
 
+	/**
+	 * @name : blogDelete
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 삭제 메소드
+	 */
 	@Override
 	public void blogDelete(ModelAndView mav) {
 		logger.info("BoardReadService blogDelete------------------------");
@@ -643,12 +653,17 @@ public class BoardReadServiceImpl implements BoardReadService {
 			 try {
 					response.getWriter().print(check);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		}
 	}
 
+	/**
+	 * @name : blogUpdate
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 수정을 위한 원본 데이터 반환 메소드
+	 */
 	@Override
 	public void blogUpdate(ModelAndView mav) {
 		logger.info("BoardReadService blogUpdate------------------------");
@@ -660,8 +675,6 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		HashMap<String, Object> hMap=new HashMap<String, Object>();
 		hMap.put("board_no", board_no);
-		
-		
 
 		List<BoardDto> boardDtoList=null;
 		List<Board_addr_infoDto> boardAddrInfoDtoList=null;
@@ -674,22 +687,26 @@ public class BoardReadServiceImpl implements BoardReadService {
 		
 		List<HashMap<String,Object>> boardReadList=new ArrayList<HashMap<String,Object>>();
 		
-		
 		boardReadList=boardReadDao.blogUpdate(hMap);
 		
-		 Gson gson=new Gson();
-			String boardReadList_json=gson.toJson(boardReadList);
-			
-			try {
-				response.setCharacterEncoding("utf-8");
-				response.getWriter().print(boardReadList_json);
-				System.out.println(boardReadList_json);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		Gson gson=new Gson();
+		String boardReadList_json=gson.toJson(boardReadList);
+		
+		try {
+			response.setCharacterEncoding("utf-8");
+			response.getWriter().print(boardReadList_json);
+			System.out.println(boardReadList_json);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
+	/**
+	 * @name : blogUpdateOk
+	 * @date : 2015. 7. 8.
+	 * @author : 황준
+	 * @description : 블로그 수정 확정을 위한 update 메소드 
+	 */
 	@Override
 	public void blogUpdateOk(ModelAndView mav) {
 		logger.info("BoardReadService blogUpdate------------------------");
@@ -717,11 +734,6 @@ public class BoardReadServiceImpl implements BoardReadService {
 		hashMap.put("boardreadDto", boardreadDto);
 		hashMap.put("member_id", member_id);
 	
-		/*System.out.println(boardDto.getBoard_title());
-		System.out.println(boardDto.getBoard_grade());
-		System.out.println(boardreadDto.getCategory_mname());
-		System.out.println(boardreadDto.getCategory_sname());*/
-		
 		//게시판 글작성
 		int check=boardReadDao.blogUpdateOk(hashMap);
 		
@@ -775,49 +787,30 @@ public class BoardReadServiceImpl implements BoardReadService {
 							file_check=boardReadDao.blogUpdate_insert(hashMap);
 						}
 					}else{
-						
-					attach_fileDto.setFile_no(Integer.parseInt(fileNo[j]));
-					attach_fileDto.setFile_name(originalNames[j]);
-					attach_fileDto.setFile_size(fileSize[j]);
-					attach_fileDto.setFile_path(file.getAbsolutePath());
-					attach_fileDto.setFile_comment(comment[j]);
-					hashMap.put("attach_file",attach_fileDto);
-					System.out.println("파일번호:"+Integer.parseInt(fileNo[j]));
-					System.out.println("파일이름:"+originalNames[j]);
-					System.out.println("파일사이즈:"+fileSize[j]);
-					//System.out.println("파일경로:"+file.getAbsolutePath());
-					System.out.println("코맨트:"+comment[j]);
-					check=boardReadDao.blogUpdateOk_attach(hashMap);
-					
+						attach_fileDto.setFile_no(Integer.parseInt(fileNo[j]));
+						attach_fileDto.setFile_name(originalNames[j]);
+						attach_fileDto.setFile_size(fileSize[j]);
+						attach_fileDto.setFile_path(file.getAbsolutePath());
+						attach_fileDto.setFile_comment(comment[j]);
+						hashMap.put("attach_file",attach_fileDto);
+						System.out.println("파일번호:"+Integer.parseInt(fileNo[j]));
+						System.out.println("파일이름:"+originalNames[j]);
+						System.out.println("파일사이즈:"+fileSize[j]);
+						System.out.println("코맨트:"+comment[j]);
+						check=boardReadDao.blogUpdateOk_attach(hashMap);
 					}
-					
-					
 				}catch(Exception e){
 					logger.info("파일 입출력 에러" + e);
-					
 				}
-				
 			}
-			/*if(attachList.size()==0){
-				logger.info("블로그작성_파일 추가안함:"+attachList.size());
-			}else{
-				check=boardDao.blogWrite_attach(hashMap);
-				logger.info("첨부파일 DB추가완료:"+check);
-			}*/
-			
-
 		}
 		
 		try {
 			response.getWriter().print(check);
 			System.out.println("blogUpdateOk_AttachFile:"+check);
 			System.out.println("blogUpdate_insert:"+file_check);
-			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
-	
 }
