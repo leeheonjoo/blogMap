@@ -1233,7 +1233,7 @@ $(function(){
 					</div>
 					<div class="modal-body">
 						<div id="mainResult">
-							<jsp:include page="manager/managerMain_test.jsp"/>
+							<jsp:include page="manager/managerMain.jsp"/>
 						</div>
 						<br/>
 						<br/>

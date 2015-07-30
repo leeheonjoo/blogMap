@@ -147,6 +147,7 @@ public class MemberServiceImpl implements MemberService {
 		MemberDto memberDto = (MemberDto) map.get("memberDto");
 
 		logger.info("member_name:" + memberDto.getMember_name());
+		logger.info("서비스 member_pwd:" + memberDto.getMember_pwd());
 
 		memberDto.setMember_jointype("0001");		
 		int check=0;
