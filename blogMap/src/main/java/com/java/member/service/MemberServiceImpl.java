@@ -581,7 +581,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @name:board_info
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:해당 아이디의 게시글 정보를 호출하기위한 메소드
 	 */
 	@Override
 	public void board_info(ModelAndView mav) {
@@ -632,7 +632,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @name:favorite_info
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:해당 아이디의 즐겨찾기 정보를 호출하기위한 메소드
 	 */
 	@Override
 	public void favorite_info(ModelAndView mav) {
@@ -684,7 +684,7 @@ public class MemberServiceImpl implements MemberService {
 	 * @name:coupon_info
 	 * @date:2015. 7. 3.
 	 * @author:김정훈
-	 * @description:
+	 * @description:해당 아이디의 쿠폰 정보를 호출하기위한 메소드
 	 */
 	@Override
 	public void coupon_info(ModelAndView mav) {
