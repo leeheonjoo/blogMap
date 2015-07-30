@@ -21,27 +21,30 @@ public class MessageDaoImpl implements MessageDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	
+	/**
+	 * @name:insert
+	 * @date:2015. 6. 26.
+	 * @author:정기창
+	 * @description: 메시지 등록
+	 */
 	@Override
 	public int insert(MessageDto messageDto) {
-			
 		return sqlSession.insert("dao.MessageMapper.messageSendInsert", messageDto);
 	}
 
 	/**
-	 * @name:getMessageCount
+	 * @name:sendCount
 	 * @date:2015. 6. 26.
 	 * @author:정기창
-	 * @description: 총 메시지의 개수를 조회
+	 * @description: 총 송신 메시지의 개수를 조회
 	 */
 	@Override	
 	public int sendCount(String member_id) {
-		
 		return sqlSession.selectOne("dao.MessageMapper.sendMessageCount", member_id);
 	}
 	
 	/**
-	 * @name:getMessageCount
+	 * @name:receiveCount
 	 * @date:2015. 6. 26.
 	 * @author:정기창
 	 * @description: 수신함 메시지의 개수를 조회
@@ -55,7 +58,7 @@ public class MessageDaoImpl implements MessageDao {
 	 * @name:getSendMessageList
 	 * @date:2015. 6. 26.
 	 * @author:정기창
-	 * @description: List 에 해당 ID 를 가진 사용자가 발신한 메시지 내용을 저장
+	 * @description: List 에 해당 ID 를 가진 사용자가 발신한 메시지 내용을 조회
 	 */
 	@Override
 	public List<MessageDto> getSendMessageList(int startRow, int endRow, String member_id) {
@@ -93,9 +96,6 @@ public class MessageDaoImpl implements MessageDao {
 		int check=0;
 				
 		check=sqlSession.update("dao.MessageMapper.read_yn",message_no);
-		/*if(check>0){
-		sqlSession.update("dao.MessageMapper.rDate", message_no);
-		}*/
 		message=sqlSession.selectOne("dao.MessageMapper.read",message_no);
 		
 		return message;
@@ -130,5 +130,4 @@ public class MessageDaoImpl implements MessageDao {
 
 		return sqlSession.delete("dao.MessageMapper.delete", hMap);
 	}
-
 }

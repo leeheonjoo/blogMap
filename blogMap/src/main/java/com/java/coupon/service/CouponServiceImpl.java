@@ -53,13 +53,14 @@ public class CouponServiceImpl implements CouponService {
 			couponList=couponDao.getCouponList();
 			logger.info("ListSize:"+couponList.size());
 		}
-//		메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
+		
+		// 메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
 		Gson gson=new Gson();
 		String json=gson.toJson(couponList);
 		logger.info("List:"+couponList);
 		logger.info("json:"+json);
 		
-//		JSON 에 저장된 정보를 조회
+		// JSON 에 저장된 정보를 조회
 		//System.out.println("json: " + json);
 	
 		mav.addObject("couponList",couponList);
@@ -102,7 +103,7 @@ public class CouponServiceImpl implements CouponService {
 			logger.info("ListSize:"+couponList_S.size());
 		}
 		
-	//		메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
+		// 메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
 		Gson gson=new Gson();
 		String json=gson.toJson(couponList_S);
 		logger.info("List:"+couponList_S);

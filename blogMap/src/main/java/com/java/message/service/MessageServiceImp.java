@@ -49,21 +49,13 @@ public class MessageServiceImp implements MessageService {
 		int check=messageDao.insert(messageDto);
 		logger.info("check : " + check);
 		
-/*		if(check > 0){
-		Gson gson=new Gson();
-		String json=gson.toJson(messageDto);
-		
-		System.out.println("json: " + json);*/
-		
 		try {
 			response.setCharacterEncoding("utf-8");
-			/*response.getWriter().print(json);*/
 			response.getWriter().print(check);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-/*}*/
 
 	/**
 	 * @name:sendMessageListOk
@@ -77,7 +69,7 @@ public class MessageServiceImp implements MessageService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
-//		사용자 아이디 임의로 등록
+		// 사용자 아이디 임의로 등록
 		String member_id=request.getParameter("member_id");
 		logger.info("SendMessage member_id" + member_id);
 		
@@ -100,11 +92,11 @@ public class MessageServiceImp implements MessageService {
 			messageList=messageDao.getSendMessageList(startRow,endRow,member_id);
 		}
 		
-//		메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
+		// 메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
 		Gson gson=new Gson();
 		String json=gson.toJson(messageList);
 		
-//		JSON 에 저장된 정보를 조회
+		// JSON 에 저장된 정보를 조회
 		System.out.println("json: " + json);
 		
 		String send_pack=json+"|"+boardSize+"|"+count+"|"+currentPage;
@@ -175,7 +167,7 @@ public class MessageServiceImp implements MessageService {
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
 		int message_no=Integer.parseInt(request.getParameter("message_no"));
-//		DB 에 사용할 메시지 번호를 불러온다.
+		// DB 에 사용할 메시지 번호를 불러온다.
 		
 		logger.info("message_no = " + message_no);	
 		
@@ -191,7 +183,6 @@ public class MessageServiceImp implements MessageService {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(json);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -209,7 +200,7 @@ public class MessageServiceImp implements MessageService {
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
 		int message_no=Integer.parseInt(request.getParameter("message_no"));
-//		DB 에 사용할 메시지 번호를 불러온다.
+		//DB 에 사용할 메시지 번호를 불러온다.
 		
 		logger.info("message_no = " + message_no);	
 		
@@ -225,7 +216,6 @@ public class MessageServiceImp implements MessageService {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(json);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -238,14 +228,10 @@ public class MessageServiceImp implements MessageService {
 	 */	
 	@Override
 	public void messageDelete(ModelAndView mav) {
-		logger.info("떠라");
-		
 		Map<String, Object> map=mav.getModelMap();
 		
 		HttpServletRequest request=(HttpServletRequest) map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
-		
-		logger.info("떠라2");
 		
 		String member_id=request.getParameter("member_id");
 		logger.info("member_id : " + member_id);
@@ -260,9 +246,7 @@ public class MessageServiceImp implements MessageService {
 			response.setCharacterEncoding("utf-8");
 			response.getWriter().print(check);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 }
-

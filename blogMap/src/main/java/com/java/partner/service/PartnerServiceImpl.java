@@ -26,6 +26,7 @@ import com.java.boardRead.dto.BoardReadDto;
 import com.java.coupon.dto.CouponDto;
 import com.java.partner.dao.PartnerDao;
 import com.java.partner.dto.PartnerDto;
+
 /**
  * @name: PartnerServiceImpl
  * @date:2015. 7. 5.
@@ -38,12 +39,13 @@ public class PartnerServiceImpl implements PartnerService {
 
 	@Autowired
 	private PartnerDao partnerDao;
-/**
- * @name: write
- * @date:2015. 7. 5.
- * @author: 변태훈
- * @description:  제휴업체 등록
- */
+	
+	/**
+	 * @name: write
+	 * @date:2015. 7. 5.
+	 * @author: 변태훈
+	 * @description:  제휴업체 등록
+	 */
 	@Override
 	public void write(ModelAndView mav) {
 		logger.info("PartnerServiceImp write----------------");
@@ -61,13 +63,6 @@ public class PartnerServiceImpl implements PartnerService {
 		logger.info(partnerDto.getPartner_phone());
 		logger.info(partnerDto.getPartner_addr());
 	
-//		String uploadPath = "C:/workspace/blogMap/blogMap/src/main/webapp/pds/partner";
-//		File dir = new File(uploadPath,originalFileName);
-//		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
-//			dir.mkdirs();
-//		}
-		
-		
 		Iterator<String> iter=request.getFileNames();
 		while(iter.hasNext()){
 			String uploadFileName=iter.next();
@@ -112,12 +107,13 @@ public class PartnerServiceImpl implements PartnerService {
 			} // if end
 		} // while end
 	}
-/**
- * @name: writeList
- * @date:2015. 7. 5.
- * @author: 변태훈
- * @description:  제휴업체 리스트
- */
+	
+	/**
+	 * @name: writeList
+	 * @date:2015. 7. 5.
+	 * @author: 변태훈
+	 * @description:  제휴업체 리스트
+	 */
 	@Override
 	public void writeList(ModelAndView mav) {
 		logger.info("PartnerServiceImp writeList----------------");
@@ -137,25 +133,26 @@ public class PartnerServiceImpl implements PartnerService {
 			writeList=partnerDao.getwriteList(member_id);
 			logger.info("partnerWriteListSize:"+writeList.size());
 		}
-//		메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
+		// 메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
 		Gson gson=new Gson();
 		String json=gson.toJson(writeList);
 		logger.info("writeList:"+writeList);
 		logger.info("json:"+json);
 		
-//		JSON 에 저장된 정보를 조회
-		//System.out.println("json: " + json);
+		// JSON 에 저장된 정보를 조회
+		// System.out.println("json: " + json);
 	
 		mav.addObject("writeList",writeList);
 		mav.addObject("json", json);
 	}
+	
 	/**
 	 * @name: getTourPartnerListDate
 	 * @date:2015. 7. 5.
 	 * @author: 변태훈
-	 * @description:  제휴업체 Tour&Restaurant 업체정보 데이터 등록
+	 * @description:  제휴업체 Tour&Restaurant 업체정보 데이터 반환
 	 */	
-@Override
+	@Override
 	public void getTourPartnerListDate(ModelAndView mav) {
 		logger.info("Partner getTourPartnerListDate start----------------");
 		
@@ -175,32 +172,22 @@ public class PartnerServiceImpl implements PartnerService {
 		
 		List<HashMap<String, Object>> partner_List=new ArrayList<HashMap<String,Object>>();
 		
-		
-		
 		partner_List=partnerDao.getTourPartnerListDate(hMap);
 		logger.info("맵퍼 갔다와서:"+partner_List);
 		
 		Gson gson=new Gson();
 		String json=gson.toJson(partner_List);
 		logger.info("json으로 담은후에" + json);
-//			
-//		//mav.addObject("getPartnerListDate",getPartnerListDate);
+
 		mav.addObject("json",json);
-		
-//		try {
-//			response.setCharacterEncoding("utf-8");
-//			response.getWriter().print(json);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}
 	
-/**
- * @name: couponWrite
- * @date:2015. 7. 5.
- * @author: 변태훈
- * @description:  제휴업체 쿠폰등록
- */
+	/**
+	 * @name: couponWrite
+	 * @date:2015. 7. 5.
+	 * @author: 변태훈
+	 * @description:  제휴업체 쿠폰등록
+	 */
 	@Override
 	public void couponWrite(ModelAndView mav) {
 		logger.info("PartnerServiceImp couponWrite----------------");
@@ -222,23 +209,11 @@ public class PartnerServiceImpl implements PartnerService {
 			coupon_bymd = format.parse(request.getParameter("coupon_bymd"));
 			coupon_eymd=format.parse(request.getParameter("coupon_eymd"));
 		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		couponDto.setCoupon_bymd(coupon_bymd);
 		couponDto.setCoupon_eymd(coupon_eymd);
 		
-//		logger.info("a:"+couponDto.getPartner_no());
-//		logger.info("b:"+couponDto.getCoupon_no());
-//		logger.info("c:"+couponDto.getCoupon_bymd());
-//		logger.info("d:"+couponDto.getCoupon_discount());
-//		logger.info("e:"+couponDto.getCoupon_item());
-	
-//		String uploadPath = "C:/workspace/blogMap/blogMap/src/main/webapp/pds/partner";
-//		File dir = new File(uploadPath,originalFileName);
-//		if (!dir.isDirectory()) {			//파일이 존재하지 않을 때 
-//			dir.mkdirs();
-//		}
 		Iterator<String> iter=request.getFileNames();
 		while(iter.hasNext()){
 			String uploadFileName=iter.next();
@@ -272,8 +247,7 @@ public class PartnerServiceImpl implements PartnerService {
 					logger.info("partner_check:"+check);
 					
 					response.getWriter().print(check);
-					
-					
+
 				} catch (IllegalStateException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
@@ -282,17 +256,6 @@ public class PartnerServiceImpl implements PartnerService {
 			} // if end
 		} // while end
 	}
-	/**
-	 * @name:couponWriteList
-	 * @date:2015. 7. 16.
-	 * @author:변태훈
-	 * @description: 쿠폰등록 업체 리스트
-	 */
-@Override
-	public void couponWriteList(ModelAndView mav) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	/**
 	 * @name:getSearchPartnerDate
@@ -300,7 +263,7 @@ public class PartnerServiceImpl implements PartnerService {
 	 * @author:변태훈
 	 * @description: partnerList 조회시 조회한 이름으로 DB에서 데이타를 가지고 온다.
 	 */
-@Override
+	@Override
 	public void getSearchPartnerDate(ModelAndView mav) {
 		
 		Map<String, Object> map=mav.getModelMap();
@@ -320,13 +283,14 @@ public class PartnerServiceImpl implements PartnerService {
 		
 		mav.addObject("searchjson", searchjson);
 	}
-/**
- * @name: writeCouponList
- * @date:2015. 7. 22.
- * @author: 변태훈
- * @description:  제휴업체 writeCouponList 리스트
- */
-@Override
+	
+	/**
+	 * @name: writeCouponList
+	 * @date:2015. 7. 22.
+	 * @author: 변태훈
+	 * @description:  제휴업체 writeCouponList 리스트
+	 */
+	@Override
 		public void writeCouponList(ModelAndView mav) {
 			logger.info("PartnerServiceImp writeCouponList----------------");
 		
@@ -347,26 +311,25 @@ public class PartnerServiceImpl implements PartnerService {
 			List<HashMap<String, Object>> writeCouponList=partnerDao.getwriteCouponList(member_id);
 			logger.info("partnerWriteListSize:"+writeCouponList.size());
 			
-//			메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
+			// 메시지 정보를 GSON 에 담고, 그 정보를 JSON 에 저장
 			Gson gson=new Gson();
 			String json=gson.toJson(writeCouponList);
 			logger.info("writeCouponList:"+writeCouponList);
 			logger.info("json:"+json);
 			
-//			JSON 에 저장된 정보를 조회
-			//System.out.println("json: " + json);
+			// JSON 에 저장된 정보를 조회
+			// System.out.println("json: " + json);
 		
-			//mav.addObject("writeCouponList",writeCouponList);
 			mav.addObject("json", json);
 		}
-/**
- * @name: search_partnerCouponinfo
- * @date:2015. 7. 22.
- * @author: 변태훈
- * @description:  제휴업체 검색 리스트
- */		
-		
-@Override
+	
+	/**
+	 * @name: search_partnerCouponinfo
+	 * @date:2015. 7. 22.
+	 * @author: 변태훈
+	 * @description:  제휴업체 검색 리스트
+	 */			
+	@Override
 	public void search_partnerCouponinfo(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
@@ -394,13 +357,13 @@ public class PartnerServiceImpl implements PartnerService {
 		
 	}
 	
-/**
- * @name: getPartnerCouponData
- * @date:2015. 7. 22.
- * @author: 변태훈
- * @description:  제휴업체 쿠폰 데이터 등록
- */		
-@Override
+	/**
+	 * @name: getPartnerCouponData
+	 * @date:2015. 7. 22.
+	 * @author: 변태훈
+	 * @description:  제휴업체 쿠폰 데이터 등록
+	 */		
+	@Override
 	public void getPartnerCouponData(ModelAndView mav) {
 		logger.info("Partner getPartnerCouponData start----------------");
 		
@@ -426,15 +389,7 @@ public class PartnerServiceImpl implements PartnerService {
 		Gson gson=new Gson();
 		String json=gson.toJson(coupon_List);
 		logger.info("json으로 담은후에" + json);
-//			
-//		//mav.addObject("getPartnerListDate",getPartnerListDate);
+
 		mav.addObject("json",json);
-		
-//		try {
-//			response.setCharacterEncoding("utf-8");
-//			response.getWriter().print(json);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 	}	
 }
