@@ -9,111 +9,111 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>BLOG MAP</title>
 <style>
-.table-bordered {
-	border: 1px solid #dddddd;
-	border-collapse: separate;
-	border-left: 0;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
-}
-
-.table {
-	width: 100%;
-	margin-bottom: 20px;
-	background-color: transparent;
-	border-collapse: collapse;
-	border-spacing: 0;
-	display: table;
-}
-
-.widget.widget-table .table {
-	margin-bottom: 0;
-	border: none;
-}
-
-.widget.widget-table .widget-content {
-	padding: 0;
-}
-
-.widget .widget-header+.widget-content {
-	border-top: none;
-	-webkit-border-top-left-radius: 0;
-	-webkit-border-top-right-radius: 0;
-	-moz-border-radius-topleft: 0;
-	-moz-border-radius-topright: 0;
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
-}
-
-.widget .widget-content {
-	padding: 20px 15px 15px;
-	background: #FFF;
-	border: 1px solid #D5D5D5;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-}
-
-.widget .widget-header {
-	position: relative;
-	height: 40px;
-	line-height: 40px;
-	background: #E9E9E9;
-	background: -moz-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa),
-		color-stop(100%, #e9e9e9));
-	background: -webkit-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
-	background: -o-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
-	background: -ms-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
-	background: linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
-	text-shadow: 0 1px 0 #fff;
-	border-radius: 5px 5px 0 0;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), inset 0 1px 0 white, inset 0
-		-1px 0 rgba(255, 255, 255, 0.7);
-	border-bottom: 1px solid #bababa;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA',
-		endColorstr='#E9E9E9');
-	-ms-filter:
-		"progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9')";
-	border: 1px solid #D5D5D5;
-	-webkit-border-top-left-radius: 4px;
-	-webkit-border-top-right-radius: 4px;
-	-moz-border-radius-topleft: 4px;
-	-moz-border-radius-topright: 4px;
-	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;
-	-webkit-background-clip: padding-box;
-}
-
-thead {
-	display: table-header-group;
-	vertical-align: middle;
-	border-color: inherit;
-}
-
-.widget .widget-header h3 {
-	top: 2px;
-	position: relative;
-	left: 10px;
-	display: inline-block;
-	margin-right: 3em;
-	font-size: 14px;
-	font-weight: 600;
-	color: #555;
-	line-height: 18px;
-	text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
-}
-
-.widget .widget-header [class^="icon-"], .widget .widget-header [class*=" icon-"]
-	{
-	display: inline-block;
-	margin-left: 13px;
-	margin-right: -2px;
-	font-size: 16px;
-	color: #555;
-	vertical-align: middle;
-}
+	.table-bordered {
+		border: 1px solid #dddddd;
+		border-collapse: separate;
+		border-left: 0;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+	}
+	
+	.table {
+		width: 100%;
+		margin-bottom: 20px;
+		background-color: transparent;
+		border-collapse: collapse;
+		border-spacing: 0;
+		display: table;
+	}
+	
+	.widget.widget-table .table {
+		margin-bottom: 0;
+		border: none;
+	}
+	
+	.widget.widget-table .widget-content {
+		padding: 0;
+	}
+	
+	.widget .widget-header+.widget-content {
+		border-top: none;
+		-webkit-border-top-left-radius: 0;
+		-webkit-border-top-right-radius: 0;
+		-moz-border-radius-topleft: 0;
+		-moz-border-radius-topright: 0;
+		border-top-left-radius: 0;
+		border-top-right-radius: 0;
+	}
+	
+	.widget .widget-content {
+		padding: 20px 15px 15px;
+		background: #FFF;
+		border: 1px solid #D5D5D5;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		border-radius: 5px;
+	}
+	
+	.widget .widget-header {
+		position: relative;
+		height: 40px;
+		line-height: 40px;
+		background: #E9E9E9;
+		background: -moz-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa),
+			color-stop(100%, #e9e9e9));
+		background: -webkit-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+		background: -o-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+		background: -ms-linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+		background: linear-gradient(top, #fafafa 0%, #e9e9e9 100%);
+		text-shadow: 0 1px 0 #fff;
+		border-radius: 5px 5px 0 0;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), inset 0 1px 0 white, inset 0
+			-1px 0 rgba(255, 255, 255, 0.7);
+		border-bottom: 1px solid #bababa;
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA',
+			endColorstr='#E9E9E9');
+		-ms-filter:
+			"progid:DXImageTransform.Microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#E9E9E9')";
+		border: 1px solid #D5D5D5;
+		-webkit-border-top-left-radius: 4px;
+		-webkit-border-top-right-radius: 4px;
+		-moz-border-radius-topleft: 4px;
+		-moz-border-radius-topright: 4px;
+		border-top-left-radius: 4px;
+		border-top-right-radius: 4px;
+		-webkit-background-clip: padding-box;
+	}
+	
+	thead {
+		display: table-header-group;
+		vertical-align: middle;
+		border-color: inherit;
+	}
+	
+	.widget .widget-header h3 {
+		top: 2px;
+		position: relative;
+		left: 10px;
+		display: inline-block;
+		margin-right: 3em;
+		font-size: 14px;
+		font-weight: 600;
+		color: #555;
+		line-height: 18px;
+		text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+	}
+	
+	.widget .widget-header [class^="icon-"], .widget .widget-header [class*=" icon-"]
+		{
+		display: inline-block;
+		margin-left: 13px;
+		margin-right: -2px;
+		font-size: 16px;
+		color: #555;
+		vertical-align: middle;
+	}
 </style>
 <script type="text/javascript">
 	var email = sessionStorage.getItem('email');
@@ -1185,97 +1185,43 @@ thead {
 </head>
 <body>
 	<article class="container-fluid">
-<!-- 	<div class="row"> -->
-<!-- 		<section class="page-header"> -->
-<!-- 		<h2 class="page-title">메시지</h2> -->
-<!-- 		</section> -->
-<!-- 	</div> -->
-	<div class="row">
-		<div>
-			<!-- 큰 사이즈 화면에서 탭 목록-->
-			<ul id="myTab" class="nav nav-pills nav-stacked col-md-2 hidden-xs hidden-sm" role="tablist">
-				<!-- 탭 사이즈를 조절 -->
-				<li role="presentation">
-					<a href="#tab_sendMessageList" aria-controls="tab_sendMessageList" role="tab" data-toggle="tab" onclick="msgSendList()">발신함</a>
-				</li>
-
-				<li role="presentation" class="active">
-					<a href="#tab_receiveMessageList" aria-controls="tab_receiveMessageList" role="tab" data-toggle="tab" onclick="msgReceiveList()">수신함</a>
-				</li>
-
-				<li role="presentation">
-					<a href="#tab_messageWrite" aria-controls="tab_messageWrite" role="tab" data-toggle="tab">메시지 작성</a>
-				</li>
-			</ul>
-
-			<!-- 작은 사이즈 화면에서 탭 목록-->
-			<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist">
-				<li role="presentation">
-					<a href="#tab_sendMessageList" aria-controls="tab_sendMessageList" role="tab" data-toggle="tab" onclick="msgSendList()">발신함</a>
-				</li>
-
-				<li role="presentation" class="active">
-					<a href="#tab_receiveMessageList" aria-controls="tab_receiveMessageList" role="tab" data-toggle="tab" onclick="msgReceiveList()">수신함</a>
-				</li>
-
-				<li role="presentation">
-					<a href="#tab_messageWrite" aria-controls="tab_messageWrite" role="tab" data-toggle="tab">메시지 작성</a>
-				</li>
-			</ul>
-
-			<!-- 수신함 클릭시 -->
-			<div class="tab-content col-md-10">
-				<section role="tabpanel" class="tab-pane active" id="tab_receiveMessageList">
-				<div class="row" id="receiveMessage_item_list">
-					<div class="thumbnail">
-						<div class="caption">
-							<div class="span7">
-								<div class="widget stacked widget-table action-table">
-									<div class="widget-content">
-										<table class="table table-striped table-bordered">
-											<thead>
-												<tr class="hidden-xs" id="receive_message">
-													<th class="col-md-1 col-sm-1 col-xs-1"
-														style="text-align: center;">No</th>
-													<th class="col-md-5 col-sm-5 col-xs-5"
-														style="text-align: center;">Message_Content</th>
-													<th class="col-md-3 col-sm-3 col-xs-3"
-														style="text-align: center;">Writer</th>
-													<th class="col-md-2 col-sm-2 col-xs-2"
-														style="text-align: center;">WriteDate</th>
-													<th class="col-md-1 col-sm-1 col-xs-1"
-														style="text-align: center;">Reception</th>
-												</tr>
-												
-												<tr class="visible-xs" id="receive_message">
-													<th class="col-xs-5"
-														style="text-align: center;">Writer</th>
-													<th class="col-xs-7"
-														style="text-align: center;">Message_Content</th>
-												</tr>
-											</thead>
-											<tbody id="receiveMsgResult">		<!-- 자료를 담기 위한 그릇 -->
-											</tbody>
-										</table>
-										
-										<div id="receive_paging" class="container" style="width: 100%; text-align: center;">
-											<ul class="pagination">
-								              <li id="receive_list_before" style="display:'none';"><a href="#" id="receive_paging_before">«</a></li>
-								              <li id="receive_list_pageNum"></li>
-								              <li id="receive_list_after" style="display:'none';"><a href="#" id="receive_paging_after">»</a></li>
-						           			</ul>
-										</div> 
-									</div>		<!-- /widget-content -->
-								</div>			<!-- /widget -->
-							</div>
-						</div>
-					</div>
-				</div>
-				</section>
-
-				<!-- 발신함 클릭시 -->
-				<div role="tabpanel" class="tab-pane" id="tab_sendMessageList">
-					<div class="row" id="sendMessage_item_list">
+		<div class="row">
+			<div>
+				<!-- 큰 사이즈 화면에서 탭 목록-->
+				<ul id="myTab" class="nav nav-pills nav-stacked col-md-2 hidden-xs hidden-sm" role="tablist">
+					<!-- 탭 사이즈를 조절 -->
+					<li role="presentation">
+						<a href="#tab_sendMessageList" aria-controls="tab_sendMessageList" role="tab" data-toggle="tab" onclick="msgSendList()">발신함</a>
+					</li>
+	
+					<li role="presentation" class="active">
+						<a href="#tab_receiveMessageList" aria-controls="tab_receiveMessageList" role="tab" data-toggle="tab" onclick="msgReceiveList()">수신함</a>
+					</li>
+	
+					<li role="presentation">
+						<a href="#tab_messageWrite" aria-controls="tab_messageWrite" role="tab" data-toggle="tab">메시지 작성</a>
+					</li>
+				</ul>
+	
+				<!-- 작은 사이즈 화면에서 탭 목록-->
+				<ul class="nav nav-tabs hidden-md hidden-lg" role="tablist">
+					<li role="presentation">
+						<a href="#tab_sendMessageList" aria-controls="tab_sendMessageList" role="tab" data-toggle="tab" onclick="msgSendList()">발신함</a>
+					</li>
+	
+					<li role="presentation" class="active">
+						<a href="#tab_receiveMessageList" aria-controls="tab_receiveMessageList" role="tab" data-toggle="tab" onclick="msgReceiveList()">수신함</a>
+					</li>
+	
+					<li role="presentation">
+						<a href="#tab_messageWrite" aria-controls="tab_messageWrite" role="tab" data-toggle="tab">메시지 작성</a>
+					</li>
+				</ul>
+	
+				<!-- 수신함 클릭시 -->
+				<div class="tab-content col-md-10">
+					<section role="tabpanel" class="tab-pane active" id="tab_receiveMessageList">
+					<div class="row" id="receiveMessage_item_list">
 						<div class="thumbnail">
 							<div class="caption">
 								<div class="span7">
@@ -1283,53 +1229,102 @@ thead {
 										<div class="widget-content">
 											<table class="table table-striped table-bordered">
 												<thead>
-													<tr class="hidden-xs" id="send_message">
+													<tr class="hidden-xs" id="receive_message">
 														<th class="col-md-1 col-sm-1 col-xs-1"
 															style="text-align: center;">No</th>
 														<th class="col-md-5 col-sm-5 col-xs-5"
 															style="text-align: center;">Message_Content</th>
 														<th class="col-md-3 col-sm-3 col-xs-3"
-															style="text-align: center;">Receiver</th>
+															style="text-align: center;">Writer</th>
 														<th class="col-md-2 col-sm-2 col-xs-2"
 															style="text-align: center;">WriteDate</th>
 														<th class="col-md-1 col-sm-1 col-xs-1"
 															style="text-align: center;">Reception</th>
 													</tr>
 													
-													<tr class="visible-xs" id="send_message">
+													<tr class="visible-xs" id="receive_message">
 														<th class="col-xs-5"
 															style="text-align: center;">Writer</th>
 														<th class="col-xs-7"
 															style="text-align: center;">Message_Content</th>
 													</tr>
 												</thead>
-												
-												<tbody id="sendMsgResult">		<!-- 자료를 담기 위한 그릇 -->
+												<tbody id="receiveMsgResult">		<!-- 자료를 담기 위한 그릇 -->
 												</tbody>
 											</table>
 											
-											<div id="send_paging" class="container" style="width: 100%; text-align: center;">
+											<div id="receive_paging" class="container" style="width: 100%; text-align: center;">
 												<ul class="pagination">
-									              <li id="send_list_before" style="display:'none';"><a href="#" id="send_paging_before">«</a></li>
-									              <li id="send_list_pageNum"></li>
-									              <li id="send_list_after" style="display:'none';"><a href="#" id="send_paging_after">»</a></li>
+									              <li id="receive_list_before" style="display:'none';"><a href="#" id="receive_paging_before">«</a></li>
+									              <li id="receive_list_pageNum"></li>
+									              <li id="receive_list_after" style="display:'none';"><a href="#" id="receive_paging_after">»</a></li>
 							           			</ul>
-											</div>
+											</div> 
 										</div>		<!-- /widget-content -->
 									</div>			<!-- /widget -->
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-
-				<!-- 메시지 작성 클릭시 -->
-				<div role="tabpanel" class="tab-pane" id="tab_messageWrite">
-					<jsp:include page="messageWrite.jsp" />
+					</section>
+	
+					<!-- 발신함 클릭시 -->
+					<div role="tabpanel" class="tab-pane" id="tab_sendMessageList">
+						<div class="row" id="sendMessage_item_list">
+							<div class="thumbnail">
+								<div class="caption">
+									<div class="span7">
+										<div class="widget stacked widget-table action-table">
+											<div class="widget-content">
+												<table class="table table-striped table-bordered">
+													<thead>
+														<tr class="hidden-xs" id="send_message">
+															<th class="col-md-1 col-sm-1 col-xs-1"
+																style="text-align: center;">No</th>
+															<th class="col-md-5 col-sm-5 col-xs-5"
+																style="text-align: center;">Message_Content</th>
+															<th class="col-md-3 col-sm-3 col-xs-3"
+																style="text-align: center;">Receiver</th>
+															<th class="col-md-2 col-sm-2 col-xs-2"
+																style="text-align: center;">WriteDate</th>
+															<th class="col-md-1 col-sm-1 col-xs-1"
+																style="text-align: center;">Reception</th>
+														</tr>
+														
+														<tr class="visible-xs" id="send_message">
+															<th class="col-xs-5"
+																style="text-align: center;">Writer</th>
+															<th class="col-xs-7"
+																style="text-align: center;">Message_Content</th>
+														</tr>
+													</thead>
+													
+													<tbody id="sendMsgResult">		<!-- 자료를 담기 위한 그릇 -->
+													</tbody>
+												</table>
+												
+												<div id="send_paging" class="container" style="width: 100%; text-align: center;">
+													<ul class="pagination">
+										              <li id="send_list_before" style="display:'none';"><a href="#" id="send_paging_before">«</a></li>
+										              <li id="send_list_pageNum"></li>
+										              <li id="send_list_after" style="display:'none';"><a href="#" id="send_paging_after">»</a></li>
+								           			</ul>
+												</div>
+											</div>		<!-- /widget-content -->
+										</div>			<!-- /widget -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+	
+					<!-- 메시지 작성 클릭시 -->
+					<div role="tabpanel" class="tab-pane" id="tab_messageWrite">
+						<jsp:include page="messageWrite.jsp" />
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 	</article>
 </body>
 </html>

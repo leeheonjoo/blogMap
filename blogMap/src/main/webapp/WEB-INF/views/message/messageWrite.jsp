@@ -431,30 +431,30 @@
 		<!-- <input type="hidden" name="member_id"/> -->
 		
 		<div class="thumbnail">	
-		<div class="caption">
-		<div class="col-md-12 col-sm-12 col-xs-12">		<!-- Div 를 3화면에서 12 칸 모두 사용 -->
-			<br/>
-		</div>
-			
-			<div class="form-group form-group-lg">		<!-- 크기 조절을 하기 위한 기본 틀 -->
-				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputLarge">받는사람</label></div> 
-																	<!-- 크기 조절을 할 대상		크기 설정 (크게 / 보통 / 작게 ) -->
-				<div class="col-md-10 col-sm-10 col-xs-10"><input type="text" class="form-control" id="message_receiver" name="messageWrite_receiver" placeholder="받는 사람의 아이디를 입력하세요."/></div>
-			</div>																	<!-- 크기조절을 할 대상 -->
-	
-			<div class="form-group form-group-lg">
-				<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputLarge">내용</label></div>
-				<div class="col-md-10 col-sm-10 col-xs-10"><textarea rows="5" name="messageWrite_content" class="form-control" id="messageWrite_content" placeholder="내용을 입력하세요"></textarea>
+			<div class="caption">
+				<div class="col-md-12 col-sm-12 col-xs-12">		<!-- Div 를 3화면에서 12 칸 모두 사용 -->
+					<br/>
 				</div>
+				
+				<div class="form-group form-group-lg">		<!-- 크기 조절을 하기 위한 기본 틀 -->
+					<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputLarge">받는사람</label></div> 
+																		<!-- 크기 조절을 할 대상		크기 설정 (크게 / 보통 / 작게 ) -->
+					<div class="col-md-10 col-sm-10 col-xs-10"><input type="text" class="form-control" id="message_receiver" name="messageWrite_receiver" placeholder="받는 사람의 아이디를 입력하세요."/></div>
+				</div>																	<!-- 크기조절을 할 대상 -->
+		
+				<div class="form-group form-group-lg">
+					<div class="col-md-2 col-sm-2 col-xs-2"><label class="control-label" for="formGroupInputLarge">내용</label></div>
+					<div class="col-md-10 col-sm-10 col-xs-10"><textarea rows="5" name="messageWrite_content" class="form-control" id="messageWrite_content" placeholder="내용을 입력하세요"></textarea>
+					</div>
+				</div>
+		
+				<div class="form-group form-group-lg" style="text-align: right;">
+					<div style="display: inline-block; margin-right: 15px;">
+						<input type="button" class="btn btn-primary" id="write_btn" value="작성"/>
+						<input type="reset" class="btn btn-primary" value="취소" />
+					</div>
+				</div>		
 			</div>
-	
-			<div class="form-group form-group-lg" style="text-align: right;">
-				<div style="display: inline-block; margin-right: 15px;">
-					<input type="button" class="btn btn-primary" id="write_btn" value="작성"/>
-					<input type="reset" class="btn btn-primary" value="취소" />
-				</div>
-			</div>		
-		</div>
 		
 		</div>
 	</form>
