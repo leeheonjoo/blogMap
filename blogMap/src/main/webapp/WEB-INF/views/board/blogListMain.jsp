@@ -153,7 +153,7 @@
 									url:'${root}/board/blogListSearchSub2.do',
 									data:{
 										query: pullAddr, 
-										key : "3933720084832bd83c88c654d3c6b08a",
+										key : "60e9ac7ab8734daca3d2053c1e713dbd",
 										encoding : "utf-8",
 										output : "json",
 										coord : "latlng",
