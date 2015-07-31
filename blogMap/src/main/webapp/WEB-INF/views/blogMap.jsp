@@ -421,7 +421,7 @@ $(function(){
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 							<div class="item active" style="m">
-								<img src="http://handsontek.net/demoimages/tiles/hot.png" class="img-responsive"/>
+								<img src="${root }/images/blogMap/blogICon.jpg" class="img-responsive"/>
 							</div>
 						</div>
 					</div>
