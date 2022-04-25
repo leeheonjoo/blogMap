@@ -1,14 +1,99 @@
-{
-  "posts": [
-    { "id": 1, "title": "Post 1" },
-    { "id": 2, "title": "Post 2" },
-    { "id": 3, "title": "Post 3" }
-  ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 },
-    { "id": 2, "body": "some comment", "postId": 1 }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
-}
+[
+	{
+		"type": "category",
+		"title": "기타",
+		"menu": [
+				{
+					"type": "menu",
+					"id": "menu01",
+					"title": "대시보드",
+					"program": [
+						{
+							"type": "program",
+							"id": "program01",
+							"title": "대시보드01"
+						},
+						{
+							"type": "program",
+							"id": "program02",
+							"title": "대시보드02"
+						}
+					]
+				},
+				{
+					"type": "menu",
+					"id": "menu02",
+					"title": "즐겨찾기",
+					"program": [
+						{
+							"type": "program",
+							"id": "program03",
+							"title": "즐겨찾기01"
+						},
+						{
+							"type": "program",
+							"id": "program04",
+							"title": "즐겨찾기02"
+						}
+					]
+				},
+				{
+					"type": "menu",
+					"id": "menu03",
+					"title": "실행중",
+					"program": [
+						{
+							"type": "program",
+							"id": "program05",
+							"title": "즐겨찾기01"
+						},
+						{
+							"type": "program",
+							"id": "program06",
+							"title": "실행중01"
+						}
+					]
+				}
+			]
+	},
+	{
+		"type": "category",
+		"title": "자산관리",
+		"menu": [
+				{
+					"type": "menu",
+					"id": "menu04",
+					"title": "고정자산",
+					"program": [
+						{
+							"type": "program",
+							"id": "program07",
+							"title": "고정자산등록"
+						},
+						{
+							"type": "program",
+							"id": "program08",
+							"title": "고정자산검색"
+						}
+					]
+				},
+				{
+					"type": "menu",
+					"id": "menu05",
+					"title": "유동자산",
+					"program": [
+						{
+							"type": "program",
+							"id": "program09",
+							"title": "유동자산등록"
+						},
+						{
+							"type": "program",
+							"id": "program04",
+							"title": "유동자산검색"
+						}
+					]
+				}
+			]
+	}
+]
