@@ -1,56 +1,11 @@
-[
-	{
-		“type”: “category”,
-		“id”: “category01”,
-		“title”: “기타”,
-		“menu”: 	[
-					{
-						“type”: “menu”,
-						“id”: “menu01”,
-						“title”: “대시보드”,
-						“program”: 	[
-										{
-											“type”: “program”,
-											“id”: “program01”,
-											“title”: “대시보드01”
-										}
-									]
-					},
-					{
-						“type”: “menu”,
-						“id”: “menu02”,
-						“title”: “즐겨찾기”,
-						“program”: 	[
-										{
-											“type”: “program”,
-											“id”: “program02”,
-											“title”: “즐겨찾기01”
-										},
-										{
-											“type”: “program”,
-											“id”: “program03”,
-											“title”: “즐겨찾기02”
-										}
-									]
-					},
-					{
-						“type”: “menu”,
-						“id”: “menu03”,
-						“title”: “실행중”,
-						“program”: 	[
-										{
-											“type”: “program”,
-											“id”: “program04”,
-											“title”: “실행중01”
-										}
-									]
-					}
-				]
-	},
-	{
-		“id”: “category02”,
-		“type”: “category”,
-		“title”: “자산관리”,
-		“menu”: []
-	}
-]
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "hello"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
