@@ -1,11 +1,74 @@
-{
-  "posts": [
+[
+  {
+    "title": "종합지표순위",
+    "list": [
+      {
+        "rank": 1,
+        "dept_name": "모바일센터영업팀",
+        "point": 40,
+        "rank_change": 3
+      },
+      {
+        "rank": 2,
+        "dept_name": "PCM팀",
+        "point": 35,
+        "rank_change": 1
+      },
+      {
+        "rank": 3,
+        "dept_name": "울산",
+        "point": 24,
+        "rank_change": -2
+      },
+      {
+        "rank": 4,
+        "dept_name": "신축",
+        "point": 19,
+        "rank_change": -1
+      },
+      {
+        "rank": 5,
+        "dept_name": "대구",
+        "point": 15,
+        "rank_change": 1
+      }
+    ]
+  },
+  [
     {
-      "id": 1,
-      "title": "hello"
+      "title": "매출달성률",
+      "list": [
+        {
+          "rank": 1,
+          "dept_name": "글로벌무역팀",
+          "point": 40,
+          "rank_change": 1
+        },
+        {
+          "rank": 2,
+          "dept_name": "모바일센터영업팀",
+          "point": 35,
+          "rank_change": 3
+        },
+        {
+          "rank": 3,
+          "dept_name": "신축",
+          "point": 25,
+          "rank_change": -1
+        },
+        {
+          "rank": 4,
+          "dept_name": "대구",
+          "point": 20,
+          "rank_change": -1
+        },
+        {
+          "rank": 5,
+          "dept_name": "분체유통",
+          "point": 17,
+          "rank_change": 2
+        }
+      ]
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
-}
+  ]
+]
